@@ -13,7 +13,7 @@ import {
   Form
 } from '@/components/ui/form'
 
-import type { accountingEffects, VoucherCategory, voucherCategoryStatus } from '@/features/accounts/settings/voucher_category/data/schema'
+import type { VoucherCategory } from '@/features/accounts/settings/voucher_category/data/schema'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -93,8 +93,7 @@ export function VoucherCategorysActionDialog({ currentRow, open, onOpenChange }:
         isEdit,
       },
   })
-  const voucherCategoryStatusOptions: voucherCategoryStatus[] = ['active', 'inactive'];
-  const accountEffectOptions: accountingEffects[] = ['debit', 'credit'];
+
   const onSubmit = (values: VoucherCategoryForm) => {
     form.reset()
     showSubmittedData(values)

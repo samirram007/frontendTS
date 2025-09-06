@@ -269,7 +269,7 @@ function TableDemo() {
             className="w-16 px-2 py-1 bg-gray-800 rounded-md border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
           />
         </span>
-        <Select
+        {/* <Select
           value={table.getState().pagination.pageSize}
           onChange={(e) => {
             table.setPageSize(Number(e.target.value))
@@ -281,7 +281,7 @@ function TableDemo() {
               Show {pageSize}
             </option>
           ))}
-        </Select>
+        </Select> */}
       </div>
       <div className="mt-4 text-gray-400">
         {table.getPrePaginationRowModel().rows.length} Rows

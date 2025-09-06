@@ -36,12 +36,13 @@ import {
     FaUndo,
     FaUsersCog, FaUserShield
 } from "react-icons/fa";
+import type { IconType } from "react-icons/lib";
 type Props = {
     name: string
     size?: number
     className?: string
 }
-const IconBag: Record<string, React.ElementType> = {
+const IconBag: Record<string, IconType> = {
     IconLayoutDashboard,
     IconChecklist,
     IconPackages,

@@ -18,7 +18,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import type { voucherCategoryStatus } from '@/features/accounts/settings/voucher_category/data/schema'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
@@ -54,7 +53,6 @@ export function VoucherCategorysInviteDialog({ open, onOpenChange }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: { name: '', code: '', description: '' },
   })
-  const voucherCategoryStatusOptions: voucherCategoryStatus[] = ['active', 'inactive'];
   const onSubmit = (values: UserInviteForm) => {
     form.reset()
     showSubmittedData(values)

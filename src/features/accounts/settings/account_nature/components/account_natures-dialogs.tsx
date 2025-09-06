@@ -1,7 +1,7 @@
 import { useAccountNature } from '@/features/accounts/settings/account_nature/contexts/account-nature-context'
 import { AccountNaturesActionDialog } from './account_natures-action-dialog'
 import { AccountNaturesDeleteDialog } from './account_natures-delete-dialog'
-import { AccountNaturesInviteDialog } from './account_natures-invite-dialog'
+
 
 export function AccountNaturesDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useAccountNature()
@@ -13,11 +13,7 @@ export function AccountNaturesDialogs() {
         onOpenChange={() => setOpen('add')}
       />
 
-      <AccountNaturesInviteDialog
-        key='account_nature-invite'
-        open={open === 'invite'}
-        onOpenChange={() => setOpen('invite')}
-      />
+
 
       {currentRow && (
         <>

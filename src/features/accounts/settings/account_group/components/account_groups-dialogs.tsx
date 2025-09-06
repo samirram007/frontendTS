@@ -2,7 +2,6 @@
 import { useAccountGroup } from '../contexts/account-group-context'
 import { AccountGroupsActionDialog } from './account_groups-action-dialog'
 import { AccountGroupsDeleteDialog } from './account_groups-delete-dialog'
-import { AccountGroupsInviteDialog } from './account_groups-invite-dialog'
 
 export function AccountGroupsDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useAccountGroup()
@@ -14,11 +13,7 @@ export function AccountGroupsDialogs() {
         onOpenChange={() => setOpen('add')}
       />
 
-      <AccountGroupsInviteDialog
-        key='account_group-invite'
-        open={open === 'invite'}
-        onOpenChange={() => setOpen('invite')}
-      />
+
 
       {currentRow && (
         <>
