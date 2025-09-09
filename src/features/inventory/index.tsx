@@ -53,9 +53,9 @@ const sidebarNavItems = [
         href: '/masters/inventory/stock_category',
     },
     {
-        title: 'Unit',
+        title: 'Stock Unit',
         icon: <IconPalette size={18} />,
-        href: '/masters/inventory/unit',
+        href: '/masters/inventory/stock_unit',
     },
     {
         title: 'Godown',

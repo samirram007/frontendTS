@@ -9,7 +9,7 @@ type Props = {
     type: 'text' | 'textarea' | 'checkbox';
     name: string;
     label: string;
-    options?: { label: string; value: string }[];
+    options?: { label: string; value: boolean | string }[];
 }
 
 const FormInputField = (props: Props) => {

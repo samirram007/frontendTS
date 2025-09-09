@@ -237,8 +237,8 @@ export const sidebarData: SidebarData = {
               icon: IconUserCog,
             },
             {
-              title: 'Unit',
-              url: '/masters/inventory/unit',
+              title: 'Stock Unit',
+              url: '/masters/inventory/stock_unit',
               icon: IconUserCog,
             },
             {
