@@ -5,9 +5,7 @@ import { getData, postData, putData } from "@/utils/dataClient";
 
 
 
-export async function fetchAccountNatureService() {
-    return await getData("/account_natures")
-}
+
 export async function fetchAccountGroupService() {
     return await getData("/account_groups")
 }
@@ -15,12 +13,7 @@ export async function fetchAccountGroupService() {
 export async function fetchVoucherTypeService() {
     return await getData("/voucher_types")
 }
-export async function storeAccountNatureService(payload: any) {
-    return await postData("/account_natures", payload)
-}
-export async function updateAccountNatureService(payload: any) {
-    return await putData(`/account_natures/${payload.id}`, payload)
-}
+
 export async function storeAccountGroupService(payload: any) {
     return await postData("/account_groups", payload)
 }

@@ -8,7 +8,7 @@ export function StockCategoryDialogs() {
   return (
     <>
       <StockCategoryActionDialog
-        key='account_ledger-add'
+        key='stock_category-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />
@@ -18,7 +18,7 @@ export function StockCategoryDialogs() {
       {currentRow && (
         <>
           <StockCategoryActionDialog
-            key={`account_ledger-edit-${currentRow.id}`}
+            key={`stock_category-edit-${currentRow.id}`}
             open={open === 'edit'}
             onOpenChange={() => {
               setOpen('edit')
@@ -30,7 +30,7 @@ export function StockCategoryDialogs() {
           />
 
           <StockCategoryDeleteDialog
-            key={`account_ledger-delete-${currentRow.id}`}
+            key={`stock_category-delete-${currentRow.id}`}
             open={open === 'delete'}
             onOpenChange={() => {
               setOpen('delete')

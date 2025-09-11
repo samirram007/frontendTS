@@ -33,10 +33,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
         try {
-            console.log('Fetching profile...');
+            // console.log('Fetching profile...');
             const data = await fetchUserProfileService();
             setUser(data?.data);
-            console.log('Profile fetched successfully:', data?.data);
+            // console.log('Profile fetched successfully:', data?.data);
 
             // console.log('profile Data: ', data, isAuthenticated, user);
         } catch (error) {

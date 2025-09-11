@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui_bk/card'
+import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 

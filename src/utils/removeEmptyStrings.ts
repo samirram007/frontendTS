@@ -12,9 +12,9 @@ export const lowerCaseFirstLetter = (str: string) => str.charAt(0).toLowerCase()
 
 export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const capitalizeWords = (str: string) => str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+export const capitalizeWords = (str: string) => str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(); });
 
-export const capitalizeAllWords = (str: string) => str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+export const capitalizeAllWords = (str: string) => str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase(); });
 
 export const upperCase = (str: string) => str.toUpperCase();
 

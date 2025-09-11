@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import { IconEye, IconEyeOff } from '@tabler/icons-react'
 import * as React from 'react'
-import { Button } from './ui_bk/button'
+import { Button } from './ui/button'
 
 type PasswordInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -37,3 +37,4 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
 PasswordInput.displayName = 'PasswordInput'
 
 export { PasswordInput }
+

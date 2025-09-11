@@ -1,5 +1,5 @@
 import { PasswordInput } from '@/components/password-input';
-import { Button } from '@/components/ui_bk/button';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -7,8 +7,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui_bk/form';
-import { Input } from '@/components/ui_bk/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react';

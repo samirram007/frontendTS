@@ -1,5 +1,6 @@
-import { fetchAccountNatureService } from '@/features/accounts/services/apis'
+
 import AccountNature from '@/features/accounts/settings/account_nature'
+import { fetchAccountNatureService } from '@/features/accounts/settings/account_nature/data/api'
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 
 import { createFileRoute } from '@tanstack/react-router'

@@ -9,7 +9,7 @@ export function StockUnitDialogs() {
   return (
     <>
       <StockUnitActionDialog
-        key='account_ledger-add'
+        key='stock_unit-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />
@@ -19,7 +19,7 @@ export function StockUnitDialogs() {
       {currentRow && (
         <>
           <StockUnitActionDialog
-            key={`account_ledger-edit-${currentRow.id}`}
+            key={`stock_unit-edit-${currentRow.id}`}
             open={open === 'edit'}
             onOpenChange={() => {
               setOpen('edit')
@@ -31,7 +31,7 @@ export function StockUnitDialogs() {
           />
 
           <StockUnitDeleteDialog
-            key={`account_ledger-delete-${currentRow.id}`}
+            key={`stock_unit-delete-${currentRow.id}`}
             open={open === 'delete'}
             onOpenChange={() => {
               setOpen('delete')

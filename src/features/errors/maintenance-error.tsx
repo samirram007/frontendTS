@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui_bk/button'
+import { Button } from '@/components/ui/button'
 
 export default function MaintenanceError() {
   return (

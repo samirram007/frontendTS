@@ -1,4 +1,4 @@
-import { getData, postData, putData } from "@/utils/dataClient";
+import { deleteData, getData, postData, putData } from "@/utils/dataClient";
 
 
 const API_PATH = "/stock_units"
@@ -13,7 +13,7 @@ async function updateStockUnitService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 async function deleteStockUnitService(payload: any) {
-    return await putData(`${API_PATH}/${payload.id}`, payload)
+    return await deleteData(`${API_PATH}/${payload.id}`)
 }
 
 export { deleteStockUnitService, fetchStockUnitService, storeStockUnitService, updateStockUnitService };

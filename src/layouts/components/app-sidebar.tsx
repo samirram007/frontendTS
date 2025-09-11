@@ -9,6 +9,7 @@ import {
 
 import { cn } from '@/lib/utils';
 import { Separator } from '@radix-ui/react-separator';
+import { Link } from '@tanstack/react-router';
 import { capitalizeAllWords, upperCase } from '../../utils/removeEmptyStrings';
 import { sidebarData } from './data/sidebar-data';
 import { NavGroup } from './nav-group';
@@ -28,7 +29,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <div className={` ${sidebar.open ? 'flex flex-col' : 'hidden'} `}>
 
               <h1 className='text-lg font-semibold text-sidebar-foreground'>
+                <Link to={'/'}>
                 {upperCase(sidebarData.header.title)}
+                </Link>
               </h1>
 
             </div>
@@ -39,7 +42,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               sidebar.open ? (
                 capitalizeAllWords(sidebarData.header.subtitle)
               ) : (
+                  <Link to={'/'}>
+                    {
                 upperCase(sidebarData.header.title)
+                    }
+                  </Link>
               )
             }
           </div>

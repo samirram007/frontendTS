@@ -3,6 +3,9 @@ import { type VariantProps, cva } from "class-variance-authority"
 import { PanelLeftIcon } from "lucide-react"
 import * as React from "react"
 
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 import {
   Sheet,
   SheetContent,
@@ -17,9 +20,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { Button } from "@/components/ui_bk/button"
-import { Input } from "@/components/ui_bk/input"
-import { Separator } from "@/components/ui_bk/separator"
 import { useIsMobile } from "@/core/hooks/use-mobile"
 import { cn } from "@/lib/utils"
 

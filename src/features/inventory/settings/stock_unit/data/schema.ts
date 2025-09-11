@@ -40,7 +40,6 @@ export const formSchema = z.object({
   secondaryStockUnitId: z.number().int().positive().optional().nullish(),
   conversionFactor: z.number().min(0).optional().nullish(),
   noOfDecimalPlaces: z.number().min(0).optional().nullish(),
-
   isEdit: z.boolean(),
 })
 

@@ -58,6 +58,11 @@ const sidebarNavItems = [
         href: '/masters/inventory/stock_unit',
     },
     {
+        title: 'Unique Quantity Code',
+        icon: <IconPalette size={18} />,
+        href: '/masters/inventory/unique_quantity_code',
+    },
+    {
         title: 'Godown',
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/godown',

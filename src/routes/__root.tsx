@@ -13,8 +13,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
   component: () => (
     <>
-      <NavigationProgress />
-      {/* <Header /> */}
+      <NavigationProgress /> 
       <Outlet />
       <TanstackQueryLayout />
     </>

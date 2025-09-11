@@ -147,6 +147,9 @@ code {
     cursor: pointer;
   }
 
+ 
+ 
+
   /* Prevent focus zoom on mobile devices */
   @media screen and (max-width: 767px) {
     input,
@@ -156,7 +159,15 @@ code {
     }
   }
 }
-
+@utility placeholder{
+    @apply placeholder:text-slate-400/80 dark:placeholder:text-zinc-600;
+  }
+@utility  text-destructive{
+  @apply  !text-red-300/70  ;
+}
+@utility  border-destructive{
+  @apply !border-red-300;
+}
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;

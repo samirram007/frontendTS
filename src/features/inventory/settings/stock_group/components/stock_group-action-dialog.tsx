@@ -25,7 +25,7 @@ import FormInputField from '@/components/form-input-field'
 import { storeStockGroupService, updateStockGroupService } from '../data/api'
 import { formSchema, type StockGroup } from '../data/schema'
 import type { StockGroupForm } from '../types/types'
-import VoucherCategoryDropdown from './stock_group-dropdown'
+import StockGroupDropdown from './stock_group-dropdown'
 
 
 
@@ -107,7 +107,7 @@ export function StockGroupActionDialog({ currentRow, open, onOpenChange }: Props
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <VoucherCategoryDropdown form={form} />
+              <StockGroupDropdown form={form} />
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='shouldQuantitiesOfItemsBeAdded' label='Should quantities of items be added to stock group?' options={[
                 { label: 'Yes', value: true },

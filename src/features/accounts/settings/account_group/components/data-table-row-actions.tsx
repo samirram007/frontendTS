@@ -12,7 +12,7 @@ import type { AccountGroup } from '@/features/accounts/settings/account_group/da
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconEdit, IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
-import { useAccountGroup } from '../contexts/account-group-context'
+import { useAccountGroup } from '../contexts/account_group-context'
 
 
 interface DataTableRowActionsProps {

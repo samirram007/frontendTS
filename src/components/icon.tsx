@@ -42,6 +42,7 @@ type Props = {
     size?: number
     className?: string
 }
+
 const IconBag: Record<string, IconType> = {
     IconLayoutDashboard,
     IconChecklist,

@@ -1,6 +1,6 @@
 import SkipToMain from '@/components/skip-to-main'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import { Toaster } from '@/components/ui_bk/sonner'
+import { Toaster } from '@/components/ui/sonner'
 import { SearchProvider } from '@/core/contexts/search-context'
 import { Outlet } from '@tanstack/react-router'
 import { Suspense } from 'react'

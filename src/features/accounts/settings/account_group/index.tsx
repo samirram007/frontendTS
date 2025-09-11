@@ -4,11 +4,11 @@ import { Main } from '@/layouts/components/main'
 
 
 
-import { columns } from './components/account_groups-columns'
-import { AccountGroupsDialogs } from './components/account_groups-dialogs'
-import { AccountGroupsPrimaryButtons } from './components/account_groups-primary-buttons'
-import { AccountGroupsTable } from './components/account_groups-table'
-import AccountGroupProvider from './contexts/account-group-context'
+import { columns } from './components/account_group-columns'
+import { AccountGroupDialogs } from './components/account_group-dialogs'
+import { AccountGroupPrimaryButtons } from './components/account_group-primary-buttons'
+import { AccountGroupTable } from './components/account_group-table'
+import AccountGroupProvider from './contexts/account_group-context'
 import { accountGroupListSchema, type AccountGroupList } from './data/schema'
 
 interface AccountGroupListProps {
@@ -31,16 +31,16 @@ export default function AccountGroup({ data }: AccountGroupListProps) {
                             Manage your account group  here.
                         </p>
                     </div>
-                    <AccountGroupsPrimaryButtons />
+                    <AccountGroupPrimaryButtons />
                 </div>
                 <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-                    <AccountGroupsTable
+                    <AccountGroupTable
                         data={accountGroupListSchema.parse(data ?? [])}
                         columns={columns} />
                 </div>
             </Main>
 
-            <AccountGroupsDialogs />
+            <AccountGroupDialogs />
         </AccountGroupProvider>
     )
 }

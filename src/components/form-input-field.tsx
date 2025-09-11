@@ -1,4 +1,4 @@
-import { capitalizeAllWords, lowerCase } from "@/utils/removeEmptyStrings";
+import { capitalizeAllWords, capitalizeWords, lowerCase } from "@/utils/removeEmptyStrings";
 import type { UseFormReturn } from "react-hook-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -25,26 +25,29 @@ const FormInputField = (props: Props) => {
                     </FormLabel>
                     <FormControl>
                         {type === 'textarea' ? <Textarea
-                            className='resize-none col-span-4'
+                            className='resize-none col-span-4 placeholder'
                             placeholder={`Add a ${name} to your entry`}
                             {...field}
                         /> :
                             (type === 'checkbox' ? (
+
                                 <Input
                                     type='checkbox'
-                                    className='col-span-1'
-                                    checked={field.value === 'active' || field.value === true}
+                                    className='col-span-1  '
+                                    checked={field.value === 'active' || field.value === 'yes' || field.value === true}
                                     onChange={(e) => {
                                         const isChecked = e.target.checked;
                                         const value = options && options.length > 0 ? (isChecked ? options[0].value : options[1]?.value || '') : isChecked;
                                         form.setValue(name, value);
                                     }}
                                 />
+
+
                             )
                                 :
                                 <Input
                                     placeholder={'Enter ' + lowerCase(label ?? name)}
-                                    className='col-span-4'
+                                    className='col-span-4 placeholder'
                                     autoComplete='off'
                                     {...field}
                                 />
@@ -54,6 +57,12 @@ const FormInputField = (props: Props) => {
 
 
                     </FormControl>
+                    {type === 'checkbox' &&
+                        <FormLabel className='col-span-2  '>
+
+                            {typeof (field.value) === 'string' ? capitalizeWords(field.value) : field.value}
+                        </FormLabel>
+                    }
                     <FormMessage className='col-span-4 col-start-3' />
                 </FormItem>
             )}

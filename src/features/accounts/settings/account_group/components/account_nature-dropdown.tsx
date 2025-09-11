@@ -1,9 +1,10 @@
 import { SelectDropdown } from "@/components/select-dropdown";
 import { FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { fetchAccountNatureService } from "@/features/accounts/services/apis";
+
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
+import { fetchAccountNatureService } from "../../account_nature/data/api";
 import { type AccountNature } from "../../account_nature/data/schema";
 import type { AccountGroupForm } from "../types/types";
 

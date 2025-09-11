@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui_bk/button'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 

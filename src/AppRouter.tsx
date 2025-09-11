@@ -28,7 +28,7 @@ declare module '@tanstack/react-router' {
 export function AppRouter() {
     const auth = useAuth();
     const { queryClient } = TanstackQuery.getContext();
-    console.log('AppRouter: auth', auth);
+
 
     if (auth.isLoading) return <LoadingBar />;
 

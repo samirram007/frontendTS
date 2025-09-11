@@ -43,6 +43,7 @@ import { Route as AuthenticatedReportsProfitlossIndexImport } from './routes/_au
 import { Route as AuthenticatedReportsBalancesheetIndexImport } from './routes/_authenticated/reports/balance_sheet/index'
 import { Route as AuthenticatedMastersAccountsCompanyImport } from './routes/_authenticated/masters/accounts/company'
 import { Route as AuthenticatedMastersInventoryUnitIndexImport } from './routes/_authenticated/masters/inventory/unit/index'
+import { Route as AuthenticatedMastersInventoryUniquequantitycodeIndexImport } from './routes/_authenticated/masters/inventory/unique_quantity_code/index'
 import { Route as AuthenticatedMastersInventoryStockunitIndexImport } from './routes/_authenticated/masters/inventory/stock_unit/index'
 import { Route as AuthenticatedMastersInventoryStockitemIndexImport } from './routes/_authenticated/masters/inventory/stock_item/index'
 import { Route as AuthenticatedMastersInventoryStockgroupIndexImport } from './routes/_authenticated/masters/inventory/stock_group/index'
@@ -339,6 +340,13 @@ const AuthenticatedMastersInventoryUnitIndexRoute =
   AuthenticatedMastersInventoryUnitIndexImport.update({
     id: '/unit/',
     path: '/unit/',
+    getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
+  } as any)
+
+const AuthenticatedMastersInventoryUniquequantitycodeIndexRoute =
+  AuthenticatedMastersInventoryUniquequantitycodeIndexImport.update({
+    id: '/unique_quantity_code/',
+    path: '/unique_quantity_code/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
 
@@ -766,6 +774,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersInventoryStockunitIndexImport
       parentRoute: typeof AuthenticatedMastersInventoryRouteImport
     }
+    '/_authenticated/masters/inventory/unique_quantity_code/': {
+      id: '/_authenticated/masters/inventory/unique_quantity_code/'
+      path: '/unique_quantity_code'
+      fullPath: '/masters/inventory/unique_quantity_code'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryUniquequantitycodeIndexImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
+    }
     '/_authenticated/masters/inventory/unit/': {
       id: '/_authenticated/masters/inventory/unit/'
       path: '/unit'
@@ -840,6 +855,7 @@ interface AuthenticatedMastersInventoryRouteRouteChildren {
   AuthenticatedMastersInventoryStockgroupIndexRoute: typeof AuthenticatedMastersInventoryStockgroupIndexRoute
   AuthenticatedMastersInventoryStockitemIndexRoute: typeof AuthenticatedMastersInventoryStockitemIndexRoute
   AuthenticatedMastersInventoryStockunitIndexRoute: typeof AuthenticatedMastersInventoryStockunitIndexRoute
+  AuthenticatedMastersInventoryUniquequantitycodeIndexRoute: typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
   AuthenticatedMastersInventoryUnitIndexRoute: typeof AuthenticatedMastersInventoryUnitIndexRoute
 }
 
@@ -855,6 +871,8 @@ const AuthenticatedMastersInventoryRouteRouteChildren: AuthenticatedMastersInven
       AuthenticatedMastersInventoryStockitemIndexRoute,
     AuthenticatedMastersInventoryStockunitIndexRoute:
       AuthenticatedMastersInventoryStockunitIndexRoute,
+    AuthenticatedMastersInventoryUniquequantitycodeIndexRoute:
+      AuthenticatedMastersInventoryUniquequantitycodeIndexRoute,
     AuthenticatedMastersInventoryUnitIndexRoute:
       AuthenticatedMastersInventoryUnitIndexRoute,
   }
@@ -962,6 +980,7 @@ export interface FileRoutesByFullPath {
   '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStockitemIndexRoute
   '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStockunitIndexRoute
+  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
   '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
 }
 
@@ -1013,6 +1032,7 @@ export interface FileRoutesByTo {
   '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStockitemIndexRoute
   '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStockunitIndexRoute
+  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
   '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
 }
 
@@ -1067,6 +1087,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/inventory/stock_group/': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
   '/_authenticated/masters/inventory/stock_item/': typeof AuthenticatedMastersInventoryStockitemIndexRoute
   '/_authenticated/masters/inventory/stock_unit/': typeof AuthenticatedMastersInventoryStockunitIndexRoute
+  '/_authenticated/masters/inventory/unique_quantity_code/': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
   '/_authenticated/masters/inventory/unit/': typeof AuthenticatedMastersInventoryUnitIndexRoute
 }
 
@@ -1121,6 +1142,7 @@ export interface FileRouteTypes {
     | '/masters/inventory/stock_group'
     | '/masters/inventory/stock_item'
     | '/masters/inventory/stock_unit'
+    | '/masters/inventory/unique_quantity_code'
     | '/masters/inventory/unit'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -1171,6 +1193,7 @@ export interface FileRouteTypes {
     | '/masters/inventory/stock_group'
     | '/masters/inventory/stock_item'
     | '/masters/inventory/stock_unit'
+    | '/masters/inventory/unique_quantity_code'
     | '/masters/inventory/unit'
   id:
     | '__root__'
@@ -1223,6 +1246,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/inventory/stock_group/'
     | '/_authenticated/masters/inventory/stock_item/'
     | '/_authenticated/masters/inventory/stock_unit/'
+    | '/_authenticated/masters/inventory/unique_quantity_code/'
     | '/_authenticated/masters/inventory/unit/'
   fileRoutesById: FileRoutesById
 }
@@ -1394,6 +1418,7 @@ export const routeTree = rootRoute
         "/_authenticated/masters/inventory/stock_group/",
         "/_authenticated/masters/inventory/stock_item/",
         "/_authenticated/masters/inventory/stock_unit/",
+        "/_authenticated/masters/inventory/unique_quantity_code/",
         "/_authenticated/masters/inventory/unit/"
       ]
     },
@@ -1513,6 +1538,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/masters/inventory/stock_unit/": {
       "filePath": "_authenticated/masters/inventory/stock_unit/index.tsx",
+      "parent": "/_authenticated/masters/inventory"
+    },
+    "/_authenticated/masters/inventory/unique_quantity_code/": {
+      "filePath": "_authenticated/masters/inventory/unique_quantity_code/index.tsx",
       "parent": "/_authenticated/masters/inventory"
     },
     "/_authenticated/masters/inventory/unit/": {

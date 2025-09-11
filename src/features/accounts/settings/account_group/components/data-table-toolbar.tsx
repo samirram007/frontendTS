@@ -3,11 +3,12 @@ import { Input } from '@/components/ui/input'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 
-import { fetchAccountNatureService } from '@/features/accounts/services/apis'
+
 import { capitalizeAllWords } from '@/utils/removeEmptyStrings'
 import { useQuery } from '@tanstack/react-query'
 import type { AccountNature } from '../../account_nature/data/schema'
 
+import { fetchAccountNatureService } from '../../account_nature/data/api'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 

@@ -8,7 +8,7 @@ export function StockGroupDialogs() {
   return (
     <>
       <StockGroupActionDialog
-        key='account_ledger-add'
+        key='stock_group-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />
@@ -18,7 +18,7 @@ export function StockGroupDialogs() {
       {currentRow && (
         <>
           <StockGroupActionDialog
-            key={`account_ledger-edit-${currentRow.id}`}
+            key={`stock_group-edit-${currentRow.id}`}
             open={open === 'edit'}
             onOpenChange={() => {
               setOpen('edit')
@@ -30,7 +30,7 @@ export function StockGroupDialogs() {
           />
 
           <StockGroupDeleteDialog
-            key={`account_ledger-delete-${currentRow.id}`}
+            key={`stock_group-delete-${currentRow.id}`}
             open={open === 'delete'}
             onOpenChange={() => {
               setOpen('delete')
