@@ -20,24 +20,24 @@ axiosClient.interceptors.request.use(
         // Example: Custom headers or logging
         // config.headers['X-Requested-With'] = 'XMLHttpRequest';
         // console.info(`[Request] ${config.method?.toUpperCase()} ${config.url}`);
-        console.log(`[Request] ${config.method?.toUpperCase()} ${config.url}`, {
-            headers: config.headers,
-            request: config,
-            params: config.params,
-            data: config.data,
-        });
+        // console.log(`[Request] ${config.method?.toUpperCase()} ${config.url}`, {
+        //     headers: config.headers,
+        //     request: config,
+        //     params: config.params,
+        //     data: config.data,
+        // });
 
         return config;
     },
     (error: AxiosError) => {
-        console.log(`[Request Error] ${error.message}`, {
-            url: error.config?.url,
-            request: error.config,
-            method: error.config?.method,
-            headers: error.config?.headers,
-            params: error.config?.params,
-            data: error.config?.data,
-        });
+        // console.log(`[Request Error] ${error.message}`, {
+        //     url: error.config?.url,
+        //     request: error.config,
+        //     method: error.config?.method,
+        //     headers: error.config?.headers,
+        //     params: error.config?.params,
+        //     data: error.config?.data,
+        // });
 
         return Promise.reject(error);
     }
@@ -102,7 +102,6 @@ axiosClient.interceptors.response.use(
 
     (response: AxiosResponse) => response,
     async (error: AxiosError) => {
-        console.log('🚨 Axios Error:', error);
         if (!originalRequest) {
             originalRequest = error.config as RetryableRequestConfig;
         }

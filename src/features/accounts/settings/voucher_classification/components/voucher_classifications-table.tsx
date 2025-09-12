@@ -43,8 +43,6 @@ export function VoucherClassificationsTable({ columns, data }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
-  console.log('VoucherClassificationsTable data', data)
-  console.log('VoucherClassificationsTable columns', columns)
   const table = useReactTable({
     data,
     columns,

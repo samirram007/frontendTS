@@ -57,7 +57,6 @@ export function VoucherCategorysActionDialog({ currentRow, open, onOpenChange }:
     mutationFn: async (data: VoucherCategoryForm) => {
       // Here you would typically make an API call to save the voucher category
       // For example:
-      console.log('Saving voucher category:', data);
       if (isEdit && currentRow) {
         return await updateVoucherCategoryService({ ...data, id: currentRow.id })
 
@@ -71,7 +70,6 @@ export function VoucherCategorysActionDialog({ currentRow, open, onOpenChange }:
       }
     },
     onSuccess: (data) => {
-      console.log(data, 'Voucher Category saved successfully!')
       queryClient.invalidateQueries({ queryKey: ['voucherCategorys'] })
       // queryClient.setQueryData(['voucherCategorys', { id: currentRow.id }], data)
       // showSubmittedData(data, 'Voucher Category saved successfully!')

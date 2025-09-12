@@ -1,9 +1,12 @@
 // src/context/AuthContext.tsx
-import type { User } from '@/types/schema';
 import { useQueryClient } from '@tanstack/react-query';
 import { type ReactNode } from '@tanstack/react-router';
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { fetchUserProfileService, loginService, logoutService } from '../services/apis';
+import type { IUserDetail } from '../interfaces/profile-interface';
+import type { ILoginPayload } from '../interfaces/login-interface';
+import { useGetUserProfile } from '../hooks/ProfileQuery';
+import { toast } from 'sonner';
 
 export type LoginProps = {
     email: string;
@@ -11,67 +14,63 @@ export type LoginProps = {
 }
 
 export interface AuthContextType {
-    user: User | null;
+    user: IUserDetail | null;
+    setUser: React.Dispatch<React.SetStateAction<IUserDetail | null>>
     isLoading: boolean;
     isAuthenticated: boolean;
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
     login: (props: LoginProps) => Promise<void>;
     logout: () => Promise<void>;
-    fetchProfile: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // const navigate = useNavigate();
-    // const [isAuthenticated, setIsAuthenticated] = useState(true)
-    const [isLoading, setIsLoading] = useState(true)
-    const [user, setUser] = useState<User | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const {data,isSuccess,isPending,isError} = useGetUserProfile();
+    const [isLoading, setIsLoading] = useState(isPending)
+    const [user, setUser] = useState<IUserDetail | null>(null);
+   
     const queryClient = useQueryClient();
     const fetchProfile = async () => {
         setIsLoading(true);
         // check cookie key "token" is set  else redirect to login
-
-
         try {
-            console.log('Fetching profile...');
+            console.log("call to profile api");
             const data = await fetchUserProfileService();
-            setUser(data?.data);
-            console.log('Profile fetched successfully:', data?.data);
+            console.log("data",data);
+            setUser(data?.data.data);
 
             // console.log('profile Data: ', data, isAuthenticated, user);
         } catch (error) {
             // console.error("Failed to fetch profile:", error);
             // setIsAuthenticated(false)
+            setIsLoading(false);
             setUser(null);
         } finally {
             // console.log('Profile fetch completed');
-
             setIsLoading(false);
         }
     };
-    const login = async ({ email, password }: LoginProps) => {
+    const login = async (payload:ILoginPayload) => {
         setIsLoading(true);
-        const response = await loginService({ email, password })
-        if (response?.status === 'success') {
-            // setIsAuthenticated(true);
-            // console.log('is authenticated');
-            //setUser(response.data);
-            // Optionally, you can fetch the user profile immediately after login
-            await fetchProfile();
+        const response = await loginService(payload);
+        console.log("Response: ",response);
+        if (response.status == 200) {
+            console.log("User logged in to dashboard");
+            fetchProfile();
         }
         else {
-            console.error('Login failed:', response?.message || 'Unknown error');
-            // setIsAuthenticated(false);
             setUser(null);
         }
         setIsLoading(false);
-        // axiosClient.get('/cookie-test').then(console.log);
-        // await fetchProfile();
+
 
     };
 
     const logout = async () => {
-        console.log('Logging out...');
+        // console.log('Logging out...');
         setIsLoading(true);
         try {
             // Optionally hit a logout endpoint to clear server-side auth
@@ -82,6 +81,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
             // Clear user state from context
             setUser(null);
+            setIsAuthenticated(false);
+            
 
             // Optionally clear auth cookies manually, if not HTTP-only
             // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=aipt-api.local; secure";
@@ -91,7 +92,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
         finally {
             setIsLoading(false);
-
         }
     };
 
@@ -108,11 +108,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         //     setIsLoading(false);
         //     return;
         // }
-        fetchProfile();
-    }, []);
+        // fetchProfile();
+        // console.log("this called on error",isError);
+
+        // if user logout it should not run fetchProfile and to prevent this we need some kind of checking on frontend either of action or something which will prevent this fetch profile call
+
+        if(isSuccess){
+            if(data.data.success == true){
+                setUser(data.data.data);
+            }
+            else if(data.data.success == false){
+                setUser(null);
+                toast.error(data.data.message);
+            }
+           
+            setIsLoading(false);
+        }
+        if(isError){
+            setIsLoading(false);
+        }
+    },[isSuccess,isError,data]);
+
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, isAuthenticated: !!user, login, logout, fetchProfile }}>
+            value={{ user, isLoading, isAuthenticated, setIsAuthenticated, login, logout, setUser }}>
             {children}
         </AuthContext.Provider>
     )

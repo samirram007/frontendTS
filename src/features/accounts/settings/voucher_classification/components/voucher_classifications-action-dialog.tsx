@@ -48,7 +48,6 @@ export function VoucherClassificationsActionDialog({ currentRow, open, onOpenCha
       }
     },
     onSuccess: (data) => {
-      console.log(data, 'Voucher Classification saved successfully!')
       queryClient.invalidateQueries({ queryKey: ['voucherClassifications'] })
     },
   })
@@ -77,7 +76,6 @@ export function VoucherClassificationsActionDialog({ currentRow, open, onOpenCha
     onOpenChange(false)
   }
 
-  console.log(form.getValues(), 'Form Values')
   return (
     <Dialog
       open={open}

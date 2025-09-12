@@ -42,7 +42,6 @@ export function VoucherTypesActionDialog({ currentRow, open, onOpenChange }: Pro
     mutationFn: async (data: VoucherTypeForm) => {
       // Here you would typically make an API call to save the account group
       // For example:
-      console.log('Saving account group:', data);
       if (isEdit && currentRow) {
         return await updateVoucherTypeService({ ...data, id: currentRow.id })
       }
@@ -51,7 +50,6 @@ export function VoucherTypesActionDialog({ currentRow, open, onOpenChange }: Pro
       }
     },
     onSuccess: (data) => {
-      console.log(data, 'Account Group saved successfully!')
       queryClient.invalidateQueries({ queryKey: ['voucherTypes'] })
     },
   })

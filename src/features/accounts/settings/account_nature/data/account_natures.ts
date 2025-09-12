@@ -19,7 +19,6 @@ import { fetchAccountNatureService } from '../../../services/apis';
 
 export const account_natures = async () => {
   const data = await fetchAccountNatureService()
-  console.log('account_natures', data);
   if (!data) {
     return []
   }

@@ -43,8 +43,6 @@ export function AccountGroupsTable({ columns, data }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
-  console.log('AccountGroupsTable data', data)
-  console.log('AccountGroupsTable columns', columns)
   const table = useReactTable({
     data,
     columns,

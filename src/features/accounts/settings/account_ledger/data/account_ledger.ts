@@ -19,7 +19,6 @@ import { fetchAccountGroupService } from '../../../services/apis';
 
 export const account_groups = async () => {
   const data = await fetchAccountGroupService()
-  console.log('account_groups', data);
   if (!data) {
     return []
   }

@@ -12,6 +12,7 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
 
+
   return <div className='flex h-screen w-full items-center justify-center flex-col space-y-4'>
     <img src="/logo512.png" alt="Logo" className='h-16 w-16' />
     <p className='text-lg'>Welcome to the App</p>

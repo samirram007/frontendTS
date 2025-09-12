@@ -62,7 +62,6 @@ export function AccountNaturesActionDialog({ currentRow, open, onOpenChange }: P
     mutationFn: async (data: AccountNatureForm) => {
       // Here you would typically make an API call to save the account nature
       // For example:
-      console.log('Saving account nature:', data);
       if (isEdit && currentRow) {
         return await updateAccountNatureService({ ...data, id: currentRow.id })
 
@@ -76,7 +75,6 @@ export function AccountNaturesActionDialog({ currentRow, open, onOpenChange }: P
       }
     },
     onSuccess: (data) => {
-      console.log(data, 'Account Nature saved successfully!')
       queryClient.invalidateQueries({ queryKey: ['accountNatures'] })
       // queryClient.setQueryData(['accountNatures', { id: currentRow.id }], data)
       // showSubmittedData(data, 'Account Nature saved successfully!')

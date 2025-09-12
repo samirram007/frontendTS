@@ -42,7 +42,6 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
     mutationFn: async (data: AccountLedgerForm) => {
       // Here you would typically make an API call to save the account group
       // For example:
-      console.log('Saving account group:', data);
       if (isEdit && currentRow) {
         return await updateAccountLedgerService({ ...data, id: currentRow.id })
       }
@@ -50,8 +49,7 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
         return await storeAccountLedgerService(data);
       }
     },
-    onSuccess: (data) => {
-      console.log(data, 'Account Group saved successfully!')
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['accountLedgers'] })
     },
   })
@@ -80,7 +78,6 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
     onOpenChange(false)
   }
 
-  console.log(form.getValues(), 'Form Values')
   return (
     <Dialog
       open={open}
