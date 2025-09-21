@@ -4,9 +4,9 @@
     "**/*.tsx",
     "eslint.config.js",
     "prettier.config.js",
-    "vite.config.js",
-    "src/routes/(auth)/_layout/.layout.tsx"
+    "vite.config.ts"
   ],
+  "exclude": ["src/server.ts", "src/entry-client.tsx", "src/entry-server.tsx"],
 
   "compilerOptions": {
     "target": "ES2022",

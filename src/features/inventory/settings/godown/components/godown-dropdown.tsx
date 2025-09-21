@@ -21,12 +21,6 @@ const GodownDropdown = (props: Props) => {
         queryFn: fetchGodownService,
     });
 
-    //  const parentId = form.watch('parentId') as string | number | undefined;; // Watch form value for reactivity
-    // const godown: Godown | null = useMemo(() => {
-    //     if (!GodownList?.data) return null;
-    //     return GodownList.data.find((group: Godown) => group.id === Number(parentId)) || null;
-    // }, [parentId, GodownList?.data]);
-
     const handleValueChange = (value: string) => {
         form.setValue('parentId', Number(value));
 
@@ -49,7 +43,7 @@ const GodownDropdown = (props: Props) => {
                             <SelectDropdown
                                 defaultValue={field.value ? field.value.toString() : ''}
                                 onValueChange={(value) => handleValueChange(value)}
-                                placeholder='Select a voucher category'
+                                placeholder='Select a godown'
                                 className='w-11/12 col-span-6 md:col-span-4'
                                 items={GodownList?.data.map((godown: Godown) => ({
                                     label: capitalizeAllWords(godown.name),

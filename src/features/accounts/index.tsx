@@ -2,7 +2,8 @@ import { Separator } from '@/components/ui/separator'
 import {
     IconPalette,
     IconTool,
-    IconUser
+    IconUser,
+    IconUserCog
 } from '@tabler/icons-react'
 import { Outlet } from '@tanstack/react-router'
 
@@ -71,5 +72,20 @@ const sidebarNavItems = [
         title: 'Voucher Classification',
         icon: <IconPalette size={18} />,
         href: '/masters/accounts/voucher_classification',
+    },
+    {
+        title: 'Currency',
+        href: '/masters/accounts/currency',
+        icon: <IconUserCog />,
+    },
+    {
+        title: 'Country',
+        href: '/masters/accounts/country',
+        icon: <IconUserCog />,
+    },
+    {
+        title: 'State',
+        href: '/masters/accounts/state',
+        icon: <IconUserCog />,
     },
 ]

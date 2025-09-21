@@ -11,7 +11,7 @@ export const getData = async (apiPath: string) => {
             return response.data;
         })
         .catch((err) => {
-            console.log("Error in getData:", err);
+            // console.log("Error in getData:", err);
             errorHandler(err)
             throw err
         })
@@ -26,7 +26,7 @@ export const postData = async (apiPath: string, payload: object) => {
         .catch((err) => {
             // console.log("Error", err)
             errorHandler(err)
-            throw err
+            // throw err
 
         })
 }
@@ -39,7 +39,7 @@ export const putData = async (apiPath: string, payload: object) => {
         })
         .catch((err) => {
             errorHandler(err)
-            throw err
+            //  throw err
         })
 }
 export const deleteData = async (apiPath: string) => {
@@ -64,6 +64,7 @@ const errorHandler = (error: any) => {
 
     if (error.response?.data) {
         // console.log('error here...', error.response.data)
+        // return
         // If there are validation errors (e.g., from form submissions)
         if (error.response.data?.errors) {
 
@@ -71,15 +72,16 @@ const errorHandler = (error: any) => {
             Object.keys(error.response.data.errors).forEach(field => {
                 const fieldErrors = error.response.data.errors[field];
                 // You can show individual field errors using toast or another method
-
+                // console.log('error here...', error.response.data)
                 fieldErrors.forEach((errorMessage: any) => {
-                    // console.log('res',errorMessage)
+                    console.log('res', errorMessage)
                     toast.error(`${errorMessage}`);
                 });
             });
         } else if (error.response.data.message) {
             // If there's a general message (e.g., non-validation error)
-            toast.error(error.response.data.message);
+            //toast.error(error.response.data.message);
+
         } else {
             // Fallback for unexpected error responses
             toast.error('An unexpected error occurred.');

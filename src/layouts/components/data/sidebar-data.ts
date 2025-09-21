@@ -196,12 +196,12 @@ export const sidebarData: SidebarData = {
           icon: IconAccessPoint,
           items: [
             {
-              title: 'Account Nature',
-              url: '/masters/accounts/account_nature',
+              title: 'Company',
+              url: '/masters/accounts/company',
               icon: IconUserCog,
             },
             {
-              title: 'Account Group',
+              title: 'Chart of Accounts',
               url: '/masters/accounts/account_group',
               icon: IconUserCog,
             },
@@ -215,10 +215,73 @@ export const sidebarData: SidebarData = {
               url: '/masters/accounts/voucher_type',
               icon: IconUserCog,
             },
+
           ]
         },
         {
           title: 'Inventory',
+          icon: IconAccessPoint,
+          items: [
+            {
+              title: 'Stock Item',
+              url: '/masters/inventory/stock_item',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Group',
+              url: '/masters/inventory/stock_group',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Category',
+              url: '/masters/inventory/stock_category',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Unit',
+              url: '/masters/inventory/stock_unit',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Godown',
+              url: '/masters/inventory/godown',
+              icon: IconUserCog,
+            },
+          ]
+        },
+        {
+          title: 'Payroll',
+          icon: IconAccessPoint,
+          items: [
+            {
+              title: 'Stock Item',
+              url: '/masters/inventory/stock_item',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Group',
+              url: '/masters/inventory/stock_group',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Category',
+              url: '/masters/inventory/stock_category',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Stock Unit',
+              url: '/masters/inventory/stock_unit',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Godown',
+              url: '/masters/inventory/godown',
+              icon: IconUserCog,
+            },
+          ]
+        },
+        {
+          title: 'Statutory',
           icon: IconAccessPoint,
           items: [
             {

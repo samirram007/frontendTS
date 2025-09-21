@@ -19,7 +19,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
-import type { ActiveInactiveStatus } from '@/types/active-inactive-status'
 import { useForm } from 'react-hook-form'
 import { lowerCase } from '../../../../../utils/removeEmptyStrings'
 import { formSchema } from '../../account_nature/data/schema'
@@ -69,7 +68,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         isEdit,
       },
   })
-  const accountNatureStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
+  //const accountNatureStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
   const moduleName = "Account Nature"
   const onSubmit = (values: AccountNatureForm) => {

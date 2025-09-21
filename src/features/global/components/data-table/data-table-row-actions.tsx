@@ -39,16 +39,10 @@ export function DataTableRowActions<TData>({
             <span className='sr-only'>Open menu</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align='end' className='w-[160px]'>
-          <DropdownMenuItem
-           onClick={() => onEdit?.(row.original)}
-            // onClick={() => {
-              
-            //   setCurrentRow(row.original)
-            //   setOpen('edit')
-            // }}
-          >
-            Edit
+        <DropdownMenuContent align='end' className='w-[160px] '>
+          <DropdownMenuItem className='cursor-pointer!'
+            onClick={() => onEdit?.(row.original)} >
+            Edit 
             <DropdownMenuShortcut>
               <IconEdit size={16} />
             </DropdownMenuShortcut>
@@ -60,7 +54,7 @@ export function DataTableRowActions<TData>({
             //   setCurrentRow(row.original)
             //   setOpen('delete')
             // }}
-            className='text-red-500!'
+            className='text-red-500! cursor-pointer!'
           >
             Delete
             <DropdownMenuShortcut>

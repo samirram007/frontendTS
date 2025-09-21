@@ -2,8 +2,7 @@ import { Button } from '@/components/ui/button';
 import { createFileRoute, Link, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/')({
-  beforeLoad: async ({ context }) => {
-    console.log(context, "context in index")
+  beforeLoad: async ({ context }) => { 
     if (context.auth?.user) {
       throw redirect({ to: '/dashboard' });
     }

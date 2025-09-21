@@ -16,7 +16,7 @@ import './styles.css'
 
 
 // Render the app
-const rootElement = document.getElementById('root')
+const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
@@ -26,7 +26,7 @@ if (rootElement && !rootElement.innerHTML) {
           <FontProvider>
 
             <AuthProvider>
-              <Toaster position="top-right" richColors />
+              <Toaster position="top-center" richColors />
               <AppRouter />
             </AuthProvider>
           </FontProvider>

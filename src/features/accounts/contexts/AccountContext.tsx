@@ -1,8 +1,7 @@
 // src/context/AccountContext.tsx
 import type { User } from '@/types/schema';
 import { useQueryClient } from '@tanstack/react-query';
-import { type ReactNode } from '@tanstack/react-router';
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { fetchUserProfileService, loginService, logoutService } from '../services/apis';
 
 export type LoginProps = {
@@ -20,7 +19,7 @@ export interface AccountContextType {
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined)
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const navigate = useNavigate();
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
     const [isLoading, setIsLoading] = useState(true)

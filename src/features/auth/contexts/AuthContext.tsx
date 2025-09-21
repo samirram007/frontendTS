@@ -1,10 +1,9 @@
 // src/context/AuthContext.tsx
 import type { User } from '@/types/schema';
 import { useQueryClient } from '@tanstack/react-query';
-import { type ReactNode } from '@tanstack/react-router';
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { fetchUserProfileService, loginService, logoutService } from '../services/apis';
-
 export type LoginProps = {
     email: string;
     password: string;
@@ -21,11 +20,11 @@ export interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const navigate = useNavigate();
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
-    const [isLoading, setIsLoading] = useState(true)
     const [user, setUser] = useState<User | null>(null);
+    const [isLoading, setIsLoading] = useState(true)
     const queryClient = useQueryClient();
     const fetchProfile = async () => {
         setIsLoading(true);
@@ -35,42 +34,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             // console.log('Fetching profile...');
             const data = await fetchUserProfileService();
-            setUser(data?.data);
+            flushSync(() => {
+
+                setUser(data?.data);
+            })
             // console.log('Profile fetched successfully:', data?.data);
 
             // console.log('profile Data: ', data, isAuthenticated, user);
         } catch (error) {
-            // console.error("Failed to fetch profile:", error);
-            // setIsAuthenticated(false)
-            setUser(null);
+            flushSync(() => {
+                setUser(null);
+
+            })
         } finally {
             // console.log('Profile fetch completed');
 
             setIsLoading(false);
         }
     };
-    const login = async ({ email, password }: LoginProps) => {
+    const login = React.useCallback(async ({ email, password }: LoginProps) => {
         setIsLoading(true);
         const response = await loginService({ email, password })
         if (response?.status === 'success') {
-            // setIsAuthenticated(true);
-            // console.log('is authenticated');
-            //setUser(response.data);
-            // Optionally, you can fetch the user profile immediately after login
+
             await fetchProfile();
         }
         else {
-            console.error('Login failed:', response?.message || 'Unknown error');
-            // setIsAuthenticated(false);
-            setUser(null);
+            flushSync(() => {
+                setUser(null);
+
+            })
         }
         setIsLoading(false);
         // axiosClient.get('/cookie-test').then(console.log);
         // await fetchProfile();
 
-    };
+    }, [])
 
-    const logout = async () => {
+    const logout = React.useCallback(async () => {
         console.log('Logging out...');
         setIsLoading(true);
         try {
@@ -78,10 +79,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             await logoutService();
 
             // Clear all client-side cache (e.g. React Query)
-            queryClient.clear();
+            flushSync(() => {
+                queryClient.clear();
+                setUser(null);
 
-            // Clear user state from context
-            setUser(null);
+            })
+
 
             // Optionally clear auth cookies manually, if not HTTP-only
             // document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=aipt-api.local; secure";
@@ -93,21 +96,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setIsLoading(false);
 
         }
-    };
+    }, [])
 
     useEffect(() => {
-        // const tokenEntry = document.cookie
-        //     .split('; ')
-        //     .find(row => row.startsWith('token='));
-        // const token = tokenEntry?.split('=')[1] ?? null;
 
-        // console.log('Token found:', token);
-
-        // if (!token) {
-        //     setUser(null);
-        //     setIsLoading(false);
-        //     return;
-        // }
         fetchProfile();
     }, []);
     return (

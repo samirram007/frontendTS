@@ -10,788 +10,1362 @@
 
 import { createFileRoute } from '@tanstack/react-router'
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
+import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
+import { Route as authOtpRouteImport } from './routes/(auth)/otp'
+import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
+import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
+import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
+import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
+import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
+import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
+import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
+import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedauthProfileRouteImport } from './routes/_authenticated/(auth)/profile'
+import { Route as demoDemoTanstackQueryRouteImport } from './routes/(demo)/demo.tanstack-query'
+import { Route as demoDemoTableRouteImport } from './routes/(demo)/demo.table'
+import { Route as AuthenticatedMastersStatutoryRouteRouteImport } from './routes/_authenticated/masters/statutory/route'
+import { Route as AuthenticatedMastersPayrollRouteRouteImport } from './routes/_authenticated/masters/payroll/route'
+import { Route as AuthenticatedMastersInventoryRouteRouteImport } from './routes/_authenticated/masters/inventory/route'
+import { Route as AuthenticatedMastersAccountsRouteRouteImport } from './routes/_authenticated/masters/accounts/route'
+import { Route as AuthenticatedTransactionsVouchersIndexRouteImport } from './routes/_authenticated/transactions/vouchers/index'
+import { Route as AuthenticatedTransactionsDay_bookIndexRouteImport } from './routes/_authenticated/transactions/day_book/index'
+import { Route as AuthenticatedReportsStock_summaryIndexRouteImport } from './routes/_authenticated/reports/stock_summary/index'
+import { Route as AuthenticatedReportsProfit_lossIndexRouteImport } from './routes/_authenticated/reports/profit_loss/index'
+import { Route as AuthenticatedReportsBalance_sheetIndexRouteImport } from './routes/_authenticated/reports/balance_sheet/index'
+import { Route as AuthenticatedMastersInventoryUnitIndexRouteImport } from './routes/_authenticated/masters/inventory/unit/index'
+import { Route as AuthenticatedMastersInventoryUnique_quantity_codeIndexRouteImport } from './routes/_authenticated/masters/inventory/unique_quantity_code/index'
+import { Route as AuthenticatedMastersInventoryStock_unitIndexRouteImport } from './routes/_authenticated/masters/inventory/stock_unit/index'
+import { Route as AuthenticatedMastersInventoryStock_itemIndexRouteImport } from './routes/_authenticated/masters/inventory/stock_item/index'
+import { Route as AuthenticatedMastersInventoryStock_groupIndexRouteImport } from './routes/_authenticated/masters/inventory/stock_group/index'
+import { Route as AuthenticatedMastersInventoryStock_categoryIndexRouteImport } from './routes/_authenticated/masters/inventory/stock_category/index'
+import { Route as AuthenticatedMastersInventoryGodownIndexRouteImport } from './routes/_authenticated/masters/inventory/godown/index'
+import { Route as AuthenticatedMastersAccountsVoucher_typeIndexRouteImport } from './routes/_authenticated/masters/accounts/voucher_type/index'
+import { Route as AuthenticatedMastersAccountsVoucher_classificationIndexRouteImport } from './routes/_authenticated/masters/accounts/voucher_classification/index'
+import { Route as AuthenticatedMastersAccountsVoucher_categoryIndexRouteImport } from './routes/_authenticated/masters/accounts/voucher_category/index'
+import { Route as AuthenticatedMastersAccountsAccount_natureIndexRouteImport } from './routes/_authenticated/masters/accounts/account_nature/index'
+import { Route as AuthenticatedMastersAccountsAccount_ledgerIndexRouteImport } from './routes/_authenticated/masters/accounts/account_ledger/index'
+import { Route as AuthenticatedMastersAccountsAccount_groupIndexRouteImport } from './routes/_authenticated/masters/accounts/account_group/index'
+import { Route as AuthenticatedMastersAccountsStateLayoutRouteImport } from './routes/_authenticated/masters/accounts/state/_layout'
+import { Route as AuthenticatedMastersAccountsCurrencyLayoutRouteImport } from './routes/_authenticated/masters/accounts/currency/_layout'
+import { Route as AuthenticatedMastersAccountsCountryLayoutRouteImport } from './routes/_authenticated/masters/accounts/country/_layout'
+import { Route as AuthenticatedMastersAccountsCompanyLayoutRouteImport } from './routes/_authenticated/masters/accounts/company/_layout'
+import { Route as AuthenticatedMastersAccountsStateLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/state/_layout/index'
+import { Route as AuthenticatedMastersAccountsCurrencyLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/currency/_layout/index'
+import { Route as AuthenticatedMastersAccountsCountryLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/country/_layout/index'
+import { Route as AuthenticatedMastersAccountsCompanyLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/company/_layout/index'
+import { Route as AuthenticatedMastersAccountsStateLayoutIdRouteImport } from './routes/_authenticated/masters/accounts/state/_layout/$id'
+import { Route as AuthenticatedMastersAccountsCurrencyLayoutIdRouteImport } from './routes/_authenticated/masters/accounts/currency/_layout/$id'
+import { Route as AuthenticatedMastersAccountsCountryLayoutIdRouteImport } from './routes/_authenticated/masters/accounts/country/_layout/$id'
+import { Route as AuthenticatedMastersAccountsCompanyLayoutIdRouteImport } from './routes/_authenticated/masters/accounts/company/_layout/$id'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as AuthenticatedImport } from './routes/_authenticated'
-import { Route as IndexImport } from './routes/index'
-import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedChartsImport } from './routes/_authenticated/charts'
-import { Route as authSignInImport } from './routes/(auth)/sign-in'
-import { Route as authOtpImport } from './routes/(auth)/otp'
-import { Route as auth500Import } from './routes/(auth)/500'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
-import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
-import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
-import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_authenticated/settings/notifications'
-import { Route as AuthenticatedSettingsDisplayImport } from './routes/_authenticated/settings/display'
-import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
-import { Route as AuthenticatedSettingsAccountImport } from './routes/_authenticated/settings/account'
-import { Route as AuthenticatedauthProfileImport } from './routes/_authenticated/(auth)/profile'
-import { Route as demoDemoTanstackQueryImport } from './routes/(demo)/demo.tanstack-query'
-import { Route as demoDemoTableImport } from './routes/(demo)/demo.table'
-import { Route as AuthenticatedMastersInventoryRouteImport } from './routes/_authenticated/masters/inventory/route'
-import { Route as AuthenticatedMastersAccountsRouteImport } from './routes/_authenticated/masters/accounts/route'
-import { Route as AuthenticatedTransactionsVouchersIndexImport } from './routes/_authenticated/transactions/vouchers/index'
-import { Route as AuthenticatedTransactionsDaybookIndexImport } from './routes/_authenticated/transactions/day_book/index'
-import { Route as AuthenticatedReportsStocksummaryIndexImport } from './routes/_authenticated/reports/stock_summary/index'
-import { Route as AuthenticatedReportsProfitlossIndexImport } from './routes/_authenticated/reports/profit_loss/index'
-import { Route as AuthenticatedReportsBalancesheetIndexImport } from './routes/_authenticated/reports/balance_sheet/index'
-import { Route as AuthenticatedMastersAccountsCompanyImport } from './routes/_authenticated/masters/accounts/company'
-import { Route as AuthenticatedMastersInventoryUnitIndexImport } from './routes/_authenticated/masters/inventory/unit/index'
-import { Route as AuthenticatedMastersInventoryUniquequantitycodeIndexImport } from './routes/_authenticated/masters/inventory/unique_quantity_code/index'
-import { Route as AuthenticatedMastersInventoryStockunitIndexImport } from './routes/_authenticated/masters/inventory/stock_unit/index'
-import { Route as AuthenticatedMastersInventoryStockitemIndexImport } from './routes/_authenticated/masters/inventory/stock_item/index'
-import { Route as AuthenticatedMastersInventoryStockgroupIndexImport } from './routes/_authenticated/masters/inventory/stock_group/index'
-import { Route as AuthenticatedMastersInventoryStockcategoryIndexImport } from './routes/_authenticated/masters/inventory/stock_category/index'
-import { Route as AuthenticatedMastersInventoryGodownIndexImport } from './routes/_authenticated/masters/inventory/godown/index'
-import { Route as AuthenticatedMastersAccountsVouchertypeIndexImport } from './routes/_authenticated/masters/accounts/voucher_type/index'
-import { Route as AuthenticatedMastersAccountsVoucherclassificationIndexImport } from './routes/_authenticated/masters/accounts/voucher_classification/index'
-import { Route as AuthenticatedMastersAccountsVouchercategoryIndexImport } from './routes/_authenticated/masters/accounts/voucher_category/index'
-import { Route as AuthenticatedMastersAccountsAccountnatureIndexImport } from './routes/_authenticated/masters/accounts/account_nature/index'
-import { Route as AuthenticatedMastersAccountsAccountledgerIndexImport } from './routes/_authenticated/masters/accounts/account_ledger/index'
-import { Route as AuthenticatedMastersAccountsAccountgroupIndexImport } from './routes/_authenticated/masters/accounts/account_group/index'
-
-// Create Virtual Routes
-
-const errors503LazyImport = createFileRoute('/(errors)/503')()
-const errors500LazyImport = createFileRoute('/(errors)/500')()
-const errors404LazyImport = createFileRoute('/(errors)/404')()
-const errors403LazyImport = createFileRoute('/(errors)/403')()
-const errors401LazyImport = createFileRoute('/(errors)/401')()
-const authSigninLazyImport = createFileRoute('/(auth)/signin')()
-const authSignUpLazyImport = createFileRoute('/(auth)/sign-up')()
-const authSignIn2LazyImport = createFileRoute('/(auth)/sign-in-2')()
-const authForgotPasswordLazyImport = createFileRoute(
+const errors503LazyRouteImport = createFileRoute('/(errors)/503')()
+const errors500LazyRouteImport = createFileRoute('/(errors)/500')()
+const errors404LazyRouteImport = createFileRoute('/(errors)/404')()
+const errors403LazyRouteImport = createFileRoute('/(errors)/403')()
+const errors401LazyRouteImport = createFileRoute('/(errors)/401')()
+const authSigninLazyRouteImport = createFileRoute('/(auth)/signin')()
+const authSignUpLazyRouteImport = createFileRoute('/(auth)/sign-up')()
+const authSignIn2LazyRouteImport = createFileRoute('/(auth)/sign-in-2')()
+const authForgotPasswordLazyRouteImport = createFileRoute(
   '/(auth)/forgot-password',
 )()
+const AuthenticatedMastersAccountsStateRouteImport = createFileRoute(
+  '/_authenticated/masters/accounts/state',
+)()
+const AuthenticatedMastersAccountsCurrencyRouteImport = createFileRoute(
+  '/_authenticated/masters/accounts/currency',
+)()
+const AuthenticatedMastersAccountsCountryRouteImport = createFileRoute(
+  '/_authenticated/masters/accounts/country',
+)()
+const AuthenticatedMastersAccountsCompanyRouteImport = createFileRoute(
+  '/_authenticated/masters/accounts/company',
+)()
 
-// Create/Update Routes
-
-const AuthenticatedRoute = AuthenticatedImport.update({
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const errors503LazyRoute = errors503LazyImport
+const errors503LazyRoute = errors503LazyRouteImport
   .update({
     id: '/(errors)/503',
     path: '/503',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(errors)/503.lazy').then((d) => d.Route))
-
-const errors500LazyRoute = errors500LazyImport
+const errors500LazyRoute = errors500LazyRouteImport
   .update({
     id: '/(errors)/500',
     path: '/500',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(errors)/500.lazy').then((d) => d.Route))
-
-const errors404LazyRoute = errors404LazyImport
+const errors404LazyRoute = errors404LazyRouteImport
   .update({
     id: '/(errors)/404',
     path: '/404',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(errors)/404.lazy').then((d) => d.Route))
-
-const errors403LazyRoute = errors403LazyImport
+const errors403LazyRoute = errors403LazyRouteImport
   .update({
     id: '/(errors)/403',
     path: '/403',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(errors)/403.lazy').then((d) => d.Route))
-
-const errors401LazyRoute = errors401LazyImport
+const errors401LazyRoute = errors401LazyRouteImport
   .update({
     id: '/(errors)/401',
     path: '/401',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(errors)/401.lazy').then((d) => d.Route))
-
-const authSigninLazyRoute = authSigninLazyImport
+const authSigninLazyRoute = authSigninLazyRouteImport
   .update({
     id: '/(auth)/signin',
     path: '/signin',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(auth)/signin.lazy').then((d) => d.Route))
-
-const authSignUpLazyRoute = authSignUpLazyImport
+const authSignUpLazyRoute = authSignUpLazyRouteImport
   .update({
     id: '/(auth)/sign-up',
     path: '/sign-up',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(auth)/sign-up.lazy').then((d) => d.Route))
-
-const authSignIn2LazyRoute = authSignIn2LazyImport
+const authSignIn2LazyRoute = authSignIn2LazyRouteImport
   .update({
     id: '/(auth)/sign-in-2',
     path: '/sign-in-2',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() => import('./routes/(auth)/sign-in-2.lazy').then((d) => d.Route))
-
-const authForgotPasswordLazyRoute = authForgotPasswordLazyImport
+const authForgotPasswordLazyRoute = authForgotPasswordLazyRouteImport
   .update({
     id: '/(auth)/forgot-password',
     path: '/forgot-password',
-    getParentRoute: () => rootRoute,
+    getParentRoute: () => rootRouteImport,
   } as any)
   .lazy(() =>
     import('./routes/(auth)/forgot-password.lazy').then((d) => d.Route),
   )
-
-const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const AuthenticatedChartsRoute = AuthenticatedChartsImport.update({
+const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
   id: '/charts',
   path: '/charts',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const authSignInRoute = authSignInImport.update({
+const authSignInRoute = authSignInRouteImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const authOtpRoute = authOtpImport.update({
+const authOtpRoute = authOtpRouteImport.update({
   id: '/(auth)/otp',
   path: '/otp',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const auth500Route = auth500Import.update({
-  id: '/(auth)/500',
-  path: '/500',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteImport.update(
-  {
+const AuthenticatedSettingsRouteRoute =
+  AuthenticatedSettingsRouteRouteImport.update({
     id: '/settings',
     path: '/settings',
     getParentRoute: () => AuthenticatedRoute,
-  } as any,
-)
-
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
+  } as any)
+const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   id: '/users/',
   path: '/users/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexImport.update({
+const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
-  {
+const AuthenticatedSettingsIndexRoute =
+  AuthenticatedSettingsIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any,
-)
-
+  } as any)
 const AuthenticatedHelpCenterIndexRoute =
-  AuthenticatedHelpCenterIndexImport.update({
+  AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
     path: '/help-center/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-
-const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexImport.update({
+const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
+const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
 const AuthenticatedSettingsNotificationsRoute =
-  AuthenticatedSettingsNotificationsImport.update({
+  AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
     path: '/notifications',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsDisplayRoute =
-  AuthenticatedSettingsDisplayImport.update({
+  AuthenticatedSettingsDisplayRouteImport.update({
     id: '/display',
     path: '/display',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsAppearanceRoute =
-  AuthenticatedSettingsAppearanceImport.update({
+  AuthenticatedSettingsAppearanceRouteImport.update({
     id: '/appearance',
     path: '/appearance',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
 const AuthenticatedSettingsAccountRoute =
-  AuthenticatedSettingsAccountImport.update({
+  AuthenticatedSettingsAccountRouteImport.update({
     id: '/account',
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-
-const AuthenticatedauthProfileRoute = AuthenticatedauthProfileImport.update({
-  id: '/(auth)/profile',
-  path: '/profile',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
-const demoDemoTanstackQueryRoute = demoDemoTanstackQueryImport.update({
+const AuthenticatedauthProfileRoute =
+  AuthenticatedauthProfileRouteImport.update({
+    id: '/(auth)/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const demoDemoTanstackQueryRoute = demoDemoTanstackQueryRouteImport.update({
   id: '/(demo)/demo/tanstack-query',
   path: '/demo/tanstack-query',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const demoDemoTableRoute = demoDemoTableImport.update({
+const demoDemoTableRoute = demoDemoTableRouteImport.update({
   id: '/(demo)/demo/table',
   path: '/demo/table',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
+const AuthenticatedMastersStatutoryRouteRoute =
+  AuthenticatedMastersStatutoryRouteRouteImport.update({
+    id: '/masters/statutory',
+    path: '/masters/statutory',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedMastersPayrollRouteRoute =
+  AuthenticatedMastersPayrollRouteRouteImport.update({
+    id: '/masters/payroll',
+    path: '/masters/payroll',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedMastersInventoryRouteRoute =
-  AuthenticatedMastersInventoryRouteImport.update({
+  AuthenticatedMastersInventoryRouteRouteImport.update({
     id: '/masters/inventory',
     path: '/masters/inventory',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-
 const AuthenticatedMastersAccountsRouteRoute =
-  AuthenticatedMastersAccountsRouteImport.update({
+  AuthenticatedMastersAccountsRouteRouteImport.update({
     id: '/masters/accounts',
     path: '/masters/accounts',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-
-const AuthenticatedTransactionsVouchersIndexRoute =
-  AuthenticatedTransactionsVouchersIndexImport.update({
-    id: '/transactions/vouchers/',
-    path: '/transactions/vouchers/',
-    getParentRoute: () => AuthenticatedRoute,
+const AuthenticatedMastersAccountsStateRoute =
+  AuthenticatedMastersAccountsStateRouteImport.update({
+    id: '/state',
+    path: '/state',
+    getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedTransactionsDaybookIndexRoute =
-  AuthenticatedTransactionsDaybookIndexImport.update({
-    id: '/transactions/day_book/',
-    path: '/transactions/day_book/',
-    getParentRoute: () => AuthenticatedRoute,
+const AuthenticatedMastersAccountsCurrencyRoute =
+  AuthenticatedMastersAccountsCurrencyRouteImport.update({
+    id: '/currency',
+    path: '/currency',
+    getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedReportsStocksummaryIndexRoute =
-  AuthenticatedReportsStocksummaryIndexImport.update({
-    id: '/reports/stock_summary/',
-    path: '/reports/stock_summary/',
-    getParentRoute: () => AuthenticatedRoute,
+const AuthenticatedMastersAccountsCountryRoute =
+  AuthenticatedMastersAccountsCountryRouteImport.update({
+    id: '/country',
+    path: '/country',
+    getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedReportsProfitlossIndexRoute =
-  AuthenticatedReportsProfitlossIndexImport.update({
-    id: '/reports/profit_loss/',
-    path: '/reports/profit_loss/',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-
-const AuthenticatedReportsBalancesheetIndexRoute =
-  AuthenticatedReportsBalancesheetIndexImport.update({
-    id: '/reports/balance_sheet/',
-    path: '/reports/balance_sheet/',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any)
-
 const AuthenticatedMastersAccountsCompanyRoute =
-  AuthenticatedMastersAccountsCompanyImport.update({
+  AuthenticatedMastersAccountsCompanyRouteImport.update({
     id: '/company',
     path: '/company',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
+const AuthenticatedTransactionsVouchersIndexRoute =
+  AuthenticatedTransactionsVouchersIndexRouteImport.update({
+    id: '/transactions/vouchers/',
+    path: '/transactions/vouchers/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTransactionsDay_bookIndexRoute =
+  AuthenticatedTransactionsDay_bookIndexRouteImport.update({
+    id: '/transactions/day_book/',
+    path: '/transactions/day_book/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedReportsStock_summaryIndexRoute =
+  AuthenticatedReportsStock_summaryIndexRouteImport.update({
+    id: '/reports/stock_summary/',
+    path: '/reports/stock_summary/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedReportsProfit_lossIndexRoute =
+  AuthenticatedReportsProfit_lossIndexRouteImport.update({
+    id: '/reports/profit_loss/',
+    path: '/reports/profit_loss/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedReportsBalance_sheetIndexRoute =
+  AuthenticatedReportsBalance_sheetIndexRouteImport.update({
+    id: '/reports/balance_sheet/',
+    path: '/reports/balance_sheet/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedMastersInventoryUnitIndexRoute =
-  AuthenticatedMastersInventoryUnitIndexImport.update({
+  AuthenticatedMastersInventoryUnitIndexRouteImport.update({
     id: '/unit/',
     path: '/unit/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersInventoryUniquequantitycodeIndexRoute =
-  AuthenticatedMastersInventoryUniquequantitycodeIndexImport.update({
+const AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute =
+  AuthenticatedMastersInventoryUnique_quantity_codeIndexRouteImport.update({
     id: '/unique_quantity_code/',
     path: '/unique_quantity_code/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersInventoryStockunitIndexRoute =
-  AuthenticatedMastersInventoryStockunitIndexImport.update({
+const AuthenticatedMastersInventoryStock_unitIndexRoute =
+  AuthenticatedMastersInventoryStock_unitIndexRouteImport.update({
     id: '/stock_unit/',
     path: '/stock_unit/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersInventoryStockitemIndexRoute =
-  AuthenticatedMastersInventoryStockitemIndexImport.update({
+const AuthenticatedMastersInventoryStock_itemIndexRoute =
+  AuthenticatedMastersInventoryStock_itemIndexRouteImport.update({
     id: '/stock_item/',
     path: '/stock_item/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersInventoryStockgroupIndexRoute =
-  AuthenticatedMastersInventoryStockgroupIndexImport.update({
+const AuthenticatedMastersInventoryStock_groupIndexRoute =
+  AuthenticatedMastersInventoryStock_groupIndexRouteImport.update({
     id: '/stock_group/',
     path: '/stock_group/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersInventoryStockcategoryIndexRoute =
-  AuthenticatedMastersInventoryStockcategoryIndexImport.update({
+const AuthenticatedMastersInventoryStock_categoryIndexRoute =
+  AuthenticatedMastersInventoryStock_categoryIndexRouteImport.update({
     id: '/stock_category/',
     path: '/stock_category/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
 const AuthenticatedMastersInventoryGodownIndexRoute =
-  AuthenticatedMastersInventoryGodownIndexImport.update({
+  AuthenticatedMastersInventoryGodownIndexRouteImport.update({
     id: '/godown/',
     path: '/godown/',
     getParentRoute: () => AuthenticatedMastersInventoryRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsVouchertypeIndexRoute =
-  AuthenticatedMastersAccountsVouchertypeIndexImport.update({
+const AuthenticatedMastersAccountsVoucher_typeIndexRoute =
+  AuthenticatedMastersAccountsVoucher_typeIndexRouteImport.update({
     id: '/voucher_type/',
     path: '/voucher_type/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsVoucherclassificationIndexRoute =
-  AuthenticatedMastersAccountsVoucherclassificationIndexImport.update({
+const AuthenticatedMastersAccountsVoucher_classificationIndexRoute =
+  AuthenticatedMastersAccountsVoucher_classificationIndexRouteImport.update({
     id: '/voucher_classification/',
     path: '/voucher_classification/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsVouchercategoryIndexRoute =
-  AuthenticatedMastersAccountsVouchercategoryIndexImport.update({
+const AuthenticatedMastersAccountsVoucher_categoryIndexRoute =
+  AuthenticatedMastersAccountsVoucher_categoryIndexRouteImport.update({
     id: '/voucher_category/',
     path: '/voucher_category/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsAccountnatureIndexRoute =
-  AuthenticatedMastersAccountsAccountnatureIndexImport.update({
+const AuthenticatedMastersAccountsAccount_natureIndexRoute =
+  AuthenticatedMastersAccountsAccount_natureIndexRouteImport.update({
     id: '/account_nature/',
     path: '/account_nature/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsAccountledgerIndexRoute =
-  AuthenticatedMastersAccountsAccountledgerIndexImport.update({
+const AuthenticatedMastersAccountsAccount_ledgerIndexRoute =
+  AuthenticatedMastersAccountsAccount_ledgerIndexRouteImport.update({
     id: '/account_ledger/',
     path: '/account_ledger/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
-
-const AuthenticatedMastersAccountsAccountgroupIndexRoute =
-  AuthenticatedMastersAccountsAccountgroupIndexImport.update({
+const AuthenticatedMastersAccountsAccount_groupIndexRoute =
+  AuthenticatedMastersAccountsAccount_groupIndexRouteImport.update({
     id: '/account_group/',
     path: '/account_group/',
     getParentRoute: () => AuthenticatedMastersAccountsRouteRoute,
   } as any)
+const AuthenticatedMastersAccountsStateLayoutRoute =
+  AuthenticatedMastersAccountsStateLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersAccountsStateRoute,
+  } as any)
+const AuthenticatedMastersAccountsCurrencyLayoutRoute =
+  AuthenticatedMastersAccountsCurrencyLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersAccountsCurrencyRoute,
+  } as any)
+const AuthenticatedMastersAccountsCountryLayoutRoute =
+  AuthenticatedMastersAccountsCountryLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersAccountsCountryRoute,
+  } as any)
+const AuthenticatedMastersAccountsCompanyLayoutRoute =
+  AuthenticatedMastersAccountsCompanyLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersAccountsCompanyRoute,
+  } as any)
+const AuthenticatedMastersAccountsStateLayoutIndexRoute =
+  AuthenticatedMastersAccountsStateLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMastersAccountsStateLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCurrencyLayoutIndexRoute =
+  AuthenticatedMastersAccountsCurrencyLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMastersAccountsCurrencyLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCountryLayoutIndexRoute =
+  AuthenticatedMastersAccountsCountryLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMastersAccountsCountryLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCompanyLayoutIndexRoute =
+  AuthenticatedMastersAccountsCompanyLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMastersAccountsCompanyLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsStateLayoutIdRoute =
+  AuthenticatedMastersAccountsStateLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedMastersAccountsStateLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCurrencyLayoutIdRoute =
+  AuthenticatedMastersAccountsCurrencyLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedMastersAccountsCurrencyLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCountryLayoutIdRoute =
+  AuthenticatedMastersAccountsCountryLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedMastersAccountsCountryLayoutRoute,
+  } as any)
+const AuthenticatedMastersAccountsCompanyLayoutIdRoute =
+  AuthenticatedMastersAccountsCompanyLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedMastersAccountsCompanyLayoutRoute,
+  } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
+  '/otp': typeof authOtpRoute
+  '/sign-in': typeof authSignInRoute
+  '/charts': typeof AuthenticatedChartsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/forgot-password': typeof authForgotPasswordLazyRoute
+  '/sign-in-2': typeof authSignIn2LazyRoute
+  '/sign-up': typeof authSignUpLazyRoute
+  '/signin': typeof authSigninLazyRoute
+  '/401': typeof errors401LazyRoute
+  '/403': typeof errors403LazyRoute
+  '/404': typeof errors404LazyRoute
+  '/500': typeof errors500LazyRoute
+  '/503': typeof errors503LazyRoute
+  '/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
+  '/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
+  '/masters/payroll': typeof AuthenticatedMastersPayrollRouteRoute
+  '/masters/statutory': typeof AuthenticatedMastersStatutoryRouteRoute
+  '/demo/table': typeof demoDemoTableRoute
+  '/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
+  '/profile': typeof AuthenticatedauthProfileRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/apps': typeof AuthenticatedAppsIndexRoute
+  '/chats': typeof AuthenticatedChatsIndexRoute
+  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
+  '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
+  '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
+  '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/transactions/day_book': typeof AuthenticatedTransactionsDay_bookIndexRoute
+  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersIndexRoute
+  '/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyLayoutRouteWithChildren
+  '/masters/accounts/country': typeof AuthenticatedMastersAccountsCountryLayoutRouteWithChildren
+  '/masters/accounts/currency': typeof AuthenticatedMastersAccountsCurrencyLayoutRouteWithChildren
+  '/masters/accounts/state': typeof AuthenticatedMastersAccountsStateLayoutRouteWithChildren
+  '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsAccount_groupIndexRoute
+  '/masters/accounts/account_ledger': typeof AuthenticatedMastersAccountsAccount_ledgerIndexRoute
+  '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsAccount_natureIndexRoute
+  '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsVoucher_categoryIndexRoute
+  '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsVoucher_classificationIndexRoute
+  '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsVoucher_typeIndexRoute
+  '/masters/inventory/godown': typeof AuthenticatedMastersInventoryGodownIndexRoute
+  '/masters/inventory/stock_category': typeof AuthenticatedMastersInventoryStock_categoryIndexRoute
+  '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStock_groupIndexRoute
+  '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStock_itemIndexRoute
+  '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStock_unitIndexRoute
+  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute
+  '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
+  '/masters/accounts/company/$id': typeof AuthenticatedMastersAccountsCompanyLayoutIdRoute
+  '/masters/accounts/country/$id': typeof AuthenticatedMastersAccountsCountryLayoutIdRoute
+  '/masters/accounts/currency/$id': typeof AuthenticatedMastersAccountsCurrencyLayoutIdRoute
+  '/masters/accounts/state/$id': typeof AuthenticatedMastersAccountsStateLayoutIdRoute
+  '/masters/accounts/company/': typeof AuthenticatedMastersAccountsCompanyLayoutIndexRoute
+  '/masters/accounts/country/': typeof AuthenticatedMastersAccountsCountryLayoutIndexRoute
+  '/masters/accounts/currency/': typeof AuthenticatedMastersAccountsCurrencyLayoutIndexRoute
+  '/masters/accounts/state/': typeof AuthenticatedMastersAccountsStateLayoutIndexRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/otp': typeof authOtpRoute
+  '/sign-in': typeof authSignInRoute
+  '/charts': typeof AuthenticatedChartsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/forgot-password': typeof authForgotPasswordLazyRoute
+  '/sign-in-2': typeof authSignIn2LazyRoute
+  '/sign-up': typeof authSignUpLazyRoute
+  '/signin': typeof authSigninLazyRoute
+  '/401': typeof errors401LazyRoute
+  '/403': typeof errors403LazyRoute
+  '/404': typeof errors404LazyRoute
+  '/500': typeof errors500LazyRoute
+  '/503': typeof errors503LazyRoute
+  '/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
+  '/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
+  '/masters/payroll': typeof AuthenticatedMastersPayrollRouteRoute
+  '/masters/statutory': typeof AuthenticatedMastersStatutoryRouteRoute
+  '/demo/table': typeof demoDemoTableRoute
+  '/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
+  '/profile': typeof AuthenticatedauthProfileRoute
+  '/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/apps': typeof AuthenticatedAppsIndexRoute
+  '/chats': typeof AuthenticatedChatsIndexRoute
+  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/settings': typeof AuthenticatedSettingsIndexRoute
+  '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
+  '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
+  '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
+  '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/transactions/day_book': typeof AuthenticatedTransactionsDay_bookIndexRoute
+  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersIndexRoute
+  '/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyLayoutIndexRoute
+  '/masters/accounts/country': typeof AuthenticatedMastersAccountsCountryLayoutIndexRoute
+  '/masters/accounts/currency': typeof AuthenticatedMastersAccountsCurrencyLayoutIndexRoute
+  '/masters/accounts/state': typeof AuthenticatedMastersAccountsStateLayoutIndexRoute
+  '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsAccount_groupIndexRoute
+  '/masters/accounts/account_ledger': typeof AuthenticatedMastersAccountsAccount_ledgerIndexRoute
+  '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsAccount_natureIndexRoute
+  '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsVoucher_categoryIndexRoute
+  '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsVoucher_classificationIndexRoute
+  '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsVoucher_typeIndexRoute
+  '/masters/inventory/godown': typeof AuthenticatedMastersInventoryGodownIndexRoute
+  '/masters/inventory/stock_category': typeof AuthenticatedMastersInventoryStock_categoryIndexRoute
+  '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStock_groupIndexRoute
+  '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStock_itemIndexRoute
+  '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStock_unitIndexRoute
+  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute
+  '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
+  '/masters/accounts/company/$id': typeof AuthenticatedMastersAccountsCompanyLayoutIdRoute
+  '/masters/accounts/country/$id': typeof AuthenticatedMastersAccountsCountryLayoutIdRoute
+  '/masters/accounts/currency/$id': typeof AuthenticatedMastersAccountsCurrencyLayoutIdRoute
+  '/masters/accounts/state/$id': typeof AuthenticatedMastersAccountsStateLayoutIdRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
+  '/(auth)/otp': typeof authOtpRoute
+  '/(auth)/sign-in': typeof authSignInRoute
+  '/_authenticated/charts': typeof AuthenticatedChartsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
+  '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
+  '/(auth)/sign-up': typeof authSignUpLazyRoute
+  '/(auth)/signin': typeof authSigninLazyRoute
+  '/(errors)/401': typeof errors401LazyRoute
+  '/(errors)/403': typeof errors403LazyRoute
+  '/(errors)/404': typeof errors404LazyRoute
+  '/(errors)/500': typeof errors500LazyRoute
+  '/(errors)/503': typeof errors503LazyRoute
+  '/_authenticated/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
+  '/_authenticated/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
+  '/_authenticated/masters/payroll': typeof AuthenticatedMastersPayrollRouteRoute
+  '/_authenticated/masters/statutory': typeof AuthenticatedMastersStatutoryRouteRoute
+  '/(demo)/demo/table': typeof demoDemoTableRoute
+  '/(demo)/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
+  '/_authenticated/(auth)/profile': typeof AuthenticatedauthProfileRoute
+  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
+  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
+  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
+  '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/reports/balance_sheet/': typeof AuthenticatedReportsBalance_sheetIndexRoute
+  '/_authenticated/reports/profit_loss/': typeof AuthenticatedReportsProfit_lossIndexRoute
+  '/_authenticated/reports/stock_summary/': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/_authenticated/transactions/day_book/': typeof AuthenticatedTransactionsDay_bookIndexRoute
+  '/_authenticated/transactions/vouchers/': typeof AuthenticatedTransactionsVouchersIndexRoute
+  '/_authenticated/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyRouteWithChildren
+  '/_authenticated/masters/accounts/company/_layout': typeof AuthenticatedMastersAccountsCompanyLayoutRouteWithChildren
+  '/_authenticated/masters/accounts/country': typeof AuthenticatedMastersAccountsCountryRouteWithChildren
+  '/_authenticated/masters/accounts/country/_layout': typeof AuthenticatedMastersAccountsCountryLayoutRouteWithChildren
+  '/_authenticated/masters/accounts/currency': typeof AuthenticatedMastersAccountsCurrencyRouteWithChildren
+  '/_authenticated/masters/accounts/currency/_layout': typeof AuthenticatedMastersAccountsCurrencyLayoutRouteWithChildren
+  '/_authenticated/masters/accounts/state': typeof AuthenticatedMastersAccountsStateRouteWithChildren
+  '/_authenticated/masters/accounts/state/_layout': typeof AuthenticatedMastersAccountsStateLayoutRouteWithChildren
+  '/_authenticated/masters/accounts/account_group/': typeof AuthenticatedMastersAccountsAccount_groupIndexRoute
+  '/_authenticated/masters/accounts/account_ledger/': typeof AuthenticatedMastersAccountsAccount_ledgerIndexRoute
+  '/_authenticated/masters/accounts/account_nature/': typeof AuthenticatedMastersAccountsAccount_natureIndexRoute
+  '/_authenticated/masters/accounts/voucher_category/': typeof AuthenticatedMastersAccountsVoucher_categoryIndexRoute
+  '/_authenticated/masters/accounts/voucher_classification/': typeof AuthenticatedMastersAccountsVoucher_classificationIndexRoute
+  '/_authenticated/masters/accounts/voucher_type/': typeof AuthenticatedMastersAccountsVoucher_typeIndexRoute
+  '/_authenticated/masters/inventory/godown/': typeof AuthenticatedMastersInventoryGodownIndexRoute
+  '/_authenticated/masters/inventory/stock_category/': typeof AuthenticatedMastersInventoryStock_categoryIndexRoute
+  '/_authenticated/masters/inventory/stock_group/': typeof AuthenticatedMastersInventoryStock_groupIndexRoute
+  '/_authenticated/masters/inventory/stock_item/': typeof AuthenticatedMastersInventoryStock_itemIndexRoute
+  '/_authenticated/masters/inventory/stock_unit/': typeof AuthenticatedMastersInventoryStock_unitIndexRoute
+  '/_authenticated/masters/inventory/unique_quantity_code/': typeof AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute
+  '/_authenticated/masters/inventory/unit/': typeof AuthenticatedMastersInventoryUnitIndexRoute
+  '/_authenticated/masters/accounts/company/_layout/$id': typeof AuthenticatedMastersAccountsCompanyLayoutIdRoute
+  '/_authenticated/masters/accounts/country/_layout/$id': typeof AuthenticatedMastersAccountsCountryLayoutIdRoute
+  '/_authenticated/masters/accounts/currency/_layout/$id': typeof AuthenticatedMastersAccountsCurrencyLayoutIdRoute
+  '/_authenticated/masters/accounts/state/_layout/$id': typeof AuthenticatedMastersAccountsStateLayoutIdRoute
+  '/_authenticated/masters/accounts/company/_layout/': typeof AuthenticatedMastersAccountsCompanyLayoutIndexRoute
+  '/_authenticated/masters/accounts/country/_layout/': typeof AuthenticatedMastersAccountsCountryLayoutIndexRoute
+  '/_authenticated/masters/accounts/currency/_layout/': typeof AuthenticatedMastersAccountsCurrencyLayoutIndexRoute
+  '/_authenticated/masters/accounts/state/_layout/': typeof AuthenticatedMastersAccountsStateLayoutIndexRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/settings'
+    | '/otp'
+    | '/sign-in'
+    | '/charts'
+    | '/dashboard'
+    | '/forgot-password'
+    | '/sign-in-2'
+    | '/sign-up'
+    | '/signin'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
+    | '/masters/accounts'
+    | '/masters/inventory'
+    | '/masters/payroll'
+    | '/masters/statutory'
+    | '/demo/table'
+    | '/demo/tanstack-query'
+    | '/profile'
+    | '/settings/account'
+    | '/settings/appearance'
+    | '/settings/display'
+    | '/settings/notifications'
+    | '/apps'
+    | '/chats'
+    | '/help-center'
+    | '/settings/'
+    | '/tasks'
+    | '/users'
+    | '/reports/balance_sheet'
+    | '/reports/profit_loss'
+    | '/reports/stock_summary'
+    | '/transactions/day_book'
+    | '/transactions/vouchers'
+    | '/masters/accounts/company'
+    | '/masters/accounts/country'
+    | '/masters/accounts/currency'
+    | '/masters/accounts/state'
+    | '/masters/accounts/account_group'
+    | '/masters/accounts/account_ledger'
+    | '/masters/accounts/account_nature'
+    | '/masters/accounts/voucher_category'
+    | '/masters/accounts/voucher_classification'
+    | '/masters/accounts/voucher_type'
+    | '/masters/inventory/godown'
+    | '/masters/inventory/stock_category'
+    | '/masters/inventory/stock_group'
+    | '/masters/inventory/stock_item'
+    | '/masters/inventory/stock_unit'
+    | '/masters/inventory/unique_quantity_code'
+    | '/masters/inventory/unit'
+    | '/masters/accounts/company/$id'
+    | '/masters/accounts/country/$id'
+    | '/masters/accounts/currency/$id'
+    | '/masters/accounts/state/$id'
+    | '/masters/accounts/company/'
+    | '/masters/accounts/country/'
+    | '/masters/accounts/currency/'
+    | '/masters/accounts/state/'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/otp'
+    | '/sign-in'
+    | '/charts'
+    | '/dashboard'
+    | '/forgot-password'
+    | '/sign-in-2'
+    | '/sign-up'
+    | '/signin'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
+    | '/masters/accounts'
+    | '/masters/inventory'
+    | '/masters/payroll'
+    | '/masters/statutory'
+    | '/demo/table'
+    | '/demo/tanstack-query'
+    | '/profile'
+    | '/settings/account'
+    | '/settings/appearance'
+    | '/settings/display'
+    | '/settings/notifications'
+    | '/apps'
+    | '/chats'
+    | '/help-center'
+    | '/settings'
+    | '/tasks'
+    | '/users'
+    | '/reports/balance_sheet'
+    | '/reports/profit_loss'
+    | '/reports/stock_summary'
+    | '/transactions/day_book'
+    | '/transactions/vouchers'
+    | '/masters/accounts/company'
+    | '/masters/accounts/country'
+    | '/masters/accounts/currency'
+    | '/masters/accounts/state'
+    | '/masters/accounts/account_group'
+    | '/masters/accounts/account_ledger'
+    | '/masters/accounts/account_nature'
+    | '/masters/accounts/voucher_category'
+    | '/masters/accounts/voucher_classification'
+    | '/masters/accounts/voucher_type'
+    | '/masters/inventory/godown'
+    | '/masters/inventory/stock_category'
+    | '/masters/inventory/stock_group'
+    | '/masters/inventory/stock_item'
+    | '/masters/inventory/stock_unit'
+    | '/masters/inventory/unique_quantity_code'
+    | '/masters/inventory/unit'
+    | '/masters/accounts/company/$id'
+    | '/masters/accounts/country/$id'
+    | '/masters/accounts/currency/$id'
+    | '/masters/accounts/state/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/_authenticated/settings'
+    | '/(auth)/otp'
+    | '/(auth)/sign-in'
+    | '/_authenticated/charts'
+    | '/_authenticated/dashboard'
+    | '/(auth)/forgot-password'
+    | '/(auth)/sign-in-2'
+    | '/(auth)/sign-up'
+    | '/(auth)/signin'
+    | '/(errors)/401'
+    | '/(errors)/403'
+    | '/(errors)/404'
+    | '/(errors)/500'
+    | '/(errors)/503'
+    | '/_authenticated/masters/accounts'
+    | '/_authenticated/masters/inventory'
+    | '/_authenticated/masters/payroll'
+    | '/_authenticated/masters/statutory'
+    | '/(demo)/demo/table'
+    | '/(demo)/demo/tanstack-query'
+    | '/_authenticated/(auth)/profile'
+    | '/_authenticated/settings/account'
+    | '/_authenticated/settings/appearance'
+    | '/_authenticated/settings/display'
+    | '/_authenticated/settings/notifications'
+    | '/_authenticated/apps/'
+    | '/_authenticated/chats/'
+    | '/_authenticated/help-center/'
+    | '/_authenticated/settings/'
+    | '/_authenticated/tasks/'
+    | '/_authenticated/users/'
+    | '/_authenticated/reports/balance_sheet/'
+    | '/_authenticated/reports/profit_loss/'
+    | '/_authenticated/reports/stock_summary/'
+    | '/_authenticated/transactions/day_book/'
+    | '/_authenticated/transactions/vouchers/'
+    | '/_authenticated/masters/accounts/company'
+    | '/_authenticated/masters/accounts/company/_layout'
+    | '/_authenticated/masters/accounts/country'
+    | '/_authenticated/masters/accounts/country/_layout'
+    | '/_authenticated/masters/accounts/currency'
+    | '/_authenticated/masters/accounts/currency/_layout'
+    | '/_authenticated/masters/accounts/state'
+    | '/_authenticated/masters/accounts/state/_layout'
+    | '/_authenticated/masters/accounts/account_group/'
+    | '/_authenticated/masters/accounts/account_ledger/'
+    | '/_authenticated/masters/accounts/account_nature/'
+    | '/_authenticated/masters/accounts/voucher_category/'
+    | '/_authenticated/masters/accounts/voucher_classification/'
+    | '/_authenticated/masters/accounts/voucher_type/'
+    | '/_authenticated/masters/inventory/godown/'
+    | '/_authenticated/masters/inventory/stock_category/'
+    | '/_authenticated/masters/inventory/stock_group/'
+    | '/_authenticated/masters/inventory/stock_item/'
+    | '/_authenticated/masters/inventory/stock_unit/'
+    | '/_authenticated/masters/inventory/unique_quantity_code/'
+    | '/_authenticated/masters/inventory/unit/'
+    | '/_authenticated/masters/accounts/company/_layout/$id'
+    | '/_authenticated/masters/accounts/country/_layout/$id'
+    | '/_authenticated/masters/accounts/currency/_layout/$id'
+    | '/_authenticated/masters/accounts/state/_layout/$id'
+    | '/_authenticated/masters/accounts/company/_layout/'
+    | '/_authenticated/masters/accounts/country/_layout/'
+    | '/_authenticated/masters/accounts/currency/_layout/'
+    | '/_authenticated/masters/accounts/state/_layout/'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  authOtpRoute: typeof authOtpRoute
+  authSignInRoute: typeof authSignInRoute
+  authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
+  authSignIn2LazyRoute: typeof authSignIn2LazyRoute
+  authSignUpLazyRoute: typeof authSignUpLazyRoute
+  authSigninLazyRoute: typeof authSigninLazyRoute
+  errors401LazyRoute: typeof errors401LazyRoute
+  errors403LazyRoute: typeof errors403LazyRoute
+  errors404LazyRoute: typeof errors404LazyRoute
+  errors500LazyRoute: typeof errors500LazyRoute
+  errors503LazyRoute: typeof errors503LazyRoute
+  demoDemoTableRoute: typeof demoDemoTableRoute
+  demoDemoTanstackQueryRoute: typeof demoDemoTanstackQueryRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof AuthenticatedImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/(auth)/500': {
-      id: '/(auth)/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof auth500Import
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/otp': {
-      id: '/(auth)/otp'
-      path: '/otp'
-      fullPath: '/otp'
-      preLoaderRoute: typeof authOtpImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/_authenticated/charts': {
-      id: '/_authenticated/charts'
-      path: '/charts'
-      fullPath: '/charts'
-      preLoaderRoute: typeof AuthenticatedChartsImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/(auth)/forgot-password': {
-      id: '/(auth)/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof authForgotPasswordLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-in-2': {
-      id: '/(auth)/sign-in-2'
-      path: '/sign-in-2'
-      fullPath: '/sign-in-2'
-      preLoaderRoute: typeof authSignIn2LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/signin': {
-      id: '/(auth)/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof authSigninLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/401': {
-      id: '/(errors)/401'
-      path: '/401'
-      fullPath: '/401'
-      preLoaderRoute: typeof errors401LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/403': {
-      id: '/(errors)/403'
-      path: '/403'
-      fullPath: '/403'
-      preLoaderRoute: typeof errors403LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/404': {
-      id: '/(errors)/404'
-      path: '/404'
-      fullPath: '/404'
-      preLoaderRoute: typeof errors404LazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/(errors)/500': {
-      id: '/(errors)/500'
-      path: '/500'
-      fullPath: '/500'
-      preLoaderRoute: typeof errors500LazyImport
-      parentRoute: typeof rootRoute
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(errors)/503': {
       id: '/(errors)/503'
       path: '/503'
       fullPath: '/503'
-      preLoaderRoute: typeof errors503LazyImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof errors503LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/masters/accounts': {
-      id: '/_authenticated/masters/accounts'
-      path: '/masters/accounts'
-      fullPath: '/masters/accounts'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsRouteImport
-      parentRoute: typeof AuthenticatedImport
+    '/(errors)/500': {
+      id: '/(errors)/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof errors500LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/masters/inventory': {
-      id: '/_authenticated/masters/inventory'
-      path: '/masters/inventory'
-      fullPath: '/masters/inventory'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryRouteImport
-      parentRoute: typeof AuthenticatedImport
+    '/(errors)/404': {
+      id: '/(errors)/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof errors404LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/(demo)/demo/table': {
-      id: '/(demo)/demo/table'
-      path: '/demo/table'
-      fullPath: '/demo/table'
-      preLoaderRoute: typeof demoDemoTableImport
-      parentRoute: typeof rootRoute
+    '/(errors)/403': {
+      id: '/(errors)/403'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof errors403LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/(demo)/demo/tanstack-query': {
-      id: '/(demo)/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof demoDemoTanstackQueryImport
-      parentRoute: typeof rootRoute
+    '/(errors)/401': {
+      id: '/(errors)/401'
+      path: '/401'
+      fullPath: '/401'
+      preLoaderRoute: typeof errors401LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/(auth)/profile': {
-      id: '/_authenticated/(auth)/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof AuthenticatedauthProfileImport
-      parentRoute: typeof AuthenticatedImport
+    '/(auth)/signin': {
+      id: '/(auth)/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof authSigninLazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/account': {
-      id: '/_authenticated/settings/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof AuthenticatedSettingsAccountImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/(auth)/sign-up': {
+      id: '/(auth)/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof authSignUpLazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/appearance': {
-      id: '/_authenticated/settings/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof AuthenticatedSettingsAppearanceImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/(auth)/sign-in-2': {
+      id: '/(auth)/sign-in-2'
+      path: '/sign-in-2'
+      fullPath: '/sign-in-2'
+      preLoaderRoute: typeof authSignIn2LazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/(auth)/forgot-password': {
+      id: '/(auth)/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authForgotPasswordLazyRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AuthenticatedAppsIndexImport
-      parentRoute: typeof AuthenticatedImport
+    '/_authenticated/charts': {
+      id: '/_authenticated/charts'
+      path: '/charts'
+      fullPath: '/charts'
+      preLoaderRoute: typeof AuthenticatedChartsRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/chats/': {
-      id: '/_authenticated/chats/'
-      path: '/chats'
-      fullPath: '/chats'
-      preLoaderRoute: typeof AuthenticatedChatsIndexImport
-      parentRoute: typeof AuthenticatedImport
+    '/(auth)/sign-in': {
+      id: '/(auth)/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof authSignInRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/help-center/': {
-      id: '/_authenticated/help-center/'
-      path: '/help-center'
-      fullPath: '/help-center'
-      preLoaderRoute: typeof AuthenticatedHelpCenterIndexImport
-      parentRoute: typeof AuthenticatedImport
+    '/(auth)/otp': {
+      id: '/(auth)/otp'
+      path: '/otp'
+      fullPath: '/otp'
+      preLoaderRoute: typeof authOtpRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
-    }
-    '/_authenticated/tasks/': {
-      id: '/_authenticated/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof AuthenticatedTasksIndexImport
-      parentRoute: typeof AuthenticatedImport
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
       fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexImport
-      parentRoute: typeof AuthenticatedImport
+      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tasks/': {
+      id: '/_authenticated/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/settings/': {
+      id: '/_authenticated/settings/'
+      path: '/'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/help-center/': {
+      id: '/_authenticated/help-center/'
+      path: '/help-center'
+      fullPath: '/help-center'
+      preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/chats/': {
+      id: '/_authenticated/chats/'
+      path: '/chats'
+      fullPath: '/chats'
+      preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/apps/': {
+      id: '/_authenticated/apps/'
+      path: '/apps'
+      fullPath: '/apps'
+      preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/settings/notifications': {
+      id: '/_authenticated/settings/notifications'
+      path: '/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof AuthenticatedSettingsNotificationsRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/display': {
+      id: '/_authenticated/settings/display'
+      path: '/display'
+      fullPath: '/settings/display'
+      preLoaderRoute: typeof AuthenticatedSettingsDisplayRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/appearance': {
+      id: '/_authenticated/settings/appearance'
+      path: '/appearance'
+      fullPath: '/settings/appearance'
+      preLoaderRoute: typeof AuthenticatedSettingsAppearanceRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/settings/account': {
+      id: '/_authenticated/settings/account'
+      path: '/account'
+      fullPath: '/settings/account'
+      preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/(auth)/profile': {
+      id: '/_authenticated/(auth)/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedauthProfileRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/(demo)/demo/tanstack-query': {
+      id: '/(demo)/demo/tanstack-query'
+      path: '/demo/tanstack-query'
+      fullPath: '/demo/tanstack-query'
+      preLoaderRoute: typeof demoDemoTanstackQueryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(demo)/demo/table': {
+      id: '/(demo)/demo/table'
+      path: '/demo/table'
+      fullPath: '/demo/table'
+      preLoaderRoute: typeof demoDemoTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/masters/statutory': {
+      id: '/_authenticated/masters/statutory'
+      path: '/masters/statutory'
+      fullPath: '/masters/statutory'
+      preLoaderRoute: typeof AuthenticatedMastersStatutoryRouteRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/masters/payroll': {
+      id: '/_authenticated/masters/payroll'
+      path: '/masters/payroll'
+      fullPath: '/masters/payroll'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollRouteRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/masters/inventory': {
+      id: '/_authenticated/masters/inventory'
+      path: '/masters/inventory'
+      fullPath: '/masters/inventory'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryRouteRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/masters/accounts': {
+      id: '/_authenticated/masters/accounts'
+      path: '/masters/accounts'
+      fullPath: '/masters/accounts'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsRouteRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/masters/accounts/state': {
+      id: '/_authenticated/masters/accounts/state'
+      path: '/state'
+      fullPath: '/masters/accounts/state'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsStateRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/currency': {
+      id: '/_authenticated/masters/accounts/currency'
+      path: '/currency'
+      fullPath: '/masters/accounts/currency'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCurrencyRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/country': {
+      id: '/_authenticated/masters/accounts/country'
+      path: '/country'
+      fullPath: '/masters/accounts/country'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCountryRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
     }
     '/_authenticated/masters/accounts/company': {
       id: '/_authenticated/masters/accounts/company'
       path: '/company'
       fullPath: '/masters/accounts/company'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsCompanyImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
-    }
-    '/_authenticated/reports/balance_sheet/': {
-      id: '/_authenticated/reports/balance_sheet/'
-      path: '/reports/balance_sheet'
-      fullPath: '/reports/balance_sheet'
-      preLoaderRoute: typeof AuthenticatedReportsBalancesheetIndexImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/reports/profit_loss/': {
-      id: '/_authenticated/reports/profit_loss/'
-      path: '/reports/profit_loss'
-      fullPath: '/reports/profit_loss'
-      preLoaderRoute: typeof AuthenticatedReportsProfitlossIndexImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/reports/stock_summary/': {
-      id: '/_authenticated/reports/stock_summary/'
-      path: '/reports/stock_summary'
-      fullPath: '/reports/stock_summary'
-      preLoaderRoute: typeof AuthenticatedReportsStocksummaryIndexImport
-      parentRoute: typeof AuthenticatedImport
-    }
-    '/_authenticated/transactions/day_book/': {
-      id: '/_authenticated/transactions/day_book/'
-      path: '/transactions/day_book'
-      fullPath: '/transactions/day_book'
-      preLoaderRoute: typeof AuthenticatedTransactionsDaybookIndexImport
-      parentRoute: typeof AuthenticatedImport
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCompanyRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
     }
     '/_authenticated/transactions/vouchers/': {
       id: '/_authenticated/transactions/vouchers/'
       path: '/transactions/vouchers'
       fullPath: '/transactions/vouchers'
-      preLoaderRoute: typeof AuthenticatedTransactionsVouchersIndexImport
-      parentRoute: typeof AuthenticatedImport
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/masters/accounts/account_group/': {
-      id: '/_authenticated/masters/accounts/account_group/'
-      path: '/account_group'
-      fullPath: '/masters/accounts/account_group'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsAccountgroupIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
+    '/_authenticated/transactions/day_book/': {
+      id: '/_authenticated/transactions/day_book/'
+      path: '/transactions/day_book'
+      fullPath: '/transactions/day_book'
+      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/masters/accounts/account_ledger/': {
-      id: '/_authenticated/masters/accounts/account_ledger/'
-      path: '/account_ledger'
-      fullPath: '/masters/accounts/account_ledger'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsAccountledgerIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
+    '/_authenticated/reports/stock_summary/': {
+      id: '/_authenticated/reports/stock_summary/'
+      path: '/reports/stock_summary'
+      fullPath: '/reports/stock_summary'
+      preLoaderRoute: typeof AuthenticatedReportsStock_summaryIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/masters/accounts/account_nature/': {
-      id: '/_authenticated/masters/accounts/account_nature/'
-      path: '/account_nature'
-      fullPath: '/masters/accounts/account_nature'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsAccountnatureIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
+    '/_authenticated/reports/profit_loss/': {
+      id: '/_authenticated/reports/profit_loss/'
+      path: '/reports/profit_loss'
+      fullPath: '/reports/profit_loss'
+      preLoaderRoute: typeof AuthenticatedReportsProfit_lossIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/masters/accounts/voucher_category/': {
-      id: '/_authenticated/masters/accounts/voucher_category/'
-      path: '/voucher_category'
-      fullPath: '/masters/accounts/voucher_category'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsVouchercategoryIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
-    }
-    '/_authenticated/masters/accounts/voucher_classification/': {
-      id: '/_authenticated/masters/accounts/voucher_classification/'
-      path: '/voucher_classification'
-      fullPath: '/masters/accounts/voucher_classification'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsVoucherclassificationIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
-    }
-    '/_authenticated/masters/accounts/voucher_type/': {
-      id: '/_authenticated/masters/accounts/voucher_type/'
-      path: '/voucher_type'
-      fullPath: '/masters/accounts/voucher_type'
-      preLoaderRoute: typeof AuthenticatedMastersAccountsVouchertypeIndexImport
-      parentRoute: typeof AuthenticatedMastersAccountsRouteImport
-    }
-    '/_authenticated/masters/inventory/godown/': {
-      id: '/_authenticated/masters/inventory/godown/'
-      path: '/godown'
-      fullPath: '/masters/inventory/godown'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryGodownIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
-    }
-    '/_authenticated/masters/inventory/stock_category/': {
-      id: '/_authenticated/masters/inventory/stock_category/'
-      path: '/stock_category'
-      fullPath: '/masters/inventory/stock_category'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryStockcategoryIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
-    }
-    '/_authenticated/masters/inventory/stock_group/': {
-      id: '/_authenticated/masters/inventory/stock_group/'
-      path: '/stock_group'
-      fullPath: '/masters/inventory/stock_group'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryStockgroupIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
-    }
-    '/_authenticated/masters/inventory/stock_item/': {
-      id: '/_authenticated/masters/inventory/stock_item/'
-      path: '/stock_item'
-      fullPath: '/masters/inventory/stock_item'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryStockitemIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
-    }
-    '/_authenticated/masters/inventory/stock_unit/': {
-      id: '/_authenticated/masters/inventory/stock_unit/'
-      path: '/stock_unit'
-      fullPath: '/masters/inventory/stock_unit'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryStockunitIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
-    }
-    '/_authenticated/masters/inventory/unique_quantity_code/': {
-      id: '/_authenticated/masters/inventory/unique_quantity_code/'
-      path: '/unique_quantity_code'
-      fullPath: '/masters/inventory/unique_quantity_code'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryUniquequantitycodeIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
+    '/_authenticated/reports/balance_sheet/': {
+      id: '/_authenticated/reports/balance_sheet/'
+      path: '/reports/balance_sheet'
+      fullPath: '/reports/balance_sheet'
+      preLoaderRoute: typeof AuthenticatedReportsBalance_sheetIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/masters/inventory/unit/': {
       id: '/_authenticated/masters/inventory/unit/'
       path: '/unit'
       fullPath: '/masters/inventory/unit'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryUnitIndexImport
-      parentRoute: typeof AuthenticatedMastersInventoryRouteImport
+      preLoaderRoute: typeof AuthenticatedMastersInventoryUnitIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/unique_quantity_code/': {
+      id: '/_authenticated/masters/inventory/unique_quantity_code/'
+      path: '/unique_quantity_code'
+      fullPath: '/masters/inventory/unique_quantity_code'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryUnique_quantity_codeIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/stock_unit/': {
+      id: '/_authenticated/masters/inventory/stock_unit/'
+      path: '/stock_unit'
+      fullPath: '/masters/inventory/stock_unit'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryStock_unitIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/stock_item/': {
+      id: '/_authenticated/masters/inventory/stock_item/'
+      path: '/stock_item'
+      fullPath: '/masters/inventory/stock_item'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryStock_itemIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/stock_group/': {
+      id: '/_authenticated/masters/inventory/stock_group/'
+      path: '/stock_group'
+      fullPath: '/masters/inventory/stock_group'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryStock_groupIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/stock_category/': {
+      id: '/_authenticated/masters/inventory/stock_category/'
+      path: '/stock_category'
+      fullPath: '/masters/inventory/stock_category'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryStock_categoryIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/inventory/godown/': {
+      id: '/_authenticated/masters/inventory/godown/'
+      path: '/godown'
+      fullPath: '/masters/inventory/godown'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryGodownIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryRouteRoute
+    }
+    '/_authenticated/masters/accounts/voucher_type/': {
+      id: '/_authenticated/masters/accounts/voucher_type/'
+      path: '/voucher_type'
+      fullPath: '/masters/accounts/voucher_type'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsVoucher_typeIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/voucher_classification/': {
+      id: '/_authenticated/masters/accounts/voucher_classification/'
+      path: '/voucher_classification'
+      fullPath: '/masters/accounts/voucher_classification'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsVoucher_classificationIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/voucher_category/': {
+      id: '/_authenticated/masters/accounts/voucher_category/'
+      path: '/voucher_category'
+      fullPath: '/masters/accounts/voucher_category'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsVoucher_categoryIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/account_nature/': {
+      id: '/_authenticated/masters/accounts/account_nature/'
+      path: '/account_nature'
+      fullPath: '/masters/accounts/account_nature'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsAccount_natureIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/account_ledger/': {
+      id: '/_authenticated/masters/accounts/account_ledger/'
+      path: '/account_ledger'
+      fullPath: '/masters/accounts/account_ledger'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsAccount_ledgerIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/account_group/': {
+      id: '/_authenticated/masters/accounts/account_group/'
+      path: '/account_group'
+      fullPath: '/masters/accounts/account_group'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsAccount_groupIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsRouteRoute
+    }
+    '/_authenticated/masters/accounts/state/_layout': {
+      id: '/_authenticated/masters/accounts/state/_layout'
+      path: '/state'
+      fullPath: '/masters/accounts/state'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsStateLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsStateRoute
+    }
+    '/_authenticated/masters/accounts/currency/_layout': {
+      id: '/_authenticated/masters/accounts/currency/_layout'
+      path: '/currency'
+      fullPath: '/masters/accounts/currency'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCurrencyRoute
+    }
+    '/_authenticated/masters/accounts/country/_layout': {
+      id: '/_authenticated/masters/accounts/country/_layout'
+      path: '/country'
+      fullPath: '/masters/accounts/country'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCountryLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCountryRoute
+    }
+    '/_authenticated/masters/accounts/company/_layout': {
+      id: '/_authenticated/masters/accounts/company/_layout'
+      path: '/company'
+      fullPath: '/masters/accounts/company'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCompanyLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCompanyRoute
+    }
+    '/_authenticated/masters/accounts/state/_layout/': {
+      id: '/_authenticated/masters/accounts/state/_layout/'
+      path: '/'
+      fullPath: '/masters/accounts/state/'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsStateLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsStateLayoutRoute
+    }
+    '/_authenticated/masters/accounts/currency/_layout/': {
+      id: '/_authenticated/masters/accounts/currency/_layout/'
+      path: '/'
+      fullPath: '/masters/accounts/currency/'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutRoute
+    }
+    '/_authenticated/masters/accounts/country/_layout/': {
+      id: '/_authenticated/masters/accounts/country/_layout/'
+      path: '/'
+      fullPath: '/masters/accounts/country/'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCountryLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCountryLayoutRoute
+    }
+    '/_authenticated/masters/accounts/company/_layout/': {
+      id: '/_authenticated/masters/accounts/company/_layout/'
+      path: '/'
+      fullPath: '/masters/accounts/company/'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCompanyLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCompanyLayoutRoute
+    }
+    '/_authenticated/masters/accounts/state/_layout/$id': {
+      id: '/_authenticated/masters/accounts/state/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/accounts/state/$id'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsStateLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsStateLayoutRoute
+    }
+    '/_authenticated/masters/accounts/currency/_layout/$id': {
+      id: '/_authenticated/masters/accounts/currency/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/accounts/currency/$id'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutRoute
+    }
+    '/_authenticated/masters/accounts/country/_layout/$id': {
+      id: '/_authenticated/masters/accounts/country/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/accounts/country/$id'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCountryLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCountryLayoutRoute
+    }
+    '/_authenticated/masters/accounts/company/_layout/$id': {
+      id: '/_authenticated/masters/accounts/company/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/accounts/company/$id'
+      preLoaderRoute: typeof AuthenticatedMastersAccountsCompanyLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersAccountsCompanyLayoutRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
@@ -816,32 +1390,173 @@ const AuthenticatedSettingsRouteRouteWithChildren =
     AuthenticatedSettingsRouteRouteChildren,
   )
 
+interface AuthenticatedMastersAccountsCompanyLayoutRouteChildren {
+  AuthenticatedMastersAccountsCompanyLayoutIdRoute: typeof AuthenticatedMastersAccountsCompanyLayoutIdRoute
+  AuthenticatedMastersAccountsCompanyLayoutIndexRoute: typeof AuthenticatedMastersAccountsCompanyLayoutIndexRoute
+}
+
+const AuthenticatedMastersAccountsCompanyLayoutRouteChildren: AuthenticatedMastersAccountsCompanyLayoutRouteChildren =
+  {
+    AuthenticatedMastersAccountsCompanyLayoutIdRoute:
+      AuthenticatedMastersAccountsCompanyLayoutIdRoute,
+    AuthenticatedMastersAccountsCompanyLayoutIndexRoute:
+      AuthenticatedMastersAccountsCompanyLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersAccountsCompanyLayoutRouteWithChildren =
+  AuthenticatedMastersAccountsCompanyLayoutRoute._addFileChildren(
+    AuthenticatedMastersAccountsCompanyLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsCompanyRouteChildren {
+  AuthenticatedMastersAccountsCompanyLayoutRoute: typeof AuthenticatedMastersAccountsCompanyLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersAccountsCompanyRouteChildren: AuthenticatedMastersAccountsCompanyRouteChildren =
+  {
+    AuthenticatedMastersAccountsCompanyLayoutRoute:
+      AuthenticatedMastersAccountsCompanyLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersAccountsCompanyRouteWithChildren =
+  AuthenticatedMastersAccountsCompanyRoute._addFileChildren(
+    AuthenticatedMastersAccountsCompanyRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsCountryLayoutRouteChildren {
+  AuthenticatedMastersAccountsCountryLayoutIdRoute: typeof AuthenticatedMastersAccountsCountryLayoutIdRoute
+  AuthenticatedMastersAccountsCountryLayoutIndexRoute: typeof AuthenticatedMastersAccountsCountryLayoutIndexRoute
+}
+
+const AuthenticatedMastersAccountsCountryLayoutRouteChildren: AuthenticatedMastersAccountsCountryLayoutRouteChildren =
+  {
+    AuthenticatedMastersAccountsCountryLayoutIdRoute:
+      AuthenticatedMastersAccountsCountryLayoutIdRoute,
+    AuthenticatedMastersAccountsCountryLayoutIndexRoute:
+      AuthenticatedMastersAccountsCountryLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersAccountsCountryLayoutRouteWithChildren =
+  AuthenticatedMastersAccountsCountryLayoutRoute._addFileChildren(
+    AuthenticatedMastersAccountsCountryLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsCountryRouteChildren {
+  AuthenticatedMastersAccountsCountryLayoutRoute: typeof AuthenticatedMastersAccountsCountryLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersAccountsCountryRouteChildren: AuthenticatedMastersAccountsCountryRouteChildren =
+  {
+    AuthenticatedMastersAccountsCountryLayoutRoute:
+      AuthenticatedMastersAccountsCountryLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersAccountsCountryRouteWithChildren =
+  AuthenticatedMastersAccountsCountryRoute._addFileChildren(
+    AuthenticatedMastersAccountsCountryRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsCurrencyLayoutRouteChildren {
+  AuthenticatedMastersAccountsCurrencyLayoutIdRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutIdRoute
+  AuthenticatedMastersAccountsCurrencyLayoutIndexRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutIndexRoute
+}
+
+const AuthenticatedMastersAccountsCurrencyLayoutRouteChildren: AuthenticatedMastersAccountsCurrencyLayoutRouteChildren =
+  {
+    AuthenticatedMastersAccountsCurrencyLayoutIdRoute:
+      AuthenticatedMastersAccountsCurrencyLayoutIdRoute,
+    AuthenticatedMastersAccountsCurrencyLayoutIndexRoute:
+      AuthenticatedMastersAccountsCurrencyLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersAccountsCurrencyLayoutRouteWithChildren =
+  AuthenticatedMastersAccountsCurrencyLayoutRoute._addFileChildren(
+    AuthenticatedMastersAccountsCurrencyLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsCurrencyRouteChildren {
+  AuthenticatedMastersAccountsCurrencyLayoutRoute: typeof AuthenticatedMastersAccountsCurrencyLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersAccountsCurrencyRouteChildren: AuthenticatedMastersAccountsCurrencyRouteChildren =
+  {
+    AuthenticatedMastersAccountsCurrencyLayoutRoute:
+      AuthenticatedMastersAccountsCurrencyLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersAccountsCurrencyRouteWithChildren =
+  AuthenticatedMastersAccountsCurrencyRoute._addFileChildren(
+    AuthenticatedMastersAccountsCurrencyRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsStateLayoutRouteChildren {
+  AuthenticatedMastersAccountsStateLayoutIdRoute: typeof AuthenticatedMastersAccountsStateLayoutIdRoute
+  AuthenticatedMastersAccountsStateLayoutIndexRoute: typeof AuthenticatedMastersAccountsStateLayoutIndexRoute
+}
+
+const AuthenticatedMastersAccountsStateLayoutRouteChildren: AuthenticatedMastersAccountsStateLayoutRouteChildren =
+  {
+    AuthenticatedMastersAccountsStateLayoutIdRoute:
+      AuthenticatedMastersAccountsStateLayoutIdRoute,
+    AuthenticatedMastersAccountsStateLayoutIndexRoute:
+      AuthenticatedMastersAccountsStateLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersAccountsStateLayoutRouteWithChildren =
+  AuthenticatedMastersAccountsStateLayoutRoute._addFileChildren(
+    AuthenticatedMastersAccountsStateLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersAccountsStateRouteChildren {
+  AuthenticatedMastersAccountsStateLayoutRoute: typeof AuthenticatedMastersAccountsStateLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersAccountsStateRouteChildren: AuthenticatedMastersAccountsStateRouteChildren =
+  {
+    AuthenticatedMastersAccountsStateLayoutRoute:
+      AuthenticatedMastersAccountsStateLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersAccountsStateRouteWithChildren =
+  AuthenticatedMastersAccountsStateRoute._addFileChildren(
+    AuthenticatedMastersAccountsStateRouteChildren,
+  )
+
 interface AuthenticatedMastersAccountsRouteRouteChildren {
-  AuthenticatedMastersAccountsCompanyRoute: typeof AuthenticatedMastersAccountsCompanyRoute
-  AuthenticatedMastersAccountsAccountgroupIndexRoute: typeof AuthenticatedMastersAccountsAccountgroupIndexRoute
-  AuthenticatedMastersAccountsAccountledgerIndexRoute: typeof AuthenticatedMastersAccountsAccountledgerIndexRoute
-  AuthenticatedMastersAccountsAccountnatureIndexRoute: typeof AuthenticatedMastersAccountsAccountnatureIndexRoute
-  AuthenticatedMastersAccountsVouchercategoryIndexRoute: typeof AuthenticatedMastersAccountsVouchercategoryIndexRoute
-  AuthenticatedMastersAccountsVoucherclassificationIndexRoute: typeof AuthenticatedMastersAccountsVoucherclassificationIndexRoute
-  AuthenticatedMastersAccountsVouchertypeIndexRoute: typeof AuthenticatedMastersAccountsVouchertypeIndexRoute
+  AuthenticatedMastersAccountsCompanyRoute: typeof AuthenticatedMastersAccountsCompanyRouteWithChildren
+  AuthenticatedMastersAccountsCountryRoute: typeof AuthenticatedMastersAccountsCountryRouteWithChildren
+  AuthenticatedMastersAccountsCurrencyRoute: typeof AuthenticatedMastersAccountsCurrencyRouteWithChildren
+  AuthenticatedMastersAccountsStateRoute: typeof AuthenticatedMastersAccountsStateRouteWithChildren
+  AuthenticatedMastersAccountsAccount_groupIndexRoute: typeof AuthenticatedMastersAccountsAccount_groupIndexRoute
+  AuthenticatedMastersAccountsAccount_ledgerIndexRoute: typeof AuthenticatedMastersAccountsAccount_ledgerIndexRoute
+  AuthenticatedMastersAccountsAccount_natureIndexRoute: typeof AuthenticatedMastersAccountsAccount_natureIndexRoute
+  AuthenticatedMastersAccountsVoucher_categoryIndexRoute: typeof AuthenticatedMastersAccountsVoucher_categoryIndexRoute
+  AuthenticatedMastersAccountsVoucher_classificationIndexRoute: typeof AuthenticatedMastersAccountsVoucher_classificationIndexRoute
+  AuthenticatedMastersAccountsVoucher_typeIndexRoute: typeof AuthenticatedMastersAccountsVoucher_typeIndexRoute
 }
 
 const AuthenticatedMastersAccountsRouteRouteChildren: AuthenticatedMastersAccountsRouteRouteChildren =
   {
     AuthenticatedMastersAccountsCompanyRoute:
-      AuthenticatedMastersAccountsCompanyRoute,
-    AuthenticatedMastersAccountsAccountgroupIndexRoute:
-      AuthenticatedMastersAccountsAccountgroupIndexRoute,
-    AuthenticatedMastersAccountsAccountledgerIndexRoute:
-      AuthenticatedMastersAccountsAccountledgerIndexRoute,
-    AuthenticatedMastersAccountsAccountnatureIndexRoute:
-      AuthenticatedMastersAccountsAccountnatureIndexRoute,
-    AuthenticatedMastersAccountsVouchercategoryIndexRoute:
-      AuthenticatedMastersAccountsVouchercategoryIndexRoute,
-    AuthenticatedMastersAccountsVoucherclassificationIndexRoute:
-      AuthenticatedMastersAccountsVoucherclassificationIndexRoute,
-    AuthenticatedMastersAccountsVouchertypeIndexRoute:
-      AuthenticatedMastersAccountsVouchertypeIndexRoute,
+      AuthenticatedMastersAccountsCompanyRouteWithChildren,
+    AuthenticatedMastersAccountsCountryRoute:
+      AuthenticatedMastersAccountsCountryRouteWithChildren,
+    AuthenticatedMastersAccountsCurrencyRoute:
+      AuthenticatedMastersAccountsCurrencyRouteWithChildren,
+    AuthenticatedMastersAccountsStateRoute:
+      AuthenticatedMastersAccountsStateRouteWithChildren,
+    AuthenticatedMastersAccountsAccount_groupIndexRoute:
+      AuthenticatedMastersAccountsAccount_groupIndexRoute,
+    AuthenticatedMastersAccountsAccount_ledgerIndexRoute:
+      AuthenticatedMastersAccountsAccount_ledgerIndexRoute,
+    AuthenticatedMastersAccountsAccount_natureIndexRoute:
+      AuthenticatedMastersAccountsAccount_natureIndexRoute,
+    AuthenticatedMastersAccountsVoucher_categoryIndexRoute:
+      AuthenticatedMastersAccountsVoucher_categoryIndexRoute,
+    AuthenticatedMastersAccountsVoucher_classificationIndexRoute:
+      AuthenticatedMastersAccountsVoucher_classificationIndexRoute,
+    AuthenticatedMastersAccountsVoucher_typeIndexRoute:
+      AuthenticatedMastersAccountsVoucher_typeIndexRoute,
   }
 
 const AuthenticatedMastersAccountsRouteRouteWithChildren =
@@ -851,11 +1566,11 @@ const AuthenticatedMastersAccountsRouteRouteWithChildren =
 
 interface AuthenticatedMastersInventoryRouteRouteChildren {
   AuthenticatedMastersInventoryGodownIndexRoute: typeof AuthenticatedMastersInventoryGodownIndexRoute
-  AuthenticatedMastersInventoryStockcategoryIndexRoute: typeof AuthenticatedMastersInventoryStockcategoryIndexRoute
-  AuthenticatedMastersInventoryStockgroupIndexRoute: typeof AuthenticatedMastersInventoryStockgroupIndexRoute
-  AuthenticatedMastersInventoryStockitemIndexRoute: typeof AuthenticatedMastersInventoryStockitemIndexRoute
-  AuthenticatedMastersInventoryStockunitIndexRoute: typeof AuthenticatedMastersInventoryStockunitIndexRoute
-  AuthenticatedMastersInventoryUniquequantitycodeIndexRoute: typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
+  AuthenticatedMastersInventoryStock_categoryIndexRoute: typeof AuthenticatedMastersInventoryStock_categoryIndexRoute
+  AuthenticatedMastersInventoryStock_groupIndexRoute: typeof AuthenticatedMastersInventoryStock_groupIndexRoute
+  AuthenticatedMastersInventoryStock_itemIndexRoute: typeof AuthenticatedMastersInventoryStock_itemIndexRoute
+  AuthenticatedMastersInventoryStock_unitIndexRoute: typeof AuthenticatedMastersInventoryStock_unitIndexRoute
+  AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute: typeof AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute
   AuthenticatedMastersInventoryUnitIndexRoute: typeof AuthenticatedMastersInventoryUnitIndexRoute
 }
 
@@ -863,16 +1578,16 @@ const AuthenticatedMastersInventoryRouteRouteChildren: AuthenticatedMastersInven
   {
     AuthenticatedMastersInventoryGodownIndexRoute:
       AuthenticatedMastersInventoryGodownIndexRoute,
-    AuthenticatedMastersInventoryStockcategoryIndexRoute:
-      AuthenticatedMastersInventoryStockcategoryIndexRoute,
-    AuthenticatedMastersInventoryStockgroupIndexRoute:
-      AuthenticatedMastersInventoryStockgroupIndexRoute,
-    AuthenticatedMastersInventoryStockitemIndexRoute:
-      AuthenticatedMastersInventoryStockitemIndexRoute,
-    AuthenticatedMastersInventoryStockunitIndexRoute:
-      AuthenticatedMastersInventoryStockunitIndexRoute,
-    AuthenticatedMastersInventoryUniquequantitycodeIndexRoute:
-      AuthenticatedMastersInventoryUniquequantitycodeIndexRoute,
+    AuthenticatedMastersInventoryStock_categoryIndexRoute:
+      AuthenticatedMastersInventoryStock_categoryIndexRoute,
+    AuthenticatedMastersInventoryStock_groupIndexRoute:
+      AuthenticatedMastersInventoryStock_groupIndexRoute,
+    AuthenticatedMastersInventoryStock_itemIndexRoute:
+      AuthenticatedMastersInventoryStock_itemIndexRoute,
+    AuthenticatedMastersInventoryStock_unitIndexRoute:
+      AuthenticatedMastersInventoryStock_unitIndexRoute,
+    AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute:
+      AuthenticatedMastersInventoryUnique_quantity_codeIndexRoute,
     AuthenticatedMastersInventoryUnitIndexRoute:
       AuthenticatedMastersInventoryUnitIndexRoute,
   }
@@ -888,16 +1603,18 @@ interface AuthenticatedRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedMastersAccountsRouteRoute: typeof AuthenticatedMastersAccountsRouteRouteWithChildren
   AuthenticatedMastersInventoryRouteRoute: typeof AuthenticatedMastersInventoryRouteRouteWithChildren
+  AuthenticatedMastersPayrollRouteRoute: typeof AuthenticatedMastersPayrollRouteRoute
+  AuthenticatedMastersStatutoryRouteRoute: typeof AuthenticatedMastersStatutoryRouteRoute
   AuthenticatedauthProfileRoute: typeof AuthenticatedauthProfileRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
-  AuthenticatedReportsBalancesheetIndexRoute: typeof AuthenticatedReportsBalancesheetIndexRoute
-  AuthenticatedReportsProfitlossIndexRoute: typeof AuthenticatedReportsProfitlossIndexRoute
-  AuthenticatedReportsStocksummaryIndexRoute: typeof AuthenticatedReportsStocksummaryIndexRoute
-  AuthenticatedTransactionsDaybookIndexRoute: typeof AuthenticatedTransactionsDaybookIndexRoute
+  AuthenticatedReportsBalance_sheetIndexRoute: typeof AuthenticatedReportsBalance_sheetIndexRoute
+  AuthenticatedReportsProfit_lossIndexRoute: typeof AuthenticatedReportsProfit_lossIndexRoute
+  AuthenticatedReportsStock_summaryIndexRoute: typeof AuthenticatedReportsStock_summaryIndexRoute
+  AuthenticatedTransactionsDay_bookIndexRoute: typeof AuthenticatedTransactionsDay_bookIndexRoute
   AuthenticatedTransactionsVouchersIndexRoute: typeof AuthenticatedTransactionsVouchersIndexRoute
 }
 
@@ -909,20 +1626,23 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
     AuthenticatedMastersAccountsRouteRouteWithChildren,
   AuthenticatedMastersInventoryRouteRoute:
     AuthenticatedMastersInventoryRouteRouteWithChildren,
+  AuthenticatedMastersPayrollRouteRoute: AuthenticatedMastersPayrollRouteRoute,
+  AuthenticatedMastersStatutoryRouteRoute:
+    AuthenticatedMastersStatutoryRouteRoute,
   AuthenticatedauthProfileRoute: AuthenticatedauthProfileRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
-  AuthenticatedReportsBalancesheetIndexRoute:
-    AuthenticatedReportsBalancesheetIndexRoute,
-  AuthenticatedReportsProfitlossIndexRoute:
-    AuthenticatedReportsProfitlossIndexRoute,
-  AuthenticatedReportsStocksummaryIndexRoute:
-    AuthenticatedReportsStocksummaryIndexRoute,
-  AuthenticatedTransactionsDaybookIndexRoute:
-    AuthenticatedTransactionsDaybookIndexRoute,
+  AuthenticatedReportsBalance_sheetIndexRoute:
+    AuthenticatedReportsBalance_sheetIndexRoute,
+  AuthenticatedReportsProfit_lossIndexRoute:
+    AuthenticatedReportsProfit_lossIndexRoute,
+  AuthenticatedReportsStock_summaryIndexRoute:
+    AuthenticatedReportsStock_summaryIndexRoute,
+  AuthenticatedTransactionsDay_bookIndexRoute:
+    AuthenticatedTransactionsDay_bookIndexRoute,
   AuthenticatedTransactionsVouchersIndexRoute:
     AuthenticatedTransactionsVouchersIndexRoute,
 }
@@ -931,349 +1651,9 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
   AuthenticatedRouteChildren,
 )
 
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '': typeof AuthenticatedRouteWithChildren
-  '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
-  '/500': typeof errors500LazyRoute
-  '/otp': typeof authOtpRoute
-  '/sign-in': typeof authSignInRoute
-  '/charts': typeof AuthenticatedChartsRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/forgot-password': typeof authForgotPasswordLazyRoute
-  '/sign-in-2': typeof authSignIn2LazyRoute
-  '/sign-up': typeof authSignUpLazyRoute
-  '/signin': typeof authSigninLazyRoute
-  '/401': typeof errors401LazyRoute
-  '/403': typeof errors403LazyRoute
-  '/404': typeof errors404LazyRoute
-  '/503': typeof errors503LazyRoute
-  '/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
-  '/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
-  '/demo/table': typeof demoDemoTableRoute
-  '/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
-  '/profile': typeof AuthenticatedauthProfileRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyRoute
-  '/reports/balance_sheet': typeof AuthenticatedReportsBalancesheetIndexRoute
-  '/reports/profit_loss': typeof AuthenticatedReportsProfitlossIndexRoute
-  '/reports/stock_summary': typeof AuthenticatedReportsStocksummaryIndexRoute
-  '/transactions/day_book': typeof AuthenticatedTransactionsDaybookIndexRoute
-  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersIndexRoute
-  '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsAccountgroupIndexRoute
-  '/masters/accounts/account_ledger': typeof AuthenticatedMastersAccountsAccountledgerIndexRoute
-  '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsAccountnatureIndexRoute
-  '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsVouchercategoryIndexRoute
-  '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsVoucherclassificationIndexRoute
-  '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsVouchertypeIndexRoute
-  '/masters/inventory/godown': typeof AuthenticatedMastersInventoryGodownIndexRoute
-  '/masters/inventory/stock_category': typeof AuthenticatedMastersInventoryStockcategoryIndexRoute
-  '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
-  '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStockitemIndexRoute
-  '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStockunitIndexRoute
-  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
-  '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '': typeof AuthenticatedRouteWithChildren
-  '/500': typeof errors500LazyRoute
-  '/otp': typeof authOtpRoute
-  '/sign-in': typeof authSignInRoute
-  '/charts': typeof AuthenticatedChartsRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/forgot-password': typeof authForgotPasswordLazyRoute
-  '/sign-in-2': typeof authSignIn2LazyRoute
-  '/sign-up': typeof authSignUpLazyRoute
-  '/signin': typeof authSigninLazyRoute
-  '/401': typeof errors401LazyRoute
-  '/403': typeof errors403LazyRoute
-  '/404': typeof errors404LazyRoute
-  '/503': typeof errors503LazyRoute
-  '/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
-  '/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
-  '/demo/table': typeof demoDemoTableRoute
-  '/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
-  '/profile': typeof AuthenticatedauthProfileRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
-  '/settings': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyRoute
-  '/reports/balance_sheet': typeof AuthenticatedReportsBalancesheetIndexRoute
-  '/reports/profit_loss': typeof AuthenticatedReportsProfitlossIndexRoute
-  '/reports/stock_summary': typeof AuthenticatedReportsStocksummaryIndexRoute
-  '/transactions/day_book': typeof AuthenticatedTransactionsDaybookIndexRoute
-  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersIndexRoute
-  '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsAccountgroupIndexRoute
-  '/masters/accounts/account_ledger': typeof AuthenticatedMastersAccountsAccountledgerIndexRoute
-  '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsAccountnatureIndexRoute
-  '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsVouchercategoryIndexRoute
-  '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsVoucherclassificationIndexRoute
-  '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsVouchertypeIndexRoute
-  '/masters/inventory/godown': typeof AuthenticatedMastersInventoryGodownIndexRoute
-  '/masters/inventory/stock_category': typeof AuthenticatedMastersInventoryStockcategoryIndexRoute
-  '/masters/inventory/stock_group': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
-  '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryStockitemIndexRoute
-  '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryStockunitIndexRoute
-  '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
-  '/masters/inventory/unit': typeof AuthenticatedMastersInventoryUnitIndexRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteWithChildren
-  '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
-  '/(auth)/500': typeof auth500Route
-  '/(auth)/otp': typeof authOtpRoute
-  '/(auth)/sign-in': typeof authSignInRoute
-  '/_authenticated/charts': typeof AuthenticatedChartsRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
-  '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
-  '/(auth)/sign-up': typeof authSignUpLazyRoute
-  '/(auth)/signin': typeof authSigninLazyRoute
-  '/(errors)/401': typeof errors401LazyRoute
-  '/(errors)/403': typeof errors403LazyRoute
-  '/(errors)/404': typeof errors404LazyRoute
-  '/(errors)/500': typeof errors500LazyRoute
-  '/(errors)/503': typeof errors503LazyRoute
-  '/_authenticated/masters/accounts': typeof AuthenticatedMastersAccountsRouteRouteWithChildren
-  '/_authenticated/masters/inventory': typeof AuthenticatedMastersInventoryRouteRouteWithChildren
-  '/(demo)/demo/table': typeof demoDemoTableRoute
-  '/(demo)/demo/tanstack-query': typeof demoDemoTanstackQueryRoute
-  '/_authenticated/(auth)/profile': typeof AuthenticatedauthProfileRoute
-  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
-  '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
-  '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
-  '/_authenticated/masters/accounts/company': typeof AuthenticatedMastersAccountsCompanyRoute
-  '/_authenticated/reports/balance_sheet/': typeof AuthenticatedReportsBalancesheetIndexRoute
-  '/_authenticated/reports/profit_loss/': typeof AuthenticatedReportsProfitlossIndexRoute
-  '/_authenticated/reports/stock_summary/': typeof AuthenticatedReportsStocksummaryIndexRoute
-  '/_authenticated/transactions/day_book/': typeof AuthenticatedTransactionsDaybookIndexRoute
-  '/_authenticated/transactions/vouchers/': typeof AuthenticatedTransactionsVouchersIndexRoute
-  '/_authenticated/masters/accounts/account_group/': typeof AuthenticatedMastersAccountsAccountgroupIndexRoute
-  '/_authenticated/masters/accounts/account_ledger/': typeof AuthenticatedMastersAccountsAccountledgerIndexRoute
-  '/_authenticated/masters/accounts/account_nature/': typeof AuthenticatedMastersAccountsAccountnatureIndexRoute
-  '/_authenticated/masters/accounts/voucher_category/': typeof AuthenticatedMastersAccountsVouchercategoryIndexRoute
-  '/_authenticated/masters/accounts/voucher_classification/': typeof AuthenticatedMastersAccountsVoucherclassificationIndexRoute
-  '/_authenticated/masters/accounts/voucher_type/': typeof AuthenticatedMastersAccountsVouchertypeIndexRoute
-  '/_authenticated/masters/inventory/godown/': typeof AuthenticatedMastersInventoryGodownIndexRoute
-  '/_authenticated/masters/inventory/stock_category/': typeof AuthenticatedMastersInventoryStockcategoryIndexRoute
-  '/_authenticated/masters/inventory/stock_group/': typeof AuthenticatedMastersInventoryStockgroupIndexRoute
-  '/_authenticated/masters/inventory/stock_item/': typeof AuthenticatedMastersInventoryStockitemIndexRoute
-  '/_authenticated/masters/inventory/stock_unit/': typeof AuthenticatedMastersInventoryStockunitIndexRoute
-  '/_authenticated/masters/inventory/unique_quantity_code/': typeof AuthenticatedMastersInventoryUniquequantitycodeIndexRoute
-  '/_authenticated/masters/inventory/unit/': typeof AuthenticatedMastersInventoryUnitIndexRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | ''
-    | '/settings'
-    | '/500'
-    | '/otp'
-    | '/sign-in'
-    | '/charts'
-    | '/dashboard'
-    | '/forgot-password'
-    | '/sign-in-2'
-    | '/sign-up'
-    | '/signin'
-    | '/401'
-    | '/403'
-    | '/404'
-    | '/503'
-    | '/masters/accounts'
-    | '/masters/inventory'
-    | '/demo/table'
-    | '/demo/tanstack-query'
-    | '/profile'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/apps'
-    | '/chats'
-    | '/help-center'
-    | '/settings/'
-    | '/tasks'
-    | '/users'
-    | '/masters/accounts/company'
-    | '/reports/balance_sheet'
-    | '/reports/profit_loss'
-    | '/reports/stock_summary'
-    | '/transactions/day_book'
-    | '/transactions/vouchers'
-    | '/masters/accounts/account_group'
-    | '/masters/accounts/account_ledger'
-    | '/masters/accounts/account_nature'
-    | '/masters/accounts/voucher_category'
-    | '/masters/accounts/voucher_classification'
-    | '/masters/accounts/voucher_type'
-    | '/masters/inventory/godown'
-    | '/masters/inventory/stock_category'
-    | '/masters/inventory/stock_group'
-    | '/masters/inventory/stock_item'
-    | '/masters/inventory/stock_unit'
-    | '/masters/inventory/unique_quantity_code'
-    | '/masters/inventory/unit'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | ''
-    | '/500'
-    | '/otp'
-    | '/sign-in'
-    | '/charts'
-    | '/dashboard'
-    | '/forgot-password'
-    | '/sign-in-2'
-    | '/sign-up'
-    | '/signin'
-    | '/401'
-    | '/403'
-    | '/404'
-    | '/503'
-    | '/masters/accounts'
-    | '/masters/inventory'
-    | '/demo/table'
-    | '/demo/tanstack-query'
-    | '/profile'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/apps'
-    | '/chats'
-    | '/help-center'
-    | '/settings'
-    | '/tasks'
-    | '/users'
-    | '/masters/accounts/company'
-    | '/reports/balance_sheet'
-    | '/reports/profit_loss'
-    | '/reports/stock_summary'
-    | '/transactions/day_book'
-    | '/transactions/vouchers'
-    | '/masters/accounts/account_group'
-    | '/masters/accounts/account_ledger'
-    | '/masters/accounts/account_nature'
-    | '/masters/accounts/voucher_category'
-    | '/masters/accounts/voucher_classification'
-    | '/masters/accounts/voucher_type'
-    | '/masters/inventory/godown'
-    | '/masters/inventory/stock_category'
-    | '/masters/inventory/stock_group'
-    | '/masters/inventory/stock_item'
-    | '/masters/inventory/stock_unit'
-    | '/masters/inventory/unique_quantity_code'
-    | '/masters/inventory/unit'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/_authenticated/settings'
-    | '/(auth)/500'
-    | '/(auth)/otp'
-    | '/(auth)/sign-in'
-    | '/_authenticated/charts'
-    | '/_authenticated/dashboard'
-    | '/(auth)/forgot-password'
-    | '/(auth)/sign-in-2'
-    | '/(auth)/sign-up'
-    | '/(auth)/signin'
-    | '/(errors)/401'
-    | '/(errors)/403'
-    | '/(errors)/404'
-    | '/(errors)/500'
-    | '/(errors)/503'
-    | '/_authenticated/masters/accounts'
-    | '/_authenticated/masters/inventory'
-    | '/(demo)/demo/table'
-    | '/(demo)/demo/tanstack-query'
-    | '/_authenticated/(auth)/profile'
-    | '/_authenticated/settings/account'
-    | '/_authenticated/settings/appearance'
-    | '/_authenticated/settings/display'
-    | '/_authenticated/settings/notifications'
-    | '/_authenticated/apps/'
-    | '/_authenticated/chats/'
-    | '/_authenticated/help-center/'
-    | '/_authenticated/settings/'
-    | '/_authenticated/tasks/'
-    | '/_authenticated/users/'
-    | '/_authenticated/masters/accounts/company'
-    | '/_authenticated/reports/balance_sheet/'
-    | '/_authenticated/reports/profit_loss/'
-    | '/_authenticated/reports/stock_summary/'
-    | '/_authenticated/transactions/day_book/'
-    | '/_authenticated/transactions/vouchers/'
-    | '/_authenticated/masters/accounts/account_group/'
-    | '/_authenticated/masters/accounts/account_ledger/'
-    | '/_authenticated/masters/accounts/account_nature/'
-    | '/_authenticated/masters/accounts/voucher_category/'
-    | '/_authenticated/masters/accounts/voucher_classification/'
-    | '/_authenticated/masters/accounts/voucher_type/'
-    | '/_authenticated/masters/inventory/godown/'
-    | '/_authenticated/masters/inventory/stock_category/'
-    | '/_authenticated/masters/inventory/stock_group/'
-    | '/_authenticated/masters/inventory/stock_item/'
-    | '/_authenticated/masters/inventory/stock_unit/'
-    | '/_authenticated/masters/inventory/unique_quantity_code/'
-    | '/_authenticated/masters/inventory/unit/'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
-  auth500Route: typeof auth500Route
-  authOtpRoute: typeof authOtpRoute
-  authSignInRoute: typeof authSignInRoute
-  authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
-  authSignIn2LazyRoute: typeof authSignIn2LazyRoute
-  authSignUpLazyRoute: typeof authSignUpLazyRoute
-  authSigninLazyRoute: typeof authSigninLazyRoute
-  errors401LazyRoute: typeof errors401LazyRoute
-  errors403LazyRoute: typeof errors403LazyRoute
-  errors404LazyRoute: typeof errors404LazyRoute
-  errors500LazyRoute: typeof errors500LazyRoute
-  errors503LazyRoute: typeof errors503LazyRoute
-  demoDemoTableRoute: typeof demoDemoTableRoute
-  demoDemoTanstackQueryRoute: typeof demoDemoTanstackQueryRoute
-}
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
-  auth500Route: auth500Route,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
   authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
@@ -1288,266 +1668,6 @@ const rootRouteChildren: RootRouteChildren = {
   demoDemoTableRoute: demoDemoTableRoute,
   demoDemoTanstackQueryRoute: demoDemoTanstackQueryRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/_authenticated",
-        "/(auth)/500",
-        "/(auth)/otp",
-        "/(auth)/sign-in",
-        "/(auth)/forgot-password",
-        "/(auth)/sign-in-2",
-        "/(auth)/sign-up",
-        "/(auth)/signin",
-        "/(errors)/401",
-        "/(errors)/403",
-        "/(errors)/404",
-        "/(errors)/500",
-        "/(errors)/503",
-        "/(demo)/demo/table",
-        "/(demo)/demo/tanstack-query"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_authenticated": {
-      "filePath": "_authenticated.tsx",
-      "children": [
-        "/_authenticated/settings",
-        "/_authenticated/charts",
-        "/_authenticated/dashboard",
-        "/_authenticated/masters/accounts",
-        "/_authenticated/masters/inventory",
-        "/_authenticated/(auth)/profile",
-        "/_authenticated/apps/",
-        "/_authenticated/chats/",
-        "/_authenticated/help-center/",
-        "/_authenticated/tasks/",
-        "/_authenticated/users/",
-        "/_authenticated/reports/balance_sheet/",
-        "/_authenticated/reports/profit_loss/",
-        "/_authenticated/reports/stock_summary/",
-        "/_authenticated/transactions/day_book/",
-        "/_authenticated/transactions/vouchers/"
-      ]
-    },
-    "/_authenticated/settings": {
-      "filePath": "_authenticated/settings/route.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/settings/account",
-        "/_authenticated/settings/appearance",
-        "/_authenticated/settings/display",
-        "/_authenticated/settings/notifications",
-        "/_authenticated/settings/"
-      ]
-    },
-    "/(auth)/500": {
-      "filePath": "(auth)/500.tsx"
-    },
-    "/(auth)/otp": {
-      "filePath": "(auth)/otp.tsx"
-    },
-    "/(auth)/sign-in": {
-      "filePath": "(auth)/sign-in.tsx"
-    },
-    "/_authenticated/charts": {
-      "filePath": "_authenticated/charts.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/dashboard": {
-      "filePath": "_authenticated/dashboard.tsx",
-      "parent": "/_authenticated"
-    },
-    "/(auth)/forgot-password": {
-      "filePath": "(auth)/forgot-password.lazy.tsx"
-    },
-    "/(auth)/sign-in-2": {
-      "filePath": "(auth)/sign-in-2.lazy.tsx"
-    },
-    "/(auth)/sign-up": {
-      "filePath": "(auth)/sign-up.lazy.tsx"
-    },
-    "/(auth)/signin": {
-      "filePath": "(auth)/signin.lazy.tsx"
-    },
-    "/(errors)/401": {
-      "filePath": "(errors)/401.lazy.tsx"
-    },
-    "/(errors)/403": {
-      "filePath": "(errors)/403.lazy.tsx"
-    },
-    "/(errors)/404": {
-      "filePath": "(errors)/404.lazy.tsx"
-    },
-    "/(errors)/500": {
-      "filePath": "(errors)/500.lazy.tsx"
-    },
-    "/(errors)/503": {
-      "filePath": "(errors)/503.lazy.tsx"
-    },
-    "/_authenticated/masters/accounts": {
-      "filePath": "_authenticated/masters/accounts/route.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/masters/accounts/company",
-        "/_authenticated/masters/accounts/account_group/",
-        "/_authenticated/masters/accounts/account_ledger/",
-        "/_authenticated/masters/accounts/account_nature/",
-        "/_authenticated/masters/accounts/voucher_category/",
-        "/_authenticated/masters/accounts/voucher_classification/",
-        "/_authenticated/masters/accounts/voucher_type/"
-      ]
-    },
-    "/_authenticated/masters/inventory": {
-      "filePath": "_authenticated/masters/inventory/route.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/masters/inventory/godown/",
-        "/_authenticated/masters/inventory/stock_category/",
-        "/_authenticated/masters/inventory/stock_group/",
-        "/_authenticated/masters/inventory/stock_item/",
-        "/_authenticated/masters/inventory/stock_unit/",
-        "/_authenticated/masters/inventory/unique_quantity_code/",
-        "/_authenticated/masters/inventory/unit/"
-      ]
-    },
-    "/(demo)/demo/table": {
-      "filePath": "(demo)/demo.table.tsx"
-    },
-    "/(demo)/demo/tanstack-query": {
-      "filePath": "(demo)/demo.tanstack-query.tsx"
-    },
-    "/_authenticated/(auth)/profile": {
-      "filePath": "_authenticated/(auth)/profile.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/settings/account": {
-      "filePath": "_authenticated/settings/account.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/appearance": {
-      "filePath": "_authenticated/settings/appearance.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/display": {
-      "filePath": "_authenticated/settings/display.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/settings/notifications": {
-      "filePath": "_authenticated/settings/notifications.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/apps/": {
-      "filePath": "_authenticated/apps/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/chats/": {
-      "filePath": "_authenticated/chats/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/help-center/": {
-      "filePath": "_authenticated/help-center/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/settings/": {
-      "filePath": "_authenticated/settings/index.tsx",
-      "parent": "/_authenticated/settings"
-    },
-    "/_authenticated/tasks/": {
-      "filePath": "_authenticated/tasks/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/users/": {
-      "filePath": "_authenticated/users/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/masters/accounts/company": {
-      "filePath": "_authenticated/masters/accounts/company.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/reports/balance_sheet/": {
-      "filePath": "_authenticated/reports/balance_sheet/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/reports/profit_loss/": {
-      "filePath": "_authenticated/reports/profit_loss/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/reports/stock_summary/": {
-      "filePath": "_authenticated/reports/stock_summary/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/transactions/day_book/": {
-      "filePath": "_authenticated/transactions/day_book/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/transactions/vouchers/": {
-      "filePath": "_authenticated/transactions/vouchers/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/masters/accounts/account_group/": {
-      "filePath": "_authenticated/masters/accounts/account_group/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/accounts/account_ledger/": {
-      "filePath": "_authenticated/masters/accounts/account_ledger/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/accounts/account_nature/": {
-      "filePath": "_authenticated/masters/accounts/account_nature/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/accounts/voucher_category/": {
-      "filePath": "_authenticated/masters/accounts/voucher_category/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/accounts/voucher_classification/": {
-      "filePath": "_authenticated/masters/accounts/voucher_classification/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/accounts/voucher_type/": {
-      "filePath": "_authenticated/masters/accounts/voucher_type/index.tsx",
-      "parent": "/_authenticated/masters/accounts"
-    },
-    "/_authenticated/masters/inventory/godown/": {
-      "filePath": "_authenticated/masters/inventory/godown/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/stock_category/": {
-      "filePath": "_authenticated/masters/inventory/stock_category/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/stock_group/": {
-      "filePath": "_authenticated/masters/inventory/stock_group/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/stock_item/": {
-      "filePath": "_authenticated/masters/inventory/stock_item/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/stock_unit/": {
-      "filePath": "_authenticated/masters/inventory/stock_unit/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/unique_quantity_code/": {
-      "filePath": "_authenticated/masters/inventory/unique_quantity_code/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    },
-    "/_authenticated/masters/inventory/unit/": {
-      "filePath": "_authenticated/masters/inventory/unit/index.tsx",
-      "parent": "/_authenticated/masters/inventory"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

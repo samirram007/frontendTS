@@ -11,10 +11,10 @@ export const Route = createFileRoute(
     context.queryClient.ensureQueryData(godownQueryOptions()),
   component: () => {
     const { data: godown } = useSuspenseQuery(godownQueryOptions())
-    console.log(godown, 'unique quantity code data');
+
     return <Godown data={godown?.data} />
   },
-  errorComponent: () => <div>Error loading unique quantity code data.</div>,
+  errorComponent: () => <div>Error loading godown data.</div>,
   pendingComponent: () => <Loader className="animate-spin" />,
 })
 

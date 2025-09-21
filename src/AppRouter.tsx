@@ -1,19 +1,12 @@
 // AppRouter.tsx
-import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
 import LoadingBar from 'react-top-loading-bar';
 import { useAuth } from './features/auth/contexts/AuthContext';
 import * as TanstackQuery from './integrations/tanstack-query/root-provider';
-import { routeTree } from './routeTree.gen';
+import { createAppRouter } from './router';
 
-export const router = createRouter({
-    routeTree,
-    context: undefined!,
-    defaultPreload: 'intent',
-    scrollRestoration: true,
-    defaultStructuralSharing: true,
-    defaultPreloadStaleTime: 0,
-});
 
+const router = createAppRouter()
 declare module '@tanstack/react-router' {
     interface Register {
         router: typeof router;
@@ -29,8 +22,14 @@ export function AppRouter() {
     const auth = useAuth();
     const { queryClient } = TanstackQuery.getContext();
 
-
     if (auth.isLoading) return <LoadingBar />;
+    if (auth.isLoading) {
+        return (
+            <div className="flex h-screen w-full items-center justify-center p-4">
+                <div className="size-10 rounded-full border-4 border-gray-200 border-t-foreground animate-spin" />
+            </div>
+        )
+    }
 
     return (
         <RouterProvider

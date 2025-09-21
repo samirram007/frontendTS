@@ -11,6 +11,7 @@ interface StockGroupContextType {
   setOpen: (str: StockGroupDialogType | null) => void
   currentRow: StockGroup | null
   setCurrentRow: React.Dispatch<React.SetStateAction<StockGroup | null>>
+  keyName: string
 }
 
 const StockGroupContext = React.createContext<StockGroupContextType | null>(null)
@@ -24,7 +25,7 @@ export default function StockGroupProvider({ children }: Props) {
   const [currentRow, setCurrentRow] = useState<StockGroup | null>(null)
 
   return (
-    <StockGroupContext value={{ open, setOpen, currentRow, setCurrentRow }}>
+    <StockGroupContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "stock_groups" }}>
       {children}
     </StockGroupContext>
   )

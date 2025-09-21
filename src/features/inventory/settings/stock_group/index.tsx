@@ -5,11 +5,12 @@ import { Main } from '@/layouts/components/main'
 
 
 
-import { columns } from './components/stock_group-columns'
+import { columns } from './components/columns'
 
-import { StockGroupDialogs } from './components/stock_group-dialogs'
-import { StockGroupPrimaryButtons } from './components/stock_group-primary-buttons'
-import { StockGroupTable } from './components/stock_group-table'
+
+import { Dialogs } from './components/dialogs'
+import { GridTable } from './components/grid-table'
+import { PrimaryButtons } from './components/primary-buttons'
 import StockGroupProvider from './contexts/stock_group-context'
 import { stockGroupListSchema, type StockGroupList } from './data/schema'
 
@@ -33,16 +34,16 @@ export default function StockGroup({ data }: StockGroupProps) {
                             Manage your stock categories here.
                         </p>
                     </div>
-                    <StockGroupPrimaryButtons />
+                    <PrimaryButtons />
                 </div>
                 <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-                    <StockGroupTable
+                    <GridTable 
                         data={stockGroupListSchema.parse(data ?? [])}
                         columns={columns} />
                 </div>
             </Main>
 
-            <StockGroupDialogs />
+            <Dialogs />
         </StockGroupProvider>
     )
 }

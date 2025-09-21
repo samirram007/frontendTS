@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react';
 import { Link, useRouter } from '@tanstack/react-router';
-import { type HTMLAttributes, useState } from 'react';
+import { type HTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useAuth } from '../../contexts/AuthContext';
@@ -36,8 +36,8 @@ const formSchema = z.object({
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const { login } = useAuth()
-  const [isLoading, setIsLoading] = useState(false)
+  const { login, isLoading } = useAuth()
+
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,15 +49,23 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
+    // setIsLoading(true)
     await login(data)
-    await router.invalidate()
+      .then(() => router.invalidate())
+      .catch((error) => {
+        console.error("Login failed:...........", error)
+
+        // throw redirect({
+        //   to: '/sign-in',
+        // })
+        // handle error here
+      })
     // eslint-disable-next-line no-console
     // console.log(data)
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 3000)
   }
 
   return (

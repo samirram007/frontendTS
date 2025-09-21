@@ -146,10 +146,18 @@ code {
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
-
- 
- 
-
+  input,
+  select,
+  button[role='combobox'],
+  textarea {
+    @apply shadow-sm shadow-indigo-400;
+  }
+  input[type='checkbox'] {
+    @apply !px-0 w-9;
+  }
+  aside {
+    box-shadow: 5px 0px 16px 1px #1d1ad521;
+}
   /* Prevent focus zoom on mobile devices */
   @media screen and (max-width: 767px) {
     input,
@@ -159,13 +167,13 @@ code {
     }
   }
 }
-@utility placeholder{
-    @apply placeholder:text-slate-400/80 dark:placeholder:text-zinc-600;
-  }
-@utility  text-destructive{
-  @apply  !text-red-300/70  ;
+@utility placeholder {
+  @apply placeholder:text-slate-400/80 dark:placeholder:text-zinc-600;
 }
-@utility  border-destructive{
+@utility text-destructive {
+  @apply !text-red-300/70;
+}
+@utility border-destructive {
   @apply !border-red-300;
 }
 @utility container {

@@ -34,10 +34,10 @@ const FormInputField = (props: Props) => {
                                 <Input
                                     type='checkbox'
                                     className='col-span-1  '
-                                    checked={field.value === 'active' || field.value === 'yes' || field.value === true}
+                                    checked={field.value === 'active' || field.value === true}
                                     onChange={(e) => {
                                         const isChecked = e.target.checked;
-                                        const value = options && options.length > 0 ? (isChecked ? options[0].value : options[1]?.value || '') : isChecked;
+                                        const value = options && options.length > 0 ? (isChecked ? options[0].value : options[1]?.value || false) : isChecked;
                                         form.setValue(name, value);
                                     }}
                                 />

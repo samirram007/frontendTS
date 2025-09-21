@@ -14,17 +14,16 @@ import {
 } from '@/components/ui/form'
 
 
-import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
 import { useForm } from 'react-hook-form'
 import { lowerCase } from '../../../../../utils/removeEmptyStrings'
 
-import { storeGodownService, updateGodownService } from '../data/api'
+import { Loader2 } from 'lucide-react'
+import { useGodownMutation } from '../data/queryOptions'
 import { formSchema, type Godown, type GodownForm } from '../data/schema'
-import AccountEffectDropdown from './godown-dropdown'
+import GodownDropdown from './godown-dropdown'
 
 
 interface Props {
@@ -34,25 +33,8 @@ interface Props {
 }
 
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
+  const { mutate: saveGodown, isPending } = useGodownMutation()
   const isEdit = !!currentRow
-  const queryClient = useQueryClient()
-  const mutateGodown = useMutation({
-    mutationFn: async (data: GodownForm) => {
-      // Here you would typically make an API call to save the account nature
-      // For example:
-      // console.log('Saving godown:', data);
-      if (isEdit && currentRow) {
-        return await updateGodownService({ ...data, id: currentRow.id })
-      }
-      else if (!isEdit) {
-        return await storeGodownService(data);
-      }
-    },
-    onSuccess: (data) => {
-      console.log(data, 'Godown saved successfully!')
-      queryClient.invalidateQueries({ queryKey: ['godowns'] })
-    },
-  })
 
   const form = useForm<GodownForm>({
     resolver: zodResolver(formSchema),
@@ -64,6 +46,15 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         name: '',
         code: '',
         description: '',
+        parentId: 1,
+        address: {
+          addressLine1: '',
+          addressLine2: '',
+          city: '',
+          pincode: '',
+          stateId: 19,
+          countryId: 74,
+        },
         status: 'active',
         isEdit,
       },
@@ -73,8 +64,10 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const moduleName = "Godown"
   const onSubmit = (values: GodownForm) => {
     form.reset()
-    showSubmittedData(values)
-    mutateGodown.mutate(values)
+    //showSubmittedData(values)
+    saveGodown(
+      currentRow ? { ...values, id: currentRow.id } : values
+    )
     onOpenChange(false)
   }
 
@@ -106,7 +99,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <AccountEffectDropdown form={form} />
+              <GodownDropdown form={form} />
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },
@@ -117,8 +110,9 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form'>
-            Save changes
+          <Button type='submit' form='user-form' disabled={isPending}>
+            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isPending ? "Saving..." : "Save changes"}
           </Button>
         </DialogFooter>
       </DialogContent>
