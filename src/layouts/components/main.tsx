@@ -1,5 +1,5 @@
-import React from 'react'
 import { cn } from '@/lib/utils'
+import React from 'react'
 
 interface MainProps extends React.HTMLAttributes<HTMLElement> {
   fixed?: boolean
@@ -11,7 +11,7 @@ export const Main = ({ fixed, ...props }: MainProps) => {
     <main
       className={cn(
         'peer-[.header-fixed]/header:mt-16',
-        'px-4 py-6',
+        'px-4 py-0 md:px-6 2xl:px-10',
         fixed && 'fixed-main flex flex-grow flex-col overflow-hidden'
       )}
       {...props}

@@ -192,14 +192,48 @@ export const sidebarData: SidebarData = {
       visible: true,
       items: [
         {
-          title: 'Accounts',
+          title: 'Organization',
           icon: IconAccessPoint,
           items: [
             {
               title: 'Company',
-              url: '/masters/accounts/company',
+              url: '/masters/organization/company',
               icon: IconUserCog,
             },
+            {
+              title: 'Branch',
+              url: '/masters/organization/branch',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Financial Year',
+              url: '/masters/organization/financial_year',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Currency',
+              url: '/masters/organization/currency',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Country',
+              url: '/masters/organization/country',
+              icon: IconUserCog,
+            },
+            {
+              title: 'State',
+              url: '/masters/organization/state',
+              icon: IconUserCog,
+            },
+
+
+          ]
+        },
+        {
+          title: 'Accounts',
+          icon: IconAccessPoint,
+          items: [
+
             {
               title: 'Chart of Accounts',
               url: '/masters/accounts/account_group',
