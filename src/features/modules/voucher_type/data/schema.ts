@@ -17,7 +17,7 @@ export const voucherTypeSchema = z.object({
   status: voucherTypeStatusSchema,
   icon: z.string(),
   voucherCategoryId: z.number().int().positive(),
-  voucherCategory: voucherCategorySchema.optional(),
+  voucherCategory: z.lazy(() => voucherCategorySchema.nullish()),
 })
 export type VoucherType = z.infer<typeof voucherTypeSchema>
 

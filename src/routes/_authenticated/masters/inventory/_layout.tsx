@@ -10,7 +10,7 @@ export const Route = createFileRoute('/_authenticated/masters/inventory/_layout'
     return (
       <InventoryProvider>
 
-        <Inventory></Inventory>
+        <Inventory />
       </InventoryProvider>
     )
   },
