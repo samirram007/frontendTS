@@ -1,36 +1,36 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchCompanyByIdService, fetchCompanyService, storeCompanyService, updateCompanyService } from "./api"
-import type { CompanyForm } from "./schema"
+import { fetchReceiptNoteByIdService, fetchReceiptNoteService, storeReceiptNoteService, updateReceiptNoteService } from "./api"
+import type { ReceiptNoteForm } from "./schema"
 
-const BASE_KEY = "vouchers"
+const BASE_KEY = "receiptNote"
 
-export const companyQueryOptions = (id?: number) => {
+export const receiptNoteQueryOptions = (id?: number) => {
 
     return queryOptions({
         queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
         queryFn: () =>
-            id ? fetchCompanyByIdService(id) : fetchCompanyService(),
+            id ? fetchReceiptNoteByIdService(id) : fetchReceiptNoteService(),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })
 }
 
-export function useCompanyMutation() {
+export function useReceiptNoteMutation() {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async (data: CompanyForm & { id?: number }) => {
+        mutationFn: async (data: ReceiptNoteForm & { id?: number }) => {
             if (data.id) {
                 // Update if id exists
-                return await updateCompanyService(data)
+                return await updateReceiptNoteService(data)
             }
             // Otherwise create
-            return await storeCompanyService(data)
+            return await storeReceiptNoteService(data)
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
         },
         onError: (error) => {
-            console.error("Company mutation failed:", error)
+            console.error("ReceiptNote mutation failed:", error)
         },
     })
 }

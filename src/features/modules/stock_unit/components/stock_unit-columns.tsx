@@ -8,6 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import Icon from '@/components/icon'
 
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
+import { capitalizeAllWords } from '../../../../utils/removeEmptyStrings'
 import type { StockUnit } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
@@ -83,11 +84,11 @@ export const columns: ColumnDef<StockUnit>[] = [
   },
 
   {
-    accessorKey: 'description',
+    accessorKey: 'unitType',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Description' />
+      <DataTableColumnHeader column={column} title='Type' />
     ),
-    cell: ({ row }) => <div>{row.getValue('description')}</div>,
+    cell: ({ row }) => <Badge variant='secondary'>{capitalizeAllWords(row.getValue('unitType'))}</Badge>,
     enableSorting: false,
   },
   {

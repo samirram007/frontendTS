@@ -1,5 +1,3 @@
-import { IconLoader } from '@tabler/icons-react'
-import { cn } from '@/lib/utils'
 import { FormControl } from '@/components/ui/form'
 import {
   Select,
@@ -8,6 +6,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
+import { IconLoader } from '@tabler/icons-react'
 
 interface SelectDropdownProps {
   onValueChange?: (value: string) => void
@@ -37,7 +37,7 @@ export function SelectDropdown({
     <Select {...defaultState}>
       <FormControl>
         <SelectTrigger disabled={disabled} className={cn(className)}>
-          <SelectValue placeholder={placeholder ?? 'Select'} />
+          <SelectValue className="" placeholder={placeholder ?? 'Select'} />
         </SelectTrigger>
       </FormControl>
       <SelectContent>

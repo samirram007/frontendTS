@@ -20,10 +20,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
 import { useForm } from 'react-hook-form'
-import { lowerCase } from '../../../../utils/removeEmptyStrings'
+
+import { lowerCase } from '@/utils/removeEmptyStrings'
 import { storeCompanyService, updateCompanyService } from '../data/api'
 import { formSchema } from '../data/schema'
-import AccountEffectDropdown from './dropdown/company_type-dropdown'
+
 
 
 interface Props {
@@ -105,7 +106,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <AccountEffectDropdown form={form} />
+
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },

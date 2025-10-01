@@ -146,11 +146,22 @@ code {
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
+  input[type="number"]{
+    @apply text-right;
+     &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+ 
+  }
   input,
   select,
   button[role='combobox'],
   textarea {
     @apply shadow-sm shadow-indigo-400;
+    @apply focus:bg-indigo-500! focus:text-gray-200 focus:font-semibold focus:text-left;
+    @apply focus:placeholder:text-gray-200;
   }
   input[type='checkbox'] {
     @apply !px-0 w-9;
@@ -158,6 +169,24 @@ code {
   aside {
     box-shadow: 5px 0px 16px 1px #1d1ad521;
 }
+button[role='combobox'][data-state='open'] {
+  background-color: #e66262;
+  border-color: #3b82f6; /* Tailwind blue-500 */
+  box-shadow: 0 0 0 2px rgba(221, 58, 8, 0.5);
+   @apply  bg-indigo-500! text-gray-200!;
+  
+}
+
+/* Optional: change text color */
+button[role='combobox'][data-state='open'] > span {
+  @apply font-semibold text-gray-200;
+  @apply focus:text-gray-200;
+}
+button[role='combobox']    {
+   @apply   data-[placeholder]:focus:text-blue-200! ;  
+ 
+}
+   
   /* Prevent focus zoom on mobile devices */
   @media screen and (max-width: 767px) {
     input,
@@ -169,6 +198,8 @@ code {
 }
 @utility placeholder {
   @apply placeholder:text-slate-400/80 dark:placeholder:text-zinc-600;
+   @apply focus:placeholder:text-gray-200/60
+  
 }
 @utility text-destructive {
   @apply !text-red-300/70;

@@ -19,11 +19,11 @@ import { formSchema, type StockItem, type StockItemForm } from '../data/schema'
 import StockCategoryDropdown from './dropdown/stock_category-dropdown'
 import StockGroupDropdown from './dropdown/stock_group-dropdown'
 import StockUnitDropdown from './dropdown/stock_unit-dropdown'
+import TypeOfSupplySelect from './dropdown/type_of_supply-select'
 import UqcDropdown from './dropdown/uqc-dropdown'
 
 interface Props {
     currentRow?: StockItem
-
 }
 
 export function FormAction({ currentRow }: Props) {
@@ -43,7 +43,7 @@ export function FormAction({ currentRow }: Props) {
                 sku: '',
                 articleNo: '',
                 partNo: '',
-                status: '',
+                status: 'active',
                 description: '',
                 stockGroupId: undefined,
                 stockCategoryId: undefined,
@@ -168,7 +168,7 @@ export function FormAction({ currentRow }: Props) {
                             <div className='space-y-4'>
                                 <div>Behaviour</div>
                                 <UqcDropdown form={form} />
-                                <FormInputField type='text' form={form} name='typeOfSupply' label='Type Of Supply' />
+                                <TypeOfSupplySelect form={form} />
                                 <FormInputField type='checkbox' form={form} name='isNegativeSalesAllow' label='Is Negative Sales Allow' />
 
                                 <FormInputField type='checkbox' form={form} name='isExpiryItem' label='Is Expiry Item' />

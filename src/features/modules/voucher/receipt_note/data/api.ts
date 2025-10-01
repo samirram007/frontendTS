@@ -2,16 +2,16 @@ import { getData, postData, putData } from "@/utils/dataClient"
 
 
 const API_PATH = "/vouchers"
-export async function fetchCompanyService() {
+export async function fetchReceiptNoteService() {
     return await getData(API_PATH)
 }
-export async function fetchCompanyByIdService(id: number) {
+export async function fetchReceiptNoteByIdService(id: number) {
     return await getData(`${API_PATH}/${id}`)
 }
 
-export async function storeCompanyService(payload: any) {
+export async function storeReceiptNoteService(payload: any) {
     return await postData(API_PATH, payload)
 }
-export async function updateCompanyService(payload: any) {
+export async function updateReceiptNoteService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }

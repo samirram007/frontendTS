@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import { capitalizeAllWords, capitalizeWords, lowerCase } from "@/utils/removeEmptyStrings";
-import type { UseFormReturn } from "react-hook-form";
+import type { Control, UseFormReturn } from "react-hook-form";
 import { SelectDropdown } from './select-dropdown';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -8,11 +9,13 @@ import { Textarea } from "./ui/textarea";
 
 type Props = {
     form: UseFormReturn<any>;
-    type: 'text' | 'number' | 'textarea' | 'checkbox' | 'select';
+    control?: Control<any>;
+    type: 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'date';
     name: string;
     label?: string;
     options?: { label: string; value: boolean | string }[];
     items?: { label: string; value: string }[];
+    gapClass?: string
 }
 
 const FormInputField = (props: Props) => {
@@ -30,6 +33,9 @@ const FormInputField = (props: Props) => {
     }
     else if (type === 'select') {
         return <SelectBox {...props} />
+    }
+    else if (type === 'date') {
+        return <DateBox {...props} />
     }
     else {
         return <TextBox {...props} />
@@ -102,13 +108,17 @@ const TextAreaBox = (props: Props) => {
 }
 
 const TextBox = (props: Props) => {
-    const { form, name, label, } = props
+    const { form, name, label, gapClass } = props
     return (
         <FormField
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem className='grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1'>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )} >
                     <FormLabel className='   '>
                         {label ?? capitalizeAllWords(name)}
                     </FormLabel>
@@ -126,14 +136,48 @@ const TextBox = (props: Props) => {
         />
     )
 }
-const NumberBox = (props: Props) => {
-    const { form, name, label, type } = props
+const DateBox = (props: Props) => {
+    const { form, name, label, gapClass } = props
     return (
         <FormField
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem className='grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1'>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )} >
+                    <FormLabel className='   '>
+                        {label ?? capitalizeAllWords(name)} {field.value[name]}
+                    </FormLabel>
+                    <FormControl>
+                        <Input
+                            placeholder={'Enter ' + lowerCase(label ?? name)}
+                            type='text'
+                            className=' placeholder'
+                            autoComplete='off'
+                            {...field}
+                        />
+                    </FormControl>
+                    <FormMessage className=' col-start-2' />
+                </FormItem>
+            )}
+        />
+    )
+}
+const NumberBox = (props: Props) => {
+    const { form, name, label, type, gapClass } = props
+    return (
+        <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )} >
                     <FormLabel className='   '>
                         {label ?? capitalizeAllWords(name)}
                     </FormLabel>
