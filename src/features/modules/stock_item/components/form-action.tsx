@@ -13,7 +13,8 @@ import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, type UseFormReturn } from 'react-hook-form'
+import { useStockItem } from '../contexts/stock_item-context'
 import { useStockItemMutation } from '../data/queryOptions'
 import { formSchema, type StockItem, type StockItemForm } from '../data/schema'
 import StockCategoryDropdown from './dropdown/stock_category-dropdown'
@@ -24,6 +25,9 @@ import UqcDropdown from './dropdown/uqc-dropdown'
 
 interface Props {
     currentRow?: StockItem
+}
+interface FormProps {
+    form: UseFormReturn<StockItemForm>
 }
 
 export function FormAction({ currentRow }: Props) {
@@ -83,10 +87,7 @@ export function FormAction({ currentRow }: Props) {
             },
     })
 
-    const config = [{
-        key: 'alternate_units',
-        value: true
-    }]
+
 
     const moduleName = "StockItem"
     const onSubmit = (values: StockItemForm) => {
@@ -147,12 +148,8 @@ export function FormAction({ currentRow }: Props) {
                             <div className='space-y-4 pt-4'>
                                 <StockGroupDropdown form={form} />
                                 <StockCategoryDropdown form={form} />
-                                <StockUnitDropdown form={form} config={config} />
+                                <UnitManagement form={form} />
 
-                                <FormInputField type='text' form={form} name='alternateUnitRatio' label='Alternate Unit Ratio' />
-                                <FormInputField type='text' form={form} name='invoiceStockUnitId' label='Invoice Stock Unit' />
-                                <FormInputField type='text' form={form} name='invoiceConversionFactor' label='Invoice Conversion Factor' />
-                                <FormInputField type='text' form={form} name='noOfDecimalPlaces' label='No Of Decimal Places' />
 
                                 <FormInputField type='checkbox' form={form} name='isMaintainBatch' label='Is Maintain Batch' />
                                 <FormInputField type='checkbox' form={form} name='isMaintainSerial' label='Is Maintain Serial' />
@@ -224,5 +221,23 @@ export function FormAction({ currentRow }: Props) {
                 </Button>
             </DialogFooter>
         </Dialog>
+    )
+}
+
+
+
+
+const UnitManagement = ({ form }: FormProps) => {
+    const { config } = useStockItem();
+
+    return (
+        <>
+            <StockUnitDropdown form={form} config={config} />
+
+            <FormInputField type='text' form={form} name='alternateUnitRatio' label='Alternate Unit Ratio' />
+
+
+            <FormInputField type='text' form={form} name='noOfDecimalPlaces' label='No Of Decimal Places' />
+        </>
     )
 }

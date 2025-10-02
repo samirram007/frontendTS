@@ -11,7 +11,8 @@ interface StockItemContextType {
   setOpen: (str: StockItemDialogType | null) => void
   currentRow: StockItem | null
   setCurrentRow: React.Dispatch<React.SetStateAction<StockItem | null>>
-  keyName: string
+  keyName: string,
+  config: { key: string, value: boolean }[]
 }
 
 const StockItemContext = React.createContext<StockItemContextType | null>(null)
@@ -23,10 +24,13 @@ interface Props {
 export default function StockItemProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<StockItemDialogType>(null)
   const [currentRow, setCurrentRow] = useState<StockItem | null>(null)
-
+  const config = [{
+    key: 'alternate_units',
+    value: true
+  }]
 
   return (
-    <StockItemContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "account_nature" }}>
+    <StockItemContext value={{ open, setOpen, currentRow, setCurrentRow, config, keyName: "account_nature" }}>
       {children}
     </StockItemContext>
   )
