@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 
 
-type InventoryModules = 'stock_item' | 'item_group' | 'brand' | 'uqc' | 'tax_rate' | 'opening_stock'
+
 
 interface InventoryContextType {
     currentModule: string

@@ -16,13 +16,11 @@ export const useReceiptForm = () => {
     return ctx
 }
 
-export const FormProvider = ({
-    children,
-    defaultValues,
-}: {
+export const FormProvider = ({ children, defaultValues, }: {
     children: React.ReactNode
     defaultValues?: Partial<ReceiptNoteForm>
 }) => {
+    console.log(defaultValues)
     const form = useForm<ReceiptNoteForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {

@@ -4,7 +4,7 @@
 import type { ReceiptNoteProps } from './components/form-action';
 import FormAction from './components/form-action';
 import { FormProvider } from './contexts/form-context';
-import { type ReceiptNote } from './data/schema';
+
 
 
 

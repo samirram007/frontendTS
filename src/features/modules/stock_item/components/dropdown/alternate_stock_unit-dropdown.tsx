@@ -17,7 +17,7 @@ type Props = {
 }
 
 const AlternateStockUnitDropdown = (props: Props) => {
-    const { form, config, gapClass } = props
+    const { form, gapClass } = props
 
     const isEdit = form.getValues('isEdit')
 

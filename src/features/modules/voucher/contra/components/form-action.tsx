@@ -8,61 +8,44 @@ import {
 
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Route as CompanyRoute } from '@/routes/_authenticated/masters/organization/_layout/company/_layout'
+
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
-import { useCompanyMutation } from '../data/queryOptions'
-import { formSchema, type Company, type CompanyForm } from '../data/schema'
-import CompanyTypeDropdown from './dropdown/company_type-dropdown'
-import CountryDropdown from './dropdown/country-dropdown'
-import CurrencyDropdown from './dropdown/currency-dropdown'
-import StateDropdown from './dropdown/state-dropdown'
+import { useContraMutation } from '../data/queryOptions'
+import { formSchema, type Contra, type ContraForm } from '../data/schema'
+
 interface Props {
-    currentRow?: Company
+    currentRow?: Contra
 }
 export function FormAction({ currentRow }: Props) {
     const isEdit = !!currentRow
-    const navigate = useNavigate();
 
-    const { mutate: saveCompany, isPending } = useCompanyMutation()
 
-    const form = useForm<CompanyForm>({
+    const { mutate: saveContra, isPending } = useContraMutation()
+
+    const form = useForm<ContraForm>({
         resolver: zodResolver(formSchema),
         defaultValues: isEdit
             ? { ...currentRow, isEdit }
             : {
                 name: '',
                 code: '',
-                companyTypeId: 1,
-                address: '',
-                phoneNo: '',
-                email: '',
-                website: '',
-                gstNo: '',
-                panNo: '',
-                tanNo: '',
-                cinNo: '',
-                currencyId: 1,
-                countryId: 1,
-                stateId: 1,
-                city: '',
-                zipCode: '',
+
                 isEdit,
             },
     })
-    //  const companyStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
+    //  const contraStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
-    const moduleName = "Company"
-    const onSubmit = (values: CompanyForm) => {
+    const moduleName = "Contra"
+    const onSubmit = (values: ContraForm) => {
         form.reset()
-        saveCompany(
+        saveContra(
             currentRow ? { ...values, id: currentRow.id! } : values,
             {
                 onSuccess: () => {
-                    navigate({ to: CompanyRoute.to, })
+
                 },
             }
         )
@@ -92,21 +75,6 @@ export function FormAction({ currentRow }: Props) {
                     >
                         <FormInputField type='text' form={form} name='name' label='Name' />
                         <FormInputField type='text' form={form} name='code' label='Code' />
-                        <CompanyTypeDropdown form={form} />
-                        <FormInputField type='textarea' form={form} name='address' label='Address' />
-                        <FormInputField type='text' form={form} name='phoneNo' label='Phone No' />
-
-                        <FormInputField type='text' form={form} name='email' label='Email' />
-                        <FormInputField type='text' form={form} name='Website' label='Website' />
-                        <FormInputField type='text' form={form} name='gstNo' label='GST No' />
-                        <FormInputField type='text' form={form} name='panNo' label='PAN No' />
-                        <FormInputField type='text' form={form} name='tanNo' label='TAN No' />
-                        <FormInputField type='text' form={form} name='cinNo' label='CIN No' />
-                        <CurrencyDropdown form={form} />
-                        <CountryDropdown form={form} />
-                        <StateDropdown form={form} />
-                        <FormInputField type='text' form={form} name='city' label='City' />
-                        <FormInputField type='text' form={form} name='zipCode' label='Pin Code' />
 
 
 

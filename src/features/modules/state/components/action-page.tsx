@@ -1,12 +1,14 @@
 'use client'
 
 
-import type { Company } from '../data/schema'
+
+
+import type { State } from '../data/schema'
 import { FormAction } from './form-action'
 
 
 interface Props {
-    currentRow?: Company
+    currentRow?: State
 }
 
 export function ActionPages({ currentRow }: Props) {

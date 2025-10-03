@@ -13,7 +13,6 @@ import {
   Form
 } from '@/components/ui/form'
 
-import type { Company, CompanyForm } from '@/features/modules/company/data/schema'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -22,13 +21,13 @@ import FormInputField from '@/components/form-input-field'
 import { useForm } from 'react-hook-form'
 
 import { lowerCase } from '@/utils/removeEmptyStrings'
-import { storeCompanyService, updateCompanyService } from '../data/api'
-import { formSchema } from '../data/schema'
+import { storeContraService, updateContraService } from '../data/api'
+import { formSchema, type Contra, type ContraForm } from '../data/schema'
 
 
 
 interface Props {
-  currentRow?: Company
+  currentRow?: Contra
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -36,25 +35,25 @@ interface Props {
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
   const queryClient = useQueryClient()
-  const mutateCompany = useMutation({
-    mutationFn: async (data: CompanyForm) => {
-      // Here you would typically make an API call to save the Company
+  const mutateContra = useMutation({
+    mutationFn: async (data: ContraForm) => {
+  // Here you would typically make an API call to save the Contra
       // For example:
-      console.log('Saving Company:', data);
+      console.log('Saving Contra:', data);
       if (isEdit && currentRow) {
-        return await updateCompanyService({ ...data, id: currentRow.id })
+        return await updateContraService({ ...data, id: currentRow.id })
       }
       else if (!isEdit) {
-        return await storeCompanyService(data);
+        return await storeContraService(data);
       }
     },
     onSuccess: (data) => {
-      console.log(data, 'Company saved successfully!')
-      queryClient.invalidateQueries({ queryKey: ['companys'] })
+      console.log(data, 'Contra saved successfully!')
+      queryClient.invalidateQueries({ queryKey: ['contras'] })
     },
   })
 
-  const form = useForm<CompanyForm>({
+  const form = useForm<ContraForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
@@ -62,19 +61,17 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
       }
       : {
         name: '',
-        code: '',
-        description: '',
-        status: 'active',
+        code: '',  
         isEdit,
       },
   })
-  //  const companyStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
+  //  const contraStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
-  const moduleName = "Company"
-  const onSubmit = (values: CompanyForm) => {
+  const moduleName = "Contra"
+  const onSubmit = (values: ContraForm) => {
     form.reset()
     showSubmittedData(values)
-    mutateCompany.mutate(values)
+    mutateContra.mutate(values)
     onOpenChange(false)
   }
 
@@ -107,11 +104,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
 
-              <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
-              <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
-                { label: 'Active', value: 'active' },
-                { label: 'Inactive', value: 'inactive' },
-              ]} />
+
 
             </form>
           </Form>

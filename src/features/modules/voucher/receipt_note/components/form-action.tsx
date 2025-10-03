@@ -1,6 +1,6 @@
 
 import { useNavigate } from "@tanstack/react-router"
-import { useFormContext, type UseFormReturn } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -13,16 +13,13 @@ export interface ReceiptNoteProps {
     currentRow?: ReceiptNote
 }
 
-interface FormProps {
-    form?: UseFormReturn<ReceiptNoteForm>
-}
 const FormAction = ({ currentRow }: ReceiptNoteProps) => {
     const isEdit = !!currentRow
     const navigate = useNavigate()
 
     const methods = useFormContext<ReceiptNoteForm>()
 
-
+    console.log(isEdit, navigate, methods)
 
 
     return (
@@ -33,7 +30,7 @@ const FormAction = ({ currentRow }: ReceiptNoteProps) => {
 
 
             <Button type="submit">Save....</Button>
-
+            <FooterComponent />
         </>
 
 
@@ -115,6 +112,7 @@ const VoucherHeader = () => {
 
 const BodyComponent = () => {
     const { register } = useFormContext<ReceiptNoteForm>()
+    console.log(register)
     return (
         <div className="bg-violet-400/20">
             {/* <StockJournalEntries /> */}

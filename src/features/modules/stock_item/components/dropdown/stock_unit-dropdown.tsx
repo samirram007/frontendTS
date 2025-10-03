@@ -17,7 +17,7 @@ type Props = {
 }
 
 const StockUnitDropdown = (props: Props) => {
-    const { form, config, gapClass } = props
+    const { form, gapClass } = props
 
     const isEdit = form.getValues('isEdit')
     const { data: StockUnitList, isLoading } = useQuery({
