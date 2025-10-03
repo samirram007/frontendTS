@@ -24,10 +24,10 @@ interface Props {
 export default function StockItemProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<StockItemDialogType>(null)
   const [currentRow, setCurrentRow] = useState<StockItem | null>(null)
-  const config = [{
-    key: 'alternate_units',
-    value: true
-  }]
+  const config = [
+    { key: 'alternate_units', value: true },
+    { key: 'batch_serial', value: true },
+  ]
 
   return (
     <StockItemContext value={{ open, setOpen, currentRow, setCurrentRow, config, keyName: "account_nature" }}>

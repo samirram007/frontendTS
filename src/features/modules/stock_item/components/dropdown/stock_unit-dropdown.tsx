@@ -5,26 +5,31 @@ import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
 import { fetchStockUnitService } from "@/features/modules/stock_unit/data/api";
+import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
+import { cn } from "@/lib/utils";
 import type { State } from "../../../state/data/schema";
 import type { StockItemForm } from "../../data/schema";
-import AlternateStockUnitDropdown from "./alternate_stock_unit-dropdown";
 
 type Props = {
     form: UseFormReturn<StockItemForm>;
+    gapClass?: string;
     config: { key: string; value: boolean }[];
 }
 
 const StockUnitDropdown = (props: Props) => {
-    const { form, config } = props
+    const { form, config, gapClass } = props
 
-    const { data: stockUnitList, isLoading } = useQuery({
-        queryKey: ["stock_units"],
+    const isEdit = form.getValues('isEdit')
+    const { data: StockUnitList, isLoading } = useQuery({
+        queryKey: ["stockUnits"],
         queryFn: fetchStockUnitService,
     });
 
     //const stateId = form.watch('stateId') as string | number | undefined;; // Watch form value for reactivity
     const handleValueChange = (value: string) => {
         form.setValue('stockUnitId', Number(value));
+        const StockUnit = StockUnitList?.data.find((item: StockUnit) => item.id === Number(value))
+        form.setValue("stockUnit", StockUnit)
 
     };
     if (isLoading) {
@@ -36,16 +41,20 @@ const StockUnitDropdown = (props: Props) => {
                 control={form.control}
                 name='stockUnitId'
                 render={({ field }) => (
-                    <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                        <FormLabel className='col-span-2 text-right'>
+                    <FormItem
+                        className={cn(
+                            'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                            gapClass
+                        )} >
+                        <FormLabel className='pt-1  '>
                             Units
                         </FormLabel>
                         <SelectDropdown
                             defaultValue={field.value ? field.value.toString() : ''}
                             onValueChange={(value) => handleValueChange(value)}
-                            placeholder='Select a stock unit'
-                            className='w-full col-span-6 md:col-span-4'
-                            items={stockUnitList?.data.map((stockUnit: State) => ({
+                            placeholder='Select an unit'
+                            className={cn("w-full", isEdit && " cursor-not-allowed")}
+                            items={StockUnitList?.data.map((stockUnit: State) => ({
                                 label: capitalizeAllWords(stockUnit.name),
                                 value: String(stockUnit.id),
                             }))}
@@ -54,14 +63,7 @@ const StockUnitDropdown = (props: Props) => {
                     </FormItem>
                 )}
             />
-            {/* Show message if 'alternate_units' config is set to false
-             Configured to hide Alternate Units field */}
-            {config.map((item) => item.key === 'alternate_units' && item.value && (
-                <div className="text-sm text-muted-foreground col-span-6 md:col-span-4 md:col-start-3">
-                    * To add Alternate Units, please select the Alternate Units field.
-                    <AlternateStockUnitDropdown form={form} />
-                </div>
-            ))}
+
         </>
     )
 }

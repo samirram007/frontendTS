@@ -1,3 +1,6 @@
+import { CostingMethodSchema } from '@/features/enums/costing_method';
+import { MarketValuationMethodSchema } from '@/features/enums/market_valuation_method';
+import { TypeOfSupplyEnum } from '@/features/enums/schema';
 import { z } from 'zod';
 import { currencySchema } from '../../currency/data/schema';
 import { stockCategorySchema } from '../../stock_category/data/schema';
@@ -21,21 +24,22 @@ export const stockItemSchema = z.object({
   stockGroupId: z.number().int().positive().nullish(),
   stockUnitId: z.number().int().positive().nullish(),
   alternativeStockUnitId: z.number().int().positive().nullish(),
-  alternateUnitRatio: z.number().positive().nullish(),
-  invoiceStockUnitId: z.number().int().positive().nullish(),
-  invoiceConversionFactor: z.number().positive().nullish(),
-  noOfDecimalPlaces: z.number().int().nonnegative().nullish(),
-  uqcId: z.number().int().positive().nullish(),
-  typeOfSupply: z.enum(['goods', 'services', 'capital_goods']).nullish(),
+  baseUnitValue: z.coerce.number().positive().nullish(),
+  alternateUnitValue: z.coerce.number().positive().nullish(),
+  uniqueQuantityCodeId: z.number().int().positive().nullish(),
+  typeOfSupply: TypeOfSupplyEnum.nullish(),
   isNegativeSalesAllow: z.boolean().nullish(),
+
   isMaintainBatch: z.boolean().nullish(),
   isMaintainSerial: z.boolean().nullish(),
-  isExpiryItem: z.boolean().nullish(),
+  useExpiryDate: z.boolean().nullish(),
+  trackManufacturingDate: z.boolean().nullish(),
+
   isFinishGoods: z.boolean().nullish(),
   isRawMaterial: z.boolean().nullish(),
   isUnfinishedGoods: z.boolean().nullish(),
-  costingMethod: z.enum(['fifo', 'lifo', 'average', 'moving_average']).nullish(),
-  pricingMethod: z.enum(['mrp', 'last_purchase', 'standard_cost', 'moving_average']).nullish(),
+  costingMethod: CostingMethodSchema.nullish(),
+  marketValuationMethod: MarketValuationMethodSchema.nullish(),
   reorderLevel: z.coerce.number().nonnegative().nullish(),
   minimumStock: z.coerce.number().nonnegative().nullish(),
   maximumStock: z.coerce.number().nonnegative().nullish(),
@@ -51,13 +55,14 @@ export const stockItemSchema = z.object({
   brandId: z.number().int().positive().nullish(),
   mrp: z.coerce.number().nonnegative().nullish(),
   standardCost: z.coerce.number().nonnegative().nullish(),
+  standardSellingPrice: z.coerce.number().nonnegative().nullish(),
   icon: z.string().nullish(),
 
   stockCategory: stockCategorySchema.nullish(),
   stockGroup: stockGroupSchema.nullish(),
   stockUnit: stockUnitSchema.nullish(),
-  alternativeStockUnit: stockUnitSchema.nullish(),
-  invoiceStockUnit: stockUnitSchema.nullish(),
+  alternateStockUnit: stockUnitSchema.nullish(),
+
   currency: currencySchema.nullish(),
 
 })
@@ -80,39 +85,44 @@ export const formSchema = z.object({
   stockCategoryId: z.number().int().positive().nullish(),
   stockGroupId: z.number().int().positive().nullish(),
   stockUnitId: z.number().int().positive().nullish(),
-  alternateStockUnitId: z.number().int().positive().nullish(),
-  alternateUnitRatio: z.number().positive().nullish(),
-  baseUnitValue: z.number().positive().nullish(),
-  alternateUnitValue: z.number().positive().nullish(),
-  uqcId: z.number().int().positive().nullish(),
-  typeOfSupply: z.enum(['goods', 'services', 'capital_goods']).nullish(),
+  alternateStockUnitId: z.coerce.number().int().positive().nullish(),
+
+  baseUnitValue: z.coerce.number().positive().nullish(),
+  alternateUnitValue: z.coerce.number().positive().nullish(),
+  uniqueQuantityCodeId: z.number().int().positive().nullish(),
+  typeOfSupply: z.string().nullish(),
   isNegativeSalesAllow: z.boolean().nullish(),
+
   isMaintainBatch: z.boolean().nullish(),
   isMaintainSerial: z.boolean().nullish(),
-  isExpiryItem: z.boolean().nullish(),
+  useExpiryDate: z.boolean().nullish(),
+  trackManufacturingDate: z.boolean().nullish(),
+
   isFinishGoods: z.boolean().nullish(),
   isRawMaterial: z.boolean().nullish(),
   isUnfinishedGoods: z.boolean().nullish(),
-  costingMethod: z.enum(['fifo', 'lifo', 'average', 'moving_average']).nullish(),
-  pricingMethod: z.enum(['mrp', 'last_purchase', 'standard_cost', 'moving_average']).nullish(),
-  reorderLevel: z.number().nonnegative().nullish(),
-  minimumStock: z.number().nonnegative().nullish(),
-  maximumStock: z.number().nonnegative().nullish(),
+  costingMethod: CostingMethodSchema.nullish(),
+  marketValuationMethod: MarketValuationMethodSchema.nullish(),
+  reorderLevel: z.coerce.number().nonnegative().nullish(),
+  minimumStock: z.coerce.number().nonnegative().nullish(),
+  maximumStock: z.coerce.number().nonnegative().nullish(),
   hasBom: z.boolean().nullish(),
   isSalesAsNewManufacture: z.boolean().nullish(),
   isPurchaseAsConsumed: z.boolean().nullish(),
   isRejectionAsScrap: z.boolean().nullish(),
   isGstApplicable: z.boolean().nullish(),
-  rateOfDuty: z.number().nonnegative().nullish(),
+  rateOfDuty: z.coerce.number().nonnegative().nullish(),
   hsnSacCode: z.string().nullish(),
   isGstInclusive: z.boolean().nullish(),
   gstType: z.enum(['cgst_sgst', 'igst', 'ugst']).nullish(),
   brandId: z.number().int().positive().nullish(),
-  mrp: z.number().nonnegative().nullish(),
-  standardCost: z.number().nonnegative().nullish(),
+  mrp: z.coerce.number().nonnegative().nullish(),
+  standardCost: z.coerce.number().nonnegative().nullish(),
+  standardSellingPrice: z.coerce.number().nonnegative().nullish(),
   icon: z.string().nullish(),
 
-
+  stockUnit: stockUnitSchema.nullish(),
+  alternateStockUnit: stockUnitSchema.nullish(),
 
   isEdit: z.boolean(),
 

@@ -253,6 +253,28 @@ export const sidebarData: SidebarData = {
           ]
         },
         {
+          title: 'Party',
+          icon: IconAccessPoint,
+          items: [
+            {
+              title: 'Distributor',
+              url: '/masters/party/distributor',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Supplier',
+              url: '/masters/party/supplier',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Transporter',
+              url: '/masters/party/transporter',
+              icon: IconUserCog,
+            },
+
+          ]
+        },
+        {
           title: 'Inventory',
           icon: IconAccessPoint,
           items: [

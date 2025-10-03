@@ -5,16 +5,18 @@ import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
 import { fetchStockCategoryService } from "@/features/modules/stock_category/data/api";
+import { cn } from "@/lib/utils";
 import type { Currency } from "../../../currency/data/schema";
 import type { StockItemForm } from "../../data/schema";
 
 type Props = {
     form: UseFormReturn<StockItemForm>;
+    gapClass?: string;
 }
 
 const StockCategoryDropdown = (props: Props) => {
-    const { form } = props
-
+    const { form, gapClass } = props
+    const isEdit = form.getValues('isEdit')
     const { data: stockCategoryList, isLoading } = useQuery({
         queryKey: ["stock_categories"],
         queryFn: fetchStockCategoryService,
@@ -33,15 +35,19 @@ const StockCategoryDropdown = (props: Props) => {
             control={form.control}
             name='stockCategoryId'
             render={({ field }) => (
-                <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )} >
+                    <FormLabel className='pt-1  '>
                         Category
                     </FormLabel>
                     <SelectDropdown
                         defaultValue={field.value ? field.value.toString() : ''}
                         onValueChange={(value) => handleValueChange(value)}
                         placeholder='Select a stock category'
-                        className='w-full col-span-6 md:col-span-4'
+                        className={cn("w-full", isEdit && " cursor-not-allowed")}
                         items={stockCategoryList?.data.map((stockCategory: Currency) => ({
                             label: capitalizeAllWords(stockCategory.name),
                             value: String(stockCategory.id),

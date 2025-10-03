@@ -18,8 +18,8 @@ type Props = {
 
 const TypeOfSupplySelect = (props: Props) => {
     const { form, gapClass } = props as Props;
-    const { data: unitTypes } = useEnum("type_of_supply");
     const isEdit = form.getValues('isEdit')
+    const { data: unitTypes } = useEnum("type_of_supply");
     const handleValueChange = (value: string) => {
         form.setValue('typeOfSupply', value as TypeOfSupply);
 

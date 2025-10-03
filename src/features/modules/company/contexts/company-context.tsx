@@ -26,7 +26,7 @@ export default function CompanyProvider({ children }: Props) {
 
 
   return (
-    <CompanyContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "account_nature" }}>
+    <CompanyContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "company" }}>
       {children}
     </CompanyContext>
   )

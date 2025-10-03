@@ -7,15 +7,19 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/f
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
+type Option = { label: string; value: string | boolean };
+type InputType = 'hidden' | 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'date';
 type Props = {
     form: UseFormReturn<any>;
     control?: Control<any>;
-    type: 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'date';
+    type: InputType;
     name: string;
     label?: string;
-    options?: { label: string; value: boolean | string }[];
+    options?: Option[];
     items?: { label: string; value: string }[];
-    gapClass?: string
+    gapClass?: string;
+    disabled?: boolean;
+    rtl?: boolean
 }
 
 const FormInputField = (props: Props) => {
@@ -37,6 +41,9 @@ const FormInputField = (props: Props) => {
     else if (type === 'date') {
         return <DateBox {...props} />
     }
+    else if (type === 'hidden') {
+        return <HiddenBox {...props} />
+    }
     else {
         return <TextBox {...props} />
     }
@@ -46,7 +53,7 @@ const FormInputField = (props: Props) => {
 
 
 const CheckBox = (props: Props) => {
-    const { form, name, label, type, options } = props
+    const { form, name, label, type, options, disabled } = props
     return (
         <FormField
             control={form.control}
@@ -55,8 +62,24 @@ const CheckBox = (props: Props) => {
                 <FormItem className='grid grid-cols-[1fr_24px] items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='   '>
                         {label ?? capitalizeAllWords(name)} ?
-                        <Badge variant={typeof (field.value) === 'string' ? 'default' : 'secondary'} className='ml-2'>
-                            {typeof (field.value) === 'string' ? capitalizeWords(field.value) : field.value}
+                        <Badge
+                            variant={typeof field.value === "string" ? "default" : "secondary"}
+                            className="ml-2"
+                        >
+                            {(() => {
+                                // If options provided → show label instead of raw value
+                                if (options && options.length > 0) {
+                                    const selected = options.find((opt) => opt.value === field.value);
+                                    return selected ? selected.label : String(field.value);
+                                }
+
+                                // Fallback → show value directly
+                                return typeof field.value === "string"
+                                    ? capitalizeWords(field.value)
+                                    : typeof field.value === "boolean"
+                                        ? field.value ? "Yes" : "No"
+                                        : String(field.value);
+                            })()}
                         </Badge>
                     </FormLabel>
                     <FormControl>
@@ -69,6 +92,7 @@ const CheckBox = (props: Props) => {
                                 const value = options && options.length > 0 ? (isChecked ? options[0].value : options[1]?.value || false) : isChecked;
                                 form.setValue(name, value);
                             }}
+                            disabled={disabled ?? false}
                         />
                     </FormControl>
                     <FormLabel className=' col-start-2  '>
@@ -108,7 +132,7 @@ const TextAreaBox = (props: Props) => {
 }
 
 const TextBox = (props: Props) => {
-    const { form, name, label, gapClass } = props
+    const { form, name, label, gapClass, rtl } = props
     return (
         <FormField
             control={form.control}
@@ -117,6 +141,35 @@ const TextBox = (props: Props) => {
                 <FormItem
                     className={cn(
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )}   >
+                    <FormLabel className={rtl ? 'order-last' : ''}>
+                        {label ?? capitalizeAllWords(name)}
+                    </FormLabel>
+                    <FormControl>
+                        <Input
+                            placeholder={'Enter ' + lowerCase(label ?? name)}
+                            className='w-full placeholder'
+                            autoComplete='off'
+                            {...field}
+                        />
+                    </FormControl>
+                    <FormMessage className=' col-start-2' />
+                </FormItem>
+            )}
+        />
+    )
+}
+const HiddenBox = (props: Props) => {
+    const { form, name, label, gapClass } = props
+    return (
+        <FormField
+            control={form.control}
+            name={name}
+            render={({ field }) => (
+                <FormItem
+                    className={cn(
+                        'hidden grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )} >
                     <FormLabel className='   '>

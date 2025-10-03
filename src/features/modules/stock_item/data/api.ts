@@ -10,6 +10,7 @@ export async function fetchStockItemByIdService(id: number) {
 }
 
 export async function storeStockItemService(payload: any) {
+    console.log(payload)
     return await postData(API_PATH, payload)
 }
 export async function updateStockItemService(payload: any) {

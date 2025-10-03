@@ -89,7 +89,7 @@ export function StockUnitActionDialog({ currentRow, open, onOpenChange }: Props)
       const primaryUnit = values.primaryStockUnit;
       const secondaryUnit = values.secondaryStockUnit;
       const conversion = values.conversionFactor ?? 1;
-      console.log(primaryUnit, secondaryUnit)
+      // console.log(primaryUnit, secondaryUnit)
       // Only proceed if both units exist and are different
       if (primaryUnit && secondaryUnit && primaryUnit.id !== secondaryUnit.id) {
         const name = `${primaryUnit.name} of ${conversion} ${secondaryUnit.name}`;

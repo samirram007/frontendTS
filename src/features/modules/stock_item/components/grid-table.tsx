@@ -7,7 +7,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
-import { DataTableToolbar } from '@/features/global/components/data-table/data-table-toolbar'
 import type { StockItem } from '@/features/modules/stock_item/data/schema'
 import {
   flexRender,
@@ -78,7 +77,7 @@ export function GridTable({ columns, data }: DataTableProps) {
 
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      {/* <DataTableToolbar table={table} /> */}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
