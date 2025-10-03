@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 import { fetchCompanyTypeService } from "../../company_type/data/api";
 import type { CompanyType } from "../../company_type/data/schema";
-import type { CompanyForm } from "../data/schema";
+import type { CompanyForm } from "../../company/data/schema";
 
 type Props = {
     form: UseFormReturn<CompanyForm>;

@@ -20,9 +20,9 @@ const StockGroupDropdown = (props: Props) => {
         queryFn: fetchStockGroupService,
     });
 
-    const handleValueChange = (value: string) => {
-        form.setValue('parentId', Number(value));
-    };
+    // const handleValueChange = (value: string) => {
+    //     form.setValue('parentId', Number(value));
+    // };
 
     if (isLoading) {
         return <div>Loading...</div>;
