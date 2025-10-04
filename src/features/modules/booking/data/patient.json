@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "name": "Aarav Mehta",
+    "phone": "9876543210",
+    "gender": "male",
+    "age": "32",
+    "dob": "1993-05-14",
+    "agentId": 101,
+    "physicianId": 201,
+    "agent": {
+      "id": 101,
+      "name": "Rohit Sharma",
+      "contact": "rohit.agent@example.com",
+      "comission": 12.5
+    },
+    "physician": {
+      "id": 201,
+      "name": "Dr. Kavita Rao",
+      "contact": "kavita.rao@hospital.com",
+      "degree": "MD (Cardiology)"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Ishita Kapoor",
+    "phone": "9123456789",
+    "gender": "female",
+    "age": "28",
+    "dob": "1997-02-09",
+    "agentId": 102,
+    "physicianId": 202,
+    "agent": {
+      "id": 102,
+      "name": "Sneha Verma",
+      "contact": "sneha.agent@example.com",
+      "comission": 15.0
+    },
+    "physician": {
+      "id": 202,
+      "name": "Dr. Arjun Malhotra",
+      "contact": "arjun.malhotra@hospital.com",
+      "degree": "MBBS, DM (Neurology)"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Karan Singh",
+    "phone": "9988776655",
+    "gender": "male",
+    "age": "45",
+    "dob": "1980-11-22",
+    "agentId": 103,
+    "physicianId": 203,
+    "agent": {
+      "id": 103,
+      "name": "Anjali Nair",
+      "contact": "anjali.nair@example.com",
+      "comission": 10.0
+    },
+    "physician": {
+      "id": 203,
+      "name": "Dr. Priya Desai",
+      "contact": "priya.desai@hospital.com",
+      "degree": "MS (Orthopedics)"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Meera Iyer",
+    "phone": "9012345678",
+    "gender": "female",
+    "age": "37",
+    "dob": "1988-08-30",
+    "agentId": 104,
+    "physicianId": 204,
+    "agent": {
+      "id": 104,
+      "name": "Vikas Gupta",
+      "contact": "vikas.gupta@example.com",
+      "comission": 18.0
+    },
+    "physician": {
+      "id": 204,
+      "name": "Dr. Ramesh Patil",
+      "contact": "ramesh.patil@hospital.com",
+      "degree": "MD (Dermatology)"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Rohan Kulkarni",
+    "phone": "9823456781",
+    "gender": "male",
+    "age": "40",
+    "dob": "1985-07-10",
+    "agentId": 105,
+    "physicianId": 205,
+    "agent": {
+      "id": 105,
+      "name": "Priya Sharma",
+      "contact": "priya.sharma@example.com",
+      "comission": 14.0
+    },
+    "physician": {
+      "id": 205,
+      "name": "Dr. Sameer Joshi",
+      "contact": "sameer.joshi@hospital.com",
+      "degree": "MD (General Medicine)"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Simran Kaur",
+    "phone": "9765432109",
+    "gender": "female",
+    "age": "30",
+    "dob": "1995-01-25",
+    "agentId": 106,
+    "physicianId": 206,
+    "agent": {
+      "id": 106,
+      "name": "Rahul Khanna",
+      "contact": "rahul.khanna@example.com",
+      "comission": 16.0
+    },
+    "physician": {
+      "id": 206,
+      "name": "Dr. Neha Bhatia",
+      "contact": "neha.bhatia@hospital.com",
+      "degree": "MS (Gynecology)"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Aditya Verma",
+    "phone": "9890123456",
+    "gender": "male",
+    "age": "26",
+    "dob": "1999-09-15",
+    "agentId": 107,
+    "physicianId": 207,
+    "agent": {
+      "id": 107,
+      "name": "Pooja Reddy",
+      "contact": "pooja.reddy@example.com",
+      "comission": 11.0
+    },
+    "physician": {
+      "id": 207,
+      "name": "Dr. Vikram Sinha",
+      "contact": "vikram.sinha@hospital.com",
+      "degree": "MD (Pediatrics)"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Neha Jain",
+    "phone": "9812345670",
+    "gender": "female",
+    "age": "34",
+    "dob": "1991-12-02",
+    "agentId": 108,
+    "physicianId": 208,
+    "agent": {
+      "id": 108,
+      "name": "Manoj Kumar",
+      "contact": "manoj.kumar@example.com",
+      "comission": 19.0
+    },
+    "physician": {
+      "id": 208,
+      "name": "Dr. Sunita Agarwal",
+      "contact": "sunita.agarwal@hospital.com",
+      "degree": "MD (Endocrinology)"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Ritika Sharma",
+    "phone": "9876501234",
+    "gender": "female",
+    "age": "29",
+    "dob": "1996-04-20",
+    "agentId": 109,
+    "physicianId": 209,
+    "agent": {
+      "id": 109,
+      "name": "Deepak Malhotra",
+      "contact": "deepak.malhotra@example.com",
+      "comission": 13.5
+    },
+    "physician": {
+      "id": 209,
+      "name": "Dr. Anil Kapoor",
+      "contact": "anil.kapoor@hospital.com",
+      "degree": "MBBS, MS (Surgery)"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Siddharth Menon",
+    "phone": "9908765432",
+    "gender": "male",
+    "age": "38",
+    "dob": "1987-03-11",
+    "agentId": 110,
+    "physicianId": 210,
+    "agent": {
+      "id": 110,
+      "name": "Kiran Deshmukh",
+      "contact": "kiran.deshmukh@example.com",
+      "comission": 17.0
+    },
+    "physician": {
+      "id": 210,
+      "name": "Dr. Alok Chatterjee",
+      "contact": "alok.chatterjee@hospital.com",
+      "degree": "DM (Nephrology)"
+    }
+  }
+]

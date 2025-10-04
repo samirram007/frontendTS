@@ -172,6 +172,11 @@ export const sidebarData: SidebarData = {
           icon: IconAccessPoint,
           items: [
             {
+              title: 'Booking',
+              url: '/transactions/booking',
+              icon: IconClipboardList,
+            },
+            {
               title: 'Vouchers',
               url: '/transactions/vouchers',
               icon: IconClipboardList,

@@ -1,0 +1,226 @@
+import { useContext, useRef } from "react";
+import LabTestSearch from "./LabTestSearch";
+import AppointmentSearch from "./AppointmentIdSearch";
+import DiscountSelect from "./Discount/DiscountSelect";
+import { MdDeleteOutline } from "react-icons/md";
+import { toast } from "sonner";
+import { PathoContext } from "../contexts/PathoContext";
+import { TestBookingContext } from "../contexts/TestBookingContext/TestBookingContext";
+import type { DiscountType, ITestItem, ITestSchema } from "../data/schema";
+import { convertReportingDate } from "../utils/date-utils";
+import { AlertAppDialog } from "../shared/components/AlertAppDialog";
+import { calculateDiscount } from "../features/NewBooking/features/DiscountFeature/discount-actions";
+
+export interface ITestSelection{
+    test_id:string,
+    test_name:string,
+    category:string,
+    price:number,
+    unit:string,
+    reporting_duration:number
+}
+
+const CreateTest = () =>{
+
+    const {setTotalAmount,totalAmount,discountDetail,setDiscountAmount,setDiscountedAmount,setNetAmount} = useContext(PathoContext);
+    const {selectedLabTest,setSelectedLabTest} = useContext(TestBookingContext);
+    const totalTestAmountRef = useRef<number>(totalAmount);
+
+
+
+    const handleSelectTest = (test:ITestSchema) =>{
+        if(selectedLabTest.some((item: ITestItem)=> item.test_name == test.test_name)){
+            toast.error("Test already selected",{
+                position:"top-right",
+                style:{
+                    color:'red'
+                }
+            })
+            return;
+        }
+
+        // test is being added here by creating a new object everytime when user select test
+        const testObj:ITestItem = {
+            id: selectedLabTest.length + 1,
+            test_id: test.test_id,
+            test_name: test.test_name,
+            category: test.category,
+            price: test.price,
+            unit: test.unit,
+            test_date:new Date(),
+            reporting_date:convertReportingDate(new Date(),test.reporting_duration),
+            payment_status:false,
+            specimen_status:false,
+            report_duration: test.reporting_duration
+        }
+
+        totalTestAmountRef.current = totalAmount + testObj.price;
+        
+        // Selected Array has been created in this function coming form context
+        setSelectedLabTest([...selectedLabTest,testObj]);
+
+        // total amount of test is being added when test is being added
+        setTotalAmount((prev) => prev + test.price);
+
+        console.log("Test total amount",totalTestAmountRef.current);
+        // this is discount detail calculation
+        if(discountDetail){
+
+            // getting the string of discount type and discount value according to type
+            const discountType = discountDetail.split(',')[0];
+            const discountVal = discountDetail.split(',')[1];
+            // discount value calculation only
+            const discountPrice = calculateDiscount(discountType as DiscountType,Number(discountVal),totalTestAmountRef.current);
+            setDiscountAmount(discountPrice);
+            
+            // discounted price is being calculated after substracting discount amount by total amount
+            const discountedPrice = totalTestAmountRef.current - discountPrice;
+            setDiscountedAmount(discountedPrice);
+            // calculating net amount means the amount to be paid
+            setNetAmount(discountedPrice);
+        }else{
+            // net amount means the amount to be paid if there is not discount done
+            setNetAmount((prev)=> prev + test.price);
+        }        
+    }
+
+
+
+    const handleTestDateChange = (id:number,date:string,duration:number)=>{
+        const reportDate = convertReportingDate(new Date(date),duration);
+        const selectedTests = selectedLabTest.map((item)=> item.id == id ? {...item,test_date: new Date(date),reporting_date:reportDate} : item);
+        setSelectedLabTest(selectedTests);
+    }
+
+    const handleReportDateChange = (id:number,date:string)=>{
+        const selectedTests = selectedLabTest.map((item)=> item.id == id ? {...item,reporting_date: new Date(date)} : item);
+        setSelectedLabTest(selectedTests);
+    }
+
+
+    // when any selected test is being removed from the list
+    const handleMinusTest = (id:number) =>{
+        // filter out the detail of test which is to be cancelled
+        const testToBeCancelled = selectedLabTest.find((item:ITestItem) => item.id == id);
+
+        // price of test which is being cancelled
+        const price = testToBeCancelled?.price || 0;
+
+        // recalculating total amount and net amount too
+       totalTestAmountRef.current = totalTestAmountRef.current - price;
+
+       
+        // filtering out remaining test from the array/list of tests to be conducted to re-populate the list
+        const remainingTest = selectedLabTest.filter((item)=> item.id != id);
+        setSelectedLabTest(remainingTest);
+
+        // only run if discount is available
+        if(discountDetail != ''){
+            const discountType = discountDetail.split(',')[0];
+            const discountVal = discountDetail.split(',')[1];
+             // calculate discount value
+            const discountValue = calculateDiscount(discountType as DiscountType,Number(discountVal),totalTestAmountRef.current);
+            setDiscountAmount(discountValue);
+
+            // calculate discounted price
+            const discountedPrice = totalTestAmountRef.current - discountValue;
+            setDiscountedAmount(discountedPrice);
+            // prices after recalculation
+            setTotalAmount(totalTestAmountRef.current);
+            setNetAmount(discountedPrice);
+        }
+        else{
+            // settleling price again after re-calculation
+            setTotalAmount(totalTestAmountRef.current);
+            setNetAmount(totalTestAmountRef.current);
+        }
+    }
+    // -------------------------------------------------------------
+
+    return(
+        <div>
+            <div className="grid grid-cols-2 items-start">
+                <div className="grid grid-rows-2 gap-3">
+                    <AppointmentSearch/>
+                    <LabTestSearch handleSelectTest={handleSelectTest} />
+                </div>
+                <div className="justify-end items-end flex">
+                    <div className="grid justify-end items-center grid-cols-[120px_1fr]">
+                                <div className="font-bold text-right pr-3">
+                                Discount
+                                </div>
+                                <div className="">
+                                <DiscountSelect className="min-w-sm"/>
+                                </div>
+                    </div>
+                </div>
+              
+            </div>
+            <div className="my-5 min-h-[30vh] relative border-2 overflow-hidden border-gray-800 rounded">
+                <div className="grid grid-cols-[60px_1fr_200px_200px_150px_200px] px-3 border-b-1 font-semibold py-2 border-black">
+                    <h1>Sl no.</h1>
+                    <h1>Test Name</h1>
+                    <h1>Test Date</h1>
+                    <h1>Reporting Date</h1>
+                    <h1 className="text-right pr-2">Amount</h1>
+                    <h1 className="text-center">Action</h1>
+                </div>
+                <div className={`overflow-auto h-[30vh] ${selectedLabTest.length < 1 ? 'flex justify-center items-center' : ''}`}>
+                    {
+                        selectedLabTest.length > 0  ?
+                        selectedLabTest.map((item,index)=>(
+                            <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_200px_200px_150px_200px]  items-center">
+                                <div className="py-2 px-2">
+                                    <h1>{++index}</h1>
+                                </div>
+                                <div className="py-2">
+                                    <h1>{item.test_name}</h1>
+                                </div>
+                                <div className="py-2">
+                                    <input type="date" onChange={(e)=> handleTestDateChange(item.id,e.target.value,item.report_duration)} id="test-date" value={new Date(item.test_date).toISOString().split("T")[0]} />
+                                </div>
+                                <div className="py-2">
+                                    <input type="date" onChange={(e)=> handleReportDateChange(item.id,e.target.value)} id="test-date" value={new Date(item.reporting_date).toISOString().split("T")[0]} />
+                                </div>
+                                <div className="border-x-2 border-black">
+                                    <h1 className="text-right py-2 pr-2">{item.price.toFixed(2)}</h1>
+                                </div>
+                                <div className="flex justify-center items-center gap-3 py-2">
+                                    <AlertAppDialog name={
+                                        <MdDeleteOutline className="cursor-pointer text-red-500" size={20}/>
+                                        }
+                                        title="Are you absolutely sure?" description="The action cannot be undone"
+                                        cancelText="Cancel" submitText="Submit" onSubmit={()=> handleMinusTest(item.id)}
+                                    />
+                                    {
+                                        // Collect Specimen will only work when payment is done
+                                        item.payment_status && <div className="bg-emerald-400 cursor-pointer rounded py-2 px-1.5 text-white text-app-small">Collect Sepcimen</div>
+                                    }
+                                </div>
+                            </div>
+                        ))
+                        :
+                        <div>
+                            <h2>No Tests Selected</h2>
+                        </div>
+                    }
+                </div>
+
+                <div className="border-t-2 sticky bottom-0 left-0 w-full py-2 bg-gray-100 z-50 border-black grid grid-cols-[60px_1fr_200px_200px_150px_200px]">
+                    <div className="text-right col-span-4">
+                        <h3>Amount</h3>
+                    </div>
+                    <div className="border-l-2 pl-2 pr-2 border-x-2` text-right px-4 ">
+                        {totalAmount == 0 ? '00.00' : totalAmount.toFixed(2)}
+                    </div>
+                    <div className="col-span-0"></div>
+                </div>
+              
+            </div>
+
+        </div>
+    )
+}
+
+
+export default CreateTest;

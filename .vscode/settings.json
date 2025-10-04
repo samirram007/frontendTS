@@ -8,6 +8,7 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
+
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#1c5a3e",
     "activityBar.background": "#1c5a3e",

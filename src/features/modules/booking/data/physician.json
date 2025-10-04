@@ -1,0 +1,72 @@
+[
+ {
+    "id": 1,
+    "name": "Dr. Rajesh Sharma",
+    "contact": "+91-9876543210",
+    "degree": "MBBS, MD",
+    "discipline": "Cardiology"
+  },
+  {
+    "id": 2,
+    "name": "Dr. Priya Mehta",
+    "contact": "+91-9123456780",
+    "degree": "MBBS, MS",
+    "discipline": "Orthopedics"
+  },
+  {
+    "id": 3,
+    "name": "Dr. Amit Verma",
+    "contact": "+91-9988776655",
+    "degree": "MBBS, DNB",
+    "discipline": "Neurology"
+  },
+  {
+    "id": 4,
+    "name": "Dr. Neha Gupta",
+    "contact": "+91-9090909090",
+    "degree": "MBBS, MD",
+    "discipline": "Pediatrics"
+  },
+  {
+    "id": 5,
+    "name": "Dr. Arjun Iyer",
+    "contact": "+91-9501234567",
+    "degree": "MBBS, MS",
+    "discipline": "General Surgery"
+  },
+  {
+    "id": 6,
+    "name": "Dr. Kavita Nair",
+    "contact": "+91-9700001122",
+    "degree": "MBBS, MD",
+    "discipline": "Dermatology"
+  },
+  {
+    "id": 7,
+    "name": "Dr. Sandeep Kulkarni",
+    "contact": "+91-9654321000",
+    "degree": "MBBS, DM",
+    "discipline": "Endocrinology"
+  },
+  {
+    "id": 8,
+    "name": "Dr. Meera Joshi",
+    "contact": "+91-9807654321",
+    "degree": "MBBS, MS",
+    "discipline": "Gynecology"
+  },
+  {
+    "id": 9,
+    "name": "Dr. Rohit Singh",
+    "contact": "+91-9345678901",
+    "degree": "MBBS, MD",
+    "discipline": "Psychiatry"
+  },
+  {
+    "id": 10,
+    "name": "Dr. Anjali Deshmukh",
+    "contact": "+91-9456781234",
+    "degree": "MBBS, MS",
+    "discipline": "Ophthalmology"
+  }
+]

@@ -1,0 +1,175 @@
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {Field, Form, Formik} from "formik";
+import { InputBox } from "../../utils/components/InputBox";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { SelectBox } from "../../utils/components/SelectBox";
+import PhysicianSearch from "../PyhsicianSearch";
+import { Plus } from "lucide-react";
+import AgentSearch from "../AgentSearch";
+import CreatePhysician from "../CreatePhysician";
+import CreateAgent from "../CreateAgent";
+import DiscountSelect from "../Discount/DiscountSelect";
+import { useContext } from "react";
+import { PathoContext } from "../../contexts/PathoContext";
+
+
+interface IPatientForm{
+    button?: React.ReactElement | string;
+    action?:string
+}
+
+
+
+const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
+
+    const {physicianDetail,agentDetail,setPhysicianDetail,setAgentDetail} = useContext(PathoContext);
+
+
+    return(
+        <Dialog onOpenChange={(open)=>{
+            if(!open){
+                setAgentDetail(null)
+                setPhysicianDetail(null)
+            }
+        }}>
+            <DialogTrigger asChild>
+                {button ? button : <span className="text-blue-600 underline underline-offset-1">Add new patient</span>}
+            </DialogTrigger>
+            <DialogContent aria-description="Patient Creation form of new Patient" aria-describedby="patient-creation-form" className="sm:max-w-8/12">
+                <DialogHeader>
+                    <DialogTitle>
+                        {action && action}
+                    </DialogTitle>
+                    <DialogDescription className="hidden">
+                        Patient create form
+                    </DialogDescription>
+                </DialogHeader>
+                <div id="patient-creation-form">
+                    <Formik
+                        onSubmit={(values,actions)=>{
+                            console.log("values",values);
+                            setTimeout(() => {
+                                actions.setSubmitting(false);
+                            }, 1000);
+                        }}
+                        enableReinitialize
+                        initialValues={{
+                            id:0,
+                            name:"",
+                            phone:"",
+                            gender:"",
+                            age:"",
+                            agent:{
+                                id:agentDetail?.id || 0,
+                                name: agentDetail?.name || "",
+                                contact: agentDetail?.contact || "",
+                                comission: agentDetail?.comission || ""
+                            },
+                            physician:{
+                                id:physicianDetail?.id || 0,
+                                name:physicianDetail?.name || "",
+                                contact: physicianDetail?.contact || "",
+                                degree:physicianDetail?.degree || "",
+                                discipline: physicianDetail?.discipline || ""
+                            }
+                        }}
+                    >
+                        {({})=>(
+                            <Form>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <div className="grid grid-cols-1 gap-8 mb-4">
+                                            <div className="text-app-base-lg border-black font-bold border-b-2">Patient Details</div>
+                                            <InputBox placeholder="Enter Patient name" type="text" name="name" label="Name" />
+                                            <InputBox placeholder="Enter patient phone number" name="phone" type="text" label="Phone Number" />
+                                            <InputBox placeholder="Enter patient age" type="text" name="age" label="Age" />
+                                            <SelectBox name="gender" label="Gender" 
+                                                options={[
+                                                    {value:"male",label:"Male"},
+                                                    {value:"female",label:"Female"},
+                                                    {value:"others",label:"Others"},
+                                                ]} 
+                                            />
+                                            <div className="grid grid-cols-[120px_1fr] w-full max-w-lg items-center">
+                                                <div className="text-app-small">Discount</div>
+                                                <div className="w-10/12 overflow-hidden">
+                                                    <DiscountSelect/>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-4">
+                                        <div className="grid grid-cols-[100px_1fr_40px] mb-2 items-center gap-6">
+                                            <h1 className="font-semibold text-app-base-lg">Physician</h1>
+                                            <PhysicianSearch/>
+                                            <CreatePhysician button={
+                                                <Button variant={'default'}>
+                                                <Plus size={20} className="cursor-pointer" />
+                                                </Button>
+                                            } />
+                                        </div>
+
+                                        <div className="flex flex-col bg-yellow-100 gap-3 border-[1px] cursor-pointer border-yellow-300 rounded-lg px-2 py-2 shadow-md shadow-gray-400 justify-evenly">
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Name:</div>
+                                                <Field type="hidden" name="physician.name"  />
+                                                <div className="font-bold">{physicianDetail ? physicianDetail.name : <span className="font-light text-gray-400 text-app-small">Physician Name</span>}</div>
+                                            </div>
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Degree:</div>
+                                                <div className="font-bold">{physicianDetail ? physicianDetail.degree : <span className="font-light text-gray-400 text-app-small">Physician Degree</span>}</div>
+                                            </div>
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Contact:</div>
+                                                <div className="font-bold">{physicianDetail  ? physicianDetail.contact : <span className="font-light text-gray-400 text-app-small">Physician Contact</span> }</div>
+                                            </div>
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Discipline:</div>
+                                                <div className="font-bold">{physicianDetail  ? physicianDetail.discipline : <span className="font-light text-gray-400 text-app-small">Physician Discipline</span> }</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <Separator className="my-3 bg-black" />
+
+                                        
+                                        <div className="grid grid-cols-[100px_1fr_40px] mb-2 items-center gap-6">
+                                            <h1 className="font-semibold text-app-base-lg">Referred By</h1>
+                                            <AgentSearch/>
+                                            <CreateAgent button={
+                                                <Button variant={'default'}>
+                                                <Plus size={20} className="cursor-pointer" />
+                                                </Button>
+                                            } />
+                                        </div>
+                                        <div className="flex flex-col bg-red-100 gap-3 border-[1px] cursor-pointer border-red-300 rounded-lg px-2 py-2 shadow-md shadow-gray-400 justify-evenly">
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Name:</div>
+                                                <div className="font-bold">{agentDetail ? agentDetail.name : <span className="font-light text-gray-400 text-app-small">Agent Name</span>}</div>
+                                            </div>
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Contact:</div>
+                                                <div className="font-bold">{agentDetail ? agentDetail.contact : <span className="font-light text-gray-400 text-app-small">Agent Contact</span>}</div>
+                                            </div>
+                                            <div className="grid grid-cols-[80px_1fr] items-center gap-4">
+                                                <div className="text-app-small">Comission:</div>
+                                                <div className="font-bold">{agentDetail ? <>{agentDetail.comission}{' %'}</>   : <span className="font-light text-gray-400 text-app-small">Agent Comission</span>}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
+                                    <Button type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">Save</Button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
+            </DialogContent>
+        </Dialog>
+    )
+}
+
+
+export default PatientForm;
