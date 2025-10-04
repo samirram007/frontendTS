@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import {  getPatientService, storePatientService } from "./api"
+import {  getPatientService, storePatientService, updatePatientService } from "./api"
 import type { IPatient } from "./schema"
 
 
@@ -12,10 +12,12 @@ import type { IPatient } from "./schema"
 export function usePatientMutation() {
     return useMutation({
         mutationFn: async (data: IPatient) => {
-            // if (data.id) {
-            //     // Update if id exists
-            //     return await updateStockItemService(data)
-            // }
+            console.log(data,"patient data");
+            if (data.id != 0 && data.id != undefined) {
+                // Update if id exists
+                console.log("entered to edit");
+                return await updatePatientService(data)
+            }
             // Otherwise create
             return await storePatientService(data)
         },

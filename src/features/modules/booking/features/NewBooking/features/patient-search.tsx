@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetPatientListQuery } from "./CreatePatientFeature/data/queryOptions";
 import type { IPatient } from "./CreatePatientFeature/data/schema";
 import { usePatient } from "../../../contexts/patient-context";
+import PatientForm from "./CreatePatientFeature/create-patient";
 
 
 
@@ -25,9 +26,6 @@ const PatientSearch = () => {
     const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
         setQuery(e.target.value);
         setShowDropdown(true);
-        if(e.target.value == ""){
-            setPatient(null);
-        }
     }
 
     const filteredPatientList = patientList?.filter((p)=>
@@ -38,7 +36,7 @@ const PatientSearch = () => {
     const handleSelectPatient = (patient: IPatient) =>{
         setPatient(patient);
         setShowDropdown(false);
-        setQuery(patient.name);
+        setQuery("");
     }
 
 
@@ -100,9 +98,10 @@ const PatientSearch = () => {
                                 ))
                             ) : (
                                 <div className="px-3 py-2 text-sm text-slate-500">
-                                    {/* <PatientForm button={
+                                    <PatientForm button={
                                         <h3 className="text-blue-400 underline underline-offset-1 text-center cursor-pointer">Add new Patient</h3>
-                                    } /> */}
+                                    } />
+                                    
                                 </div>
                             )}
                         </div>

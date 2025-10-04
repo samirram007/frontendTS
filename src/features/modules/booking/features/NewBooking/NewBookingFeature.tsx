@@ -5,13 +5,16 @@ import LabTestList from "./features/LabTestsFeature/test-list";
 // import { TestBookingContext } from "../../contexts/TestBookingContext/TestBookingContext";
 // import { PathoContext } from "../../contexts/PathoContext";
 import { Button } from "@/components/ui/button";
-import { PayAndBookModal } from "../../components/Payment/PaymentModal";
-import { PaymentDetail } from "./features/payment-detail";
+import { PaymentDetail } from "./features/PaymentFeature/payment-detail";
 import { PatientDetail } from "./features/patient-details";
 import DiscountSelect from "./features/DiscountFeature/discount-select";
 import PatientForm from "./features/CreatePatientFeature/create-patient";
 import { Plus } from "lucide-react";
 import PathoProvider from "../../contexts/PathProvider";
+import { useLabTestItem } from "./features/LabTestsFeature/context/lab-test-context";
+import { usePatient } from "../../contexts/patient-context";
+import { ErrorToast } from "../../utils/error-response";
+import { PayAndBookModal } from "./features/PaymentFeature/components/PaymentModal";
 
 
 
@@ -19,12 +22,12 @@ import PathoProvider from "../../contexts/PathProvider";
 
 const NewBookingFeature = () => {
 
-    //   const {selectedLabTest} = useContext(TestBookingContext);
-    //     const {patientSearch} = useContext(PathoContext);
+    const {selectTestItemList} = useLabTestItem();
+    const {patient} = usePatient();
 
-//           const handleValidatePay = () =>{
-//     // ErrorToast.launchErrorToast("Please select Patient and Test");
-//   }
+    const handleValidatePay = () =>{
+        ErrorToast.launchErrorToast("Please select Patient and Test");
+    }
 
 
     return (
@@ -68,30 +71,21 @@ const NewBookingFeature = () => {
                     <PaymentDetail/>
                     <div className="mt-6  w-full">
                         <PathoProvider>
-                                 <PayAndBookModal
-                                    button={
-                                        <Button className="text-center cursor-pointer !py-3 text-lg w-full">
-                                            Pay & Book
-                                        </Button>
-                                    }
-                                />
+                            {
+                                selectTestItemList.length == 0 || patient == null ?
+                                    <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                                        Pay & Book
+                                    </Button>
+                                    :
+                                    <PayAndBookModal
+                                        button={
+                                            <Button className="text-center cursor-pointer !py-3 text-lg w-full">
+                                                Pay & Book
+                                            </Button>
+                                        }
+                                    />
+                            }
                         </PathoProvider>
-                       
-                        {/* {
-                            selectedLabTest.length == 0 || patientSearch == null ?
-                                <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                    Pay & Book
-                                </Button>
-                                :
-                                <PayAndBookModal
-                                    button={
-                                        <Button className="text-center cursor-pointer !py-3 text-lg w-full">
-                                            Pay & Book
-                                        </Button>
-                                    }
-                                />
-                        } */}
-
                     </div>
                 </div>
 

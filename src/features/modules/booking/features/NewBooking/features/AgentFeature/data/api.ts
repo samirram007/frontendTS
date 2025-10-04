@@ -18,6 +18,19 @@ export async function storeAgentService(payload: IAgent):Promise<AxiosResponse<I
 }
 
 
+export async function updateAgentService(payload: IAgent):Promise<AxiosResponse<IAgentResponse>>{
+    try{
+        const response = await axiosClient.put(`/agents/${payload.id}`,payload);
+        return response;
+    }catch(error:unknown){
+        if(axios.isAxiosError(error) && error.response){
+            return error.response as AxiosResponse<IAgentResponse>;
+        }
+        throw new Error("Network Error");
+    }
+}
+
+
 export async function getAgentService():Promise<AxiosResponse<IAgentListResponse>>{
     try{
         const response = await axiosClient.get('/agents');

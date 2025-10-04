@@ -1,11 +1,13 @@
 import { useContext } from "react";
-import { PathoContext } from "../../../contexts/PathoContext";
-import { DiscountDetail } from "./DiscountFeature/discount-details";
+import { PathoContext } from "../../../../contexts/PathoContext";
+import { DiscountDetail } from "../DiscountFeature/discount-details";
+import { usePayment } from "../../../../contexts/payment-context";
 
 export function PaymentDetail({ }) {
 
 
-    const {totalAmount,discountAmount,netAmount,dueAmount} = useContext(PathoContext);
+    const {discountAmount,dueAmount} = useContext(PathoContext);
+    const {totalAmount,netAmount} = usePayment();
 
 
 

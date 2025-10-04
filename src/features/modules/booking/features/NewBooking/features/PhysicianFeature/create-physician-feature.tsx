@@ -3,24 +3,44 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { InputBox } from "@/features/modules/booking/utils/components/InputBox";
 import { Field, Form, Formik } from "formik";
 import { physicianSchema } from "./data/schema";
-import { useState } from "react";
-import { usePhysician } from "./context/physician-context";
-import { usePhysicianMutation } from "./data/queryOptions";
+import { useEffect, useState } from "react";
+import { useGetDisciplineListQuery, usePhysicianMutation } from "./data/queryOptions";
 import { useQueryClient } from "@tanstack/react-query";
 import { usePatient } from "@/features/modules/booking/contexts/patient-context";
 import type { IPatient } from "../CreatePatientFeature/data/schema";
+import { SelectBox } from "@/features/modules/booking/utils/components/SelectBox";
 
-
+interface ISelectOption{
+    value: string,
+    label: string
+}
 
 
 
 const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?:string}) => {
 
-    const {physicianDetail,setPhysicianDetail} = usePhysician();
-    const {setPatient} = usePatient();
+    const {data,isSuccess} = useGetDisciplineListQuery();
+
+    const [displineList,setDisciplineList] = useState<ISelectOption[]>([]);
+    const {setPatient,patient} = usePatient();
     const {mutate,isPending} = usePhysicianMutation();
     const [open,setOpen] = useState<boolean>(false);
     const queryClient = useQueryClient();
+
+    useEffect(()=>{
+        if(isSuccess){
+            let disciplineArr: ISelectOption[] = [];
+            data.data.data.forEach(item=>{
+                const disciplineObj:ISelectOption ={
+                    value: `${item.id}`,
+                    label: `${item.name}`
+                };
+                disciplineArr.push(disciplineObj);
+            });
+            setDisciplineList(disciplineArr);
+        }
+    },[isSuccess,data]);
+
 
     return (
         <>
@@ -34,6 +54,9 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                             }
                     });
                 }
+                if(action != "Edit" && patient?.physician != null){
+                    setPatient({...patient,physician:undefined});
+                }
             }}>
                 <DialogTrigger asChild>
                     {button}
@@ -46,7 +69,11 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                     </DialogHeader>
                     <Formik
                         onSubmit={(values, action) => {
-                            mutate(values,{
+                            const payload = {
+                                ...values,
+                                disciplineId: Number(values.disciplineId)
+                            };
+                            mutate(payload,{
                                 onSuccess(data) {
                                     setPatient((prev)=>{
                                         return prev ?
@@ -58,7 +85,6 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                                             { physician: data.data.data,
                                              } as IPatient;
                                     });
-                                    setPhysicianDetail(data.data.data);
                                     queryClient.invalidateQueries({ queryKey: ['get-physician-query'] });
                                     setOpen(false);
                                 },
@@ -70,14 +96,14 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                         }}
                         validationSchema={physicianSchema}
                         initialValues={{
-                            id: physicianDetail?.id,
-                            name: physicianDetail?.name || "",
-                            contactNo: physicianDetail?.contactNo || "",
-                            accountLedgerId: physicianDetail?.accountLedgerId || 0,
-                            email: physicianDetail?.email,
-                            degree: physicianDetail?.degree || "",
-                            disciplineId: physicianDetail?.disciplineId || 0,
-                            status: physicianDetail?.status || true,
+                            id: patient?.physician?.id,
+                            name: patient?.physician?.name || "",
+                            contactNo: patient?.physician?.contactNo || "",
+                            accountLedgerId: patient?.physician?.accountLedgerId || 0,
+                            email: patient?.physician?.email,
+                            degree: patient?.physician?.degree || "",
+                            disciplineId: String(patient?.physician?.disciplineId) || 0,
+                            status: patient?.physician?.status || true,
                         }}
                     >
                         {() => (
@@ -87,7 +113,9 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                                     <InputBox placeholder="Physician name" name="name" type="text" label="Name" />
                                     <InputBox placeholder="0000-000-000" name="contactNo" type="text" label="Contact" />
                                     <InputBox placeholder="M.B.B.S" name="degree" type="text" label="Degree" />
-                                    <InputBox placeholder="Palentology" name="disciplineId" type="number" label="Discipline" />
+                                    <SelectBox name="disciplineId" label="Discipline"
+                                        options={displineList} 
+                                    />
                                 </div>
                                 <Button type="submit" className="w-full !bg-blue-500">
                                     {isPending ? "Saving...." : "Save"}

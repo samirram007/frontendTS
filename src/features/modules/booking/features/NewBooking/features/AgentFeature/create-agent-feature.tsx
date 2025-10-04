@@ -4,8 +4,10 @@ import { InputBox } from "@/features/modules/booking/utils/components/InputBox";
 import { Field, Form, Formik } from "formik";
 import { useAgentMutation } from "./data/queryOptions";
 import { agentSchema } from "./data/schema";
-import { useAgent } from "./context/agent-context";
-import { useState } from "react";
+import {  useState } from "react";
+import { usePatient } from "@/features/modules/booking/contexts/patient-context";
+import type { IPatient } from "../CreatePatientFeature/data/schema";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface AgentFormInterface{
     button: React.ReactElement | string,
@@ -15,12 +17,19 @@ interface AgentFormInterface{
 
 const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
     const [open,setOpen] = useState<boolean>(false);
-    const {agentDetail} = useAgent();
+    const {patient,setPatient} = usePatient();
     const {mutate,isPending} = useAgentMutation();
+
+    const queryClient = useQueryClient();
 
     return (
         <>
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={open} onOpenChange={(value)=>{
+                setOpen(value);
+                if(action != "Edit" && patient?.agent != undefined){
+                    setPatient({...patient,agent: undefined});
+                }
+            }}>
                 <DialogTrigger asChild>
                     {button}
                 </DialogTrigger>
@@ -34,23 +43,38 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
                     </DialogHeader>
                     <Formik
                         onSubmit={(values, action) => {
-                            console.log("values", values);
-                            mutate(values);
+                            mutate(values,{
+                                onSuccess:(data)=>{
+                                    if(data){
+                                        setPatient((prev)=>{
+                                            return prev ?
+                                                {
+                                                    ...prev,
+                                                    agent: data.data.data
+                                                }
+                                                :
+                                                { agent: data.data.data } as IPatient;
+                                        });
+                                        setOpen(false);
+                                    }
+                                    queryClient.invalidateQueries({ queryKey: ['get-agent-query'] })
+                                }
+                            });
                             setTimeout(() => {
                                 action.setSubmitting(false);
-                                setOpen(false);
-                            }, 700);
+                                
+                            }, 500);
                         }}
                         validationSchema={agentSchema}
                         
                         initialValues={{
-                            id: agentDetail?.id,
-                            name: agentDetail?.name || "",
-                            contactNo: agentDetail?.contactNo || "",
-                            email: agentDetail?.email,
-                            commissionPercent: agentDetail?.commissionPercent || 0.00,
-                            accountLedgerId:0,
-                            status: true
+                            id: patient?.agent?.id,
+                            name: patient?.agent?.name || "",
+                            contactNo: patient?.agent?.contactNo || "",
+                            email: patient?.agent?.email,
+                            commissionPercent: patient?.agent?.commissionPercent || 0.00,
+                            accountLedgerId: patient?.agent?.accountLedgerId || 0,
+                            status: patient?.agent?.status || true
                         }}
                     >
                         {({}) => (

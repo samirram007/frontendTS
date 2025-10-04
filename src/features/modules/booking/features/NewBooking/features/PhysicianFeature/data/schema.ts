@@ -10,7 +10,7 @@ export interface IPhysician{
     degree: string,
     email?: string,
     contactNo: string,
-    disciplineId: number,
+    disciplineId: number | string,
     status: boolean
 }
 export interface IPhysicianRequest{
@@ -19,7 +19,7 @@ export interface IPhysicianRequest{
     degree: string,
     email?: string,
     contactNo: string,
-    disciplineId: number,
+    disciplineId: number | string,
     status: boolean
 }
 
@@ -61,7 +61,7 @@ export const physicianSchema = yup.object({
     .required('Contact is required'),
 
   disciplineId: yup
-    .number()
+    .string()
     .optional(),
 
   status: yup
@@ -69,3 +69,23 @@ export const physicianSchema = yup.object({
     .default(true)
     .optional()
 });
+
+
+
+// discipline Interface
+export interface IDiscipline{
+  id?: number,
+  name: string,
+  code?: string | null | undefined,
+  status?: string,
+  description?: string
+}
+
+
+export interface IDisciplineResponse extends IResponseInterface{
+    data: IDiscipline
+};
+
+export interface IDisciplineListResponse extends IResponseInterface{
+    data: IDiscipline[]
+}

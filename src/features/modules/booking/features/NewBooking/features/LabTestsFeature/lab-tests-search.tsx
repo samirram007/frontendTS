@@ -3,6 +3,7 @@ import { useGetAgentListQuery } from "./data/queryOptions";
 import type { ILabTestItem, ITestItem } from "./data/schema";
 import { useLabTestItem } from "./context/lab-test-context";
 import { toast } from "sonner";
+import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 
 
 
@@ -14,7 +15,8 @@ const LabTestSearch = () => {
 
     const {data,isSuccess} = useGetAgentListQuery();
 
-    const {setLabTestItemList,labTestItemList,setSelectTestItemList,selectTesItemList} = useLabTestItem();
+    const {setLabTestItemList,labTestItemList,setSelectTestItemList,selectTestItemList} = useLabTestItem();
+    const {setTotalAmount,setNetAmount} = usePayment();
 
     const [query,setQuery] = useState<string>("");
     const [showDropdown,setShowDropdown] = useState<boolean>(false);
@@ -34,14 +36,15 @@ const LabTestSearch = () => {
         }
     }
 
-
-    const filteredLabTestList = labTestItemList?.filter((lab)=>
+    // getting all ids of selected test items and filtering them out
+    const allIds =  Array.from(selectTestItemList.map((item)=> item.testId));
+    const filteredLabTestList = labTestItemList?.filter((item)=> !allIds.includes(item.id))?.filter((lab)=>
         lab.name.toLowerCase().includes(query.toLowerCase())
     );
 
     const handleSelectTest = (test: ILabTestItem) =>{
         setShowDropdown(false);
-        const isMatch = selectTesItemList.some((item)=> item.testId == test.id);
+        const isMatch = selectTestItemList.some((item)=> item.testId == test.id);
         if(isMatch){
             return toast.error("Test already selected");
         }
@@ -53,10 +56,11 @@ const LabTestSearch = () => {
             amount: test.mrp,
             status: "active"
         }
-        setSelectTestItemList([...selectTesItemList,testObj]);
-        const selectedLabTest = labTestItemList.filter((item)=> item.id != test.id);
-        setLabTestItemList(selectedLabTest);
+        setSelectTestItemList([...selectTestItemList,testObj]);
         setQuery("");
+        // amount calculation
+        setTotalAmount((prev)=> prev + Number(test.mrp));
+        setNetAmount((prev)=> prev + Number(test.mrp));
     }
 
 

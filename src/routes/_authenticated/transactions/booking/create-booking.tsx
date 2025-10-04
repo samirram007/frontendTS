@@ -1,4 +1,5 @@
 import PatientProvider from '@/features/modules/booking/contexts/patient-context';
+import PaymentProvider from '@/features/modules/booking/contexts/payment-context';
 import AgentProvider from '@/features/modules/booking/features/NewBooking/features/AgentFeature/context/agent-context';
 import LabTestItemProvider from '@/features/modules/booking/features/NewBooking/features/LabTestsFeature/context/lab-test-context';
 import PhysicianProvider from '@/features/modules/booking/features/NewBooking/features/PhysicianFeature/context/physician-context';
@@ -19,7 +20,9 @@ function NewBookingProvider() {
       <AgentProvider>
         <PhysicianProvider>
           <LabTestItemProvider>
-            <NewBooking />
+            <PaymentProvider>
+              <NewBooking />
+            </PaymentProvider>
           </LabTestItemProvider>
         </PhysicianProvider>
       </AgentProvider>

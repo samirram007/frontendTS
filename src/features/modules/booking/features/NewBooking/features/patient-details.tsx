@@ -21,6 +21,7 @@ export function PatientDetail() {
                     button={
                         <PenLine color="black" className="cursor-pointer" size={16} />
                     }
+                    action="Edit"
                 />
 
             </div>

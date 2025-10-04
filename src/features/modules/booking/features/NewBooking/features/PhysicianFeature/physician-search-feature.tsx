@@ -30,7 +30,7 @@ const PhysicianSearchFeature = () => {
     const filteredPatients = physicianData.filter(
         (p) =>
             p.degree?.toLowerCase().includes(query.toLowerCase()) ||
-            p.name?.includes(query) ||
+            p.name.toLowerCase()?.includes(query.toLowerCase()) ||
             p.contactNo?.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -46,7 +46,7 @@ const PhysicianSearchFeature = () => {
                 {physician: pyhsician
                  } as IPatient;
         });
-        setQuery(pyhsician.name);
+        setQuery("");
         setShowDropdown(false);
     };
     return (
@@ -63,9 +63,9 @@ const PhysicianSearchFeature = () => {
                         if (e.target.value == '') {
                             setPhysicianDetail(null);
                         }
-                        setShowDropdown(true); // open dropdown when typing
+                        setShowDropdown(true); 
                     }}
-                    onFocus={() => query && setShowDropdown(true)} // open dropdown on focus if query exists
+                    onFocus={() => query && setShowDropdown(true)}
                     className="w-full px-3 py-1 border-none shadow-none placeholder:text-[12px] outline-none"
                 />
                 <Search size={16} className="cursor-pointer" />

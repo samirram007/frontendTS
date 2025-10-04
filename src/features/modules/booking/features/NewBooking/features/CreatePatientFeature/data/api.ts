@@ -29,3 +29,16 @@ export async function getPatientService():Promise<AxiosResponse<IPatientListResp
         throw new Error("Network Error");
     }
 }
+
+
+export async function updatePatientService(payload: IPatient):Promise<AxiosResponse<IPatientResponseDetail>>{
+    try{
+        const response = await axiosClient.put(`/patients/${payload.id}`,payload);
+        return response;
+    }catch(error:unknown){
+        if(axios.isAxiosError(error) && error.response && error.response.data.success == false){
+            return error.response as AxiosResponse<IPatientResponseDetail>;
+        }
+        throw new Error("Network Error");
+    }
+}

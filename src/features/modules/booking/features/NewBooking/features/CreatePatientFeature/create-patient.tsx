@@ -16,6 +16,7 @@ import { usePatientMutation } from "./data/queryOptions";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
+import { showErrors } from "@/utils/dataClient";
 
 
 interface IPatientForm{
@@ -36,7 +37,12 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
     const queryClient = useQueryClient();
 
     return(
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={(value)=> {
+            setOpen(value);
+            if(action != "Edit"){
+                setPatient(null);
+            }
+        }}>
             <DialogTrigger asChild>
                 {button ? button : <span className="text-blue-600 underline underline-offset-1">Add new patient</span>}
             </DialogTrigger>
@@ -53,8 +59,9 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                     <Formik
                         onSubmit={(values,actions)=>{
                              const payload: IPatient = {
+                                id: values.id,
                                 name: values.name,
-                                age: values.age,
+                                age: values.age || 0,
                                 status: values.status,
                                 gender: values.gender,
                                 contactNo: values.contactNo,
@@ -65,6 +72,10 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                             };
                             mutate(payload,{
                                 onSuccess:(data) =>{
+                                    if(data.data.success == false){
+                                        showErrors(data.data);
+                                        return;
+                                    }
                                     setPatient(data.data.data);
                                     queryClient.invalidateQueries({queryKey:['get-paitent-query']});
                                     toast.success("Patient created successfully");
@@ -83,7 +94,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                             id: patient?.id,
                             name: patient?.name || "",
                             contactNo: patient?.contactNo || "",
-                            age: patient?.age || 0,
+                            age: patient?.age,
                             gender: patient?.gender,
                             agentId: patient?.agent?.id,
                             physicianId: patient?.physician?.id,
@@ -132,10 +143,11 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                             <h1 className="font-semibold text-app-base-lg">Physician</h1>
                                             <PhysicianSearchFeature/>
                                             <PhysicianForm button={
-                                                <Button className="!py-0.5 h-8 !px-2" variant={'default'}>
-                                                    <Plus size={8} className="cursor-pointer" />
-                                                </Button>
-                                            } />
+                                                    <Button className="!py-0.5 h-8 !px-2" variant={'default'}>
+                                                        <Plus size={8} className="cursor-pointer" />
+                                                    </Button>
+                                                }
+                                            />
                                         </div>
                                         
                                         {/* if physician exists then use it if not then create it if want to edit the existing data then do it */}
@@ -144,15 +156,15 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Name:</div>
                                                     <Field type="hidden" name="agentId"  />
-                                                    <div className="font-bold">{patient ? patient.physician?.name : <span className="font-light text-gray-400 text-app-small">Physician Name</span>}</div>
+                                                    <div className="font-bold">{patient?.physician != undefined ? patient.physician?.name : <span className="font-light text-gray-400 text-app-small">Physician Name</span>}</div>
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Degree:</div>
-                                                    <div className="font-bold">{patient ? patient.physician?.degree : <span className="font-light text-gray-400 text-app-small">Physician Degree</span>}</div>
+                                                    <div className="font-bold">{patient?.physician != undefined ? patient.physician?.degree : <span className="font-light text-gray-400 text-app-small">Physician Degree</span>}</div>
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Contact:</div>
-                                                    <div className="font-bold">{patient  ? patient.physician?.contactNo : <span className="font-light text-gray-400 text-app-small">Physician Contact</span> }</div>
+                                                    <div className="font-bold">{patient?.physician != undefined  ? patient.physician?.contactNo : <span className="font-light text-gray-400 text-app-small">Physician Contact</span> }</div>
                                                 </div>
                                                 {/* <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Discipline:</div>
@@ -163,6 +175,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 button={
                                                     <PenLine className="cursor-pointer" size={18} />
                                                 }
+                                                action="Edit"
                                             />
                                         </div>
                                         
@@ -184,22 +197,22 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                             <div className="flex flex-col gap-3  cursor-pointer justify-evenly">
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Name:</div>
-                                                    <div className="font-bold">{patient ? patient.agent?.name : <span className="font-light text-gray-400 text-app-small">Agent Name</span>}</div>
+                                                    <div className="font-bold">{patient?.agent != undefined ? patient.agent?.name : <span className="font-light text-gray-400 text-app-small">Agent Name</span>}</div>
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Contact:</div>
-                                                    <div className="font-bold">{patient ? patient.agent?.contactNo : <span className="font-light text-gray-400 text-app-small">Agent Contact</span>}</div>
+                                                    <div className="font-bold">{patient?.agent != undefined ? patient.agent?.contactNo : <span className="font-light text-gray-400 text-app-small">Agent Contact</span>}</div>
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Comission:</div>
-                                                    <div className="font-bold">{patient ? <>{patient.agent?.commissionPercent}{' %'}</>   : <span className="font-light text-gray-400 text-app-small">Agent Comission</span>}</div>
+                                                    <div className="font-bold">{patient?.agent != undefined ? <>{patient.agent?.commissionPercent}{' %'}</>   : <span className="font-light text-gray-400 text-app-small">Agent Comission</span>}</div>
                                                 </div>
                                             </div>
                                             <AgentForm
                                                 button={
                                                     <PenLine className="cursor-pointer" size={18} />
                                                 }
-                                                action="Edit Agent"
+                                                action="Edit"
                                             />
                                         </div>
                                         

@@ -6,7 +6,7 @@ import type { ILabTestItem, ITestItem } from '../data/schema';
 interface LabItemContextType{
     labTestItemList: ILabTestItem[];
     setLabTestItemList: React.Dispatch<React.SetStateAction<ILabTestItem[]>>;
-    selectTesItemList: ITestItem[];
+    selectTestItemList: ITestItem[];
     setSelectTestItemList: React.Dispatch<React.SetStateAction<ITestItem[]>>
 }
 
@@ -19,12 +19,12 @@ export default function LabTestItemProvider({children}:{children: React.ReactNod
 
 
     const [labTestItemList,setLabTestItemList] = useState<ILabTestItem[]>([]);
-    const [selectTesItemList,setSelectTestItemList] = useState<ITestItem[]>([]);
+    const [selectTestItemList,setSelectTestItemList] = useState<ITestItem[]>([]);
 
     return(
         <LabItemContext.Provider value={{
             labTestItemList,setLabTestItemList,
-            selectTesItemList,setSelectTestItemList
+            selectTestItemList,setSelectTestItemList
         }}>
             {children}
         </LabItemContext.Provider>

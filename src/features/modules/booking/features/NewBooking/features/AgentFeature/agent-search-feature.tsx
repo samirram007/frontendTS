@@ -47,7 +47,7 @@ const AgentSearchFeature = () => {
                 { agent: agent,
                  } as IPatient;
         });
-        setQuery(agent.name);
+        setQuery("");
         setShowDropdown(false);
     };
     return (

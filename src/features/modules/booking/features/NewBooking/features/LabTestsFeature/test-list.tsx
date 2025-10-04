@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { AlertAppDialog } from "../../../../shared/components/AlertAppDialog";
 import { MdDeleteOutline } from "react-icons/md";
 import { useLabTestItem } from "./context/lab-test-context";
+import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 
 
 
@@ -11,8 +11,8 @@ import { useLabTestItem } from "./context/lab-test-context";
 
 const LabTestList = () => {
 
-    const {selectTesItemList} = useLabTestItem();
-    const [totalAmount,_setTotalAmount] = useState<number>(0);
+    const {selectTestItemList,setSelectTestItemList} = useLabTestItem();
+    const {totalAmount,setTotalAmount,setNetAmount} = usePayment();
 
     // on change of test date reporting date will change
     const handleTestDateChange = (_id:number,_e:React.HTMLInputTypeAttribute)=>{
@@ -25,8 +25,14 @@ const LabTestList = () => {
     }
 
     // on adding or removing lab tests
-    const handleMinusTest = (_id:number) =>{
+    const handleMinusTest = (id:number) =>{
+        const remaningList = selectTestItemList.filter((item)=> item.testId != id);
+        const amount = selectTestItemList.filter((item) => item.testId == id)[0].amount;
+        setSelectTestItemList(remaningList);
 
+        // amount calculation
+        setTotalAmount((prev) => prev - Number(amount));
+        setNetAmount((prev)=> prev - Number(amount));
     }
 
 
@@ -40,10 +46,10 @@ const LabTestList = () => {
                 <h1 className="text-right pr-2">Amount</h1>
                 <h1 className="text-center">Action</h1>
             </div>
-            <div className={`overflow-auto h-[30vh] ${selectTesItemList.length < 1 ? 'flex justify-center items-center' : ''}`}>
+            <div className={`overflow-auto h-[30vh] ${selectTestItemList.length < 1 ? 'flex justify-center items-center' : ''}`}>
                 {
-                    selectTesItemList.length > 0 ?
-                        selectTesItemList.map((item, index) => (
+                    selectTestItemList.length > 0 ?
+                        selectTestItemList.map((item, index) => (
                             <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_150px_150px_120px_90px]  items-center">
                                 <div className="py-2 px-2">
                                     <h1>{++index}</h1>

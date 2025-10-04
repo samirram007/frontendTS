@@ -1,7 +1,6 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useContext } from "react";
-import { PathoContext } from "../../contexts/PathoContext";
-import { PaymentTypeSchema } from "../../data/schema";
+import { PaymentTypeSchema } from "@/features/modules/booking/data/schema";
+import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 
 interface IPaymentSelectInterface{
     className?:string
@@ -11,7 +10,8 @@ interface IPaymentSelectInterface{
 
 
 export default function PaymentSelect({className}:IPaymentSelectInterface){
-    const {setPaymentMethod} = useContext(PathoContext);
+    const {setPaymentMethod} = usePayment();
+
     return(
         <div className="py-2 my-1">
             <Select onValueChange={(e)=>{
