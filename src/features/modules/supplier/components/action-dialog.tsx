@@ -25,7 +25,7 @@ import { accountLedgerSchema } from '../../account_ledger/data/schema'
 import { addressSchema } from '../../address/data/schema'
 import { useSupplierMutation } from '../data/queryOptions'
 import { formSchema, type Supplier, type SupplierForm } from '../data/schema'
-import AccountGroupDropdown from './sub-component/account_group-dropdown'
+import AccountGroupDropdown from './dropdown/account_group-dropdown'
 import AddressForm from './sub-component/address-form'
 
 

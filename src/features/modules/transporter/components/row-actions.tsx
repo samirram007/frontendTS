@@ -1,22 +1,30 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
+import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
-import { useGodown } from "../contexts/godown-context"
-import type { Godown } from "../data/schema"
+import { useTransporter } from "../contexts/transporter-context"
+import type { Transporter } from "../data/schema"
 
+import { Route as TransporterDetailRoute } from '@/routes/_authenticated/masters/party/_layout/transporter/_layout/$id'
 
 interface DataTableRowActionsProps {
-    row: Row<Godown>
+    row: Row<Transporter>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const { setOpen, setCurrentRow } = useGodown()
+    const navigate = useNavigate()
+    const { setOpen, currentRow, setCurrentRow } = useTransporter()
     const { row } = props
     return (
-        <DataTableRowActions<Godown>
+        <DataTableRowActions<Transporter>
             row={row}
             onEdit={(data) => {
                 setCurrentRow(data)
-                setOpen("edit")
+                console.log("row Action: ", currentRow)
+                navigate({
+                    to: TransporterDetailRoute.to,
+                    params: { id: data.id! },
+                })
+
             }}
             onDelete={(data) => {
                 setCurrentRow(data)

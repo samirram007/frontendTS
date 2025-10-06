@@ -25,7 +25,7 @@ import {
   type VisibilityState,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import type { Godown } from '../data/schema'
+import type { Distributor } from '../data/schema'
 
 
 declare module '@tanstack/react-table' {
@@ -36,8 +36,8 @@ declare module '@tanstack/react-table' {
 }
 
 interface DataTableProps {
-  columns: ColumnDef<Godown>[]
-  data: Godown[]
+  columns: ColumnDef<Distributor>[]
+  data: Distributor[]
 }
 
 export function GridTable({ columns, data }: DataTableProps) {

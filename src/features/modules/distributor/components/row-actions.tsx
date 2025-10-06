@@ -1,22 +1,30 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
+import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
-import { useGodown } from "../contexts/godown-context"
-import type { Godown } from "../data/schema"
+import { useDistributor } from "../contexts/distributor-context"
+import type { Distributor } from "../data/schema"
 
+import { Route as DistributorDetailRoute } from '@/routes/_authenticated/masters/party/_layout/distributor/_layout/$id'
 
 interface DataTableRowActionsProps {
-    row: Row<Godown>
+    row: Row<Distributor>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const { setOpen, setCurrentRow } = useGodown()
+    const navigate = useNavigate()
+    const { setOpen, currentRow, setCurrentRow } = useDistributor()
     const { row } = props
     return (
-        <DataTableRowActions<Godown>
+        <DataTableRowActions<Distributor>
             row={row}
             onEdit={(data) => {
                 setCurrentRow(data)
-                setOpen("edit")
+                console.log("row Action: ", currentRow)
+                navigate({
+                    to: DistributorDetailRoute.to,
+                    params: { id: data.id! },
+                })
+
             }}
             onDelete={(data) => {
                 setCurrentRow(data)

@@ -1,61 +1,52 @@
 import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
 import { z } from 'zod';
+import { accountLedgerSchema } from '../../account_ledger/data/schema';
+import { addressSchema } from '../../address/data/schema';
 
 
 
 
-export const godownSchema: z.ZodType<any> = z.object({
+export const transporterSchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
-  code: z.string().min(1),
-  description: z.string().optional(),
+  code: z.string().nullish(),
+  gstin: z.string().nullish(),
+  pan: z.string().nullish(),
+  licenseNo: z.string().nullish(),
+  vehicleType: z.string().nullish(),
+  contactPerson: z.string().nullish(),
+  contactNo: z.string().nullish(),
+  phone: z.string().nullish(),
+  email: z.string().nullish(),
   status: ActiveInactiveStatusSchema,
-  parentId: z.number().int().positive().optional().nullish(),
-  parent: z.lazy(() => godownSchema).optional().nullish(),
-  address: z
-    .object({
-      street: z.string().nullable().optional(),
-      city: z.string().nullable().optional(),
-      state: z.string().nullable().optional(),
-      pincode: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
-  ourStockWithThirdParty: z.boolean(),
-  thirdPartyStockWithUs: z.boolean()
+  accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
+  address: z.lazy(() => addressSchema).nullable().nullish(),
 
 })
-export type Godown = z.infer<typeof godownSchema>
-export const godownListSchema = z.array(godownSchema)
-export type GodownList = z.infer<typeof godownListSchema>
+export type Transporter = z.infer<typeof transporterSchema>
+export const transporterListSchema = z.array(transporterSchema)
+export type TransporterList = z.infer<typeof transporterListSchema>
 
 
 
 export const formSchema = z
   .object({
-    name: z
-      .string()
-      .min(1, { message: 'Name is required.' }),
-    code: z
-      .string()
-      .min(1, { message: 'Role is required.' }),
-    status: z
-      .string()
-      .min(1, { message: 'Status is required.' }),
-    parentId: z.number().int().positive().optional().nullish(),
-    description: z.string().min(1, { message: 'Description is required.' }),
-    address: z
-      .object({
-        street: z.string().nullable().optional(),
-        city: z.string().nullable().optional(),
-        state: z.string().nullable().optional(),
-        pincode: z.string().nullable().optional(),
-      })
-      .nullable()
-      .optional(),
-    ourStockWithThirdParty: z.boolean(),
-    thirdPartyStockWithUs: z.boolean(),
+    name: z.string().min(1, { message: 'Name is required.' }),
+    code: z.string(),
+    status: z.string().min(1, { message: 'Status is required.' }),
+    gstin: z.string().nullish(),
+    pan: z.string().nullish(),
+    licenseNo: z.string().nullish(),
+    vehicleType: z.string().nullish(),
+    contactPerson: z.string().nullish(),
+    contactNo: z.string().nullish(),
+    phone: z.string().nullish(),
+    email: z.string().nullish(),
+    accountGroupId: z.coerce.number().nullish(),
+    accountLedger: accountLedgerSchema.optional().nullish(),
+    address: addressSchema.optional().nullish(),
+
     isEdit: z.boolean(),
   })
 
-export type GodownForm = z.infer<typeof formSchema>
+export type TransporterForm = z.infer<typeof formSchema>

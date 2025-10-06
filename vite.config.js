@@ -18,18 +18,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // All node_modules go into a vendor chunk
-          // if (id.includes('node_modules')) {
-          //   if (id.includes('react') || id.includes('react-dom')) {
-          //     return 'react-vendor'
-          //   }
-          //   if (id.includes('@tanstack/react-query')) {
-          //     return 'query-vendor'
-          //   }
-          //   return 'vendor'
-          // }
 
-          // Optionally, split routes by folder
           if (id.includes('src/features/accounts/settings')) {
             return 'accounts-settings'
           }

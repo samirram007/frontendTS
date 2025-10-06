@@ -5,6 +5,7 @@ import { SearchProvider } from '@/core/contexts/search-context'
 import { Outlet } from '@tanstack/react-router'
 import { Suspense } from 'react'
 import { AppSidebar } from './components/app-sidebar'
+import Footer from './components/footer'
 import HeaderComponent from './components/HeaderComponent'
 
 
@@ -34,8 +35,8 @@ const AdminLayout = () => {
                                 {/* <!-- ===== Header End ===== --> */}
 
                                 {/* <!-- ===== Main Content Start ===== --> */}
-                                <main className="">
-                                    <div className="mx-auto max-w-screen-2xl px-4 md:px-6 2xl:px-10">
+                                <main className="max-w-screen ">
+                                    <div className="mx-auto max-w-screen-2xl px-0 md:px-6 2xl:px-10">
 
 
                                         <Suspense fallback={<Toaster />}>
@@ -46,7 +47,7 @@ const AdminLayout = () => {
                                     </div>
                                 </main>
                                 {/* <!-- ===== Main Content End ===== --> */}
-                                {/* <Footer /> */}
+                                <Footer />
                             </div>
                         </div>
                         {/* <!-- ===== Content Area End ===== --> */}

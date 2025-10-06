@@ -64,7 +64,7 @@ const CheckBox = (props: Props) => {
                         {label ?? capitalizeAllWords(name)} ?
                         <Badge
                             variant={typeof field.value === "string" ? "default" : "secondary"}
-                            className="ml-2"
+                            className="ml-2 cursor-pointer"
                         >
                             {(() => {
                                 // If options provided → show label instead of raw value
