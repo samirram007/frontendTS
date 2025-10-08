@@ -25,7 +25,7 @@ import {
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
 
-const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
+const APP_NAME = import.meta.env.VITE_APP_NAME || 'AIPT'
 const APP_SUBTITLE = import.meta.env.VITE_APP_SUBTITLE || 'Admin Dashboard'
 export const sidebarData: SidebarData = {
   user: {

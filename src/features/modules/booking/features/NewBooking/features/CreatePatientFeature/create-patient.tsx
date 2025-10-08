@@ -37,7 +37,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
     const queryClient = useQueryClient();
 
     return(
-        <Dialog open={open} onOpenChange={(value)=> {
+        <Dialog open={open} onOpenChange={(value)=>{
             setOpen(value);
             if(action != "Edit"){
                 setPatient(null);
@@ -77,35 +77,39 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                         return;
                                     }
                                     setPatient(data.data.data);
-                                    queryClient.invalidateQueries({queryKey:['get-paitent-query']});
+                                    queryClient.invalidateQueries({queryKey:['get-patient-query']});
                                     toast.success("Patient created successfully");
-                                    setOpen(false);
+
+                                    setTimeout(() => {
+                                        setOpen(false);
+                                    }, 700);
                                 },
                                 onError:(error)=>{
+                                    console.log("Patient Error came",error);
                                     toast.error(error.message);
                                 }
                             })
                             setTimeout(() => {
                                 actions.setSubmitting(false);
-                            }, 1000);
+                            }, 700);
                         }}
                         validationSchema={patientRequestSchema}
                         initialValues={{
-                            id: patient?.id,
-                            name: patient?.name || "",
-                            contactNo: patient?.contactNo || "",
-                            age: patient?.age,
-                            gender: patient?.gender,
-                            agentId: patient?.agent?.id,
-                            physicianId: patient?.physician?.id,
+                            id: action != "Edit" ? undefined : patient?.id,
+                            name: action != "Edit" ? "" : patient?.name || "",
+                            contactNo: action != "Edit" ? "" : patient?.contactNo || "",
+                            age: action != "Edit" ? 0 : patient?.age,
+                            gender: action != "Edit" ? "male" : patient?.gender,
+                            agentId: action != "Edit" ? 0 : patient?.agent?.id,
+                            physicianId: action != "Edit" ? 0 : patient?.physician?.id,
                             accountLedgerId:0,
                             address:{
-                                line1: patient?.address?.line1 || "",
-                                line2: patient?.address?.line2 || "",
-                                city: patient?.address?.city || "",
-                                state_id: patient?.address?.state_id || 0,
-                                is_primary: patient?.address?.is_primary || true,
-                                postal_code: patient?.address?.postal_code || ""
+                                line1: action != "Edit" ? "" : patient?.address?.line1 || "",
+                                line2: action != "Edit" ? "" : patient?.address?.line2 || "",
+                                city: action != "Edit" ? "" : patient?.address?.city || "",
+                                stateId: action != "Edit" ? 0 : patient?.address?.stateId || 0,
+                                isPrimary: action != "Edit" ? true : patient?.address?.isPrimary || true,
+                                postalCode: action != "Edit" ? "" : patient?.address?.postalCode || "x"
                             },
                             status: patient?.status || 'active'
                         }}
@@ -223,11 +227,11 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 <InputBox className="w-full" placeholder="Address Line 1" type="text" name="address.line1"  />
                                                 <InputBox className="w-full" placeholder="Address Line 2" type="text" name="address.line2" />
                                                 <InputBox className="w-full" placeholder="City" type="text" name="address.city"/>
-                                                <InputBox className="w-full" placeholder="Postal Code"  type="text" name="address.postal_code"/>
+                                                <InputBox className="w-full" placeholder="Postal Code"  type="text" name="address.postalCode"/>
                                             </div>
                                 <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
                                     <Button type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">
-                                        {isPending ? "Saving...." : "Save"}
+                                        {isPending ? "Saving...." : action == "Edit" ? "Save and Use" : "Save"}
                                     </Button>
                                 </div>
                             </Form>

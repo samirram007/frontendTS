@@ -1,42 +1,46 @@
 import {type ColumnDef} from "@tanstack/react-table";
-import type { IBookingListSchema } from "../../../data/schema";
 import { View } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import type { IBooking } from "../../NewBooking/data/schema";
 
 
-export const columns: ColumnDef<IBookingListSchema>[] = [
+export const columns: ColumnDef<IBooking>[] = [
     {
-        accessorKey:"id",
         header:"Sl no",
-        cell:(row) => <>{row.getValue()}</>
+        cell:(row) => <>{row.row.index + 1}</>
     },
     {
-        accessorKey:"bookingDate",
+        accessorKey:"voucherNo",
+        header:"Booking ID"
+    },
+    {
+        accessorKey:"voucherDate",
         header:"Booking Date",
     },
     {
-        accessorKey:"paitentName",
+        accessorKey:"voucherPatient.patient.name",
         header:"Patient Name",
     },
     {
-        accessorKey:"testType",
-        header:"Test Type",
-    },
-    {
-        accessorKey:"bookingStatus",
+        accessorKey:"status",
         header:"Booking Status",
     },
     {
-        accessorKey:"paymentStatus",
+        accessorKey:"remarks",
         header:"Payment Status",
     },
     {
-        accessorKey:"reportingStatus",
-        header:"Reporting Status",
-    },
-    {
-        id:"actions",
+        id:"id",
         header:"Action",
-        cell:(row)=> <Link to={'/transactions/booking/view'}><View/></Link> 
+        cell:({row})=>{
+            return(
+                <Link to={'/transactions/booking/$id'}
+                    params={{id: row.original.id}}
+                    className="text-blue-500 hover:text-blue-700"
+                >
+                    <View className="w-4 h-4"/>
+                </Link>
+            )
+        } 
     },
 ];

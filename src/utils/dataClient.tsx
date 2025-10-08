@@ -96,7 +96,7 @@ const errorHandler = (error: any) => {
 export function showErrors(errorResponse:any) {
 
   Object.entries(errorResponse.errors).forEach(([field, messages]) => {
-    messages.forEach((msg: any) => {
+    (messages as String[]).forEach((msg: any) => {
       toast.error(`${field}: ${msg}`);
     });
   });

@@ -1,7 +1,7 @@
 import { AlertAppDialog } from "../../../../shared/components/AlertAppDialog";
 import { MdDeleteOutline } from "react-icons/md";
 import { useLabTestItem } from "./context/lab-test-context";
-import { usePayment } from "@/features/modules/booking/contexts/payment-context";
+import { usePayment } from "../PaymentFeature/context/payment-context";
 
 
 

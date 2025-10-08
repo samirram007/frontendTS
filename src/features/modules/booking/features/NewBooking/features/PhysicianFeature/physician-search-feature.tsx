@@ -1,11 +1,12 @@
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import PhysicianForm from "./create-physician-feature";
+// import PhysicianForm from "./create-physician-feature";
 import { useGetPhysicianListQuery } from "./data/queryOptions";
 import { usePhysician } from "./context/physician-context";
 import type { IPhysician } from "./data/schema";
 import { usePatient } from "@/features/modules/booking/contexts/patient-context";
 import type { IPatient } from "../CreatePatientFeature/data/schema";
+import { useClickOutside } from "@/features/modules/booking/utils/outsideClickHandler";
 
 
 
@@ -13,13 +14,14 @@ import type { IPatient } from "../CreatePatientFeature/data/schema";
 const PhysicianSearchFeature = () => {
 
     const {data,isSuccess} = useGetPhysicianListQuery();
-    console.log("physician data",data?.data.data);
-
     const {setPhysicianDetail} = usePhysician();
     const {setPatient} = usePatient();
     const [query, setQuery] = useState<string>("");
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const [physicianData,setPhysicianData] = useState<IPhysician[]>([]);
+
+    const dropdownRef = useClickOutside(()=> {setShowDropdown(false); setQuery("")});
+
 
     useEffect(()=>{
         if(isSuccess){
@@ -58,6 +60,7 @@ const PhysicianSearchFeature = () => {
                     name="appointment_search"
                     placeholder="Search existing Patient by name, phone, or ID..."
                     value={query}
+                    autoComplete="off"
                     onChange={(e) => {
                         setQuery(e.target.value);
                         if (e.target.value == '') {
@@ -70,7 +73,7 @@ const PhysicianSearchFeature = () => {
                 />
                 <Search size={16} className="cursor-pointer" />
                 {showDropdown && query && (
-                    <div className="absolute top-full left-0 w-full mt-1 bg-white border rounded-lg shadow-md z-10 max-h-60 overflow-y-auto">
+                    <div ref={dropdownRef} className="absolute top-full left-0 w-full mt-1 bg-white border rounded-lg shadow-md z-10 max-h-60 overflow-y-auto">
                         {filteredPatients.length > 0 ? (
                             filteredPatients.map((pyhsician) => (
                                 <div
@@ -86,9 +89,10 @@ const PhysicianSearchFeature = () => {
                             ))
                         ) : (
                             <div className="px-3 py-2 text-sm text-slate-500">
-                                <PhysicianForm 
+                                No Physician Found
+                                {/* <PhysicianForm 
                                     button={<span className="text-sm text-blue-500 cursor-pointer">Create Pyhsician</span>}
-                                />
+                                /> */}
                             </div>
                         )}
                     </div>

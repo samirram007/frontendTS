@@ -3,7 +3,7 @@ import { useGetAgentListQuery } from "./data/queryOptions";
 import type { ILabTestItem, ITestItem } from "./data/schema";
 import { useLabTestItem } from "./context/lab-test-context";
 import { toast } from "sonner";
-import { usePayment } from "@/features/modules/booking/contexts/payment-context";
+import { usePayment } from "../PaymentFeature/context/payment-context";
 
 
 

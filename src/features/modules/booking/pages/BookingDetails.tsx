@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 // import { ViewAndEditBooking } from "../features/ViewAndEditBooking/ViewAndEditBooking";
 import type { ITestItem } from "../data/schema";
 import { MdDeleteOutline } from "react-icons/md";
@@ -7,28 +7,14 @@ import { PathoContext } from "../contexts/PathoContext";
 import { AlertAppDialog } from "../shared/components/AlertAppDialog";
 // import BookingHeader from "../components/BookingHeader/BookingHeader";
 import BookingDetailsHeader from "../features/BookingDetails/Features/booking-details-header";
+import { InvoicesFeature } from "../features/NewBooking/features/InvoiceFeature/invoice-feature";
+import type { IBooking } from "../features/NewBooking/data/schema";
+import { useBookingTest } from "../features/NewBooking/context/new-booking-context";
 
 
-function TestListView(){
+function TestListView({data}:{data?:IBooking}){
     const {totalAmount} = useContext(PathoContext);
-    const [tests,setTests]= useState<ITestItem[]>([])
-
-    const fetchTests = useCallback(async()=>{
-         try {
-       const res = await fetch(`http://localhost:5000/tests`);
-       if (!res.ok) {
-         throw new Error(`HTTP error! status: ${res.status}`);
-       }
-       const data = await res.json();
-       setTests(data.tests ?? data);
-     } catch (err: any) {
-       console.error("Fetch failed:", err);
-     }
-    },[]);
-
-    useEffect(()=>{
-        fetchTests();
-    },[fetchTests]);
+    const [tests,setTests]= useState<ITestItem[]>([]);
 
 
     const handleMinusTest = (e:number) =>{
@@ -49,23 +35,23 @@ function TestListView(){
                         </div>
                         <div className={`overflow-auto h-[30vh] ${tests.length < 1 ? 'flex justify-center items-center' : ''}`}>
                             {
-                                tests?.length > 0  ?
-                                tests.map((item,index)=>(
+                                data  ?
+                                data.stockJournal.stockJournalEntries.map((item,index)=>(
                                     <div key={index} className="text-sm px-3 border-b-[0px] grid grid-cols-[60px_1fr_200px_200px_150px_200px]  items-center">
                                         <div className="py-2 px-2">
                                             <h1>{++index}</h1>
                                         </div>
                                         <div className="py-2">
-                                            <h1>{item.test_name}</h1>
+                                            <h1>{item.stockItem.name}</h1>
                                         </div>
                                         <div className="py-2">
-                                            <input type="date"  id="test-date" defaultValue={new Date(item.test_date).toISOString().split('T')[0]}  />
+                                            <input type="date"  id="test-date" defaultValue={new Date().toISOString().split('T')[0]}  />
                                         </div>
                                         <div className="py-2">
-                                            <input type="date"  id="test-date" defaultValue={new Date(item.reporting_date).toISOString().split('T')[0]}  />
+                                            <input type="date"  id="test-date" defaultValue={new Date().toISOString().split('T')[0]}  />
                                         </div>
                                         <div className="border-x-2 h-full border-black">
-                                            <h1 className="text-right py-2 pr-2">{item?.price?.toFixed(2)}</h1>
+                                            <h1 className="text-right py-2 pr-2">{Number(item.stockItem.standardSellingPrice).toFixed(2)}</h1>
                                         </div>
                                         <div className="grid grid-cols-[30px_1fr] px-2 justify-center items-center gap-1 py-2">
                                             <AlertAppDialog name={
@@ -76,10 +62,9 @@ function TestListView(){
                                             />
                                             {
                                                 // Collect Specimen will only work when payment is done
-                                                item.specimen_status ? 
+                                              
                                                     <div className="bg-blue-600 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Confirm Test</div>
-                                                :
-                                                <div className="bg-emerald-400 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Collect Sepcimen</div>
+                                                // <div className="bg-emerald-400 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Collect Sepcimen</div>
                                             }
                                         </div>
                                     </div>
@@ -106,18 +91,14 @@ function TestListView(){
 }
 
 
-function TestView(){
+function TestView({data}:{data?:IBooking}){
     return (
         <div>
             <div className="grid grid-cols-2">
                 <div className="grid grid-rows-1 gap-4 text-app-base">
                     <div className="grid grid-cols-[140px_1fr] gap-4">
                         <div className="font-bold">Patient Name:</div>
-                        <div>Aaron Sharma</div>
-                    </div>
-                    <div className="grid grid-cols-[140px_1fr] gap-4">
-                        <div className="font-bold">Total Test:</div>
-                        <div>3</div>
+                        <div className="text-black">{data?.voucherPatient.patient.name}</div>
                     </div>
                 </div>
                 <div className="grid grid-cols-[80px_1fr]">
@@ -125,7 +106,7 @@ function TestView(){
                     <div>Flat 500</div>
                 </div>
             </div>
-            <TestListView/>
+            <TestListView data={data}/>
         </div>
       
         
@@ -133,7 +114,9 @@ function TestView(){
 }
 
 
-function PatientView(){
+function PatientView({data}:{data?:IBooking}){
+
+
     return(
          <div className=" text-app-base py-3 px-4">
           <div className="flex items-center gap-2">
@@ -141,20 +124,20 @@ function PatientView(){
           </div>
           <div className="flex justify-between mb-2 gap-3">
             <div className="flex flex-row items-center h-10 w-full gap-3">
-              <div className="w-full text-center font-semibold text-lg"><span className="text-gray-900 text-app-base font-medium">Aaron Sharma</span></div>
+              <div className="w-full text-center font-semibold text-lg"><span className="text-gray-900 text-app-base font-medium">{data?.voucherPatient.patient.name}</span></div>
             </div>
           </div>
           <div className="flex justify-center h-9 items-center gap-3">
               <div>
-                <span className="text-gray-900 font-medium">32</span>
+                <span className="text-gray-900 font-medium">{data?.voucherPatient.patient.age}</span>
               </div>
               <div className="border-1 border-black h-full"/>
               <div>
-                <span className="text-gray-900 font-medium">male</span>
+                <span className="text-gray-900 font-medium">{data?.voucherPatient.patient.gender}</span>
               </div>
               <div className="border-1 border-black h-full"/>
               <div>
-                <span className="text-gray-900 font-medium">999-000-5555</span>
+                <span className="text-gray-900 font-medium">{data?.voucherPatient.patient.contactNo}</span>
               </div>
           </div>
           <div className="flex my-6 py-2 flex-col">
@@ -163,7 +146,7 @@ function PatientView(){
                 Physician:
               </div>
               <div className="font-semibold">
-                <span className="text-gray-900 font-medium">Dr Ambika Rao</span>
+                <span className="text-gray-900 font-medium">{data?.voucherPatient.physician?.name}</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -171,7 +154,7 @@ function PatientView(){
                 Referred By:
               </div>
               <div className="font-semibold">
-                <span className="text-gray-900 font-medium">Mr. Rajesh kumar</span>
+                <span className="text-gray-900 font-medium">{data?.voucherPatient.agent?.name}</span>
               </div>
             </div>
           </div>
@@ -246,10 +229,10 @@ function PaymentView(){
     )
 }
 
-function PatientBillingDetail(){
+function PatientBillingDetail({data}:{data?:IBooking}){
     return(
         <div>
-            <PatientView/>
+            <PatientView data={data}/>
             <PaymentView/>
             <div className="mt-6  w-full">
                 <Button  className={`text-center cursor-pointer !py-3 text-lg w-full`}>
@@ -260,16 +243,20 @@ function PatientBillingDetail(){
     )
 }
 
+interface BookingDetailProps {
+    data?: IBooking
+}
 
 
-const BookingDetails = () => {
+const BookingDetails:React.FC<BookingDetailProps> = ({data}) => {
     return(
         <div className="py-4 px-4">
-            <BookingDetailsHeader/>
+            <BookingDetailsHeader data={data} />
             <div className="py-3 pt-10 px-6 gap-4 grid grid-cols-[1fr_430px]">
-                <TestView/>
-                <PatientBillingDetail/>
+                <TestView data={data}/>
+                <PatientBillingDetail data={data}/>
             </div>
+            <InvoicesFeature/>
         </div>
     )
 }

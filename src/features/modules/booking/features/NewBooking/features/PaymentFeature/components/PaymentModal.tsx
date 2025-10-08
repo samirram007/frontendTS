@@ -4,9 +4,9 @@ import { useContext } from "react"
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { PathoContext } from "@/features/modules/booking/contexts/PathoContext";
-import { PaymentTypeSchema } from "@/features/modules/booking/data/schema";
 import BookingAmountDetails from "./booking-amount-details";
 import PaymentMethodSelected from "./payment-method-select";
+import { PaymentTypeSchema } from "../data/schema";
 
 
 
@@ -26,21 +26,26 @@ function PaymentNullScreen(){
 
 
 
+interface PayAndBookInterface{
+    open: boolean,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    button: any
+}
 
 
 
 
 
-
-export const PayAndBookModal = ({button}:{button:any}) =>{
+export const PayAndBookModal: React.FC<PayAndBookInterface> = ({open,setOpen, button}) =>{
 
     const {paymentMethod,setPaymentMethod,setAmountToBePaid,discountedAmount} = useContext(PathoContext);
 
     return(
         <>
-            <Dialog onOpenChange={()=>{
+            <Dialog open={open} onOpenChange={(value)=>{
                 setPaymentMethod(PaymentTypeSchema.CASH);
                 setAmountToBePaid(discountedAmount);
+                setOpen(value);
             }}>
                 <DialogTrigger asChild>
                     {button}

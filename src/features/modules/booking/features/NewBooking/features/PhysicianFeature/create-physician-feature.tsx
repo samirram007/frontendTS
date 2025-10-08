@@ -54,9 +54,6 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                             }
                     });
                 }
-                if(action != "Edit" && patient?.physician != null){
-                    setPatient({...patient,physician:undefined});
-                }
             }}>
                 <DialogTrigger asChild>
                     {button}
@@ -96,14 +93,14 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                         }}
                         validationSchema={physicianSchema}
                         initialValues={{
-                            id: patient?.physician?.id,
-                            name: patient?.physician?.name || "",
-                            contactNo: patient?.physician?.contactNo || "",
-                            accountLedgerId: patient?.physician?.accountLedgerId || 0,
-                            email: patient?.physician?.email,
-                            degree: patient?.physician?.degree || "",
-                            disciplineId: String(patient?.physician?.disciplineId) || 0,
-                            status: patient?.physician?.status || true,
+                            id: action != "Edit" ? 0 : patient?.physician?.id,
+                            name: action != "Edit" ? "" : patient?.physician?.name || "",
+                            contactNo: action != "Edit" ? "" : patient?.physician?.contactNo || "",
+                            accountLedgerId: action != "Edit" ? 0 : patient?.physician?.accountLedgerId || 0,
+                            email: action != "Edit" ? undefined : patient?.physician?.email,
+                            degree: action != "Edit" ? "" : patient?.physician?.degree || "",
+                            disciplineId: action != "Edit" ? 0 : String(patient?.physician?.disciplineId) || 0,
+                            status: action != "Edit" ? true : patient?.physician?.status || true,
                         }}
                     >
                         {() => (

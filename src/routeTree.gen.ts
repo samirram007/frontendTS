@@ -34,6 +34,7 @@ import { Route as AuthenticatedTransactionsBookingIndexRouteImport } from './rou
 import { Route as AuthenticatedReportsStock_summaryIndexRouteImport } from './routes/_authenticated/reports/stock_summary/index'
 import { Route as AuthenticatedReportsProfit_lossIndexRouteImport } from './routes/_authenticated/reports/profit_loss/index'
 import { Route as AuthenticatedReportsBalance_sheetIndexRouteImport } from './routes/_authenticated/reports/balance_sheet/index'
+import { Route as AuthenticatedTransactionsVouchersLayoutRouteImport } from './routes/_authenticated/transactions/vouchers/_layout'
 import { Route as AuthenticatedTransactionsBookingViewRouteImport } from './routes/_authenticated/transactions/booking/view'
 import { Route as AuthenticatedTransactionsBookingCreateBookingRouteImport } from './routes/_authenticated/transactions/booking/create-booking'
 import { Route as AuthenticatedTransactionsBookingIdRouteImport } from './routes/_authenticated/transactions/booking/$id'
@@ -419,6 +420,11 @@ const AuthenticatedReportsBalance_sheetIndexRoute =
     id: '/reports/balance_sheet/',
     path: '/reports/balance_sheet/',
     getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTransactionsVouchersLayoutRoute =
+  AuthenticatedTransactionsVouchersLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedTransactionsVouchersRoute,
   } as any)
 const AuthenticatedTransactionsBookingViewRoute =
   AuthenticatedTransactionsBookingViewRouteImport.update({
@@ -1027,6 +1033,7 @@ export interface FileRoutesByFullPath {
   '/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
   '/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
   '/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
+  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersLayoutRouteWithChildren
   '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
@@ -1142,6 +1149,7 @@ export interface FileRoutesByTo {
   '/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
   '/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
   '/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
+  '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersLayoutIndexRoute
   '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
@@ -1255,6 +1263,8 @@ export interface FileRoutesById {
   '/_authenticated/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
   '/_authenticated/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
   '/_authenticated/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
+  '/_authenticated/transactions/vouchers': typeof AuthenticatedTransactionsVouchersRouteWithChildren
+  '/_authenticated/transactions/vouchers/_layout': typeof AuthenticatedTransactionsVouchersLayoutRouteWithChildren
   '/_authenticated/reports/balance_sheet/': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/_authenticated/reports/profit_loss/': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/_authenticated/reports/stock_summary/': typeof AuthenticatedReportsStock_summaryIndexRoute
@@ -1384,6 +1394,7 @@ export interface FileRouteTypes {
     | '/transactions/booking/$id'
     | '/transactions/booking/create-booking'
     | '/transactions/booking/view'
+    | '/transactions/vouchers'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/reports/stock_summary'
@@ -1499,6 +1510,7 @@ export interface FileRouteTypes {
     | '/transactions/booking/$id'
     | '/transactions/booking/create-booking'
     | '/transactions/booking/view'
+    | '/transactions/vouchers'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/reports/stock_summary'
@@ -1611,6 +1623,8 @@ export interface FileRouteTypes {
     | '/_authenticated/transactions/booking/$id'
     | '/_authenticated/transactions/booking/create-booking'
     | '/_authenticated/transactions/booking/view'
+    | '/_authenticated/transactions/vouchers'
+    | '/_authenticated/transactions/vouchers/_layout'
     | '/_authenticated/reports/balance_sheet/'
     | '/_authenticated/reports/profit_loss/'
     | '/_authenticated/reports/stock_summary/'
@@ -1999,6 +2013,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/balance_sheet'
       preLoaderRoute: typeof AuthenticatedReportsBalance_sheetIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/transactions/vouchers/_layout': {
+      id: '/_authenticated/transactions/vouchers/_layout'
+      path: '/transactions/vouchers'
+      fullPath: '/transactions/vouchers'
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutRouteImport
+      parentRoute: typeof AuthenticatedTransactionsVouchersRoute
     }
     '/_authenticated/transactions/booking/view': {
       id: '/_authenticated/transactions/booking/view'
@@ -3424,6 +3445,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedTransactionsBookingIdRoute: typeof AuthenticatedTransactionsBookingIdRoute
   AuthenticatedTransactionsBookingCreateBookingRoute: typeof AuthenticatedTransactionsBookingCreateBookingRoute
   AuthenticatedTransactionsBookingViewRoute: typeof AuthenticatedTransactionsBookingViewRoute
+  AuthenticatedTransactionsVouchersRoute: typeof AuthenticatedTransactionsVouchersRouteWithChildren
   AuthenticatedReportsBalance_sheetIndexRoute: typeof AuthenticatedReportsBalance_sheetIndexRoute
   AuthenticatedReportsProfit_lossIndexRoute: typeof AuthenticatedReportsProfit_lossIndexRoute
   AuthenticatedReportsStock_summaryIndexRoute: typeof AuthenticatedReportsStock_summaryIndexRoute
@@ -3460,6 +3482,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
     AuthenticatedTransactionsBookingCreateBookingRoute,
   AuthenticatedTransactionsBookingViewRoute:
     AuthenticatedTransactionsBookingViewRoute,
+  AuthenticatedTransactionsVouchersRoute:
+    AuthenticatedTransactionsVouchersRouteWithChildren,
   AuthenticatedReportsBalance_sheetIndexRoute:
     AuthenticatedReportsBalance_sheetIndexRoute,
   AuthenticatedReportsProfit_lossIndexRoute:

@@ -1,6 +1,3 @@
-// import { Link } from "@tanstack/react-router";
-// import { ArrowLeft } from "lucide-react";
-
 import NewBookingFeature from "../features/NewBooking/NewBookingFeature";
 
 
@@ -47,14 +44,6 @@ function BookingHeadRight(){
 const NewBooking = () => {
     return (
         <div className="text-sm py-5">
-            {/* <div className="grid mb-4 grid-cols-[100px_1fr]">
-                <Link to={'/transactions/booking'} className="font-semibold flex flex-wrap underline underline-offset-2 gap-1 items-center text-blue-500">
-                    <ArrowLeft size={17} />
-                    Go Back
-                </Link>
-                <div className="text-xl text-center text-dark items-center justify-center font-semibold">Test Booking</div>
-            </div> */}
-
             <div className="grid mb-8 w-full border-b-1 border-gray-300 pb-3 grid-cols-[300px_1fr] gap-6">
                 <BookingHead/>
                 <BookingHeadRight/>

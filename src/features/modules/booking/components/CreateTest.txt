@@ -1,11 +1,9 @@
 import { useContext, useRef } from "react";
-import LabTestSearch from "./LabTestSearch";
 import AppointmentSearch from "./AppointmentIdSearch";
 import DiscountSelect from "./Discount/DiscountSelect";
 import { MdDeleteOutline } from "react-icons/md";
 import { toast } from "sonner";
 import { PathoContext } from "../contexts/PathoContext";
-import { TestBookingContext } from "../contexts/TestBookingContext/TestBookingContext";
 import type { DiscountType, ITestItem, ITestSchema } from "../data/schema";
 import { convertReportingDate } from "../utils/date-utils";
 import { AlertAppDialog } from "../shared/components/AlertAppDialog";
@@ -23,7 +21,6 @@ export interface ITestSelection{
 const CreateTest = () =>{
 
     const {setTotalAmount,totalAmount,discountDetail,setDiscountAmount,setDiscountedAmount,setNetAmount} = useContext(PathoContext);
-    const {selectedLabTest,setSelectedLabTest} = useContext(TestBookingContext);
     const totalTestAmountRef = useRef<number>(totalAmount);
 
 

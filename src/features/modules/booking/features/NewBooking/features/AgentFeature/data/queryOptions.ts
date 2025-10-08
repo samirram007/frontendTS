@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { getAgentService, storeAgentService, updateAgentService } from "./api"
 import type { IAgent } from "./schema"
+import { showErrors } from "@/utils/dataClient"
 
 
 
@@ -21,7 +22,8 @@ export function useAgentMutation() {
             return await storeAgentService(data)
         },
         onError: (error) => {
-            console.error("Stock Item mutation failed:", error)
+            showErrors(error);
+            
         },
     })
 }

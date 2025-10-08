@@ -53,12 +53,6 @@ export interface ITestSchema{
 
 
 // Payment Enum
-export enum PaymentTypeSchema{
-  CASH = "CASH",
-  DEBIT_CARD = "DEBIT CARD",
-  CREDIT_CARD = "CREDIT CARD",
-  UPI = "UPI"
-}
 
 export interface ITestItem{
     id:number,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PathoContext } from "./PathoContext";
-import { PaymentTypeSchema, type AgentInterface, type IPatientSchema, type PhysicianInterface } from "../data/schema";
+import { type AgentInterface, type IPatientSchema, type PhysicianInterface } from "../data/schema";
+import { PaymentTypeSchema } from "../features/NewBooking/features/PaymentFeature/data/schema";
 
 
 

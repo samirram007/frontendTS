@@ -14,7 +14,11 @@ import PathoProvider from "../../contexts/PathProvider";
 import { useLabTestItem } from "./features/LabTestsFeature/context/lab-test-context";
 import { usePatient } from "../../contexts/patient-context";
 import { ErrorToast } from "../../utils/error-response";
-import { PayAndBookModal } from "./features/PaymentFeature/components/PaymentModal";
+import { useBookingMutation } from "./data/queryOptions";
+import type { IBookingTest } from "./data/schema";
+import { useBookingTest } from "./context/new-booking-context";
+import InvoiceFeatureModal from "./features/InvoiceFeature/invoice-feature-modal";
+import { useNavigate } from "@tanstack/react-router";
 
 
 
@@ -24,10 +28,37 @@ const NewBookingFeature = () => {
 
     const {selectTestItemList} = useLabTestItem();
     const {patient} = usePatient();
+    const {setBookingData} = useBookingTest();
+     const navigate = useNavigate();
+    const {mutate} = useBookingMutation();
+
 
     const handleValidatePay = () =>{
-        ErrorToast.launchErrorToast("Please select Patient and Test");
+        if(selectTestItemList.length == 0){
+            ErrorToast.launchErrorToast("Please select Patient and Test");
+            return;
+        }
+        if(patient?.id != undefined && selectTestItemList){
+            const testBookingObject: IBookingTest = {
+                bookingDate: new Date(),
+                patientId: patient?.id,
+                agentId: patient.agent?.id,
+                physicianId: patient.physician?.id,
+                tests: selectTestItemList
+            }
+            
+            mutate(testBookingObject,{
+                onSuccess:(data)=>{
+                    const bookingId = data.data.data.id;
+                    setBookingData(data.data);
+                    navigate({ to: `/transactions/booking/${bookingId}` });
+                }
+            });
+        }
     }
+
+
+
 
 
     return (
@@ -71,24 +102,19 @@ const NewBookingFeature = () => {
                     <PaymentDetail/>
                     <div className="mt-6  w-full">
                         <PathoProvider>
-                            {
-                                selectTestItemList.length == 0 || patient == null ?
-                                    <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                        Pay & Book
-                                    </Button>
-                                    :
-                                    <PayAndBookModal
-                                        button={
-                                            <Button className="text-center cursor-pointer !py-3 text-lg w-full">
-                                                Pay & Book
-                                            </Button>
-                                        }
-                                    />
-                            }
+                            <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                                Book & Pay
+                            </Button>
                         </PathoProvider>
                     </div>
                 </div>
-
+                <div>
+                    <InvoiceFeatureModal
+                        button={
+                            <span className="text-blue-500 underline underline-offset-1">Payment Invoice</span>
+                        }
+                    />
+                </div>
             </div>
         </div>
 

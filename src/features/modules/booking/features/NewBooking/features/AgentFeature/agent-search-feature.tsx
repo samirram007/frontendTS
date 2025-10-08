@@ -1,11 +1,12 @@
-import { Plus, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
-import AgentForm from "./create-agent-feature";
+// import AgentForm from "./create-agent-feature";
 import { useAgent } from "./context/agent-context";
 import type { IAgent } from "./data/schema";
 import { useGetAgentListQuery } from "./data/queryOptions";
 import { usePatient } from "@/features/modules/booking/contexts/patient-context";
 import type { IPatient } from "../CreatePatientFeature/data/schema";
+import { useClickOutside } from "@/features/modules/booking/utils/outsideClickHandler";
 
 
 
@@ -19,6 +20,8 @@ const AgentSearchFeature = () => {
     const [query, setQuery] = useState("");
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
     const [filterPatient,setFilterPatient] = useState<IAgent[]>([]);
+
+    const dropdownRef = useClickOutside(()=> {setShowDropdown(false); setQuery("")});
 
     useEffect(()=>{
         if(isSuccess){
@@ -59,6 +62,7 @@ const AgentSearchFeature = () => {
                     name="agent_search"
                     placeholder="Search Agent by name, contact, or ID..."
                     value={query}
+                    autoComplete="off"
                     onChange={(e) => {
                         setQuery(e.target.value)
                         if (e.target.value == '') {
@@ -70,7 +74,7 @@ const AgentSearchFeature = () => {
                 />
                 <Search size={16} className="cursor-pointer" />
                 {showDropdown && query && (
-                    <div className="absolute top-full left-0 w-full mt-1 bg-white border rounded-lg shadow-md z-10 max-h-60 overflow-y-auto">
+                    <div ref={dropdownRef} className="absolute top-full left-0 w-full mt-1 bg-white border rounded-lg shadow-md z-10 max-h-60 overflow-y-auto">
                         { filteredPatients.length > 0 ? (
                             filteredPatients.map((agent) => (
                                 <div
@@ -87,8 +91,9 @@ const AgentSearchFeature = () => {
                             ))
                         ) : (
                             <div className="px-3 py-2 flex justify-center items-center gap-1 text-sm text-slate-500">
-                                <AgentForm button={<span className="text-sm text-blue-500 cursor-pointer">Create Agent</span>} />
-                                <Plus size={16} className="text-blue-500"/>
+                                No Agent Found
+                                {/* <AgentForm button={<span className="text-sm text-blue-500 cursor-pointer">Create Agent</span>} />
+                                <Plus size={16} className="text-blue-500"/> */}
                             </div>
                         )}
                     </div>

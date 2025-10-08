@@ -10,8 +10,8 @@ export async function storePatientService(payload: IPatient):Promise<AxiosRespon
         const response = await axiosClient.post('/patients',payload);
         return response;
     }catch(error:unknown){
-        if(axios.isAxiosError(error) && error.response){
-            return error.response as AxiosResponse<IPatientResponseDetail>;
+        if(axios.isAxiosError(error)){
+            throw error
         }
         throw new Error("Network Error");
     }

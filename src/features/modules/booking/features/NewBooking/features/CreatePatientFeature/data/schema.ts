@@ -12,26 +12,20 @@ export type AddressType = {
   line1: string,
   line2: string,
   city: string,
-  state_id: number,
-  is_primary: boolean,
-  postal_code: string,
+  landmark?: string,
+  stateId?: number,
+  countryId?: number,
+  isPrimary: boolean,
+  postalCode: string,
   latitude?: any,
   longitude?: any,
+  addressType?: string,
+  addressable?: {
+    id: number,
+    type: string
+  }
 }
 
-
-// Patient Request Interface for API
-export interface IPatientRequest{
-    id?:number,
-    name: string,
-    status: StatusType,
-    gender: GenderType,
-    contact_no: string,
-    account_ledger_id: number,
-    agent_id: number,
-    physician_id: number,
-    address?: AddressType
-}
 
 //  Patient Interface for form to create and edit
 export interface IPatient{
@@ -123,9 +117,10 @@ export const patientRequestSchema = yup.object({
       line1: yup.string().optional(),
       line2: yup.string().optional(),
       city: yup.string().optional(),
-      state_id: yup.number().optional(),
-      postal_code: yup.string().optional(),
-      is_primary: yup.boolean().optional(),
+      landmark: yup.string().optional(),
+      stateId: yup.number().optional(),
+      postalCode: yup.string().optional(),
+      isPrimary: yup.boolean().optional(),
     })
     .optional(),
 });

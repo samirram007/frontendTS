@@ -1,6 +1,6 @@
-import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 import { ErrorToast } from "@/features/modules/booking/utils/error-response";
 import { useState } from "react";
+import { usePayment } from "../context/payment-context";
 
 export default function BookingAmountDetails(){
 

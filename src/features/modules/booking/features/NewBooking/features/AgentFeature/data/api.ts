@@ -11,7 +11,7 @@ export async function storeAgentService(payload: IAgent):Promise<AxiosResponse<I
         return response;
     }catch(error:unknown){
         if(axios.isAxiosError(error) && error.response){
-            return error.response as AxiosResponse<IAgentResponse>;
+            throw error.response?.data
         }
         throw new Error("Network Error");
     }

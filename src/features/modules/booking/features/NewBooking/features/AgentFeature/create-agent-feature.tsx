@@ -8,6 +8,7 @@ import {  useState } from "react";
 import { usePatient } from "@/features/modules/booking/contexts/patient-context";
 import type { IPatient } from "../CreatePatientFeature/data/schema";
 import { useQueryClient } from "@tanstack/react-query";
+import { showErrors } from "@/utils/dataClient";
 
 interface AgentFormInterface{
     button: React.ReactElement | string,
@@ -24,12 +25,7 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
 
     return (
         <>
-            <Dialog open={open} onOpenChange={(value)=>{
-                setOpen(value);
-                if(action != "Edit" && patient?.agent != undefined){
-                    setPatient({...patient,agent: undefined});
-                }
-            }}>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     {button}
                 </DialogTrigger>
@@ -45,7 +41,10 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
                         onSubmit={(values, action) => {
                             mutate(values,{
                                 onSuccess:(data)=>{
-                                    if(data){
+                                    if(data.data.success == false){
+                                        showErrors(data.data);
+                                        return;
+                                    }
                                         setPatient((prev)=>{
                                             return prev ?
                                                 {
@@ -56,7 +55,6 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
                                                 { agent: data.data.data } as IPatient;
                                         });
                                         setOpen(false);
-                                    }
                                     queryClient.invalidateQueries({ queryKey: ['get-agent-query'] })
                                 }
                             });
@@ -68,13 +66,13 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
                         validationSchema={agentSchema}
                         
                         initialValues={{
-                            id: patient?.agent?.id,
-                            name: patient?.agent?.name || "",
-                            contactNo: patient?.agent?.contactNo || "",
-                            email: patient?.agent?.email,
-                            commissionPercent: patient?.agent?.commissionPercent || 0.00,
-                            accountLedgerId: patient?.agent?.accountLedgerId || 0,
-                            status: patient?.agent?.status || true
+                            id: action != "Edit" ? undefined : patient?.agent?.id,
+                            name: action != "Edit" ? "" : patient?.agent?.name || "",
+                            contactNo: action != "Edit" ? "" : patient?.agent?.contactNo || "",
+                            email: action != "Edit" ? "" : patient?.agent?.email,
+                            commissionPercent: action != "Edit" ? 0.00 : patient?.agent?.commissionPercent || 0.00,
+                            accountLedgerId: action != "Edit" ? 0 : patient?.agent?.accountLedgerId || 0,
+                            status: action != "Edit" ? true : patient?.agent?.status || true
                         }}
                     >
                         {({}) => (

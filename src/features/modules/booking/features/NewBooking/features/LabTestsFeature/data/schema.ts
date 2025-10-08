@@ -61,5 +61,6 @@ export interface ITestItem{
     testDate: Date,
     reportDate: Date,
     amount: string,
-    status: string,
+    status?: string,
 }
+
