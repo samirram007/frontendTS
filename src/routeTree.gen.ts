@@ -30,10 +30,14 @@ import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_a
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedauthProfileRouteImport } from './routes/_authenticated/(auth)/profile'
 import { Route as AuthenticatedTransactionsDay_bookIndexRouteImport } from './routes/_authenticated/transactions/day_book/index'
+import { Route as AuthenticatedTransactionsBookingIndexRouteImport } from './routes/_authenticated/transactions/booking/index'
 import { Route as AuthenticatedReportsStock_summaryIndexRouteImport } from './routes/_authenticated/reports/stock_summary/index'
 import { Route as AuthenticatedReportsProfit_lossIndexRouteImport } from './routes/_authenticated/reports/profit_loss/index'
 import { Route as AuthenticatedReportsBalance_sheetIndexRouteImport } from './routes/_authenticated/reports/balance_sheet/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutRouteImport } from './routes/_authenticated/transactions/vouchers/_layout'
+import { Route as AuthenticatedTransactionsBookingViewRouteImport } from './routes/_authenticated/transactions/booking/view'
+import { Route as AuthenticatedTransactionsBookingCreateBookingRouteImport } from './routes/_authenticated/transactions/booking/create-booking'
+import { Route as AuthenticatedTransactionsBookingIdRouteImport } from './routes/_authenticated/transactions/booking/$id'
 import { Route as AuthenticatedMastersStatutoryLayoutRouteImport } from './routes/_authenticated/masters/statutory/_layout'
 import { Route as AuthenticatedMastersPayrollLayoutRouteImport } from './routes/_authenticated/masters/payroll/_layout'
 import { Route as AuthenticatedMastersPartyLayoutRouteImport } from './routes/_authenticated/masters/party/_layout'
@@ -403,6 +407,12 @@ const AuthenticatedTransactionsDay_bookIndexRoute =
     path: '/transactions/day_book/',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
+const AuthenticatedTransactionsBookingIndexRoute =
+  AuthenticatedTransactionsBookingIndexRouteImport.update({
+    id: '/transactions/booking/',
+    path: '/transactions/booking/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedReportsStock_summaryIndexRoute =
   AuthenticatedReportsStock_summaryIndexRouteImport.update({
     id: '/reports/stock_summary/',
@@ -425,6 +435,24 @@ const AuthenticatedTransactionsVouchersLayoutRoute =
   AuthenticatedTransactionsVouchersLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => AuthenticatedTransactionsVouchersRoute,
+  } as any)
+const AuthenticatedTransactionsBookingViewRoute =
+  AuthenticatedTransactionsBookingViewRouteImport.update({
+    id: '/transactions/booking/view',
+    path: '/transactions/booking/view',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTransactionsBookingCreateBookingRoute =
+  AuthenticatedTransactionsBookingCreateBookingRouteImport.update({
+    id: '/transactions/booking/create-booking',
+    path: '/transactions/booking/create-booking',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedTransactionsBookingIdRoute =
+  AuthenticatedTransactionsBookingIdRouteImport.update({
+    id: '/transactions/booking/$id',
+    path: '/transactions/booking/$id',
+    getParentRoute: () => AuthenticatedRoute,
   } as any)
 const AuthenticatedMastersStatutoryLayoutRoute =
   AuthenticatedMastersStatutoryLayoutRouteImport.update({
@@ -1046,10 +1074,14 @@ export interface FileRoutesByFullPath {
   '/masters/party': typeof AuthenticatedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof AuthenticatedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof AuthenticatedMastersStatutoryLayoutRoute
+  '/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
+  '/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
+  '/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
   '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersLayoutRouteWithChildren
   '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/transactions/booking': typeof AuthenticatedTransactionsBookingIndexRoute
   '/transactions/day_book': typeof AuthenticatedTransactionsDay_bookIndexRoute
   '/transactions/vouchers/': typeof AuthenticatedTransactionsVouchersLayoutIndexRoute
   '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
@@ -1162,10 +1194,14 @@ export interface FileRoutesByTo {
   '/masters/party': typeof AuthenticatedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof AuthenticatedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof AuthenticatedMastersStatutoryLayoutRoute
+  '/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
+  '/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
+  '/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
   '/transactions/vouchers': typeof AuthenticatedTransactionsVouchersLayoutIndexRoute
   '/reports/balance_sheet': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/reports/stock_summary': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/transactions/booking': typeof AuthenticatedTransactionsBookingIndexRoute
   '/transactions/day_book': typeof AuthenticatedTransactionsDay_bookIndexRoute
   '/masters/accounts/account_group': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/masters/accounts/account_ledger': typeof AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
@@ -1274,11 +1310,15 @@ export interface FileRoutesById {
   '/_authenticated/masters/payroll/_layout': typeof AuthenticatedMastersPayrollLayoutRouteWithChildren
   '/_authenticated/masters/statutory': typeof AuthenticatedMastersStatutoryRouteWithChildren
   '/_authenticated/masters/statutory/_layout': typeof AuthenticatedMastersStatutoryLayoutRoute
+  '/_authenticated/transactions/booking/$id': typeof AuthenticatedTransactionsBookingIdRoute
+  '/_authenticated/transactions/booking/create-booking': typeof AuthenticatedTransactionsBookingCreateBookingRoute
+  '/_authenticated/transactions/booking/view': typeof AuthenticatedTransactionsBookingViewRoute
   '/_authenticated/transactions/vouchers': typeof AuthenticatedTransactionsVouchersRouteWithChildren
   '/_authenticated/transactions/vouchers/_layout': typeof AuthenticatedTransactionsVouchersLayoutRouteWithChildren
   '/_authenticated/reports/balance_sheet/': typeof AuthenticatedReportsBalance_sheetIndexRoute
   '/_authenticated/reports/profit_loss/': typeof AuthenticatedReportsProfit_lossIndexRoute
   '/_authenticated/reports/stock_summary/': typeof AuthenticatedReportsStock_summaryIndexRoute
+  '/_authenticated/transactions/booking/': typeof AuthenticatedTransactionsBookingIndexRoute
   '/_authenticated/transactions/day_book/': typeof AuthenticatedTransactionsDay_bookIndexRoute
   '/_authenticated/transactions/vouchers/_layout/': typeof AuthenticatedTransactionsVouchersLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/account_group': typeof AuthenticatedMastersAccountsLayoutAccount_groupRouteWithChildren
@@ -1407,10 +1447,14 @@ export interface FileRouteTypes {
     | '/masters/party'
     | '/masters/payroll'
     | '/masters/statutory'
+    | '/transactions/booking/$id'
+    | '/transactions/booking/create-booking'
+    | '/transactions/booking/view'
     | '/transactions/vouchers'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/reports/stock_summary'
+    | '/transactions/booking'
     | '/transactions/day_book'
     | '/transactions/vouchers/'
     | '/masters/accounts/account_group'
@@ -1523,10 +1567,14 @@ export interface FileRouteTypes {
     | '/masters/party'
     | '/masters/payroll'
     | '/masters/statutory'
+    | '/transactions/booking/$id'
+    | '/transactions/booking/create-booking'
+    | '/transactions/booking/view'
     | '/transactions/vouchers'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/reports/stock_summary'
+    | '/transactions/booking'
     | '/transactions/day_book'
     | '/masters/accounts/account_group'
     | '/masters/accounts/account_ledger'
@@ -1634,11 +1682,15 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/payroll/_layout'
     | '/_authenticated/masters/statutory'
     | '/_authenticated/masters/statutory/_layout'
+    | '/_authenticated/transactions/booking/$id'
+    | '/_authenticated/transactions/booking/create-booking'
+    | '/_authenticated/transactions/booking/view'
     | '/_authenticated/transactions/vouchers'
     | '/_authenticated/transactions/vouchers/_layout'
     | '/_authenticated/reports/balance_sheet/'
     | '/_authenticated/reports/profit_loss/'
     | '/_authenticated/reports/stock_summary/'
+    | '/_authenticated/transactions/booking/'
     | '/_authenticated/transactions/day_book/'
     | '/_authenticated/transactions/vouchers/_layout/'
     | '/_authenticated/masters/accounts/_layout/account_group'
@@ -2002,6 +2054,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/transactions/booking/': {
+      id: '/_authenticated/transactions/booking/'
+      path: '/transactions/booking'
+      fullPath: '/transactions/booking'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingIndexRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/reports/stock_summary/': {
       id: '/_authenticated/reports/stock_summary/'
       path: '/reports/stock_summary'
@@ -2029,6 +2088,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/transactions/vouchers'
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersRoute
+    }
+    '/_authenticated/transactions/booking/view': {
+      id: '/_authenticated/transactions/booking/view'
+      path: '/transactions/booking/view'
+      fullPath: '/transactions/booking/view'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingViewRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/transactions/booking/create-booking': {
+      id: '/_authenticated/transactions/booking/create-booking'
+      path: '/transactions/booking/create-booking'
+      fullPath: '/transactions/booking/create-booking'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingCreateBookingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/transactions/booking/$id': {
+      id: '/_authenticated/transactions/booking/$id'
+      path: '/transactions/booking/$id'
+      fullPath: '/transactions/booking/$id'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingIdRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/masters/statutory/_layout': {
       id: '/_authenticated/masters/statutory/_layout'
@@ -3538,10 +3618,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedMastersPartyRoute: typeof AuthenticatedMastersPartyRouteWithChildren
   AuthenticatedMastersPayrollRoute: typeof AuthenticatedMastersPayrollRouteWithChildren
   AuthenticatedMastersStatutoryRoute: typeof AuthenticatedMastersStatutoryRouteWithChildren
+  AuthenticatedTransactionsBookingIdRoute: typeof AuthenticatedTransactionsBookingIdRoute
+  AuthenticatedTransactionsBookingCreateBookingRoute: typeof AuthenticatedTransactionsBookingCreateBookingRoute
+  AuthenticatedTransactionsBookingViewRoute: typeof AuthenticatedTransactionsBookingViewRoute
   AuthenticatedTransactionsVouchersRoute: typeof AuthenticatedTransactionsVouchersRouteWithChildren
   AuthenticatedReportsBalance_sheetIndexRoute: typeof AuthenticatedReportsBalance_sheetIndexRoute
   AuthenticatedReportsProfit_lossIndexRoute: typeof AuthenticatedReportsProfit_lossIndexRoute
   AuthenticatedReportsStock_summaryIndexRoute: typeof AuthenticatedReportsStock_summaryIndexRoute
+  AuthenticatedTransactionsBookingIndexRoute: typeof AuthenticatedTransactionsBookingIndexRoute
   AuthenticatedTransactionsDay_bookIndexRoute: typeof AuthenticatedTransactionsDay_bookIndexRoute
 }
 
@@ -3568,6 +3652,12 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
     AuthenticatedMastersPayrollRouteWithChildren,
   AuthenticatedMastersStatutoryRoute:
     AuthenticatedMastersStatutoryRouteWithChildren,
+  AuthenticatedTransactionsBookingIdRoute:
+    AuthenticatedTransactionsBookingIdRoute,
+  AuthenticatedTransactionsBookingCreateBookingRoute:
+    AuthenticatedTransactionsBookingCreateBookingRoute,
+  AuthenticatedTransactionsBookingViewRoute:
+    AuthenticatedTransactionsBookingViewRoute,
   AuthenticatedTransactionsVouchersRoute:
     AuthenticatedTransactionsVouchersRouteWithChildren,
   AuthenticatedReportsBalance_sheetIndexRoute:
@@ -3576,6 +3666,8 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
     AuthenticatedReportsProfit_lossIndexRoute,
   AuthenticatedReportsStock_summaryIndexRoute:
     AuthenticatedReportsStock_summaryIndexRoute,
+  AuthenticatedTransactionsBookingIndexRoute:
+    AuthenticatedTransactionsBookingIndexRoute,
   AuthenticatedTransactionsDay_bookIndexRoute:
     AuthenticatedTransactionsDay_bookIndexRoute,
 }

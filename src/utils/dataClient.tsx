@@ -91,3 +91,13 @@ const errorHandler = (error: any) => {
         toast.error('Network or server error occurred.');
     }
 };
+
+
+export function showErrors(errorResponse:any) {
+
+  Object.entries(errorResponse.errors).forEach(([field, messages]) => {
+    (messages as String[]).forEach((msg: any) => {
+      toast.error(`${field}: ${msg}`);
+    });
+  });
+}

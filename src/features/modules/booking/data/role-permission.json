@@ -1,0 +1,46 @@
+{
+  "roles": [
+    {
+      "role_id": "R001",
+      "role_name": "Admin",
+      "modules": [
+        {
+          "module_id": "M001",
+          "module_name": "Booking",
+          "processes": [
+            {
+              "process_id": "P001",
+              "process_name": "New Booking",
+              "actions": [
+                { "action_id": "A001", "action_name": "Create Booking", "allowed": true },
+                { "action_id": "A002", "action_name": "Create Patient", "allowed": true },
+                { "action_id": "A003", "action_name": "Create Physician", "allowed": true },
+                { "action_id": "A004", "action_name": "Create Agent", "allowed": true },
+                { "action_id": "A005", "action_name": "Edit Physician", "allowed": true },
+                { "action_id": "A006", "action_name": "Edit Agent", "allowed": true },
+                { "action_id": "A007", "action_name": "Edit Patient Details", "allowed": true },
+                { "action_id": "A008", "action_name": "Pay & Book", "allowed": true },
+                { "action_id": "A009", "action_name": "Draft Test Booking", "allowed": true }
+              ]
+            },
+            {
+              "process_id": "P002",
+              "process_name": "View & Edit Booking",
+              "actions": [
+                { "action_id": "A010", "action_name": "Booking List", "allowed": true },
+                { "action_id": "A011", "action_name": "View and Edit Booking", "allowed": true },
+                { "action_id": "A012", "action_name": "Reports Download", "allowed": true },
+                { "action_id": "A013", "action_name": "Report View", "allowed": true },
+                { "action_id": "A014", "action_name": "Refund Action", "allowed": true },
+                { "action_id": "A015", "action_name": "Specimen Collection Action", "allowed": true },
+                { "action_id": "A016", "action_name": "Confirm Test Action", "allowed": true },
+                { "action_id": "A017", "action_name": "Report Process", "allowed": true },
+                { "action_id": "A018", "action_name": "Pay & Book (inside View/Edit)", "allowed": true }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

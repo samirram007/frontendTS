@@ -25,8 +25,8 @@ export default function StockItemProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<StockItemDialogType>(null)
   const [currentRow, setCurrentRow] = useState<StockItem | null>(null)
   const config = [
-    { key: 'alternate_units', value: true },
-    { key: 'batch_serial', value: true },
+    { key: 'alternate_units', value: false },
+    { key: 'batch_serial', value: false },
   ]
 
   return (
