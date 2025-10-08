@@ -10,7 +10,24 @@ import { createFileRoute } from '@tanstack/react-router'
 export const Route = createFileRoute(
   '/_authenticated/transactions/booking/create-booking',
 )({
-  component: NewBooking,
+  component: () => <BookingContextProvider><NewBooking/></BookingContextProvider> ,
 });
 
 
+function BookingContextProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <PatientProvider>
+      <AgentProvider>
+        <PhysicianProvider>
+          <LabTestItemProvider>
+            <PaymentProvider>
+              <BookingDataProvider>
+                {children}
+              </BookingDataProvider>
+            </PaymentProvider>
+          </LabTestItemProvider>
+        </PhysicianProvider>
+      </AgentProvider>
+    </PatientProvider>
+  )
+}

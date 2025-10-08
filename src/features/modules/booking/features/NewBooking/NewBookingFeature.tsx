@@ -103,7 +103,7 @@ const NewBookingFeature = () => {
                     <div className="mt-6  w-full">
                         <PathoProvider>
                             <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                Book & Pay
+                                Confirm this booking
                             </Button>
                         </PathoProvider>
                     </div>

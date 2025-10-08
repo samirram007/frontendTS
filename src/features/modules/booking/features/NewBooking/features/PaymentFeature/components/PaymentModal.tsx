@@ -27,8 +27,6 @@ function PaymentNullScreen(){
 
 
 interface PayAndBookInterface{
-    open: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>;
     button: any
 }
 
@@ -36,16 +34,15 @@ interface PayAndBookInterface{
 
 
 
-export const PayAndBookModal: React.FC<PayAndBookInterface> = ({open,setOpen, button}) =>{
+export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button}) =>{
 
     const {paymentMethod,setPaymentMethod,setAmountToBePaid,discountedAmount} = useContext(PathoContext);
 
     return(
         <>
-            <Dialog open={open} onOpenChange={(value)=>{
+            <Dialog onOpenChange={()=>{
                 setPaymentMethod(PaymentTypeSchema.CASH);
                 setAmountToBePaid(discountedAmount);
-                setOpen(value);
             }}>
                 <DialogTrigger asChild>
                     {button}

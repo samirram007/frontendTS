@@ -23,6 +23,7 @@ const BookingDetailsHeader: React.FC<IBookingDetails> = ({data}) =>{
                         <input
                             type="date"
                             id="dob"
+                            disabled
                             onChange={(e)=> console.log(e.target.value)}
                             value={new Date(data?.voucherDate || new Date()).toISOString().split("T")[0]}
                             name="dob"

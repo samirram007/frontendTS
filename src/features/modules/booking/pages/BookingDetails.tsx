@@ -10,6 +10,7 @@ import BookingDetailsHeader from "../features/BookingDetails/Features/booking-de
 import { InvoicesFeature } from "../features/NewBooking/features/InvoiceFeature/invoice-feature";
 import type { IBooking } from "../features/NewBooking/data/schema";
 import { useBookingTest } from "../features/NewBooking/context/new-booking-context";
+import { PayAndBookModal } from "../features/NewBooking/features/PaymentFeature/components/PaymentModal";
 
 
 function TestListView({data}:{data?:IBooking}){
@@ -33,7 +34,7 @@ function TestListView({data}:{data?:IBooking}){
                             <h1 className="text-right pr-2">Amount</h1>
                             <h1 className="text-center">Action</h1>
                         </div>
-                        <div className={`overflow-auto h-[30vh] ${tests.length < 1 ? 'flex justify-center items-center' : ''}`}>
+                        <div className={`overflow-auto h-[30vh] ${data == null ? 'flex justify-center items-center' : ''}`}>
                             {
                                 data  ?
                                 data.stockJournal.stockJournalEntries.map((item,index)=>(
@@ -53,18 +54,18 @@ function TestListView({data}:{data?:IBooking}){
                                         <div className="border-x-2 h-full border-black">
                                             <h1 className="text-right py-2 pr-2">{Number(item.stockItem.standardSellingPrice).toFixed(2)}</h1>
                                         </div>
-                                        <div className="grid grid-cols-[30px_1fr] px-2 justify-center items-center gap-1 py-2">
-                                            <AlertAppDialog name={
+                                        <div className=" px-2 justify-center items-center gap-1 py-2">
+                                            {/* <AlertAppDialog name={
                                                 <MdDeleteOutline className="cursor-pointer text-red-500" size={20}/>
                                                 }
                                                 title="Are you absolutely sure?" description="The action cannot be undone"
                                                 cancelText="Cancel" submitText="Submit" onSubmit={()=> handleMinusTest(item.id)}
-                                            />
+                                            /> */}
                                             {
                                                 // Collect Specimen will only work when payment is done
                                               
-                                                    <div className="bg-blue-600 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Confirm Test</div>
-                                                // <div className="bg-emerald-400 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Collect Sepcimen</div>
+                                                    // <div className="bg-blue-600 w-full text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Confirm Test</div>
+                                                <div className="bg-blue-500 text-center cursor-pointer rounded py-3 px-1.5 text-white text-app-small">Collect Sepcimen</div>
                                             }
                                         </div>
                                     </div>
@@ -94,7 +95,7 @@ function TestListView({data}:{data?:IBooking}){
 function TestView({data}:{data?:IBooking}){
     return (
         <div>
-            <div className="grid grid-cols-2">
+            {/* <div className="grid grid-cols-2">
                 <div className="grid grid-rows-1 gap-4 text-app-base">
                     <div className="grid grid-cols-[140px_1fr] gap-4">
                         <div className="font-bold">Patient Name:</div>
@@ -105,7 +106,7 @@ function TestView({data}:{data?:IBooking}){
                     <div className="font-bold">Discount:</div>
                     <div>Flat 500</div>
                 </div>
-            </div>
+            </div> */}
             <TestListView data={data}/>
         </div>
       
@@ -252,9 +253,21 @@ const BookingDetails:React.FC<BookingDetailProps> = ({data}) => {
     return(
         <div className="py-4 px-4">
             <BookingDetailsHeader data={data} />
-            <div className="py-3 pt-10 px-6 gap-4 grid grid-cols-[1fr_430px]">
-                <TestView data={data}/>
-                <PatientBillingDetail data={data}/>
+             <TestView data={data}/>
+            <div className="py-3 pt-10 px-1 gap-4 grid grid-cols-[1fr_430px]">
+               
+                {/* <PatientBillingDetail data={data}/> */}
+            </div>
+              <PaymentView/>
+            <div className="mt-0 w-full">
+                <PayAndBookModal
+                    button={
+                        <Button  className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                            Pay & Book
+                        </Button>
+                    }
+                />
+                
             </div>
             <InvoicesFeature/>
         </div>
