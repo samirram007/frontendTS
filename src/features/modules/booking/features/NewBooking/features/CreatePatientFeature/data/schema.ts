@@ -2,6 +2,7 @@ import type { IResponseInterface } from "@/features/modules/booking/data/schema"
 import type { IAgent } from "../../AgentFeature/data/schema";
 import type { IPhysician } from "../../PhysicianFeature/data/schema";
 import * as yup from 'yup';
+import type { IAccountLedger } from "../../../data/schema";
 
 // status type
 type StatusType = "active" | "deactive";
@@ -26,7 +27,6 @@ export type AddressType = {
   }
 }
 
-
 //  Patient Interface for form to create and edit
 export interface IPatient{
     id?: number,
@@ -41,8 +41,7 @@ export interface IPatient{
     address?: AddressType,
     agent?: IAgent,
     physician?: IPhysician,
-    created_at?: string,
-    updated_at?: string
+    accountLedger?: IAccountLedger
 }
 
 // Patient Response after create API called

@@ -1,10 +1,12 @@
 import BookingDataProvider from '@/features/modules/booking/features/NewBooking/context/new-booking-context'
 import { bookingQueryOptions } from '@/features/modules/booking/features/NewBooking/data/queryOptions'
+import PaymentProvider from '@/features/modules/booking/contexts/payment-context'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { Loader } from 'lucide-react'
 import React, { Suspense } from 'react'
 import z from 'zod'
+import BookingDetailProvider from '@/features/modules/booking/features/BookingDetails/context/booking-detail-context'
 
 const BookingDetails = React.lazy(() =>
     import('@/features/modules/booking/pages/BookingDetails')
@@ -26,15 +28,20 @@ export const Route = createFileRoute(
     return context.queryClient.ensureQueryData(bookingQueryOptions(id))
   },
   component: () => {
-    const { id } = Route.useParams()
+    const { id } = Route.useParams();
+    console.log("Id called",id);
 
-    const { data: booking } = useSuspenseQuery(bookingQueryOptions(id))
+    const { data: booking} = useSuspenseQuery(bookingQueryOptions(id));
 
     return (
       <Suspense fallback={<Loader className="animate-spin mx-auto" />}>
-        <BookingDataProvider>
-          <BookingDetails data={booking.data.data} />
-        </BookingDataProvider>
+        <BookingDetailProvider>
+          <BookingDataProvider>
+            <PaymentProvider>
+              <BookingDetails data={booking.data.data} />
+            </PaymentProvider>
+          </BookingDataProvider>
+        </BookingDetailProvider>
       </Suspense>
     )
   },

@@ -73,20 +73,6 @@ export type DiscountType = "percentage" | "flat";
 
 
 
-
-
-// Booking list schema
-export type IBookingListSchema = {
-  id: number,
-  bookingDate: string,
-  paitentName: string,
-  testType: string,
-  amount: number,
-  bookingStatus: string,
-  reportingStatus: string,
-  paymentStatus: string
-}
-
 // schema used in this project
 
 // agent list schema
@@ -189,3 +175,4 @@ export interface IResponseInterface{
   };
   errorCode: string
 }
+

@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
-import type { AgentInterface, IPatientSchema, PaymentTypeSchema, PhysicianInterface } from "../data/schema";
+import type { AgentInterface, IPatientSchema, PhysicianInterface } from "../data/schema";
 import { AgentDefault, PatientDefault, PhysicianDefault } from "../data/default-value";
+import type { PaymentTypeSchema } from "../features/NewBooking/features/PaymentFeature/data/schema";
 
 
 

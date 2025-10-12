@@ -1,46 +1,43 @@
 import {type ColumnDef} from "@tanstack/react-table";
 import { View } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import type { IBooking } from "../../NewBooking/data/schema";
+import {  useNavigate } from "@tanstack/react-router";
+import type { IAllBooking } from "../data/schema";
 
 
-export const columns: ColumnDef<IBooking>[] = [
+export const columns: ColumnDef<IAllBooking>[] = [
     {
         header:"Sl no",
         cell:(row) => <>{row.row.index + 1}</>
     },
     {
-        accessorKey:"voucherNo",
-        header:"Booking ID"
+        header:"Booking ID",
+        accessorFn:(row)=> row?.voucher.voucherNo ?? ""
     },
     {
-        accessorKey:"voucherDate",
         header:"Booking Date",
+        accessorFn:(row)=> row.voucher.voucherDate ?? ""
     },
     {
-        accessorKey:"voucherPatient.patient.name",
+        header:"Status",
+        accessorFn: () => "Drafted"
+    },
+    {
         header:"Patient Name",
+        accessorFn:(row)=> row.patient.name
     },
     {
-        accessorKey:"status",
-        header:"Booking Status",
-    },
-    {
-        accessorKey:"remarks",
-        header:"Payment Status",
-    },
-    {
-        id:"id",
-        header:"Action",
-        cell:({row})=>{
-            return(
-                <Link to={'/transactions/booking/$id'}
-                    params={{id: row.original.id}}
-                    className="text-blue-500 hover:text-blue-700"
-                >
-                    <View className="w-4 h-4"/>
-                </Link>
-            )
-        } 
+        header: "Action",
+        cell: (props) => {
+        const navigate = useNavigate();
+
+        return (
+            <div
+            onClick={() => navigate({ to: `/transactions/booking/${props.row.original.voucherId}` })}
+            className="text-blue-500 hover:text-blue-700 cursor-pointer"
+            >
+            <View className="w-4 h-4" />
+            </div>
+        );
+        },
     },
 ];

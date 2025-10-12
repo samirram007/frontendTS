@@ -1,6 +1,7 @@
 import type { IResponseInterface } from "../../../data/schema";
 import type { ITestItem } from "../features/LabTestsFeature/data/schema";
-import type { IPatient } from "../features/CreatePatientFeature/data/schema";
+import type { AddressType, IPatient } from "../features/CreatePatientFeature/data/schema";
+import type { IVoucher } from "../../BookingList/data/schema";
 
 
 type MovementType = "in" | "out";
@@ -24,6 +25,8 @@ export interface IStockJournalEntry{
     stockItemId: number,
     stockUnitId: number,
     alternateUnitId: number,
+    testDate: Date,
+    reportDate: Date,
     unitRatio: string,
     itemCost: string,
     rate: string,
@@ -119,6 +122,13 @@ export interface IAccountLedger{
     accountGroupId: number
 }
 
+export interface IVoucherReference{
+    id: number,
+    voucherId: number,
+    voucherReferenceId: number | null,
+    voucher: IVoucher,
+}
+
 export interface IVoucherPatient{
     id: number,
     voucherId: number,
@@ -148,7 +158,8 @@ export interface IVoucherPatient{
         contactNo: string,
         degree: string,
         disciplineId: number
-    }
+    },
+    address?: AddressType
 }
 
   
@@ -202,17 +213,14 @@ export interface IBooking{
     stockJournalId: number,
     stockJournal: IStockJournal,
     voucherEntries: IVoucherEntry[],
-    voucherPatient: IVoucherPatient
+    voucherPatient: IVoucherPatient,
+    voucherReferences?: IVoucherReference[]
 }
 
 
 
-export interface IBookingListResponse extends IResponseInterface{
-    data: IBooking[]
-}
+
 export interface IBookingResponse extends IResponseInterface{
     data: IBooking
 }
-
-
 

@@ -42,6 +42,11 @@ export default function Inventory() {
 const sidebarNavItems = [
 
     {
+        title: 'Test Item',
+        icon: <IconTool size={18} />,
+        href: '/masters/inventory/test_item',
+    },
+    {
         title: 'Stock Item',
         icon: <IconTool size={18} />,
         href: '/masters/inventory/stock_item',

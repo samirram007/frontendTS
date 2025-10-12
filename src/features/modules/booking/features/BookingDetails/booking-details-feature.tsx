@@ -1,4 +1,7 @@
 import type { IBooking } from "../NewBooking/data/schema";
+import { BookingDetailPayment } from "./Features/booking-detail-payment";
+import { BookingDetailList } from "./Features/booking-detail-test-list";
+import BookingDetailsHeader from "./Features/booking-details-header";
 
 
 interface BookingDetailProps {
@@ -8,10 +11,11 @@ interface BookingDetailProps {
 
 
 const BookingDetailsFeature: React.FC<BookingDetailProps> = ({data}) =>{
-    console.log(data);
     return(
         <>
-            
+            <BookingDetailsHeader data={data} />
+            <BookingDetailList data={data}/>
+            <BookingDetailPayment data={data} />
         </>
     )
 }

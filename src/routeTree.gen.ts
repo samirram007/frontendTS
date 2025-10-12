@@ -95,6 +95,7 @@ import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutRouteImport }
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout'
+import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_type/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/vendor/_layout'
@@ -106,6 +107,7 @@ import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIndexRouteImp
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/index'
+import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout/index'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_type/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/vendor/_layout/index'
@@ -117,6 +119,7 @@ import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIdRouteImport
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/$id'
+import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
 
 const errors503LazyRouteImport = createFileRoute('/(errors)/503')()
@@ -166,6 +169,9 @@ const AuthenticatedMastersOrganizationLayoutCountryRouteImport =
   createFileRoute('/_authenticated/masters/organization/_layout/country')()
 const AuthenticatedMastersOrganizationLayoutCompanyRouteImport =
   createFileRoute('/_authenticated/masters/organization/_layout/company')()
+const AuthenticatedMastersInventoryLayoutTest_itemRouteImport = createFileRoute(
+  '/_authenticated/masters/inventory/_layout/test_item',
+)()
 const AuthenticatedMastersInventoryLayoutStock_itemRouteImport =
   createFileRoute('/_authenticated/masters/inventory/_layout/stock_item')()
 const AuthenticatedMastersAccountsLayoutVoucher_typeRouteImport =
@@ -509,6 +515,12 @@ const AuthenticatedMastersOrganizationLayoutCompanyRoute =
     path: '/company',
     getParentRoute: () => AuthenticatedMastersOrganizationLayoutRoute,
   } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemRouteImport.update({
+    id: '/test_item',
+    path: '/test_item',
+    getParentRoute: () => AuthenticatedMastersInventoryLayoutRoute,
+  } as any)
 const AuthenticatedMastersInventoryLayoutStock_itemRoute =
   AuthenticatedMastersInventoryLayoutStock_itemRouteImport.update({
     id: '/stock_item',
@@ -848,6 +860,11 @@ const AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute =
     id: '/_layout',
     getParentRoute: () => AuthenticatedMastersOrganizationLayoutCompanyRoute,
   } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersInventoryLayoutTest_itemRoute,
+  } as any)
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute =
   AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteImport.update({
     id: '/_layout',
@@ -911,6 +928,13 @@ const AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute =
     path: '/',
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute,
+  } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute,
   } as any)
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute =
   AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRouteImport.update({
@@ -988,6 +1012,13 @@ const AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute =
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute,
   } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () =>
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute,
+  } as any)
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute =
   AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport.update({
     id: '/$id',
@@ -1046,6 +1077,7 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/vendor': typeof AuthenticatedMastersAccountsLayoutVendorLayoutRouteWithChildren
   '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
+  '/masters/inventory/test_item': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutRouteWithChildren
   '/masters/organization/currency': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
@@ -1096,6 +1128,7 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1107,6 +1140,7 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/vendor/': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type/': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
   '/masters/inventory/stock_item/': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
+  '/masters/inventory/test_item/': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute
   '/masters/organization/company/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/masters/organization/currency/': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
@@ -1161,6 +1195,7 @@ export interface FileRoutesByTo {
   '/masters/accounts/vendor': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
+  '/masters/inventory/test_item': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/masters/organization/currency': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
@@ -1211,6 +1246,7 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1283,6 +1319,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/accounts/_layout/voucher_type/_layout': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
   '/_authenticated/masters/inventory/_layout/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren
   '/_authenticated/masters/inventory/_layout/stock_item/_layout': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
+  '/_authenticated/masters/inventory/_layout/test_item': typeof AuthenticatedMastersInventoryLayoutTest_itemRouteWithChildren
+  '/_authenticated/masters/inventory/_layout/test_item/_layout': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren
   '/_authenticated/masters/organization/_layout/company': typeof AuthenticatedMastersOrganizationLayoutCompanyRouteWithChildren
   '/_authenticated/masters/organization/_layout/company/_layout': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
   '/_authenticated/masters/organization/_layout/country': typeof AuthenticatedMastersOrganizationLayoutCountryRouteWithChildren
@@ -1338,6 +1376,7 @@ export interface FileRoutesById {
   '/_authenticated/transactions/vouchers/_layout/stock_journal/': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/_authenticated/transactions/vouchers/_layout/transfer_voucher/': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/_authenticated/masters/inventory/_layout/test_item/_layout/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/_authenticated/masters/organization/_layout/company/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_authenticated/masters/organization/_layout/country/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1349,6 +1388,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/accounts/_layout/vendor/_layout/': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_type/_layout/': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
   '/_authenticated/masters/inventory/_layout/stock_item/_layout/': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
+  '/_authenticated/masters/inventory/_layout/test_item/_layout/': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/company/_layout/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/country/_layout/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
@@ -1407,6 +1447,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
     | '/masters/inventory/stock_item'
+    | '/masters/inventory/test_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
     | '/masters/organization/currency'
@@ -1457,6 +1498,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/masters/inventory/stock_item/$id'
+    | '/masters/inventory/test_item/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1468,6 +1510,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/vendor/'
     | '/masters/accounts/voucher_type/'
     | '/masters/inventory/stock_item/'
+    | '/masters/inventory/test_item/'
     | '/masters/organization/company/'
     | '/masters/organization/country/'
     | '/masters/organization/currency/'
@@ -1522,6 +1565,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
     | '/masters/inventory/stock_item'
+    | '/masters/inventory/test_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
     | '/masters/organization/currency'
@@ -1572,6 +1616,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/masters/inventory/stock_item/$id'
+    | '/masters/inventory/test_item/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1643,6 +1688,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/accounts/_layout/voucher_type/_layout'
     | '/_authenticated/masters/inventory/_layout/stock_item'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout'
+    | '/_authenticated/masters/inventory/_layout/test_item'
+    | '/_authenticated/masters/inventory/_layout/test_item/_layout'
     | '/_authenticated/masters/organization/_layout/company'
     | '/_authenticated/masters/organization/_layout/company/_layout'
     | '/_authenticated/masters/organization/_layout/country'
@@ -1698,6 +1745,7 @@ export interface FileRouteTypes {
     | '/_authenticated/transactions/vouchers/_layout/stock_journal/'
     | '/_authenticated/transactions/vouchers/_layout/transfer_voucher/'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+    | '/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
     | '/_authenticated/masters/organization/_layout/company/_layout/$id'
     | '/_authenticated/masters/organization/_layout/country/_layout/$id'
     | '/_authenticated/masters/organization/_layout/currency/_layout/$id'
@@ -1709,6 +1757,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/accounts/_layout/vendor/_layout/'
     | '/_authenticated/masters/accounts/_layout/voucher_type/_layout/'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout/'
+    | '/_authenticated/masters/inventory/_layout/test_item/_layout/'
     | '/_authenticated/masters/organization/_layout/company/_layout/'
     | '/_authenticated/masters/organization/_layout/country/_layout/'
     | '/_authenticated/masters/organization/_layout/currency/_layout/'
@@ -2126,6 +2175,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutRoute
     }
+    '/_authenticated/masters/inventory/_layout/test_item': {
+      id: '/_authenticated/masters/inventory/_layout/test_item'
+      path: '/test_item'
+      fullPath: '/masters/inventory/test_item'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutRoute
+    }
     '/_authenticated/masters/inventory/_layout/stock_item': {
       id: '/_authenticated/masters/inventory/_layout/stock_item'
       path: '/stock_item'
@@ -2518,6 +2574,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyRoute
     }
+    '/_authenticated/masters/inventory/_layout/test_item/_layout': {
+      id: '/_authenticated/masters/inventory/_layout/test_item/_layout'
+      path: '/test_item'
+      fullPath: '/masters/inventory/test_item'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemRoute
+    }
     '/_authenticated/masters/inventory/_layout/stock_item/_layout': {
       id: '/_authenticated/masters/inventory/_layout/stock_item/_layout'
       path: '/stock_item'
@@ -2595,6 +2658,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute
     }
+    '/_authenticated/masters/inventory/_layout/test_item/_layout/': {
+      id: '/_authenticated/masters/inventory/_layout/test_item/_layout/'
+      path: '/'
+      fullPath: '/masters/inventory/test_item/'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute
+    }
     '/_authenticated/masters/inventory/_layout/stock_item/_layout/': {
       id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/'
       path: '/'
@@ -2671,6 +2741,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/organization/company/$id'
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute
+    }
+    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id': {
+      id: '/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/inventory/test_item/$id'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute
     }
     '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': {
       id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
@@ -2972,8 +3049,42 @@ const AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren =
     AuthenticatedMastersInventoryLayoutStock_itemRouteChildren,
   )
 
+interface AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren {
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute
+}
+
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren: AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren =
+  {
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute,
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute._addFileChildren(
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersInventoryLayoutTest_itemRouteChildren {
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersInventoryLayoutTest_itemRouteChildren: AuthenticatedMastersInventoryLayoutTest_itemRouteChildren =
+  {
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersInventoryLayoutTest_itemRouteWithChildren =
+  AuthenticatedMastersInventoryLayoutTest_itemRoute._addFileChildren(
+    AuthenticatedMastersInventoryLayoutTest_itemRouteChildren,
+  )
+
 interface AuthenticatedMastersInventoryLayoutRouteChildren {
   AuthenticatedMastersInventoryLayoutStock_itemRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren
+  AuthenticatedMastersInventoryLayoutTest_itemRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemRouteWithChildren
   AuthenticatedMastersInventoryLayoutGodownIndexRoute: typeof AuthenticatedMastersInventoryLayoutGodownIndexRoute
   AuthenticatedMastersInventoryLayoutStock_categoryIndexRoute: typeof AuthenticatedMastersInventoryLayoutStock_categoryIndexRoute
   AuthenticatedMastersInventoryLayoutStock_groupIndexRoute: typeof AuthenticatedMastersInventoryLayoutStock_groupIndexRoute
@@ -2985,6 +3096,8 @@ const AuthenticatedMastersInventoryLayoutRouteChildren: AuthenticatedMastersInve
   {
     AuthenticatedMastersInventoryLayoutStock_itemRoute:
       AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren,
+    AuthenticatedMastersInventoryLayoutTest_itemRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemRouteWithChildren,
     AuthenticatedMastersInventoryLayoutGodownIndexRoute:
       AuthenticatedMastersInventoryLayoutGodownIndexRoute,
     AuthenticatedMastersInventoryLayoutStock_categoryIndexRoute:

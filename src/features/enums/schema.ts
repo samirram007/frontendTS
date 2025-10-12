@@ -27,3 +27,9 @@ export const TypeOfSupplyEnum = z.enum([
     "services",
 ]);
 export type TypeOfSupply = z.infer<typeof TypeOfSupplyEnum>;
+
+export const ProcessTypeEnum = z.enum([
+    "inhouse",
+    "outsource",
+]);
+export type ProcessType = z.infer<typeof ProcessTypeEnum>;

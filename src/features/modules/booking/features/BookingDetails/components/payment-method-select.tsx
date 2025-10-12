@@ -1,8 +1,9 @@
 import PaymentCash from "./payement-method-select-cash";
 import DebitPayment from "./payment-method-select-debit";
 import CreditPayment from "./payment-method-select-credit";
-import { usePayment } from "../context/payment-context";
-import { PaymentTypeSchema } from "../data/schema";
+import { PaymentTypeSchema } from "../../NewBooking/features/PaymentFeature/data/schema";
+import { usePayment } from "../../../contexts/payment-context";
+
 
 
 

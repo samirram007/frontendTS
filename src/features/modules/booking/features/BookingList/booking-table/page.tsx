@@ -1,17 +1,18 @@
 import { useMemo } from "react";
-import { useGetBookingQuery } from "../../NewBooking/data/queryOptions";
 import { columns } from "./columns";
 import { BookingListDataTable } from "./data-table";
+import { useGetAgentListQuery } from "../data/queryOptions";
 
 
 export function BookingListTable(){
 
-  const { data, isSuccess } = useGetBookingQuery();
+  const {data,isSuccess} = useGetAgentListQuery();
 
   const bookingList = useMemo(()=>{
     return data?.data.data ?? []
   },[isSuccess,data]);
   
+  console.log(bookingList,"booking list");
 
   return(
       <div className="mx-auto py-10">

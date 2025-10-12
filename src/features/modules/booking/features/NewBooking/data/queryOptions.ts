@@ -1,12 +1,12 @@
-import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
-import { fetchByIdBookingService, getAllBookingService, storeBookingService } from "./api";
+import { queryOptions, useMutation } from "@tanstack/react-query";
+import { fetchByIdBookingService, storeBookingService } from "./api";
 import type { IBookingTest } from "./schema";
 import { showErrors } from "@/utils/dataClient";
 
 const BASE_KEY = "get-booking-query-by-id";
 
 
-
+// Test Booking Service
 export function useBookingMutation() {
 
     return useMutation({
@@ -26,25 +26,11 @@ export function useBookingMutation() {
 }
 
 
-
-
-export function useGetBookingQuery(){
-    return useQuery({
-        queryKey:['get-booking-query'],
-        queryFn: getAllBookingService,
-        retry: false,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
-        enabled: true
-    })
-}
-
 export const bookingQueryOptions = (id:number) => {
 
     return queryOptions({
-        queryKey: [BASE_KEY],
+        queryKey: [BASE_KEY,id],
         queryFn: () => fetchByIdBookingService(id),
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        retry: 1,
+        retry: 0,
     })
 }

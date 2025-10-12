@@ -29,9 +29,12 @@ const Booking = () =>{
                     </div>
                 </div>
                 <div className="flex justify-end">
-                    <Button className="!bg-blue-500 text-white">
-                        <Link to="/transactions/booking/create-booking">Create Booking</Link>
-                    </Button>
+                    <Link to="/transactions/booking/create-booking">
+                        <Button className="!bg-blue-500 text-white">
+                            Create Booking
+                        </Button>
+                    </Link>
+                    
                 </div>
             </div>
             <Separator className="border-1 border-gray-500" />

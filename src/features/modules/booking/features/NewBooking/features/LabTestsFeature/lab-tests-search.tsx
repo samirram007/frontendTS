@@ -3,7 +3,7 @@ import { useGetAgentListQuery } from "./data/queryOptions";
 import type { ILabTestItem, ITestItem } from "./data/schema";
 import { useLabTestItem } from "./context/lab-test-context";
 import { toast } from "sonner";
-import { usePayment } from "../PaymentFeature/context/payment-context";
+import { usePayment } from "../../../../contexts/payment-context";
 
 
 
@@ -53,14 +53,14 @@ const LabTestSearch = () => {
             name: test.printName,
             testDate: new Date(),
             reportDate: new Date(),
-            amount: test.mrp,
+            amount: test.standardSellingPrice,
             status: "active"
         }
         setSelectTestItemList([...selectTestItemList,testObj]);
         setQuery("");
         // amount calculation
-        setTotalAmount((prev)=> prev + Number(test.mrp));
-        setNetAmount((prev)=> prev + Number(test.mrp));
+        setTotalAmount((prev)=> prev + Number(test.standardSellingPrice));
+        setNetAmount((prev)=> prev + Number(test.standardSellingPrice));
     }
 
 

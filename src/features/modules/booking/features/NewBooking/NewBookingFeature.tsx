@@ -16,8 +16,6 @@ import { usePatient } from "../../contexts/patient-context";
 import { ErrorToast } from "../../utils/error-response";
 import { useBookingMutation } from "./data/queryOptions";
 import type { IBookingTest } from "./data/schema";
-import { useBookingTest } from "./context/new-booking-context";
-import InvoiceFeatureModal from "./features/InvoiceFeature/invoice-feature-modal";
 import { useNavigate } from "@tanstack/react-router";
 
 
@@ -28,13 +26,12 @@ const NewBookingFeature = () => {
 
     const {selectTestItemList} = useLabTestItem();
     const {patient} = usePatient();
-    const {setBookingData} = useBookingTest();
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const {mutate} = useBookingMutation();
 
 
     const handleValidatePay = () =>{
-        if(selectTestItemList.length == 0){
+        if(selectTestItemList.length == 0 || patient == undefined){
             ErrorToast.launchErrorToast("Please select Patient and Test");
             return;
         }
@@ -50,7 +47,6 @@ const NewBookingFeature = () => {
             mutate(testBookingObject,{
                 onSuccess:(data)=>{
                     const bookingId = data.data.data.id;
-                    setBookingData(data.data);
                     navigate({ to: `/transactions/booking/${bookingId}` });
                 }
             });
@@ -107,13 +103,6 @@ const NewBookingFeature = () => {
                             </Button>
                         </PathoProvider>
                     </div>
-                </div>
-                <div>
-                    <InvoiceFeatureModal
-                        button={
-                            <span className="text-blue-500 underline underline-offset-1">Payment Invoice</span>
-                        }
-                    />
                 </div>
             </div>
         </div>

@@ -1,0 +1,328 @@
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { useReactToPrint } from "react-to-print";
+import type { IBooking } from "../../data/schema";
+import { usePayment } from "@/features/modules/booking/contexts/payment-context";
+
+const companyName = import.meta.env.VITE_APP_PATHO_CENTER_NAME;
+
+interface IInvoiceFeature {
+  data?: IBooking;
+}
+
+export function InvoicesFeature({ data }: IInvoiceFeature) {
+  const { payementReceipt } = usePayment();
+  const printRef = useRef<HTMLDivElement>(null);
+
+  const totalStandardSellingPrice = data?.stockJournal.stockJournalEntries.reduce(
+    (sum, item) => sum + Number(item.stockItem.standardSellingPrice ?? 0),
+    0
+  );
+
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    pageStyle: `
+      @page {
+        size: A5 portrait;
+        margin: 0mm !important;
+        size:
+      }
+
+      /* Ensure the printable area matches exact A5 dimensions so content fills page */
+      html, body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 148mm;
+        height: 210mm;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        font-family: "Arial", sans-serif;
+        font-size: 11px;
+        line-height: 1.2;
+        background: #fff;
+      }
+
+      * { box-sizing: border-box; }
+
+      .print-wrapper {
+        width: 148mm;
+        height: 210mm;
+        padding: 6mm; /* inner margin on the A5 sheet */
+        background: #fff;
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header {
+        border-bottom: 2px solid #000;
+        padding-bottom: 6px;
+        margin-bottom: 6px;
+      }
+
+      .patient-booking {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+
+      .left-col .row,
+      .right-col .row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .right-col {
+        text-align: right;
+      }
+
+      .money-header {
+        text-align: center;
+        font-weight: 700;
+        font-size: 12px;
+        margin: 6px 0;
+        text-decoration: underline;
+      }
+
+      /* Items table (keeps borders) */
+      table.items {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5px;
+        margin-bottom: 6px;
+      }
+      table.items thead th {
+        border: 1px solid #000;
+        padding: 4px 6px;
+        background: #f5f5f5;
+        font-weight: 700;
+        text-align: left;
+      }
+      table.items tbody td {
+        border: 1px solid #000;
+        padding: 4px 6px;
+      }
+      table.items tbody tr td.text-right { text-align: right; }
+
+      /* Totals area — not a table, no borders */
+      .totals {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 6px;
+      }
+
+      .totals-card {
+        width: 46%;
+        min-width: 68mm;
+        font-size: 10.5px;
+      }
+
+      .totals-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 6px;
+      }
+
+      .totals-row.label {
+        font-weight: 600;
+      }
+
+      .totals-divider {
+        border-top: 1px solid #000;
+        margin-top: 6px;
+        padding-top: 6px;
+      }
+
+      .footer {
+        border-top: 2px solid #000;
+        padding-top: 6px;
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-size: 10px;
+      }
+
+      .printed-by {
+        position: absolute;
+        bottom: 6mm;
+        left: 6mm;
+        font-size: 10px;
+      }
+
+      @media print {
+        button, .no-print { display: none !important; }
+        html, body { margin: 0; }
+      }
+    `,
+  });
+
+  return data != null ? (
+    <div>
+      <h1 className="text-center font-semibold">Invoice</h1>
+
+      <div ref={printRef} className="print-wrapper">
+        {/* Header */}
+        <div className="header">
+          <h1 style={{ textAlign: "center", fontWeight: 700, fontSize: "16px" }}>
+            {companyName}
+          </h1>
+          <h2 style={{ textAlign: "center", fontWeight: 600, fontSize: "12px" }}>
+            Contact No:
+          </h2>
+        </div>
+
+        {/* Patient + Booking Info */}
+        <div className="patient-booking">
+          <div className="left-col">
+            <div className="row">
+              <div>Patient</div>
+              <div>: {data?.voucherPatient.patient.name}</div>
+            </div>
+
+            <div style={{ display: "flex", gap: "8px", marginTop: 4 }}>
+              <div style={{ width: "50%" }}>
+                <div className="row">
+                  <div>Gender</div>
+                  <div>: {data?.voucherPatient.patient.gender}</div>
+                </div>
+              </div>
+              <div style={{ width: "50%" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "60px 1fr" }}>
+                  <div>Age</div>
+                  <div>: {data?.voucherPatient.patient.age}</div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 4 }}>
+              <div className="row">
+                <div>Address</div>
+                <div>: {data?.voucherPatient.address?.line1}</div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 4 }}>
+              <div className="row">
+                <div>Ref. By Dr.</div>
+                <div>: {data?.voucherPatient.physician?.name}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right column: Booking info moved to right and right-aligned */}
+          <div className="right-col">
+            <div style={{ display: "grid", gap: 4, justifyItems: "end" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: 4 }}>
+                <div style={{ textAlign: "left" }}>Booking Id</div>
+                <div>: {data?.voucherNo}</div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: 4 }}>
+                <div style={{ textAlign: "left" }}>Booking Date</div>
+                <div>: {new Date(data?.voucherDate).toLocaleDateString()}</div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "140px 1fr", gap: 4 }}>
+                <div style={{ textAlign: "left" }}>Collection Type</div>
+                <div>: Inhouse</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Money Receipt Header */}
+        <div className="money-header">Money Receipt</div>
+
+        {/* Items Table */}
+        <div style={{ marginTop: 6 }}>
+          <table className="items">
+            <thead>
+              <tr>
+                <th style={{ width: "8%" }}>Sl No</th>
+                <th style={{ width: "30%" }}>Test</th>
+                <th style={{ width: "15%" }}>Test Date</th>
+                <th style={{ width: "15%" }}>Report Date</th>
+                <th style={{ width: "10%", textAlign: "right" }}>Rate</th>
+                <th style={{ width: "10%", textAlign: "right" }}>Disc(%)</th>
+                <th style={{ width: "15%", textAlign: "right" }}>Amount (INR)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.stockJournal.stockJournalEntries.map((item, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.stockItem.name}</td>
+                  <td>{new Date().toLocaleDateString()}</td>
+                  <td>{new Date().toLocaleDateString()}</td>
+                  <td className="text-right">{item.stockItem.standardSellingPrice}</td>
+                  <td className="text-right">0.00</td>
+                  <td className="text-right">{item.stockItem.standardSellingPrice}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Totals (non-table) */}
+        <div className="totals">
+          <div className="totals-card">
+            <div className="totals-row">
+              <div className="label">Gross Amount:</div>
+              <div>{totalStandardSellingPrice?.toFixed(2)}</div>
+            </div>
+
+            {payementReceipt.length > 0 &&
+              payementReceipt.map((item) => (
+                <div className="totals-row" key={item.date}>
+                  <div className="label">Receipt ({item.date})</div>
+                  <div>{item.amount.toFixed(2)}</div>
+                </div>
+              ))}
+
+            <div className="totals-row">
+              <div className="label">Less Discount:</div>
+              <div>0.00</div>
+            </div>
+
+            <div className="totals-row totals-divider" style={{ fontWeight: 700 }}>
+              <div>Invoice Total:</div>
+              <div>{totalStandardSellingPrice?.toFixed(2)}</div>
+            </div>
+
+            <div className="totals-row" style={{ marginTop: 4 }}>
+              <div className="label">Cash Receipt:</div>
+              <div>{totalStandardSellingPrice?.toFixed(2)}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="footer">
+          <div>Rupees One thousand four hundred forty only</div>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div style={{ width: 300 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "140px 1fr" }}>
+                <div>Net Receipt:</div>
+                <div style={{ textAlign: "right" }}>{totalStandardSellingPrice?.toFixed(2)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="printed-by">Printed By: Priyanshu Chourasia</div>
+      </div>
+
+      {/* Print Button */}
+      <div className="flex no-print justify-center mt-6">
+        <Button onClick={handlePrint}>Print Invoice</Button>
+      </div>
+    </div>
+  ) : (
+    <>No Invoice Generated Yet</>
+  );
+}

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PathoContext } from "../../../../contexts/PathoContext";
 import { DiscountDetail } from "../DiscountFeature/discount-details";
-import { usePayment } from "./context/payment-context";
+import { usePayment } from "../../../../contexts/payment-context";
 
 export function PaymentDetail({ }) {
 

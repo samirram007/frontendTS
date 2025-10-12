@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { usePayment } from "../context/payment-context";
-import { PaymentTypeSchema } from "../data/schema";
+import { PaymentTypeSchema } from "../../NewBooking/features/PaymentFeature/data/schema";
+import { usePayment } from "../../../contexts/payment-context";
 
 interface IPaymentSelectInterface{
     className?:string

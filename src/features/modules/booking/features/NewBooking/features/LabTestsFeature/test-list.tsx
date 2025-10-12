@@ -1,7 +1,7 @@
 import { AlertAppDialog } from "../../../../shared/components/AlertAppDialog";
 import { MdDeleteOutline } from "react-icons/md";
 import { useLabTestItem } from "./context/lab-test-context";
-import { usePayment } from "../PaymentFeature/context/payment-context";
+import { usePayment } from "../../../../contexts/payment-context";
 
 
 
@@ -15,13 +15,15 @@ const LabTestList = () => {
     const {totalAmount,setTotalAmount,setNetAmount} = usePayment();
 
     // on change of test date reporting date will change
-    const handleTestDateChange = (_id:number,_e:React.HTMLInputTypeAttribute)=>{
-
+    const handleTestDateChange = (id:number,e:React.HTMLInputTypeAttribute)=>{
+        const selectedTests = selectTestItemList.map((item)=> item.testId == id ? {...item,testDate: new Date(e)} : item);
+        setSelectTestItemList(selectedTests);
     }
 
     // on report date change
-    const handleReportDateChange = (_id:number,_e:React.HTMLInputTypeAttribute)=>{
-
+    const handleReportDateChange = (id:number,e:React.HTMLInputTypeAttribute)=>{
+        const selectedTests = selectTestItemList.map((item)=> item.testId == id ? {...item,reportDate: new Date(e)} : item);
+        setSelectTestItemList(selectedTests);
     }
 
     // on adding or removing lab tests

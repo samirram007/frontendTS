@@ -284,6 +284,11 @@ export const sidebarData: SidebarData = {
           icon: IconAccessPoint,
           items: [
             {
+              title: 'Test Item',
+              url: '/masters/inventory/test_item',
+              icon: IconUserCog,
+            },
+            {
               title: 'Stock Item',
               url: '/masters/inventory/stock_item',
               icon: IconUserCog,

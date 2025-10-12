@@ -1,51 +1,82 @@
 import type { IResponseInterface } from "@/features/modules/booking/data/schema";
 
-export interface ILabTestItem{
-    id: number,
-    name: string,
-    code: string,
-    printName: string,
-    sku: string,
-    articleNo: string,
-    partNo: null,
-    description: string,
-    stockCategoryId: number,
-    stockGroupId: null,
-    stockUnitId: number,
-    alternativeStockUnitId: null,
-    alternateUnitRatio: null,
-    invoiceStockUnitId: null,
-    invoiceConversionFactor: null,
-    noOfDecimalPlaces: null,
-    uqcId: null,
-    typeOfSupply:string,
-    isNegativeSalesAllow: boolean,
-    isMaintainBatch: boolean,
-    isMaintainSerial: boolean,
-    isExpiryItem: boolean,
-    isFinishGoods: boolean,
-    isRawMaterial: boolean,
-    isUnfinishedGoods: boolean,
-    costingMethod: string,
-    pricingMethod: string,
-    reorderLevel: string,
-    minimumStock: string,
-    maximumStock: string,
-    hasBom: null,
-    isSalesAsNewManufacture: boolean,
-    isPurchaseAsConsumed: boolean,
-    isRejectionAsScrap: boolean,
-    isGstApplicable: boolean,
-    rateOfDuty: string,
-    hsnSacCode: string,
-    isGstInclusive: boolean,
-    gstType: string,
-    brandId: null,
-    mrp: string,
-    standardCost: null,
-    icon: string,
-    status: string,
+export interface ILabTestItem {
+  id: number;
+  name: string;
+  code: string;
+  printName: string;
+  sku: string;
+  articleNo: unknown | null;
+  partNo: unknown | null;
+  description: string;
+  stockCategoryId: number;
+  stockGroupId: number;
+  stockUnitId: number;
+  alternateStockUnitId: number;
+  baseUnitValue: string;
+  alternateUnitValue: string;
+  uniqueQuantityId: unknown | null;
+  typeOfSupply: string;
+  isNegativeSalesAllow: boolean;
+  isMaintainBatch: boolean;
+  isMaintainSerial: boolean;
+  useExpiryDate: boolean;
+  trackManufacturingDate: boolean;
+  isFinishGoods: boolean;
+  isRawMaterial: boolean;
+  isUnfinishedGoods: boolean;
+  costingMethod: string;
+  marketValuationMethod: string;
+  reorderLevel: number;
+  minimumStock: string;
+  maximumStock: string;
+  hasBom: boolean;
+  isSalesAsNewManufacture: boolean;
+  isPurchaseAsConsumed: boolean;
+  isRejectionAsScrap: boolean;
+  isGstApplicable: boolean;
+  rateOfDuty: string;
+  hsnSacCode: string;
+  isGstInclusive: boolean;
+  gstType: string;
+  brandId: unknown | null;
+  mrp: string;
+  standardCost: string;
+  standardSellingPrice: string;
+  icon: unknown | null;
+  status: string;
+  stockUnit: {
+    id: number;
+    name: string;
+    code: string;
+    description: string;
+    status: string;
+    unitType: string;
+    quantityType: string;
+    icon: string;
+    uniqueQuantityCodeId: number;
+    primaryStockUnitId: unknown | null;
+    secondaryStockUnitId: unknown | null;
+    conversionFactor: unknown | null;
+    noOfDecimalPlaces: number;
+  };
+  alternateStockUnit: {
+    id: number;
+    name: string;
+    code: string;
+    description: string;
+    status: string;
+    unitType: string;
+    quantityType: string;
+    icon: string;
+    uniqueQuantityCodeId: number;
+    primaryStockUnitId: unknown | null;
+    secondaryStockUnitId: unknown | null;
+    conversionFactor: string;
+    noOfDecimalPlaces: number;
+  };
 }
+
 
 
 export interface ILabTestListItemResponse extends IResponseInterface{

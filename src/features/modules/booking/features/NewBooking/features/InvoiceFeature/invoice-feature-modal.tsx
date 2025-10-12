@@ -1,14 +1,16 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import {  useState } from "react";
 import { InvoicesFeature } from "./invoice-feature";
+import type { IBooking } from "../../data/schema";
 
 interface InvoiceModalInterface{
     button: React.ReactElement | string,
     action?: string,
+    data?: IBooking
 }
 
 
-const InvoiceFeatureModal: React.FC<InvoiceModalInterface> = ({button,action}) => {
+const InvoiceFeatureModal: React.FC<InvoiceModalInterface> = ({button,action, data}) => {
     const [open,setOpen] = useState<boolean>(false);
 
     return (
@@ -26,7 +28,7 @@ const InvoiceFeatureModal: React.FC<InvoiceModalInterface> = ({button,action}) =
                         </DialogDescription>
                     </DialogHeader>
                     <>
-                        <InvoicesFeature/>
+                        <InvoicesFeature data={data}/>
                     </>
                 </DialogContent>
             </Dialog>
