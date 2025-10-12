@@ -11,7 +11,7 @@ export const getData = async (apiPath: string) => {
             return response.data;
         })
         .catch((err) => {
-            // console.log("Error in getData:", err);
+            console.log("Error in getData:", err);
             errorHandler(err)
             throw err
         })

@@ -5,8 +5,8 @@ import {
 } from '@tabler/icons-react'
 import { Outlet } from '@tanstack/react-router'
 
+import SidebarInner from '@/features/global/components/sidebar-inner'
 import { Main } from '@/layouts/components/main'
-import SidebarNav from './components/sidebar-nav'
 import { useInventory } from './context/inventory-context'
 
 export default function Inventory() {
@@ -15,7 +15,7 @@ export default function Inventory() {
         <>
 
             <Main fixed>
-                <div className='space-y-0.5'>
+                <div className='space-y-0.5 mt-2'>
                     <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
                         Inventory
                     </h1>
@@ -26,9 +26,9 @@ export default function Inventory() {
                 <Separator className='my-4 lg:my-6' />
                 <div className='flex flex-1 flex-col space-y-2 overflow-hidden md:space-y-2 lg:flex-row lg:space-y-0 lg:space-x-12'>
                     {sideBarOpen && (
-                        <aside className='top-0 lg:sticky lg:w-1/5'>
-                            <SidebarNav items={sidebarNavItems} />
-                        </aside>
+
+                        <SidebarInner items={sidebarNavItems} />
+
                     )}
                     <div className='flex w-full overflow-y-hidden p-1'>
                         <Outlet />

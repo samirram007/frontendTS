@@ -13,10 +13,10 @@ export const accountLedgerSchema = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
   code: z.string().min(1),
-  description: z.string().optional(),
+  description: z.string().nullish(),
   status: accountLedgerStatusSchema,
   accountGroupId: z.number().int().positive(),
-  accountGroup: accountGroupSchema
+  accountGroup: accountGroupSchema.nullish()
 })
 export type AccountLedger = z.infer<typeof accountLedgerSchema>
 

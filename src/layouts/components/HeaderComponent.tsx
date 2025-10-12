@@ -9,10 +9,10 @@ import { TopNav } from "./top-nav";
 
 const HeaderComponent: React.FC<{}> = () => {
     return (
-        <Header>
+        <Header className='max-w-full bg-blue-600/5 dark:bg-violet-400'>
             <TopNav links={topNav} />
-            <div className='ml-auto flex items-center space-x-4'>
-                <Search />
+            <div className='ml-auto flex items-center max-w-screen space-x-0 lg:space-x-4'>
+                <Search className=' ' />
                 <ThemeSwitch />
                 <ProfileDropdown />
             </div>

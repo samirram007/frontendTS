@@ -8,13 +8,13 @@ import { Label } from '@/components/ui/label'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
 import { useState } from 'react'
-import type { Godown } from '../data/schema'
+import type { Transporter } from '../data/schema'
 
 
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow: Godown
+  currentRow: Transporter
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {

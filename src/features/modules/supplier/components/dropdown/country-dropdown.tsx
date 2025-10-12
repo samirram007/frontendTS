@@ -4,6 +4,7 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
+import { cn } from "@/lib/utils";
 import { fetchCountryService } from "../../../country/data/api";
 import type { Country } from "../../../country/data/schema";
 import type { SupplierForm } from "../../data/schema";
@@ -11,10 +12,13 @@ import type { SupplierForm } from "../../data/schema";
 
 type Props = {
     form: UseFormReturn<SupplierForm>;
+    gapClass?: string;
+    rtl?: boolean;
+
 }
 
 const CountryDropdown = (props: Props) => {
-    const { form } = props
+    const { form, gapClass, rtl } = props
 
     const { data: countryList, isLoading } = useQuery({
         queryKey: ["countries"],
@@ -34,15 +38,19 @@ const CountryDropdown = (props: Props) => {
             control={form.control}
             name='address.countryId'
             render={({ field }) => (
-                <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )}   >
+                    <FormLabel className={rtl ? 'order-last' : ''}>
                         Country
                     </FormLabel>
                     <SelectDropdown
                         defaultValue={field.value ? field.value.toString() : ''}
                         onValueChange={(value) => handleValueChange(value)}
                         placeholder='Select a country'
-                        className='w-full col-span-6 md:col-span-4'
+                        className='w-full placeholder'
                         items={countryList?.data.map((country: Country) => ({
                             label: capitalizeAllWords(country.name),
                             value: String(country.id),

@@ -164,6 +164,16 @@ code {
     @apply focus:bg-indigo-500! focus:text-gray-200 focus:font-semibold focus:text-left;
     @apply focus:placeholder:text-gray-200;
   }
+  .command-input-wrapper input[data-slot="command-input"]{
+    @apply shadow-none shadow-indigo-400/5;
+    @apply focus:bg-indigo-500/10! focus:text-gray-200 focus:font-semibold focus:text-left;
+    @apply focus:placeholder:text-gray-200;
+  }
+  [data-slot='command-input-wrapper'] input {
+    @apply shadow-none;
+  @apply focus:bg-transparent! focus:text-inherit! focus:font-normal!;
+}
+  
   input[type='checkbox'] {
     @apply !px-0 w-9;
   }
@@ -174,9 +184,10 @@ button[role='combobox'][data-state='open'] {
   background-color: #e66262;
   border-color: #3b82f6; /* Tailwind blue-500 */
   box-shadow: 0 0 0 2px rgba(221, 58, 8, 0.5);
-   @apply  bg-indigo-500! text-gray-200!;
+   /* @apply  bg-indigo-500! text-gray-200!; */
   
 }
+
 
 /* Optional: change text color */
 button[role='combobox'][data-state='open'] > span {
@@ -257,4 +268,9 @@ button[role='combobox']    {
   to {
     height: 0;
   }
+}
+
+.popover-content-width-same-as-trigger {
+  width: var(--radix-popover-trigger-width);
+  /* optionally, max-width, min-width as needed */
 }

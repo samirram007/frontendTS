@@ -5,27 +5,31 @@ import {
 } from '@tabler/icons-react'
 import { Outlet } from '@tanstack/react-router'
 
+import SidebarInner from '@/features/global/components/sidebar-inner'
 import { Main } from '@/layouts/components/main'
-import SidebarNav from './components/sidebar-nav'
+import { usePayroll } from './context/payroll-context'
 
 export default function Payroll() {
+    const { sideBarOpen } = usePayroll()
     return (
         <>
 
             <Main fixed>
                 <div className='space-y-0.5'>
                     <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-                        Organization
+                        Payroll
                     </h1>
                     <p className='text-muted-foreground'>
-                        Manage your company and organization settings.
+                        Manage your employee, department, designation etc.
                     </p>
                 </div>
                 <Separator className='my-4 lg:my-6' />
                 <div className='flex flex-1 flex-col space-y-2 overflow-hidden md:space-y-2 lg:flex-row lg:space-y-0 lg:space-x-12'>
-                    <aside className='top-0 lg:sticky lg:w-1/5'>
-                        <SidebarNav items={sidebarNavItems} />
-                    </aside>
+                    {sideBarOpen && (
+
+                        <SidebarInner items={sidebarNavItems} />
+
+                    )}
                     <div className='flex w-full overflow-y-hidden p-1'>
                         <Outlet />
                     </div>

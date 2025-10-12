@@ -4,7 +4,10 @@ import { stockUnitSchema } from '@/features/modules/stock_unit/data/schema';
 import { z } from 'zod';
 
 
-
+export const stockJournalsGodownEntrySchema = z.object({
+  id: z.number().int().positive().nullish(),
+  stockJournalEntryId: z.number().int().positive().nullish(),
+})
 
 export const stockJournalsEntrySchema = z.object({
   id: z.number().int().positive().nullish(),
@@ -31,9 +34,9 @@ export type StockJournalsEntryForm = z.infer<typeof stockJournalsEntrySchema>
 
 export const stockJournalSchema = z.object({
   id: z.number().int().positive().nullish(),
-  journal_no: z.string().min(1).nullish(),
-  journal_date: z.coerce.date().nullish(),
-  voucher_id: z.number().int().nullish(),
+  journalNo: z.string().min(1).nullish(),
+  journalDate: z.coerce.date().nullish(),
+  voucherId: z.number().int().nullish(),
   type: z.string().nullish(),
   remarks: z.string().nullish(),
   stockJournalEntries: z.array(stockJournalsEntrySchema)
@@ -57,10 +60,14 @@ export const receiptNoteSchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherNo: z.string().min(1).nullish(),
   voucherDate: z.coerce.date(),
+  referenceNo: z.string().min(1).nullish(),
+  referenceDate: z.coerce.date().nullish(),
   voucherTypeId: z.number().int(),
   stockJournalId: z.number().int().nullish(),
   stockJournal: stockJournalSchema.nullish(),
   voucherEntries: z.array(voucherEntrySchema),
+  purchaseLedgerId: z.number().int().nullish(),
+  partyLedgerId: z.number().int().nullish(),
   party: partySchema.nullish(),
   remarks: z.string().nullish()
 })
@@ -74,10 +81,17 @@ export const formSchema = z
   .object({
     voucherNo: z.string().min(1).nullish(),
     voucherDate: z.coerce.date(),
+    referenceNo: z.string().min(1).nullish(),
+    referenceDate: z.coerce.date().nullish(),
     voucherTypeId: z.number().int(),
+    purchaseLedgerId: z.number().int(),
+    partyLedgerId: z.number().int(),
+
     stockJournalId: z.number().int().nullish(),
     stockJournal: stockJournalSchema.nullish(),
     voucherEntries: z.array(voucherEntrySchema),
+    party: partySchema.nullish(),
+    remarks: z.string().nullish(),
     isEdit: z.boolean(),
   })
 

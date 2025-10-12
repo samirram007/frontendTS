@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form'
 import FormInputField from '@/components/form-input-field'
 import type { AccountGroupForm } from '../types/types'
 import AccountNatureDropdown from './account_nature-dropdown'
+import AccountGroupDropdown from './dropdown/account_group-dropdown'
 
 
 
@@ -66,11 +67,12 @@ export function AccountGroupActionDialog({ currentRow, open, onOpenChange }: Pro
         code: '',
         description: '',
         accountNatureId: 1,
+        parentId: null,
         status: 'active',
         isEdit,
       },
   })
-
+  // const accountNatureId = form.watch('accountNatureId') as string | number | undefined;
   const onSubmit = (values: AccountGroupForm) => {
     values.accountNatureId = Number(values.accountNatureId)
     form.reset()
@@ -105,6 +107,8 @@ export function AccountGroupActionDialog({ currentRow, open, onOpenChange }: Pro
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
+              <AccountGroupDropdown form={form} />
+
               <AccountNatureDropdown form={form} />
 
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />

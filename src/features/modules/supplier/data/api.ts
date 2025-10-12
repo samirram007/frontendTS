@@ -10,6 +10,7 @@ export async function fetchSupplierByIdService(id: number) {
 }
 
 export async function storeSupplierService(payload: any) {
+    console.log("Supplier payload: ", payload)
     return await postData(API_PATH, payload)
 }
 export async function updateSupplierService(payload: any) {

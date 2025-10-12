@@ -1,33 +1,36 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchGodownService, storeGodownService, updateGodownService } from "./api"
-import type { GodownForm } from "./schema"
-//queryOptions.ts
-const Key = "godowns"
-export const godownQueryOptions = (key: string = Key) => {
+import { fetchTransporterByIdService, fetchTransporterService, storeTransporterService, updateTransporterService } from "./api"
+import type { TransporterForm } from "./schema"
+
+const BASE_KEY = "transporter"
+
+export const transporterQueryOptions = (id?: number) => {
+
     return queryOptions({
-        queryKey: [key],
-        queryFn: fetchGodownService,
+        queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
+        queryFn: () =>
+            id ? fetchTransporterByIdService(id) : fetchTransporterService(),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })
 }
-export function useGodownMutation() {
-    const queryClient = useQueryClient()
 
+export function useTransporterMutation() {
+    const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async (data: GodownForm & { id?: number }) => {
+        mutationFn: async (data: TransporterForm & { id?: number }) => {
             if (data.id) {
                 // Update if id exists
-                return await updateGodownService(data)
+                return await updateTransporterService(data)
             }
             // Otherwise create
-            return await storeGodownService(data)
+            return await storeTransporterService(data)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [Key] })
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
         },
         onError: (error) => {
-            console.error("Godown mutation failed:", error)
+            console.error("Transporter mutation failed:", error)
         },
     })
 }

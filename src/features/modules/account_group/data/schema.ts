@@ -9,12 +9,14 @@ const accountGroupStatusSchema = z.union([
 export type accountGroupStatus = z.infer<typeof accountGroupStatusSchema>
 
 
-export const accountGroupSchema = z.object({
+export const accountGroupSchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
   code: z.string().min(1),
   description: z.string().optional(),
   status: accountGroupStatusSchema,
+  parentId: z.number().int().positive().optional().nullish(),
+  parent: z.lazy(() => accountGroupSchema).optional().nullish(),
   accountNatureId: z.number().int().positive(),
   accountNature: accountNatureSchema
 })
@@ -37,5 +39,7 @@ export const formSchema = z
       .min(1, { message: 'Status is required.' }),
     accountNatureId: z.number().int().positive().min(1, { message: 'Account Nature ID is required.' }),
     description: z.string().min(1, { message: 'Description is required.' }),
+    parentId: z.number().int().positive().optional().nullish(),
+    parent: z.lazy(() => accountGroupSchema).optional().nullish(),
     isEdit: z.boolean(),
   })

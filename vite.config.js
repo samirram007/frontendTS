@@ -10,6 +10,15 @@ export default defineConfig({
   server: {
     port: 3000,
     open:true
+    // port: 3000,
+    // proxy: {
+    //   '/api': {
+    //     target: 'https://aipt-api.local', // Your Laravel backend URL
+    //     changeOrigin: true, // Ensures the host header is rewritten to the target
+    //     secure: false, // For local HTTP servers (set to true for HTTPS in production)
+    //     //rewrite: (path) => path.replace(/^\/api/, ''), // Optional: removes /api prefix if needed
+    //   },
+    // },
 
   },
   build: {
@@ -19,18 +28,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // All node_modules go into a vendor chunk
-          // if (id.includes('node_modules')) {
-          //   if (id.includes('react') || id.includes('react-dom')) {
-          //     return 'react-vendor'
-          //   }
-          //   if (id.includes('@tanstack/react-query')) {
-          //     return 'query-vendor'
-          //   }
-          //   return 'vendor'
-          // }
 
-          // Optionally, split routes by folder
           if (id.includes('src/features/accounts/settings')) {
             return 'accounts-settings'
           }

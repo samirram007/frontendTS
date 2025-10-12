@@ -15,3 +15,7 @@ export async function storeReceiptNoteService(payload: any) {
 export async function updateReceiptNoteService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
+
+export async function fetchPurchaseLedgersService() {
+    return await getData('purchase_ledgers')
+}

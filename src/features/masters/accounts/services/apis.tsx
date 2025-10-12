@@ -9,6 +9,9 @@ import { getData, postData, putData } from "@/utils/dataClient";
 export async function fetchAccountGroupService() {
     return await getData("/account_groups")
 }
+export async function fetchCurrentLiabitityGroupService() {
+    return await getData("/current_liability_groups")
+}
 
 export async function fetchVoucherTypeService() {
     return await getData("/voucher_types")

@@ -18,7 +18,7 @@ export const supplierSchema: z.ZodType<any> = z.object({
   email: z.string().nullish(),
   status: ActiveInactiveStatusSchema,
   accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
-  address: z.lazy(() => addressSchema).nullable().optional(),
+  address: z.lazy(() => addressSchema).nullable().nullish(),
 
 })
 export type Supplier = z.infer<typeof supplierSchema>
@@ -39,8 +39,8 @@ export const formSchema = z
     phone: z.string().nullish(),
     email: z.string().nullish(),
     accountGroupId: z.coerce.number().nullish(),
-    accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
-    address: z.lazy(() => addressSchema).nullable().optional(),
+    accountLedger: accountLedgerSchema.optional().nullish(),
+    address: addressSchema.optional().nullish(),
 
     isEdit: z.boolean(),
   })

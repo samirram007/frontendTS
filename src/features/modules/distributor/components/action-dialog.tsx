@@ -21,22 +21,26 @@ import { useForm } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { Loader2 } from 'lucide-react'
-import { useGodownMutation } from '../data/queryOptions'
-import { formSchema, type Godown, type GodownForm } from '../data/schema'
-import GodownDropdown from './godown-dropdown'
+import { accountLedgerSchema } from '../../account_ledger/data/schema'
+import { addressSchema } from '../../address/data/schema'
+import { useDistributorMutation } from '../data/queryOptions'
+import { formSchema, type Distributor, type DistributorForm } from '../data/schema'
+import AccountGroupDropdown from './dropdown/account_group-dropdown'
+import AddressForm from './sub-component/address-form'
 
 
 interface Props {
-  currentRow?: Godown
+  currentRow?: Distributor
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
+
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
-  const { mutate: saveGodown, isPending } = useGodownMutation()
+  const { mutate: saveDistributor, isPending } = useDistributorMutation()
   const isEdit = !!currentRow
 
-  const form = useForm<GodownForm>({
+  const form = useForm<DistributorForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
@@ -45,27 +49,26 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
       : {
         name: '',
         code: '',
-        description: '',
-        parentId: 1,
-        address: {
-          addressLine1: '',
-          addressLine2: '',
-          city: '',
-          pincode: '',
-          stateId: 19,
-          countryId: 74,
-        },
+        gstin: '',
+        pan: '',
+        contactPerson: '',
+        contactNo: '',
+        phone: '',
+        email: '',
+        accountGroupId: 1,
+        accountLedger: accountLedgerSchema,
+        address: addressSchema,
         status: 'active',
         isEdit,
       },
   })
 
 
-  const moduleName = "Godown"
-  const onSubmit = (values: GodownForm) => {
+  const moduleName = "Distributor"
+  const onSubmit = (values: DistributorForm) => {
     form.reset()
     //showSubmittedData(values)
-    saveGodown(
+    saveDistributor(
       currentRow ? { ...values, id: currentRow.id } : values
     )
     onOpenChange(false)
@@ -99,13 +102,19 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <GodownDropdown form={form} />
-              <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
+              <FormInputField type='text' form={form} name='gstin' label='Gst Number' />
+              <FormInputField type='text' form={form} name='pan' label='Pan Number' />
+              <FormInputField type='text' form={form} name='contactPerson' label='Contact Person' />
+              <FormInputField type='text' form={form} name='contactNumber' label='Contact Number' />
+              <FormInputField type='text' form={form} name='phone' label='Phone Number' />
+              <FormInputField type='text' form={form} name='email' label='Email' />
+              <AddressForm form={form} />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },
                 { label: 'Inactive', value: 'inactive' },
               ]} />
 
+              <AccountGroupDropdown form={form} />
             </form>
           </Form>
         </div>
