@@ -2,6 +2,8 @@ import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
 import { z } from 'zod';
 import { accountLedgerSchema } from '../../account_ledger/data/schema';
 import { addressSchema } from '../../address/data/schema';
+import { departmentSchema } from '../../department/data/schema';
+import { designationSchema } from '../../designation/data/schema';
 
 
 
@@ -10,13 +12,18 @@ export const employeeSchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
   code: z.string().nullish(),
-  gstin: z.string().nullish(),
-  pan: z.string().nullish(),
-  contactPerson: z.string().nullish(),
-  contactNo: z.string().nullish(),
-  phone: z.string().nullish(),
+  dob: z.date().nullish(),
+  doj: z.date().nullish(),
   email: z.string().nullish(),
+  contactNo: z.string().nullish(),
+  pan: z.string().nullish(),
+  image: z.string().nullish(),
+  education: z.string().nullish(),
   status: ActiveInactiveStatusSchema,
+  departmentId: z.coerce.number().nullish(),
+  department: z.lazy(() => departmentSchema).optional().nullish(),
+  designationId: z.coerce.number().nullish(),
+  designation: z.lazy(() => designationSchema).optional().nullish(),
   accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
   address: z.lazy(() => addressSchema).nullable().nullish(),
 
@@ -32,15 +39,20 @@ export const formSchema = z
     name: z.string().min(1, { message: 'Name is required.' }),
     code: z.string(),
     status: z.string().min(1, { message: 'Status is required.' }),
-    gstin: z.string().nullish(),
-    pan: z.string().nullish(),
-    contactPerson: z.string().nullish(),
-    contactNo: z.string().nullish(),
-    phone: z.string().nullish(),
+    dob: z.coerce.date().nullish(),
+    doj: z.coerce.date().nullish(),
     email: z.string().nullish(),
-    accountGroupId: z.coerce.number().nullish(),
-    accountLedger: accountLedgerSchema.optional().nullish(),
-    address: addressSchema.optional().nullish(),
+    contactNo: z.string().nullish(),
+    pan: z.string().nullish(),
+    image: z.string().nullish(),
+    education: z.string().nullish(),
+    departmentId: z.coerce.number().nullish(),
+    department: z.lazy(() => departmentSchema).optional().nullish(),
+    designationId: z.coerce.number().nullish(),
+    designation: z.lazy(() => designationSchema).optional().nullish(),
+    accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
+    address: z.lazy(() => addressSchema).nullable().nullish(),
+    accountGroupId: z.coerce.number().nullish(), 
 
     isEdit: z.boolean(),
   })

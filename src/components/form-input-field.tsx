@@ -207,8 +207,8 @@ const DateBox = (props: Props) => {
                     <FormControl>
                         <Input
                             placeholder={'Enter ' + lowerCase(label ?? name)}
-                            type='text'
-                            className=' placeholder'
+                            type='date'
+                            className='w-5/12 placeholder'
                             autoComplete='off'
                             {...field}
                         />

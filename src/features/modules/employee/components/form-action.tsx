@@ -17,7 +17,9 @@ import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useEmployeeMutation } from '../data/queryOptions'
 import { formSchema, type Employee, type EmployeeForm } from '../data/schema'
-import AccountGroupDropdown from './dropdown/account_group-dropdown'
+import CurrentLiabilityGroupsDropdown from './dropdown/current_liability_group-dropdown'
+import DepartmentDropdown from './dropdown/department-dropdown'
+import DesignationDropdown from './dropdown/designation-dropdown'
 import AddressForm from './sub-component/address-form'
 
 interface Props {
@@ -40,6 +42,8 @@ export function FormAction({ currentRow }: Props) {
                     line1: '',
                     line2: '',
                     landmark: '',
+                    postOffice: 'rathbari',
+                    district: 'Malda',
                     countryId: 76,
                     stateId: 36,
                     city: 'Malda',
@@ -50,15 +54,17 @@ export function FormAction({ currentRow }: Props) {
                         addressableType: '',
                     }
                 },
+                dob: '',
+                doj: '',
                 email: '',
-                website: '',
-                gstin: '',
+                contactNo: '',
+                education: '', 
                 pan: '',
                 status: 'active',
-                accountGroupId: 4,
-                contactPerson: '',
-                contactNo: '',
-                phone: '',
+                departmentId: 1,
+                designationId: 1,
+                accountGroupId: 20002,
+                image: '4', 
 
                 isEdit,
             },
@@ -108,12 +114,15 @@ export function FormAction({ currentRow }: Props) {
                             <div className='space-y-4'>
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
-                                <FormInputField type='text' gapClass={gapClass} form={form} name='gstin' label='Gst Number' />
+                                <FormInputField type='date' gapClass={gapClass} form={form} name='dob' label='DOB' />
+                                <FormInputField type='date' gapClass={gapClass} form={form} name='doj' label='Joining Date' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='pan' label='Pan Number' />
-                                <FormInputField type='text' gapClass={gapClass} form={form} name='contactPerson' label='Contact Person' />
+                                <FormInputField type='text' gapClass={gapClass} form={form} name='education' label='Education' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='contactNo' label='Contact Number' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='phone' label='Phone Number' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='email' label='Email' />
+                                <DesignationDropdown form={form} gapClass={gapClass} />
+                                <DepartmentDropdown form={form} gapClass={gapClass} />
                             </div>
                             <div className='space-y-4'>
                                 <AddressForm form={form} />
@@ -125,9 +134,12 @@ export function FormAction({ currentRow }: Props) {
                                         </div>
                                     </div>
                                     :
+                                    <>
+                                        <CurrentLiabilityGroupsDropdown form={form} gapClass={gapClass} />
 
-                                    <AccountGroupDropdown form={form} gapClass={gapClass} />
+                                    </>
                                 }
+
                                 <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                                     { label: 'Active', value: 'active' },
                                     { label: 'Inactive', value: 'inactive' },

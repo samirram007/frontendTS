@@ -25,7 +25,7 @@ import { accountLedgerSchema } from '../../account_ledger/data/schema'
 import { addressSchema } from '../../address/data/schema'
 import { useEmployeeMutation } from '../data/queryOptions'
 import { formSchema, type Employee, type EmployeeForm } from '../data/schema'
-import AccountGroupDropdown from './dropdown/account_group-dropdown'
+import AccountGroupDropdown from './dropdown/current_liability_group-dropdown'
 import AddressForm from './sub-component/address-form'
 
 

@@ -5,7 +5,7 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
-import { fetchAccountGroupService } from "@/features/masters/accounts/services/apis";
+import { fetchCurrentLiabitityGroupService } from "@/features/masters/accounts/services/apis";
 import type { AccountGroup } from "@/features/modules/account_group/data/schema";
 import { cn } from "@/lib/utils";
 import type { EmployeeForm } from "../../data/schema";
@@ -18,11 +18,11 @@ type Props = {
     gapClass?: string;
     rtl?: boolean;
 };
-const AccountGroupDropdown = (props: Props) => {
+const CurrentLiabilityGroupsDropdown = (props: Props) => {
     const { form, gapClass, rtl } = props as Props;
     const { data: accountGroups, isLoading } = useQuery({
         queryKey: ["accountGroups"],
-        queryFn: fetchAccountGroupService,
+        queryFn: fetchCurrentLiabitityGroupService,
     });
 
     const handleValueChange = (value: string) => {
@@ -68,4 +68,4 @@ const AccountGroupDropdown = (props: Props) => {
     )
 }
 
-export default AccountGroupDropdown
+export default CurrentLiabilityGroupsDropdown
