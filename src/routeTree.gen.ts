@@ -65,7 +65,6 @@ import { Route as AuthenticatedMastersPayrollLayoutSalaryIndexRouteImport } from
 import { Route as AuthenticatedMastersPayrollLayoutLeave_typeIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/leave_type/index'
 import { Route as AuthenticatedMastersPayrollLayoutHolidayIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/holiday/index'
 import { Route as AuthenticatedMastersPayrollLayoutGradeIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/grade/index'
-import { Route as AuthenticatedMastersPayrollLayoutEmployeeIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/index'
 import { Route as AuthenticatedMastersPayrollLayoutDesignationIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/designation/index'
 import { Route as AuthenticatedMastersPayrollLayoutDepartmentIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/department/index'
 import { Route as AuthenticatedMastersPayrollLayoutCost_centerIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/cost_center/index'
@@ -84,6 +83,7 @@ import { Route as AuthenticatedMastersAdministrationLayoutPermissionIndexRouteIm
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_classification/index'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_category/index'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_natureIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_nature/index'
+import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout'
@@ -97,6 +97,7 @@ import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutRouteImport } fr
 import { Route as AuthenticatedMastersAccountsLayoutCustomerLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/customer/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_ledger/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_groupLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_group/_layout'
+import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout/index'
@@ -110,6 +111,7 @@ import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutIndexRouteImport
 import { Route as AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/customer/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_ledger/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_group/_layout/index'
+import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout/$id'
@@ -153,6 +155,9 @@ const AuthenticatedMastersAdministrationRouteImport = createFileRoute(
 )()
 const AuthenticatedMastersAccountsRouteImport = createFileRoute(
   '/_authenticated/masters/accounts',
+)()
+const AuthenticatedMastersPayrollLayoutEmployeeRouteImport = createFileRoute(
+  '/_authenticated/masters/payroll/_layout/employee',
 )()
 const AuthenticatedMastersPartyLayoutTransporterRouteImport = createFileRoute(
   '/_authenticated/masters/party/_layout/transporter',
@@ -461,6 +466,12 @@ const AuthenticatedMastersAccountsLayoutRoute =
     id: '/_layout',
     getParentRoute: () => AuthenticatedMastersAccountsRoute,
   } as any)
+const AuthenticatedMastersPayrollLayoutEmployeeRoute =
+  AuthenticatedMastersPayrollLayoutEmployeeRouteImport.update({
+    id: '/employee',
+    path: '/employee',
+    getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
+  } as any)
 const AuthenticatedMastersPartyLayoutTransporterRoute =
   AuthenticatedMastersPartyLayoutTransporterRouteImport.update({
     id: '/transporter',
@@ -687,12 +698,6 @@ const AuthenticatedMastersPayrollLayoutGradeIndexRoute =
     path: '/grade/',
     getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
   } as any)
-const AuthenticatedMastersPayrollLayoutEmployeeIndexRoute =
-  AuthenticatedMastersPayrollLayoutEmployeeIndexRouteImport.update({
-    id: '/employee/',
-    path: '/employee/',
-    getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
-  } as any)
 const AuthenticatedMastersPayrollLayoutDesignationIndexRoute =
   AuthenticatedMastersPayrollLayoutDesignationIndexRouteImport.update({
     id: '/designation/',
@@ -805,6 +810,11 @@ const AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute =
     path: '/account_nature/',
     getParentRoute: () => AuthenticatedMastersAccountsLayoutRoute,
   } as any)
+const AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute =
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersPayrollLayoutEmployeeRoute,
+  } as any)
 const AuthenticatedMastersPartyLayoutTransporterLayoutRoute =
   AuthenticatedMastersPartyLayoutTransporterLayoutRouteImport.update({
     id: '/_layout',
@@ -869,6 +879,12 @@ const AuthenticatedMastersAccountsLayoutAccount_groupLayoutRoute =
   AuthenticatedMastersAccountsLayoutAccount_groupLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => AuthenticatedMastersAccountsLayoutAccount_groupRoute,
+  } as any)
+const AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute =
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute,
   } as any)
 const AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute =
   AuthenticatedMastersPartyLayoutTransporterLayoutIndexRouteImport.update({
@@ -957,6 +973,12 @@ const AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute =
     path: '/',
     getParentRoute: () =>
       AuthenticatedMastersAccountsLayoutAccount_groupLayoutRoute,
+  } as any)
+const AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute =
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute,
   } as any)
 const AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute =
   AuthenticatedMastersPartyLayoutTransporterLayoutIdRouteImport.update({
@@ -1065,6 +1087,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/distributor': typeof AuthenticatedMastersPartyLayoutDistributorLayoutRouteWithChildren
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutRouteWithChildren
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
+  '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
@@ -1083,7 +1106,6 @@ export interface FileRoutesByFullPath {
   '/masters/payroll/cost_center': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/masters/payroll/department': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/masters/payroll/designation': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
-  '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeIndexRoute
   '/masters/payroll/grade': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/masters/payroll/holiday': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/masters/payroll/leave_type': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1115,6 +1137,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/distributor/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
+  '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/masters/accounts/account_group/': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/masters/accounts/account_ledger/': typeof AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
   '/masters/accounts/customer/': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRoute
@@ -1128,6 +1151,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/distributor/': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/masters/party/supplier/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
+  '/masters/payroll/employee/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1180,6 +1204,7 @@ export interface FileRoutesByTo {
   '/masters/party/distributor': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
+  '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
@@ -1198,7 +1223,6 @@ export interface FileRoutesByTo {
   '/masters/payroll/cost_center': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/masters/payroll/department': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/masters/payroll/designation': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
-  '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeIndexRoute
   '/masters/payroll/grade': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/masters/payroll/holiday': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/masters/payroll/leave_type': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1230,6 +1254,7 @@ export interface FileRoutesByTo {
   '/masters/party/distributor/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
+  '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1307,6 +1332,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/supplier/_layout': typeof AuthenticatedMastersPartyLayoutSupplierLayoutRouteWithChildren
   '/_authenticated/masters/party/_layout/transporter': typeof AuthenticatedMastersPartyLayoutTransporterRouteWithChildren
   '/_authenticated/masters/party/_layout/transporter/_layout': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
+  '/_authenticated/masters/payroll/_layout/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren
+  '/_authenticated/masters/payroll/_layout/employee/_layout': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
   '/_authenticated/masters/accounts/_layout/account_nature/': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_category/': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_classification/': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
@@ -1325,7 +1352,6 @@ export interface FileRoutesById {
   '/_authenticated/masters/payroll/_layout/cost_center/': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/_authenticated/masters/payroll/_layout/department/': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/_authenticated/masters/payroll/_layout/designation/': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
-  '/_authenticated/masters/payroll/_layout/employee/': typeof AuthenticatedMastersPayrollLayoutEmployeeIndexRoute
   '/_authenticated/masters/payroll/_layout/grade/': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/_authenticated/masters/payroll/_layout/holiday/': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/_authenticated/masters/payroll/_layout/leave_type/': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1357,6 +1383,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/distributor/_layout/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/_authenticated/masters/party/_layout/supplier/_layout/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
+  '/_authenticated/masters/payroll/_layout/employee/_layout/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/_authenticated/masters/accounts/_layout/account_group/_layout/': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/account_ledger/_layout/': typeof AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/customer/_layout/': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRoute
@@ -1370,6 +1397,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/distributor/_layout/': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/_authenticated/masters/party/_layout/supplier/_layout/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
+  '/_authenticated/masters/payroll/_layout/employee/_layout/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1426,6 +1454,7 @@ export interface FileRouteTypes {
     | '/masters/party/distributor'
     | '/masters/party/supplier'
     | '/masters/party/transporter'
+    | '/masters/payroll/employee'
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
@@ -1444,7 +1473,6 @@ export interface FileRouteTypes {
     | '/masters/payroll/cost_center'
     | '/masters/payroll/department'
     | '/masters/payroll/designation'
-    | '/masters/payroll/employee'
     | '/masters/payroll/grade'
     | '/masters/payroll/holiday'
     | '/masters/payroll/leave_type'
@@ -1476,6 +1504,7 @@ export interface FileRouteTypes {
     | '/masters/party/distributor/$id'
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
+    | '/masters/payroll/employee/$id'
     | '/masters/accounts/account_group/'
     | '/masters/accounts/account_ledger/'
     | '/masters/accounts/customer/'
@@ -1489,6 +1518,7 @@ export interface FileRouteTypes {
     | '/masters/party/distributor/'
     | '/masters/party/supplier/'
     | '/masters/party/transporter/'
+    | '/masters/payroll/employee/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1541,6 +1571,7 @@ export interface FileRouteTypes {
     | '/masters/party/distributor'
     | '/masters/party/supplier'
     | '/masters/party/transporter'
+    | '/masters/payroll/employee'
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
@@ -1559,7 +1590,6 @@ export interface FileRouteTypes {
     | '/masters/payroll/cost_center'
     | '/masters/payroll/department'
     | '/masters/payroll/designation'
-    | '/masters/payroll/employee'
     | '/masters/payroll/grade'
     | '/masters/payroll/holiday'
     | '/masters/payroll/leave_type'
@@ -1591,6 +1621,7 @@ export interface FileRouteTypes {
     | '/masters/party/distributor/$id'
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
+    | '/masters/payroll/employee/$id'
   id:
     | '__root__'
     | '/'
@@ -1667,6 +1698,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/supplier/_layout'
     | '/_authenticated/masters/party/_layout/transporter'
     | '/_authenticated/masters/party/_layout/transporter/_layout'
+    | '/_authenticated/masters/payroll/_layout/employee'
+    | '/_authenticated/masters/payroll/_layout/employee/_layout'
     | '/_authenticated/masters/accounts/_layout/account_nature/'
     | '/_authenticated/masters/accounts/_layout/voucher_category/'
     | '/_authenticated/masters/accounts/_layout/voucher_classification/'
@@ -1685,7 +1718,6 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/payroll/_layout/cost_center/'
     | '/_authenticated/masters/payroll/_layout/department/'
     | '/_authenticated/masters/payroll/_layout/designation/'
-    | '/_authenticated/masters/payroll/_layout/employee/'
     | '/_authenticated/masters/payroll/_layout/grade/'
     | '/_authenticated/masters/payroll/_layout/holiday/'
     | '/_authenticated/masters/payroll/_layout/leave_type/'
@@ -1717,6 +1749,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/distributor/_layout/$id'
     | '/_authenticated/masters/party/_layout/supplier/_layout/$id'
     | '/_authenticated/masters/party/_layout/transporter/_layout/$id'
+    | '/_authenticated/masters/payroll/_layout/employee/_layout/$id'
     | '/_authenticated/masters/accounts/_layout/account_group/_layout/'
     | '/_authenticated/masters/accounts/_layout/account_ledger/_layout/'
     | '/_authenticated/masters/accounts/_layout/customer/_layout/'
@@ -1730,6 +1763,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/distributor/_layout/'
     | '/_authenticated/masters/party/_layout/supplier/_layout/'
     | '/_authenticated/masters/party/_layout/transporter/_layout/'
+    | '/_authenticated/masters/payroll/_layout/employee/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -2079,6 +2113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersAccountsLayoutRouteImport
       parentRoute: typeof AuthenticatedMastersAccountsRoute
     }
+    '/_authenticated/masters/payroll/_layout/employee': {
+      id: '/_authenticated/masters/payroll/_layout/employee'
+      path: '/employee'
+      fullPath: '/masters/payroll/employee'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeRouteImport
+      parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
+    }
     '/_authenticated/masters/party/_layout/transporter': {
       id: '/_authenticated/masters/party/_layout/transporter'
       path: '/transporter'
@@ -2338,13 +2379,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutGradeIndexRouteImport
       parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
     }
-    '/_authenticated/masters/payroll/_layout/employee/': {
-      id: '/_authenticated/masters/payroll/_layout/employee/'
-      path: '/employee'
-      fullPath: '/masters/payroll/employee'
-      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeIndexRouteImport
-      parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
-    }
     '/_authenticated/masters/payroll/_layout/designation/': {
       id: '/_authenticated/masters/payroll/_layout/designation/'
       path: '/designation'
@@ -2471,6 +2505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRouteImport
       parentRoute: typeof AuthenticatedMastersAccountsLayoutRoute
     }
+    '/_authenticated/masters/payroll/_layout/employee/_layout': {
+      id: '/_authenticated/masters/payroll/_layout/employee/_layout'
+      path: '/employee'
+      fullPath: '/masters/payroll/employee'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeRoute
+    }
     '/_authenticated/masters/party/_layout/transporter/_layout': {
       id: '/_authenticated/masters/party/_layout/transporter/_layout'
       path: '/transporter'
@@ -2562,6 +2603,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutRouteImport
       parentRoute: typeof AuthenticatedMastersAccountsLayoutAccount_groupRoute
     }
+    '/_authenticated/masters/payroll/_layout/employee/_layout/': {
+      id: '/_authenticated/masters/payroll/_layout/employee/_layout/'
+      path: '/'
+      fullPath: '/masters/payroll/employee/'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute
+    }
     '/_authenticated/masters/party/_layout/transporter/_layout/': {
       id: '/_authenticated/masters/party/_layout/transporter/_layout/'
       path: '/'
@@ -2652,6 +2700,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/accounts/account_group/'
       preLoaderRoute: typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutRoute
+    }
+    '/_authenticated/masters/payroll/_layout/employee/_layout/$id': {
+      id: '/_authenticated/masters/payroll/_layout/employee/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/payroll/employee/$id'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute
     }
     '/_authenticated/masters/party/_layout/transporter/_layout/$id': {
       id: '/_authenticated/masters/party/_layout/transporter/_layout/$id'
@@ -3359,14 +3414,47 @@ const AuthenticatedMastersPartyRouteWithChildren =
     AuthenticatedMastersPartyRouteChildren,
   )
 
+interface AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteChildren {
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+}
+
+const AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteChildren: AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteChildren =
+  {
+    AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute:
+      AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute,
+    AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute:
+      AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren =
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute._addFileChildren(
+    AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersPayrollLayoutEmployeeRouteChildren {
+  AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersPayrollLayoutEmployeeRouteChildren: AuthenticatedMastersPayrollLayoutEmployeeRouteChildren =
+  {
+    AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute:
+      AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren =
+  AuthenticatedMastersPayrollLayoutEmployeeRoute._addFileChildren(
+    AuthenticatedMastersPayrollLayoutEmployeeRouteChildren,
+  )
+
 interface AuthenticatedMastersPayrollLayoutRouteChildren {
+  AuthenticatedMastersPayrollLayoutEmployeeRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren
   AuthenticatedMastersPayrollLayoutBankIndexRoute: typeof AuthenticatedMastersPayrollLayoutBankIndexRoute
   AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute: typeof AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute
   AuthenticatedMastersPayrollLayoutCost_categoryIndexRoute: typeof AuthenticatedMastersPayrollLayoutCost_categoryIndexRoute
   AuthenticatedMastersPayrollLayoutCost_centerIndexRoute: typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   AuthenticatedMastersPayrollLayoutDepartmentIndexRoute: typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   AuthenticatedMastersPayrollLayoutDesignationIndexRoute: typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
-  AuthenticatedMastersPayrollLayoutEmployeeIndexRoute: typeof AuthenticatedMastersPayrollLayoutEmployeeIndexRoute
   AuthenticatedMastersPayrollLayoutGradeIndexRoute: typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   AuthenticatedMastersPayrollLayoutHolidayIndexRoute: typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute: typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -3378,6 +3466,8 @@ interface AuthenticatedMastersPayrollLayoutRouteChildren {
 
 const AuthenticatedMastersPayrollLayoutRouteChildren: AuthenticatedMastersPayrollLayoutRouteChildren =
   {
+    AuthenticatedMastersPayrollLayoutEmployeeRoute:
+      AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren,
     AuthenticatedMastersPayrollLayoutBankIndexRoute:
       AuthenticatedMastersPayrollLayoutBankIndexRoute,
     AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute:
@@ -3390,8 +3480,6 @@ const AuthenticatedMastersPayrollLayoutRouteChildren: AuthenticatedMastersPayrol
       AuthenticatedMastersPayrollLayoutDepartmentIndexRoute,
     AuthenticatedMastersPayrollLayoutDesignationIndexRoute:
       AuthenticatedMastersPayrollLayoutDesignationIndexRoute,
-    AuthenticatedMastersPayrollLayoutEmployeeIndexRoute:
-      AuthenticatedMastersPayrollLayoutEmployeeIndexRoute,
     AuthenticatedMastersPayrollLayoutGradeIndexRoute:
       AuthenticatedMastersPayrollLayoutGradeIndexRoute,
     AuthenticatedMastersPayrollLayoutHolidayIndexRoute:

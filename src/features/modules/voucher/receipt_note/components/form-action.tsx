@@ -6,7 +6,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ReceiptNote } from '../data/schema'
 import { type ReceiptNoteForm } from '../data/schema'
-import { StockJournal } from "./stock-journal"
+
+import FormInputField from '@/components/form-input-field'
+import { Label } from "@/components/ui/label"
+import { StockJournalComponent } from "./stock-journal/stock-journal-component"
+import PartyLedgerForm from "./sub-component/party-ledger-form"
+import PurchaseLedgerForm from "./sub-component/purchase-ledger-form"
 
 
 export interface ReceiptNoteProps {
@@ -19,7 +24,7 @@ const FormAction = ({ currentRow }: ReceiptNoteProps) => {
 
     const methods = useFormContext<ReceiptNoteForm>()
 
-    console.log(isEdit, navigate, methods)
+    // console.log(isEdit, navigate, methods)
 
 
     return (
@@ -60,19 +65,37 @@ const VoucherHeader = () => {
     const dayName = voucherDate
         ? new Date(voucherDate).toLocaleDateString("en-US", { weekday: "long" })
         : ""
+    const party = methods.watch('party')
+
     return (
         <div className="grid grid-rows-1 ">
             <div className="grid grid-cols-[350px_1fr_200px] border-amber-300 border-0">
 
-                <div>
+                <div className="space-y-0">
                     <div className="grid grid-cols-[120px_200px] gap-2">
                         <div className="bg-red-400 text-gray-100 px-2">Receipt Note</div>
-                        <div>No: {methods.getValues('voucherNo')}</div>
-
+                        <div>No: {methods.getValues('voucherNo') ?? 'new'}  </div>
                     </div>
-                    <div className="grid grid-cols-[40px_200px] gap-2">
-                        <div>Ref. : </div>
-                        <div>#1236</div>
+                    <div className="grid grid-cols-[250px_300px] gap-6 pt-2">
+                        <div className="grid grid-cols-[40px_200px]">
+                            <FormInputField form={methods} gapClass={"grid grid-cols-[90px_150px] gap-4"} type="text" name="referenceNo" label="Reference No." />
+                        </div>
+                        <div className="grid grid-cols-[110px_150px]">
+                            <Label>Reference Date:</Label>
+
+                            <Input
+                                type="date"
+                                {...methods.register("referenceDate", {
+                                    setValueAs: (value) => (value ? new Date(value) : null), // store as Date
+                                })}
+                                value={inputValue}
+                                onChange={(e) => {
+                                    if (e.target.value) {
+                                        methods.setValue("referenceDate", new Date(e.target.value))
+                                    }
+                                }}
+                            />
+                        </div>
                     </div>
 
                 </div>
@@ -96,14 +119,14 @@ const VoucherHeader = () => {
 
                 </div>
             </div>
-            <div>
-                <div className="grid grid-cols-[140px_1fr] justify-start ">
-                    <div>Party's A/c Name</div>
-                    <div>: Samir Ram</div>
+            <div className="grid grid-cols-2 gap-2 pb-2">
+                <div className="grid grid-rows-2 gap-2 items-center">
+                    <PartyLedgerForm form={methods} />
+                    <PurchaseLedgerForm form={methods} />
+
                 </div>
-                <div className="grid grid-cols-[140px_1fr] justify-start ">
-                    <div>Current Balance</div>
-                    <div>: 50000 cr</div>
+                <div className="sm:hidden grid grid-cols-2 gap-2 items-center">
+                    <div className="text-right">Cost Center: </div><Input type="text" />
                 </div>
             </div>
         </div>
@@ -111,12 +134,12 @@ const VoucherHeader = () => {
 }
 
 const BodyComponent = () => {
-    const { register } = useFormContext<ReceiptNoteForm>()
-    console.log(register)
+
+
     return (
         <div className="bg-violet-400/20">
             {/* <StockJournalEntries /> */}
-            <StockJournal />
+            <StockJournalComponent />
             {/* <pre>
 
                 {JSON.stringify(register)}

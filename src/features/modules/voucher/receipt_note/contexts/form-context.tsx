@@ -16,25 +16,33 @@ export const useReceiptForm = () => {
     return ctx
 }
 
-export const FormProvider = ({ children, defaultValues, }: {
+export const FormProvider = ({ children }: {
     children: React.ReactNode
-    defaultValues?: Partial<ReceiptNoteForm>
 }) => {
-    console.log(defaultValues)
+
     const form = useForm<ReceiptNoteForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             voucherNo: "",
             voucherDate: new Date(),
+            referenceNo: "",
+            referenceDate: new Date(),
             voucherTypeId: 1,
+            purchaseLedgerId: undefined,
+            partyLedgerId: undefined,
             stockJournalId: null,
+            remarks: "",
             stockJournal: {
-                journal_no: "",
-                journal_date: new Date(),
-                voucher_id: null,
+                journalNo: "",
+                journalDate: new Date(),
+                voucherId: null,
                 type: "",
                 remarks: "",
                 stockJournalEntries: [],
+            },
+            party: {
+                id: 2,
+                name: "SAM",
             },
             voucherEntries: [],
             isEdit: false,

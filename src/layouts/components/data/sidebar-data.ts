@@ -310,30 +310,21 @@ export const sidebarData: SidebarData = {
           icon: IconAccessPoint,
           items: [
             {
-              title: 'Stock Item',
-              url: '/masters/inventory/stock_item',
+              title: 'Employee',
+              url: '/masters/payroll/employee',
               icon: IconUserCog,
             },
             {
-              title: 'Stock Group',
-              url: '/masters/inventory/stock_group',
+              title: 'Department',
+              url: '/masters/payroll/department',
               icon: IconUserCog,
             },
             {
-              title: 'Stock Category',
-              url: '/masters/inventory/stock_category',
+              title: 'Designation',
+              url: '/masters/payroll/designation',
               icon: IconUserCog,
             },
-            {
-              title: 'Stock Unit',
-              url: '/masters/inventory/stock_unit',
-              icon: IconUserCog,
-            },
-            {
-              title: 'Godown',
-              url: '/masters/inventory/godown',
-              icon: IconUserCog,
-            },
+
           ]
         },
         {

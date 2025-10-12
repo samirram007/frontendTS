@@ -10,6 +10,8 @@ export const addressSchema: z.ZodType<any> = z.object({
   line1: z.string().nullable().optional(),
   line2: z.string().nullable().optional(),
   landmark: z.string().nullable().optional(),
+  postOffice: z.string().nullable().optional(),
+  district: z.string().nullable().optional(),
   city: z.string().nullable().optional(),
   stateId: z.number().nullish(),
   countryId: z.number().nullish(),
@@ -36,6 +38,8 @@ export const formSchema = z
     line1: z.string(),
     line2: z.string().nullable().optional(),
     landmark: z.string().nullable().optional(),
+    postOffice: z.string().nullable().optional(),
+    district: z.string().nullable().optional(),
     city: z.string().nullable().optional(),
     state: z.string().nullable().optional(),
     postalCode: z.string({ required_error: 'Postal code is required.' })

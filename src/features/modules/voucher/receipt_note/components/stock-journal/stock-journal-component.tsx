@@ -4,11 +4,12 @@ import { fetchGodownService } from "@/features/modules/godown/data/api"
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api"
 import { useQueries } from "@tanstack/react-query"
 import { useFieldArray, useFormContext } from "react-hook-form"
-import type { ReceiptNoteForm } from "../data/schema"
+import type { ReceiptNoteForm } from "../../data/schema"
 import { RHFSelect } from "./RHFSelect"
+import { ItemDialog } from "./item-dialog"
 
 
-export function StockJournal() {
+export function StockJournalComponent() {
     return (
         <>
             <div className="items">
@@ -109,7 +110,7 @@ const StockJournalEntries = () => {
                 </div>
             ))}
 
-            <Button
+            {/* <Button
                 type="button"
                 onClick={() =>
                     append({
@@ -123,8 +124,17 @@ const StockJournalEntries = () => {
                 }
             >
                 + Add Entry
-            </Button>
+            </Button> */}
+            <ItemAdd />
         </div>
     )
+}
+
+const ItemAdd = () => {
+    return (
+        <div className="space-y-4 grid grid-cols-1 justify-center items-center w-full bg-amber-400">
+            <ItemDialog />
+        </div>)
+
 }
 

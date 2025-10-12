@@ -120,7 +120,7 @@ export function FormAction({ currentRow }: Props) {
                                 {isEdit && form.getValues('accountLedger') ?
                                     <div className={cn(gapClass, 'items-center')}>
                                         <div>Ledger A/c: </div>
-                                        <div className={cn(gapClass, 'font-bold border-2 px-2 py-1 rounded-sm')} >
+                                        <div className={cn(gapClass, 'grid-cols-1 font-bold border-2 px-2 py-1 rounded-sm')} >
                                             {form.getValues('accountLedger')?.name}
                                         </div>
                                     </div>
