@@ -74,12 +74,16 @@ export function FormAction({ currentRow }: Props) {
     const moduleName = "Employee"
     const onSubmit = (values: EmployeeForm) => {
         console.log("here: ", values)
-        form.reset()
+        
         saveEmployee(
             currentRow ? { ...values, id: currentRow.id! } : values,
             {
                 onSuccess: () => {
-                    navigate({ to: EmployeeRoute.to, })
+                    form.reset()
+                    setTimeout(() => {
+                        navigate({ to: EmployeeRoute.to, })
+                    }, 600);
+                    
                 },
             }
         )

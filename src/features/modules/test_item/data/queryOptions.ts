@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchTestItemByIdService, fetchTestItemService, storeTestItemService, updateTestItemService } from "./api"
+import { fetchTestItemByIdService, fetchTestItemService, storeTestItemReportTemplateFileService, storeTestItemService, updateTestItemReportTemplateFileService, updateTestItemService } from "./api"
 import type { TestItemForm } from "./schema"
 
 const BASE_KEY = "test_items"
@@ -25,6 +25,27 @@ export function useTestItemMutation() {
             }
             // Otherwise create
             return await storeTestItemService(data)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+        },
+        onError: (error) => {
+            console.error("Test Item mutation failed:", error)
+        },
+    })
+}
+
+
+export function useTestItemReportTemplateFileMutation() {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async (data: TestItemForm & { id?: number }) => {
+            if (data.id) {
+                // Update if id exists
+                return await updateTestItemReportTemplateFileService(data)
+            }
+            // Otherwise create
+            return await storeTestItemReportTemplateFileService(data)
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [BASE_KEY] })

@@ -2,6 +2,8 @@ import { getData, postData, putData } from "@/utils/dataClient"
 
 
 const API_PATH = "/test_items"
+const REPORT_API_PATH="/test_item_report_templates"
+
 export async function fetchTestItemService() {
     return await getData(API_PATH)
 }
@@ -13,6 +15,16 @@ export async function storeTestItemService(payload: any) {
     console.log(payload)
     return await postData(API_PATH, payload)
 }
+
+export async function storeTestItemReportTemplateFileService(payload: any) {
+    return await postData(REPORT_API_PATH, payload)
+}
+
+export async function updateTestItemReportTemplateFileService(payload: any) {
+    return await postData(REPORT_API_PATH, payload)
+}
+
+
 export async function updateTestItemService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }

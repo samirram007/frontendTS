@@ -4,7 +4,7 @@ import type { TestItem } from '../data/schema'
 
 
 
-type TestItemDialogType = 'invite' | 'add' | 'edit' | 'delete'
+type TestItemDialogType = 'invite' | 'add' | 'edit' | 'delete' | "configuration"
 
 interface TestItemContextType {
   open: TestItemDialogType | null

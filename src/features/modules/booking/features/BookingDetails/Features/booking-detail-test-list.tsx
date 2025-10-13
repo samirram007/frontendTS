@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import type { IBooking } from "../../NewBooking/data/schema";
 import { usePayment } from "../../../contexts/payment-context";
 import { useBookingDetail } from "../context/booking-detail-context";
+import { MdDeleteOutline } from "react-icons/md";
 
 const formatDateForInput = (dateString: string | Date) => {
   const date = new Date(dateString);
@@ -50,8 +51,8 @@ export function BookingDetailList({data}:{data?:IBooking}){
                                             <h1 className="text-right py-2 pr-2">{Number(item.stockItem.standardSellingPrice).toFixed(2)}</h1>
                                         </div>
                                         <div className=" px-2 flex justify-center items-center gap-1 py-2">
-                                            {isMinimumPaymentDone ?  <Badge variant="outline">Ready for process</Badge> : <Badge variant="outline">waiting for payment</Badge>}
-                                          
+                                            {isMinimumPaymentDone ?  <Badge variant="outline">Ready for process</Badge> : <Badge className="bg-amber-600 text-white" variant="outline">waiting for payment</Badge>}
+                                            <MdDeleteOutline className="cursor-pointer text-red-500" size={20} />
                                         </div>
                                     </div>
                                 ))

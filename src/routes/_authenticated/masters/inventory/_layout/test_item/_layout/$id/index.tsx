@@ -19,7 +19,7 @@ const paramsSchema = z.object({
     ]),
 })
 export const Route = createFileRoute(
-    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id',
+    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/',
 )({
     params: {
         parse: (params) => paramsSchema.parse(params),
@@ -35,7 +35,7 @@ export const Route = createFileRoute(
 
         if (id === "new") return <TestItemDetails />
 
-        const { data: testItem } = useSuspenseQuery(testItemQueryOptions(id))
+        const { data: testItem } = useSuspenseQuery(testItemQueryOptions(Number(id)))
         return <Suspense fallback={<Loader className="animate-spin" />}>
             <TestItemDetails data={testItem?.data} />
         </Suspense>

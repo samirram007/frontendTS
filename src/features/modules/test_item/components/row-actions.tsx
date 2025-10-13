@@ -5,6 +5,7 @@ import { useTestItem } from "../contexts/test_item-context"
 import type { TestItem } from "../data/schema"
 
 import { Route as TestItemDetailRoute } from '@/routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
+import { Route as TestItemConfigurationRoute} from '@/routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration';
 
 interface DataTableRowActionsProps {
     row: Row<TestItem>
@@ -29,6 +30,14 @@ const RowActions = (props: DataTableRowActionsProps) => {
             onDelete={(data) => {
                 setCurrentRow(data)
                 setOpen("delete")
+            }}
+            onConfiguraton={(data)=>{
+                setCurrentRow(data);
+                setOpen("configuration");
+                navigate({
+                    to: TestItemConfigurationRoute.to,
+                    params: { id: data.id! },
+                })
             }}
         />
     )

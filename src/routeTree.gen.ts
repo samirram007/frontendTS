@@ -125,8 +125,9 @@ import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIdRouteImport
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/$id'
-import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id/index'
+import { Route as AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRouteImport } from './routes/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration'
 
 const errors503LazyRouteImport = createFileRoute('/(errors)/503')()
 const errors500LazyRouteImport = createFileRoute('/(errors)/500')()
@@ -1078,13 +1079,6 @@ const AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute =
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute,
   } as any)
-const AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute =
-  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport.update({
-    id: '/$id',
-    path: '/$id',
-    getParentRoute: () =>
-      AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute,
-  } as any)
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute =
   AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport.update({
     id: '/$id',
@@ -1092,6 +1086,22 @@ const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute =
     getParentRoute: () =>
       AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute,
   } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRouteImport.update({
+    id: '/$id/',
+    path: '/$id/',
+    getParentRoute: () =>
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute,
+  } as any)
+const AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute =
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRouteImport.update(
+    {
+      id: '/$id/configuration',
+      path: '/$id/configuration',
+      getParentRoute: () =>
+        AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -1194,7 +1204,6 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
-  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1218,6 +1227,8 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/masters/inventory/test_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute
+  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1318,7 +1329,6 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
-  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1327,6 +1337,8 @@ export interface FileRoutesByTo {
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  '/masters/inventory/test_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute
+  '/masters/inventory/test_item/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1454,7 +1466,6 @@ export interface FileRoutesById {
   '/_authenticated/transactions/vouchers/_layout/stock_journal/': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/_authenticated/transactions/vouchers/_layout/transfer_voucher/': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
-  '/_authenticated/masters/inventory/_layout/test_item/_layout/$id': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   '/_authenticated/masters/organization/_layout/company/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_authenticated/masters/organization/_layout/country/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1478,6 +1489,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/supplier/_layout/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/_authenticated/masters/payroll/_layout/employee/_layout/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute
+  '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/': typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1582,7 +1595,6 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/masters/inventory/stock_item/$id'
-    | '/masters/inventory/test_item/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1606,6 +1618,8 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/'
     | '/masters/party/transporter/'
     | '/masters/payroll/employee/'
+    | '/masters/inventory/test_item/$id/configuration'
+    | '/masters/inventory/test_item/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1706,7 +1720,6 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/masters/inventory/stock_item/$id'
-    | '/masters/inventory/test_item/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1715,6 +1728,8 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
+    | '/masters/inventory/test_item/$id/configuration'
+    | '/masters/inventory/test_item/$id'
   id:
     | '__root__'
     | '/'
@@ -1841,7 +1856,6 @@ export interface FileRouteTypes {
     | '/_authenticated/transactions/vouchers/_layout/stock_journal/'
     | '/_authenticated/transactions/vouchers/_layout/transfer_voucher/'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
-    | '/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
     | '/_authenticated/masters/organization/_layout/company/_layout/$id'
     | '/_authenticated/masters/organization/_layout/country/_layout/$id'
     | '/_authenticated/masters/organization/_layout/currency/_layout/$id'
@@ -1865,6 +1879,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/supplier/_layout/'
     | '/_authenticated/masters/party/_layout/transporter/_layout/'
     | '/_authenticated/masters/payroll/_layout/employee/_layout/'
+    | '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration'
+    | '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -2907,19 +2923,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute
     }
-    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id': {
-      id: '/_authenticated/masters/inventory/_layout/test_item/_layout/$id'
-      path: '/$id'
-      fullPath: '/masters/inventory/test_item/$id'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRouteImport
-      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute
-    }
     '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': {
       id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
       path: '/$id'
       fullPath: '/masters/inventory/stock_item/$id'
       preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport
       parentRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute
+    }
+    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/': {
+      id: '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/'
+      path: '/$id'
+      fullPath: '/masters/inventory/test_item/$id'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute
+    }
+    '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration': {
+      id: '/_authenticated/masters/inventory/_layout/test_item/_layout/$id/configuration'
+      path: '/$id/configuration'
+      fullPath: '/masters/inventory/test_item/$id/configuration'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutRoute
     }
   }
 }
@@ -3215,16 +3238,19 @@ const AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren =
   )
 
 interface AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren {
-  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute
   AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute
+  AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute: typeof AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute
 }
 
 const AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren: AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteChildren =
   {
-    AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute:
-      AuthenticatedMastersInventoryLayoutTest_itemLayoutIdRoute,
     AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute:
       AuthenticatedMastersInventoryLayoutTest_itemLayoutIndexRoute,
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutIdConfigurationRoute,
+    AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute:
+      AuthenticatedMastersInventoryLayoutTest_itemLayoutIdIndexRoute,
   }
 
 const AuthenticatedMastersInventoryLayoutTest_itemLayoutRouteWithChildren =

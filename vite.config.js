@@ -10,15 +10,6 @@ export default defineConfig({
   server: {
     port: 3000,
     open:true
-    // port: 3000,
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://aipt-api.local', // Your Laravel backend URL
-    //     changeOrigin: true, // Ensures the host header is rewritten to the target
-    //     secure: false, // For local HTTP servers (set to true for HTTPS in production)
-    //     //rewrite: (path) => path.replace(/^\/api/, ''), // Optional: removes /api prefix if needed
-    //   },
-    // },
 
   },
   build: {

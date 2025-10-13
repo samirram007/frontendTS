@@ -10,6 +10,7 @@ import {
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconEdit, IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
+import { Cog } from 'lucide-react'
 
 
 // interface DataTableRowActionsProps {
@@ -19,12 +20,14 @@ interface DataTableRowActionsProps<TData> {
   row: Row<TData>
   onEdit?: (row: TData) => void
   onDelete?: (row: TData) => void
+  onConfiguraton?: (row: TData) => void
 }
 
 export function DataTableRowActions<TData>({
   row,
   onEdit,
   onDelete,
+  onConfiguraton
 }: DataTableRowActionsProps<TData>) {
   
   return (
@@ -59,6 +62,19 @@ export function DataTableRowActions<TData>({
             Delete
             <DropdownMenuShortcut>
               <IconTrash size={16} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+           onClick={() => onConfiguraton?.(row.original)}
+            // onClick={() => {
+            //   setCurrentRow(row.original)
+            //   setOpen('delete')
+            // }}
+            className='text-blue-500! cursor-pointer!'
+          >
+            Configuration
+            <DropdownMenuShortcut>
+              <Cog size={16} />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>

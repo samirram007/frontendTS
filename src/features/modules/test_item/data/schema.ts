@@ -139,3 +139,13 @@ export const formSchema = z.object({
 })
 
 export type TestItemForm = z.infer<typeof formSchema>
+
+
+
+export const testConfigSchema = z.object({
+  stockItemId: z.number().nullish(),
+  employeeId: z.number().nullish(),
+  reportTemplateName: z.string()
+});
+
+export type TestItemConfiguration = z.infer<typeof testConfigSchema>;
