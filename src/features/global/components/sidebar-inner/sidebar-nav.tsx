@@ -14,6 +14,7 @@ import { useState, type JSX } from 'react'
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
     href: string
+    visible: boolean
     title: string
     icon: JSX.Element
   }[]
@@ -66,6 +67,7 @@ export default function SidebarNav({
           {...props}
         >
           {items.map((item) => (
+            item.visible && (
             <Link
               key={item.href}
               to={item.href}
@@ -80,6 +82,7 @@ export default function SidebarNav({
               <span className='mr-2'>{item.icon}</span>
               {item.title}
             </Link>
+            )
           ))}
         </nav>
       </ScrollArea>

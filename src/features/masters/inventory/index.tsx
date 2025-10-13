@@ -43,31 +43,37 @@ const sidebarNavItems = [
 
     {
         title: 'Stock Item',
+        visible: true,
         icon: <IconTool size={18} />,
         href: '/masters/inventory/stock_item',
     },
     {
         title: 'Stock Group',
+        visible: true,
         icon: <IconTool size={18} />,
         href: '/masters/inventory/stock_group',
     },
     {
         title: 'Stock Category',
+        visible: true,
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/stock_category',
     },
     {
         title: 'Stock Unit',
+        visible: true,
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/stock_unit',
     },
     {
         title: 'Unique Quantity Code',
+        visible: true,
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/unique_quantity_code',
     },
     {
         title: 'Godown',
+        visible: true,
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/godown',
     },

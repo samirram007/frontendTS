@@ -7,23 +7,29 @@ import { Outlet } from '@tanstack/react-router'
 
 import SidebarInner from '@/features/global/components/sidebar-inner'
 import { Main } from '@/layouts/components/main'
+import { useAdministration } from './context/administration-context'
 
 export default function Administration() {
+    const { sideBarOpen } = useAdministration()
     return (
         <>
 
             <Main fixed>
                 <div className='space-y-0.5'>
                     <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-                        Organization
+                        Administration
                     </h1>
                     <p className='text-muted-foreground'>
-                        Manage your company and organization settings.
+                        Manage user, role, permission etc..
                     </p>
                 </div>
                 <Separator className='my-4 lg:my-6' />
                 <div className='flex flex-1 flex-col space-y-2 overflow-hidden md:space-y-2 lg:flex-row lg:space-y-0 lg:space-x-12'>
-                    <SidebarInner items={sidebarNavItems} />
+                    {sideBarOpen && (
+
+                        <SidebarInner items={sidebarNavItems} />
+
+                    )}
                     <div className='flex w-full overflow-y-hidden p-1'>
                         <Outlet />
                     </div>
@@ -35,24 +41,33 @@ export default function Administration() {
 
 const sidebarNavItems = [
     {
-        title: 'Company Profile',
+        title: 'Role',
+        visible: true,
         icon: <IconUser size={18} />,
-        href: '/masters/accounts/company',
+        href: '/masters/administration/role',
     },
-
     {
-        title: 'Currency',
-        href: '/masters/accounts/currency',
+        title: 'User',
+        visible: true,
+        href: '/masters/administration/user',
         icon: <IconUserCog />,
     },
     {
-        title: 'Country',
-        href: '/masters/accounts/country',
+        title: 'App Module',
+        visible: true,
+        href: '/masters/administration/app-module',
         icon: <IconUserCog />,
     },
     {
-        title: 'State',
-        href: '/masters/accounts/state',
+        title: 'App Feature',
+        visible: true,
+        href: '/masters/administration/app-feature',
+        icon: <IconUserCog />,
+    },
+    {
+        title: 'Permission',
+        visible: true,
+        href: '/masters/administration/permission',
         icon: <IconUserCog />,
     },
 ]

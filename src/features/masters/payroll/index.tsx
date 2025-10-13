@@ -54,47 +54,63 @@ export default function Payroll() {
 const sidebarNavItems = [
     {
         title: 'Employee',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/payroll/employee',
     },
     {
+        title: 'Employee Group',
+        visible: true,
+        icon: <IconUser size={18} />,
+        href: '/masters/payroll/employee_group',
+    },
+    {
         title: 'Department',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/payroll/department',
     },
     {
         title: 'Designation',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/payroll/designation',
     },
     {
         title: 'Grade',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/payroll/grade',
     },
+
+    {
+        title: 'Shift',
+        visible: true,
+        icon: <IconUserCog />,
+        href: '/masters/payroll/shift',
+    },
     {
         title: 'Bank Master',
+        visible: false,
         icon: <IconUserCog />,
         href: '/masters/payroll/bank_master',
     },
     {
         title: 'Salary',
+        visible: false,
         icon: <IconUserCog />,
         href: '/masters/payroll/salary',
     },
     {
         title: 'Leave Types',
+        visible: false,
         icon: <IconUserCog />,
-        href: '/masters/payroll/leave_types',
+        href: '/masters/payroll/leave_type',
     },
     {
         title: 'Holiday List',
+        visible: false,
         icon: <IconUserCog />,
         href: '/masters/payroll/holiday_list',
-    },
-    {
-        title: 'Shifts',
-        icon: <IconUserCog />,
-        href: '/masters/payroll/shifts',
     },
 ]

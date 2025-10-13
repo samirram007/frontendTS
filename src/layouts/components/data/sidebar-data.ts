@@ -19,8 +19,7 @@ import {
   IconSettings,
   IconTool,
   IconUserCog,
-  IconUserOff,
-  IconUsers,
+  IconUserOff
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
@@ -92,12 +91,7 @@ export const sidebarData: SidebarData = {
           badge: '3',
           icon: IconMessages,
         },
-        {
-          title: 'Users',
-          visible: false,
-          url: '/users',
-          icon: IconUsers,
-        },
+
       ],
     },
     {
@@ -360,6 +354,19 @@ export const sidebarData: SidebarData = {
         },
       ],
     },
+    {
+      title: 'Administration',
+      visible: true,
+      items: [
+        {
+          title: 'User',
+          url: '/masters/administration/user',
+          visible: true,
+          icon: IconUserCog,
+        },
+      ],
+    },
+
     {
       title: 'Reports',
       visible: true,

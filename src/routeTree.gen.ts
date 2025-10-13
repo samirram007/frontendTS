@@ -18,7 +18,6 @@ import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
@@ -65,6 +64,7 @@ import { Route as AuthenticatedMastersPayrollLayoutSalaryIndexRouteImport } from
 import { Route as AuthenticatedMastersPayrollLayoutLeave_typeIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/leave_type/index'
 import { Route as AuthenticatedMastersPayrollLayoutHolidayIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/holiday/index'
 import { Route as AuthenticatedMastersPayrollLayoutGradeIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/grade/index'
+import { Route as AuthenticatedMastersPayrollLayoutEmployee_groupIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee_group/index'
 import { Route as AuthenticatedMastersPayrollLayoutDesignationIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/designation/index'
 import { Route as AuthenticatedMastersPayrollLayoutDepartmentIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/department/index'
 import { Route as AuthenticatedMastersPayrollLayoutCost_centerIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/cost_center/index'
@@ -92,6 +92,7 @@ import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteImpor
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout'
+import { Route as AuthenticatedMastersAdministrationLayoutUserLayoutRouteImport } from './routes/_authenticated/masters/administration/_layout/user/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_type/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/vendor/_layout'
 import { Route as AuthenticatedMastersAccountsLayoutCustomerLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/customer/_layout'
@@ -106,6 +107,7 @@ import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/index'
 import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/index'
+import { Route as AuthenticatedMastersAdministrationLayoutUserLayoutIndexRouteImport } from './routes/_authenticated/masters/administration/_layout/user/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_type/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutVendorLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/vendor/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/customer/_layout/index'
@@ -119,7 +121,9 @@ import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIdRouteImport
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/$id'
-import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+import { Route as AuthenticatedMastersAdministrationLayoutUserLayoutIdRouteImport } from './routes/_authenticated/masters/administration/_layout/user/_layout/$id'
+import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/index'
+import { Route as AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration'
 
 const errors503LazyRouteImport = createFileRoute('/(errors)/503')()
 const errors500LazyRouteImport = createFileRoute('/(errors)/500')()
@@ -179,6 +183,9 @@ const AuthenticatedMastersOrganizationLayoutCompanyRouteImport =
   createFileRoute('/_authenticated/masters/organization/_layout/company')()
 const AuthenticatedMastersInventoryLayoutStock_itemRouteImport =
   createFileRoute('/_authenticated/masters/inventory/_layout/stock_item')()
+const AuthenticatedMastersAdministrationLayoutUserRouteImport = createFileRoute(
+  '/_authenticated/masters/administration/_layout/user',
+)()
 const AuthenticatedMastersAccountsLayoutVoucher_typeRouteImport =
   createFileRoute('/_authenticated/masters/accounts/_layout/voucher_type')()
 const AuthenticatedMastersAccountsLayoutVendorRouteImport = createFileRoute(
@@ -340,11 +347,6 @@ const AuthenticatedMastersAccountsRoute =
     path: '/masters/accounts',
     getParentRoute: () => AuthenticatedRoute,
   } as any)
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -519,6 +521,12 @@ const AuthenticatedMastersInventoryLayoutStock_itemRoute =
     id: '/stock_item',
     path: '/stock_item',
     getParentRoute: () => AuthenticatedMastersInventoryLayoutRoute,
+  } as any)
+const AuthenticatedMastersAdministrationLayoutUserRoute =
+  AuthenticatedMastersAdministrationLayoutUserRouteImport.update({
+    id: '/user',
+    path: '/user',
+    getParentRoute: () => AuthenticatedMastersAdministrationLayoutRoute,
   } as any)
 const AuthenticatedMastersAccountsLayoutVoucher_typeRoute =
   AuthenticatedMastersAccountsLayoutVoucher_typeRouteImport.update({
@@ -698,6 +706,12 @@ const AuthenticatedMastersPayrollLayoutGradeIndexRoute =
     path: '/grade/',
     getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
   } as any)
+const AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute =
+  AuthenticatedMastersPayrollLayoutEmployee_groupIndexRouteImport.update({
+    id: '/employee_group/',
+    path: '/employee_group/',
+    getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
+  } as any)
 const AuthenticatedMastersPayrollLayoutDesignationIndexRoute =
   AuthenticatedMastersPayrollLayoutDesignationIndexRouteImport.update({
     id: '/designation/',
@@ -855,6 +869,11 @@ const AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute =
     id: '/_layout',
     getParentRoute: () => AuthenticatedMastersInventoryLayoutStock_itemRoute,
   } as any)
+const AuthenticatedMastersAdministrationLayoutUserLayoutRoute =
+  AuthenticatedMastersAdministrationLayoutUserLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => AuthenticatedMastersAdministrationLayoutUserRoute,
+  } as any)
 const AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRoute =
   AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteImport.update({
     id: '/_layout',
@@ -938,6 +957,13 @@ const AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute =
     path: '/',
     getParentRoute: () =>
       AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute,
+  } as any)
+const AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute =
+  AuthenticatedMastersAdministrationLayoutUserLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      AuthenticatedMastersAdministrationLayoutUserLayoutRoute,
   } as any)
 const AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute =
   AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRouteImport.update({
@@ -1026,13 +1052,29 @@ const AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute =
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute,
   } as any)
-const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute =
-  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport.update({
+const AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute =
+  AuthenticatedMastersAdministrationLayoutUserLayoutIdRouteImport.update({
     id: '/$id',
     path: '/$id',
     getParentRoute: () =>
+      AuthenticatedMastersAdministrationLayoutUserLayoutRoute,
+  } as any)
+const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute =
+  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport.update({
+    id: '/$id/',
+    path: '/$id/',
+    getParentRoute: () =>
       AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute,
   } as any)
+const AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute =
+  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRouteImport.update(
+    {
+      id: '/$id/configuration',
+      path: '/$id/configuration',
+      getParentRoute: () =>
+        AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute,
+    } as any,
+  )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -1060,7 +1102,6 @@ export interface FileRoutesByFullPath {
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
   '/masters/accounts': typeof AuthenticatedMastersAccountsLayoutRouteWithChildren
   '/masters/administration': typeof AuthenticatedMastersAdministrationLayoutRouteWithChildren
   '/masters/inventory': typeof AuthenticatedMastersInventoryLayoutRouteWithChildren
@@ -1079,6 +1120,7 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/customer': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutRouteWithChildren
   '/masters/accounts/vendor': typeof AuthenticatedMastersAccountsLayoutVendorLayoutRouteWithChildren
   '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
+  '/masters/administration/user': typeof AuthenticatedMastersAdministrationLayoutUserLayoutRouteWithChildren
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutRouteWithChildren
@@ -1106,6 +1148,7 @@ export interface FileRoutesByFullPath {
   '/masters/payroll/cost_center': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/masters/payroll/department': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/masters/payroll/designation': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
+  '/masters/payroll/employee_group': typeof AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute
   '/masters/payroll/grade': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/masters/payroll/holiday': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/masters/payroll/leave_type': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1129,7 +1172,7 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/sales_order': typeof AuthenticatedTransactionsVouchersLayoutSales_orderIndexRoute
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
-  '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/masters/administration/user/$id': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1143,6 +1186,7 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/customer/': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/masters/accounts/vendor/': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type/': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/masters/administration/user/': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute
   '/masters/inventory/stock_item/': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/masters/organization/company/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -1152,6 +1196,8 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/masters/inventory/stock_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
+  '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1178,7 +1224,6 @@ export interface FileRoutesByTo {
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
   '/masters/accounts': typeof AuthenticatedMastersAccountsLayoutRouteWithChildren
   '/masters/administration': typeof AuthenticatedMastersAdministrationLayoutRouteWithChildren
   '/masters/inventory': typeof AuthenticatedMastersInventoryLayoutRouteWithChildren
@@ -1196,6 +1241,7 @@ export interface FileRoutesByTo {
   '/masters/accounts/customer': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/masters/accounts/vendor': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/masters/administration/user': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute
   '/masters/inventory/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -1223,6 +1269,7 @@ export interface FileRoutesByTo {
   '/masters/payroll/cost_center': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/masters/payroll/department': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/masters/payroll/designation': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
+  '/masters/payroll/employee_group': typeof AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute
   '/masters/payroll/grade': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/masters/payroll/holiday': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/masters/payroll/leave_type': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1246,7 +1293,7 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/sales_order': typeof AuthenticatedTransactionsVouchersLayoutSales_orderIndexRoute
   '/transactions/vouchers/stock_journal': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
-  '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/masters/administration/user/$id': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1255,6 +1302,8 @@ export interface FileRoutesByTo {
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  '/masters/inventory/stock_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
+  '/masters/inventory/stock_item/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1284,7 +1333,6 @@ export interface FileRoutesById {
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/masters/accounts': typeof AuthenticatedMastersAccountsRouteWithChildren
   '/_authenticated/masters/accounts/_layout': typeof AuthenticatedMastersAccountsLayoutRouteWithChildren
   '/_authenticated/masters/administration': typeof AuthenticatedMastersAdministrationRouteWithChildren
@@ -1316,6 +1364,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/accounts/_layout/vendor/_layout': typeof AuthenticatedMastersAccountsLayoutVendorLayoutRouteWithChildren
   '/_authenticated/masters/accounts/_layout/voucher_type': typeof AuthenticatedMastersAccountsLayoutVoucher_typeRouteWithChildren
   '/_authenticated/masters/accounts/_layout/voucher_type/_layout': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
+  '/_authenticated/masters/administration/_layout/user': typeof AuthenticatedMastersAdministrationLayoutUserRouteWithChildren
+  '/_authenticated/masters/administration/_layout/user/_layout': typeof AuthenticatedMastersAdministrationLayoutUserLayoutRouteWithChildren
   '/_authenticated/masters/inventory/_layout/stock_item': typeof AuthenticatedMastersInventoryLayoutStock_itemRouteWithChildren
   '/_authenticated/masters/inventory/_layout/stock_item/_layout': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
   '/_authenticated/masters/organization/_layout/company': typeof AuthenticatedMastersOrganizationLayoutCompanyRouteWithChildren
@@ -1352,6 +1402,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/payroll/_layout/cost_center/': typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   '/_authenticated/masters/payroll/_layout/department/': typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   '/_authenticated/masters/payroll/_layout/designation/': typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
+  '/_authenticated/masters/payroll/_layout/employee_group/': typeof AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute
   '/_authenticated/masters/payroll/_layout/grade/': typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   '/_authenticated/masters/payroll/_layout/holiday/': typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   '/_authenticated/masters/payroll/_layout/leave_type/': typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -1375,7 +1426,7 @@ export interface FileRoutesById {
   '/_authenticated/transactions/vouchers/_layout/sales_order/': typeof AuthenticatedTransactionsVouchersLayoutSales_orderIndexRoute
   '/_authenticated/transactions/vouchers/_layout/stock_journal/': typeof AuthenticatedTransactionsVouchersLayoutStock_journalIndexRoute
   '/_authenticated/transactions/vouchers/_layout/transfer_voucher/': typeof AuthenticatedTransactionsVouchersLayoutTransfer_voucherIndexRoute
-  '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
+  '/_authenticated/masters/administration/_layout/user/_layout/$id': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute
   '/_authenticated/masters/organization/_layout/company/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_authenticated/masters/organization/_layout/country/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1389,6 +1440,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/accounts/_layout/customer/_layout/': typeof AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/vendor/_layout/': typeof AuthenticatedMastersAccountsLayoutVendorLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_type/_layout/': typeof AuthenticatedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/_authenticated/masters/administration/_layout/user/_layout/': typeof AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute
   '/_authenticated/masters/inventory/_layout/stock_item/_layout/': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/company/_layout/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/country/_layout/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -1398,6 +1450,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/supplier/_layout/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/_authenticated/masters/payroll/_layout/employee/_layout/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
+  '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1427,7 +1481,6 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/settings/'
     | '/tasks'
-    | '/users'
     | '/masters/accounts'
     | '/masters/administration'
     | '/masters/inventory'
@@ -1446,6 +1499,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer'
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
+    | '/masters/administration/user'
     | '/masters/inventory/stock_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
@@ -1473,6 +1527,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/cost_center'
     | '/masters/payroll/department'
     | '/masters/payroll/designation'
+    | '/masters/payroll/employee_group'
     | '/masters/payroll/grade'
     | '/masters/payroll/holiday'
     | '/masters/payroll/leave_type'
@@ -1496,7 +1551,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/sales_order'
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
-    | '/masters/inventory/stock_item/$id'
+    | '/masters/administration/user/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1510,6 +1565,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer/'
     | '/masters/accounts/vendor/'
     | '/masters/accounts/voucher_type/'
+    | '/masters/administration/user/'
     | '/masters/inventory/stock_item/'
     | '/masters/organization/company/'
     | '/masters/organization/country/'
@@ -1519,6 +1575,8 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/'
     | '/masters/party/transporter/'
     | '/masters/payroll/employee/'
+    | '/masters/inventory/stock_item/$id/configuration'
+    | '/masters/inventory/stock_item/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1545,7 +1603,6 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/settings'
     | '/tasks'
-    | '/users'
     | '/masters/accounts'
     | '/masters/administration'
     | '/masters/inventory'
@@ -1563,6 +1620,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer'
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
+    | '/masters/administration/user'
     | '/masters/inventory/stock_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
@@ -1590,6 +1648,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/cost_center'
     | '/masters/payroll/department'
     | '/masters/payroll/designation'
+    | '/masters/payroll/employee_group'
     | '/masters/payroll/grade'
     | '/masters/payroll/holiday'
     | '/masters/payroll/leave_type'
@@ -1613,7 +1672,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/sales_order'
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
-    | '/masters/inventory/stock_item/$id'
+    | '/masters/administration/user/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -1622,6 +1681,8 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
+    | '/masters/inventory/stock_item/$id/configuration'
+    | '/masters/inventory/stock_item/$id'
   id:
     | '__root__'
     | '/'
@@ -1650,7 +1711,6 @@ export interface FileRouteTypes {
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
-    | '/_authenticated/users/'
     | '/_authenticated/masters/accounts'
     | '/_authenticated/masters/accounts/_layout'
     | '/_authenticated/masters/administration'
@@ -1682,6 +1742,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/accounts/_layout/vendor/_layout'
     | '/_authenticated/masters/accounts/_layout/voucher_type'
     | '/_authenticated/masters/accounts/_layout/voucher_type/_layout'
+    | '/_authenticated/masters/administration/_layout/user'
+    | '/_authenticated/masters/administration/_layout/user/_layout'
     | '/_authenticated/masters/inventory/_layout/stock_item'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout'
     | '/_authenticated/masters/organization/_layout/company'
@@ -1718,6 +1780,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/payroll/_layout/cost_center/'
     | '/_authenticated/masters/payroll/_layout/department/'
     | '/_authenticated/masters/payroll/_layout/designation/'
+    | '/_authenticated/masters/payroll/_layout/employee_group/'
     | '/_authenticated/masters/payroll/_layout/grade/'
     | '/_authenticated/masters/payroll/_layout/holiday/'
     | '/_authenticated/masters/payroll/_layout/leave_type/'
@@ -1741,7 +1804,7 @@ export interface FileRouteTypes {
     | '/_authenticated/transactions/vouchers/_layout/sales_order/'
     | '/_authenticated/transactions/vouchers/_layout/stock_journal/'
     | '/_authenticated/transactions/vouchers/_layout/transfer_voucher/'
-    | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+    | '/_authenticated/masters/administration/_layout/user/_layout/$id'
     | '/_authenticated/masters/organization/_layout/company/_layout/$id'
     | '/_authenticated/masters/organization/_layout/country/_layout/$id'
     | '/_authenticated/masters/organization/_layout/currency/_layout/$id'
@@ -1755,6 +1818,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/accounts/_layout/customer/_layout/'
     | '/_authenticated/masters/accounts/_layout/vendor/_layout/'
     | '/_authenticated/masters/accounts/_layout/voucher_type/_layout/'
+    | '/_authenticated/masters/administration/_layout/user/_layout/'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout/'
     | '/_authenticated/masters/organization/_layout/company/_layout/'
     | '/_authenticated/masters/organization/_layout/country/_layout/'
@@ -1764,6 +1828,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/supplier/_layout/'
     | '/_authenticated/masters/party/_layout/transporter/_layout/'
     | '/_authenticated/masters/payroll/_layout/employee/_layout/'
+    | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration'
+    | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1950,13 +2016,6 @@ declare module '@tanstack/react-router' {
       path: '/masters/accounts'
       fullPath: '/masters/accounts'
       preLoaderRoute: typeof AuthenticatedMastersAccountsRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
     '/_authenticated/tasks/': {
@@ -2176,6 +2235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemRouteImport
       parentRoute: typeof AuthenticatedMastersInventoryLayoutRoute
     }
+    '/_authenticated/masters/administration/_layout/user': {
+      id: '/_authenticated/masters/administration/_layout/user'
+      path: '/user'
+      fullPath: '/masters/administration/user'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutUserRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutRoute
+    }
     '/_authenticated/masters/accounts/_layout/voucher_type': {
       id: '/_authenticated/masters/accounts/_layout/voucher_type'
       path: '/voucher_type'
@@ -2379,6 +2445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutGradeIndexRouteImport
       parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
     }
+    '/_authenticated/masters/payroll/_layout/employee_group/': {
+      id: '/_authenticated/masters/payroll/_layout/employee_group/'
+      path: '/employee_group'
+      fullPath: '/masters/payroll/employee_group'
+      preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutEmployee_groupIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
+    }
     '/_authenticated/masters/payroll/_layout/designation/': {
       id: '/_authenticated/masters/payroll/_layout/designation/'
       path: '/designation'
@@ -2568,6 +2641,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteImport
       parentRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemRoute
     }
+    '/_authenticated/masters/administration/_layout/user/_layout': {
+      id: '/_authenticated/masters/administration/_layout/user/_layout'
+      path: '/user'
+      fullPath: '/masters/administration/user'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutUserRoute
+    }
     '/_authenticated/masters/accounts/_layout/voucher_type/_layout': {
       id: '/_authenticated/masters/accounts/_layout/voucher_type/_layout'
       path: '/voucher_type'
@@ -2666,6 +2746,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute
     }
+    '/_authenticated/masters/administration/_layout/user/_layout/': {
+      id: '/_authenticated/masters/administration/_layout/user/_layout/'
+      path: '/'
+      fullPath: '/masters/administration/user/'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutRoute
+    }
     '/_authenticated/masters/accounts/_layout/voucher_type/_layout/': {
       id: '/_authenticated/masters/accounts/_layout/voucher_type/_layout/'
       path: '/'
@@ -2757,11 +2844,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRoute
     }
-    '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id': {
-      id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+    '/_authenticated/masters/administration/_layout/user/_layout/$id': {
+      id: '/_authenticated/masters/administration/_layout/user/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/administration/user/$id'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutRoute
+    }
+    '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/': {
+      id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/'
       path: '/$id'
       fullPath: '/masters/inventory/stock_item/$id'
-      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRouteImport
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute
+    }
+    '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration': {
+      id: '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration'
+      path: '/$id/configuration'
+      fullPath: '/masters/inventory/stock_item/$id/configuration'
+      preLoaderRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRouteImport
       parentRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutRoute
     }
   }
@@ -2991,13 +3092,49 @@ const AuthenticatedMastersAccountsRouteWithChildren =
     AuthenticatedMastersAccountsRouteChildren,
   )
 
+interface AuthenticatedMastersAdministrationLayoutUserLayoutRouteChildren {
+  AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute
+  AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute
+}
+
+const AuthenticatedMastersAdministrationLayoutUserLayoutRouteChildren: AuthenticatedMastersAdministrationLayoutUserLayoutRouteChildren =
+  {
+    AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute:
+      AuthenticatedMastersAdministrationLayoutUserLayoutIdRoute,
+    AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute:
+      AuthenticatedMastersAdministrationLayoutUserLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersAdministrationLayoutUserLayoutRouteWithChildren =
+  AuthenticatedMastersAdministrationLayoutUserLayoutRoute._addFileChildren(
+    AuthenticatedMastersAdministrationLayoutUserLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersAdministrationLayoutUserRouteChildren {
+  AuthenticatedMastersAdministrationLayoutUserLayoutRoute: typeof AuthenticatedMastersAdministrationLayoutUserLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersAdministrationLayoutUserRouteChildren: AuthenticatedMastersAdministrationLayoutUserRouteChildren =
+  {
+    AuthenticatedMastersAdministrationLayoutUserLayoutRoute:
+      AuthenticatedMastersAdministrationLayoutUserLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersAdministrationLayoutUserRouteWithChildren =
+  AuthenticatedMastersAdministrationLayoutUserRoute._addFileChildren(
+    AuthenticatedMastersAdministrationLayoutUserRouteChildren,
+  )
+
 interface AuthenticatedMastersAdministrationLayoutRouteChildren {
+  AuthenticatedMastersAdministrationLayoutUserRoute: typeof AuthenticatedMastersAdministrationLayoutUserRouteWithChildren
   AuthenticatedMastersAdministrationLayoutPermissionIndexRoute: typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRoute
   AuthenticatedMastersAdministrationLayoutRoleIndexRoute: typeof AuthenticatedMastersAdministrationLayoutRoleIndexRoute
 }
 
 const AuthenticatedMastersAdministrationLayoutRouteChildren: AuthenticatedMastersAdministrationLayoutRouteChildren =
   {
+    AuthenticatedMastersAdministrationLayoutUserRoute:
+      AuthenticatedMastersAdministrationLayoutUserRouteWithChildren,
     AuthenticatedMastersAdministrationLayoutPermissionIndexRoute:
       AuthenticatedMastersAdministrationLayoutPermissionIndexRoute,
     AuthenticatedMastersAdministrationLayoutRoleIndexRoute:
@@ -3025,16 +3162,19 @@ const AuthenticatedMastersAdministrationRouteWithChildren =
   )
 
 interface AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteChildren {
-  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute
   AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute
+  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
+  AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute: typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteChildren: AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteChildren =
   {
-    AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute:
-      AuthenticatedMastersInventoryLayoutStock_itemLayoutIdRoute,
     AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute:
       AuthenticatedMastersInventoryLayoutStock_itemLayoutIndexRoute,
+    AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute:
+      AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute,
+    AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute:
+      AuthenticatedMastersInventoryLayoutStock_itemLayoutIdIndexRoute,
   }
 
 const AuthenticatedMastersInventoryLayoutStock_itemLayoutRouteWithChildren =
@@ -3455,6 +3595,7 @@ interface AuthenticatedMastersPayrollLayoutRouteChildren {
   AuthenticatedMastersPayrollLayoutCost_centerIndexRoute: typeof AuthenticatedMastersPayrollLayoutCost_centerIndexRoute
   AuthenticatedMastersPayrollLayoutDepartmentIndexRoute: typeof AuthenticatedMastersPayrollLayoutDepartmentIndexRoute
   AuthenticatedMastersPayrollLayoutDesignationIndexRoute: typeof AuthenticatedMastersPayrollLayoutDesignationIndexRoute
+  AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute: typeof AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute
   AuthenticatedMastersPayrollLayoutGradeIndexRoute: typeof AuthenticatedMastersPayrollLayoutGradeIndexRoute
   AuthenticatedMastersPayrollLayoutHolidayIndexRoute: typeof AuthenticatedMastersPayrollLayoutHolidayIndexRoute
   AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute: typeof AuthenticatedMastersPayrollLayoutLeave_typeIndexRoute
@@ -3480,6 +3621,8 @@ const AuthenticatedMastersPayrollLayoutRouteChildren: AuthenticatedMastersPayrol
       AuthenticatedMastersPayrollLayoutDepartmentIndexRoute,
     AuthenticatedMastersPayrollLayoutDesignationIndexRoute:
       AuthenticatedMastersPayrollLayoutDesignationIndexRoute,
+    AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute:
+      AuthenticatedMastersPayrollLayoutEmployee_groupIndexRoute,
     AuthenticatedMastersPayrollLayoutGradeIndexRoute:
       AuthenticatedMastersPayrollLayoutGradeIndexRoute,
     AuthenticatedMastersPayrollLayoutHolidayIndexRoute:
@@ -3618,7 +3761,6 @@ interface AuthenticatedRouteChildren {
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedMastersAccountsRoute: typeof AuthenticatedMastersAccountsRouteWithChildren
   AuthenticatedMastersAdministrationRoute: typeof AuthenticatedMastersAdministrationRouteWithChildren
   AuthenticatedMastersInventoryRoute: typeof AuthenticatedMastersInventoryRouteWithChildren
@@ -3642,7 +3784,6 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedMastersAccountsRoute:
     AuthenticatedMastersAccountsRouteWithChildren,
   AuthenticatedMastersAdministrationRoute:

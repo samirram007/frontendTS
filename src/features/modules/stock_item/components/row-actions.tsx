@@ -5,6 +5,7 @@ import { useStockItem } from "../contexts/stock_item-context"
 import type { StockItem } from "../data/schema"
 
 import { Route as StockItemDetailRoute } from '@/routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+import { Route as StockItemConfigureRoute } from '@/routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration'
 
 interface DataTableRowActionsProps {
     row: Row<StockItem>
@@ -18,10 +19,17 @@ const RowActions = (props: DataTableRowActionsProps) => {
         <DataTableRowActions<StockItem>
             row={row}
             onEdit={(data) => {
-                setCurrentRow(data)
-                console.log("row Action: ", currentRow)
+                setCurrentRow(data) 
                 navigate({
                     to: StockItemDetailRoute.to,
+                    params: { id: data.id! },
+                })
+
+            }}
+            onConfigure={(data) => {
+                setCurrentRow(data)
+                navigate({
+                    to: StockItemConfigureRoute.to,
                     params: { id: data.id! },
                 })
 

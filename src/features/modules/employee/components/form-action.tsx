@@ -20,6 +20,9 @@ import { formSchema, type Employee, type EmployeeForm } from '../data/schema'
 import CurrentLiabilityGroupsDropdown from './dropdown/current_liability_group-dropdown'
 import DepartmentDropdown from './dropdown/department-dropdown'
 import DesignationDropdown from './dropdown/designation-dropdown'
+import EmployeeGroupDropdown from './dropdown/employee_group-dropdown'
+import GradeDropdown from './dropdown/grade-dropdown'
+import ShiftDropdown from './dropdown/shift-dropdown'
 import AddressForm from './sub-component/address-form'
 
 interface Props {
@@ -61,8 +64,12 @@ export function FormAction({ currentRow }: Props) {
                 education: '', 
                 pan: '',
                 status: 'active',
-                departmentId: 1,
-                designationId: 1,
+                departmentId: 101,
+                designationId: 101,
+                employeeGroupId: 101,
+                gradeId: 101,
+                shiftId: 101,
+
                 accountGroupId: 20002,
                 image: '4', 
 
@@ -110,8 +117,9 @@ export function FormAction({ currentRow }: Props) {
                         onSubmit={form.handleSubmit(onSubmit)}
                         className='space-y-4 p-0.5'
                     >
-                        <div className='grid grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-3 gap-4'>
                             <div className='space-y-4'>
+                                <h3 className=" font-semibold text-md  ">Bio</h3>
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
                                 <FormInputField type='date' gapClass={gapClass} form={form} name='dob' label='DOB' />
@@ -121,11 +129,20 @@ export function FormAction({ currentRow }: Props) {
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='contactNo' label='Contact Number' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='phone' label='Phone Number' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='email' label='Email' />
-                                <DesignationDropdown form={form} gapClass={gapClass} />
-                                <DepartmentDropdown form={form} gapClass={gapClass} />
+
+
                             </div>
                             <div className='space-y-4'>
                                 <AddressForm form={form} />
+
+                            </div>
+                            <div className="space-y-4">
+                                <h3 className=" font-semibold text-md  ">Additional</h3>
+                                <DesignationDropdown form={form} gapClass={gapClass} />
+                                <DepartmentDropdown form={form} gapClass={gapClass} />
+                                <EmployeeGroupDropdown form={form} gapClass={gapClass} />
+                                <ShiftDropdown form={form} gapClass={gapClass} />
+                                <GradeDropdown form={form} gapClass={gapClass} />
                                 {isEdit && form.getValues('accountLedger') ?
                                     <div className={cn(gapClass, 'items-center')}>
                                         <div>Ledger A/c: </div>
@@ -144,6 +161,14 @@ export function FormAction({ currentRow }: Props) {
                                     { label: 'Active', value: 'active' },
                                     { label: 'Inactive', value: 'inactive' },
                                 ]} />
+                                <DialogFooter className='flex flex-row justify-end! py-4 border-t-2 border-orange-900/50 max-w-full w-full text-center'>
+
+                                    <Button type='submit' className='self-center' form='user-form'
+                                        disabled={isPending}>
+                                        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                                        {isPending ? "Saving..." : "Save changes"}
+                                    </Button>
+                                </DialogFooter>
                             </div>
                         </div>
 
@@ -157,14 +182,6 @@ export function FormAction({ currentRow }: Props) {
             </div>
 
 
-            <DialogFooter className='flex flex-row justify-end! py-4 border-t-2 border-orange-900/50 max-w-full w-[95%] text-center'>
-
-                <Button type='submit' className='self-center' form='user-form'
-                    disabled={isPending}>
-                    {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {isPending ? "Saving..." : "Save changes"}
-                </Button>
-            </DialogFooter>
 
         </Dialog>
     )
