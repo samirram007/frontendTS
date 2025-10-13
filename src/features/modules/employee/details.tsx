@@ -5,6 +5,8 @@ import { Main } from '@/layouts/components/main'
 
 
 
+import { usePayroll } from '@/features/masters/payroll/context/payroll-context'
+import { useEffect } from 'react'
 import { ActionPages } from './components/action-page'
 import { type Employee } from './data/schema'
 
@@ -18,9 +20,14 @@ interface EmployeeProps {
 }
 
 export default function EmployeeDetails(props: EmployeeProps) {
+
+    const keyName = 'employee'
+
+    const { setSideBarOpen } = usePayroll()
     const { data } = props
-    const keyName = 'companies'
-    console.log("data");
+    useEffect(() => {
+        setSideBarOpen && setSideBarOpen(false)
+    }, [])
 
     return (
 

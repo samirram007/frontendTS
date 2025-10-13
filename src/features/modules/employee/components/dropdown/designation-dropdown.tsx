@@ -25,7 +25,7 @@ const DesignationDropdown = (props: Props) => {
 
     //const designationId = form.watch('designationId') as string | number | undefined;; // Watch form value for reactivity
     const handleValueChange = (value: string) => {
-        form.setValue('address.designationId', Number(value));
+        form.setValue('designationId', Number(value));
 
     };
     if (isLoading) {
@@ -34,7 +34,7 @@ const DesignationDropdown = (props: Props) => {
     return (
         <FormField
             control={form.control}
-            name='address.designationId'
+            name='designationId'
             render={({ field }) => (
                 <FormItem
                     className={cn(

@@ -208,7 +208,7 @@ const DateBox = (props: Props) => {
                         <Input
                             placeholder={'Enter ' + lowerCase(label ?? name)}
                             type='date'
-                            className='w-5/12 placeholder'
+                            className='w-8/12 placeholder'
                             autoComplete='off'
                             {...field}
                         />

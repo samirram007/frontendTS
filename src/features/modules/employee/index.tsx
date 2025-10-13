@@ -6,6 +6,8 @@ import { columns } from './components/columns'
 
 
 
+import { usePayroll } from '@/features/masters/payroll/context/payroll-context'
+import { useEffect } from 'react'
 import { Dialogs } from './components/dialogs'
 import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
@@ -21,6 +23,12 @@ interface EmployeeProps {
 }
 
 export default function Employee({ data }: EmployeeProps) {
+  const { setSideBarOpen } = usePayroll()
+
+
+  useEffect(() => {
+    setSideBarOpen && setSideBarOpen(true)
+  }, [])
 
 
   return (

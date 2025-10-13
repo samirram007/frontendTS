@@ -21,13 +21,15 @@ interface DataTableRowActionsProps<TData> {
   onEdit?: (row: TData) => void
   onDelete?: (row: TData) => void
   onConfiguraton?: (row: TData) => void
+  onConfigure?: (row: TData) => void
 }
 
 export function DataTableRowActions<TData>({
   row,
   onEdit,
   onDelete,
-  onConfiguraton
+  onConfiguraton,
+  onConfigure,
 }: DataTableRowActionsProps<TData>) {
   
   return (
@@ -43,6 +45,14 @@ export function DataTableRowActions<TData>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align='end' className='w-[160px] '>
+          <DropdownMenuItem className='cursor-pointer!'
+            onClick={() => onConfigure?.(row.original)} >
+            Configure
+            <DropdownMenuShortcut>
+              <IconEdit size={16} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem className='cursor-pointer!'
             onClick={() => onEdit?.(row.original)} >
             Edit 

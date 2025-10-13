@@ -21,6 +21,7 @@ export function useAddressMutation() {
                 return await updateAddressService(data)
             }
             // Otherwise create
+            console.log("employee Data: ", data)
             return await storeAddressService(data)
         },
         onSuccess: () => {

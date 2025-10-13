@@ -36,9 +36,9 @@ export default function StockItem({ data }: StockItemProps) {
       <Main className='min-w-full'>
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>StockItem List</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>Stock Item List</h2>
             <p className='text-muted-foreground'>
-              Manage your StockItem  here.
+              Manage your Stock Item  here.
             </p>
           </div>
           <PrimaryButtons />
