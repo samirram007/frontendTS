@@ -80,6 +80,8 @@ import { Route as AuthenticatedMastersInventoryLayoutStock_categoryIndexRouteImp
 import { Route as AuthenticatedMastersInventoryLayoutGodownIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/godown/index'
 import { Route as AuthenticatedMastersAdministrationLayoutRoleIndexRouteImport } from './routes/_authenticated/masters/administration/_layout/role/index'
 import { Route as AuthenticatedMastersAdministrationLayoutPermissionIndexRouteImport } from './routes/_authenticated/masters/administration/_layout/permission/index'
+import { Route as AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRouteImport } from './routes/_authenticated/masters/administration/_layout/app_module_feature/index'
+import { Route as AuthenticatedMastersAdministrationLayoutApp_moduleIndexRouteImport } from './routes/_authenticated/masters/administration/_layout/app_module/index'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_classification/index'
 import { Route as AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/voucher_category/index'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_natureIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_nature/index'
@@ -804,6 +806,20 @@ const AuthenticatedMastersAdministrationLayoutPermissionIndexRoute =
     path: '/permission/',
     getParentRoute: () => AuthenticatedMastersAdministrationLayoutRoute,
   } as any)
+const AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute =
+  AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRouteImport.update(
+    {
+      id: '/app_module_feature/',
+      path: '/app_module_feature/',
+      getParentRoute: () => AuthenticatedMastersAdministrationLayoutRoute,
+    } as any,
+  )
+const AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute =
+  AuthenticatedMastersAdministrationLayoutApp_moduleIndexRouteImport.update({
+    id: '/app_module/',
+    path: '/app_module/',
+    getParentRoute: () => AuthenticatedMastersAdministrationLayoutRoute,
+  } as any)
 const AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute =
   AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRouteImport.update(
     {
@@ -1133,6 +1149,8 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/masters/administration/app_module': typeof AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute
+  '/masters/administration/app_module_feature': typeof AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute
   '/masters/administration/permission': typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRoute
   '/masters/administration/role': typeof AuthenticatedMastersAdministrationLayoutRoleIndexRoute
   '/masters/inventory/godown': typeof AuthenticatedMastersInventoryLayoutGodownIndexRoute
@@ -1254,6 +1272,8 @@ export interface FileRoutesByTo {
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/masters/administration/app_module': typeof AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute
+  '/masters/administration/app_module_feature': typeof AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute
   '/masters/administration/permission': typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRoute
   '/masters/administration/role': typeof AuthenticatedMastersAdministrationLayoutRoleIndexRoute
   '/masters/inventory/godown': typeof AuthenticatedMastersInventoryLayoutGodownIndexRoute
@@ -1387,6 +1407,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/accounts/_layout/account_nature/': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_category/': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/_authenticated/masters/accounts/_layout/voucher_classification/': typeof AuthenticatedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/_authenticated/masters/administration/_layout/app_module/': typeof AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute
+  '/_authenticated/masters/administration/_layout/app_module_feature/': typeof AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute
   '/_authenticated/masters/administration/_layout/permission/': typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRoute
   '/_authenticated/masters/administration/_layout/role/': typeof AuthenticatedMastersAdministrationLayoutRoleIndexRoute
   '/_authenticated/masters/inventory/_layout/godown/': typeof AuthenticatedMastersInventoryLayoutGodownIndexRoute
@@ -1512,6 +1534,8 @@ export interface FileRouteTypes {
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
+    | '/masters/administration/app_module'
+    | '/masters/administration/app_module_feature'
     | '/masters/administration/permission'
     | '/masters/administration/role'
     | '/masters/inventory/godown'
@@ -1633,6 +1657,8 @@ export interface FileRouteTypes {
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
+    | '/masters/administration/app_module'
+    | '/masters/administration/app_module_feature'
     | '/masters/administration/permission'
     | '/masters/administration/role'
     | '/masters/inventory/godown'
@@ -1765,6 +1791,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/accounts/_layout/account_nature/'
     | '/_authenticated/masters/accounts/_layout/voucher_category/'
     | '/_authenticated/masters/accounts/_layout/voucher_classification/'
+    | '/_authenticated/masters/administration/_layout/app_module/'
+    | '/_authenticated/masters/administration/_layout/app_module_feature/'
     | '/_authenticated/masters/administration/_layout/permission/'
     | '/_authenticated/masters/administration/_layout/role/'
     | '/_authenticated/masters/inventory/_layout/godown/'
@@ -2557,6 +2585,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRouteImport
       parentRoute: typeof AuthenticatedMastersAdministrationLayoutRoute
     }
+    '/_authenticated/masters/administration/_layout/app_module_feature/': {
+      id: '/_authenticated/masters/administration/_layout/app_module_feature/'
+      path: '/app_module_feature'
+      fullPath: '/masters/administration/app_module_feature'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutRoute
+    }
+    '/_authenticated/masters/administration/_layout/app_module/': {
+      id: '/_authenticated/masters/administration/_layout/app_module/'
+      path: '/app_module'
+      fullPath: '/masters/administration/app_module'
+      preLoaderRoute: typeof AuthenticatedMastersAdministrationLayoutApp_moduleIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersAdministrationLayoutRoute
+    }
     '/_authenticated/masters/accounts/_layout/voucher_classification/': {
       id: '/_authenticated/masters/accounts/_layout/voucher_classification/'
       path: '/voucher_classification'
@@ -3127,6 +3169,8 @@ const AuthenticatedMastersAdministrationLayoutUserRouteWithChildren =
 
 interface AuthenticatedMastersAdministrationLayoutRouteChildren {
   AuthenticatedMastersAdministrationLayoutUserRoute: typeof AuthenticatedMastersAdministrationLayoutUserRouteWithChildren
+  AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute: typeof AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute
+  AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute: typeof AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute
   AuthenticatedMastersAdministrationLayoutPermissionIndexRoute: typeof AuthenticatedMastersAdministrationLayoutPermissionIndexRoute
   AuthenticatedMastersAdministrationLayoutRoleIndexRoute: typeof AuthenticatedMastersAdministrationLayoutRoleIndexRoute
 }
@@ -3135,6 +3179,10 @@ const AuthenticatedMastersAdministrationLayoutRouteChildren: AuthenticatedMaster
   {
     AuthenticatedMastersAdministrationLayoutUserRoute:
       AuthenticatedMastersAdministrationLayoutUserRouteWithChildren,
+    AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute:
+      AuthenticatedMastersAdministrationLayoutApp_moduleIndexRoute,
+    AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute:
+      AuthenticatedMastersAdministrationLayoutApp_module_featureIndexRoute,
     AuthenticatedMastersAdministrationLayoutPermissionIndexRoute:
       AuthenticatedMastersAdministrationLayoutPermissionIndexRoute,
     AuthenticatedMastersAdministrationLayoutRoleIndexRoute:

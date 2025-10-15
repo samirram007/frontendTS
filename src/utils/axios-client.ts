@@ -76,7 +76,7 @@ axiosClient.interceptors.response.use(
         const messages: Record<number, string> = {
             400: '❗ Bad Request',
             403: '⛔ Forbidden',
-            404: '❓ Not Found',
+            404: '❓ Not Found..',
             422: '⚠️ Validation Failed',
             500: '💥 Server Error',
         }

@@ -1,14 +1,19 @@
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { capitalizeAllWords, capitalizeWords, lowerCase } from "@/utils/removeEmptyStrings";
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { useState } from 'react';
 import type { Control, UseFormReturn } from "react-hook-form";
 import { SelectDropdown } from './select-dropdown';
+import { Button } from './ui/button';
+import { Command, CommandGroup, CommandItem } from './ui/command';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Textarea } from "./ui/textarea";
 
 type Option = { label: string; value: string | boolean };
-type InputType = 'hidden' | 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'date';
+type InputType = 'hidden' | 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'multiselect' | 'date';
 type Props = {
     form: UseFormReturn<any>;
     control?: Control<any>;
@@ -37,6 +42,9 @@ const FormInputField = (props: Props) => {
     }
     else if (type === 'select') {
         return <SelectBox {...props} />
+    }
+    else if (type === 'multiselect') {
+        return <MultiSelectBox {...props} />
     }
     else if (type === 'date') {
         return <DateBox {...props} />
@@ -276,6 +284,67 @@ const SelectBox = (props: Props) => {
         />
     )
 }
+const MultiSelectBox = (props: Props) => {
+    const { form, name, label, items } = props
+    const [open, setOpen] = useState(false)
+
+    const selectedValues: string[] = form.watch(name) || []
+
+    const toggleValue = (value: string) => {
+        const newValues = selectedValues.includes(value)
+            ? selectedValues.filter(v => v !== value)
+            : [...selectedValues, value]
+        form.setValue(name, newValues, { shouldValidate: true })
+    }
+    return (
+        <FormField
+            control={form.control}
+            name={name}
+            render={() => (
+                <FormItem className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-1">
+                    <FormLabel>{label ?? capitalizeAllWords(name)}</FormLabel>
+                    <FormControl>
+                        <Popover open={open} onOpenChange={setOpen}>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className="justify-between w-full"
+                                >
+                                    {selectedValues.length > 0
+                                        ? `${selectedValues.length} selected`
+                                        : `Select ${label ?? name}`}
+                                    <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="p-0 w-[250px]">
+                                <Command>
+                                    <CommandGroup>
+                                        {items!.map((item) => (
+                                            <CommandItem
+                                                key={item.value}
+                                                onSelect={() => toggleValue(item.value)}
+                                            >
+                                                <Check
+                                                    className={`mr-2 h-4 w-4 ${selectedValues.includes(item.value)
+                                                        ? "opacity-100"
+                                                        : "opacity-0"
+                                                        }`}
+                                                />
+                                                {item.label}
+                                            </CommandItem>
+                                        ))}
+                                    </CommandGroup>
+                                </Command>
+                            </PopoverContent>
+                        </Popover>
+                    </FormControl>
+                    <FormMessage className="col-start-2" />
+                </FormItem>
+            )}
+        />
+    )
+}
 export default FormInputField
-export { CheckBox, NumberBox, SelectBox, TextAreaBox, TextBox };
+export { CheckBox, MultiSelectBox, NumberBox, SelectBox, TextAreaBox, TextBox };
 

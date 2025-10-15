@@ -116,7 +116,7 @@ axiosClient.interceptors.response.use(
         // Log common error status
         const messages: Record<number, string> = {
             403: '⛔ Unauthorized',
-            404: '❓ Not Found',
+            404: '❓ Not Found..',
             422: '⚠️ Validation Failed',
             500: '💥 Server Error',
         };

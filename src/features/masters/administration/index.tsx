@@ -55,13 +55,13 @@ const sidebarNavItems = [
     {
         title: 'App Module',
         visible: true,
-        href: '/masters/administration/app-module',
+        href: '/masters/administration/app_module',
         icon: <IconUserCog />,
     },
     {
         title: 'App Feature',
         visible: true,
-        href: '/masters/administration/app-feature',
+        href: '/masters/administration/app_module_feature',
         icon: <IconUserCog />,
     },
     {

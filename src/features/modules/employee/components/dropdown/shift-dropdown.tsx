@@ -6,8 +6,8 @@ import type { UseFormReturn } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
 
-import { fetchShiftService } from "@/features/modules/Shift/data/api";
-import type { Shift } from "@/features/modules/Shift/data/schema";
+import { fetchShiftService } from "@/features/modules/shift/data/api";
+import type { Shift } from "@/features/modules/shift/data/schema";
 import type { EmployeeForm } from "../../data/schema";
 
 type Props = {

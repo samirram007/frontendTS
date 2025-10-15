@@ -6,7 +6,7 @@ import { departmentSchema } from '../../department/data/schema';
 import { designationSchema } from '../../designation/data/schema';
 import { employeeGroupSchema } from '../../employee_group/data/schema';
 import { gradeSchema } from '../../grade/data/schema';
-import { shiftSchema } from '../../Shift/data/schema';
+import { shiftSchema } from '../../shift/data/schema';
 
 
 

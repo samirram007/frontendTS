@@ -139,7 +139,7 @@ export const sidebarData: SidebarData = {
               icon: IconUserOff,
             },
             {
-              title: 'Not Found',
+              title: 'Not Found..',
               url: '/404',
               icon: IconError404,
             },
@@ -361,6 +361,12 @@ export const sidebarData: SidebarData = {
         {
           title: 'User',
           url: '/masters/administration/user',
+          visible: true,
+          icon: IconUserCog,
+        },
+        {
+          title: 'App Module  ',
+          url: '/masters/administration/app_module',
           visible: true,
           icon: IconUserCog,
         },
