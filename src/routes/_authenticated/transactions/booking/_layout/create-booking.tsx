@@ -7,7 +7,7 @@ import NewBooking from '@/features/modules/booking/pages/NewBooking'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
-  '/_authenticated/transactions/booking/create-booking',
+  '/_authenticated/transactions/booking/_layout/create-booking',
 )({
   component: () => <BookingContextProvider><NewBooking/></BookingContextProvider> ,
 });

@@ -6,7 +6,6 @@ import React from "react";
 const Dashboard = () => {
     const auth = useAuth();
     const [loading, setLoading] = React.useState(false);
-    // console.log('Dashboard RouteComponent', context);
     const handleLogout = async () => {
         setLoading(true);
         await auth.logout();

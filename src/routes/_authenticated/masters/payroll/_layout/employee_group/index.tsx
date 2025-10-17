@@ -11,7 +11,6 @@ export const Route = createFileRoute(
     context.queryClient.ensureQueryData(employeeGroupQueryOptions()),
   component: () => {
     const { data: employeeGroup } = useSuspenseQuery(employeeGroupQueryOptions())
-    // console.log(employeeGroup, 'employee group data');
     return <EmployeeGroup data={employeeGroup?.data} />
   },
   errorComponent: () => <div>Error loading employee group data.</div>,

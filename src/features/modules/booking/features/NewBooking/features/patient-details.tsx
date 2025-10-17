@@ -11,7 +11,6 @@ import { usePatient } from "../../../contexts/patient-context";
 export function PatientDetail() {
 
     const {patient} = usePatient();
-    console.log(patient,"patient");
 
     return (
         <div>

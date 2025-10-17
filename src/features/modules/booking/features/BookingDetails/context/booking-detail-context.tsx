@@ -41,7 +41,7 @@ export default function BookingDetailProvider({children}:{children: React.ReactN
                 setIsFullPaymentDone(true);
                 setIsMinimumPaymentDone(true);
             }
-            else if(duedataAmount && duedataAmount > half){
+            else if(duedataAmount && duedataAmount >= half){
                 setIsMinimumPaymentDone(true);
                 setIsFullPaymentDone(false);
             }

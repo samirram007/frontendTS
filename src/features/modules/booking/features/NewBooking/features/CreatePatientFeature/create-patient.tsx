@@ -32,7 +32,6 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
     const {mutate,isPending} = usePatientMutation();
     const [open,setOpen] = useState<boolean>(false);
 
-    console.log(patient);
 
     const queryClient = useQueryClient();
 
@@ -85,7 +84,6 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                     }, 700);
                                 },
                                 onError:(error)=>{
-                                    console.log("Patient Error came",error);
                                     toast.error(error.message);
                                 }
                             })

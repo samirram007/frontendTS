@@ -1,7 +1,7 @@
-import type { IBooking } from "../../NewBooking/data/schema";
-import { usePayment } from "../../../contexts/payment-context";
-import InvoiceFeatureModal from "../../NewBooking/features/InvoiceFeature/invoice-feature-modal";
-import { useBookingDetail } from "../context/booking-detail-context";
+import { usePayment } from "@/features/modules/booking/contexts/payment-context";
+import type { IBooking } from "../../../NewBooking/data/schema";
+import { useBookingDetail } from "../../context/booking-detail-context";
+import InvoiceFeatureModal from "../../../NewBooking/features/InvoiceFeature/invoice-feature-modal";
 
 
 
@@ -28,8 +28,8 @@ export function BookingDetailPayment({data}:{data?:IBooking}){
                     {
                         payementReceipt.length > 0
                         && 
-                        payementReceipt.map((item)=>(
-                            <h3>Receipt ({item.date})</h3>
+                        payementReceipt.map((item,index)=>(
+                            <h3 key={index}>Receipt ({item.date})</h3>
                         ))
                     }
                     {
@@ -54,8 +54,8 @@ export function BookingDetailPayment({data}:{data?:IBooking}){
                     {
                         payementReceipt.length > 0
                         && 
-                        payementReceipt.map((item)=>(
-                            <h3>{item.amount.toFixed(2)}</h3>
+                        payementReceipt.map((item,index)=>(
+                            <h3 key={index}>{item.amount.toFixed(2)}</h3>
                         ))
                     }
 

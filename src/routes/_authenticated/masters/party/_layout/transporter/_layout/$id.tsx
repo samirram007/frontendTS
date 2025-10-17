@@ -26,8 +26,7 @@ export const Route = createFileRoute(
         parse: (params) => paramsSchema.parse(params),
         stringify: ({ id }) => ({ id: `${id}` }),
     },
-    loader: ({ context, params: { id }, params }) => {
-        console.log("🚀 Loader params:", id, params, typeof params)
+    loader: ({ context, params: { id },  }) => {
         if (id === "new") return null
         return context.queryClient.ensureQueryData(transporterQueryOptions(id))
     },

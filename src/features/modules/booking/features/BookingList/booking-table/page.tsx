@@ -12,7 +12,6 @@ export function BookingListTable(){
     return data?.data.data ?? []
   },[isSuccess,data]);
   
-  console.log(bookingList,"booking list");
 
   return(
       <div className="mx-auto py-10">

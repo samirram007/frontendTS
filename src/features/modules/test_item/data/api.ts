@@ -16,6 +16,14 @@ export async function storeTestItemService(payload: any) {
     return await postData(API_PATH, payload)
 }
 
+export async function updateTestItemService(payload: any) {
+    return await putData(`${API_PATH}/${payload.id}`, payload)
+}
+
+
+
+
+//  store template
 export async function storeTestItemReportTemplateFileService(payload: any) {
     return await postData(REPORT_API_PATH, payload)
 }
@@ -24,7 +32,10 @@ export async function updateTestItemReportTemplateFileService(payload: any) {
     return await postData(REPORT_API_PATH, payload)
 }
 
-
-export async function updateTestItemService(payload: any) {
-    return await putData(`${API_PATH}/${payload.id}`, payload)
+// get Template By Id
+export async function fetchTestItemReportTemplateByIdService(id: number) {
+    return await getData(`${REPORT_API_PATH}/${id}`)
+}
+export async function fetchTestItemReportTemplateService() {
+    return await getData(REPORT_API_PATH)
 }

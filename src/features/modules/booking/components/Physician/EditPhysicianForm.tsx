@@ -28,8 +28,7 @@ export default function EditPhysician({button}:{button:any}) {
         </DialogHeader>
         <div>          
           <Formik
-            onSubmit={(values,actions)=>{
-                console.log("values:",values);
+            onSubmit={(_values,actions)=>{
               setTimeout(() => {
                 actions.setSubmitting(false);
               }, 1000);

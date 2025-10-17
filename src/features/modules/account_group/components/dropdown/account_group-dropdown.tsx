@@ -32,7 +32,6 @@ const AccountGroupDropdown = (props: Props) => {
     const nullItem = { label: "--select an account group--", value: null }
     const handleValueChange = (value: string) => {
         form.setValue('parentId', Number(value));
-        // console.log(Number(accountGroupList.data
         //     .find((group: AccountGroup) => group.id === Number(value))?.accountNatureId))
         form.setValue(
             'accountNatureId',

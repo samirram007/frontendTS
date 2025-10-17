@@ -1,8 +1,9 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchTestItemByIdService, fetchTestItemService, storeTestItemReportTemplateFileService, storeTestItemService, updateTestItemReportTemplateFileService, updateTestItemService } from "./api"
-import type { TestItemForm } from "./schema"
+import { fetchTestItemByIdService, fetchTestItemReportTemplateByIdService, fetchTestItemReportTemplateService, fetchTestItemService, storeTestItemReportTemplateFileService, storeTestItemService, updateTestItemReportTemplateFileService, updateTestItemService } from "./api"
+import type { TestItemConfiguration, TestItemForm } from "./schema"
 
-const BASE_KEY = "test_items"
+const BASE_KEY = "test_items";
+const TEST_ITEM_REPORT_KEY="test_item_reports";
 
 export const testItemQueryOptions = (id?: number) => {
 
@@ -36,10 +37,20 @@ export function useTestItemMutation() {
 }
 
 
+export const testItemReportTemplateQueryOptions = (id?: number) => {
+
+    return queryOptions({
+        queryKey: id ? [TEST_ITEM_REPORT_KEY, id] : [BASE_KEY],
+        queryFn: () =>
+            id ? fetchTestItemReportTemplateByIdService(id) : fetchTestItemReportTemplateService(),
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: 1,
+    })
+}
 export function useTestItemReportTemplateFileMutation() {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: async (data: TestItemForm & { id?: number }) => {
+        mutationFn: async (data: TestItemConfiguration  & { id?: number }) => {
             if (data.id) {
                 // Update if id exists
                 return await updateTestItemReportTemplateFileService(data)
@@ -48,7 +59,7 @@ export function useTestItemReportTemplateFileMutation() {
             return await storeTestItemReportTemplateFileService(data)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+            queryClient.invalidateQueries({ queryKey: [TEST_ITEM_REPORT_KEY] })
         },
         onError: (error) => {
             console.error("Test Item mutation failed:", error)

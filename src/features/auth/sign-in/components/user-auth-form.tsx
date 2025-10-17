@@ -61,7 +61,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         // handle error here
       })
     // eslint-disable-next-line no-console
-    // console.log(data)
 
     // setTimeout(() => {
     //   setIsLoading(false)

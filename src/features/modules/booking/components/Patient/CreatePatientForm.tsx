@@ -47,8 +47,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                 </DialogHeader>
                 <div id="patient-creation-form">
                     <Formik
-                        onSubmit={(values,actions)=>{
-                            console.log("values",values);
+                        onSubmit={(_values,actions)=>{
                             setTimeout(() => {
                                 actions.setSubmitting(false);
                             }, 1000);

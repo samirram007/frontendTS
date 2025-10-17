@@ -1,4 +1,5 @@
-import { testItemQueryOptions } from '@/features/modules/test_item/data/queryOptions';
+import { testItemQueryOptions, testItemReportTemplateQueryOptions } from '@/features/modules/test_item/data/queryOptions';
+import TestItemDetails from '@/features/modules/test_item/details';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Loader } from 'lucide-react';
@@ -33,11 +34,12 @@ export const Route = createFileRoute(
   component: () => {
     const { id } = Route.useParams()
 
-    if (id === "new") return <TestItemConfigurations />
+    if (id === "new") return <TestItemDetails />
 
     const { data: testItem } = useSuspenseQuery(testItemQueryOptions(Number(id)))
+    const { data: testItemReport } = useSuspenseQuery(testItemReportTemplateQueryOptions(Number(id)))
     return <Suspense fallback={<Loader className="animate-spin" />}>
-        <TestItemConfigurations data={testItem?.data} />
+        <TestItemConfigurations data={testItem?.data} reportData={testItemReport?.data ?? []} />
     </Suspense>
   },
   errorComponent: () => <div> <span className='bg-red-400  '>By ID:</span> Error loading testItem data[]. </div>

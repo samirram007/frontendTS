@@ -44,3 +44,18 @@ export async function fetchByIdBookingService(id:number):Promise<AxiosResponse<I
         throw new Error("Network Error");
     }
 }
+
+
+
+
+export async function fetchDiscountsService():Promise<AxiosResponse<IBookingResponse>>{
+    try{
+        const response = await axiosClient.get(`/discounts`);
+        return response;
+    }catch(error:unknown){
+        if(axios.isAxiosError(error) && error.response){
+            throw error.response.data;
+        }
+        throw new Error("Network Error");
+    }
+}

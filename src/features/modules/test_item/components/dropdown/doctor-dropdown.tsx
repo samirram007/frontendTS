@@ -20,19 +20,19 @@ export function DoctorDropdown({ form, gapClass }: Props) {
 
   if (isLoading) return <div>Loading doctors...</div>
 
-  
-  const handleChange = (value: string) => form.setValue('employeeId', Number(value))
+
 
   return (
     <FormField
       control={form.control}
-      name='employeeId'
+      name='doctorId'
       render={({ field }) => (
         <FormItem className={cn('grid grid-cols-[150px_1fr] items-center gap-x-4', gapClass)}>
           <FormLabel>Doctor</FormLabel>
           <SelectDropdown
+           key={field.value ?? 'empty'} 
             defaultValue={field.value?.toString() ?? ''}
-            onValueChange={handleChange}
+            onValueChange={(value) => field.onChange(Number(value) || undefined)}
             placeholder='Select Doctor'
             className='w-full'
             items={data?.data.map((doc: any) => ({

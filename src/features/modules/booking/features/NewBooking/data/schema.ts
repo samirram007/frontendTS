@@ -2,10 +2,26 @@ import type { IResponseInterface } from "../../../data/schema";
 import type { ITestItem } from "../features/LabTestsFeature/data/schema";
 import type { AddressType, IPatient } from "../features/CreatePatientFeature/data/schema";
 import type { IVoucher } from "../../BookingList/data/schema";
+import {z} from "zod";
 
 
 type MovementType = "in" | "out";
 type StatusType = "active" | "inactive"
+
+export interface IJobOrder {
+  id: number;
+  patientId: number;
+  voucherId: number;
+  status: 'sample_collected' | 'pending' | 'completed' | 'cancelled' | string; // you can narrow down further if needed
+  paymentStatus: 'paid' | 'partial' | 'unpaid' | string;
+  bookedDate: string | null;
+  expectedDeliveryDate: string | null;
+  report_generated_date: string | null;
+  report_delivered_date: string | null;
+  cancelled_date: string | null;
+  report_file_path: string | null;
+  remarks: string | null;
+}
 
 
 //  Stock Journal
@@ -34,6 +50,7 @@ export interface IStockJournalEntry{
     godownId: unknown | null,
     stockItem: IStockItem,
     stockUnit: IStockUnit,
+    jobOrder:IJobOrder | null
 }
 
 // Stock Item
@@ -82,6 +99,7 @@ export interface IStockItem{
     standardSellingPrice: string,
     icon: unknown | null,
     status: StatusType,
+    isSampleRequired: boolean
 }
 
 
@@ -143,7 +161,8 @@ export interface IVoucherPatient{
         gender: string,
         status: string,
         agentId: number,
-        physicianId: number
+        physicianId: number,
+        address?: AddressType
     },
     agent: {
         id: number,
@@ -224,3 +243,12 @@ export interface IBookingResponse extends IResponseInterface{
     data: IBooking
 }
 
+
+
+// discounts
+export const discountSchema = z.object({
+    id: z.number().optional(),
+    name: z.string(),
+    isPercentage: z.boolean(),
+    value: z.number()
+})

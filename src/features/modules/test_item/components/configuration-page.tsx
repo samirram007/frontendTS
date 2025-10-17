@@ -11,7 +11,7 @@ import FormInputField from "@/components/form-input-field";
 import { DoctorDropdown } from './dropdown/doctor-dropdown'
 import type { TestItem, TestItemConfiguration } from '../data/schema'
 import { ReportTemplateFileDropdown } from './dropdown/report-template-files-dropdown'
-import { useEffect } from 'react';
+import { useTestItemReportTemplateFileMutation } from '../data/queryOptions';
 
 
 type Props = {
@@ -21,11 +21,24 @@ type Props = {
 
 export function TestConfigurationForm({ form, gapClass }: Props) {
 
+  const {mutate: saveTestConfig} = useTestItemReportTemplateFileMutation();
+
+  const onSubmit = (values: TestItemConfiguration) => {
+
+    
+      saveTestConfig(values,{
+        onSuccess:()=>{
+          form.reset();
+        }
+      });
+
+  }
+
   return (
     <Form {...form}>
       <form
         id='test-configuration-form'
-        onSubmit={form.handleSubmit((values) => console.log(values))}
+        onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-6 p-4'
       >
         <FormInputField type='text' form={form} gapClass='sr-only' name='testId' label='Name' />
@@ -53,17 +66,12 @@ interface ConfigPageProps {
 const ConfigurationPage = ({ currentRow }: ConfigPageProps) => {
   const form = useForm<TestItemConfiguration>({
     defaultValues: {
-      stockItemId: currentRow?.id,
-      employeeId: null,
-      reportTemplateName: "",
+      testItemId: currentRow?.id,
+      doctorId: undefined,
+      reportTemplateName: undefined,
     },
   });
 
-  useEffect(()=>{
-    if(currentRow?.id){
-        form.setValue('stockItemId',currentRow?.id);
-    }
-  },[currentRow,form])
 
   return (
     <div className="p-6">

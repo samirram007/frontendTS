@@ -31,12 +31,14 @@ function PaymentNullScreen(){
 }
 
 function createPayload(amount:number,payMethod:PaymentTypeSchema | null,data?: IBooking | null):IBookingPaymentSchema | null{
+    const CASH_LEDGER = 1000001;
+    const BANK_LEDGER = 1000002;
     if(data){
         const paymentPayload:IBookingPaymentSchema={
             voucherId: data.id,
             amount: amount,
             patientId: data.voucherPatient.patientId,
-            paymentMode: payMethod === "CASH" ? 1 : 2
+            paymentMode: payMethod === "CASH" ? CASH_LEDGER : BANK_LEDGER
         };
         return paymentPayload;
     }

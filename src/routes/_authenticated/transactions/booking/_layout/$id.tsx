@@ -18,7 +18,7 @@ const paramsSchema = z.object({
 })
 
 export const Route = createFileRoute(
-  '/_authenticated/transactions/booking/$id',
+  '/_authenticated/transactions/booking/_layout/$id',
 )({
   params: {
     parse: (params) => paramsSchema.parse(params),
@@ -29,7 +29,6 @@ export const Route = createFileRoute(
   },
   component: () => {
     const { id } = Route.useParams();
-    console.log("Id called",id);
 
     const { data: booking} = useSuspenseQuery(bookingQueryOptions(id));
 

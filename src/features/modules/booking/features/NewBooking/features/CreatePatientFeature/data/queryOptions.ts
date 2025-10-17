@@ -12,10 +12,8 @@ import type { IPatient } from "./schema"
 export function usePatientMutation() {
     return useMutation({
         mutationFn: async (data: IPatient) => {
-            console.log(data,"patient data");
             if (data.id != 0 && data.id != undefined) {
                 // Update if id exists
-                console.log("entered to edit");
                 return await updatePatientService(data)
             }
             // Otherwise create

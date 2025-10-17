@@ -6,6 +6,29 @@ import { currencySchema } from '../../currency/data/schema';
 import { stockCategorySchema } from '../../stock_category/data/schema';
 import { stockGroupSchema } from '../../stock_group/data/schema';
 import { stockUnitSchema } from '../../stock_unit/data/schema';
+import { employeeSchema } from '../../employee/data/schema';
+
+
+export const testItemReportTemplateSchema = z.object({
+  id: z.number().int().positive(),
+  testItemId: z.number().int().positive(),
+  doctorId: z.number().int().positive(),
+  reportTemplateName: z.string().min(1),
+  doctor: employeeSchema.nullish(),
+});
+
+
+export const testConfigSchema = z.object({
+  testItemId: z.number().nullish(),
+  doctorId: z.number().nullish(),
+  reportTemplateName: z.string()
+});
+
+export type TestItemConfiguration = z.infer<typeof testConfigSchema>;
+
+export type TestItemReportTemplate = z.infer<typeof testItemReportTemplateSchema>;
+export const testItemReportTemplateListSchemas = z.array(testItemReportTemplateSchema);
+export type TestItemReportListTemplate = z.infer<typeof testItemReportTemplateListSchemas>
 
 
 
@@ -68,7 +91,8 @@ export const testItemSchema = z.object({
   isSampleRequired: z.boolean(),
   sampleName: z.string(),
   processDuration: z.coerce.number(),
-  processType: z.enum(['inhouse','outsource'])
+  processType: z.enum(['inhouse','outsource']),
+  testItemReportTemplates: testItemReportTemplateListSchemas.nullish()
 
 })
 export type TestItem = z.infer<typeof testItemSchema>
@@ -142,10 +166,15 @@ export type TestItemForm = z.infer<typeof formSchema>
 
 
 
-export const testConfigSchema = z.object({
-  stockItemId: z.number().nullish(),
-  employeeId: z.number().nullish(),
-  reportTemplateName: z.string()
+
+export const testItemReportTemplateResponseSchema = z.object({
+  id: z.number().int().positive(),
+  testItemId: z.number().int().positive(),
+  doctorId: z.number().int().positive(),
+  reportTemplateName: z.string().min(1),
+  doctor: employeeSchema.nullish(),
+  testItem: testItemSchema.nullish(),
 });
 
-export type TestItemConfiguration = z.infer<typeof testConfigSchema>;
+export type TestItemReportTemplateResponseSchema = z.infer<typeof testItemReportTemplateResponseSchema>;
+export const testItemReportTemplateResponseSchemas = z.array(testItemReportTemplateResponseSchema);

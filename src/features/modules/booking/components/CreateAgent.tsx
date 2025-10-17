@@ -35,7 +35,6 @@ export default function CreateAgent({button}:CreateAgentInterface) {
         </DialogHeader>
           <Formik
             onSubmit={(values,action)=>{
-              console.log("values",values);
               setTimeout(() => {
                 action.setSubmitting(false);
               }, 700);

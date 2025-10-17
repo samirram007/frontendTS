@@ -42,7 +42,6 @@ export function AccountGroupActionDialog({ currentRow, open, onOpenChange }: Pro
     mutationFn: async (data: AccountGroupForm) => {
       // Here you would typically make an API call to save the account group
       // For example:
-      console.log('Saving account group:', data);
       if (isEdit && currentRow) {
         return await updateAccountGroupService({ ...data, id: currentRow.id })
       }
@@ -50,8 +49,7 @@ export function AccountGroupActionDialog({ currentRow, open, onOpenChange }: Pro
         return await storeAccountGroupService(data);
       }
     },
-    onSuccess: (data) => {
-      console.log(data, 'Account Group saved successfully!')
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['accountGroups'] })
     },
   })
@@ -81,7 +79,6 @@ export function AccountGroupActionDialog({ currentRow, open, onOpenChange }: Pro
     onOpenChange(false)
   }
 
-  console.log(form.getValues(), 'Form Values')
   return (
     <Dialog
       open={open}

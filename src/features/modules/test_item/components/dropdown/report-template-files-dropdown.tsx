@@ -22,7 +22,6 @@ export function ReportTemplateFileDropdown({ form, gapClass }: Props) {
   if (isLoading) return <div>Loading report templates...</div>
 
   
-  const handleChange = (value: string) => form.setValue('reportTemplateName', value)
 
   return (
     <FormField
@@ -32,9 +31,10 @@ export function ReportTemplateFileDropdown({ form, gapClass }: Props) {
         <FormItem className={cn('grid grid-cols-[150px_1fr] items-center gap-x-4', gapClass)}>
           <FormLabel>Report File Template</FormLabel>
           <SelectDropdown
+          key={field.value ?? 'empty'} 
             defaultValue={field.value?.toString() ?? ''}
-            onValueChange={handleChange}
-            placeholder='Select Doctor'
+            onValueChange={(value) => field.onChange(value || '')}
+            placeholder='Select Template File'
             className='w-full'
             items={data?.map((doc: any) => ({
               label: capitalizeAllWords(doc),

@@ -32,23 +32,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
         try {
-            // console.log('Fetching profile...');
             const data = await fetchUserProfileService();
             flushSync(() => {
 
                 setUser(data?.data);
             })
-            // console.log('Profile fetched successfully:', data?.data);
 
-            // console.log('profile Data: ', data, isAuthenticated, user);
         } catch (error) {
             flushSync(() => {
                 setUser(null);
 
             })
         } finally {
-            // console.log('Profile fetch completed');
-
             setIsLoading(false);
         }
     };
@@ -66,13 +61,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             })
         }
         setIsLoading(false);
-        // axiosClient.get('/cookie-test').then(console.log);
-        // await fetchProfile();
-
     }, [])
 
     const logout = React.useCallback(async () => {
-        console.log('Logging out...');
         setIsLoading(true);
         try {
             // Optionally hit a logout endpoint to clear server-side auth
@@ -99,7 +90,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [])
 
     useEffect(() => {
-        console.log("calling authContext useEffect")
         fetchProfile();
     }, []);
     return (

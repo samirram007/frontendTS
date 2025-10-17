@@ -9,7 +9,6 @@ const EnumResponseSchema = z.object({
 
 const fetchEnum = async (enumName: string) => {
     const res = await getData(`/enums/${enumName}`);
-    // console.log(EnumResponseSchema.parse(res).data, 'enum data');
     return EnumResponseSchema.parse(res).data;
 };
 

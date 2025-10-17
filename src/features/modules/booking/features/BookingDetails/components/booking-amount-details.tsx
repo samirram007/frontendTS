@@ -52,7 +52,6 @@ export default function BookingAmountDetails(){
             ErrorToast.launchErrorToast("Amount limit exceded");
             return;
         }
-        console.log(e.target.value,dueAmount);
         
         if(dueAmount != 0 && Number(e.target.value) > dueAmount){
             setReceivingAmount('');

@@ -20,8 +20,8 @@ const InvoiceFeatureModal: React.FC<InvoiceModalInterface> = ({button,action, da
                     {button}
                 </DialogTrigger>
 
-                <DialogContent className="min-w-7xl h-screen">
-                    <DialogHeader>
+                <DialogContent className="min-w-[800px] max-w-[95vw] max-h-[100vh] overflow-auto">
+                    <DialogHeader className="!h-12 hidden">
                         <DialogTitle>{action ?? "Invoice"}</DialogTitle>
                         <DialogDescription className="hidden">
                             Invoice
