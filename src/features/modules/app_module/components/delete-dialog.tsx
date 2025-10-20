@@ -2,8 +2,6 @@
 
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
@@ -18,13 +16,13 @@ interface Props {
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(currentRow.id.toString())
 
   const handleDelete = () => {
     if (value.trim() !== String(currentRow.id)) return
 
     onOpenChange(false)
-    showSubmittedData(currentRow, 'The following user has been deleted:')
+    showSubmittedData(currentRow, 'The following module has been deleted:')
   }
 
   return (
@@ -55,14 +53,14 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
             from the system. This cannot be undone.
           </p>
 
-          <Label className='my-2'>
+          {/* <Label className='my-2'>
             Username:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder='Enter username to confirm deletion.'
             />
-          </Label>
+          </Label> */}
 
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>

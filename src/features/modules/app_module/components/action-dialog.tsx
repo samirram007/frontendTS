@@ -22,6 +22,7 @@ import { useForm } from 'react-hook-form'
 import FormInputField from '@/components/form-input-field'
 
 import { Loader2 } from 'lucide-react'
+import { useEffect, useMemo } from 'react'
 import { useAppModuleMutation } from '../data/queryOptions'
 import { formSchema, type AppModule } from '../data/schema'
 import type { AppModuleForm } from '../types/types'
@@ -58,15 +59,35 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   })
 
   const onSubmit = (values: AppModuleForm) => {
+    const formattedName = values.name
+      .replace(/_/g, ' ')                 // Replace underscores with spaces
+      .replace(/\b\w/g, (char) => char.toUpperCase()) // Capitalize each word
 
+    // Update the form values
+    const formattedValues = {
+      ...values,
+      name: formattedName.trim(),
+    }
     form.reset()
-    showSubmittedData(values)
+    showSubmittedData(formattedValues)
     saveAppModule(
       currentRow ? { ...values, id: currentRow.id } : values
     )
     onOpenChange(false)
   }
+  const name = form.watch("name")
 
+  const code = useMemo(() => {
+    return name
+      ? name.toUpperCase().replace(/\s+/g, "_").replace(/[^A-Z0-9_]/g, "")
+      : ""
+  }, [name])
+
+  // reflect it in the input
+  useEffect(() => {
+    form.setValue("code", code)
+    form.setValue("description", code)
+  }, [code])
   return (
     <Dialog
       open={open}
@@ -91,6 +112,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
               className='space-y-4 p-0.5'
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
+
               <FormInputField type='text' form={form} name='code' label='Code' />
 
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />

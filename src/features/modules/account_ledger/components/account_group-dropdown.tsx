@@ -9,7 +9,8 @@ import { useMemo } from "react";
 import type { UseFormReturn } from "react-hook-form";
 import { type AccountGroup } from "../../account_group/data/schema";
 import type { AccountNature } from "../../account_nature/data/schema";
-import type { AccountLedgerForm } from "../types/types";
+import type { AccountLedgerForm } from "../data/schema";
+
 
 
 type Props = {
@@ -22,7 +23,7 @@ const AccountGroupDropdown = (props: Props) => {
         queryFn: fetchAccountGroupService,
     });
 
-    const accountGroupId = form.watch('accountGroupId') as string | number | undefined;; // Watch form value for reactivity
+    const accountGroupId = form.watch('accountGroupId') as string | number | undefined; // Watch form value for reactivity
     const accountNature: AccountNature | null = useMemo(() => {
         if (!accountGroupList?.data) return null;
         return accountGroupList.data.find((group: AccountGroup) => group.id === Number(accountGroupId))?.accountNature || null;

@@ -56,6 +56,22 @@ export const partySchema = z.object({
   accountLedgerId: z.number().int().nullish(),
   accountBalance: z.coerce.number().nullish(),
 })
+export const transactionLedgerSchema = z.object({
+  id: z.number().int().positive(),
+  name: z.string().min(1),
+  code: z.string().nullish(),
+  ledgerableType: z.string().nullish(),
+  ledgerableId: z.coerce.number().int().nullish(),
+  currentBalance: z.coerce.number().nullish(),
+})
+export const partyLedgerSchema = z.object({
+  id: z.number().int().positive(),
+  name: z.string().min(1),
+  code: z.string().nullish(),
+  ledgerableType: z.string().nullish(),
+  ledgerableId: z.coerce.number().int().nullish(),
+  currentBalance: z.coerce.number().nullish(),
+})
 export const receiptNoteSchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherNo: z.string().min(1).nullish(),
@@ -66,9 +82,10 @@ export const receiptNoteSchema = z.object({
   stockJournalId: z.number().int().nullish(),
   stockJournal: stockJournalSchema.nullish(),
   voucherEntries: z.array(voucherEntrySchema),
-  purchaseLedgerId: z.number().int().nullish(),
-  partyLedgerId: z.number().int().nullish(),
   party: partySchema.nullish(),
+  partyLedger: partyLedgerSchema.nullish(),
+  transactionLedger: transactionLedgerSchema.nullish(),
+  amount: z.coerce.number().nullish(),  
   remarks: z.string().nullish()
 })
 export type ReceiptNote = z.infer<typeof receiptNoteSchema>
@@ -83,14 +100,14 @@ export const formSchema = z
     voucherDate: z.coerce.date(),
     referenceNo: z.string().min(1).nullish(),
     referenceDate: z.coerce.date().nullish(),
-    voucherTypeId: z.number().int(),
-    purchaseLedgerId: z.number().int(),
-    partyLedgerId: z.number().int(),
-
+    voucherTypeId: z.number().int(), 
     stockJournalId: z.number().int().nullish(),
     stockJournal: stockJournalSchema.nullish(),
     voucherEntries: z.array(voucherEntrySchema),
     party: partySchema.nullish(),
+    partyLedger: partyLedgerSchema.nullish(),
+    transactionLedger: transactionLedgerSchema.nullish(),
+    amount: z.coerce.number().nullish(), 
     remarks: z.string().nullish(),
     isEdit: z.boolean(),
   })

@@ -63,8 +63,8 @@ const StockJournalEntries = () => {
     const stockItems = results[0].data || []
     const godowns = results[1].data || []
     const isLoading = results.some((r) => r.isLoading)
-    console.log(stockItems, godowns)
-    const { fields, append, remove } = useFieldArray({
+
+    const { fields, remove } = useFieldArray({
         control,
         name: "stockJournal.stockJournalEntries", // 👈 path inside schema
     })

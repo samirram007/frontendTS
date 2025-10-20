@@ -28,7 +28,8 @@ export default function Designation({ data }: DesignationProps) {
   return (
     <DesignationProvider>
 
-      <Main>
+      <Main className='min-w-full'>
+
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
           <div>
             <h2 className='text-2xl font-bold tracking-tight'>{moduleName} List</h2>

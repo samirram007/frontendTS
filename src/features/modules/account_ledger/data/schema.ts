@@ -15,7 +15,7 @@ export const accountLedgerSchema = z.object({
   code: z.string().min(1),
   description: z.string().nullish(),
   status: accountLedgerStatusSchema,
-  accountGroupId: z.number().int().positive(),
+  accountGroupId: z.coerce.number().int().positive(),
   accountGroup: accountGroupSchema.nullish()
 })
 export type AccountLedger = z.infer<typeof accountLedgerSchema>
@@ -26,16 +26,13 @@ export type AccountLedgerList = z.infer<typeof accountLedgerListSchema>
 
 export const formSchema = z
   .object({
-    name: z
-      .string()
-      .min(1, { message: 'Name is required.' }),
-    code: z
-      .string()
-      .min(1, { message: 'Role is required.' }),
-    status: z
-      .string()
-      .min(1, { message: 'Status is required.' }),
-    accountGroupId: z.number().int().positive().min(1, { message: 'Account Group ID is required.' }),
+    name: z.string().min(1, { message: 'Name is required.' }),
+    code: z.string().min(1, { message: 'Role is required.' }),
+    status: z.string().min(1, { message: 'Status is required.' }),
+    accountGroupId: z.coerce.number().int().positive().min(1, { message: 'Account Group ID is required.' }),
+
     description: z.string().min(1, { message: 'Description is required.' }),
     isEdit: z.boolean(),
   })
+
+export type AccountLedgerForm = z.infer<typeof formSchema>

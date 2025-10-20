@@ -14,13 +14,13 @@
 //     ]),
 //     accounting_effect: faker.helpers.arrayElement(['debit', 'credit', null])
 
-import { fetchAppModuleFeatureService } from "./api"
+import { fetchDayBookService } from "./api"
 
 //   }
 // })
 
-export const app_module_features = async () => {
-  const data = await fetchAppModuleFeatureService()
+export const day_books = async () => {
+  const data = await fetchDayBookService()
   if (!data) {
     return []
   }

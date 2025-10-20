@@ -27,9 +27,9 @@ export const FormProvider = ({ children }: {
             voucherDate: new Date(),
             referenceNo: "",
             referenceDate: new Date(),
-            voucherTypeId: 1,
-            purchaseLedgerId: undefined,
-            partyLedgerId: undefined,
+            voucherTypeId: 1, 
+            partyLedger: undefined,
+            transactionLedger: undefined,
             stockJournalId: null,
             remarks: "",
             stockJournal: {

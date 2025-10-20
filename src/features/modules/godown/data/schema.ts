@@ -1,5 +1,6 @@
 import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
 import { z } from 'zod';
+import { addressSchema } from '../../address/data/schema';
 
 
 
@@ -12,15 +13,7 @@ export const godownSchema: z.ZodType<any> = z.object({
   status: ActiveInactiveStatusSchema,
   parentId: z.number().int().positive().optional().nullish(),
   parent: z.lazy(() => godownSchema).optional().nullish(),
-  address: z
-    .object({
-      street: z.string().nullable().optional(),
-      city: z.string().nullable().optional(),
-      state: z.string().nullable().optional(),
-      pincode: z.string().nullable().optional(),
-    })
-    .nullable()
-    .optional(),
+  address: z.lazy(() => addressSchema).nullable().nullish(),
   ourStockWithThirdParty: z.boolean(),
   thirdPartyStockWithUs: z.boolean()
 
@@ -44,15 +37,7 @@ export const formSchema = z
       .min(1, { message: 'Status is required.' }),
     parentId: z.number().int().positive().optional().nullish(),
     description: z.string().min(1, { message: 'Description is required.' }),
-    address: z
-      .object({
-        street: z.string().nullable().optional(),
-        city: z.string().nullable().optional(),
-        state: z.string().nullable().optional(),
-        pincode: z.string().nullable().optional(),
-      })
-      .nullable()
-      .optional(),
+    address: z.lazy(() => addressSchema).nullable().nullish(),
     ourStockWithThirdParty: z.boolean(),
     thirdPartyStockWithUs: z.boolean(),
     isEdit: z.boolean(),

@@ -115,14 +115,18 @@ const CheckBox = (props: Props) => {
 }
 
 const TextAreaBox = (props: Props) => {
-    const { form, name, label } = props
+    const { form, name, gapClass, rtl, label } = props
     return (
         <FormField
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem className='grid grid-cols-[100px_1fr] items-start space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className=' pt-1  '>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass
+                    )}   >
+                    <FormLabel className={rtl ? 'order-last' : ''}>
                         {label ?? capitalizeAllWords(name)}
                     </FormLabel>
                     <FormControl>

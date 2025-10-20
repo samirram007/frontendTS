@@ -45,11 +45,4 @@ export const Route = createFileRoute(
   pendingComponent: () => <Loader className="animate-spin" />,
 })
 
-function RouteComponent() {
-  return (
-    <div>
-      Hello
-      "/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration"!
-    </div>
-  )
-}
+

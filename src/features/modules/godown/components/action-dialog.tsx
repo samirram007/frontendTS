@@ -23,7 +23,8 @@ import { lowerCase } from '../../../../utils/removeEmptyStrings'
 import { Loader2 } from 'lucide-react'
 import { useGodownMutation } from '../data/queryOptions'
 import { formSchema, type Godown, type GodownForm } from '../data/schema'
-import GodownDropdown from './godown-dropdown'
+import GodownDropdown from './dropdown/godown-dropdown'
+import AddressForm from './sub-component/address-form'
 
 
 interface Props {
@@ -35,7 +36,6 @@ interface Props {
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const { mutate: saveGodown, isPending } = useGodownMutation()
   const isEdit = !!currentRow
-
   const form = useForm<GodownForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
@@ -47,19 +47,13 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         code: '',
         description: '',
         parentId: 1,
-        address: {
-          addressLine1: '',
-          addressLine2: '',
-          city: '',
-          pincode: '',
-          stateId: 19,
-          countryId: 74,
-        },
+        address: undefined,
         status: 'active',
         isEdit,
       },
   })
 
+  const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
 
   const moduleName = "Godown"
   const onSubmit = (values: GodownForm) => {
@@ -81,7 +75,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         onOpenChange(state)
       }}
     >
-      <DialogContent className='sm:max-w-lg'>
+      <DialogContent className='sm:max-w-lg md:max-w-8/12 lg:max-w-6/12 '>
         <DialogHeader className='text-left'>
           <DialogTitle>{isEdit ? 'Edit ' : 'Add New '} {moduleName}</DialogTitle>
           <DialogDescription>
@@ -90,21 +84,31 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
+        <div className='-mr-4 h-full w-full overflow-y-auto py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
               onSubmit={form.handleSubmit(onSubmit)}
               className='space-y-4 p-0.5'
             >
-              <FormInputField type='text' form={form} name='name' label='Name' />
-              <FormInputField type='text' form={form} name='code' label='Code' />
-              <GodownDropdown form={form} />
-              <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
+              <div className='grid grid-cols-2 gap-4'>
+                <div className='space-y-4'>
+                  <h6 className=" font-semibold text-md  ">GENERAL</h6>
+                  <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
+                  <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
+                  <GodownDropdown form={form} gapClass={gapClass} />
+
+                  <FormInputField type='textarea' gapClass={gapClass} form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },
                 { label: 'Inactive', value: 'inactive' },
               ]} />
+                </div>
+                <div className='space-y-4'>
+                  <AddressForm form={form} />
+
+                </div>
+              </div>
 
             </form>
           </Form>

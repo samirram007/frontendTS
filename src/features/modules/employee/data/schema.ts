@@ -72,7 +72,7 @@ export const formSchema = z
     accountLedger: z.lazy(() => accountLedgerSchema).optional().nullish(),
     address: z.lazy(() => addressSchema).nullable().nullish(),
     accountGroupId: z.coerce.number().nullish(), 
-
+    hasUserAccount: z.boolean(),
     isEdit: z.boolean(),
   })
 

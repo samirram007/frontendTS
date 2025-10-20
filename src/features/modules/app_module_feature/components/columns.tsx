@@ -55,12 +55,22 @@ export const columns: ColumnDef<AppModuleFeature>[] = [
       <DataTableColumnHeader column={column} title='Name' />
     ),
     cell: ({ row }) => {
-
+      const { appModuleId, appModule } = row.original
+      const badgeColor = 'success'
+      if (!appModuleId) {
+        return <div className='text-muted-foreground'>Primary</div>
+      }
       return (
-        <LongText className='max-w-36 flex items-center gap-2'>
-          {row.getValue('name')}
-        </LongText>
-      );
+        <div className='flex space-x-2'>
+          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
+            <LongText className='max-w-60 truncate flex items-center gap-2'>
+              {appModule?.name ?? 'Primary'} -  {row.getValue('name')}
+            </LongText>
+          </Badge>
+
+        </div>
+      )
+
     },
     meta: {
       className: cn(
@@ -81,28 +91,7 @@ export const columns: ColumnDef<AppModuleFeature>[] = [
       <div className='w-fit text-nowrap'>{row.getValue('code')}</div>
     ),
   },
-  {
-    accessorKey: 'appModuleId',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Module' />
-    ),
-    cell: ({ row }) => {
-      const { appModuleId, appModule } = row.original
-      const badgeColor = 'success'
-      if (!appModuleId) {
-        return <div className='text-muted-foreground'>Primary</div>
-      }
-      return (
-        <div className='flex space-x-2'>
-          <Badge variant='default' className={cn('capitalize', badgeColor)}>
-            {appModule?.name ?? 'Primary'}
-          </Badge>
 
-        </div>
-      )
-    },
-    enableHiding: false,
-  },
   {
     accessorKey: 'description',
     header: ({ column }) => (

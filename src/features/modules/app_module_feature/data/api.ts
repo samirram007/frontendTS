@@ -1,4 +1,4 @@
-import { getData, postData, putData } from "@/utils/dataClient";
+import { deleteData, getData, postData, putData } from "@/utils/dataClient";
 
 
 const API_PATH = "/app_module_features"
@@ -13,7 +13,8 @@ async function updateAppModuleFeatureService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 async function deleteAppModuleFeatureService(payload: any) {
-    return await putData(`${API_PATH}/${payload.id}`, payload)
+    console.log(payload)
+    return await deleteData(`${API_PATH}/${payload.id}`)
 }
 
 export { deleteAppModuleFeatureService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService };

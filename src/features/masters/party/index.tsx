@@ -41,16 +41,19 @@ export default function Party() {
 const sidebarNavItems = [
     {
         title: 'Distributor',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/party/distributor',
     },
     {
         title: 'Supplier',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/party/supplier',
     },
     {
         title: 'Transporter',
+        visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/party/transporter',
     },

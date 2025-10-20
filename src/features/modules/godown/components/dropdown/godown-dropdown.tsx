@@ -5,21 +5,25 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
-import { fetchGodownService } from "../data/api";
-import type { Godown, GodownForm } from "../data/schema";
+import { cn } from "@/lib/utils";
+import { fetchGodownService } from "../../data/api";
+import type { Godown, GodownForm } from "../../data/schema";
 
 
 
 
 type Props = {
     form: UseFormReturn<GodownForm>;
+    gapClass?: string;
+    rtl?: boolean;
 };
 const GodownDropdown = (props: Props) => {
-    const { form } = props as Props;
+    const { form, gapClass, rtl } = props as Props;
     const { data: GodownList, isLoading } = useQuery({
         queryKey: ["Godowns"],
         queryFn: fetchGodownService,
     });
+
 
     const handleValueChange = (value: string) => {
         form.setValue('parentId', Number(value));
@@ -34,25 +38,26 @@ const GodownDropdown = (props: Props) => {
                 control={form.control}
                 name='parentId'
                 render={({ field }) => (
-                    <FormItem className='grid grid-cols-6 items-start space-y-0 gap-x-4 gap-y-1 '>
-                        <FormLabel className='col-span-2 text-right mt-3'>
+                    <FormItem
+                        className={cn(
+                            'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                            gapClass
+                        )}   >
+                        <FormLabel className={rtl ? 'order-last' : ''}>
                             Under
                         </FormLabel>
-                        <div className="w-full flex gap-2 flex-row items-center justify-start col-span-4 space-y-1">
-
-                            <SelectDropdown
-                                defaultValue={field.value ? field.value.toString() : ''}
-                                onValueChange={(value) => handleValueChange(value)}
-                                placeholder='Select a godown'
-                                className='w-11/12 col-span-6 md:col-span-4'
-                                items={GodownList?.data.map((godown: Godown) => ({
-                                    label: capitalizeAllWords(godown.name),
-                                    value: String(godown.id),
-                                }))}
-                            />
 
 
-                        </div>
+                        <SelectDropdown
+                            defaultValue={field.value ? field.value.toString() : ''}
+                            onValueChange={(value) => handleValueChange(value)}
+                            placeholder='Select a godown'
+                            className='w-11/12 '
+                            items={GodownList?.data.map((godown: Godown) => ({
+                                label: capitalizeAllWords(godown.name),
+                                value: String(godown.id),
+                            }))}
+                        />
                         <FormMessage className='col-span-4 col-start-3' />
                     </FormItem>
                 )}

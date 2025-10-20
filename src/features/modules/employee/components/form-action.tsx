@@ -37,7 +37,11 @@ export function FormAction({ currentRow }: Props) {
     const form = useForm<EmployeeForm>({
         resolver: zodResolver(formSchema),
         defaultValues: isEdit
-            ? { ...currentRow, isEdit }
+            ? {
+                ...currentRow,
+                isEdit,
+                hasUserAccount: currentRow?.user ? true : false,
+            }
             : {
                 name: '',
                 code: '',
@@ -72,6 +76,7 @@ export function FormAction({ currentRow }: Props) {
 
                 accountGroupId: 20002,
                 image: '4', 
+                hasUserAccount: false,
 
                 isEdit,
             },
@@ -160,6 +165,10 @@ export function FormAction({ currentRow }: Props) {
                                 <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                                     { label: 'Active', value: 'active' },
                                     { label: 'Inactive', value: 'inactive' },
+                                ]} />
+                                <FormInputField type='checkbox' form={form} name='hasUserAccount' label='Has user account' options={[
+                                    { label: 'yes', value: true },
+                                    { label: 'No', value: false },
                                 ]} />
                                 <DialogFooter className='flex flex-row justify-end! py-4 border-t-2 border-orange-900/50 max-w-full w-full text-center'>
 

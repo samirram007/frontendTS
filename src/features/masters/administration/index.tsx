@@ -41,15 +41,21 @@ export default function Administration() {
 
 const sidebarNavItems = [
     {
+        title: 'User',
+        visible: true,
+        href: '/masters/administration/user',
+        icon: <IconUserCog />,
+    },
+    {
         title: 'Role',
         visible: true,
         icon: <IconUser size={18} />,
         href: '/masters/administration/role',
     },
     {
-        title: 'User',
+        title: 'Permission',
         visible: true,
-        href: '/masters/administration/user',
+        href: '/masters/administration/permission',
         icon: <IconUserCog />,
     },
     {
@@ -62,12 +68,6 @@ const sidebarNavItems = [
         title: 'App Feature',
         visible: true,
         href: '/masters/administration/app_module_feature',
-        icon: <IconUserCog />,
-    },
-    {
-        title: 'Permission',
-        visible: true,
-        href: '/masters/administration/permission',
         icon: <IconUserCog />,
     },
 ]

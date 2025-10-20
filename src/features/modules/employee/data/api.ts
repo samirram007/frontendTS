@@ -14,5 +14,6 @@ export async function storeEmployeeService(payload: any) {
     return await postData(API_PATH, payload)
 }
 export async function updateEmployeeService(payload: any) {
+    console.log(payload)
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }

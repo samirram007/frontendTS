@@ -1,6 +1,6 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import type { AppModuleFeatureForm } from "../types/types"
-import { fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService } from "./api"
+import { deleteAppModuleFeatureService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService } from "./api"
 const Key = "AppModuleFeatures"
 export const appModuleFeatureQueryOptions = (key: string = Key) => {
     return queryOptions({
@@ -30,4 +30,21 @@ export function useAppModuleFeatureMutation() {
             console.error("AppModuleFeature mutation failed:", error)
         },
     })
+}
+export function useAppModuleFeatureDeleteMutation() {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: async (id: number) => {
+            // console.log("Deleting feature id:", id)
+            return await deleteAppModuleFeatureService({ id })
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [Key] })
+        },
+        onError: (error) => {
+            console.error("AppModuleFeature mutation failed:", error)
+        },
+    }
+    )
 }

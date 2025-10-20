@@ -21,11 +21,13 @@ import { useForm } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 
+import { Badge } from '@/components/ui/badge'
 import { Loader2 } from 'lucide-react'
+import { useEffect, useMemo } from 'react'
 import { useAppModuleFeatureMutation } from '../data/queryOptions'
 import { formSchema, type AppModuleFeature } from '../data/schema'
 import type { AppModuleFeatureForm } from '../types/types'
-import AppModuleDropdown from './app_module-dropdown'
+import AppModuleForm from './dropdown/app_module-form'
 
 
 
@@ -61,14 +63,31 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
 
   const onSubmit = (values: AppModuleFeatureForm) => {
     values.appModuleId = Number(values.appModuleId)
-    form.reset()
+    form.reset({
+      ...form.getValues(),
+      name: "",
+      code: "",
+      description: "",
+    })
     showSubmittedData(values)
     saveAppModuleFeature(
       currentRow ? { ...values, id: currentRow.id } : values
     )
-    onOpenChange(false)
+    // onOpenChange(false)
   }
+  const name = form.watch("name")
+  const appModule = form.watch("appModule")
+  const code = useMemo(() => {
+    return name
+      ? appModule?.code + "_" + name.toUpperCase().replace(/\s+/g, "_").replace(/[^A-Z0-9_]/g, "")
+      : ""
+  }, [name])
 
+  // reflect it in the input
+  useEffect(() => {
+    form.setValue("code", code)
+    form.setValue("description", code)
+  }, [code])
   return (
     <Dialog
       open={open}
@@ -79,21 +98,30 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
     >
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-left border-b-2 pb-2'>
-          <DialogTitle>{isEdit ? 'Edit Stock Group' : 'Add New Stock Group'}</DialogTitle>
+          <DialogTitle>{isEdit ? 'Edit Module Feature' : 'Add New Module Feature'}</DialogTitle>
           <DialogDescription>
-            {isEdit ? 'Update the Stock Group here. ' : 'Create new Stock Group here. '}
+            {isEdit ? 'Update the  Module Feature here. ' : 'Create new  Module Feature here. '}
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
+        <div className='-mr-4 h-auto w-full overflow-y-auto py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
               onSubmit={form.handleSubmit(onSubmit)}
               className='space-y-4 p-0.5'
             >
-              <AppModuleDropdown form={form} />
+              <AppModuleForm form={form} />
               <FormInputField type='text' form={form} name='name' label='Name' />
+              <div className='grid grid-cols-[120px_1fr] gap-2 -mt-3 items-start text-sm text-muted-foreground'>
+                <div>sample:</div>
+                <div className='flex flex-row gap-4'>
+
+                  <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Create') }}>Create</Badge>
+                  <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Edit') }}>Edit</Badge>
+                  <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Delete') }}>Delete</Badge>
+                </div>
+              </div>
               <FormInputField type='text' form={form} name='code' label='Code' />
 
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />

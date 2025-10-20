@@ -26,6 +26,7 @@ export const formSchema = z.object({
   status: z.string().min(1, { message: 'Status is required.' }),
   appModuleId: z.coerce.number().int().positive(),
   description: z.string().min(1, { message: 'Description is required.' }).nullish(),
+  appModule: z.lazy(() => appModuleSchema).optional().nullish(),
   action: z.string().nullish(),
   isEdit: z.boolean(),
 })

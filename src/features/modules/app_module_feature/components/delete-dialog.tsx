@@ -2,12 +2,11 @@
 
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+
+import { IconAlertTriangle } from '@tabler/icons-react'
 
 import { showSubmittedData } from '@/utils/show-submitted-data'
-import { IconAlertTriangle } from '@tabler/icons-react'
-import { useState } from 'react'
+import { useAppModuleFeatureDeleteMutation } from '../data/queryOptions'
 import type { AppModuleFeature } from '../data/schema'
 
 
@@ -18,28 +17,36 @@ interface Props {
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
-  const [value, setValue] = useState('')
+  const { mutate: deleteAppModuleFeature } = useAppModuleFeatureDeleteMutation()
+
 
   const handleDelete = () => {
-    if (value.trim() !== String(currentRow.id)) return
+    // if (value.trim() !== String(currentRow.id)) return
 
-    onOpenChange(false)
+    //(false)
     showSubmittedData(currentRow, 'The following user has been deleted:')
+    deleteAppModuleFeature(currentRow.id, {
+      onSuccess: () => {
+        onOpenChange(false)
+      },
+      onError: (error) => {
+        console.error('Delete failed:', error)
+      },
+    })
   }
 
   return (
     <ConfirmDialog
       open={open}
       onOpenChange={onOpenChange}
-      handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.id.toString()}
+      handleConfirm={handleDelete} 
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
             className='stroke-destructive mr-1 inline-block'
             size={18}
           />{' '}
-          Delete User
+          Delete App Module Feature
         </span>
       }
       desc={
@@ -48,21 +55,14 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
             Are you sure you want to delete{' '}
             <span className='font-bold'>{currentRow.name}</span>?
             <br />
-            This action will permanently remove the user with the status of{' '}
+            This action will permanently remove the app module feature with the status of{' '}
             <span className='font-bold'>
               {currentRow.status.toUpperCase()}
             </span>{' '}
             from the system. This cannot be undone.
           </p>
 
-          <Label className='my-2'>
-            Username:
-            <Input
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
-            />
-          </Label>
+
 
           <Alert variant='destructive'>
             <AlertTitle>Warning!</AlertTitle>

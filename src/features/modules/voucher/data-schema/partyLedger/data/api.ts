@@ -1,6 +1,6 @@
 import { getData } from "@/utils/dataClient"
 
-const API_PATH = "/parties"
+// const API_PATH = "/parties"
 export async function fetchPartyLedgerService(module: string) {
     return await getData(`${module}`)
 }

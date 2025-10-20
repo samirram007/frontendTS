@@ -17,11 +17,11 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import type { AccountLedger } from "@/features/modules/account_ledger/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
-import type { PurchaseLedger } from "../../../data-schema/purchaseLedger/data/schema"
+
+import type { PurchaseLedger } from "../../../data-schema/purchasableStockItem/data/schema"
 import type { ReceiptNoteForm } from "../../data/schema"
 
 // const frameworks = [
@@ -53,10 +53,10 @@ interface Props {
 export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
 
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('purchaseLedgerId')?.toString())
+    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
 
     const handleSelect = (value: string) => {
-        form.setValue("purchaseLedgerId", purchaseLedgers.find((purchaseLedger) => purchaseLedger.id === Number(value))?.id!)
+        form.setValue("transactionLedger.id", purchaseLedgers.find((purchaseLedger) => purchaseLedger.id === Number(value))?.id!)
         setValue(value)
         setOpen(false)
     }

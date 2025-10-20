@@ -13,7 +13,7 @@ import {
   Form
 } from '@/components/ui/form'
 
-import { formSchema, type AccountLedger } from '@/features/modules/account_ledger/data/schema'
+import { formSchema, type AccountLedger, type AccountLedgerForm } from '@/features/modules/account_ledger/data/schema'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -22,8 +22,7 @@ import { useForm } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 import { storeAccountLedgerService, updateAccountLedgerService } from '../data/api'
-import type { AccountLedgerForm } from '../types/types'
-import AccountGroupDropdown from './account_group-dropdown'
+
 
 
 
@@ -58,17 +57,22 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
 
   const form = useForm<AccountLedgerForm>({
     resolver: zodResolver(formSchema),
-    defaultValues: isEdit
+    defaultValues: isEdit && currentRow
       ? {
-        ...currentRow, isEdit,
+      name: currentRow.name ?? '',
+      code: currentRow.code ?? '',
+      description: currentRow.description ?? '',
+      accountGroupId: currentRow.accountGroupId ?? 0,
+      status: currentRow.status ?? 'active',
+      isEdit: true,
       }
-      : {
+    : {
         name: '',
         code: '',
         description: '',
-        accountGroupId: 1,
+      accountGroupId: 0,
         status: 'active',
-        isEdit,
+      isEdit: false,
       },
   })
 
@@ -106,8 +110,13 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <AccountGroupDropdown form={form} />
+              {/* <AccountGroupDropdown form={form} /> */}
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
+              <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
+                { label: 'Active', value: 'active' },
+                { label: 'Inactive', value: 'inactive' },
+              ]} />
+
 
 
 

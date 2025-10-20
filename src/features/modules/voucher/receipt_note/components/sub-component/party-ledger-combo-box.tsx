@@ -53,11 +53,11 @@ interface Props {
 export const PartyLedgerCombobox = ({ form, partyLedgers }: Props) => {
 
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('partyLedgerId')?.toString())
+    const [value, setValue] = React.useState(form.getValues('partyLedger.id')?.toString())
 
     const handleSelect = (value: string) => {
         // form.setValue("party", partyLedgers.find((party) => party.id === Number(value)))
-        form.setValue("partyLedgerId", partyLedgers.find((partyLedger) => partyLedger.id === Number(value))?.id!)
+        form.setValue("partyLedger.id", partyLedgers.find((partyLedger) => partyLedger.id === Number(value))?.id!)
         setValue(value)
         setOpen(false)
     }
