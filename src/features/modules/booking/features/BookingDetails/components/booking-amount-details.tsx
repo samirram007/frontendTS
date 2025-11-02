@@ -1,5 +1,4 @@
 import { ErrorToast } from "@/features/modules/booking/utils/error-response";
-import { useState } from "react";
 import { usePayment } from "../../../contexts/payment-context";
 import { useBookingDetail } from "../context/booking-detail-context";
 
@@ -13,10 +12,9 @@ const formatDate = (dateString: string | Date) => {
 
 export default function BookingAmountDetails(){
 
-    const {totalAmount,discountAmount,discountedAmount,dueAmount,receivingAmount,setReceivingAmount,payementReceipt} = usePayment();
+    const {totalAmount,dueAmount,receivingAmount,setReceivingAmount,payementReceipt,netAmount} = usePayment();
     const {isFullPaymentDone} = useBookingDetail();
    
-    const [discountDetail,_setDiscountDetail] = useState<string>("");
 
 
     // const handlePaymentChange = (e:React.ChangeEvent<HTMLInputElement>) => {
@@ -70,14 +68,14 @@ export default function BookingAmountDetails(){
             <div className="px-6 grid grid-rows-1 gap-4">
                 <div className="grid grid-cols-[200px_1fr]">
                     <div className="font-medium">Net Payable</div>
-                    <div className="text-right text-base font-bold">{totalAmount > 0 ? totalAmount.toFixed(2) :  '0.00'}</div>
+                    <div className="text-right text-base font-bold">{netAmount > 0 ? netAmount.toFixed(2) :  '0.00'}</div>
                 </div>
-                {
-                    discountDetail != '' && (
+                {/* {
+                    discountedAmount != 0 && (
                         <>
                             <div className="grid grid-cols-[200px_1fr]">
                                 <div className="font-medium">Discount Amount</div>
-                                <div className="text-right  font-semibold">{discountAmount.toFixed(2) ?? '0.00'}</div>
+                                <div className="text-right  font-semibold">{discountedAmount.toFixed(2) ?? '0.00'}</div>
                             </div>
                             <div className="grid grid-cols-[200px_1fr]">
                                 <div className="font-medium">Discounted Amount</div>
@@ -85,7 +83,7 @@ export default function BookingAmountDetails(){
                             </div>
                         </>
                     )
-                }
+                } */}
 
                 {
                     payementReceipt.length > 0

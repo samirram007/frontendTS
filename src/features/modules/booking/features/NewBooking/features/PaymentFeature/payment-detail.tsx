@@ -1,13 +1,10 @@
-import { useContext } from "react";
-import { PathoContext } from "../../../../contexts/PathoContext";
 import { DiscountDetail } from "../DiscountFeature/discount-details";
 import { usePayment } from "../../../../contexts/payment-context";
 
 export function PaymentDetail({ }) {
 
 
-    const {discountAmount,dueAmount} = useContext(PathoContext);
-    const {totalAmount,netAmount} = usePayment();
+    const {totalAmount,netAmount,discountedAmount,dueAmount} = usePayment();
 
 
 
@@ -23,7 +20,7 @@ export function PaymentDetail({ }) {
                     </div>
                 </div>
                 {
-                    discountAmount != 0 && <DiscountDetail />
+                    discountedAmount != 0 && <DiscountDetail />
                 }
 
 

@@ -15,3 +15,15 @@ export async function getBookingListService():Promise<AxiosResponse<IAllBookingR
         throw new Error("Network Error");
     }
 }
+
+export async function getBookingListByDateService(start_date:string | null,end_date:string | null):Promise<AxiosResponse<IAllBookingResponse>>{
+    try{
+        const response = await axiosClient.get(`/bookings/${start_date}/${end_date}`);
+        return response;
+    }catch(error:unknown){
+        if(axios.isAxiosError(error) && error.response){
+            throw error.response.data;
+        }
+        throw new Error("Network Error");
+    }
+}

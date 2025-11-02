@@ -7,21 +7,15 @@ import { Main } from '@/layouts/components/main'
 
 import { useInventory } from '@/features/masters/inventory/context/inventory-context'
 import { useEffect } from 'react'
-import { type StockItem } from './data/schema'
 
 
 // Import the correct type for stockitemListSchema
 
 
 
-interface StockItemProps {
-    data?: StockItem
-}
 
-export default function StockItemDetails(props: StockItemProps) {
+export default function StockItemDetails() {
     const { setSideBarOpen } = useInventory()
-    const { data } = props
-    const keyName = 'stock_items'
     useEffect(() => {
         setSideBarOpen && setSideBarOpen(false)
     }, [])

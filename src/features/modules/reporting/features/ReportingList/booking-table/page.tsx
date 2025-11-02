@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { columns } from "./columns";
-import { BookingListDataTable } from "./data-table";
+import ReportingListDataTable from "./data-table";
 import { jobOrderQueryOptions } from "../../../data/queryOptions";
 import LoadingBar from "react-top-loading-bar";
 
@@ -8,7 +8,6 @@ import LoadingBar from "react-top-loading-bar";
 export function ReportListTable(){
 
   const {data,isLoading,isError} = useQuery(jobOrderQueryOptions());
-  console.log("list data",data);
 
   if(isLoading) return <LoadingBar color="blue" />
 
@@ -16,7 +15,7 @@ export function ReportListTable(){
 
   return(
       <div className="mx-auto py-10">
-          <BookingListDataTable columns={columns} data={data}  />
+          <ReportingListDataTable columns={columns} data={data.data}  />
       </div>
   )
 }

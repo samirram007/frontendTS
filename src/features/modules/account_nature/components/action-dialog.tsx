@@ -46,7 +46,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         return await storeAccountNatureService(data);
       }
     },
-    onSuccess: (data) => {
+    onSuccess: (_data) => {
       queryClient.invalidateQueries({ queryKey: ['accountNatures'] })
     },
   })

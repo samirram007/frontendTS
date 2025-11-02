@@ -20,7 +20,6 @@ function BookingHead(){
               <input
                 type="date"
                 id="dob"
-                onChange={(e)=> console.log(e.target.value)}
                 value={new Date().toISOString().split("T")[0]}
                 name="dob"
                 className="w-full font-semibold py-1 border-0 outline-0 rounded"

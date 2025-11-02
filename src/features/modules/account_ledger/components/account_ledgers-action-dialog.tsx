@@ -49,7 +49,7 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
         return await storeAccountLedgerService(data);
       }
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['accountLedgers'] })
     },
   })
@@ -59,6 +59,7 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,
+        description: currentRow?.description ?? ""
       }
       : {
         name: '',

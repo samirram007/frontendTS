@@ -17,12 +17,11 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import type { AccountLedger } from "@/features/modules/account_ledger/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
-import type { PurchaseLedger } from "../../../data-schema/purchaseLedger/data/schema"
 import type { ReceiptNoteForm } from "../../data/schema"
+import type { PurchaseLedger } from "../../../data-schema/purchasableStockItem/data/schema"
 
 // const frameworks = [
 //     {

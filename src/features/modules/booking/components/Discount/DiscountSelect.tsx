@@ -24,7 +24,6 @@ const DiscountSelect = ({className}:{className?:string}) =>{
             setDiscountData(data);
             setLoading(false);
         }catch(error:unknown){
-            console.error(`Error: ${error}`);
             setLoading(false);
         }
     },[]);

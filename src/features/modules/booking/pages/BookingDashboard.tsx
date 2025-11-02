@@ -1,15 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { DatePicker } from "../components/DatePicker";
-import { Search } from "lucide-react";
+import { Search, SearchIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { BookingListTable } from "../features/BookingList/booking-table/page";
+import { useState } from "react";
+import { useGetBookingListQuery } from "../features/BookingList/data/queryOptions";
 
 
 
 
 
 const Booking = () =>{
+
+    const [startDate,setStartDate] = useState<Date>(new Date());
+    const [endDate,setEndDate] = useState<Date>(new Date());
+    const [selectedStartDate,setSelectedStartDate] = useState<string | null>(null);
+    const [selectedEndDate,setSelectedEndDate] = useState<string | null>(null);
+    const {data,isSuccess} = useGetBookingListQuery(selectedStartDate,selectedEndDate);
+
+    const handleFilterBooking = () => {
+        const start = startDate.toLocaleDateString('en-CA');
+        const end = endDate.toLocaleDateString('en-CA');
+        setSelectedStartDate(start);
+        setSelectedEndDate(end);
+    }
+
     return(
         <div>
             <div className="w-full grid grid-cols-[1fr_20vw] my-4 py-2 px-2 border-[1px] border-gray-300 rounded">
@@ -24,8 +40,12 @@ const Booking = () =>{
                     </label>
                     
                     <div className="flex gap-2">
-                        <DatePicker placeholder="Select start date"/>
-                        <DatePicker placeholder="Select end date"/>
+                        <DatePicker date={startDate} setDate={setStartDate} placeholder="Select start date"/>
+                        <DatePicker date={endDate} setDate={setEndDate} placeholder="Select end date"/>
+                        <Button onClick={handleFilterBooking}>
+                            <SearchIcon/>
+                            Filter
+                        </Button>
                     </div>
                 </div>
                 <div className="flex justify-end">
@@ -38,7 +58,7 @@ const Booking = () =>{
                 </div>
             </div>
             <Separator className="border-1 border-gray-500" />
-            <BookingListTable/>
+            <BookingListTable data={data ? data.data.data : []} isSuccess={isSuccess} />
         </div>
     )
 }

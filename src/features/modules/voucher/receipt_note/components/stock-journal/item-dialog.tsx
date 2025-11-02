@@ -11,13 +11,10 @@ import { FormLabel } from "@/components/ui/form";
 import { fetchGodownService } from "@/features/modules/godown/data/api";
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api";
 import { useQueries } from "@tanstack/react-query";
-import { useFormContext } from "react-hook-form";
-import type { ReceiptNoteForm } from "../../data/schema";
 import { GodownCombobox } from "./godown-combo-box";
 import { StockItemCombobox } from "./stock-item-combo-box";
 
 export function ItemDialog() {
-    const form = useFormContext<ReceiptNoteForm>()
     const results = useQueries({
         queries: [
             {
@@ -32,7 +29,6 @@ export function ItemDialog() {
     })
 
     const [stockItems, godowns] = results
-    // console.log(stockItems?.data, godowns?.data)
     if (results.some((r) => r.isLoading)) return <div>Loading...</div>
     return (
         <Dialog>

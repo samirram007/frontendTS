@@ -4,6 +4,7 @@ import { useReactToPrint } from "react-to-print";
 import type { IBooking } from "../../data/schema";
 import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 import { useAuth } from "@/features/auth/contexts/AuthContext";
+import { numberToWords } from "./data/actions";
 
 
 
@@ -28,7 +29,7 @@ function convertDateToGBFormat(date: Date) {
 export function InvoicesFeature({ data }: IInvoiceFeature) {
 
 
-    const { payementReceipt } = usePayment();
+    const { payementReceipt ,totalAmount, discountedAmount, netAmount} = usePayment();
     const { user } = useAuth();
 
     const printRef = useRef<HTMLDivElement>(null);
@@ -96,12 +97,6 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
     return data != null ? (
         <div className="overflow-hidden relative">
             <h1 className="text-center font-semibold">Invoice</h1>
-            <div className="flex no-print justify-center">
-                <Button onClick={handlePrint}>
-                    Print Invoice
-                </Button>
-            </div>
-
 
             <div ref={printRef} className="print-container relative border-2 px-2 bg-white">
                 {/* HEADER */}
@@ -200,11 +195,11 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                             ))}
                             <div className="grid grid-cols-[1fr_120px]">
                                 <div className="text-right font-medium">Less Discount</div>
-                                <div className="text-right">0.00</div>
+                                <div className="text-right">{discountedAmount.toFixed(2)}</div>
                             </div>
                             <div className="grid grid-cols-[1fr_120px]">
                                 <div className="text-right font-semibold">Invoice Total</div>
-                                <div className="text-right">{totalStandardSellingPrice?.toFixed(2)}</div>
+                                <div className="text-right">{netAmount?.toFixed(2)}</div>
                             </div>
                             <div className="grid grid-cols-[1fr_120px]">
                                 <div className="text-right font-semibold">Cash Receipt</div>
@@ -212,7 +207,7 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                             </div>
                             <div className="w-full flex justify-between border-t-2 border-black">
                                 <div className="font-semibold">
-                                    Money in wordssldafjhasdhfajksdfhshjklirhfsajdhfkajsdfhaskjdfh
+                                    {numberToWords(totalAmount)}
                                 </div>
                                 <div className="grid grid-cols-[1fr_120px]">
                                     <div className="text-right font-semibold">Net Receipt</div>
@@ -230,7 +225,11 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                 </div>
             </div>
 
-
+            <div className="flex mt-2 no-print justify-center">
+                <Button variant={'default'} onClick={handlePrint}>
+                    Print Invoice
+                </Button>
+            </div>
         </div>
     )
         :

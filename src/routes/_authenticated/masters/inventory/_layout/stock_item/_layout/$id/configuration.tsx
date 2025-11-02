@@ -1,5 +1,4 @@
 import { stockItemQueryOptions } from '@/features/modules/stock_item/data/queryOptions'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { Loader } from 'lucide-react'
 import React, { Suspense } from 'react'
@@ -35,21 +34,11 @@ export const Route = createFileRoute(
 
     if (id === "new") return <StockItemConfiguration />
 
-    const { data: stockItem } = useSuspenseQuery(stockItemQueryOptions(id))
     return <Suspense fallback={<Loader className="animate-spin" />}>
-      <StockItemConfiguration data={stockItem?.data} />
+      <StockItemConfiguration  />
     </Suspense>
   },
   errorComponent: () => <div> <span className='bg-red-400  '>By ID:</span> Error loading stockItem data[]. </div>
   ,
   pendingComponent: () => <Loader className="animate-spin" />,
 })
-
-function RouteComponent() {
-  return (
-    <div>
-      Hello
-      "/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration"!
-    </div>
-  )
-}

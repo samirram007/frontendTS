@@ -190,10 +190,12 @@ export interface IVoucherPatient{
 export interface IBookingTest{
     bookingDate: Date,
     patientId: number,
-    agentId?:number,
-    physicianId?: number,
+    agentId?:number | null ,
+    physicianId?: number | null,
     tests: ITestItem[],
-    discountTypeId?: number
+    discountTypeId?: number | null,
+    sampleCollectorId?:number | null,
+    rate?:number
 }
 
 

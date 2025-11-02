@@ -1,7 +1,8 @@
-import { queryOptions } from "@tanstack/react-query"
-import { fetchJobOrderByIdService, fetchJobOrdersService } from "./api"
+import { queryOptions, useMutation } from "@tanstack/react-query"
+import { fetchJobOrderByIdService, fetchJobOrdersService, postUploadReport } from "./api"
+import type { IReportUploadRequest } from "./schema"
 
-const BASE_KEY = "job_orders_key"
+const BASE_KEY = "job_orders_key";
 
 export const jobOrderQueryOptions = (id?: number) => {
     return queryOptions({
@@ -15,3 +16,13 @@ export const jobOrderQueryOptions = (id?: number) => {
 
 
 
+
+
+export const useReportUploadMutation = () =>{
+    return useMutation({
+        mutationKey:['post-report-upload-mutate-key'],
+        mutationFn: (request:IReportUploadRequest) => {
+            return postUploadReport(request);
+        }
+    })
+}

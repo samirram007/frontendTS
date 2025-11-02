@@ -32,7 +32,7 @@ const PartyLedgerForm = (props: FormProps) => {
             <FormField
                 control={form.control}
                 name={'party.id'}
-                render={({ field }) => (
+                render={({  }) => (
                     <FormItem className='grid grid-rows-1 gap-1 '>
                         <div className="grid grid-cols-[140px_1fr] justify-start items-center ">
 

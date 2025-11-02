@@ -10,7 +10,6 @@ export async function fetchEmployeeByIdService(id: number) {
 }
 
 export async function storeEmployeeService(payload: any) {
-    console.log("Employee payload: ", payload)
     return await postData(API_PATH, payload)
 }
 export async function updateEmployeeService(payload: any) {

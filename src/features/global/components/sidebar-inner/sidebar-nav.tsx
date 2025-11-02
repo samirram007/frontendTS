@@ -14,7 +14,7 @@ import { useState, type JSX } from 'react'
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
     href: string
-    visible: boolean
+    visible?: boolean
     title: string
     icon: JSX.Element
   }[]

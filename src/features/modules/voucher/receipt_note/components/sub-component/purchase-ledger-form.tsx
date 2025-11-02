@@ -18,7 +18,6 @@ const PurchaseLedgerForm = (props: FormProps) => {
         queryKey: ["accountLedgers", "purchase"],
         queryFn: () => fetchPurchaseLedgersService(),
     })
-    console.log(purchaseLedgers?.data)
     // const handleValueChange = (value: string) => {
     //     form.setValue('party.id', Number(value))
 
@@ -31,7 +30,7 @@ const PurchaseLedgerForm = (props: FormProps) => {
             <FormField
                 control={form.control}
                 name={'purchaseLedgerId'}
-                render={({ field }) => (
+                render={({  }) => (
                     <FormItem className='grid grid-rows-1 gap-1'>
                         <div className="grid grid-cols-[140px_1fr] justify-start items-center ">
 

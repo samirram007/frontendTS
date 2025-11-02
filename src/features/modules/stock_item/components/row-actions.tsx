@@ -13,7 +13,7 @@ interface DataTableRowActionsProps {
 
 const RowActions = (props: DataTableRowActionsProps) => {
     const navigate = useNavigate()
-    const { setOpen, currentRow, setCurrentRow } = useStockItem()
+    const { setOpen, setCurrentRow } = useStockItem()
     const { row } = props
     return (
         <DataTableRowActions<StockItem>

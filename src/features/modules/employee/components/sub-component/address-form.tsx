@@ -15,7 +15,7 @@ type FormProps = {
 const AddressForm = (props: FormProps) => {
     const { form } = props as FormProps;
     const gapClass = "gap-4"
-    const gapClass2 = "grid grid-cols-[80px_1fr] gap-2"
+    // const gapClass2 = "grid grid-cols-[80px_1fr] gap-2"
     return (
         <div className="grid grid-cols-1 grid-rows-[auto_auto_auto] gap-4 border rounded-lg p-2">
             <h3 className=" font-semibold text-md  ">Address</h3>

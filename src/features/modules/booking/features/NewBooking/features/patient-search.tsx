@@ -62,22 +62,6 @@ const PatientSearch = () => {
                         className="w-3/3 px-3 py-2 border rounded-lg outline-none"
                     />
 
-            {/* create new patient action */}
-                    {/* <div>
-                        <PatientForm
-                            button={
-                                <Button
-                                    title="Add New Patient"
-                                    className="cursor-pointer"
-                                    variant={"default"}
-                                >
-                                    <Plus size={30} />
-                                </Button>
-                            }
-                        />
-                    </div> */}
-
-
                     {showDropdown && query && (
                         <div
                             tabIndex={0}
@@ -87,7 +71,7 @@ const PatientSearch = () => {
                                 filteredPatientList.map((patient) => (
                                     <div
                                         key={patient.id}
-                                        className={`px-3 py-2 cursor-pointer`}
+                                        className={`px-3 py-2 cursor-pointer border-b-1 border-gray-600`}
                                         onClick={() => handleSelectPatient(patient)}
                                     >
                                         <div className="font-medium">{patient.name}</div>

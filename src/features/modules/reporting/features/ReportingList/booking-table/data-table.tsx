@@ -11,7 +11,7 @@ interface DataTableProps<TData, TValue> {
 
 
 
-export function BookingListDataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+const ReportingListDataTable = <TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) => {
 
     const table = useReactTable({
         data,
@@ -93,3 +93,6 @@ export function BookingListDataTable<TData, TValue>({ columns, data }: DataTable
         </>
     )
 }
+
+
+export default ReportingListDataTable;

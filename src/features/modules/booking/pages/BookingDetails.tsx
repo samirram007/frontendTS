@@ -14,7 +14,6 @@ interface BookingDetailProps {
 
 const BookingDetails:React.FC<BookingDetailProps> = ({data}) => {
     
-    console.log("data of called id",data);
 
     const {calculateTotalAmount} = usePayment();
     const {setBookingDetail,isFullPaymentDone} = useBookingDetail();

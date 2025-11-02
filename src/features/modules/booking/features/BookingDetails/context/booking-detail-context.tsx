@@ -25,8 +25,8 @@ export default function BookingDetailProvider({children}:{children: React.ReactN
     useEffect(()=>{
         if(bookingDetail){
             const totalCredit = bookingDetail?.voucherEntries?.reduce(
-            (sum, entry) => sum + Number(entry.credit ?? 0),
-            0
+                (sum, entry) => sum + Number(entry.credit ?? 0),
+                0
             );
             const duedataAmount = bookingDetail?.voucherReferences?.reduce((sum, ref) => {
                 const entries = ref?.voucher?.voucherEntries ?? [];
@@ -36,8 +36,18 @@ export default function BookingDetailProvider({children}:{children: React.ReactN
                 );
                 return sum + voucherCredit;
             }, 0);
-            const half = totalCredit / 2;
-            if(duedataAmount && duedataAmount == totalCredit){
+
+            const discountEntry = bookingDetail?.voucherEntries?.find(
+                (entry) =>
+                    entry.accountLedger.code?.toLowerCase() == 'discalw' ||
+                    entry.accountLedger.name?.toLowerCase() == 'discount allowed'
+            );
+
+            const discountedAmount = discountEntry ? Number(discountEntry.debit ?? 0) : 0;
+            const amountTotal = totalCredit - discountedAmount;
+
+            const half = amountTotal / 2;
+            if(duedataAmount && duedataAmount == amountTotal){
                 setIsFullPaymentDone(true);
                 setIsMinimumPaymentDone(true);
             }

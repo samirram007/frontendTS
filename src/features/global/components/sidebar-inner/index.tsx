@@ -4,7 +4,7 @@ import SidebarNav from "./sidebar-nav"
 interface SidebarNavProps {
     items: {
         href: string
-        visible: boolean
+        visible?: boolean
         title: string
         icon: JSX.Element
     }[]

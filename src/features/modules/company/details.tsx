@@ -20,7 +20,6 @@ interface CompanyProps {
 export default function CompanyDetails(props: CompanyProps) {
     const { data } = props
     const keyName = 'companies'
-    console.log("data");
 
     return (
 

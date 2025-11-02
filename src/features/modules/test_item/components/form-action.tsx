@@ -296,7 +296,6 @@ const UnitManagement = ({ form }: FormProps) => {
         const basePrimaryUnitId = StockUnit?.unitType === "compound"
             ? StockUnit?.primaryStockUnitId
             : StockUnit?.id;
-        // console.log("C", TestUnit)
 
         const baseSecondaryUnitId =
             StockUnit?.unitType === "compound" ? StockUnit?.secondaryStockUnit?.id ?? null : null;

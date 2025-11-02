@@ -2,6 +2,10 @@ import { AlertAppDialog } from "../../../../shared/components/AlertAppDialog";
 import { MdDeleteOutline } from "react-icons/md";
 import { useLabTestItem } from "./context/lab-test-context";
 import { usePayment } from "../../../../contexts/payment-context";
+import { toast } from "sonner";
+import { useBookingTest } from "../../context/new-booking-context";
+import { useEffect, useRef } from "react";
+import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } from "../DiscountFeature/discount-actions";
 
 
 
@@ -12,7 +16,14 @@ import { usePayment } from "../../../../contexts/payment-context";
 const LabTestList = () => {
 
     const {selectTestItemList,setSelectTestItemList} = useLabTestItem();
-    const {totalAmount,setTotalAmount,setNetAmount} = usePayment();
+    const {discountTypeId,setDiscountTypeId} = useBookingTest();
+    const {totalAmount,setTotalAmount,setNetAmount,discountedAmount,setSelectedDiscount,setDiscountRate,setDiscountedAmount,selectedDiscount} = usePayment();
+    const totalAmountRef = useRef<number>(totalAmount);
+
+    useEffect(()=>{
+        totalAmountRef.current = totalAmount;   
+    },[totalAmount]);
+
 
     // on change of test date reporting date will change
     const handleTestDateChange = (id:number,e:React.HTMLInputTypeAttribute)=>{
@@ -30,11 +41,54 @@ const LabTestList = () => {
     const handleMinusTest = (id:number) =>{
         const remaningList = selectTestItemList.filter((item)=> item.testId != id);
         const amount = selectTestItemList.filter((item) => item.testId == id)[0].amount;
+        const remainingAmount = totalAmount - Number(amount);
         setSelectTestItemList(remaningList);
-
+        // if discount amount is greater than total
+        if(remainingAmount < discountedAmount){
+            setSelectedDiscount("none");
+            setTotalAmount((prev) => prev - Number(amount));
+            setNetAmount(remainingAmount);
+            setDiscountRate(100);
+            setDiscountedAmount(0);
+            setDiscountTypeId(1);
+            toast.error("Discount have been denied due to inappropriate amount");
+            return;
+        }
+       
         // amount calculation
         setTotalAmount((prev) => prev - Number(amount));
         setNetAmount((prev)=> prev - Number(amount));
+
+        totalAmountRef.current = totalAmountRef.current - Number(amount);
+
+        // discount calculation
+        if(discountTypeId && discountTypeId > 1){
+            const isPercent = selectedDiscount.split(',')[0];
+            const value = selectedDiscount.split(',')[1];
+            const discountId = selectedDiscount.split(',')[2];
+
+            if(isPercent === "true"){
+                const amount = calculateDiscountPercent(Number(value),totalAmountRef.current);
+                setDiscountedAmount(amount);
+                setDiscountRate(Number(value));
+            }else{
+                const rate = calculateDiscountRate(Number(value),totalAmountRef.current);
+                setDiscountRate(rate);
+                setDiscountedAmount(Number(value));
+            }
+
+            const discountedTotalAmount:number = calculateDiscount(isPercent,Number(value),totalAmountRef.current);
+            if(discountedTotalAmount == -1){
+                setNetAmount(totalAmountRef.current);
+                setDiscountTypeId(1);
+                setSelectedDiscount("none");
+                toast.error("Discount not applied");
+                return
+            }else{
+                setNetAmount(discountedTotalAmount);
+                setDiscountTypeId(Number(discountId));
+            }
+        }
     }
 
 

@@ -36,6 +36,6 @@ export const formSchema = z
       .string()
       .min(1, { message: 'Status is required.' }),
     accountGroupId: z.number().int().positive().min(1, { message: 'Account Group ID is required.' }),
-    description: z.string().min(1, { message: 'Description is required.' }),
+    description: z.string().min(1, { message: 'Description is required.' }).optional(),
     isEdit: z.boolean(),
   })

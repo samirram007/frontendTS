@@ -9,8 +9,8 @@ import { usePayment } from "@/features/modules/booking/contexts/payment-context"
 
 export function PaymentRuleAlertModal({action}:{action: string | React.ReactNode}) {
 
-    const {totalAmount} = usePayment();
-    const payableAmount = totalAmount/2;
+    const {netAmount} = usePayment();
+    const payableAmount = netAmount/2;
 
     return (
         <AlertDialog>
@@ -21,8 +21,8 @@ export function PaymentRuleAlertModal({action}:{action: string | React.ReactNode
                 <AlertDialogHeader>
                     <AlertDialogTitle>Payment Rule</AlertDialogTitle>
                     <AlertDialogDescription>
-                        <p>You have to make payment of (50%) to move to further process.</p>
-                        <p>Your current due amount to move to further process is {Math.round(payableAmount)} </p>
+                        <span>You have to make payment of (50%) to move to further process.</span>
+                        <span>Your current due amount to move to further process is {Math.round(payableAmount)} </span>
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

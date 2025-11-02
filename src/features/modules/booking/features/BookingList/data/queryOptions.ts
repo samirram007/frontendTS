@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBookingListService } from "./api";
+import { getBookingListByDateService, getBookingListService } from "./api";
 
-export function useGetAgentListQuery(){
+export function useGetBookingListQuery(startDate:string | null,endDate:string | null){
     return useQuery({
-        queryKey:['get-all-bookings-query'],
-        queryFn: getBookingListService,
+        queryKey: startDate && endDate ? ['get-all-bookings-query',startDate,endDate]  : ['get-all-bookings-query'],
+        queryFn: () => startDate && endDate ? getBookingListByDateService(startDate,endDate) : getBookingListService(),
         retry: false,
-        refetchOnMount: false,
+        refetchOnMount: true,
         refetchOnWindowFocus: false,
         enabled: true
     })

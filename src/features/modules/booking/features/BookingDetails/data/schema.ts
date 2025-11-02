@@ -28,9 +28,9 @@ export interface IJobOrderStoreSchema{
     stockJournalId?: number,
     stockItemId: number,
     status: string,
-    start_date?: string | Date,
-    end_date?: string | Date,
-    voucher_id?: number
+    startDate?: string | Date,
+    endDate?: string | Date,
+    voucherId?: number
 }
 
 export interface IJobOrderResponse extends IResponseInterface {

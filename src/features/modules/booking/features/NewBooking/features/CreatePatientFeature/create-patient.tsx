@@ -17,6 +17,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 import { showErrors } from "@/utils/dataClient";
+import { useBookingTest } from "../../context/new-booking-context";
 
 
 interface IPatientForm{
@@ -29,6 +30,7 @@ interface IPatientForm{
 const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
 
     const {patient,setPatient} = usePatient();
+    const {discountTypeId} = useBookingTest();
     const {mutate,isPending} = usePatientMutation();
     const [open,setOpen] = useState<boolean>(false);
 
@@ -67,7 +69,8 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                 accountLedgerId: values.accountLedgerId,
                                 address: values.address,
                                 agentId: patient?.agent?.id,
-                                physicianId: patient?.physician?.id
+                                physicianId: patient?.physician?.id,
+                                discountTypeId: discountTypeId
                             };
                             mutate(payload,{
                                 onSuccess:(data) =>{
@@ -100,6 +103,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                             gender: action != "Edit" ? "male" : patient?.gender,
                             agentId: action != "Edit" ? 0 : patient?.agent?.id,
                             physicianId: action != "Edit" ? 0 : patient?.physician?.id,
+                            discountTypeId: action != "Edit" ? discountTypeId : patient?.discountTypeId,
                             accountLedgerId:0,
                             address:{
                                 line1: action != "Edit" ? "" : patient?.address?.line1 || "",
@@ -138,9 +142,23 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
 
                                             <Separator className="border-1 border-gray-800" />
                                         </div>
+                                        <div className=" gap-3 w-full">
+                                            <div className="text-base font-semibold mb-3">Address: </div>
+                                            <div className="grid grid-cols-2 mb-3 gap-2">
+                                                <InputBox className="w-full" placeholder="Address Line 1" type="text" name="address.line1"  />
+                                                <InputBox className="w-full" placeholder="Address Line 2" type="text" name="address.line2" />
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <InputBox className="w-full" placeholder="City" type="text" name="address.city"/>
+                                                <InputBox className="w-full" placeholder="Postal Code"  type="text" name="address.postalCode"/>
+                                            </div>
+                                            
+                                             
+                                        </div>
                                     </div>
 
                                     <div className="mt-4">
+                                        {/* Physician Information */}
                                         <div className="grid grid-cols-[80px_1fr_40px] mb-2 items-center gap-6">
                                             <h1 className="font-semibold text-app-base-lg">Physician</h1>
                                             <PhysicianSearchFeature/>
@@ -183,7 +201,8 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                         
                                         
                                         <Separator className="my-3 bg-black" />
-
+                                        
+                                        {/* Agent Information */}
                                         
                                         <div className="grid grid-cols-[80px_1fr_40px] mb-2 items-center gap-6">
                                             <h1 className="font-semibold text-app-base-lg">Referred By</h1>
@@ -220,13 +239,6 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                         
                                     </div>
                                 </div>
-                                 <div className="grid grid-cols-[90px_1fr_1fr_1fr_1fr] gap-3 w-full">
-                                                <div className="text-base font-semibold">Address: </div>
-                                                <InputBox className="w-full" placeholder="Address Line 1" type="text" name="address.line1"  />
-                                                <InputBox className="w-full" placeholder="Address Line 2" type="text" name="address.line2" />
-                                                <InputBox className="w-full" placeholder="City" type="text" name="address.city"/>
-                                                <InputBox className="w-full" placeholder="Postal Code"  type="text" name="address.postalCode"/>
-                                            </div>
                                 <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
                                     <Button type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">
                                         {isPending ? "Saving...." : action == "Edit" ? "Save and Use" : "Save"}

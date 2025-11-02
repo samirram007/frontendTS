@@ -1,5 +1,4 @@
 
-import { useNavigate } from "@tanstack/react-router"
 import { useFormContext } from "react-hook-form"
 
 import { Button } from '@/components/ui/button'
@@ -18,13 +17,9 @@ export interface ReceiptNoteProps {
     currentRow?: ReceiptNote
 }
 
-const FormAction = ({ currentRow }: ReceiptNoteProps) => {
-    const isEdit = !!currentRow
-    const navigate = useNavigate()
+const FormAction = ({  }: ReceiptNoteProps) => {
 
-    const methods = useFormContext<ReceiptNoteForm>()
 
-    // console.log(isEdit, navigate, methods)
 
 
     return (
@@ -65,7 +60,6 @@ const VoucherHeader = () => {
     const dayName = voucherDate
         ? new Date(voucherDate).toLocaleDateString("en-US", { weekday: "long" })
         : ""
-    const party = methods.watch('party')
 
     return (
         <div className="grid grid-rows-1 ">

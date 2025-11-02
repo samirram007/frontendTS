@@ -38,7 +38,6 @@ export const Route = createFileRoute(
     if (id === "") return <Reporting />
 
     const { data: jobOrder } = useSuspenseQuery(jobOrderQueryOptions(Number(id)));
-    console.log("api call job order: ",jobOrder.data);
     return <Suspense fallback={<Loader className="animate-spin" />}>
         <TestReportingDetail data={jobOrder?.data}  />
     </Suspense>

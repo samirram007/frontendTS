@@ -39,7 +39,6 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
     mutationFn: async (data: CountryForm) => {
       // Here you would typically make an API call to save the Country
       // For example:
-      console.log('Saving Country:', data);
       if (isEdit && currentRow) {
         return await updateCountryService({ ...data, id: currentRow.id })
       }
@@ -47,8 +46,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         return await storeCountryService(data);
       }
     },
-    onSuccess: (data) => {
-      console.log(data, 'Country saved successfully!')
+    onSuccess: (_data) => {
       queryClient.invalidateQueries({ queryKey: ['countrys'] })
     },
   })

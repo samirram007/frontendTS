@@ -27,6 +27,15 @@ export type AddressType = {
   }
 }
 
+export type IDiscountType = {
+  id: number,
+  name: string,
+  code: string,
+  isPercentage: boolean,
+  value: string,
+  accountLedgerId: number
+}
+
 //  Patient Interface for form to create and edit
 export interface IPatient{
     id?: number,
@@ -38,10 +47,12 @@ export interface IPatient{
     accountLedgerId?: number,
     agentId?: number,
     physicianId?: number,
+    discountTypeId?: number | null,
     address?: AddressType,
     agent?: IAgent,
     physician?: IPhysician,
-    accountLedger?: IAccountLedger
+    accountLedger?: IAccountLedger,
+    discountType?: IDiscountType
 }
 
 // Patient Response after create API called

@@ -1,9 +1,4 @@
-// import { useContext } from "react";
-import LabTestSearch from "./features/LabTestsFeature/lab-tests-search";
-import PatientSearch from "./features/patient-search";
 import LabTestList from "./features/LabTestsFeature/test-list";
-// import { TestBookingContext } from "../../contexts/TestBookingContext/TestBookingContext";
-// import { PathoContext } from "../../contexts/PathoContext";
 import { Button } from "@/components/ui/button";
 import { PaymentDetail } from "./features/PaymentFeature/payment-detail";
 import { PatientDetail } from "./features/patient-details";
@@ -17,6 +12,12 @@ import { ErrorToast } from "../../utils/error-response";
 import { useBookingMutation } from "./data/queryOptions";
 import type { IBookingTest } from "./data/schema";
 import { useNavigate } from "@tanstack/react-router";
+import SampleCollectorSearch from "./features/SampleCollector/sample-collector-search";
+import { useBookingTest } from "./context/new-booking-context";
+import { usePayment } from "../../contexts/payment-context";
+import { useQueryClient } from "@tanstack/react-query";
+import PatientComboBoxSearch from "./features/patient-combobox-search";
+import LabTestComboBoxSearch from "./features/LabTestsFeature/lab-test-comob-box-search";
 
 
 
@@ -25,9 +26,13 @@ import { useNavigate } from "@tanstack/react-router";
 const NewBookingFeature = () => {
 
     const {selectTestItemList} = useLabTestItem();
+    const {discountRate} = usePayment();
+    const {discountTypeId,sampleCollectorId} = useBookingTest();
     const {patient} = usePatient();
     const navigate = useNavigate();
     const {mutate} = useBookingMutation();
+
+    const queryClient = useQueryClient();
 
 
     const handleValidatePay = () =>{
@@ -39,13 +44,17 @@ const NewBookingFeature = () => {
             const testBookingObject: IBookingTest = {
                 bookingDate: new Date(),
                 patientId: patient?.id,
-                agentId: patient.agent?.id,
-                physicianId: patient.physician?.id,
-                tests: selectTestItemList
+                agentId: patient.agent ? patient.agent.id : null,
+                physicianId: patient.physician ? patient.physician.id : null,
+                tests: selectTestItemList,
+                discountTypeId: discountTypeId,
+                sampleCollectorId: sampleCollectorId,
+                rate: discountRate ?  Number(discountRate.toFixed(2)) : 100
             }
-            
+
             mutate(testBookingObject,{
                 onSuccess:(data)=>{
+                    queryClient.invalidateQueries({queryKey:['get-all-bookings-query']});
                     const bookingId = data.data.data.id;
                     navigate({ to: `/transactions/booking/${bookingId}` });
                 }
@@ -60,10 +69,11 @@ const NewBookingFeature = () => {
     return (
         <div className="grid grid-cols-[1fr_400px] gap-3">
             <div>
-                <div className="grid grid-cols-[1fr_380px] items-start">
+                <div className="grid grid-cols-[1fr_450px] gap-4 items-start">
                     <div className="grid grid-rows-2 gap-3">
                         <div className="flex w-full justify-between gap-3">
-                            <PatientSearch />
+                            {/* <PatientSearch /> */}
+                            <PatientComboBoxSearch/>
                             <PatientForm
                                 button={
                                     <Button>
@@ -74,13 +84,14 @@ const NewBookingFeature = () => {
                             />
                         </div>
                         <div>
-                            <LabTestSearch />
+                            {/* <LabTestSearch /> */}
+                            <LabTestComboBoxSearch/>
                         </div>
                         
                         
                     </div>
-                    <div className="justify-end w-full items-end overflow-hidden flex">
-                        <div className="grid justify-end w-full items-center grid-cols-[100px_1fr]">
+                    <div className="justify-end w-full items-end flex-col gap-3 flex">
+                        <div className="grid justify-end w-full items-center grid-cols-[70px_1fr]">
                             <div className="font-bold text-right pr-3">
                                 Discount
                             </div>
@@ -88,6 +99,7 @@ const NewBookingFeature = () => {
                                 <DiscountSelect/>
                             </div>
                         </div>
+                        <SampleCollectorSearch/>
                     </div>
                 </div>
                 <LabTestList />

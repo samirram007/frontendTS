@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGetAgentListQuery } from "./data/queryOptions";
 import type { ILabTestItem, ITestItem } from "./data/schema";
 import { useLabTestItem } from "./context/lab-test-context";
 import { toast } from "sonner";
 import { usePayment } from "../../../../contexts/payment-context";
+import { useBookingTest } from "../../context/new-booking-context";
+import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } from "../DiscountFeature/discount-actions";
 
 
 
@@ -14,9 +16,11 @@ import { usePayment } from "../../../../contexts/payment-context";
 const LabTestSearch = () => {
 
     const {data,isSuccess} = useGetAgentListQuery();
-
+    const {discountTypeId,setDiscountTypeId} = useBookingTest();
     const {setLabTestItemList,labTestItemList,setSelectTestItemList,selectTestItemList} = useLabTestItem();
-    const {setTotalAmount,setNetAmount} = usePayment();
+    const {setTotalAmount,setNetAmount,selectedDiscount,setDiscountRate,setDiscountedAmount,setSelectedDiscount} = usePayment();
+    const totalAmountRef = useRef<number>(0);
+    const [highlightIndex, setHighlightIndex] = useState<number>(-1);
 
     const [query,setQuery] = useState<string>("");
     const [showDropdown,setShowDropdown] = useState<boolean>(false);
@@ -31,9 +35,8 @@ const LabTestSearch = () => {
 
     const handleLabSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
         setQuery(e.target.value);
-        if(e.target.value == ""){
-            
-        }
+        setShowDropdown(true);
+        setHighlightIndex(-1);
     }
 
     // getting all ids of selected test items and filtering them out
@@ -58,9 +61,59 @@ const LabTestSearch = () => {
         }
         setSelectTestItemList([...selectTestItemList,testObj]);
         setQuery("");
+        totalAmountRef.current = totalAmountRef.current + Number(test.standardSellingPrice);
         // amount calculation
         setTotalAmount((prev)=> prev + Number(test.standardSellingPrice));
         setNetAmount((prev)=> prev + Number(test.standardSellingPrice));
+
+        
+        if(discountTypeId && discountTypeId > 1){
+            const isPercent = selectedDiscount.split(',')[0];
+            const value = selectedDiscount.split(',')[1];
+            const discountId = selectedDiscount.split(',')[2];
+
+            if(isPercent === "true"){
+                const amount = calculateDiscountPercent(Number(value),totalAmountRef.current);
+                setDiscountedAmount(amount);
+                setDiscountRate(Number(value));
+            }else{
+                const rate = calculateDiscountRate(Number(value),totalAmountRef.current);
+                setDiscountRate(rate);
+                setDiscountedAmount(Number(value));
+            }
+            const discountedTotalAmount:number = calculateDiscount(isPercent,Number(value),totalAmountRef.current);
+            if(discountedTotalAmount == -1){
+                setNetAmount(totalAmountRef.current);
+                setDiscountTypeId(1);
+                setSelectedDiscount("none");
+                toast.error("Discount not applied");
+                return
+            }else{
+                setNetAmount(discountedTotalAmount);
+                setDiscountTypeId(Number(discountId));
+                setDiscountRate(100);
+            }
+        }
+    }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if(!showDropdown || filteredLabTestList.length == 0) return;
+
+        if(e.key == "ArrowDown"){
+            e.preventDefault();
+            setHighlightIndex((prev) => prev <filteredLabTestList.length - 1 ? prev + 1: 0);
+        }else if(e.key == "ArrowUp"){
+            e.preventDefault();
+            setHighlightIndex((prev) => prev > 0 ? prev - 1 : filteredLabTestList.length - 1);
+        }else if(e.key == "Enter"){
+            e.preventDefault();
+            if(highlightIndex >= 0){
+                handleSelectTest(filteredLabTestList[highlightIndex]);
+            }
+        }else if(e.key == "Escape"){
+            e.preventDefault();
+            setShowDropdown(false);
+        }
     }
 
 
@@ -77,6 +130,7 @@ const LabTestSearch = () => {
                     autoComplete="off"
                     onChange={(e) => handleLabSearch(e)}
                     onFocus={() => setShowDropdown(true)}
+                    onKeyDown={handleKeyDown}
                     className="w-3/3 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-200 outline-none"
                 />
 
@@ -86,7 +140,7 @@ const LabTestSearch = () => {
                             filteredLabTestList.map((labtest) => (
                                 <div
                                     key={labtest.id}
-                                    className="px-3 py-2 hover:bg-emerald-100 cursor-pointer"
+                                    className="px-3 py-2 hover:bg-emerald-100 cursor-pointer border-b-1 border-gray-600"
                                     onClick={() => handleSelectTest(labtest)}
                                 >
                                     <div className="font-medium">{labtest.printName}</div>

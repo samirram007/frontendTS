@@ -1,7 +1,10 @@
+// import axiosClient from "@/utils/axios-client";
+// import axios, { type AxiosResponse } from "axios";
+// import type { IJobOrderListResponse, IJobOrderResponse } from "./schema";
 import axiosClient from "@/utils/axios-client";
-import axios, { type AxiosResponse } from "axios";
-import type { IJobOrderListResponse, IJobOrderResponse } from "./schema";
 import { getData } from "@/utils/dataClient";
+import type { AxiosError, AxiosResponse } from "axios";
+import type { IReportUploadRequest, IReportUploadResponse } from "./schema";
 
 
 
@@ -36,4 +39,31 @@ export async function fetchJobOrderByIdService(id: number) {
 }
 export async function fetchJobOrdersService() {
     return await getData(`${API_PATH}`)
+}
+
+
+
+export async function postUploadReport(request:IReportUploadRequest):Promise<AxiosResponse<IReportUploadResponse>>{
+    try{
+        const formData = new FormData();
+        formData.append("report_file",request.file);
+
+        const response = await axiosClient.post(`job_orders/${request.id}/upload-report`,formData,{
+            headers:{
+                "Content-Type" : "multipart/form-data",
+                "Accept":"application/json"
+            }
+        });
+        return response;
+    }catch(error:unknown){
+        const RError = error as AxiosError<IReportUploadResponse>;
+        if(RError.response?.data.success == false)
+            {
+                throw new Error(RError.response.data.message);
+            }
+            else{
+                throw new Error("Data not found");
+            }
+        throw new Error("Network Error");
+    }
 }

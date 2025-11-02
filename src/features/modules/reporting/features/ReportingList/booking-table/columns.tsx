@@ -1,5 +1,5 @@
 import {type ColumnDef} from "@tanstack/react-table";
-import type { JobOrderType, ReportTestType } from "../../../data/schema";
+import type { JobOrderType } from "../../../data/schema";
 
 
 export const columns: ColumnDef<JobOrderType>[] = [
@@ -8,17 +8,19 @@ export const columns: ColumnDef<JobOrderType>[] = [
         cell:(row) => <>{row.row.index + 1}</>
     },
     {
-        header:"Patient Name",
-    },
-    {
         header:"Booking ID",
+        accessorFn:(row) => row.testBooking?.voucherNo
     },
     {
-        header:"Booked Date",
-        accessorFn:(row)=> row.expectedStartDate ?? new Date().toDateString() 
+        header:"Booking Date",
+        accessorFn:(row) => row.testBooking?.voucherDate
+    },
+    {
+        header:"Patient Name",
+        accessorFn:(row) => row?.testBooking?.voucherPatient?.patient?.name
     },
     {
         header:"Reporting Status",
-        accessorFn:(row)=> row.status 
+        accessorFn:(row)=> row.status
     },
 ];

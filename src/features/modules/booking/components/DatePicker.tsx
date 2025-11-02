@@ -1,5 +1,4 @@
 
-import * as React from "react"
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
 
@@ -11,8 +10,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-export function DatePicker({placeholder}:{placeholder:string}) {
-  const [date, setDate] = React.useState<Date>()
+
+interface DatePickerInterface{
+  date?: Date,
+  setDate?:React.Dispatch<React.SetStateAction<Date>>,
+  placeholder:string
+}
+
+export function DatePicker({date,placeholder,setDate}:DatePickerInterface) {
 
   return (
     <Popover>
@@ -27,7 +32,7 @@ export function DatePicker({placeholder}:{placeholder:string}) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={setDate} />
+        <Calendar  hidden={{after:new Date()}} required mode="single" selected={date} onSelect={setDate} />
       </PopoverContent>
     </Popover>
   )

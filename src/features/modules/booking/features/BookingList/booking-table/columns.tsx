@@ -18,10 +18,6 @@ export const columns: ColumnDef<IAllBooking>[] = [
         accessorFn:(row)=> row.voucher.voucherDate ?? ""
     },
     {
-        header:"Status",
-        accessorFn: () => "Drafted"
-    },
-    {
         header:"Patient Name",
         accessorFn:(row)=> row.patient.name
     },
