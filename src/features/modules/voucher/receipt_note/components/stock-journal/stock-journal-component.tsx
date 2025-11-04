@@ -132,7 +132,7 @@ const StockJournalEntries = () => {
 
 const ItemAdd = () => {
     return (
-        <div className="space-y-4 grid grid-cols-1 justify-center items-center w-full bg-amber-400">
+        <div className="space-y-4 grid grid-rows-1 justify-center items-center w-full bg-amber-400">
             <ItemDialog />
         </div>)
 

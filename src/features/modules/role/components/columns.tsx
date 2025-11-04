@@ -9,6 +9,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
 import type { Role } from '../data/schema'
+import ActionPermission from './action-permission'
 import RowActions from './row-actions'
 
 export const columns: ColumnDef<Role>[] = [
@@ -93,6 +94,14 @@ export const columns: ColumnDef<Role>[] = [
     enableSorting: false,
   },
 
+
+  {
+    id: 'permissions',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Permissions' />
+    ),
+    cell: ({ row }) => <ActionPermission row={row} />,
+  },
   {
     id: 'actions',
     cell: RowActions,

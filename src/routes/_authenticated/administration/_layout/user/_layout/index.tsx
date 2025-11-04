@@ -8,7 +8,7 @@ const User = React.lazy(() =>
   import('@/features/modules/user')
 )
 
-export const Route = createFileRoute('/_authenticated/masters/administration/_layout/user/_layout/',)({
+export const Route = createFileRoute('/_authenticated/administration/_layout/user/_layout/',)({
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(userQueryOptions()),
   component: () => {

@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { createContext, useContext, type KeyboardEvent } from "react"
 import { useForm, type UseFormReturn } from "react-hook-form"
 import { FocusTrap } from '../components/focus-trap'
+import defaultValues from "../data/data"
 import { formSchema, type ReceiptNote, type ReceiptNoteForm } from "../data/schema"
 
 
@@ -20,33 +21,9 @@ export const FormProvider = ({ children }: {
     children: React.ReactNode
 }) => {
 
-    const form = useForm<ReceiptNoteForm>({
+    const outerForm = useForm<ReceiptNoteForm>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            voucherNo: "",
-            voucherDate: new Date(),
-            referenceNo: "",
-            referenceDate: new Date(),
-            voucherTypeId: 1, 
-            partyLedger: undefined,
-            transactionLedger: undefined,
-            stockJournalId: null,
-            remarks: "",
-            stockJournal: {
-                journalNo: "",
-                journalDate: new Date(),
-                voucherId: null,
-                type: "",
-                remarks: "",
-                stockJournalEntries: [],
-            },
-            party: {
-                id: 2,
-                name: "SAM",
-            },
-            voucherEntries: [],
-            isEdit: false,
-        },
+        defaultValues: defaultValues,
     })
 
     const handleEnterAsTab = (e: KeyboardEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -70,7 +47,7 @@ export const FormProvider = ({ children }: {
     }
 
     const handleOnSubmit = (values: ReceiptNote) => {
-        form.reset()
+        outerForm.reset()
         console.log(values)
 
 
@@ -79,12 +56,12 @@ export const FormProvider = ({ children }: {
 
         <div className="w-full grid grid-rows-[1fr_100px]  h-[calc(100dvh_-_200px)]">
 
-            <Form {...form}   >
+            <Form {...outerForm}   >
 
-                <FormContext.Provider value={form}>
+                <FormContext.Provider value={outerForm}>
                     <FocusTrap>
 
-                        <form onSubmit={form.handleSubmit(handleOnSubmit)}
+                        <form onSubmit={outerForm.handleSubmit(handleOnSubmit)}
                             onKeyDown={(e) => {
                                 if (e.key === "Enter") handleEnterAsTab(e as any)
                             }}>

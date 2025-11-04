@@ -1,11 +1,17 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import type { AppModuleFeatureForm } from "../types/types"
-import { deleteAppModuleFeatureService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService } from "./api"
+import { deleteAppModuleFeatureService, fetchAppModuleFeatureByIdService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService } from "./api"
 const Key = "AppModuleFeatures"
-export const appModuleFeatureQueryOptions = (key: string = Key) => {
+const BASE_KEY = "AppModuleFeatures"
+
+
+export const appModuleFeatureQueryOptions = (id?: number) => {
+
     return queryOptions({
-        queryKey: [key],
-        queryFn: fetchAppModuleFeatureService,
+        queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
+        queryFn: () => {
+            return id ? fetchAppModuleFeatureByIdService(id) : fetchAppModuleFeatureService()
+        },
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })

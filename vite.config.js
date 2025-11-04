@@ -15,14 +15,14 @@ export default defineConfig(({ command, mode }) => {
     base: env.VITE_BASE_URL,
     server: {
   // port: 3000,
-  // proxy: {
-  //   '/api': {
-  //     target: 'https://aipt-api.local', // Your Laravel backend URL
-  //     changeOrigin: true, // Ensures the host header is rewritten to the target
-  //     secure: false, // For local HTTP servers (set to true for HTTPS in production)
-  //     //rewrite: (path) => path.replace(/^\/api/, ''), // Optional: removes /api prefix if needed
-  //   },
-  // },
+      proxy: {
+        '/api': {
+          target: env.VITE_API_BASE_URL, // Your Laravel backend URL
+          changeOrigin: true, // Ensures the host header is rewritten to the target
+          secure: false, // For local HTTP servers (set to true for HTTPS in production)
+          rewrite: (path) => path.replace(/^\/api/, ''), // Optional: removes /api prefix if needed
+        },
+      },
 
     },
     build: {

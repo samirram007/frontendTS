@@ -4,32 +4,42 @@ import { stockUnitSchema } from '@/features/modules/stock_unit/data/schema';
 import { z } from 'zod';
 
 
-export const stockJournalsGodownEntrySchema = z.object({
+export const stockJournalGodownEntrySchema = z.object({
   id: z.number().int().positive().nullish(),
-  stockJournalEntryId: z.number().int().positive().nullish(),
+  stockJournalEntryId: z.number().int().positive().nullish(),  
+  godownId: z.number(),
+  batchNo: z.string().nullish(),
+  mfgDate: z.coerce.date().nullish(),
+  expDate: z.coerce.date().nullish(),
+  serialNo: z.string().nullish(),
+  quantity: z.number(),
+  rate: z.coerce.number().nullish(),
+  amount: z.coerce.number().nullish(),
+  movementType: z.string().min(1).nullish(),
+  remarks: z.string().min(1).nullish(),
+  godown: godownSchema.nullish(),
+  stockItem: stockItemSchema.nullish(),
+  stockUnit: stockUnitSchema.nullish(),
 })
-
-export const stockJournalsEntrySchema = z.object({
+export type StockJournalGodownEntryForm = z.infer<typeof stockJournalGodownEntrySchema>
+export const stockJournalEntrySchema = z.object({
   id: z.number().int().positive().nullish(),
   stockJournalId: z.number().int().positive().nullish(),
   stockItemId: z.number().int().positive().nullish(),
   stockUnitId: z.number().int().positive().nullish(),
-  alternateUnitId: z.number().int().positive().nullish(),
+  alternateStockUnitId: z.number().int().positive().nullish(),
   unitRatio: z.number().int().positive().nullish(),
   itemCost: z.number().int().positive().nullish(),
   quantity: z.number().int().positive().nullish(),
   rate: z.number().int().positive().nullish(),
-  movementType: z.string().min(1).nullish(),
-  godownId: z.number().int().nullish(),
-  stockItem: stockItemSchema.nullish(),
-  godown: godownSchema.nullish(),
+  amount: z.coerce.number().nullish(),
+  movementType: z.string().min(1).nullish(), 
+  stockItem: stockItemSchema.nullish(), 
   stockUnit: stockUnitSchema.nullish(),
   alternateStockUnit: stockUnitSchema.nullish()
-
-
 })
 
-export type StockJournalsEntryForm = z.infer<typeof stockJournalsEntrySchema>
+export type StockJournalEntryForm = z.infer<typeof stockJournalEntrySchema>
 
 
 export const stockJournalSchema = z.object({
@@ -39,8 +49,11 @@ export const stockJournalSchema = z.object({
   voucherId: z.number().int().nullish(),
   type: z.string().nullish(),
   remarks: z.string().nullish(),
-  stockJournalEntries: z.array(stockJournalsEntrySchema)
+  stockJournalEntries: z.array(stockJournalEntrySchema)
 })
+export type StockJournalForm = z.infer<typeof stockJournalSchema>
+
+
 export const voucherEntrySchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherId: z.string().min(1).nullish(),

@@ -3,7 +3,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { Loader } from 'lucide-react'
 
 export const Route = createFileRoute(
-  '/_authenticated/masters/administration/_layout/user/_layout',
+  '/_authenticated/administration/_layout/user/_layout',
 )({
 
   component: () => {

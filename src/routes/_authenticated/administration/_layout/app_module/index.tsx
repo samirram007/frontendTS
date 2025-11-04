@@ -5,7 +5,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Loader } from 'lucide-react';
 
 export const Route = createFileRoute(
-  '/_authenticated/masters/administration/_layout/app_module/',
+  '/_authenticated/administration/_layout/app_module/',
 )({
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(appModuleQueryOptions()),

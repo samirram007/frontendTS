@@ -20,6 +20,7 @@ type Props = {
     type: InputType;
     name: string;
     label?: string;
+    noLabel?: boolean;
     options?: Option[];
     items?: { label: string; value: string }[];
     gapClass?: string;
@@ -69,6 +70,7 @@ const CheckBox = (props: Props) => {
             render={({ field }) => (
                 <FormItem className='grid grid-cols-[1fr_24px] items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='   '>
+
                         {label ?? capitalizeAllWords(name)} ?
                         <Badge
                             variant={typeof field.value === "string" ? "default" : "secondary"}
@@ -82,15 +84,18 @@ const CheckBox = (props: Props) => {
                                 }
 
                                 // Fallback → show value directly
-                                return typeof field.value === "string"
-                                    ? capitalizeWords(field.value)
-                                    : typeof field.value === "boolean"
-                                        ? field.value ? "Yes" : "No"
-                                        : String(field.value);
+                                return field.value == null
+                                    ? "No"
+                                    : typeof field.value === "string"
+                                        ? capitalizeWords(field.value)
+                                        : typeof field.value === "boolean"
+                                            ? (field.value ? "Yes" : "No")
+                                            : String(field.value);
                             })()}
                         </Badge>
                     </FormLabel>
                     <FormControl>
+
                         <Input
                             type={type}
                             className=' w-6 h-6 '
@@ -144,7 +149,7 @@ const TextAreaBox = (props: Props) => {
 }
 
 const TextBox = (props: Props) => {
-    const { form, name, label, gapClass, rtl } = props
+    const { form, name, label, gapClass, rtl, noLabel } = props
     return (
         <FormField
             control={form.control}
@@ -155,9 +160,11 @@ const TextBox = (props: Props) => {
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )}   >
+                    {!noLabel && 
                     <FormLabel className={rtl ? 'order-last' : ''}>
                         {label ?? capitalizeAllWords(name)}
                     </FormLabel>
+                    }
                     <FormControl>
                         <Input
                             placeholder={'Enter ' + lowerCase(label ?? name)}
@@ -202,7 +209,7 @@ const HiddenBox = (props: Props) => {
     )
 }
 const DateBox = (props: Props) => {
-    const { form, name, label, gapClass } = props
+    const { form, name, label, gapClass, noLabel } = props
     return (
         <FormField
             control={form.control}
@@ -213,14 +220,16 @@ const DateBox = (props: Props) => {
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )} >
+                    {!noLabel &&
                     <FormLabel className='   '>
                         {label ?? capitalizeAllWords(name)} {field.value[name]}
                     </FormLabel>
+                    }
                     <FormControl>
                         <Input
-                            placeholder={'Enter ' + lowerCase(label ?? name)}
+                            placeholder={'Enter ' + (label ?? lowerCase(label ?? name))}
                             type='date'
-                            className='w-8/12 placeholder'
+                            className='w-full placeholder'
                             autoComplete='off'
                             {...field}
                         />

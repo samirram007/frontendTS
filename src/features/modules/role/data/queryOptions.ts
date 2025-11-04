@@ -1,12 +1,14 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchRoleService, storeRoleService, updateRoleService } from "./api"
+import { fetchRoleByIdService, fetchRoleService, storeRoleService, updateRoleService } from "./api"
 import type { RoleForm } from "./schema"
 //queryOptions.ts
-const Key = "roles"
-export const roleQueryOptions = (key: string = Key) => {
+const BASE_KEY = "roles"
+export const roleQueryOptions = (id?: number) => {
+
     return queryOptions({
-        queryKey: [key],
-        queryFn: fetchRoleService,
+        queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
+        queryFn: () =>
+            id ? fetchRoleByIdService(id) : fetchRoleService(),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })
@@ -24,7 +26,7 @@ export function useRoleMutation() {
             return await storeRoleService(data)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [Key] })
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
         },
         onError: (error) => {
             console.error("Role mutation failed:", error)

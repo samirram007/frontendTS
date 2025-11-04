@@ -4,7 +4,7 @@ import type { Role } from '../data/schema'
 
 
 
-type RoleDialogType = 'invite' | 'add' | 'edit' | 'delete'
+type RoleDialogType = 'invite' | 'add' | 'edit' | 'delete' | 'permissions'
 
 interface RoleContextType {
   open: RoleDialogType | null

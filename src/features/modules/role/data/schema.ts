@@ -4,6 +4,14 @@ import { z } from 'zod';
 
 
 
+// export const RolePermissionSchema: z.ZodType<any> = z.object({
+//   id: z.number().int().positive(),
+//   roleId: z.number().int().positive(),
+//   appModuleFeatureId: z.number().int().positive(),
+//   isAllowed: z.boolean(),
+
+// })
+// export type RolePermission = z.infer<typeof RolePermissionSchema>
 export const roleSchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),

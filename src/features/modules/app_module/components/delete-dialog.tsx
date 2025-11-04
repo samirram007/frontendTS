@@ -5,7 +5,6 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
-import { useState } from 'react'
 import type { AppModule } from '../data/schema'
 
 
@@ -16,10 +15,10 @@ interface Props {
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
-  const [value, setValue] = useState(currentRow.id.toString())
+
 
   const handleDelete = () => {
-    if (value.trim() !== String(currentRow.id)) return
+
 
     onOpenChange(false)
     showSubmittedData(currentRow, 'The following module has been deleted:')
@@ -29,8 +28,7 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
     <ConfirmDialog
       open={open}
       onOpenChange={onOpenChange}
-      handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.id.toString()}
+      handleConfirm={handleDelete} 
       title={
         <span className='text-destructive'>
           <IconAlertTriangle

@@ -9,7 +9,7 @@ import { TopNav } from "./top-nav";
 
 const HeaderComponent: React.FC<{}> = () => {
     return (
-        <Header className='max-w-full bg-blue-600/5 dark:bg-violet-400/10'>
+        <Header className='max-w-full rounded-t-md m-2 bg-cyan-800/20 dark:bg-violet-400/10'>
             <TopNav links={topNav} />
             <div className='ml-auto flex items-center max-w-screen space-x-0 lg:space-x-4'>
                 <Search className=' ' />
@@ -24,26 +24,26 @@ export default HeaderComponent
 
 const topNav = [
     {
-        title: 'Overview',
-        href: 'dashboard/overview',
+        title: 'Dashboard',
+        href: '/dashboard',
         isActive: true,
         disabled: false,
     },
     {
-        title: 'Customers',
-        href: '/dashboard/customers',
+        title: 'Receipt Note',
+        href: '/transactions/vouchers/receipt_note',
         isActive: false,
         disabled: true,
     },
     {
-        title: 'Products',
-        href: '/dashboard/products',
+        title: 'Delivery Note',
+        href: '/transactions/vouchers/delivery_note',
         isActive: false,
         disabled: true,
     },
     {
-        title: 'Settings',
-        href: '/dashboard/settings',
+        title: 'Day Book',
+        href: '/transactions/day_book',
         isActive: false,
         disabled: true,
     },

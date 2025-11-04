@@ -6,11 +6,11 @@ import { columns } from './components/columns'
 
 
 
-import { lowerCase } from '../../../utils/removeEmptyStrings'
+import { useAdministration } from '@/features/masters/administration/context/administration-context'
+import { useEffect } from 'react'
 import { Dialogs } from './components/dialogs'
 import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
-import RoleProvider from './contexts/role-context'
 import { roleListSchema, type RoleList } from './data/schema'
 
 
@@ -23,17 +23,22 @@ interface RoleProps {
 }
 
 export default function Role({ data }: RoleProps) {
-  const moduleName = "Role"
 
+  const { setSideBarOpen, setHeaderVisible } = useAdministration()
+
+  useEffect(() => {
+    setSideBarOpen?.(true)
+    setHeaderVisible?.(true)
+  }, [setSideBarOpen, setHeaderVisible])
   return (
-    <RoleProvider>
+    <>
 
       <Main className='min-w-full'>
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>{moduleName} List</h2>
+            <h2 className='text-2xl font-bold tracking-tight'>Role & Permission</h2>
             <p className='text-muted-foreground'>
-              Manage your {lowerCase(moduleName)}  here.
+              Manage your role & permission here.
             </p>
           </div>
           <PrimaryButtons />
@@ -46,6 +51,6 @@ export default function Role({ data }: RoleProps) {
       </Main>
 
       <Dialogs />
-    </RoleProvider>
+    </>
   )
 }

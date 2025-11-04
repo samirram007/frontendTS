@@ -360,13 +360,13 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'User',
-          url: '/masters/administration/user',
+          url: '/administration/user',
           visible: true,
           icon: IconUserCog,
         },
         {
           title: 'App Module  ',
-          url: '/masters/administration/app_module',
+          url: '/administration/app_module',
           visible: true,
           icon: IconUserCog,
         },

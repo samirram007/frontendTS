@@ -1,20 +1,26 @@
 'use client'
 
 
+import { useTransaction } from '@/features/transactions/context/transaction-context';
+import { useEffect } from 'react';
 import type { ReceiptNoteProps } from './components/form-action';
-import FormAction from './components/form-action';
-import { FormProvider } from './contexts/form-context';
+import Pos from './pos';
 
 
 
 
 
 const ReceiptNote = ({ currentRow }: ReceiptNoteProps) => {
+    const { setHeaderVisible } = useTransaction()
+    useEffect(() => {
+        setHeaderVisible?.(false)
+    }, [])
     return (
-        <FormProvider>
-            <FormAction currentRow={currentRow} />
 
-        </FormProvider>
+        <>
+
+            <Pos currentRow={currentRow} />
+        </>
     )
 }
 

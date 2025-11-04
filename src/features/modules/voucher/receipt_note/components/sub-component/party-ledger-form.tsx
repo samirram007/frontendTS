@@ -19,11 +19,6 @@ const PartyLedgerForm = (props: FormProps) => {
         queryFn: () => fetchPartyLedgerService('supplier_ledgers'),
     })
 
-
-    // const handleValueChange = (value: string) => {
-    //     form.setValue('party.id', Number(value))
-
-    // }
     if (isLoading) {
         return <div>Loading...</div>
     }
@@ -36,7 +31,7 @@ const PartyLedgerForm = (props: FormProps) => {
                     <FormItem className='grid grid-rows-1 gap-1 '>
                         <div className="grid grid-cols-[140px_1fr] justify-start items-center ">
 
-                            <FormLabel className=' text-right'>
+                            <FormLabel htmlFor="" className=' text-right'>
                                 Party's A/c Name
                             </FormLabel>
                             <div className="w-8/12 grid grid-cols-[auto_1fr] gap-2 items-center  ">

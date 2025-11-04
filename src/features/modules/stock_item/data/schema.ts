@@ -23,7 +23,7 @@ export const stockItemSchema = z.object({
   stockCategoryId: z.number().int().positive().nullish(),
   stockGroupId: z.number().int().positive().nullish(),
   stockUnitId: z.number().int().positive().nullish(),
-  alternativeStockUnitId: z.number().int().positive().nullish(),
+  alternateStockUnitId: z.number().int().positive().nullish(),
   baseUnitValue: z.coerce.number().positive().nullish(),
   alternateUnitValue: z.coerce.number().positive().nullish(),
   uniqueQuantityCodeId: z.number().int().positive().nullish(),

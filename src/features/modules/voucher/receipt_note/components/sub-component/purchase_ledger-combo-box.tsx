@@ -101,7 +101,7 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                                             value === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}
+                                    {framework.label} [{framework.value}]
                                 </CommandItem>
                             ))}
                         </CommandGroup>

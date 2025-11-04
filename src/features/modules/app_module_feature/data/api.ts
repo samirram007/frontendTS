@@ -6,6 +6,9 @@ const API_PATH = "/app_module_features"
 async function fetchAppModuleFeatureService() {
     return await getData(API_PATH)
 }
+async function fetchAppModuleFeatureByIdService(id: number) {
+    return await getData(`${API_PATH}/${id}`)
+}
 async function storeAppModuleFeatureService(payload: any) {
     return await postData(API_PATH, payload)
 }
@@ -17,5 +20,5 @@ async function deleteAppModuleFeatureService(payload: any) {
     return await deleteData(`${API_PATH}/${payload.id}`)
 }
 
-export { deleteAppModuleFeatureService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService };
+export { deleteAppModuleFeatureService, fetchAppModuleFeatureByIdService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService };
 

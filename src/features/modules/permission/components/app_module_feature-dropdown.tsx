@@ -28,7 +28,7 @@ const AppModuleFetureDropdown = (props: Props) => {
     return <FormInputField type='multiselect' form={form} name='appModuleFeatureId' label='Feature'
         items={
             AppModuleFetureList?.data.map((appModuleFeture: AppModuleFeature) => ({
-                label: capitalizeAllWords(appModuleFeture.name),
+                label: capitalizeAllWords(appModuleFeture.name + (appModuleFeture.name ? ` (${appModuleFeture.appModule?.name})` : '')),
                 value: String(appModuleFeture.id),
             }))
         } />

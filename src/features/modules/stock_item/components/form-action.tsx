@@ -152,7 +152,9 @@ export function FormAction({ currentRow }: Props) {
                             </div>
                         </div>
                         <div className=" grid grid-cols-[1fr_25rem_25rem] gap-8 border-y-2 border-solid border-gray-700  ">
-                            <div className='space-y-2 py-4'>
+
+                            <div className='space-y-2 pb-4'>
+                                <div>General</div>
                                 <StockGroupDropdown form={form} gapClass={gapClass} />
                                 <StockCategoryDropdown form={form} gapClass={gapClass} />
                                 <FormInputField type='hidden' form={form} name='brandId' label='Brand ID' />
@@ -196,7 +198,33 @@ export function FormAction({ currentRow }: Props) {
 
 
                         </div>
-                        <div className='opening-balance grid grid-cols-5 px-[300px] gap-4 justify-center items-center'>
+                        <OpeningBalanceManagement form={form} />
+                    </form>
+                </Form>
+            </div>
+            <div className='flex justify-center items-start pt-6 '>
+
+                <DialogFooter>
+                    <Button size={'lg'} type='submit' form='user-form' disabled={isPending}>
+                        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {isPending ? "Saving..." : "Save changes"}
+                    </Button>
+                </DialogFooter>
+                <div className='min-h-36'></div>
+            </div>
+        </Dialog>
+    )
+}
+
+
+const OpeningBalanceManagement = ({ form }: FormProps) => {
+    const { config } = useStockItem();
+    return (
+        <>
+            {config.map((item) => item.key === 'opening_balance' && item.value && (
+                <div className='opening-balance 
+                border-b-2 border-amber-800
+                grid grid-cols-5 px-[300px] gap-4 justify-center items-center pb-6'>
                             <div>Opening Balance</div>
                             <div>
                                 <FormInputField type='number' form={form} gapClass={'grid grid-rows-2 grid-cols-1'} name='quantity' label='Quantity' />
@@ -212,22 +240,11 @@ export function FormAction({ currentRow }: Props) {
                             </div>
 
                         </div>
-                    </form>
-                </Form>
-            </div>
-            <div className='flex justify-center items-start pt-6 border-t-2 border-amber-800'>
-
-                <DialogFooter>
-                    <Button size={'lg'} type='submit' form='user-form' disabled={isPending}>
-                        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        {isPending ? "Saving..." : "Save changes"}
-                    </Button>
-                </DialogFooter>
-                <div className='min-h-36'></div>
-            </div>
-        </Dialog>
+            ))}
+        </>
     )
 }
+
 const BatchManagement = ({ form }: FormProps) => {
     const { config } = useStockItem();
     const isMaintainBatch = form.watch('isMaintainBatch')

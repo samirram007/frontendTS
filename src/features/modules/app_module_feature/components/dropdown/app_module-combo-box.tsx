@@ -73,7 +73,7 @@ export const AppModuleCombobox = ({ form, appModules }: Props) => {
 
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
+        <Popover open={open} onOpenChange={setOpen} modal={false}>
             <PopoverTrigger asChild>
                 <Button
                     variant="outline"
@@ -90,14 +90,15 @@ export const AppModuleCombobox = ({ form, appModules }: Props) => {
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search module..." />
-                    <CommandList>
+                    <CommandList className="max-h-64 overflow-y-auto">
+
                         <CommandEmpty>No module found.</CommandEmpty>
-                        <CommandGroup>
+                        <CommandGroup className="overflow-y-auto">
                             {frameworks.map((framework) => (
                                 <CommandItem
                                     className="min-w-full"
                                     key={framework.value}
-                                    value={framework.value}
+                                    value={framework.label}
                                     onSelect={() => handleSelect(framework.value)}
                                 >
                                     <CheckIcon

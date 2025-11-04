@@ -1,12 +1,12 @@
 
 import { useFormContext } from "react-hook-form"
 
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ReceiptNote } from '../data/schema'
 import { type ReceiptNoteForm } from '../data/schema'
 
 import FormInputField from '@/components/form-input-field'
+import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { StockJournalComponent } from "./stock-journal/stock-journal-component"
 import PartyLedgerForm from "./sub-component/party-ledger-form"
@@ -28,17 +28,12 @@ const FormAction = ({ currentRow }: ReceiptNoteProps) => {
 
     return (
 
-        <>
+        <div className="grid grid-rows-[230px_1fr_100px]">
             <VoucherHeader />
             <BodyComponent />
 
-
-            <Button type="submit">Save....</Button>
             <FooterComponent />
-        </>
-
-
-
+        </div>
     )
 }
 export default FormAction
@@ -67,7 +62,7 @@ const VoucherHeader = () => {
 
 
     return (
-        <div className="grid grid-rows-1 ">
+        <div className="grid grid-rows-1 mt-2 ">
             <div className="grid grid-cols-[350px_1fr_200px] border-amber-300 border-0">
 
                 <div className="space-y-0">
@@ -136,7 +131,7 @@ const BodyComponent = () => {
 
 
     return (
-        <div className="bg-violet-400/20">
+        <div className="bg-violet-400/20 h-[25rem]">
             {/* <StockJournalEntries /> */}
             <StockJournalComponent />
             {/* <pre>
@@ -151,17 +146,24 @@ const BodyComponent = () => {
 
 const FooterComponent = () => {
     return (
-        <div className="bg-red-300/20 grid grid-rows-[30px_1fr]">
-            <div className="text-right">
-                Total: 50000
-            </div>
-            <div className="grid grid-cols-2">
+        <div className="bg-red-300/20 grid grid-cols-[1fr_1fr]">
+            <div className="grid ">
                 <div>
                     <div className="text-sm">Narration:</div>
                     <div contentEditable className="narration caret-accent caret-underscore caret-unde justify-self-end bg-black text-gray-100 w-full h-full text-sm  font-semibold  "></div>
                 </div>
                 <div className="narration"></div>
             </div>
+            <div className="grid grid-rows-2 justify-end">
+
+                <div className="text-right">
+                    Total: 50000
+                </div>
+                <div className="text-right">
+                    <Button type="submit">Save....</Button>
+                </div>
+            </div>
+
         </div>
 
     )

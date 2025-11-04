@@ -19,7 +19,6 @@ interface DataTableRowActionsProps<TData> {
   row: Row<TData>
   onEdit?: (row: TData) => void
   onDelete?: (row: TData) => void
-  onConfigure?: (row: TData) => void
 }
 
 export function DataTableRowActions<TData>({

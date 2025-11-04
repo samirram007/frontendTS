@@ -1,7 +1,8 @@
-import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
+
 import type { Row } from "@tanstack/react-table"
 import { useRole } from "../contexts/role-context"
 import type { Role } from "../data/schema"
+import { DataTableRowActions } from "./data-table-row-actions"
 
 
 interface DataTableRowActionsProps {
@@ -9,6 +10,7 @@ interface DataTableRowActionsProps {
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
+
     const { setOpen, setCurrentRow } = useRole()
     const { row } = props
     return (
@@ -21,6 +23,14 @@ const RowActions = (props: DataTableRowActionsProps) => {
             onDelete={(data) => {
                 setCurrentRow(data)
                 setOpen("delete")
+            }}
+            onPermissions={(data) => {
+                setCurrentRow(data)
+            // navigate({
+            //     to: RolePermissionRoute.to,
+            //     params: { id: data.id! },
+            // })
+
             }}
         />
     )

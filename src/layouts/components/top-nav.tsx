@@ -8,7 +8,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { IconMenu } from '@tabler/icons-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
@@ -20,7 +21,17 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   }[]
 }
 
-export function TopNav({ className, links, ...props }: TopNavProps) {
+export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) {
+  const location = useLocation();
+  const [links, setLinks] = useState([...arrayLinks]);
+  useEffect(() => {
+    setLinks((prev) =>
+      prev.map((link) => ({
+        ...link,
+        isActive: location.pathname === link.href,
+      }))
+    );
+  }, [location.pathname]);
   return (
     <>
       <div className='lg:hidden'>

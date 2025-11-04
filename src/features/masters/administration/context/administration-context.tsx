@@ -9,6 +9,8 @@ interface AdministrationContextType {
     setCurrentModule: (str: string) => void
     sideBarOpen?: boolean
     setSideBarOpen?: (open: boolean) => void
+    headerVisible?: boolean
+    setHeaderVisible?: (visible: boolean) => void
     keyName: string
 }
 
@@ -21,6 +23,8 @@ interface Props {
 export default function AdministrationProvider({ children }: Props) {
     const [currentModule, setCurrentModule] = useState<string>("user")
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(true)
+    const [headerVisible, setHeaderVisible] = useState<boolean>(true)
+
 
 
 
@@ -30,6 +34,8 @@ export default function AdministrationProvider({ children }: Props) {
             setCurrentModule,
             sideBarOpen,
             setSideBarOpen,
+            headerVisible,
+            setHeaderVisible,
             keyName: "administration"
         }}>
             {children}

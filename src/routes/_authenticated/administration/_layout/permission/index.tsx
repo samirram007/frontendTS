@@ -7,7 +7,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Loader } from 'lucide-react';
 
 export const Route = createFileRoute(
-  '/_authenticated/masters/administration/_layout/permission/',
+  '/_authenticated/administration/_layout/permission/',
 )({
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(permissionQueryOptions()),

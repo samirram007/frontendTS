@@ -5,7 +5,7 @@ import Administration from '@/features/masters/administration'
 import AdministrationProvider from '@/features/masters/administration/context/administration-context'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_authenticated/masters/administration/_layout')({
+export const Route = createFileRoute('/_authenticated/administration/_layout')({
   component: () => {
     return (
       <AdministrationProvider>

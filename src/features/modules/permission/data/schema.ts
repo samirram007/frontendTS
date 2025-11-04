@@ -17,6 +17,7 @@ export const permissionSchema: z.ZodType<any> = z.object({
 
 })
 export type Permission = z.infer<typeof permissionSchema>
+export type RolePermission = z.infer<typeof permissionSchema>
 export const permissionListSchema = z.array(permissionSchema)
 export type PermissionList = z.infer<typeof permissionListSchema>
 

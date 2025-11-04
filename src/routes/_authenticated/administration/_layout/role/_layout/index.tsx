@@ -5,16 +5,21 @@ import { roleQueryOptions } from '@/features/modules/role/data/queryOptions';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Loader } from 'lucide-react';
+import { Suspense } from 'react';
 
 export const Route = createFileRoute(
-  '/_authenticated/masters/administration/_layout/role/',
+  '/_authenticated/administration/_layout/role/_layout/',
 )({
   loader: ({ context }) =>
     context.queryClient.ensureQueryData(roleQueryOptions()),
   component: () => {
     const { data: role } = useSuspenseQuery(roleQueryOptions())
 
-    return <Role data={role?.data} />
+    return (
+      <Suspense fallback={<Loader className="animate-spin bg-amber-600" />}>
+        <Role data={role?.data} />
+      </Suspense>
+    )
   },
   errorComponent: () => <div>Error loading roles.</div>,
   pendingComponent: () => <Loader className="animate-spin" />,

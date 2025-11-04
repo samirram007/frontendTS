@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import { useFormContext } from "react-hook-form"
+import { type UseFormReturn } from "react-hook-form"
 
 import type { StockItem } from "@/features/modules/stock_item/data/schema"
-import type { ReceiptNoteForm } from "../../data/schema"
+import type { StockJournalEntryForm } from "../../data/schema"
 
 // const frameworks = [
 //     {
@@ -47,20 +47,22 @@ import type { ReceiptNoteForm } from "../../data/schema"
 //     },
 // ]
 interface Props {
-    stockItems: StockItem[];
+    stockItems: StockItem[]; 
+    form: UseFormReturn<StockJournalEntryForm>;
 }
-export const StockItemCombobox = ({ stockItems }: Props) => {
-    const form = useFormContext<ReceiptNoteForm>()
+export const StockItemCombobox = ({ stockItems, form }: Props) => {
+    //const form = useFormContext<ReceiptNoteForm>()
     const [open, setOpen] = React.useState(false)
-    const index = form.getValues('stockJournal.stockJournalEntries').length
-    const [value, setValue] = React.useState(form.getValues(`stockJournal.stockJournalEntries.${index}.stockItemId`)?.toString())
+    // const index = currentIndex
+    const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
 
     const handleSelect = (value: string) => {
+        form.setValue(`stockItemId`, Number(value))
         const selected = stockItems.find((i) => i.id === Number(value));
 
         // ✅ Safely update nested field value by index
         // console.log(form.getValues('stockJournal'), index, "index")
-        form.setValue(`stockJournal.stockJournalEntries.${index}.stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
+        form.setValue(`stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
         );
 
         setValue(value);
