@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { lowerCase } from '@/utils/removeEmptyStrings';
 import { useLocation, useNavigate } from '@tanstack/react-router';
-import z from 'zod';
 import { voucherCategoryViewListSchema, type VoucherCategoryView } from '../modules/voucher_category/data/schema';
 import type { VoucherType } from '../modules/voucher_type/data/schema';
 
@@ -53,18 +52,20 @@ interface VoucherTypeTabletProps {
 
 }
 
-const moduleLinkItemSchema = z.object({
-    title: z.string(),
-    href: z.string().url(),
-});
+// const moduleLinkItemSchema = z.object({
+//     title: z.string(),
+//     href: z.string().url(),
+// });
 
-const moduleLinkSchema = z.array(moduleLinkItemSchema).optional().transform(val => val ?? []);
+// const moduleLinkSchema = z.array(moduleLinkItemSchema).optional().transform(val => val ?? []);
 
 const VoucherTypeTablet = ({ voucherType, moduleLink }: VoucherTypeTabletProps) => {
     const router = useLocation()
     const navigate = useNavigate()
     const handleClick = () => {
         const link = moduleLinkCollection.find(item => item.title === voucherType.name)?.href ?? moduleLink
+        alert(link)
+
 
         navigate({ to: `/${router.pathname}/${lowerCase(voucherType.name.replace(' ', '_'))}` })
     }

@@ -19,54 +19,43 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import { type UseFormReturn } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import type { Godown } from "@/features/modules/godown/data/schema"
 import type { StockJournalGodownEntryForm } from "../../data/schema"
 
-// const frameworks = [
-//     {
-//         value: "next.js",
-//         label: "Next.js",
-//     },
-//     {
-//         value: "sveltekit",
-//         label: "SvelteKit",
-//     },
-//     {
-//         value: "nuxt.js",
-//         label: "Nuxt.js",
-//     },
-//     {
-//         value: "remix",
-//         label: "Remix",
-//     },
-//     {
-//         value: "astro",
-//         label: "Astro",
-//     },
-// ]
-interface Props {
+interface GodownComboboxProps {
+    handleRemove?: () => void;
     godowns: Godown[];
-    form: UseFormReturn<StockJournalGodownEntryForm>;
 }
-export const GodownCombobox = ({ godowns, form }: Props) => {
-
+export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) => {
+    const form = useFormContext<StockJournalGodownEntryForm>()
     const [open, setOpen] = React.useState(false)
     const selectedId = form.watch('godownId')?.toString()
 
     const handleSelect = (value: string) => {
-        const selected = godowns.find((i) => i.id === Number(value));
-        form.setValue(`godownId`, Number(value))
-        form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
-        );
-
+        if (value === '-1') {
+            handleRemove?.();
+        } else {
+            const selected = godowns.find((i) => i.id === Number(value));
+            form.setValue(`godownId`, Number(value))
+            form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
+            );
+        }
         setOpen(false);
     };
-    const frameworks = godowns?.map((godown: Godown) => ({
-        label: capitalizeAllWords(godown.name!),
-        value: String(godown.id),
-    }))
+    const frameworks = [
+        {
+            label: "End Selection", value: "-1",
+            className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
+        },
+        ...(godowns?.map((godown: Godown) => ({
+            label: capitalizeAllWords(godown.name!),
+            value: String(godown.id),
+            className: "min-w-full hover:bg-blue-300",
+        })) ?? []),
+    ];
+
     const selected = frameworks.find((o) => o.value === selectedId)
     const selectedLabel = selected ? (selected?.label + ` - ` + selected?.value) : 'Select godown'
 
@@ -78,7 +67,8 @@ export const GodownCombobox = ({ godowns, form }: Props) => {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full justify-between"
+                    className={cn("w-full justify-between")}
+                    autoFocus={true}
                 >
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -90,9 +80,10 @@ export const GodownCombobox = ({ godowns, form }: Props) => {
                     <CommandList>
                         <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>
+
                             {frameworks.map((framework) => (
                                 <CommandItem
-                                    className="min-w-full"
+                                    className={cn("justify-start", framework.className)}
                                     key={framework.value}
                                     value={framework.value}
                                     onSelect={() => handleSelect(framework.value)}
@@ -103,7 +94,7 @@ export const GodownCombobox = ({ godowns, form }: Props) => {
                                             selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}- {framework.value}
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>

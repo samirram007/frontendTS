@@ -12,14 +12,18 @@ export const stockJournalGodownEntrySchema = z.object({
   mfgDate: z.coerce.date().nullish(),
   expDate: z.coerce.date().nullish(),
   serialNo: z.string().nullish(),
-  quantity: z.number(),
+  actualQuantity: z.number(),
+  billingQuantity: z.number(),
   rate: z.coerce.number().nullish(),
+  discountPercentage: z.number().int().positive().nullish(),
+  discount: z.number().int().positive().nullish(),
   amount: z.coerce.number().nullish(),
   movementType: z.string().min(1).nullish(),
   remarks: z.string().min(1).nullish(),
-  godown: godownSchema.nullish(),
-  stockItem: stockItemSchema.nullish(),
-  stockUnit: stockUnitSchema.nullish(),
+  godown: z.lazy(() => godownSchema.nullish()),
+  stockItem: z.lazy(() => stockItemSchema.nullish()),
+  stockUnit: z.lazy(() => stockUnitSchema.nullish()),
+  rateUnit: z.lazy(() => stockUnitSchema.nullish()),
 })
 export type StockJournalGodownEntryForm = z.infer<typeof stockJournalGodownEntrySchema>
 export const stockJournalEntrySchema = z.object({
@@ -30,13 +34,21 @@ export const stockJournalEntrySchema = z.object({
   alternateStockUnitId: z.number().int().positive().nullish(),
   unitRatio: z.number().int().positive().nullish(),
   itemCost: z.number().int().positive().nullish(),
-  quantity: z.number().int().positive().nullish(),
+  actualQuantity: z.number().int().positive().nullish(),
+  billingQuantity: z.number().int().positive().nullish(),
   rate: z.number().int().positive().nullish(),
+  rateUnitId: z.number().int().positive().nullish(),
+  rateUnitRatio: z.number().int().positive().nullish(),
+  discountPercentage: z.number().int().positive().nullish(),
+  discount: z.number().int().positive().nullish(),
   amount: z.coerce.number().nullish(),
-  movementType: z.string().min(1).nullish(), 
-  stockItem: stockItemSchema.nullish(), 
-  stockUnit: stockUnitSchema.nullish(),
-  alternateStockUnit: stockUnitSchema.nullish()
+  movementType: z.string().min(1).nullish(),
+  stockItem: z.lazy(() => stockItemSchema.nullish()),
+  stockUnit: z.lazy(() => stockUnitSchema.nullish()),
+  rateUnit: z.lazy(() => stockUnitSchema.nullish()),
+  stockJournalGodownEntries: z.array(stockJournalGodownEntrySchema.nullish()),
+  // remarks: z.string().nullish(),
+  alternateStockUnit: z.lazy(() => stockUnitSchema.nullish())
 })
 
 export type StockJournalEntryForm = z.infer<typeof stockJournalEntrySchema>
@@ -49,7 +61,7 @@ export const stockJournalSchema = z.object({
   voucherId: z.number().int().nullish(),
   type: z.string().nullish(),
   remarks: z.string().nullish(),
-  stockJournalEntries: z.array(stockJournalEntrySchema)
+  stockJournalEntries: z.array(stockJournalEntrySchema.nullish()),
 })
 export type StockJournalForm = z.infer<typeof stockJournalSchema>
 
@@ -93,8 +105,8 @@ export const receiptNoteSchema = z.object({
   referenceDate: z.coerce.date().nullish(),
   voucherTypeId: z.number().int(),
   stockJournalId: z.number().int().nullish(),
-  stockJournal: stockJournalSchema.nullish(),
-  voucherEntries: z.array(voucherEntrySchema),
+  stockJournal: z.lazy(() => stockJournalSchema.nullish()),
+  voucherEntries: z.array(z.lazy(() => voucherEntrySchema)),
   party: partySchema.nullish(),
   partyLedger: partyLedgerSchema.nullish(),
   transactionLedger: transactionLedgerSchema.nullish(),
@@ -116,7 +128,7 @@ export const formSchema = z
     voucherTypeId: z.number().int(), 
     stockJournalId: z.number().int().nullish(),
     stockJournal: stockJournalSchema.nullish(),
-    voucherEntries: z.array(voucherEntrySchema),
+    voucherEntries: z.array(voucherEntrySchema.nullish()),
     party: partySchema.nullish(),
     partyLedger: partyLedgerSchema.nullish(),
     transactionLedger: transactionLedgerSchema.nullish(),

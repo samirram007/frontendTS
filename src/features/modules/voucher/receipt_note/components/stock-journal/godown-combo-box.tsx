@@ -52,18 +52,19 @@ interface Props {
 export const GodownCombobox = ({ godowns }: Props) => {
     const form = useFormContext<ReceiptNoteForm>()
     const [open, setOpen] = React.useState(false)
-    const index = form.getValues('stockJournal.stockJournalEntries').length
-    const [value, setValue] = React.useState(form.getValues(`stockJournal.stockJournalEntries.${index}.godownId`)?.toString())
-
+    // const index = form.getValues('stockJournal.stockJournalEntries').length
+    // const [value, setValue] = React.useState('')
+    const value = ''
     const handleSelect = (value: string) => {
-        const selected = godowns.find((i) => i.id === Number(value));
+        // const selected = godowns.find((i) => i.id === Number(value));
         const index = form.getValues('stockJournal.stockJournalEntries').length
         // ✅ Safely update nested field value by index
         console.log(form.getValues('stockJournal'), index, "index")
-        form.setValue(`stockJournal.stockJournalEntries.${index}.godown`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
-        );
-
-        setValue(value);
+        // form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true } 
+        //     // optional but recommended
+        // );
+        console.log(value)
+        // setValue(value);
         setOpen(false);
     };
     const frameworks = godowns?.map((godown: Godown) => ({

@@ -22,6 +22,7 @@ import { useForm } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 import { storeAccountLedgerService, updateAccountLedgerService } from '../data/api'
+import AccountGroupDropdown from './account_group-dropdown'
 
 
 
@@ -110,7 +111,7 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              {/* <AccountGroupDropdown form={form} /> */}
+              <AccountGroupDropdown form={form} />
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },

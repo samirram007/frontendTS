@@ -1,14 +1,20 @@
+import type { ReceiptNoteForm } from "./schema";
 
 export const stockJournalGodownEntryDefaultValues = {
-    id: undefined,
+    id: null,
     stockJournalEntryId: null,
-    godownId: 1,
+    godownId: -1,
     batchNo: '',
-    mfgDate: new Date().toISOString().split('T')[0],
-    expDate: new Date().toISOString().split('T')[0],
+    mfgDate: null,
+    expDate: null,
     serialNo: '',
-    quantity: 1,
+    actualQuantity: 0,
+    billingQuantity: 0,
     rate: 0.00,
+    rateUnitRatio: 1,
+    discountPercentage: 0,
+    discount: 0,
+    amount: 0,
     movementType: 'in',
     stockItem: undefined,
     stockUnit: undefined,
@@ -17,7 +23,7 @@ export const stockJournalGodownEntryDefaultValues = {
 }
 export const stockJournalEntryDefaultValues = {
 
-    id: undefined,
+    id: null,
     stockJournalId: undefined,
     stockItemId: undefined,
     stockItem: undefined,
@@ -25,13 +31,20 @@ export const stockJournalEntryDefaultValues = {
     alternateStockUnitId: undefined,
     unitRatio: 0,
     itemCost: 0,
-    quantity: 0,
+    actualQuantity: 0,
+    billingQuantity: 0,
     rate: 0,
+    rateUnitId: undefined,
+    rateUnitRatio: 1,
+    discountPercentage: 0,
+    discount: 0,
     amount: 0,
     movementType: 'in',
-    stockJournalGodownEntries: [
-        stockJournalGodownEntryDefaultValues
-    ]
+    stockUnit: undefined,
+    rateUnit: undefined,
+    godown: undefined,
+    alternateStockUnit: undefined,
+    stockJournalGodownEntries: [] 
 
 }
 export const stockJournalDefaultValues = {
@@ -39,21 +52,22 @@ export const stockJournalDefaultValues = {
 
     id: undefined,
     journalNo: "",
-    journalDate: new Date().toISOString().split('T')[0],
+    journalDate: null,
     voucherId: undefined,
     type: "in",
     remarks: "",
-    stockJournalEntries: [
-        stockJournalEntryDefaultValues
-    ],
+    stockJournalEntries: [],
+
+    // stockJournalEntryDefaultValues
+
 
 }
 
-const defaultValues = {
+const receiptNoteDefaultValues: ReceiptNoteForm = {
     voucherNo: "new",
     voucherDate: new Date(),
-    referenceNo: "123456",
-    referenceDate: new Date(),
+    referenceNo: "",
+    referenceDate: null,
     voucherTypeId: 1,
     partyLedger: undefined,
     transactionLedger: undefined,
@@ -67,5 +81,5 @@ const defaultValues = {
     voucherEntries: [],
     isEdit: false,
 }
-export default defaultValues;
+export default receiptNoteDefaultValues;
 

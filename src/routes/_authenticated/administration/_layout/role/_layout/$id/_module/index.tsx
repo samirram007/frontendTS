@@ -28,7 +28,7 @@ export const Route = createFileRoute(
         parse: (params) => paramsSchema.parse(params),
         stringify: ({ id }) => ({ id: `${id}` }),
     },
-    loader: ({ context, params: { id }, params }) => {
+    loader: ({ params: { id } }) => {
         if (id === "new") return null
 
         return

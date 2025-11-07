@@ -27,6 +27,7 @@ import type { ReceiptNoteForm } from "../../data/schema"
 interface Props {
     form: UseFormReturn<ReceiptNoteForm>;
     partyLedgers: PartyLedger[];
+    tabIndex?: number;
 }
 
 export const PartyLedgerCombobox = ({ form, partyLedgers }: Props) => {
@@ -106,6 +107,7 @@ export const PartyLedgerCombobox = ({ form, partyLedgers }: Props) => {
                     aria-expanded={open}
                     className="w-full justify-between"  
                     onKeyDown={handleKeyDown}
+
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label

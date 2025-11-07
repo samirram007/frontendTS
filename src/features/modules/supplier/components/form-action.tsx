@@ -67,8 +67,8 @@ export function FormAction({ currentRow }: Props) {
     const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
     const moduleName = "Supplier"
     const onSubmit = (values: SupplierForm) => {
-        console.log("here: ", values)
-        form.reset()
+        // console.log("here: ", values)
+        // form.reset()
         saveSupplier(
             currentRow ? { ...values, id: currentRow.id! } : values,
             {

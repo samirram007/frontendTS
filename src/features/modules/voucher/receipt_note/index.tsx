@@ -18,8 +18,8 @@ const ReceiptNote = ({ currentRow }: ReceiptNoteProps) => {
     return (
 
         <>
-
             <Pos currentRow={currentRow} />
+
         </>
     )
 }

@@ -1,6 +1,7 @@
 import useDialogState from '@/core/hooks/use-dialog-state'
+import type { RolePermission } from '@/features/modules/permission/data/schema'
 import React, { useState } from 'react'
-import type { RolePermission } from '../../../data/schema'
+
 
 
 

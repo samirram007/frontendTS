@@ -19,7 +19,7 @@ export default defineConfig(({ command, mode }) => {
         '/api': {
           target: env.VITE_API_BASE_URL, // Your Laravel backend URL
           changeOrigin: true, // Ensures the host header is rewritten to the target
-          secure: false, // For local HTTP servers (set to true for HTTPS in production)
+          secure: env.VITE_API_SECURE === 'true', // For local HTTP servers (set to true for HTTPS in production)
           rewrite: (path) => path.replace(/^\/api/, ''), // Optional: removes /api prefix if needed
         },
       },

@@ -87,11 +87,11 @@ const StockJournalEntries = () => {
                             options={godowns?.data}
                             placeholder="Godown"
                         />
-                        <Input
+                        {/* <Input
                             type="number"
                             {...register(`stockJournal.stockJournalEntries.${index}.quantity`)}
                             placeholder="Quantity"
-                        />
+                        /> */}
                         <Input
                             type="number"
                             {...register(`stockJournal.stockJournalEntries.${index}.rate`)}

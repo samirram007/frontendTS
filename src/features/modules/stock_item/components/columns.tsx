@@ -67,10 +67,6 @@ export const columns: ColumnDef<StockItem>[] = [
       <div className='w-fit text-nowrap'>{row.getValue('code')}</div>
     ),
   },
-
-
-
-
   {
     id: 'actions',
     cell: RowActions,

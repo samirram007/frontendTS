@@ -21,8 +21,6 @@ import { useEffect, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { stockJournalEntrySchema, type StockJournalEntryForm, } from "../../data/schema";
 import { GodownCombobox } from "./godown-combo-box";
-import { StockItemCombobox } from "./stock-item-combo-box";
-import { StockUnitCombobox } from "./stock-unit-combo-box";
 
 export function ItemDialog() {
 
@@ -42,9 +40,9 @@ export function ItemDialog() {
             },
         ],
     })
-    const [stockItem, setStockItem] = useState<StockItem>()
+    const [stockItem] = useState<StockItem>()
     const [stockItemUnits, setStockItemUnits] = useState<StockUnit[]>([])
-    const [stockItems, godowns, stockUnits] = results
+    const [stockItems, godowns,] = results
 
 
     const form = useForm<StockJournalEntryForm>({
@@ -57,19 +55,19 @@ export function ItemDialog() {
             alternateStockUnitId: undefined,
             unitRatio: 0,
             itemCost: 0,
-            quantity: 0,
+            // quantity: 0,
             rate: 0,
             movementType: 'in',
 
         },
     })
     const stockItemId = form.watch('stockItemId')
-    const onSubmit = (values: StockJournalEntryForm) => {
-        console.log("here: ", values)
-        form.reset()
+    // const onSubmit = (values: StockJournalEntryForm) => {
+    //     console.log("here: ", values)
+    //     form.reset()
 
 
-    }
+    // }
     useEffect(() => {
         if (!stockItemId) return
 
@@ -101,9 +99,9 @@ export function ItemDialog() {
                 e.preventDefault();
             }}>
                 <Form {...form}>
-                    <div
+                    <form
                         id='inner-form'
-                        onSubmit={form.handleSubmit(onSubmit)}
+                        // onSubmit={form.handleSubmit(onSubmit)}
                         className='space-y-4 p-0.5'
                     >
 
@@ -117,7 +115,7 @@ export function ItemDialog() {
 
                                             <FormLabel >Item</FormLabel>
 
-                                            <StockItemCombobox form={form} stockItems={stockItems?.data?.data} />
+                                            {/* <StockItemCombobox form={form} stockItems={stockItems?.data?.data} /> */}
                                         </div>
                                         <div className="w-full">
                                             {JSON.stringify(stockItemUnits)}
@@ -138,7 +136,7 @@ export function ItemDialog() {
                                 <Input name={'batchNo'} placeholder={'BatchNo'} />
                                 <Input name={'quantity'} placeholder={'Quantity'} />
 
-                                <StockUnitCombobox stockUnits={stockUnits?.data?.data} form={form} />
+                                {/* <StockUnitCombobox stockUnits={stockUnits?.data?.data} form={form} /> */}
                                 <Input name="rate" placeholder="Rate" />
                             </div>
                 </div>
@@ -148,7 +146,7 @@ export function ItemDialog() {
                     </DialogClose>
                     <Button type="submit">Save changes</Button>
                 </DialogFooter>
-                    </div>
+                    </form>
                 </Form>
             </DialogContent>
 

@@ -26,6 +26,8 @@ type Props = {
     gapClass?: string;
     disabled?: boolean;
     rtl?: boolean
+    tabIndex?: number
+    [key: string]: any;
 }
 
 const FormInputField = (props: Props) => {
@@ -62,10 +64,11 @@ const FormInputField = (props: Props) => {
 
 
 const CheckBox = (props: Props) => {
-    const { form, name, label, type, options, disabled } = props
+    const { form, name, label, type, options, disabled, tabIndex } = props
     return (
         <FormField
             control={form.control}
+
             name={name}
             render={({ field }) => (
                 <FormItem className='grid grid-cols-[1fr_24px] items-center space-y-0 gap-x-4 gap-y-1'>
@@ -99,6 +102,8 @@ const CheckBox = (props: Props) => {
                         <Input
                             type={type}
                             className=' w-6 h-6 '
+                            tabIndex={tabIndex}
+                            autoFocus={tabIndex === 0}
                             checked={field.value === 'active' || field.value === true}
                             onChange={(e) => {
                                 const isChecked = e.target.checked;
@@ -120,7 +125,7 @@ const CheckBox = (props: Props) => {
 }
 
 const TextAreaBox = (props: Props) => {
-    const { form, name, gapClass, rtl, label } = props
+    const { form, name, gapClass, rtl, label, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -144,12 +149,13 @@ const TextAreaBox = (props: Props) => {
                     <FormMessage className=' col-start-2' />
                 </FormItem>
             )}
+            {...rest}
         />
     )
 }
 
 const TextBox = (props: Props) => {
-    const { form, name, label, gapClass, rtl, noLabel } = props
+    const { form, name, label, gapClass, rtl, noLabel, tabIndex, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -167,6 +173,8 @@ const TextBox = (props: Props) => {
                     }
                     <FormControl>
                         <Input
+                            tabIndex={tabIndex}
+                            autoFocus={tabIndex === 0}
                             placeholder={'Enter ' + lowerCase(label ?? name)}
                             className='w-full placeholder'
                             autoComplete='off'
@@ -176,11 +184,12 @@ const TextBox = (props: Props) => {
                     <FormMessage className=' col-start-2' />
                 </FormItem>
             )}
+            {...rest}
         />
     )
 }
 const HiddenBox = (props: Props) => {
-    const { form, name, label, gapClass } = props
+    const { form, name, label, gapClass, tabIndex, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -196,6 +205,8 @@ const HiddenBox = (props: Props) => {
                     </FormLabel>
                     <FormControl>
                         <Input
+                            tabIndex={tabIndex}
+                            autoFocus={tabIndex === 0}
                             placeholder={'Enter ' + lowerCase(label ?? name)}
                             className=' placeholder'
                             autoComplete='off'
@@ -205,11 +216,12 @@ const HiddenBox = (props: Props) => {
                     <FormMessage className=' col-start-2' />
                 </FormItem>
             )}
+            {...rest}
         />
     )
 }
 const DateBox = (props: Props) => {
-    const { form, name, label, gapClass, noLabel } = props
+    const { form, name, label, gapClass, noLabel, tabIndex, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -222,26 +234,30 @@ const DateBox = (props: Props) => {
                     )} >
                     {!noLabel &&
                     <FormLabel className='   '>
-                        {label ?? capitalizeAllWords(name)} {field.value[name]}
+                            {label ?? capitalizeAllWords(name)}  
                     </FormLabel>
                     }
                     <FormControl>
                         <Input
+                            tabIndex={tabIndex}
+                            autoFocus={tabIndex === 0}
                             placeholder={'Enter ' + (label ?? lowerCase(label ?? name))}
                             type='date'
                             className='w-full placeholder'
                             autoComplete='off'
                             {...field}
+                            value={field.value ?? ""} 
                         />
                     </FormControl>
                     <FormMessage className=' col-start-2' />
                 </FormItem>
             )}
+            {...rest}
         />
     )
 }
 const NumberBox = (props: Props) => {
-    const { form, name, label, type, gapClass } = props
+    const { form, name, label, type, gapClass, tabIndex, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -257,6 +273,8 @@ const NumberBox = (props: Props) => {
                     </FormLabel>
                     <FormControl>
                         <Input
+                            tabIndex={tabIndex}
+                            autoFocus={tabIndex === 0}
                             type={type}
                             placeholder={'Enter ' + lowerCase(label ?? name)}
                             className=' placeholder'
@@ -267,6 +285,7 @@ const NumberBox = (props: Props) => {
                     <FormMessage className=' col-start-2' />
                 </FormItem>
             )}
+            {...rest}
         />
     )
 }

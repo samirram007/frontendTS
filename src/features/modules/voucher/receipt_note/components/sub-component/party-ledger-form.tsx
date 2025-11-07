@@ -11,9 +11,10 @@ import { PartyLedgerCombobox } from "./party-ledger-combo-box"
 
 type FormProps = {
     form: UseFormReturn<ReceiptNoteForm>;
+    tabIndex?: number;
 };
 const PartyLedgerForm = (props: FormProps) => {
-    const { form } = props as FormProps;
+    const { form, tabIndex } = props as FormProps;
     const { data: partyLedgers, isLoading } = useQuery({
         queryKey: ["accountLedgers", "supplier_ledgers"],
         queryFn: () => fetchPartyLedgerService('supplier_ledgers'),
@@ -36,7 +37,7 @@ const PartyLedgerForm = (props: FormProps) => {
                             </FormLabel>
                             <div className="w-8/12 grid grid-cols-[auto_1fr] gap-2 items-center  ">
                                 <div className="text-right" >:</div>
-                                <PartyLedgerCombobox form={form} partyLedgers={partyLedgers?.data} />
+                                <PartyLedgerCombobox form={form} partyLedgers={partyLedgers?.data} tabIndex={tabIndex} />
 
                             </div>
                             <FormMessage className=' col-start-3' />

@@ -20,7 +20,7 @@ import {
 import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import { type UseFormReturn } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import type { StockJournalEntryForm } from "../../data/schema"
 
 
@@ -47,38 +47,57 @@ import type { StockJournalEntryForm } from "../../data/schema"
 //         label: "Astro",
 //     },
 // ]
-interface Props {
+interface StockItemComboboxProps {
+
     stockItems: StockItem[];
-    form: UseFormReturn<StockJournalEntryForm>;
+    handleRemove?: () => void;
 }
-export const StockItemCombobox = ({ stockItems, form }: Props) => {
-    //const form = useFormContext<ReceiptNoteForm>()
+export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemComboboxProps) => {
+    const form = useFormContext<StockJournalEntryForm>()
     const [open, setOpen] = React.useState(false)
     // const index = currentIndex
-    const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
-
+    // const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
+    const selectedId = form.watch('stockItemId')?.toString()
     const handleSelect = (value: string) => {
+        if (value === '-1') {
+            handleRemove?.();
+            return
+        }  
         const selected = stockItems.find((i) => i.id === Number(value));
         const quantity = 1
         form.setValue(`stockItemId`, Number(value))
-        form.setValue(`quantity`, quantity)
+        form.setValue(`actualQuantity`, quantity)
+        form.setValue(`billingQuantity`, quantity)
         form.setValue(`stockUnitId`, selected?.stockUnitId)
         form.setValue(`rate`, selected?.standardCost)
-        form.setValue(`amount`, (selected?.standardCost! * quantity))
+        form.setValue(`rateUnitId`, selected?.stockUnitId)
+        form.setValue(`discountPercentage`, 0)
+        form.setValue(`discount`, (form.getValues(`rate`)! * form.getValues(`discountPercentage`)! / 100 * selected?.standardCost! * quantity))
+        form.setValue(`amount`, (selected?.standardCost! * quantity - form.getValues(`discount`)!))
 
         // ✅ Safely update nested field value by index
         // console.log(form.getValues('stockJournal'), index, "index")
         form.setValue(`stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
         );
 
-        setValue(value);
+        // setValue(value);
         setOpen(false);
     };
-    console.log("StockItems: ", stockItems)
-    const frameworks = stockItems?.map((stockItem: StockItem) => ({
-        label: capitalizeAllWords(stockItem.name!),
-        value: String(stockItem.id),
-    }))
+
+    const frameworks = [
+        {
+            label: "End Selection", value: "-1",
+            className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
+        },
+        ...(stockItems?.map((stockItem: StockItem) => ({
+            label: capitalizeAllWords(stockItem.name!),
+            value: String(stockItem.id),
+            className: "min-w-full hover:bg-blue-300",
+        })) ?? []),
+    ];
+
+    const selected = frameworks.find((o) => o.value === selectedId)
+    const selectedLabel = selected ? (selected?.label + ` - ` + selected?.value) : 'Select item'
 
 
 
@@ -89,11 +108,10 @@ export const StockItemCombobox = ({ stockItems, form }: Props) => {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full justify-between"
+                    className={cn("w-full justify-between")}
+                    autoFocus={true}
                 >
-                    {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select item..."}
+                    {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -113,7 +131,7 @@ export const StockItemCombobox = ({ stockItems, form }: Props) => {
                                     <CheckIcon
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                     {framework.label}

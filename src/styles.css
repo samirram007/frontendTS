@@ -165,6 +165,19 @@ code {
     @apply text-shadow-sm!    border-b-gray-700!;
     
   }
+  .voucher-entry{
+    input,
+  select,
+  button[role='combobox'],
+  textarea {
+    @apply shadow-none;
+    @apply focus:bg-slate-950! focus:text-gray-50 focus:font-semibold focus:text-left;
+    @apply focus:placeholder:text-gray-200;
+    @apply py-0! h-6! rounded-sm!;
+    @apply text-shadow-sm! border-x-0! border-t-0!  border-b-[1px]   border-b-gray-700/20!;
+    
+  }
+  }
   input::selection,
 select::selection,
 button[role='combobox']::selection,
