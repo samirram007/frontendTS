@@ -25,22 +25,22 @@ import LabTestComboBoxSearch from "./features/LabTestsFeature/lab-test-comob-box
 
 const NewBookingFeature = () => {
 
-    const {selectTestItemList} = useLabTestItem();
-    const {discountRate} = usePayment();
-    const {discountTypeId,sampleCollectorId} = useBookingTest();
-    const {patient} = usePatient();
+    const { selectTestItemList } = useLabTestItem();
+    const { discountRate } = usePayment();
+    const { discountTypeId, sampleCollectorId } = useBookingTest();
+    const { patient } = usePatient();
     const navigate = useNavigate();
-    const {mutate} = useBookingMutation();
+    const { mutate, isPending } = useBookingMutation();
 
     const queryClient = useQueryClient();
 
 
-    const handleValidatePay = () =>{
-        if(selectTestItemList.length == 0 || patient == undefined){
+    const handleValidatePay = () => {
+        if (selectTestItemList.length == 0 || patient == undefined) {
             ErrorToast.launchErrorToast("Please select Patient and Test");
             return;
         }
-        if(patient?.id != undefined && selectTestItemList){
+        if (patient?.id != undefined && selectTestItemList) {
             const testBookingObject: IBookingTest = {
                 bookingDate: new Date(),
                 patientId: patient?.id,
@@ -49,12 +49,12 @@ const NewBookingFeature = () => {
                 tests: selectTestItemList,
                 discountTypeId: discountTypeId,
                 sampleCollectorId: sampleCollectorId,
-                rate: discountRate ?  Number(discountRate.toFixed(2)) : 100
+                rate: discountRate ? Number(discountRate.toFixed(2)) : 100
             }
 
-            mutate(testBookingObject,{
-                onSuccess:(data)=>{
-                    queryClient.invalidateQueries({queryKey:['get-all-bookings-query']});
+            mutate(testBookingObject, {
+                onSuccess: (data) => {
+                    queryClient.invalidateQueries({ queryKey: ['get-all-bookings-query'] });
                     const bookingId = data.data.data.id;
                     navigate({ to: `/transactions/booking/${bookingId}` });
                 }
@@ -73,22 +73,22 @@ const NewBookingFeature = () => {
                     <div className="grid grid-rows-2 gap-3">
                         <div className="flex w-full justify-between gap-3">
                             {/* <PatientSearch /> */}
-                            <PatientComboBoxSearch/>
+                            <PatientComboBoxSearch />
                             <PatientForm
                                 button={
                                     <Button>
                                         <Plus size={16} />
                                     </Button>
-                                    
+
                                 }
                             />
                         </div>
                         <div>
                             {/* <LabTestSearch /> */}
-                            <LabTestComboBoxSearch/>
+                            <LabTestComboBoxSearch />
                         </div>
-                        
-                        
+
+
                     </div>
                     <div className="justify-end w-full items-end flex-col gap-3 flex">
                         <div className="grid justify-end w-full items-center grid-cols-[70px_1fr]">
@@ -96,22 +96,22 @@ const NewBookingFeature = () => {
                                 Discount
                             </div>
                             <div className="">
-                                <DiscountSelect/>
+                                <DiscountSelect />
                             </div>
                         </div>
-                        <SampleCollectorSearch/>
+                        <SampleCollectorSearch />
                     </div>
                 </div>
                 <LabTestList />
             </div>
             <div>
                 <div className="border-l-0 text-app-base border-gray-400 py-3 px-2">
-                    <PatientDetail/>
-                    <PaymentDetail/>
+                    <PatientDetail />
+                    <PaymentDetail />
                     <div className="mt-6  w-full">
                         <PathoProvider>
-                            <Button onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                Confirm this booking
+                            <Button disabled={isPending} onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                                {isPending ? "Confirm this booking" : "Booking processing"}
                             </Button>
                         </PathoProvider>
                     </div>

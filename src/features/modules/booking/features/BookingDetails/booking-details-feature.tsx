@@ -10,13 +10,13 @@ interface BookingDetailProps {
 
 
 
-const BookingDetailsFeature: React.FC<BookingDetailProps> = ({data}) =>{
+const BookingDetailsFeature: React.FC<BookingDetailProps> = ({ data }) => {
 
 
-    return(
+    return (
         <>
             <BookingDetailsHeader data={data} />
-            <BookingDetailList data={data}/>
+            <BookingDetailList booking={data} />
             <BookingDetailPayment data={data} />
         </>
     )

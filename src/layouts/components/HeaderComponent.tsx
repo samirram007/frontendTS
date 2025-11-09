@@ -30,14 +30,14 @@ const topNav = [
         disabled: false,
     },
     {
-        title: 'Customers',
-        href: '/dashboard/customers',
+        title: 'Booking',
+        href: '/transactions/booking/create-booking',
         isActive: false,
         disabled: true,
     },
     {
-        title: 'Products',
-        href: '/dashboard/products',
+        title: 'Report',
+        href: '/transactions/booking/report',
         isActive: false,
         disabled: true,
     },

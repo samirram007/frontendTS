@@ -2,15 +2,17 @@ import { Input } from "@/components/ui/input";
 
 interface ReportTemplateDateInterface {
   setReportDate: (date: string) => void;
+  reportDate: string
 }
 
-export function ReportTemplateDate({ setReportDate }: ReportTemplateDateInterface) {
+export function ReportTemplateDate({ setReportDate, reportDate }: ReportTemplateDateInterface) {
   return (
-    <div className="grid grid-cols-[120px_1fr] items-center gap-x-4 w-full">
-      <div className="font-semibold">Report Date</div>
+    <div className="mb-2 space-y-1 w-full">
+      <div className="font-semibold">Report Date :</div>
       <Input
         type="date"
-        className="w-md"
+        className="w-6/12"
+        value={reportDate}
         onChange={(e) => setReportDate(e.target.value)}
       />
     </div>

@@ -1,5 +1,5 @@
 import { queryOptions, useMutation } from "@tanstack/react-query"
-import { fetchJobOrderByIdService, fetchJobOrdersService, postUploadReport } from "./api"
+import { delUploadReport, fetchJobOrderByIdService, fetchJobOrdersService, postUploadReport } from "./api"
 import type { IReportUploadRequest } from "./schema"
 
 const BASE_KEY = "job_orders_key";
@@ -25,4 +25,16 @@ export const useReportUploadMutation = () =>{
             return postUploadReport(request);
         }
     })
+};
+
+
+
+
+export const useReportDeleteMutation = () =>{
+    return useMutation({
+        mutationKey: ['del-report-mutate-key'],
+        mutationFn: (id:number) => {
+            return delUploadReport(id);
+        }
+    });
 }

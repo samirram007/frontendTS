@@ -64,6 +64,23 @@ export async function postUploadReport(request:IReportUploadRequest):Promise<Axi
             else{
                 throw new Error("Data not found");
             }
-        throw new Error("Network Error");
+    }
+}
+
+
+
+export async function delUploadReport(id:number):Promise<AxiosResponse<IReportUploadResponse>>{
+    try{
+        const response = await axiosClient.delete(`job_orders/${id}/delete-report`);
+        return response;
+    }catch(error:unknown){
+        const RError = error as AxiosError<IReportUploadResponse>;
+        if(RError.response?.data.success == false)
+            {
+                throw new Error(RError.response.data.message);
+            }
+            else{
+                throw new Error("Data not found");
+            }
     }
 }

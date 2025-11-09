@@ -53,6 +53,26 @@ export interface IStockJournalEntry{
     jobOrder:IJobOrder | null
 }
 
+
+export interface IStockCategory{
+    id: number,
+    name: string,
+    code: string,
+    status: string,
+    description: string,
+    parentId: number | null
+}
+
+export interface IStockGroup{
+    id: number,
+    name: string,
+    code: string,
+    status: string,
+    description: string,
+    shouldQuantitiesOfItemsBeAdded: boolean,
+    parentId: number
+}
+
 // Stock Item
 export interface IStockItem{
     id: number,
@@ -99,7 +119,9 @@ export interface IStockItem{
     standardSellingPrice: string,
     icon: unknown | null,
     status: StatusType,
-    isSampleRequired: boolean
+    isSampleRequired: boolean,
+    stockCategory: IStockCategory,
+    stockGroup: IStockGroup
 }
 
 
@@ -254,3 +276,5 @@ export const discountSchema = z.object({
     isPercentage: z.boolean(),
     value: z.number()
 })
+
+

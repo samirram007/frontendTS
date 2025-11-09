@@ -1,5 +1,5 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import {Field, Form, Formik} from "formik";
+import { Field, Form, Formik } from "formik";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { PenLine, Plus } from "lucide-react";
@@ -20,27 +20,27 @@ import { showErrors } from "@/utils/dataClient";
 import { useBookingTest } from "../../context/new-booking-context";
 
 
-interface IPatientForm{
+interface IPatientForm {
     button?: React.ReactElement | string;
-    action?:string
+    action?: string
 }
 
 
 
-const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
+const PatientForm: React.FC<IPatientForm> = ({ button, action }) => {
 
-    const {patient,setPatient} = usePatient();
-    const {discountTypeId} = useBookingTest();
-    const {mutate,isPending} = usePatientMutation();
-    const [open,setOpen] = useState<boolean>(false);
+    const { patient, setPatient } = usePatient();
+    const { discountTypeId } = useBookingTest();
+    const { mutate, isPending } = usePatientMutation();
+    const [open, setOpen] = useState<boolean>(false);
 
 
     const queryClient = useQueryClient();
 
-    return(
-        <Dialog open={open} onOpenChange={(value)=>{
+    return (
+        <Dialog open={open} onOpenChange={(value) => {
             setOpen(value);
-            if(action != "Edit"){
+            if (action != "Edit") {
                 setPatient(null);
             }
         }}>
@@ -58,8 +58,8 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                 </DialogHeader>
                 <div id="patient-creation-form">
                     <Formik
-                        onSubmit={(values,actions)=>{
-                             const payload: IPatient = {
+                        onSubmit={(values, actions) => {
+                            const payload: IPatient = {
                                 id: values.id,
                                 name: values.name,
                                 age: values.age || 0,
@@ -72,21 +72,21 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                 physicianId: patient?.physician?.id,
                                 discountTypeId: discountTypeId
                             };
-                            mutate(payload,{
-                                onSuccess:(data) =>{
-                                    if(data.data.success == false){
+                            mutate(payload, {
+                                onSuccess: (data) => {
+                                    if (data.data.success == false) {
                                         showErrors(data.data);
                                         return;
                                     }
                                     setPatient(data.data.data);
-                                    queryClient.invalidateQueries({queryKey:['get-patient-query']});
+                                    queryClient.invalidateQueries({ queryKey: ['get-patient-query'] });
                                     toast.success("Patient created successfully");
 
                                     setTimeout(() => {
                                         setOpen(false);
                                     }, 700);
                                 },
-                                onError:(error)=>{
+                                onError: (error) => {
                                     toast.error(error.message);
                                 }
                             })
@@ -104,8 +104,8 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                             agentId: action != "Edit" ? 0 : patient?.agent?.id,
                             physicianId: action != "Edit" ? 0 : patient?.physician?.id,
                             discountTypeId: action != "Edit" ? discountTypeId : patient?.discountTypeId,
-                            accountLedgerId:0,
-                            address:{
+                            accountLedgerId: 0,
+                            address: {
                                 line1: action != "Edit" ? "" : patient?.address?.line1 || "",
                                 line2: action != "Edit" ? "" : patient?.address?.line2 || "",
                                 city: action != "Edit" ? "" : patient?.address?.city || "",
@@ -116,7 +116,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                             status: patient?.status || 'active'
                         }}
                     >
-                        {({})=>(
+                        {({ }) => (
                             <Form>
                                 <div className="grid grid-cols-2 gap-3">
                                     <div>
@@ -125,19 +125,19 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                             <InputBox placeholder="Enter Patient name" type="text" name="name" label="Name" />
                                             <InputBox placeholder="Enter patient phone number" name="contactNo" type="text" label="Phone Number" />
                                             <InputBox placeholder="Enter patient age" type="text" name="age" label="Age" />
-                                            <SelectBox name="gender" label="Gender" 
+                                            <SelectBox name="gender" label="Gender"
                                                 options={[
-                                                    {value:"male",label:"Male"},
-                                                    {value:"female",label:"Female"},
-                                                    {value:"others",label:"Others"},
-                                                ]} 
+                                                    { value: "male", label: "Male" },
+                                                    { value: "female", label: "Female" },
+                                                    { value: "others", label: "Others" },
+                                                ]}
                                             />
                                             <div className="grid grid-cols-[120px_1fr] w-full max-w-lg items-center">
                                                 <div className="text-app-small">Discount</div>
                                                 <div className="w-10/12 overflow-hidden">
-                                                    <DiscountSelect/>
+                                                    <DiscountSelect />
                                                 </div>
-                                                
+
                                             </div>
 
                                             <Separator className="border-1 border-gray-800" />
@@ -145,15 +145,15 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                         <div className=" gap-3 w-full">
                                             <div className="text-base font-semibold mb-3">Address: </div>
                                             <div className="grid grid-cols-2 mb-3 gap-2">
-                                                <InputBox className="w-full" placeholder="Address Line 1" type="text" name="address.line1"  />
+                                                <InputBox className="w-full" placeholder="Address Line 1" type="text" name="address.line1" />
                                                 <InputBox className="w-full" placeholder="Address Line 2" type="text" name="address.line2" />
                                             </div>
                                             <div className="grid grid-cols-2 gap-2">
-                                                <InputBox className="w-full" placeholder="City" type="text" name="address.city"/>
-                                                <InputBox className="w-full" placeholder="Postal Code"  type="text" name="address.postalCode"/>
+                                                <InputBox className="w-full" placeholder="City" type="text" name="address.city" />
+                                                <InputBox className="w-full" placeholder="Postal Code" type="text" name="address.postalCode" />
                                             </div>
-                                            
-                                             
+
+
                                         </div>
                                     </div>
 
@@ -161,21 +161,21 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                         {/* Physician Information */}
                                         <div className="grid grid-cols-[80px_1fr_40px] mb-2 items-center gap-6">
                                             <h1 className="font-semibold text-app-base-lg">Physician</h1>
-                                            <PhysicianSearchFeature/>
+                                            <PhysicianSearchFeature />
                                             <PhysicianForm button={
-                                                    <Button className="!py-0.5 h-8 !px-2" variant={'default'}>
-                                                        <Plus size={8} className="cursor-pointer" />
-                                                    </Button>
-                                                }
+                                                <Button className="!py-0.5 h-8 !px-2" variant={'default'}>
+                                                    <Plus size={8} className="cursor-pointer" />
+                                                </Button>
+                                            }
                                             />
                                         </div>
-                                        
+
                                         {/* if physician exists then use it if not then create it if want to edit the existing data then do it */}
                                         <div className="grid grid-cols-[1fr_30px] border-[1px] bg-yellow-100 border-yellow-300 rounded-lg px-2 py-2 shadow-md shadow-gray-400">
                                             <div className="flex flex-col  gap-3  cursor-pointer  justify-evenly">
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Name:</div>
-                                                    <Field type="hidden" name="agentId"  />
+                                                    <Field type="hidden" name="agentId" />
                                                     <div className="font-bold">{patient?.physician != undefined ? patient.physician?.name : <span className="font-light text-gray-400 text-app-small">Physician Name</span>}</div>
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
@@ -184,32 +184,32 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Contact:</div>
-                                                    <div className="font-bold">{patient?.physician != undefined  ? patient.physician?.contactNo : <span className="font-light text-gray-400 text-app-small">Physician Contact</span> }</div>
+                                                    <div className="font-bold">{patient?.physician != undefined ? patient.physician?.contactNo : <span className="font-light text-gray-400 text-app-small">Physician Contact</span>}</div>
                                                 </div>
                                                 {/* <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Discipline:</div>
                                                     <div className="font-bold">{physicianDetail  ? patient?.physician.discipline : <span className="font-light text-gray-400 text-app-small">Physician Discipline</span> }</div>
                                                 </div> */}
                                             </div>
-                                            <PhysicianForm 
+                                            <PhysicianForm
                                                 button={
                                                     <PenLine className="cursor-pointer" size={18} />
                                                 }
                                                 action="Edit"
                                             />
                                         </div>
-                                        
-                                        
+
+
                                         <Separator className="my-3 bg-black" />
-                                        
+
                                         {/* Agent Information */}
-                                        
+
                                         <div className="grid grid-cols-[80px_1fr_40px] mb-2 items-center gap-6">
                                             <h1 className="font-semibold text-app-base-lg">Referred By</h1>
-                                            <AgentSearchFeature/>
+                                            <AgentSearchFeature />
                                             <AgentForm button={
                                                 <Button className="!py-0.5 h-8 !px-2" variant={'default'}>
-                                                <Plus size={20} className="cursor-pointer" />
+                                                    <Plus size={20} className="cursor-pointer" />
                                                 </Button>
                                             } />
                                         </div>
@@ -226,7 +226,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 </div>
                                                 <div className="grid grid-cols-[80px_1fr] items-center gap-4">
                                                     <div className="text-app-small">Comission:</div>
-                                                    <div className="font-bold">{patient?.agent != undefined ? <>{patient.agent?.commissionPercent}{' %'}</>   : <span className="font-light text-gray-400 text-app-small">Agent Comission</span>}</div>
+                                                    <div className="font-bold">{patient?.agent != undefined ? <>{patient.agent?.commissionPercent}{' %'}</> : <span className="font-light text-gray-400 text-app-small">Agent Comission</span>}</div>
                                                 </div>
                                             </div>
                                             <AgentForm
@@ -236,11 +236,11 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                                 action="Edit"
                                             />
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
-                                    <Button type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">
+                                    <Button disabled={isPending} type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">
                                         {isPending ? "Saving...." : action == "Edit" ? "Save and Use" : "Save"}
                                     </Button>
                                 </div>

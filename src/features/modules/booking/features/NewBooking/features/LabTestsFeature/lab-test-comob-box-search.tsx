@@ -16,7 +16,7 @@ import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } fr
 
 
 
-interface ILabTestOption{
+interface ILabTestOption {
     label: string,
     value: string
 }
@@ -25,20 +25,20 @@ interface ILabTestOption{
 
 
 const LabTestComboBoxSearch = () => {
-    const {data,isSuccess} = useGetAgentListQuery();
-    const {discountTypeId,setDiscountTypeId} = useBookingTest();
-    const {setSelectTestItemList,selectTestItemList,setLabTestItemList,labTestItemList} = useLabTestItem();
-    const {setTotalAmount,setNetAmount,selectedDiscount,setDiscountRate,setDiscountedAmount,setSelectedDiscount} = usePayment();
+    const { data, isSuccess } = useGetAgentListQuery();
+    const { discountTypeId, setDiscountTypeId } = useBookingTest();
+    const { setSelectTestItemList, selectTestItemList, setLabTestItemList, labTestItemList } = useLabTestItem();
+    const { setTotalAmount, setNetAmount, selectedDiscount, setDiscountRate, setDiscountedAmount } = usePayment();
     const totalAmountRef = useRef<number>(0);
-    const [testItemList,setTestItemList] = useState<ILabTestOption[]>([]);
+    const [testItemList, setTestItemList] = useState<ILabTestOption[]>([]);
     const [open, setOpen] = useState<boolean>(false)
     const [value, setValue] = useState<string>("");
 
 
-    useEffect(()=>{
-        if(isSuccess && data){
+    useEffect(() => {
+        if (isSuccess && data) {
             const labtestArr: ILabTestOption[] = [];
-            data.data.data.forEach((testItem)=>{
+            data.data.data.forEach((testItem) => {
                 const labTestObj: ILabTestOption = {
                     label: testItem.name,
                     value: `${testItem.id}`
@@ -48,7 +48,7 @@ const LabTestComboBoxSearch = () => {
             setTestItemList(labtestArr);
             setLabTestItemList(data.data.data);
         }
-    },[data,isSuccess]);
+    }, [data, isSuccess]);
 
     // const allIds =  Array.from(selectTestItemList.map((item)=> item.testId));
     // const filteredLabTestList = labTestItemList?.filter((item)=> !allIds.includes(item.id))?.filter((lab)=>
@@ -56,18 +56,18 @@ const LabTestComboBoxSearch = () => {
     // );
 
 
-    const handleSelectTest = (currentValue:string) =>{
+    const handleSelectTest = (currentValue: string) => {
         setValue(currentValue === value ? "" : currentValue);
         setOpen(false);
-        if(isSuccess && labTestItemList){
+        if (isSuccess && labTestItemList) {
             const test = labTestItemList.find((item) => item.id === Number(currentValue));
 
             if (!test) {
                 return toast.error("Test not found");
             }
 
-            const isMatch = selectTestItemList.some((item)=> item.testId == test.id);
-            if(isMatch){
+            const isMatch = selectTestItemList.some((item) => item.testId == test.id);
+            if (isMatch) {
                 return toast.error("Test already selected");
             }
             const testObj: ITestItem = {
@@ -78,34 +78,34 @@ const LabTestComboBoxSearch = () => {
                 amount: test.standardSellingPrice,
                 status: "active"
             }
-            setSelectTestItemList([...selectTestItemList,testObj]);
+            setSelectTestItemList([...selectTestItemList, testObj]);
             totalAmountRef.current = totalAmountRef.current + Number(test.standardSellingPrice);
 
             // amount calculation
-            setTotalAmount((prev)=> prev + Number(test.standardSellingPrice));
-            setNetAmount((prev)=> prev + Number(test.standardSellingPrice));
-            if(discountTypeId && discountTypeId > 1){
+            setTotalAmount((prev) => prev + Number(test.standardSellingPrice));
+            setNetAmount((prev) => prev + Number(test.standardSellingPrice));
+            if (discountTypeId && discountTypeId > 1) {
                 const isPercent = selectedDiscount.split(',')[0];
                 const value = selectedDiscount.split(',')[1];
                 const discountId = selectedDiscount.split(',')[2];
 
-                if(isPercent === "true"){
-                    const amount = calculateDiscountPercent(Number(value),totalAmountRef.current);
+                if (isPercent === "true") {
+                    const amount = calculateDiscountPercent(Number(value), totalAmountRef.current);
                     setDiscountedAmount(amount);
                     setDiscountRate(Number(value));
-                }else{
-                    const rate = calculateDiscountRate(Number(value),totalAmountRef.current);
+                } else {
+                    const rate = calculateDiscountRate(Number(value), totalAmountRef.current);
                     setDiscountRate(rate);
                     setDiscountedAmount(Number(value));
                 }
-                const discountedTotalAmount:number = calculateDiscount(isPercent,Number(value),totalAmountRef.current);
-                if(discountedTotalAmount == -1){
+                const discountedTotalAmount: number = calculateDiscount(isPercent, Number(value), totalAmountRef.current);
+                if (discountedTotalAmount == -1) {
                     setNetAmount(totalAmountRef.current);
                     setDiscountTypeId(1);
-                    setSelectedDiscount("none");
+                    // setSelectedDiscount("none");
                     toast.error("Discount not applied");
                     return
-                }else{
+                } else {
                     setNetAmount(discountedTotalAmount);
                     setDiscountTypeId(Number(discountId));
                     setDiscountRate(100);
@@ -113,7 +113,7 @@ const LabTestComboBoxSearch = () => {
             }
         }
 
-  
+
     }
 
 

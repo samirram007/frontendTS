@@ -35,7 +35,7 @@ const BookingDetailsHeader: React.FC<IBookingDetails> = ({data}) =>{
 
             {/* Recent Bokoing */}
             <div>
-                <div className="flex gap-4 items-center">
+                <div className="flex justify-end gap-4 items-center">
                     <div className="font-semibold text-base">{data?.voucherPatient.patient.name}</div>
                     <div className="border-1 border-gray-400 h-6"/>
                     <div className="text-gray-900 font-medium">{data?.voucherPatient.patient.age}</div>
@@ -44,7 +44,7 @@ const BookingDetailsHeader: React.FC<IBookingDetails> = ({data}) =>{
                     <div className="border-1 border-gray-400 h-6"/>
                     <div className="text-gray-900 font-medium">{data?.voucherPatient.patient.contactNo}</div>
                 </div>
-                <div className="flex mt-3 items-center  gap-3">
+                <div className="flex justify-end mt-3 items-center  gap-3">
                     <div className="font-bold">
                         Physician:
                     </div>
@@ -52,7 +52,7 @@ const BookingDetailsHeader: React.FC<IBookingDetails> = ({data}) =>{
                         <span className="text-gray-900 font-medium">{data?.voucherPatient.physician?.name}</span>
                     </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex justify-end items-center gap-3">
                     <div className="font-bold">
                         Referred By:
                     </div>

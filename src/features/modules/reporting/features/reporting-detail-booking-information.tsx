@@ -8,18 +8,19 @@ import { useJobOderMutation } from "../../booking/features/BookingDetails/data/q
 import { toast } from "sonner";
 import { bookingQueryOptions } from "../../booking/features/NewBooking/data/queryOptions";
 import { useQueryClient } from "@tanstack/react-query";
+import { formatDateMonthYearForInput } from "../../booking/utils/date-utils";
 
 
-const formatDateForInput = (dateString: string | Date | undefined | null) => {
-  if (dateString == undefined || null) return;
-  const date = new Date(dateString);
+// const formatDateForInput = (dateString: string | Date | undefined | null) => {
+//   if (dateString == undefined || null) return;
+//   const date = new Date(dateString);
 
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // months 0-11
-  const day = String(date.getDate()).padStart(2, '0');
+//   const year = date.getFullYear();
+//   const month = String(date.getMonth() + 1).padStart(2, '0'); // months 0-11
+//   const day = String(date.getDate()).padStart(2, '0');
 
-  return `${year}-${month}-${day}`;
-};
+//   return `${year}-${month}-${day}`;
+// };
 
 
 
@@ -157,7 +158,7 @@ export function ReportBookingInformation({ jobOrderData }: { jobOrderData?: JobO
                 <td style={{ border: "0px", padding: "3px" }}>Booking Date</td>
                 <td style={{ border: "0px", padding: "3px" }}>:</td>
                 <td style={{ border: "0px", padding: "3px" }}>
-                  {formatDateForInput(jobOrderData?.testBooking.voucherDate)}
+                  {formatDateMonthYearForInput(jobOrderData?.testBooking.voucherDate)}
                 </td>
               </tr>
 
@@ -196,7 +197,7 @@ export function ReportBookingInformation({ jobOrderData }: { jobOrderData?: JobO
                 <td style={{ border: "0px", padding: "3px" }}>Reporting Time</td>
                 <td style={{ border: "0px", padding: "3px" }}>:</td>
                 <td style={{ border: "0px", padding: "3px" }}>
-                  <span id="ReportingTime">{formatDateForInput(new Date())}</span>
+                  <span id="ReportingTime">{formatDateMonthYearForInput(new Date())}</span>
                 </td>
               </tr>
             </tbody>

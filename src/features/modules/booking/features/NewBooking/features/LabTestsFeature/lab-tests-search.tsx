@@ -15,40 +15,40 @@ import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } fr
 
 const LabTestSearch = () => {
 
-    const {data,isSuccess} = useGetAgentListQuery();
-    const {discountTypeId,setDiscountTypeId} = useBookingTest();
-    const {setLabTestItemList,labTestItemList,setSelectTestItemList,selectTestItemList} = useLabTestItem();
-    const {setTotalAmount,setNetAmount,selectedDiscount,setDiscountRate,setDiscountedAmount,setSelectedDiscount} = usePayment();
+    const { data, isSuccess } = useGetAgentListQuery();
+    const { discountTypeId, setDiscountTypeId } = useBookingTest();
+    const { setLabTestItemList, labTestItemList, setSelectTestItemList, selectTestItemList } = useLabTestItem();
+    const { setTotalAmount, setNetAmount, selectedDiscount, setDiscountRate, setDiscountedAmount } = usePayment();
     const totalAmountRef = useRef<number>(0);
     const [highlightIndex, setHighlightIndex] = useState<number>(-1);
 
-    const [query,setQuery] = useState<string>("");
-    const [showDropdown,setShowDropdown] = useState<boolean>(false);
+    const [query, setQuery] = useState<string>("");
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
-    useEffect(()=>{
-        if(isSuccess){
+    useEffect(() => {
+        if (isSuccess) {
             setLabTestItemList(data.data.data);
         }
-    },[isSuccess,data]);
-    
+    }, [isSuccess, data]);
 
 
-    const handleLabSearch = (e:React.ChangeEvent<HTMLInputElement>) =>{
+
+    const handleLabSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
         setShowDropdown(true);
         setHighlightIndex(-1);
     }
 
     // getting all ids of selected test items and filtering them out
-    const allIds =  Array.from(selectTestItemList.map((item)=> item.testId));
-    const filteredLabTestList = labTestItemList?.filter((item)=> !allIds.includes(item.id))?.filter((lab)=>
+    const allIds = Array.from(selectTestItemList.map((item) => item.testId));
+    const filteredLabTestList = labTestItemList?.filter((item) => !allIds.includes(item.id))?.filter((lab) =>
         lab.name.toLowerCase().includes(query.toLowerCase())
     );
 
-    const handleSelectTest = (test: ILabTestItem) =>{
+    const handleSelectTest = (test: ILabTestItem) => {
         setShowDropdown(false);
-        const isMatch = selectTestItemList.some((item)=> item.testId == test.id);
-        if(isMatch){
+        const isMatch = selectTestItemList.some((item) => item.testId == test.id);
+        if (isMatch) {
             return toast.error("Test already selected");
         }
         const testObj: ITestItem = {
@@ -59,36 +59,36 @@ const LabTestSearch = () => {
             amount: test.standardSellingPrice,
             status: "active"
         }
-        setSelectTestItemList([...selectTestItemList,testObj]);
+        setSelectTestItemList([...selectTestItemList, testObj]);
         setQuery("");
         totalAmountRef.current = totalAmountRef.current + Number(test.standardSellingPrice);
         // amount calculation
-        setTotalAmount((prev)=> prev + Number(test.standardSellingPrice));
-        setNetAmount((prev)=> prev + Number(test.standardSellingPrice));
+        setTotalAmount((prev) => prev + Number(test.standardSellingPrice));
+        setNetAmount((prev) => prev + Number(test.standardSellingPrice));
 
-        
-        if(discountTypeId && discountTypeId > 1){
+
+        if (discountTypeId && discountTypeId > 1) {
             const isPercent = selectedDiscount.split(',')[0];
             const value = selectedDiscount.split(',')[1];
             const discountId = selectedDiscount.split(',')[2];
 
-            if(isPercent === "true"){
-                const amount = calculateDiscountPercent(Number(value),totalAmountRef.current);
+            if (isPercent === "true") {
+                const amount = calculateDiscountPercent(Number(value), totalAmountRef.current);
                 setDiscountedAmount(amount);
                 setDiscountRate(Number(value));
-            }else{
-                const rate = calculateDiscountRate(Number(value),totalAmountRef.current);
+            } else {
+                const rate = calculateDiscountRate(Number(value), totalAmountRef.current);
                 setDiscountRate(rate);
                 setDiscountedAmount(Number(value));
             }
-            const discountedTotalAmount:number = calculateDiscount(isPercent,Number(value),totalAmountRef.current);
-            if(discountedTotalAmount == -1){
+            const discountedTotalAmount: number = calculateDiscount(isPercent, Number(value), totalAmountRef.current);
+            if (discountedTotalAmount == -1) {
                 setNetAmount(totalAmountRef.current);
                 setDiscountTypeId(1);
-                setSelectedDiscount("none");
+                // setSelectedDiscount("none");
                 toast.error("Discount not applied");
                 return
-            }else{
+            } else {
                 setNetAmount(discountedTotalAmount);
                 setDiscountTypeId(Number(discountId));
                 setDiscountRate(100);
@@ -97,20 +97,20 @@ const LabTestSearch = () => {
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(!showDropdown || filteredLabTestList.length == 0) return;
+        if (!showDropdown || filteredLabTestList.length == 0) return;
 
-        if(e.key == "ArrowDown"){
+        if (e.key == "ArrowDown") {
             e.preventDefault();
-            setHighlightIndex((prev) => prev <filteredLabTestList.length - 1 ? prev + 1: 0);
-        }else if(e.key == "ArrowUp"){
+            setHighlightIndex((prev) => prev < filteredLabTestList.length - 1 ? prev + 1 : 0);
+        } else if (e.key == "ArrowUp") {
             e.preventDefault();
             setHighlightIndex((prev) => prev > 0 ? prev - 1 : filteredLabTestList.length - 1);
-        }else if(e.key == "Enter"){
+        } else if (e.key == "Enter") {
             e.preventDefault();
-            if(highlightIndex >= 0){
+            if (highlightIndex >= 0) {
                 handleSelectTest(filteredLabTestList[highlightIndex]);
             }
-        }else if(e.key == "Escape"){
+        } else if (e.key == "Escape") {
             e.preventDefault();
             setShowDropdown(false);
         }

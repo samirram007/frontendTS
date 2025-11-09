@@ -15,37 +15,37 @@ import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } fr
 
 const LabTestList = () => {
 
-    const {selectTestItemList,setSelectTestItemList} = useLabTestItem();
-    const {discountTypeId,setDiscountTypeId} = useBookingTest();
-    const {totalAmount,setTotalAmount,setNetAmount,discountedAmount,setSelectedDiscount,setDiscountRate,setDiscountedAmount,selectedDiscount} = usePayment();
+    const { selectTestItemList, setSelectTestItemList } = useLabTestItem();
+    const { discountTypeId, setDiscountTypeId } = useBookingTest();
+    const { totalAmount, setTotalAmount, setNetAmount, discountedAmount, setDiscountRate, setDiscountedAmount, selectedDiscount } = usePayment();
     const totalAmountRef = useRef<number>(totalAmount);
 
-    useEffect(()=>{
-        totalAmountRef.current = totalAmount;   
-    },[totalAmount]);
+    useEffect(() => {
+        totalAmountRef.current = totalAmount;
+    }, [totalAmount]);
 
 
     // on change of test date reporting date will change
-    const handleTestDateChange = (id:number,e:React.HTMLInputTypeAttribute)=>{
-        const selectedTests = selectTestItemList.map((item)=> item.testId == id ? {...item,testDate: new Date(e)} : item);
+    const handleTestDateChange = (id: number, e: React.HTMLInputTypeAttribute) => {
+        const selectedTests = selectTestItemList.map((item) => item.testId == id ? { ...item, testDate: new Date(e) } : item);
         setSelectTestItemList(selectedTests);
     }
 
     // on report date change
-    const handleReportDateChange = (id:number,e:React.HTMLInputTypeAttribute)=>{
-        const selectedTests = selectTestItemList.map((item)=> item.testId == id ? {...item,reportDate: new Date(e)} : item);
+    const handleReportDateChange = (id: number, e: React.HTMLInputTypeAttribute) => {
+        const selectedTests = selectTestItemList.map((item) => item.testId == id ? { ...item, reportDate: new Date(e) } : item);
         setSelectTestItemList(selectedTests);
     }
 
     // on adding or removing lab tests
-    const handleMinusTest = (id:number) =>{
-        const remaningList = selectTestItemList.filter((item)=> item.testId != id);
+    const handleMinusTest = (id: number) => {
+        const remaningList = selectTestItemList.filter((item) => item.testId != id);
         const amount = selectTestItemList.filter((item) => item.testId == id)[0].amount;
         const remainingAmount = totalAmount - Number(amount);
         setSelectTestItemList(remaningList);
         // if discount amount is greater than total
-        if(remainingAmount < discountedAmount){
-            setSelectedDiscount("none");
+        if (remainingAmount < discountedAmount) {
+            // setSelectedDiscount("none");
             setTotalAmount((prev) => prev - Number(amount));
             setNetAmount(remainingAmount);
             setDiscountRate(100);
@@ -54,37 +54,37 @@ const LabTestList = () => {
             toast.error("Discount have been denied due to inappropriate amount");
             return;
         }
-       
+
         // amount calculation
         setTotalAmount((prev) => prev - Number(amount));
-        setNetAmount((prev)=> prev - Number(amount));
+        setNetAmount((prev) => prev - Number(amount));
 
         totalAmountRef.current = totalAmountRef.current - Number(amount);
 
         // discount calculation
-        if(discountTypeId && discountTypeId > 1){
+        if (discountTypeId && discountTypeId > 1) {
             const isPercent = selectedDiscount.split(',')[0];
             const value = selectedDiscount.split(',')[1];
             const discountId = selectedDiscount.split(',')[2];
 
-            if(isPercent === "true"){
-                const amount = calculateDiscountPercent(Number(value),totalAmountRef.current);
+            if (isPercent === "true") {
+                const amount = calculateDiscountPercent(Number(value), totalAmountRef.current);
                 setDiscountedAmount(amount);
                 setDiscountRate(Number(value));
-            }else{
-                const rate = calculateDiscountRate(Number(value),totalAmountRef.current);
+            } else {
+                const rate = calculateDiscountRate(Number(value), totalAmountRef.current);
                 setDiscountRate(rate);
                 setDiscountedAmount(Number(value));
             }
 
-            const discountedTotalAmount:number = calculateDiscount(isPercent,Number(value),totalAmountRef.current);
-            if(discountedTotalAmount == -1){
+            const discountedTotalAmount: number = calculateDiscount(isPercent, Number(value), totalAmountRef.current);
+            if (discountedTotalAmount == -1) {
                 setNetAmount(totalAmountRef.current);
                 setDiscountTypeId(1);
-                setSelectedDiscount("none");
+                // setSelectedDiscount("none");
                 toast.error("Discount not applied");
                 return
-            }else{
+            } else {
                 setNetAmount(discountedTotalAmount);
                 setDiscountTypeId(Number(discountId));
             }

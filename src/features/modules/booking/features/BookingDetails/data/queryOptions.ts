@@ -1,13 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import type { IBookingPaymentSchema, IJobOrderStoreSchema } from "./schema";
-import { storeBookingPaymentService, storeJobOrderService, updateJobOrderService } from "./api";
+import { deleteRequestTest, storeBookingPaymentService, storeJobOrderService, updateJobOrderService } from "./api";
 import { showErrors } from "@/utils/dataClient";
 
 
 export function useBookingPaymentMutation() {
-    
-
-
     return useMutation({
         mutationFn: async (data: IBookingPaymentSchema) => {
             // if (data.id != 0 && data.id != undefined) {
@@ -19,7 +16,20 @@ export function useBookingPaymentMutation() {
         },
         onError: (error) => {
             showErrors(error);
-            
+
+        },
+    })
+}
+
+
+export function useTestBookingCancelMutation() {
+    return useMutation({
+        mutationFn: async (id: number) => {
+            return await deleteRequestTest(id);
+        },
+        onError: (error) => {
+            showErrors(error);
+
         },
     })
 }
@@ -36,7 +46,7 @@ export function useJobOderMutation() {
         },
         onError: (error) => {
             showErrors(error);
-            
+
         },
     })
 }

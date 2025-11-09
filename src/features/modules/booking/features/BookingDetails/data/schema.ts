@@ -1,29 +1,30 @@
 import type { IResponseInterface } from "../../../data/schema";
+import type { IStockCategory, IStockItem, IVoucherPatient } from "../../NewBooking/data/schema";
 
 
 
 
-export interface IBookingPaymentSchema{
-    voucherId:number,
-    amount:number,
-    patientId : number,
-    paymentMode:number
+export interface IBookingPaymentSchema {
+    voucherId: number,
+    amount: number,
+    patientId: number,
+    paymentMode: number
 }
 
 export enum JobStatus {
-  Booked = 'Booked',
-  SampleCollected = 'SampleCollected',
-  InProcess = 'InProcess',
-  Completed = 'Completed',
-  Delivered = 'Delivered',
-  Cancelled = 'Cancelled',
-  Drafted = 'Drafted',
+    Booked = 'Booked',
+    SampleCollected = 'SampleCollected',
+    InProcess = 'InProcess',
+    Completed = 'Completed',
+    Delivered = 'Delivered',
+    Cancelled = 'Cancelled',
+    Drafted = 'Drafted',
 }
 
 
 
-export interface IJobOrderStoreSchema{
-    id?:number,
+export interface IJobOrderStoreSchema {
+    id?: number,
     stockJournalEntryId: number,
     stockJournalId?: number,
     stockItemId: number,
@@ -34,11 +35,36 @@ export interface IJobOrderStoreSchema{
 }
 
 export interface IJobOrderResponse extends IResponseInterface {
-    data:{
+    data: {
         id: number;
         stockJournalEntryId: number;
         status: string;
         stockItemId: number;
     }
 
+}
+
+
+
+export interface IDepartmentData {
+    stockItem: IStockItem,
+    stockCategory: IStockCategory,
+    voucherNo: string,
+    testDate: Date,
+    reportDate: Date,
+    voucherDate: string,
+    voucherPatient: IVoucherPatient | undefined,
+}
+
+// department slip interface
+export interface IDepartmentSlipData {
+    categoryName: string,
+    data: IDepartmentData[]
+}
+
+
+export interface ITestCancellationResponse {
+    status: boolean,
+    code: number,
+    message: string
 }
