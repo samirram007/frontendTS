@@ -22,6 +22,7 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
 import type { Godown } from "@/features/modules/godown/data/schema"
+import { FaSignOutAlt } from "react-icons/fa"
 import type { StockJournalGodownEntryForm } from "../../data/schema"
 
 interface GodownComboboxProps {
@@ -46,8 +47,12 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
     };
     const frameworks = [
         {
-            label: "End Selection", value: "-1",
-            className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
+            label: (
+                <div className="flex items-center justify-end gap-2 text-red-600 hover:text-red-800 font-medium">
+                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Godown Entries
+                </div>
+            ), value: "-1",
+            className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
         },
         ...(godowns?.map((godown: Godown) => ({
             label: capitalizeAllWords(godown.name!),
@@ -57,7 +62,8 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
     ];
 
     const selected = frameworks.find((o) => o.value === selectedId)
-    const selectedLabel = selected ? (selected?.label + ` - ` + selected?.value) : 'Select godown'
+    console.log("SELECTED GODOWN: ", selectedId, selected)
+    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select godown') : 'Select godown'
 
 
     return (
@@ -76,7 +82,7 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search item..." />
+                    <CommandInput placeholder="Search godown..." />
                     <CommandList>
                         <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>

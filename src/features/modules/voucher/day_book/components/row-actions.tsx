@@ -1,22 +1,27 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
+import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
 import { useDayBook } from "../contexts/day_book-context"
-import type { DayBook } from "../data/schema"
+import type { DayBookSchema } from "../data/schema"
 
 
 interface DataTableRowActionsProps {
-    row: Row<DayBook>
+    row: Row<DayBookSchema>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
     const { setOpen, setCurrentRow } = useDayBook()
+    const navigate = useNavigate()
     const { row } = props
     return (
-        <DataTableRowActions<DayBook>
+        <DataTableRowActions<DayBookSchema>
             row={row}
             onEdit={(data) => {
-                setCurrentRow(data)
-                setOpen("edit")
+                // setCurrentRow(data) 
+                const voucherType = data?.voucherType?.name.toLowerCase().replaceAll(" ", "_")
+                navigate({
+                    to: `/transactions/vouchers/${voucherType}/${data.id}`,
+                });
             }}
             onDelete={(data) => {
                 setCurrentRow(data)

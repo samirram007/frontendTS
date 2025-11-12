@@ -21,6 +21,7 @@ import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
+import { FaSignOutAlt } from "react-icons/fa"
 import type { StockJournalEntryForm } from "../../data/schema"
 
 
@@ -86,7 +87,11 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
 
     const frameworks = [
         {
-            label: "End Selection", value: "-1",
+            label: (
+                <div className="flex items-center justify-end gap-2 text-red-600 hover:text-red-800 font-medium">
+                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Item Entries
+                </div>
+            ), value: "-1",
             className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
         },
         ...(stockItems?.map((stockItem: StockItem) => ({
@@ -97,7 +102,7 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
     ];
 
     const selected = frameworks.find((o) => o.value === selectedId)
-    const selectedLabel = selected ? (selected?.label + ` - ` + selected?.value) : 'Select item'
+    const selectedLabel = selected ? (selected?.label.toString()) : 'Select item'
 
 
 

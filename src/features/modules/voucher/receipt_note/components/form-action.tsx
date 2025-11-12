@@ -2,20 +2,19 @@
 import { useFormContext } from "react-hook-form"
 
 import { Input } from '@/components/ui/input'
-import type { ReceiptNote } from '../data/schema'
 import { type ReceiptNoteForm } from '../data/schema'
 
 import FormInputField from '@/components/form-input-field'
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import type { ReceiptNoteProps } from "../pos/contracts"
 import { StockJournalComponent } from "./stock-journal/stock-journal-component"
 import PartyLedgerForm from "./sub-component/party-ledger-form"
 import PurchaseLedgerForm from "./sub-component/purchase-ledger-form"
 
 
-export interface ReceiptNoteProps {
-    currentRow?: ReceiptNote
-}
+
+
 
 const FormAction = ({ currentRow }: ReceiptNoteProps) => {
     // const isEdit = !!currentRow

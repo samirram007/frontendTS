@@ -11,7 +11,7 @@ const PosJournalEntryGodownContext = createContext<PosJournalEntryGodownContextT
 
 export const PosJournalEntryGodownProvider = ({ children }: { children: React.ReactNode }) => {
     const addGodownEntryButtonRef = React.useRef<HTMLButtonElement>(null)
-    const [addGodownButtonVisible, setAddGodownButtonVisible] = React.useState<boolean>(true)
+    const [addGodownButtonVisible, setAddGodownButtonVisible] = React.useState<boolean>(false)
 
     return (
         <PosJournalEntryGodownContext

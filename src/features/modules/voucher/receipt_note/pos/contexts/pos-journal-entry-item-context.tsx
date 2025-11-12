@@ -11,7 +11,7 @@ const PosJournalEntryItemContext = createContext<PosJournalEntryItemContextType 
 
 export const PosJournalEntryItemProvider = ({ children }: { children: React.ReactNode }) => {
     const addItemEntryButtonRef = React.useRef<HTMLButtonElement>(null)
-    const [addItemButtonVisible, setAddItemButtonVisible] = React.useState<boolean>(true)
+    const [addItemButtonVisible, setAddItemButtonVisible] = React.useState<boolean>(false)
 
     return (
         <PosJournalEntryItemContext

@@ -7,7 +7,7 @@ import { z } from 'zod';
 export const stockJournalGodownEntrySchema = z.object({
   id: z.number().int().positive().nullish(),
   stockJournalEntryId: z.number().int().positive().nullish(),  
-  godownId: z.number(),
+  godownId: z.number().int().positive().nullish(),
   batchNo: z.string().nullish(),
   mfgDate: z.coerce.date().nullish(),
   expDate: z.coerce.date().nullish(),
@@ -113,7 +113,7 @@ export const receiptNoteSchema = z.object({
   amount: z.coerce.number().nullish(),  
   remarks: z.string().nullish()
 })
-export type ReceiptNote = z.infer<typeof receiptNoteSchema>
+export type ReceiptNoteSchema = z.infer<typeof receiptNoteSchema>
 export const receiptNoteListSchema = z.array(receiptNoteSchema)
 export type ReceiptNoteList = z.infer<typeof receiptNoteListSchema>
 

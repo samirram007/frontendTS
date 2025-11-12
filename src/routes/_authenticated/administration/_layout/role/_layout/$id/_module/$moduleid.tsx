@@ -36,7 +36,7 @@ export const Route = createFileRoute(
     stringify: ({ id, moduleid }) => ({ id: `${id}`, moduleid: `${moduleid}` }),
   },
   loader: ({ context, params: { id, moduleid } }) => {
-    // console.log("🚀 Loader params:", id, moduleid, params, typeof params)
+
     if (id === "new") return null
     if (moduleid === "new") return null
     return context.queryClient.ensureQueryData(appModuleFeatureRoleQueryOptions(id, moduleid))

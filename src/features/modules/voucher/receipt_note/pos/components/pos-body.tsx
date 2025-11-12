@@ -55,7 +55,7 @@ const PosBody = () => {
         return () => subscription.unsubscribe();
     }, [receiptNoteForm, stockJournalForm]);
 
-    console.log("PosBody Level: ", receiptNoteForm.watch("stockJournal"), stockJournalForm.watch("stockJournalEntries"));
+    // console.log("PosBody Level: ", receiptNoteForm.watch("stockJournal"), stockJournalForm.watch("stockJournalEntries"));
     return (
         <div className="flex flex-col w-full gap-0   items-start overflow-y-scroll px-2  ">
             <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">

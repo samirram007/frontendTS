@@ -99,7 +99,7 @@ type DateBoxProps = {
 }
 
 const DateBox = (props: DateBoxProps) => {
-    const { form, name, tabIndex } = props;
+    const { form, name, } = props;
     const [displayValue, setDisplayValue] = useState<string | null>("");
 
     const parseAndFormatDate = (input: string): Date | null => {

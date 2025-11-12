@@ -24,7 +24,7 @@ import {
   type VisibilityState,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import type { DayBook } from '../data/schema'
+import type { DayBookSchema } from '../data/schema'
 
 
 declare module '@tanstack/react-table' {
@@ -35,8 +35,8 @@ declare module '@tanstack/react-table' {
 }
 
 interface DataTableProps {
-  columns: ColumnDef<DayBook>[]
-  data: DayBook[]
+  columns: ColumnDef<DayBookSchema>[]
+  data: DayBookSchema[]
 }
 
 export function GridTable({ columns, data }: DataTableProps) {

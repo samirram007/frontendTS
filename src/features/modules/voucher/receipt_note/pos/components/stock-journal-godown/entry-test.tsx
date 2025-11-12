@@ -2,6 +2,7 @@ import FormInputField from "@/components/form-input-field";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import type { Godown } from "@/features/modules/godown/data/schema";
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
@@ -29,24 +30,46 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
 
     const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
     const entryPath = `stockJournalGodownEntries.${index}` as const;
+    console.log(stockJournalEntryForm.watch(entryPath));
 
-    const stockJournalGodownEntryForm = useForm<StockJournalGodownEntryForm>(
-        {
-            resolver: zodResolver(stockJournalGodownEntrySchema),
-            defaultValues: {
-                ...(stockJournalEntryForm.watch(entryPath) ?? stockJournalGodownEntryDefaultValues),
-                stockItem: stockItem,
-                actualQuantity: 0,
-                billingQuantity: 0,
-                rate: stockItem?.standardCost!,
-                mfgDate: stockJournalGodownEntryDefaultValues.mfgDate ? new Date(stockJournalGodownEntryDefaultValues.mfgDate) : undefined,
-                expDate: stockJournalGodownEntryDefaultValues.expDate ? new Date(stockJournalGodownEntryDefaultValues.expDate) : undefined,
-                rateUnit: stockItem?.stockUnit!,
-            },
-            mode: "onChange",
-        });
-
-
+    //     {
+    //         resolver: zodResolver(stockJournalGodownEntrySchema),
+    //         defaultValues: {
+    //             ...(stockJournalEntryForm.watch(entryPath) ?? stockJournalGodownEntryDefaultValues),
+    //             stockItem: stockItem,
+    //             actualQuantity: 0,
+    //             billingQuantity: 0,
+    //             rate: stockItem?.standardCost!,
+    //             mfgDate: stockJournalGodownEntryDefaultValues.mfgDate ? new Date(stockJournalGodownEntryDefaultValues.mfgDate) : undefined,
+    //             expDate: stockJournalGodownEntryDefaultValues.expDate ? new Date(stockJournalGodownEntryDefaultValues.expDate) : undefined,
+    //             rateUnit: stockItem?.stockUnit!,
+    //         },
+    //         mode: "onChange",
+    //     });
+    const defaultValues = useMemo(() => {
+        const base = stockJournalEntryForm.watch(entryPath) ?? stockJournalGodownEntryDefaultValues;
+        console.log("base", base)
+        return {
+            ...base,
+            stockItem: base.stockItem ?? stockItem,
+            actualQuantity: base.actualQuantity ?? 0,
+            billingQuantity: base.billingQuantity ?? 0,
+            rate: base.rate ?? stockItem?.standardCost!,
+            discountPercentage: base.discountPercentage ?? 0,
+            discount: base.amount ?? 0,
+            amount: base.amount ?? 0,
+            batchNo: base.batchNo ?? '',
+            mfgDate: base.mfgDate ? new Date(base.mfgDate) : undefined,
+            expDate: base.expDate ? new Date(base.expDate) : undefined,
+            rateUnit: stockJournalEntryForm.watch("rateUnit") ?? stockItem?.stockUnit!,
+        };
+        // Only recompute when entryPath changes (e.g., switching edit item)
+    }, [entryPath]);
+    const stockJournalGodownEntryForm = useForm<StockJournalGodownEntryForm>({
+        resolver: zodResolver(stockJournalGodownEntrySchema),
+        defaultValues,
+        mode: "onChange",
+    });
     const rateUnitRatio = stockJournalEntryForm.watch("rateUnitRatio") ?? 1;
     // const actualQuantity = stockJournalGodownEntryForm.watch("actualQuantity") ?? 1;
     // stockJournalGodownEntryForm.setValue("billingQuantity", actualQuantity * rateUnitRatio, { shouldValidate: true });
@@ -93,21 +116,29 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                     <div className="grid grid-rows-2    border-0!">
                         <div className="border-b-0! w-full  ">
                             <FormInputField type='text' form={stockJournalGodownEntryForm}
-                                label='Batch No'
-                                noLabel
-                                gapClass="grid-cols-[1fr] gap-0  "
+                                label='Batch: '
+                                gapClass="grid grid-cols-[40px_1fr] gap-0  "
                                 name="batchNo" />
                         </div>
                         <div className="flex flex-col justify-start">
 
-                            <div className="grid grid-cols-2 items-center justify-start   px-1">
-                                <div className="border-y-0! border-x-0! px-1 ">
+                            <div className="grid grid-cols-2 items-center justify-start  ">
+                                <div className="border-y-0! border-x-0! pr-1 ">
+                                    <div className="grid grid-cols-[30px_1fr] justify-start items-center">
+                                        <Label>
+                                            Mfg:
+                                        </Label>
                                     <DateBox form={stockJournalGodownEntryForm} name="mfgDate" />
+                                    </div>
 
                                 </div>
-                                <div className="border-y-0! border-r-0!   px-1">
-
+                                <div className="border-y-0! border-r-0!   pl-2">
+                                    <div className="grid grid-cols-[30px_1fr] justify-end items-center">
+                                        <Label>
+                                            Exp:
+                                        </Label>
                                     <DateBox form={stockJournalGodownEntryForm} name="expDate" />
+                                    </div> 
                                 </div>
                             </div>
                         </div>
@@ -115,6 +146,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                     <div className="grid grid-rows-1 border-0!">
                         <div className="grid grid-cols-2 items-start">
                             <div className="border-y-0! border-x-0!  ">
+
                                 <QuantityBox
                                     form={stockJournalGodownEntryForm}
                                     stockUnits={stockUnits}
@@ -217,11 +249,15 @@ type DateBoxProps = {
 
 const DateBox = (props: DateBoxProps) => {
     const { form, name } = props;
-    const [displayValue, setDisplayValue] = useState<string | null>("");
+    const [displayValue, setDisplayValue] = useState<string | null>(form.getValues(name)?.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }));
 
     const parseAndFormatDate = (input: string): Date | null => {
         if (!input) return null;
-
+        console.log("INPUT: ", name, input)
         const now = new Date();
         const parts = input.split(/[./-]/).map(p => p.trim());
 
@@ -240,6 +276,8 @@ const DateBox = (props: DateBoxProps) => {
 
         return new Date(year, month, day);
     };
+
+
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -276,7 +314,7 @@ const DateBox = (props: DateBoxProps) => {
     };
     return (
         <>
-            {/* {form.watch(name)} {displayValue} */}
+
             <Input
                 type="text"
                 placeholder="__-__-____"
@@ -623,7 +661,7 @@ const QuantityBox = (props: QuantityBoxProps) => {
             setBoxValue("");
         }
     }, [form.watch(name), baseUnitCode]);
-
+    console.log("actualQuantity: ", form.watch(name))
     return (
         <>
             <Input
@@ -641,7 +679,7 @@ const QuantityBox = (props: QuantityBoxProps) => {
                 name={name} />
             {/* {alternateUnitValue && <div>({alternateUnitValue})</div>} */}
             {conversionFactors.length > 1 && (
-                <div className="text-xs  text-gray-500 mt-0 space-y-0 gap-0 flex flex-col justify-start items-end ">
+                <div className="pr-1 text-xs  text-gray-500 mt-0 space-y-0 gap-0 flex flex-col justify-start items-end ">
 
                     {conversionFactors.map((cf, index) => (
                         !cf.isBaseUnit && <span key={index} className="mx-2">

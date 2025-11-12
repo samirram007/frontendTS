@@ -32,7 +32,7 @@ export const dayBookSchema: z.ZodType<any> = z.object({
 
 })
 
-export type DayBook = z.infer<typeof dayBookSchema>
+export type DayBookSchema = z.infer<typeof dayBookSchema>
 
 export const dayBookListSchema = z.array(dayBookSchema)
 export type DayBookList = z.infer<typeof dayBookListSchema>

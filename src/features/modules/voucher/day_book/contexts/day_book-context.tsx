@@ -1,6 +1,7 @@
 import useDialogState from '@/core/hooks/use-dialog-state'
 import React, { useState } from 'react'
-import type { DayBook } from '../data/schema'
+import type { DayBookSchema } from '../data/schema'
+
 
 
 
@@ -9,8 +10,8 @@ type DayBookDialogType = 'invite' | 'add' | 'edit' | 'delete'
 interface DayBookContextType {
   open: DayBookDialogType | null
   setOpen: (str: DayBookDialogType | null) => void
-  currentRow: DayBook | null
-  setCurrentRow: React.Dispatch<React.SetStateAction<DayBook | null>>
+  currentRow: DayBookSchema | null
+  setCurrentRow: React.Dispatch<React.SetStateAction<DayBookSchema | null>>
   keyName: string
 }
 
@@ -22,7 +23,7 @@ interface Props {
 
 export default function DayBookProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<DayBookDialogType>(null)
-  const [currentRow, setCurrentRow] = useState<DayBook | null>(null)
+  const [currentRow, setCurrentRow] = useState<DayBookSchema | null>(null)
 
   return (
     <DayBookContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "day_books" }}>

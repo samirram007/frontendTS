@@ -1,32 +1,48 @@
+import FormInputField from '@/components/form-input-field';
 import { Button } from '@/components/ui/button';
 import { useFormContext } from 'react-hook-form';
+import { useReceiptNoteMutation } from '../../data/queryOptions';
 import type { ReceiptNoteForm } from '../../data/schema';
 
 
 const PosFooter = () => {
-    const form = useFormContext<ReceiptNoteForm>();
-
-    const total = form.watch("stockJournal.stockJournalEntries")?.reduce((acc, entry) => acc + (entry?.amount || 0), 0) || 0;
-    console.log("total: ", total)
+    const mainForm = useFormContext<ReceiptNoteForm>();
+    const { mutate: createReceiptNote, isPending } = useReceiptNoteMutation();
+    const { watch } = mainForm;
+    const total = watch("stockJournal.stockJournalEntries")?.reduce((acc, entry) => acc + (entry?.amount || 0), 0) || 0;
+    // console.log("total: ", total)
     // const total = form.getValues("stockJournal.stockJournalEntries")?.reduce((acc, entry) => acc + (entry.amount || 0), 0) || 0;
-    console.log("Footer Level", form.watch('stockJournal'))
+    // console.log("Footer Level", mainForm.getValues())
 
     return (
-        <div className="bg-red-300/20 grid grid-cols-[1fr_1fr]">
+        <div className="bg-red-300/50 grid grid-cols-[1fr_1fr] px-8">
             <div className="grid ">
-                <div>
-                    <div className="text-sm">Narration:</div>
-                    <div contentEditable className="narration caret-accent caret-underscore caret-unde justify-self-end bg-black text-gray-100 w-full h-full text-sm  font-semibold  "></div>
-                </div>
-                <div className="narration"></div>
-            </div>
-            <div className="grid grid-rows-2 justify-end">
 
-                <div className="text-right">
-                    Total: {total ? total.toFixed(2) : 0}
+
+                <Button
+                    type="button" asChild>
+                    <FormInputField type="textarea" form={mainForm} gapClass={'grid grid-rows-2 grid-cols-1 gap-2 border-2 border-blue-700'} className="border-2 border-blue-700" name="narration" />
+                </Button>
+
+
+
+            </div>
+            <div className="grid grid-rows-[1fr_1fr] grid-cols-[1fr_140px] items-center  justify-end">
+
+                <div className="text-right font-bold  ">
+                    Total: {total ? Number(total).toFixed(2) : 0}
                 </div>
-                <div className="text-right">
-                    <Button type="submit">Save....</Button>
+                <div className="text-left pl-2">
+                    <Button
+                        type="button"
+                        variant="default"
+                        className="h-7 focus:bg-black focus:text-white"
+                        size="lg"
+                        disabled={isPending}
+                        onClick={() => {
+                            console.log('Form submitted', mainForm.getValues());
+                            createReceiptNote(mainForm.getValues());
+                        }}>Save....</Button>
                 </div>
             </div>
 

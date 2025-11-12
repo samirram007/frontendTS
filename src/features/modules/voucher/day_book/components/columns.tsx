@@ -8,10 +8,11 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
-import type { DayBook } from '../data/schema'
+
+import type { DayBookSchema } from '../data/schema'
 import RowActions from './row-actions'
 
-export const columns: ColumnDef<DayBook>[] = [
+export const columns: ColumnDef<DayBookSchema>[] = [
   {
     id: 'select',
     header: ({ table }) => (

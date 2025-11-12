@@ -3,9 +3,9 @@
 
 import { useTransaction } from '@/features/transactions/context/transaction-context';
 import { useEffect } from 'react';
-import type { ReceiptNoteProps } from './components/form-action';
-import Pos from './pos';
 
+import Pos from './pos';
+import type { ReceiptNoteProps } from './pos/contracts';
 
 
 

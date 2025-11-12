@@ -67,6 +67,12 @@ const StockJournalEntriesSection = () => {
 
     });
     const handleOnClickAddEntry = () => {
+        const lastEntry = fields[fields.length - 1];
+        if (lastEntry && Number(lastEntry.amount) === 0) {
+            stockJournalForm.setFocus(`stockJournalEntries.${fields.length - 1}.stockItem`);
+            return;
+        }
+
         append(stockJournalEntryDefaultValues as StockJournalEntryForm);
 
         setAddItemButtonVisible?.(false);
@@ -77,7 +83,7 @@ const StockJournalEntriesSection = () => {
     //         handleOnClickAddEntry();
     //     }
     // }, [])
-    console.log("Journal Entries Section", stockJournalForm.watch(), stockJournalForm.getValues('stockJournalEntries'))
+    // console.log("Journal Entries Section", stockJournalForm.watch(), stockJournalForm.getValues('stockJournalEntries'))
     return (
         <div className="">
             {fields.map((field, index) => (

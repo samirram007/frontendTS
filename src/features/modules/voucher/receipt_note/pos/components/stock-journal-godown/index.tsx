@@ -90,6 +90,15 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
 
     }, [JSON.stringify(stockJournalGodownEntries)]);
     const handleGodownEntryAdd = () => {
+        //get value with amount=0 then return to that entry and ignore append
+        const lastEntry = stockJournalGodownEntries[stockJournalGodownEntries.length - 1];
+        if (lastEntry && Number(lastEntry.amount) === 0) {
+            // console.log("GDGDG: ", fields.length - 1);
+            stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${stockJournalGodownEntries.length - 1}.amount`);
+            // props.handleOnClickItemAddEntry();
+            // remove(fields.length - 1);
+            return;
+        }
 
         append(stockJournalGodownEntryDefaultValues as StockJournalGodownEntryForm);
         setAddGodownButtonVisible?.(false);
@@ -113,7 +122,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
             computedTotals.discount !== currentValues[4] ||
             computedTotals.discountPercentage !== currentValues[5];
 
-        console.log("hasChanged", hasChanged)
+        // console.log("hasChanged", hasChanged)
         if (hasChanged) {
             stockJournalEntryForm.setValue("actualQuantity", computedTotals.actualQuantity);
             stockJournalEntryForm.setValue("billingQuantity", computedTotals.billingQuantity);
@@ -130,7 +139,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
     }, [props.stockItem])
     // console.log("HOW: ", stockJournalGodownEntries, stockJournalEntryForm.watch("stockJournalGodownEntries"));
     return (
-        <div className=" pl-24 w-full flex flex-col ">
+        <div className=" pl-24 ">
             {fields.map((field, index) => (
                 <div key={field.id} className="w-full flex  items-center gap-0">
                     <StockJournalGodownEntry key={field.id}
@@ -147,7 +156,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
             {
                 (addGodownButtonVisible || fields.length === 0) && props.stockItem && (
                     <button type="button" ref={addGodownEntryButtonRef}
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded my-2"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded my-2"
                         onClick={handleGodownEntryAdd}>
                         + Add GodownEntry
                     </button>)

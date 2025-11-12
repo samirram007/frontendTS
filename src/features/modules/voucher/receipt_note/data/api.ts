@@ -6,10 +6,12 @@ export async function fetchReceiptNoteService() {
     return await getData(API_PATH)
 }
 export async function fetchReceiptNoteByIdService(id: number) {
+    //console.log(`${API_PATH} / ${id}`)
     return await getData(`${API_PATH}/${id}`)
 }
 
 export async function storeReceiptNoteService(payload: any) {
+    console.log("payload", payload)
     return await postData(API_PATH, payload)
 }
 export async function updateReceiptNoteService(payload: any) {

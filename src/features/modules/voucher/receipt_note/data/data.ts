@@ -3,7 +3,7 @@ import type { ReceiptNoteForm } from "./schema";
 export const stockJournalGodownEntryDefaultValues = {
     id: null,
     stockJournalEntryId: null,
-    godownId: -1,
+    godownId: undefined,
     batchNo: '',
     mfgDate: null,
     expDate: null,
@@ -68,7 +68,7 @@ const receiptNoteDefaultValues: ReceiptNoteForm = {
     voucherDate: new Date(),
     referenceNo: "",
     referenceDate: null,
-    voucherTypeId: 1,
+    voucherTypeId: 2002,
     partyLedger: undefined,
     transactionLedger: undefined,
     stockJournalId: null,

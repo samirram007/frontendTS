@@ -23,7 +23,7 @@ import FormInputField from '@/components/form-input-field'
 
 import { Loader2 } from 'lucide-react'
 import { useDayBookMutation } from '../data/queryOptions'
-import { formSchema, type DayBook } from '../data/schema'
+import { formSchema, type DayBookSchema } from '../data/schema'
 import type { DayBookForm } from '../types/types'
 
 
@@ -32,7 +32,7 @@ import type { DayBookForm } from '../types/types'
 
 
 interface Props {
-  currentRow?: DayBook
+  currentRow?: DayBookSchema
   open: boolean
   onOpenChange: (open: boolean) => void
 }

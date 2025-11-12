@@ -190,8 +190,12 @@ textarea::selection {
     @apply focus:bg-indigo-500/10! focus:text-gray-50 focus:font-semibold focus:text-left;
     @apply focus:placeholder:text-gray-200;
   }
+  button[data-slot='popover-trigger']{
+    @apply hover:text-gray-400! hover:bg-gray-800!;
+  }
   [data-slot='command-input-wrapper'] input {
     @apply shadow-none;
+    @apply hover:text-white!;
     @apply focus:bg-transparent! focus:text-inherit! focus:font-normal!;
   }
 

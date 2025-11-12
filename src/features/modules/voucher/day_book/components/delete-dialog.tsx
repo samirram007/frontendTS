@@ -8,13 +8,13 @@ import { Label } from '@/components/ui/label'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
 import { useState } from 'react'
-import type { DayBook } from '../data/schema'
+import type { DayBookSchema } from '../data/schema'
 
 
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow: DayBook
+  currentRow: DayBookSchema
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {

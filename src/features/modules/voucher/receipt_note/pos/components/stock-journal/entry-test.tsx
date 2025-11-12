@@ -79,7 +79,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     if ([stockItems, godowns, stockUnits].some((r) => r.isLoading))
         return <Loader size={20} className="animate-spin" />;
 
-    console.log("THIS IS HOW: ", stockJournalForm.watch(), stockJournalEntryForm.watch("stockJournalGodownEntries"));
+    // console.log("THIS IS HOW: ", stockJournalForm.watch(), stockJournalEntryForm.watch("stockJournalGodownEntries"));
     return (
         <Form {...stockJournalEntryForm}>
             <div className="w-full grid grid-rows-1">
