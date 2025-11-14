@@ -60,7 +60,6 @@ import { Route as AuthenticatedTransactionsVouchersLayoutPhysical_stockIndexRout
 import { Route as AuthenticatedTransactionsVouchersLayoutPaymentIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/payment/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/manufacturing_journal/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutJournalIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/journal/index'
-import { Route as AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/delivery_note/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutContraIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/contra/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutTransfer_voucherIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/transfer_voucher/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutStock_journalIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/stock_journal/index'
@@ -75,7 +74,6 @@ import { Route as AuthenticatedTransactionsDay_bookLayoutPhysical_stockIndexRout
 import { Route as AuthenticatedTransactionsDay_bookLayoutPaymentIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/payment/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/manufacturing_journal/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutJournalIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/journal/index'
-import { Route as AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/delivery_note/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutContraIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/contra/index'
 import { Route as AuthenticatedMastersPayrollLayoutShiftIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/shift/index'
 import { Route as AuthenticatedMastersPayrollLayoutSalary_structureIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/salary_structure/index'
@@ -104,7 +102,9 @@ import { Route as AuthenticatedMastersAccountsLayoutAccount_natureIndexRouteImpo
 import { Route as AuthenticatedAdministrationLayoutUserLayoutIndexRouteImport } from './routes/_authenticated/administration/_layout/user/_layout/index'
 import { Route as AuthenticatedAdministrationLayoutRoleLayoutIndexRouteImport } from './routes/_authenticated/administration/_layout/role/_layout/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/receipt_note/_layout'
+import { Route as AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/delivery_note/_layout'
 import { Route as AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteImport } from './routes/_authenticated/transactions/day_book/_layout/receipt_note/_layout'
+import { Route as AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteImport } from './routes/_authenticated/transactions/day_book/_layout/delivery_note/_layout'
 import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout'
@@ -121,7 +121,9 @@ import { Route as AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutRouteImp
 import { Route as AuthenticatedMastersAccountsLayoutAccount_groupLayoutRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_group/_layout'
 import { Route as AuthenticatedAdministrationLayoutUserLayoutIdRouteImport } from './routes/_authenticated/administration/_layout/user/_layout/$id'
 import { Route as AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/index'
+import { Route as AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/index'
 import { Route as AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/receipt_note/_layout/index'
+import { Route as AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRouteImport } from './routes/_authenticated/transactions/day_book/_layout/delivery_note/_layout/index'
 import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/index'
@@ -137,7 +139,9 @@ import { Route as AuthenticatedMastersAccountsLayoutCustomerLayoutIndexRouteImpo
 import { Route as AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_ledger/_layout/index'
 import { Route as AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_group/_layout/index'
 import { Route as AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/$id'
+import { Route as AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRouteImport } from './routes/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/$id'
 import { Route as AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRouteImport } from './routes/_authenticated/transactions/day_book/_layout/receipt_note/_layout/$id'
+import { Route as AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRouteImport } from './routes/_authenticated/transactions/day_book/_layout/delivery_note/_layout/$id'
 import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/$id'
@@ -200,9 +204,17 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteImport =
   createFileRoute(
     '/_authenticated/transactions/vouchers/_layout/receipt_note',
   )()
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteImport =
+  createFileRoute(
+    '/_authenticated/transactions/vouchers/_layout/delivery_note',
+  )()
 const AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteImport =
   createFileRoute(
     '/_authenticated/transactions/day_book/_layout/receipt_note',
+  )()
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteImport =
+  createFileRoute(
+    '/_authenticated/transactions/day_book/_layout/delivery_note',
   )()
 const AuthenticatedMastersPayrollLayoutEmployeeRouteImport = createFileRoute(
   '/_authenticated/masters/payroll/_layout/employee',
@@ -534,10 +546,22 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteRoute =
     path: '/receipt_note',
     getParentRoute: () => AuthenticatedTransactionsVouchersLayoutRoute,
   } as any)
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteImport.update({
+    id: '/delivery_note',
+    path: '/delivery_note',
+    getParentRoute: () => AuthenticatedTransactionsVouchersLayoutRoute,
+  } as any)
 const AuthenticatedTransactionsDay_bookLayoutReceipt_noteRoute =
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteImport.update({
     id: '/receipt_note',
     path: '/receipt_note',
+    getParentRoute: () => AuthenticatedTransactionsDay_bookLayoutRoute,
+  } as any)
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteImport.update({
+    id: '/delivery_note',
+    path: '/delivery_note',
     getParentRoute: () => AuthenticatedTransactionsDay_bookLayoutRoute,
   } as any)
 const AuthenticatedMastersPayrollLayoutEmployeeRoute =
@@ -752,12 +776,6 @@ const AuthenticatedTransactionsVouchersLayoutJournalIndexRoute =
     path: '/journal/',
     getParentRoute: () => AuthenticatedTransactionsVouchersLayoutRoute,
   } as any)
-const AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute =
-  AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRouteImport.update({
-    id: '/delivery_note/',
-    path: '/delivery_note/',
-    getParentRoute: () => AuthenticatedTransactionsVouchersLayoutRoute,
-  } as any)
 const AuthenticatedTransactionsVouchersLayoutContraIndexRoute =
   AuthenticatedTransactionsVouchersLayoutContraIndexRouteImport.update({
     id: '/contra/',
@@ -844,12 +862,6 @@ const AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute =
   AuthenticatedTransactionsDay_bookLayoutJournalIndexRouteImport.update({
     id: '/journal/',
     path: '/journal/',
-    getParentRoute: () => AuthenticatedTransactionsDay_bookLayoutRoute,
-  } as any)
-const AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute =
-  AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRouteImport.update({
-    id: '/delivery_note/',
-    path: '/delivery_note/',
     getParentRoute: () => AuthenticatedTransactionsDay_bookLayoutRoute,
   } as any)
 const AuthenticatedTransactionsDay_bookLayoutContraIndexRoute =
@@ -1024,11 +1036,23 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRoute =
     getParentRoute: () =>
       AuthenticatedTransactionsVouchersLayoutReceipt_noteRoute,
   } as any)
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () =>
+      AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute,
+  } as any)
 const AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRoute =
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () =>
       AuthenticatedTransactionsDay_bookLayoutReceipt_noteRoute,
+  } as any)
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () =>
+      AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute,
   } as any)
 const AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute =
   AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport.update({
@@ -1115,6 +1139,15 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute =
         AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRoute,
     } as any,
   )
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute,
+    } as any,
+  )
 const AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute =
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRouteImport.update(
     {
@@ -1122,6 +1155,15 @@ const AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute =
       path: '/',
       getParentRoute: () =>
         AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRoute,
+    } as any,
+  )
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute,
     } as any,
   )
 const AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute =
@@ -1227,6 +1269,15 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute =
         AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRoute,
     } as any,
   )
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRouteImport.update(
+    {
+      id: '/$id',
+      path: '/$id',
+      getParentRoute: () =>
+        AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute,
+    } as any,
+  )
 const AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute =
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRouteImport.update(
     {
@@ -1234,6 +1285,15 @@ const AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute =
       path: '/$id',
       getParentRoute: () =>
         AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRoute,
+    } as any,
+  )
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRouteImport.update(
+    {
+      id: '/$id',
+      path: '/$id',
+      getParentRoute: () =>
+        AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute,
     } as any,
   )
 const AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute =
@@ -1386,7 +1446,9 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutRouteWithChildren
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
   '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
+  '/transactions/day_book/delivery_note': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
   '/transactions/day_book/receipt_note': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
+  '/transactions/vouchers/delivery_note': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
   '/transactions/vouchers/receipt_note': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/administration/role/': typeof AuthenticatedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user/': typeof AuthenticatedAdministrationLayoutUserLayoutIndexRoute
@@ -1415,7 +1477,6 @@ export interface FileRoutesByFullPath {
   '/masters/payroll/salary_structure': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/masters/payroll/shift': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
   '/transactions/day_book/contra': typeof AuthenticatedTransactionsDay_bookLayoutContraIndexRoute
-  '/transactions/day_book/delivery_note': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute
   '/transactions/day_book/journal': typeof AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute
   '/transactions/day_book/manufacturing_journal': typeof AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute
   '/transactions/day_book/payment': typeof AuthenticatedTransactionsDay_bookLayoutPaymentIndexRoute
@@ -1430,7 +1491,6 @@ export interface FileRoutesByFullPath {
   '/transactions/day_book/stock_journal': typeof AuthenticatedTransactionsDay_bookLayoutStock_journalIndexRoute
   '/transactions/day_book/transfer_voucher': typeof AuthenticatedTransactionsDay_bookLayoutTransfer_voucherIndexRoute
   '/transactions/vouchers/contra': typeof AuthenticatedTransactionsVouchersLayoutContraIndexRoute
-  '/transactions/vouchers/delivery_note': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute
   '/transactions/vouchers/journal': typeof AuthenticatedTransactionsVouchersLayoutJournalIndexRoute
   '/transactions/vouchers/manufacturing_journal': typeof AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute
   '/transactions/vouchers/payment': typeof AuthenticatedTransactionsVouchersLayoutPaymentIndexRoute
@@ -1453,7 +1513,9 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  '/transactions/day_book/delivery_note/$id': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/transactions/day_book/receipt_note/$id': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/transactions/vouchers/delivery_note/$id': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute
   '/transactions/vouchers/receipt_note/$id': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
   '/masters/accounts/account_group/': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/masters/accounts/account_ledger/': typeof AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
@@ -1469,7 +1531,9 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/transactions/day_book/delivery_note/': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute
   '/transactions/day_book/receipt_note/': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute
+  '/transactions/vouchers/delivery_note/': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
   '/transactions/vouchers/receipt_note/': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
   '/administration/role/$id/$moduleid': typeof AuthenticatedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
@@ -1533,7 +1597,9 @@ export interface FileRoutesByTo {
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/transactions/day_book/delivery_note': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute
   '/transactions/day_book/receipt_note': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute
+  '/transactions/vouchers/delivery_note': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
   '/transactions/vouchers/receipt_note': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRoute
@@ -1560,7 +1626,6 @@ export interface FileRoutesByTo {
   '/masters/payroll/salary_structure': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/masters/payroll/shift': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
   '/transactions/day_book/contra': typeof AuthenticatedTransactionsDay_bookLayoutContraIndexRoute
-  '/transactions/day_book/delivery_note': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute
   '/transactions/day_book/journal': typeof AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute
   '/transactions/day_book/manufacturing_journal': typeof AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute
   '/transactions/day_book/payment': typeof AuthenticatedTransactionsDay_bookLayoutPaymentIndexRoute
@@ -1575,7 +1640,6 @@ export interface FileRoutesByTo {
   '/transactions/day_book/stock_journal': typeof AuthenticatedTransactionsDay_bookLayoutStock_journalIndexRoute
   '/transactions/day_book/transfer_voucher': typeof AuthenticatedTransactionsDay_bookLayoutTransfer_voucherIndexRoute
   '/transactions/vouchers/contra': typeof AuthenticatedTransactionsVouchersLayoutContraIndexRoute
-  '/transactions/vouchers/delivery_note': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute
   '/transactions/vouchers/journal': typeof AuthenticatedTransactionsVouchersLayoutJournalIndexRoute
   '/transactions/vouchers/manufacturing_journal': typeof AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute
   '/transactions/vouchers/payment': typeof AuthenticatedTransactionsVouchersLayoutPaymentIndexRoute
@@ -1598,7 +1662,9 @@ export interface FileRoutesByTo {
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/masters/party/transporter/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  '/transactions/day_book/delivery_note/$id': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/transactions/day_book/receipt_note/$id': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/transactions/vouchers/delivery_note/$id': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute
   '/transactions/vouchers/receipt_note/$id': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
   '/administration/role/$id/$moduleid': typeof AuthenticatedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
@@ -1691,8 +1757,12 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/transporter/_layout': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
   '/_authenticated/masters/payroll/_layout/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren
   '/_authenticated/masters/payroll/_layout/employee/_layout': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
+  '/_authenticated/transactions/day_book/_layout/delivery_note': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteWithChildren
+  '/_authenticated/transactions/day_book/_layout/delivery_note/_layout': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
   '/_authenticated/transactions/day_book/_layout/receipt_note': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteWithChildren
   '/_authenticated/transactions/day_book/_layout/receipt_note/_layout': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
+  '/_authenticated/transactions/vouchers/_layout/delivery_note': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteWithChildren
+  '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
   '/_authenticated/transactions/vouchers/_layout/receipt_note': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteWithChildren
   '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/_authenticated/administration/_layout/role/_layout/': typeof AuthenticatedAdministrationLayoutRoleLayoutIndexRoute
@@ -1722,7 +1792,6 @@ export interface FileRoutesById {
   '/_authenticated/masters/payroll/_layout/salary_structure/': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/_authenticated/masters/payroll/_layout/shift/': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
   '/_authenticated/transactions/day_book/_layout/contra/': typeof AuthenticatedTransactionsDay_bookLayoutContraIndexRoute
-  '/_authenticated/transactions/day_book/_layout/delivery_note/': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute
   '/_authenticated/transactions/day_book/_layout/journal/': typeof AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute
   '/_authenticated/transactions/day_book/_layout/manufacturing_journal/': typeof AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute
   '/_authenticated/transactions/day_book/_layout/payment/': typeof AuthenticatedTransactionsDay_bookLayoutPaymentIndexRoute
@@ -1737,7 +1806,6 @@ export interface FileRoutesById {
   '/_authenticated/transactions/day_book/_layout/stock_journal/': typeof AuthenticatedTransactionsDay_bookLayoutStock_journalIndexRoute
   '/_authenticated/transactions/day_book/_layout/transfer_voucher/': typeof AuthenticatedTransactionsDay_bookLayoutTransfer_voucherIndexRoute
   '/_authenticated/transactions/vouchers/_layout/contra/': typeof AuthenticatedTransactionsVouchersLayoutContraIndexRoute
-  '/_authenticated/transactions/vouchers/_layout/delivery_note/': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute
   '/_authenticated/transactions/vouchers/_layout/journal/': typeof AuthenticatedTransactionsVouchersLayoutJournalIndexRoute
   '/_authenticated/transactions/vouchers/_layout/manufacturing_journal/': typeof AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute
   '/_authenticated/transactions/vouchers/_layout/payment/': typeof AuthenticatedTransactionsVouchersLayoutPaymentIndexRoute
@@ -1761,7 +1829,9 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/supplier/_layout/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/$id': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIdRoute
   '/_authenticated/masters/payroll/_layout/employee/_layout/$id': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIdRoute
+  '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/$id': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/$id': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/$id': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute
   '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/$id': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
   '/_authenticated/masters/accounts/_layout/account_group/_layout/': typeof AuthenticatedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/_authenticated/masters/accounts/_layout/account_ledger/_layout/': typeof AuthenticatedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
@@ -1777,7 +1847,9 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/supplier/_layout/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/_authenticated/masters/party/_layout/transporter/_layout/': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/_authenticated/masters/payroll/_layout/employee/_layout/': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/': typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute
   '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/': typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute
+  '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/': typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
   '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/': typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
   '/_authenticated/administration/_layout/role/_layout/$id/_module/$moduleid': typeof AuthenticatedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration': typeof AuthenticatedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
@@ -1846,7 +1918,9 @@ export interface FileRouteTypes {
     | '/masters/party/supplier'
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
+    | '/transactions/day_book/delivery_note'
     | '/transactions/day_book/receipt_note'
+    | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/receipt_note'
     | '/administration/role/'
     | '/administration/user/'
@@ -1875,7 +1949,6 @@ export interface FileRouteTypes {
     | '/masters/payroll/salary_structure'
     | '/masters/payroll/shift'
     | '/transactions/day_book/contra'
-    | '/transactions/day_book/delivery_note'
     | '/transactions/day_book/journal'
     | '/transactions/day_book/manufacturing_journal'
     | '/transactions/day_book/payment'
@@ -1890,7 +1963,6 @@ export interface FileRouteTypes {
     | '/transactions/day_book/stock_journal'
     | '/transactions/day_book/transfer_voucher'
     | '/transactions/vouchers/contra'
-    | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/journal'
     | '/transactions/vouchers/manufacturing_journal'
     | '/transactions/vouchers/payment'
@@ -1913,7 +1985,9 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
+    | '/transactions/day_book/delivery_note/$id'
     | '/transactions/day_book/receipt_note/$id'
+    | '/transactions/vouchers/delivery_note/$id'
     | '/transactions/vouchers/receipt_note/$id'
     | '/masters/accounts/account_group/'
     | '/masters/accounts/account_ledger/'
@@ -1929,7 +2003,9 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/'
     | '/masters/party/transporter/'
     | '/masters/payroll/employee/'
+    | '/transactions/day_book/delivery_note/'
     | '/transactions/day_book/receipt_note/'
+    | '/transactions/vouchers/delivery_note/'
     | '/transactions/vouchers/receipt_note/'
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
@@ -1993,7 +2069,9 @@ export interface FileRouteTypes {
     | '/masters/party/supplier'
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
+    | '/transactions/day_book/delivery_note'
     | '/transactions/day_book/receipt_note'
+    | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/receipt_note'
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
@@ -2020,7 +2098,6 @@ export interface FileRouteTypes {
     | '/masters/payroll/salary_structure'
     | '/masters/payroll/shift'
     | '/transactions/day_book/contra'
-    | '/transactions/day_book/delivery_note'
     | '/transactions/day_book/journal'
     | '/transactions/day_book/manufacturing_journal'
     | '/transactions/day_book/payment'
@@ -2035,7 +2112,6 @@ export interface FileRouteTypes {
     | '/transactions/day_book/stock_journal'
     | '/transactions/day_book/transfer_voucher'
     | '/transactions/vouchers/contra'
-    | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/journal'
     | '/transactions/vouchers/manufacturing_journal'
     | '/transactions/vouchers/payment'
@@ -2058,7 +2134,9 @@ export interface FileRouteTypes {
     | '/masters/party/supplier/$id'
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
+    | '/transactions/day_book/delivery_note/$id'
     | '/transactions/day_book/receipt_note/$id'
+    | '/transactions/vouchers/delivery_note/$id'
     | '/transactions/vouchers/receipt_note/$id'
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
@@ -2150,8 +2228,12 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/transporter/_layout'
     | '/_authenticated/masters/payroll/_layout/employee'
     | '/_authenticated/masters/payroll/_layout/employee/_layout'
+    | '/_authenticated/transactions/day_book/_layout/delivery_note'
+    | '/_authenticated/transactions/day_book/_layout/delivery_note/_layout'
     | '/_authenticated/transactions/day_book/_layout/receipt_note'
     | '/_authenticated/transactions/day_book/_layout/receipt_note/_layout'
+    | '/_authenticated/transactions/vouchers/_layout/delivery_note'
+    | '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout'
     | '/_authenticated/transactions/vouchers/_layout/receipt_note'
     | '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout'
     | '/_authenticated/administration/_layout/role/_layout/'
@@ -2181,7 +2263,6 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/payroll/_layout/salary_structure/'
     | '/_authenticated/masters/payroll/_layout/shift/'
     | '/_authenticated/transactions/day_book/_layout/contra/'
-    | '/_authenticated/transactions/day_book/_layout/delivery_note/'
     | '/_authenticated/transactions/day_book/_layout/journal/'
     | '/_authenticated/transactions/day_book/_layout/manufacturing_journal/'
     | '/_authenticated/transactions/day_book/_layout/payment/'
@@ -2196,7 +2277,6 @@ export interface FileRouteTypes {
     | '/_authenticated/transactions/day_book/_layout/stock_journal/'
     | '/_authenticated/transactions/day_book/_layout/transfer_voucher/'
     | '/_authenticated/transactions/vouchers/_layout/contra/'
-    | '/_authenticated/transactions/vouchers/_layout/delivery_note/'
     | '/_authenticated/transactions/vouchers/_layout/journal/'
     | '/_authenticated/transactions/vouchers/_layout/manufacturing_journal/'
     | '/_authenticated/transactions/vouchers/_layout/payment/'
@@ -2220,7 +2300,9 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/supplier/_layout/$id'
     | '/_authenticated/masters/party/_layout/transporter/_layout/$id'
     | '/_authenticated/masters/payroll/_layout/employee/_layout/$id'
+    | '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/$id'
     | '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/$id'
+    | '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/$id'
     | '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/$id'
     | '/_authenticated/masters/accounts/_layout/account_group/_layout/'
     | '/_authenticated/masters/accounts/_layout/account_ledger/_layout/'
@@ -2236,7 +2318,9 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/supplier/_layout/'
     | '/_authenticated/masters/party/_layout/transporter/_layout/'
     | '/_authenticated/masters/payroll/_layout/employee/_layout/'
+    | '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/'
     | '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/'
+    | '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/'
     | '/_authenticated/transactions/vouchers/_layout/receipt_note/_layout/'
     | '/_authenticated/administration/_layout/role/_layout/$id/_module/$moduleid'
     | '/_authenticated/masters/inventory/_layout/stock_item/_layout/$id/configuration'
@@ -2612,11 +2696,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersLayoutRoute
     }
+    '/_authenticated/transactions/vouchers/_layout/delivery_note': {
+      id: '/_authenticated/transactions/vouchers/_layout/delivery_note'
+      path: '/delivery_note'
+      fullPath: '/transactions/vouchers/delivery_note'
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteImport
+      parentRoute: typeof AuthenticatedTransactionsVouchersLayoutRoute
+    }
     '/_authenticated/transactions/day_book/_layout/receipt_note': {
       id: '/_authenticated/transactions/day_book/_layout/receipt_note'
       path: '/receipt_note'
       fullPath: '/transactions/day_book/receipt_note'
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteImport
+      parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutRoute
+    }
+    '/_authenticated/transactions/day_book/_layout/delivery_note': {
+      id: '/_authenticated/transactions/day_book/_layout/delivery_note'
+      path: '/delivery_note'
+      fullPath: '/transactions/day_book/delivery_note'
+      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteImport
       parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutRoute
     }
     '/_authenticated/masters/payroll/_layout/employee': {
@@ -2864,13 +2962,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutJournalIndexRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersLayoutRoute
     }
-    '/_authenticated/transactions/vouchers/_layout/delivery_note/': {
-      id: '/_authenticated/transactions/vouchers/_layout/delivery_note/'
-      path: '/delivery_note'
-      fullPath: '/transactions/vouchers/delivery_note'
-      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRouteImport
-      parentRoute: typeof AuthenticatedTransactionsVouchersLayoutRoute
-    }
     '/_authenticated/transactions/vouchers/_layout/contra/': {
       id: '/_authenticated/transactions/vouchers/_layout/contra/'
       path: '/contra'
@@ -2967,13 +3058,6 @@ declare module '@tanstack/react-router' {
       path: '/journal'
       fullPath: '/transactions/day_book/journal'
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutJournalIndexRouteImport
-      parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutRoute
-    }
-    '/_authenticated/transactions/day_book/_layout/delivery_note/': {
-      id: '/_authenticated/transactions/day_book/_layout/delivery_note/'
-      path: '/delivery_note'
-      fullPath: '/transactions/day_book/delivery_note'
-      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRouteImport
       parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutRoute
     }
     '/_authenticated/transactions/day_book/_layout/contra/': {
@@ -3172,12 +3256,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteRoute
     }
+    '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout': {
+      id: '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout'
+      path: '/delivery_note'
+      fullPath: '/transactions/vouchers/delivery_note'
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteImport
+      parentRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute
+    }
     '/_authenticated/transactions/day_book/_layout/receipt_note/_layout': {
       id: '/_authenticated/transactions/day_book/_layout/receipt_note/_layout'
       path: '/receipt_note'
       fullPath: '/transactions/day_book/receipt_note'
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteImport
       parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteRoute
+    }
+    '/_authenticated/transactions/day_book/_layout/delivery_note/_layout': {
+      id: '/_authenticated/transactions/day_book/_layout/delivery_note/_layout'
+      path: '/delivery_note'
+      fullPath: '/transactions/day_book/delivery_note'
+      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteImport
+      parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute
     }
     '/_authenticated/masters/payroll/_layout/employee/_layout': {
       id: '/_authenticated/masters/payroll/_layout/employee/_layout'
@@ -3291,12 +3389,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRoute
     }
+    '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/': {
+      id: '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/'
+      path: '/'
+      fullPath: '/transactions/vouchers/delivery_note/'
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute
+    }
     '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/': {
       id: '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/'
       path: '/'
       fullPath: '/transactions/day_book/receipt_note/'
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRoute
+    }
+    '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/': {
+      id: '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/'
+      path: '/'
+      fullPath: '/transactions/day_book/delivery_note/'
+      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute
     }
     '/_authenticated/masters/payroll/_layout/employee/_layout/': {
       id: '/_authenticated/masters/payroll/_layout/employee/_layout/'
@@ -3403,12 +3515,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRouteImport
       parentRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRoute
     }
+    '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/$id': {
+      id: '/_authenticated/transactions/vouchers/_layout/delivery_note/_layout/$id'
+      path: '/$id'
+      fullPath: '/transactions/vouchers/delivery_note/$id'
+      preLoaderRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute
+    }
     '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/$id': {
       id: '/_authenticated/transactions/day_book/_layout/receipt_note/_layout/$id'
       path: '/$id'
       fullPath: '/transactions/day_book/receipt_note/$id'
       preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRouteImport
       parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRoute
+    }
+    '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/$id': {
+      id: '/_authenticated/transactions/day_book/_layout/delivery_note/_layout/$id'
+      path: '/$id'
+      fullPath: '/transactions/day_book/delivery_note/$id'
+      preLoaderRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute
     }
     '/_authenticated/masters/payroll/_layout/employee/_layout/$id': {
       id: '/_authenticated/masters/payroll/_layout/employee/_layout/$id'
@@ -4382,6 +4508,39 @@ const AuthenticatedMastersStatutoryRouteWithChildren =
     AuthenticatedMastersStatutoryRouteChildren,
   )
 
+interface AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteChildren {
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute
+}
+
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteChildren: AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteChildren =
+  {
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute:
+      AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIdRoute,
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute:
+      AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutIndexRoute,
+  }
+
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteWithChildren =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute._addFileChildren(
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteChildren,
+  )
+
+interface AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteChildren {
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
+}
+
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteChildren: AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteChildren =
+  {
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRoute:
+      AuthenticatedTransactionsDay_bookLayoutDelivery_noteLayoutRouteWithChildren,
+  }
+
+const AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteWithChildren =
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute._addFileChildren(
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteChildren,
+  )
+
 interface AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutRouteChildren {
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIdRoute
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteLayoutIndexRoute
@@ -4417,9 +4576,9 @@ const AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteWithChildren =
 
 interface AuthenticatedTransactionsDay_bookLayoutRouteChildren {
   AuthenticatedTransactionsDay_bookLayoutIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutIndexRoute
+  AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteWithChildren
   AuthenticatedTransactionsDay_bookLayoutReceipt_noteRoute: typeof AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteWithChildren
   AuthenticatedTransactionsDay_bookLayoutContraIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutContraIndexRoute
-  AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute
   AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute
   AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute
   AuthenticatedTransactionsDay_bookLayoutPaymentIndexRoute: typeof AuthenticatedTransactionsDay_bookLayoutPaymentIndexRoute
@@ -4439,12 +4598,12 @@ const AuthenticatedTransactionsDay_bookLayoutRouteChildren: AuthenticatedTransac
   {
     AuthenticatedTransactionsDay_bookLayoutIndexRoute:
       AuthenticatedTransactionsDay_bookLayoutIndexRoute,
+    AuthenticatedTransactionsDay_bookLayoutDelivery_noteRoute:
+      AuthenticatedTransactionsDay_bookLayoutDelivery_noteRouteWithChildren,
     AuthenticatedTransactionsDay_bookLayoutReceipt_noteRoute:
       AuthenticatedTransactionsDay_bookLayoutReceipt_noteRouteWithChildren,
     AuthenticatedTransactionsDay_bookLayoutContraIndexRoute:
       AuthenticatedTransactionsDay_bookLayoutContraIndexRoute,
-    AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute:
-      AuthenticatedTransactionsDay_bookLayoutDelivery_noteIndexRoute,
     AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute:
       AuthenticatedTransactionsDay_bookLayoutJournalIndexRoute,
     AuthenticatedTransactionsDay_bookLayoutManufacturing_journalIndexRoute:
@@ -4493,6 +4652,39 @@ const AuthenticatedTransactionsDay_bookRouteWithChildren =
     AuthenticatedTransactionsDay_bookRouteChildren,
   )
 
+interface AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren {
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
+}
+
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren: AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren =
+  {
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute:
+      AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute,
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute:
+      AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute,
+  }
+
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute._addFileChildren(
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren,
+  )
+
+interface AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteChildren {
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
+}
+
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteChildren: AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteChildren =
+  {
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRoute:
+      AuthenticatedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren,
+  }
+
+const AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteWithChildren =
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute._addFileChildren(
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteChildren,
+  )
+
 interface AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutRouteChildren {
   AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
   AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
@@ -4528,9 +4720,9 @@ const AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteWithChildren =
 
 interface AuthenticatedTransactionsVouchersLayoutRouteChildren {
   AuthenticatedTransactionsVouchersLayoutIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutIndexRoute
+  AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteWithChildren
   AuthenticatedTransactionsVouchersLayoutReceipt_noteRoute: typeof AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteWithChildren
   AuthenticatedTransactionsVouchersLayoutContraIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutContraIndexRoute
-  AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute
   AuthenticatedTransactionsVouchersLayoutJournalIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutJournalIndexRoute
   AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute
   AuthenticatedTransactionsVouchersLayoutPaymentIndexRoute: typeof AuthenticatedTransactionsVouchersLayoutPaymentIndexRoute
@@ -4550,12 +4742,12 @@ const AuthenticatedTransactionsVouchersLayoutRouteChildren: AuthenticatedTransac
   {
     AuthenticatedTransactionsVouchersLayoutIndexRoute:
       AuthenticatedTransactionsVouchersLayoutIndexRoute,
+    AuthenticatedTransactionsVouchersLayoutDelivery_noteRoute:
+      AuthenticatedTransactionsVouchersLayoutDelivery_noteRouteWithChildren,
     AuthenticatedTransactionsVouchersLayoutReceipt_noteRoute:
       AuthenticatedTransactionsVouchersLayoutReceipt_noteRouteWithChildren,
     AuthenticatedTransactionsVouchersLayoutContraIndexRoute:
       AuthenticatedTransactionsVouchersLayoutContraIndexRoute,
-    AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute:
-      AuthenticatedTransactionsVouchersLayoutDelivery_noteIndexRoute,
     AuthenticatedTransactionsVouchersLayoutJournalIndexRoute:
       AuthenticatedTransactionsVouchersLayoutJournalIndexRoute,
     AuthenticatedTransactionsVouchersLayoutManufacturing_journalIndexRoute:

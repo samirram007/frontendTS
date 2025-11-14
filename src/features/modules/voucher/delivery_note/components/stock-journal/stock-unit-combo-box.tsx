@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import type { UseFormReturn } from "react-hook-form"
+import { type UseFormReturn } from "react-hook-form"
 
-import type { TransactionLedger } from "../../../data-schema/transactinableStockItem/data/schema"
-import type { ReceiptNoteForm } from "../../data/schema"
+import type { StockUnit } from "@/features/modules/stock_unit/data/schema"
+import type { StockJournalEntryForm } from "../../data/schema"
 
 // const frameworks = [
 //     {
@@ -47,23 +47,22 @@ import type { ReceiptNoteForm } from "../../data/schema"
 //     },
 // ]
 interface Props {
-    form: UseFormReturn<ReceiptNoteForm>;
-    purchaseLedgers: TransactionLedger[];
+    stockUnits: StockUnit[];
+    form: UseFormReturn<StockJournalEntryForm>;
 }
-export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
-
+export const StockUnitCombobox = ({ stockUnits, form }: Props) => {
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
+    const selectedId = form.watch('stockUnitId')?.toString()
 
     const handleSelect = (value: string) => {
-        form.setValue("transactionLedger.id", purchaseLedgers.find((purchaseLedger) => purchaseLedger.id === Number(value))?.id!)
-        setValue(value)
-        setOpen(false)
-    }
-    const frameworks = purchaseLedgers?.map((purchaseLedger: TransactionLedger) => ({
-        label: capitalizeAllWords(purchaseLedger.name!),
-        value: String(purchaseLedger.id),
+        form.setValue(`stockUnitId`, Number(value) ?? null, { shouldValidate: true, shouldDirty: true });
+        setOpen(false);
+    };
+    const frameworks = stockUnits?.map((stockUnit: StockUnit) => ({
+        label: capitalizeAllWords(stockUnit.name!),
+        value: String(stockUnit.id),
     }))
+    const selectedLabel = frameworks.find((o) => o.value === selectedId)?.label ?? 'Select unit'
 
 
 
@@ -76,17 +75,15 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                     aria-expanded={open}
                     className="w-full justify-between"
                 >
-                    {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select purchase ledger..."}
+                    {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search purchase ledger..." />
+                    <CommandInput placeholder="Search item..." />
                     <CommandList>
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                        <CommandEmpty>No Unit found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (
                                 <CommandItem
@@ -98,10 +95,10 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                                     <CheckIcon
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label} [{framework.value}]
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>

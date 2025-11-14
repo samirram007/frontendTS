@@ -19,9 +19,9 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import type { UseFormReturn } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
-import type { TransactionLedger } from "../../../data-schema/transactinableStockItem/data/schema"
+import type { Godown } from "@/features/modules/godown/data/schema"
 import type { ReceiptNoteForm } from "../../data/schema"
 
 // const frameworks = [
@@ -47,22 +47,29 @@ import type { ReceiptNoteForm } from "../../data/schema"
 //     },
 // ]
 interface Props {
-    form: UseFormReturn<ReceiptNoteForm>;
-    purchaseLedgers: TransactionLedger[];
+    godowns: Godown[];
 }
-export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
-
+export const GodownCombobox = ({ godowns }: Props) => {
+    const form = useFormContext<ReceiptNoteForm>()
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
-
+    // const index = form.getValues('stockJournal.stockJournalEntries').length
+    // const [value, setValue] = React.useState('')
+    const value = ''
     const handleSelect = (value: string) => {
-        form.setValue("transactionLedger.id", purchaseLedgers.find((purchaseLedger) => purchaseLedger.id === Number(value))?.id!)
-        setValue(value)
-        setOpen(false)
-    }
-    const frameworks = purchaseLedgers?.map((purchaseLedger: TransactionLedger) => ({
-        label: capitalizeAllWords(purchaseLedger.name!),
-        value: String(purchaseLedger.id),
+        // const selected = godowns.find((i) => i.id === Number(value));
+        const index = form.getValues('stockJournal.stockJournalEntries').length
+        // ✅ Safely update nested field value by index
+        console.log(form.getValues('stockJournal'), index, "index")
+        // form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true } 
+        //     // optional but recommended
+        // );
+        console.log(value)
+        // setValue(value);
+        setOpen(false);
+    };
+    const frameworks = godowns?.map((godown: Godown) => ({
+        label: capitalizeAllWords(godown.name!),
+        value: String(godown.id),
     }))
 
 
@@ -78,15 +85,15 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select purchase ledger..."}
+                        : "Select godown..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search purchase ledger..." />
+                    <CommandInput placeholder="Search item..." />
                     <CommandList>
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                        <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (
                                 <CommandItem
@@ -101,7 +108,7 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                                             value === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label} [{framework.value}]
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>

@@ -19,10 +19,10 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import type { UseFormReturn } from "react-hook-form"
+import { type UseFormReturn } from "react-hook-form"
 
-import type { TransactionLedger } from "../../../data-schema/transactinableStockItem/data/schema"
-import type { ReceiptNoteForm } from "../../data/schema"
+import type { StockItem } from "@/features/modules/stock_item/data/schema"
+import type { StockJournalEntryForm } from "../../data/schema"
 
 // const frameworks = [
 //     {
@@ -47,22 +47,30 @@ import type { ReceiptNoteForm } from "../../data/schema"
 //     },
 // ]
 interface Props {
-    form: UseFormReturn<ReceiptNoteForm>;
-    purchaseLedgers: TransactionLedger[];
+    stockItems: StockItem[]; 
+    form: UseFormReturn<StockJournalEntryForm>;
 }
-export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
-
+export const StockItemCombobox = ({ stockItems, form }: Props) => {
+    //const form = useFormContext<ReceiptNoteForm>()
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
+    // const index = currentIndex
+    const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
 
     const handleSelect = (value: string) => {
-        form.setValue("transactionLedger.id", purchaseLedgers.find((purchaseLedger) => purchaseLedger.id === Number(value))?.id!)
-        setValue(value)
-        setOpen(false)
-    }
-    const frameworks = purchaseLedgers?.map((purchaseLedger: TransactionLedger) => ({
-        label: capitalizeAllWords(purchaseLedger.name!),
-        value: String(purchaseLedger.id),
+        form.setValue(`stockItemId`, Number(value))
+        const selected = stockItems.find((i) => i.id === Number(value));
+
+        // ✅ Safely update nested field value by index
+        // console.log(form.getValues('stockJournal'), index, "index")
+        form.setValue(`stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
+        );
+
+        setValue(value);
+        setOpen(false);
+    };
+    const frameworks = stockItems?.map((stockItem: StockItem) => ({
+        label: capitalizeAllWords(stockItem.name!),
+        value: String(stockItem.id),
     }))
 
 
@@ -78,13 +86,13 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select purchase ledger..."}
+                        : "Select item..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search purchase ledger..." />
+                    <CommandInput placeholder="Search item..." />
                     <CommandList>
                         <CommandEmpty>No pary found.</CommandEmpty>
                         <CommandGroup>
@@ -101,7 +109,7 @@ export const PurchaseLedgerCombobox = ({ form, purchaseLedgers }: Props) => {
                                             value === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label} [{framework.value}]
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>

@@ -1,4 +1,4 @@
-import type { ReceiptNoteForm } from "./schema";
+import type { DeliveryNoteForm } from "./schema";
 
 export const stockJournalGodownEntryDefaultValues = {
     id: null,
@@ -44,7 +44,7 @@ export const stockJournalEntryDefaultValues = {
     rateUnit: undefined,
     godown: undefined,
     alternateStockUnit: undefined,
-    stockJournalGodownEntries: [] 
+    stockJournalGodownEntries: []
 
 }
 export const stockJournalDefaultValues = {
@@ -63,12 +63,12 @@ export const stockJournalDefaultValues = {
 
 }
 
-const receiptNoteDefaultValues: ReceiptNoteForm = {
+const deliveryNoteDefaultValues: DeliveryNoteForm = {
     voucherNo: "new",
     voucherDate: new Date(),
     referenceNo: "",
     referenceDate: null,
-    voucherTypeId: 2002,
+    voucherTypeId: 2001,
     partyLedger: undefined,
     transactionLedger: undefined,
     stockJournalId: null,
@@ -81,5 +81,5 @@ const receiptNoteDefaultValues: ReceiptNoteForm = {
     voucherEntries: [],
     isEdit: false,
 }
-export default receiptNoteDefaultValues;
+export default deliveryNoteDefaultValues;
 

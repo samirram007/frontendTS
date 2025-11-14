@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { useFormContext } from 'react-hook-form';
-import { useReceiptNoteMutation } from '../../data/queryOptions';
-import type { ReceiptNoteForm } from '../../data/schema';
+import { useDeliveryNoteMutation } from '../../data/queryOptions';
+import type { DeliveryNoteForm } from '../../data/schema';
 import NarrationBox from './special/narration-box';
 
 
 const PosFooter = () => {
-    const mainForm = useFormContext<ReceiptNoteForm>();
-    const { mutate: createReceiptNote, isPending } = useReceiptNoteMutation();
+    const mainForm = useFormContext<DeliveryNoteForm>();
+    const { mutate: createDeliveryNote, isPending } = useDeliveryNoteMutation();
     const { watch } = mainForm;
     const total = watch("stockJournal.stockJournalEntries")?.reduce((acc, entry) => acc + (entry?.amount || 0), 0) || 0;
     // console.log("total: ", total)
@@ -22,7 +22,7 @@ const PosFooter = () => {
                 <Button
                     type="button" asChild onClick={() => {
                         console.log('Form submitted', mainForm.getValues());
-                        createReceiptNote(mainForm.getValues());
+                        createDeliveryNote(mainForm.getValues());
                     }}>
 
                     <NarrationBox type="textarea" form={mainForm} gapClass={''} className=" " name="narration" />
@@ -45,7 +45,7 @@ const PosFooter = () => {
                         disabled={isPending}
                         onClick={() => {
                             console.log('Form submitted', mainForm.getValues());
-                            createReceiptNote(mainForm.getValues());
+                            createDeliveryNote(mainForm.getValues());
                         }}>Save....</Button>
                 </div>
             </div>

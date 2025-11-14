@@ -17,53 +17,93 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
-
-import type { Godown } from "@/features/modules/godown/data/schema"
 import { FaSignOutAlt } from "react-icons/fa"
-import type { StockJournalGodownEntryForm } from "../../data/schema"
+import type { StockJournalEntryForm } from "../../data/schema"
 
-interface GodownComboboxProps {
+
+
+// const frameworks = [
+//     {
+//         value: "next.js",
+//         label: "Next.js",
+//     },
+//     {
+//         value: "sveltekit",
+//         label: "SvelteKit",
+//     },
+//     {
+//         value: "nuxt.js",
+//         label: "Nuxt.js",
+//     },
+//     {
+//         value: "remix",
+//         label: "Remix",
+//     },
+//     {
+//         value: "astro",
+//         label: "Astro",
+//     },
+// ]
+interface StockItemComboboxProps {
+
+    stockItems: StockItem[];
     handleRemove?: () => void;
-    godowns: Godown[];
 }
-export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) => {
-    const form = useFormContext<StockJournalGodownEntryForm>()
+export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemComboboxProps) => {
+    const form = useFormContext<StockJournalEntryForm>()
     const [open, setOpen] = React.useState(false)
-    const selectedId = form.watch('godownId')?.toString()
-
+    // const index = currentIndex
+    // const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
+    const selectedId = form.watch('stockItemId')?.toString()
     const handleSelect = (value: string) => {
         if (value === '-1') {
             handleRemove?.();
-        } else {
-            const selected = godowns.find((i) => i.id === Number(value));
-            form.setValue(`godownId`, Number(value))
-            form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
-            );
-        }
+            return
+        }  
+        const selected = stockItems.find((i) => i.id === Number(value));
+        const quantity = 1
+        form.setValue(`stockItemId`, Number(value))
+        form.setValue(`actualQuantity`, quantity)
+        form.setValue(`billingQuantity`, quantity)
+        form.setValue(`stockUnitId`, selected?.stockUnitId)
+        form.setValue(`rate`, selected?.standardCost)
+        form.setValue(`rateUnitId`, selected?.stockUnitId)
+        form.setValue(`discountPercentage`, 0)
+        form.setValue(`discount`, (form.getValues(`rate`)! * form.getValues(`discountPercentage`)! / 100 * selected?.standardCost! * quantity))
+        form.setValue(`amount`, (selected?.standardCost! * quantity - form.getValues(`discount`)!))
+
+        // ✅ Safely update nested field value by index
+        // console.log(form.getValues('stockJournal'), index, "index")
+        form.setValue(`stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
+        );
+
+        // setValue(value);
         setOpen(false);
     };
+
     const frameworks = [
         {
             label: (
                 <div className="flex items-center justify-end gap-2 text-red-600 hover:text-red-800 font-medium">
-                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Godown Entries
+                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Item Entries
                 </div>
             ), value: "-1",
-            className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
+            className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
         },
-        ...(godowns?.map((godown: Godown) => ({
-            label: capitalizeAllWords(godown.name!),
-            value: String(godown.id),
+        ...(stockItems?.map((stockItem: StockItem) => ({
+            label: capitalizeAllWords(stockItem.name!),
+            value: String(stockItem.id),
             className: "min-w-full hover:bg-blue-300",
         })) ?? []),
     ];
 
     const selected = frameworks.find((o) => o.value === selectedId)
-    // console.log("SELECTED GODOWN: ", selectedId, selected)
-    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select godown') : 'Select godown'
+    const selectedLabel = selected ? (selected?.label.toString()) : 'Select item'
+
 
 
     return (
@@ -82,14 +122,13 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search godown..." />
+                    <CommandInput placeholder="Search item..." />
                     <CommandList>
-                        <CommandEmpty>No godown found.</CommandEmpty>
+                        <CommandEmpty>No pary found.</CommandEmpty>
                         <CommandGroup>
-
                             {frameworks.map((framework) => (
                                 <CommandItem
-                                    className={cn("justify-start", framework.className)}
+                                    className="min-w-full"
                                     key={framework.value}
                                     value={framework.value}
                                     onSelect={() => handleSelect(framework.value)}
