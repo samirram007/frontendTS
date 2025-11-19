@@ -9,6 +9,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 
+import { lowerCase } from '../../../../../utils/removeEmptyStrings'
+import { VoucherTypeColorMapping } from '../data/data'
 import type { DayBookSchema } from '../data/schema'
 import RowActions from './row-actions'
 
@@ -74,14 +76,15 @@ export const columns: ColumnDef<DayBookSchema>[] = [
       <DataTableColumnHeader column={column} title='Particulars' />
     ),
     cell: ({ row }) => {
-      const { partyLedger } = row.original
-      const badgeColor = 'success'
+      const { partyLedger, voucherType } = row.original
+      const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
+      const badgeColor = VoucherTypeColorMapping.get(key);
       if (!partyLedger) {
         return <div className='text-muted-foreground'>Primary</div>
       }
       return (
         <div className='flex space-x-2'>
-          <Badge variant='default' className={cn('capitalize', badgeColor)}>
+          <Badge variant='outline' className={cn('capitalize', badgeColor, 'bg-transparent')}>
             {/* <div className='text-muted-foreground'>{parentId.name}: </div> */}
             {partyLedger?.name ?? 'Unknown'}
           </Badge>
@@ -98,7 +101,8 @@ export const columns: ColumnDef<DayBookSchema>[] = [
     ),
     cell: ({ row }) => {
       const { voucherType } = row.original
-      const badgeColor = 'success'
+      const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
+      const badgeColor = VoucherTypeColorMapping.get(key);
       if (!voucherType) {
         return <div className='text-muted-foreground'>Primary</div>
       }
@@ -125,14 +129,14 @@ export const columns: ColumnDef<DayBookSchema>[] = [
   {
     accessorKey: 'amount',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Amount' />
+      <DataTableColumnHeader column={column} title='Amount' className='text-right pr-8' />
     ),
     cell: ({ row }) => {
       const { amount } = row.original
       const badgeColor = ActiveInactiveStatusTypes.get(amount)
       return (
-        <div className='flex space-x-2'>
-          <Badge variant='outline' className={cn('capitalize', badgeColor)}>
+        <div className='flex space-x-2 justify-end pr-4'>
+          <Badge variant='outline' className={cn('capitalize', badgeColor, 'border-0 bg-transparent')}>
             {Number(row.getValue('amount')).toFixed(2)}
           </Badge>
         </div>

@@ -147,7 +147,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
     }, [props.stockItem])
     // console.log("HOW: ", stockJournalGodownEntries, stockJournalEntryForm.watch("stockJournalGodownEntries"));
     return (
-        <div className=" pl-24 ">
+        <div className=" pl-12 ">
             {fields.map((field, index) => (
                 <div key={field.id} className="w-full flex  items-center gap-0">
                     <StockJournalGodownEntry key={field.id}

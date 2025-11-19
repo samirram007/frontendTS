@@ -17,32 +17,36 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import { stateQueryOptions } from "@/features/modules/state/data/queryOptions"
+import type { State } from "@/features/modules/state/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
+import { useSuspenseQuery } from "@tanstack/react-query"
 import type { UseFormReturn } from "react-hook-form"
+import type { PartyForm } from "../../../data/schema"
 
-import type { TransactionLedger } from "../../../data-schema/transactinableStockItem/data/schema"
-import type { DeliveryNoteForm } from "../../data/schema"
 
 
 interface Props {
-    form: UseFormReturn<DeliveryNoteForm>;
-    saleLedgers: TransactionLedger[];
+    form: UseFormReturn<PartyForm>;
 }
-export const SaleLedgerCombobox = ({ form, saleLedgers }: Props) => {
+export const PlaceOfSupplyCombobox = ({ form }: Props) => {
 
+    const { data: states } = useSuspenseQuery(stateQueryOptions())
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
-
+    const [selectedId] = React.useState(form.getValues('placeOfSupplyStateId')?.toString())
     const handleSelect = (value: string) => {
-        form.setValue("transactionLedger.id", saleLedgers.find((saleLedger) => saleLedger.id === Number(value))?.id!)
-        setValue(value)
+        form.setValue("placeOfSupplyStateId", value ? Number(value) : undefined)
+
         setOpen(false)
     }
-    const frameworks = saleLedgers?.map((saleLedger: TransactionLedger) => ({
-        label: capitalizeAllWords(saleLedger.name!),
-        value: String(saleLedger.id),
+    const frameworks = states?.data.map((state: State) => ({
+        label: capitalizeAllWords(state.name!),
+        value: String(state.id),
     }))
+    const selected = frameworks.find((o: { label: string, value: string }) => o.value === selectedId)
+    // console.log("SELECTED GODOWN: ", selectedId, selected)
+    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select state') : 'Select state'
 
 
 
@@ -55,32 +59,30 @@ export const SaleLedgerCombobox = ({ form, saleLedgers }: Props) => {
                     aria-expanded={open}
                     className="w-full justify-between"
                 >
-                    {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select sale ledger..."}
+                    {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search sale ledger..." />
+                    <CommandInput placeholder="Search place of supply..." />
                     <CommandList>
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                        <CommandEmpty>No place found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem
                                     className="min-w-full"
                                     key={framework.value}
-                                    value={framework.value}
+                                    value={framework.label.toLowerCase()}
                                     onSelect={() => handleSelect(framework.value)}
                                 >
                                     <CheckIcon
                                         className={cn(
                                             "mr-2 h-4 w-4",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label} [{framework.value}]
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>

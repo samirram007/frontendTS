@@ -23,7 +23,7 @@ interface Props {
 export default function TransactionProvider({ children }: Props) {
     const [currentModule, setCurrentModule] = useState<string>("user")
     const [sideBarOpen, setSideBarOpen] = useState<boolean>(true)
-    const [headerVisible, setHeaderVisible] = useState<boolean>(true)
+    const [headerVisible, setHeaderVisible] = useState<boolean>(false)
 
 
 

@@ -49,12 +49,16 @@ const PosBody = () => {
                 receiptNoteForm.setValue("stockJournal", value as StockJournalForm, {
                     shouldValidate: false,
                 });
-    }
+
+            }
         });
 
         return () => subscription.unsubscribe();
     }, [receiptNoteForm, stockJournalForm]);
 
+    if (receiptNoteForm.watch("transactionLedger.id") === undefined || receiptNoteForm.watch("partyLedger.id") === undefined) {
+        return <StockJournalUnloadedView />
+    }
     // console.log("PosBody Level: ", receiptNoteForm.watch("stockJournal"), stockJournalForm.watch("stockJournalEntries"));
     return (
         <div className="flex flex-col w-full gap-0   items-start overflow-y-scroll px-2  ">
@@ -77,3 +81,42 @@ const PosBody = () => {
 }
 
 export default PosBody
+
+
+
+const StockJournalUnloadedView = () => {
+    return (
+        <div className="flex flex-col w-full gap-0   items-start overflow-y-scroll px-2  ">
+            <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">
+                <div className="">
+                    <div className="border-inside-all 
+                    grid grid-rows-1 grid-cols-[1fr_300px_150px_80px_80px_200px_120px] 
+                    bg-gray-300 text-center border-border">
+
+                        <div className="border-r-0!  ">Particulars</div>
+
+
+                        <div className="grid grid-rows-2 border-0!">
+                            <div className="border-b-0!  ">Quantity</div>
+                            <div className="grid grid-cols-2 items-center">
+                                <div className="border-y-0! border-x-0!  ">Actual</div>
+                                <div className="border-y-0! border-r-0!  ">Billing</div>
+                            </div>
+                        </div>
+                        <div className="border-l-0!">Rate</div>
+                        <div className="border-l-0!">per</div>
+                        <div className="border-l-0!">disc%</div>
+                        <div className="border-l-0!">Amount</div>
+                        <div className="border-l-0!">Action</div>
+
+                    </div>
+                </div>
+                <div className="text-center text-gray-500 py-20">
+                    Please select both Party A/c and Purchase Ledger to add Stock Journal Entries.
+                </div>
+
+
+            </div>
+        </div>
+    )
+}

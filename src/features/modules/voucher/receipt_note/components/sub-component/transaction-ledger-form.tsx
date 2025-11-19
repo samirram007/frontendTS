@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query"
 
 import { cn } from "@/lib/utils"
 import { useFormContext } from "react-hook-form"
-import { fetchPartyLedgerService } from "../../../data-schema/partyLedger/data/api"
+import { fetchStockInHandLedgersService } from "../../data/api"
 import type { ReceiptNoteForm } from "../../data/schema"
-import PartyDetails from "./party-details"
-import { PartyLedgerCombobox } from "./party-ledger-combo-box"
+import { TransactionLedgerCombobox } from './transaction-ledger-combo-box'
+import VoucherDispatchDetail from "./voucher-dispatch-detail"
 
 
 
@@ -15,40 +15,39 @@ type FormProps = {
 
     tabIndex?: number;
 };
-const PartyLedgerForm = (props: FormProps) => {
+const TransactionLedgerForm = (props: FormProps) => {
     const { tabIndex } = props as FormProps;
     const form = useFormContext<ReceiptNoteForm>()
-    const { data: partyLedgers, isLoading } = useQuery({
-        queryKey: ["accountLedgers", "supplier_ledgers"],
-        queryFn: () => fetchPartyLedgerService('supplier_ledgers'),
+    const { data: transactionLedgers, isLoading } = useQuery({
+        queryKey: ["accountLedgers", "stock_in_hand"],
+        queryFn: () => fetchStockInHandLedgersService(),
     })
 
     if (isLoading) {
         return <div>Loading...</div>
     }
-    console.log("PARTY... :", form.watch('party'))
+    console.log(tabIndex)
     return (
         <>
             <FormField
                 control={form.control}
-                name={'partyLedger.id'}
+                name={'transactionLedger.id'}
                 render={() => (
                     <FormItem className='grid grid-rows-1 gap-1 '>
                         <div className="grid grid-cols-[140px_1fr] justify-start items-center ">
 
-                            <FormLabel htmlFor="" className=' text-right'>
-                                Party's A/c Name
+                            <FormLabel className=' text-right'>
+                                Stock Ledger
                             </FormLabel>
-                            <div className={cn(form.getValues('partyLedger.id') ? "w-8/12" : "w-10/12", "grid grid-cols-[auto_1fr_100px] gap-2 items-center  ")}>
+                            <div className={cn(form.getValues('transactionLedger.id') ? "w-8/12" : "w-10/12", "grid grid-cols-[auto_1fr_100px] gap-2 items-center  ")}>
                                 <div className="text-right" >:</div>
-                                <PartyLedgerCombobox partyLedgers={partyLedgers?.data} tabIndex={tabIndex} />
+                                <TransactionLedgerCombobox form={form} transactionLedgers={transactionLedgers?.data} />
 
                                 {
-                                    form.getValues('partyLedger.id') &&
+                                    form.getValues('transactionLedger.id') &&
 
-                                    <PartyDetails />
+                                    <VoucherDispatchDetail />
                                 }
-
                             </div>
                             <FormMessage className=' col-start-3' />
                         </div>
@@ -64,4 +63,4 @@ const PartyLedgerForm = (props: FormProps) => {
     )
 }
 
-export default PartyLedgerForm
+export default TransactionLedgerForm

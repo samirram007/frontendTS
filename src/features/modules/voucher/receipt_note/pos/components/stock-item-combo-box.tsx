@@ -26,28 +26,6 @@ import type { StockJournalEntryForm } from "../../data/schema"
 
 
 
-// const frameworks = [
-//     {
-//         value: "next.js",
-//         label: "Next.js",
-//     },
-//     {
-//         value: "sveltekit",
-//         label: "SvelteKit",
-//     },
-//     {
-//         value: "nuxt.js",
-//         label: "Nuxt.js",
-//     },
-//     {
-//         value: "remix",
-//         label: "Remix",
-//     },
-//     {
-//         value: "astro",
-//         label: "Astro",
-//     },
-// ]
 interface StockItemComboboxProps {
 
     stockItems: StockItem[];
@@ -92,11 +70,15 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
                     <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Item Entries
                 </div>
             ), value: "-1",
+            stockInHand: '',
+            stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
             className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
         },
         ...(stockItems?.map((stockItem: StockItem) => ({
             label: capitalizeAllWords(stockItem.name!),
             value: String(stockItem.id),
+            stockInHand: stockItem.stockInHand,
+            stockUnitLabel: stockItem.stockUnit?.code || stockItem.stockUnit?.name || '',
             className: "min-w-full hover:bg-blue-300",
         })) ?? []),
     ];
@@ -139,7 +121,15 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
                                             selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}
+                                    <div className="flex flex-row justify-between w-full">
+                                        <div>
+                                            {framework.label}
+                                        </div>
+                                        <div>
+                                            {framework.stockInHand} {framework.stockUnitLabel}
+                                        </div>
+                                    </div>
+
                                 </CommandItem>
                             ))}
                         </CommandGroup>

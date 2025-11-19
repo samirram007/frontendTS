@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useFormContext, type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
 import PartyLedgerForm from "../../components/sub-component/party-ledger-form";
-import PurchaseLedgerForm from "../../components/sub-component/purchase-ledger-form";
+import TransactionLedgerForm from "../../components/sub-component/transaction-ledger-form";
 import type { ReceiptNoteForm } from "../../data/schema";
 
 
@@ -14,6 +14,8 @@ const PosHeader = () => {
 
 
     const voucherDate = form.watch("voucherDate")
+    // const party = form.watch("party")
+
     // const inputValue = voucherDate
     //     ? formatDateForInput(new Date(voucherDate))
     //     : formatDateForInput(new Date()) // today in local timezone
@@ -45,18 +47,7 @@ const PosHeader = () => {
                             <DateBox tabIndex={1}
                                 form={form} name="referenceDate" />
 
-                            {/* <Input
-                                type="date"
-                                {...form.register("referenceDate", {
-                                    setValueAs: (value) => (value ? new Date(value) : null), // store as Date
-                                })}
-                                value={inputValue}
-                                onChange={(e) => {
-                                    if (e.target.value) {
-                                        form.setValue("referenceDate", new Date(e.target.value))
-                                    }
-                                }}
-                            /> */}
+
                         </div>
                     </div>
 
@@ -74,11 +65,14 @@ const PosHeader = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
-                    <PartyLedgerForm form={form} tabIndex={3} />
-                    <PurchaseLedgerForm form={form} />
+                    <PartyLedgerForm tabIndex={3} />
+                    <TransactionLedgerForm tabIndex={4} />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">
+                    <pre>
+                        {JSON.stringify(form.getValues('party'), null, 2)}
+                    </pre>
                     <div className="text-right">Cost Center: </div><Input type="text" />
                 </div>
             </div>

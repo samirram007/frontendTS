@@ -183,7 +183,7 @@ export const sidebarData: SidebarData = {
     },
     {
       title: 'Masters',
-      visible: true,
+      visible: false,
       items: [
         {
           title: 'Organization',
@@ -356,7 +356,7 @@ export const sidebarData: SidebarData = {
     },
     {
       title: 'Administration',
-      visible: true,
+      visible: false,
       items: [
         {
           title: 'User',
@@ -375,7 +375,7 @@ export const sidebarData: SidebarData = {
 
     {
       title: 'Reports',
-      visible: true,
+      visible: false,
       items: [
         {
           title: 'Balance Sheet',
@@ -399,7 +399,7 @@ export const sidebarData: SidebarData = {
     },
     {
       title: 'Other',
-      visible: true,
+      visible: false,
       items: [
         {
           title: 'Settings',

@@ -64,6 +64,7 @@ export const stockItemSchema = z.object({
   alternateStockUnit: stockUnitSchema.nullish(),
 
   currency: currencySchema.nullish(),
+  stockInHand: z.coerce.number().nullish(),
 
 })
 export type StockItem = z.infer<typeof stockItemSchema>
@@ -123,6 +124,7 @@ export const formSchema = z.object({
 
   stockUnit: stockUnitSchema.nullish(),
   alternateStockUnit: stockUnitSchema.nullish(),
+  stockInHand: z.coerce.number().nullish(),
 
   isEdit: z.boolean(),
 

@@ -42,7 +42,7 @@ const PartyLedgerForm = (props: FormProps) => {
                             </FormLabel>
                             <div className="w-8/12 grid grid-cols-[auto_1fr] gap-2 items-center  ">
                                 <div className="text-right" >:</div>
-                                <PartyLedgerCombobox form={form} partyLedgers={partyLedgers?.data} />
+                                <PartyLedgerCombobox partyLedgers={partyLedgers?.data} />
 
                             </div>
                             <FormMessage className=' col-start-3' />

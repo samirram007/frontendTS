@@ -19,26 +19,41 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
-import type { UseFormReturn } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 
 import type { PartyLedger } from "../../../data-schema/partyLedger/data/schema"
-import type { DeliveryNoteForm } from "../../data/schema"
+import type { PartyForm, DeliveryNoteForm } from "../../data/schema"
 
 interface Props {
-    form: UseFormReturn<DeliveryNoteForm>;
+
     partyLedgers: PartyLedger[];
     tabIndex?: number;
 }
 
-export const PartyLedgerCombobox = ({ form, partyLedgers }: Props) => {
-
+export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
+    const form = useFormContext<DeliveryNoteForm>()
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('partyLedger.id')?.toString())
     const [enterCount, setEnterCount] = React.useState(0)
 
     const handleSelect = (value: string) => {
         // form.setValue("party", partyLedgers.find((party) => party.id === Number(value)))
-        form.setValue("partyLedger.id", partyLedgers.find((partyLedger) => partyLedger.id === Number(value))?.id!)
+        form.setValue("partyLedger.id", Number(value))
+        const partyLedger = partyLedgers.find((partyLedger) => partyLedger.id === Number(value))
+        const ledgerable = partyLedger?.ledgerable as any
+        const party: PartyForm = {
+            name: ledgerable?.name,
+            mailingName: ledgerable?.name,
+            line1: ledgerable?.address?.line1,
+            line2: ledgerable?.address?.line2,
+            line3: ledgerable?.address?.landmark,
+            stateId: ledgerable?.address?.stateId ?? 36,
+            countryId: ledgerable?.address?.countryId ?? 76,
+            gstRegistrationTypeId: ledgerable?.gstRegistrationTypeId ?? 1,
+            gstin: ledgerable?.gstin,
+            placeOfSupplyStateId: ledgerable?.stateId ?? 36,
+        }
+        form.setValue("party", party)
         setValue(value)
         setOpen(false);
         setEnterCount(1)
@@ -101,11 +116,11 @@ export const PartyLedgerCombobox = ({ form, partyLedgers }: Props) => {
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button
+                <Button 
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full justify-between"
+                    className="w-full justify-between"  
                     onKeyDown={handleKeyDown}
 
                 >

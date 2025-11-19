@@ -31,7 +31,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     const entryPath = `stockJournalEntries.${index}` as const;
     const [stockItems, godowns, stockUnits,] = useQueries({
         queries: [
-            { queryKey: ["stockItems"], queryFn: fetchStockItemService },
+            { queryKey: ["stockItems"], queryFn: fetchStockItemService, staleTime: 1000 * 60 * 1, },
             { queryKey: ["godowns"], queryFn: fetchGodownService },
             { queryKey: ["stockUnits"], queryFn: fetchStockUnitService },
         ],
@@ -166,7 +166,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
 //                             <div className="text-left">MFG:
 //                                 <span className="font-normal">{entry?.mfgDate?.toLocaleDateString()}</span></div>
 //                             <div className="text-left">
-//                                 EXP: <span className="font-normal">{entry?.expDate?.toLocaleDateString()}</span>
+//                                 EXP: <span className="font-normal">{entry?.expiryDate?.toLocaleDateString()}</span>
 //                             </div>
 //                         </div>
 //                     </div>

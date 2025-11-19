@@ -22,6 +22,8 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
 import type { Godown } from "@/features/modules/godown/data/schema"
+import { getData } from "@/utils/dataClient"
+import { useQuery } from "@tanstack/react-query"
 import { FaSignOutAlt } from "react-icons/fa"
 import type { StockJournalGodownEntryForm } from "../../data/schema"
 
@@ -33,6 +35,27 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
     const form = useFormContext<StockJournalGodownEntryForm>()
     const [open, setOpen] = React.useState(false)
     const selectedId = form.watch('godownId')?.toString()
+    const stockItem = form.watch('stockItem')
+    const { data: godownItemStocks } = useQuery({
+        queryKey: ['godownItemStocks', stockItem?.id],
+        queryFn: async () => {
+            if (!stockItem?.id) {
+                return []
+            }
+            const response = await getData(`/godown_item_stocks/${stockItem.id}`)
+
+            return response.data
+        },
+        staleTime: 1000 * 60 * 1,
+        enabled: !!stockItem?.id
+    })
+    const stockMap = React.useMemo(() => {
+        const map: Record<string, number> = {};
+        godownItemStocks?.forEach((row: any) => {
+            map[row.godownId] = row.stockInHand;
+        });
+        return map;
+    }, [godownItemStocks]);
 
     const handleSelect = (value: string) => {
         if (value === '-1') {
@@ -48,17 +71,25 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
     const frameworks = [
         {
             label: (
-                <div className="flex items-center justify-end gap-2 text-red-600 hover:text-red-800 font-medium">
+                <div className="flex items-center  gap-2 text-red-600 hover:text-red-800 font-medium">
                     <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Godown Entries
                 </div>
             ), value: "-1",
+            stockInHand: '',
+            stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
             className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
         },
-        ...(godowns?.map((godown: Godown) => ({
-            label: capitalizeAllWords(godown.name!),
+        ...(godowns?.map((godown: Godown) => {
+            const stock = stockMap[godown.id] ?? 0; // fallback to zero
+
+            return {
+                label: capitalizeAllWords(godown.name!),
             value: String(godown.id),
-            className: "min-w-full hover:bg-blue-300",
-        })) ?? []),
+                stockInHand: stock,
+                stockUnitLabel: stockItem?.stockUnit?.code || stockItem?.stockUnit?.name || '',
+                className: "min-w-full hover:bg-blue-300"
+            };
+        }) ?? [])
     ];
 
     const selected = frameworks.find((o) => o.value === selectedId)
@@ -100,7 +131,14 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
                                             selectedId === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label}
+                                    <div className="flex flex-row justify-between w-full">
+                                        <div>
+                                            {framework.label}
+                                        </div>
+                                        <div>
+                                            {framework.stockInHand} {framework.stockUnitLabel}
+                                        </div>
+                                    </div>
                                 </CommandItem>
                             ))}
                         </CommandGroup>

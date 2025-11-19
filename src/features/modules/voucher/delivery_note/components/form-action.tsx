@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import type { DeliveryNoteProps } from "../pos/contracts"
 import { StockJournalComponent } from "./stock-journal/stock-journal-component"
 import PartyLedgerForm from "./sub-component/party-ledger-form"
-import PurchaseLedgerForm from "./sub-component/sale-ledger-form"
+import PurchaseLedgerForm from "./sub-component/transaction-ledger-form"
 
 
 
@@ -114,8 +114,8 @@ const VoucherHeader = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
-                    <PartyLedgerForm form={methods} />
-                    <PurchaseLedgerForm form={methods} />
+                    <PartyLedgerForm />
+                    <PurchaseLedgerForm />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">

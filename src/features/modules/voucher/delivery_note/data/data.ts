@@ -1,4 +1,4 @@
-import type { DeliveryNoteForm } from "./schema";
+import type { DeliveryNoteForm, VoucherDispatchDetailForm } from "./schema";
 
 export const stockJournalGodownEntryDefaultValues = {
     id: null,
@@ -6,7 +6,7 @@ export const stockJournalGodownEntryDefaultValues = {
     godownId: undefined,
     batchNo: '',
     mfgDate: null,
-    expDate: null,
+    expiryDate: null,
     serialNo: '',
     actualQuantity: 0,
     billingQuantity: 0,
@@ -15,7 +15,7 @@ export const stockJournalGodownEntryDefaultValues = {
     discountPercentage: 0,
     discount: 0,
     amount: 0,
-    movementType: 'in',
+    movementType: 'out',
     stockItem: undefined,
     stockUnit: undefined,
     remarks: undefined,
@@ -39,12 +39,12 @@ export const stockJournalEntryDefaultValues = {
     discountPercentage: 0,
     discount: 0,
     amount: 0,
-    movementType: 'in',
+    movementType: 'out',
     stockUnit: undefined,
     rateUnit: undefined,
     godown: undefined,
     alternateStockUnit: undefined,
-    stockJournalGodownEntries: []
+    stockJournalGodownEntries: [] 
 
 }
 export const stockJournalDefaultValues = {
@@ -54,7 +54,7 @@ export const stockJournalDefaultValues = {
     journalNo: "",
     journalDate: null,
     voucherId: undefined,
-    type: "in",
+    type: "out",
     remarks: "",
     stockJournalEntries: [],
 
@@ -62,6 +62,37 @@ export const stockJournalDefaultValues = {
 
 
 }
+export const partyDefaultValues = {
+    name: "",
+    mailingName: "",
+    line1: "",
+    line2: "",
+    line3: "",
+    stateId: 36,
+    countryId: 76,
+    gstRegistrationTypeId: 1,
+    gstin: "",
+    placeOfSupplyStateId: 36,
+}
+export const voucherDispatchDefaultValues: VoucherDispatchDetailForm = {
+    id: null,
+    voucherId: null,
+    orderNumber: null,
+    paymentTerms: null,
+    otherReferences: null,
+    termsOfDelivery: null,
+    receiptDocNo: null,
+    dispatchedThrough: null,
+    destination: null,
+    carrierName: null,
+    billOfLadingNo: null,
+    billOfLadingDate: null,
+    motorVehicleNo: null,
+
+
+}
+
+
 
 const deliveryNoteDefaultValues: DeliveryNoteForm = {
     voucherNo: "new",
@@ -74,10 +105,8 @@ const deliveryNoteDefaultValues: DeliveryNoteForm = {
     stockJournalId: null,
     remarks: "",
     stockJournal: stockJournalDefaultValues,
-    party: {
-        id: 2,
-        name: "SAM",
-    },
+    party: partyDefaultValues,
+    voucherDispatchDetail: voucherDispatchDefaultValues,
     voucherEntries: [],
     isEdit: false,
 }

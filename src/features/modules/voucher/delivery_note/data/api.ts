@@ -24,3 +24,6 @@ export async function fetchPurchaseLedgersService() {
 export async function fetchSaleLedgersService() {
     return await getData('sale_ledgers')
 }
+export async function fetchStockInHandLedgersService() {
+    return await getData('stock_in_hand_ledgers')
+}

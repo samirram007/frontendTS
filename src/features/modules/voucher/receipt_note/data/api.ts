@@ -21,3 +21,6 @@ export async function updateReceiptNoteService(payload: any) {
 export async function fetchPurchaseLedgersService() {
     return await getData('purchase_ledgers')
 }
+export async function fetchStockInHandLedgersService() {
+    return await getData('stock_in_hand_ledgers')
+}

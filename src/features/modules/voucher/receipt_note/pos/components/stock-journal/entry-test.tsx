@@ -43,9 +43,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
             stockJournalForm.watch(entryPath) ?? stockJournalEntryDefaultValues,
         mode: "onChange",
     });
-    // const {   watch } = stockJournalEntryForm;
-    // const qty = watch("billingQuantity");
-    // const rate = watch("rate");
+
 
     const handleRemove = () => {
         if (index !== 0) {
@@ -137,51 +135,4 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
 
         </Form>
     );
-};
-// type stockJournalGodownEntriesShowProps = {
-//     stockJournalEntryForm: UseFormReturn<StockJournalEntryForm>;
-//     godowns: Godown[] | undefined;
-//     stockUnits: StockUnit[] | undefined;
-// }
-// const StockJournalGodownEntriesShow = ({ stockJournalEntryForm, godowns, stockUnits }: stockJournalGodownEntriesShowProps) => {
-//     const stockJournalGodownEntries = stockJournalEntryForm.watch('stockJournalGodownEntries');
-//     return <div>
-//         {
-//             // JSON.stringify(stockJournalEntryForm.watch('stockJournalGodownEntries'))
-//             stockJournalGodownEntries &&
-//             stockJournalGodownEntries.map((entry, index) => (
-//                 <div key={index} className="grid grid-cols-[1fr_280px_300px_150px_80px_80px_200px_120px]  border-b border-dashed border-gray-400   ">
-
-//                     <div className="">
-//                         <span className="font-bold">Godown: </span>
-//                         <span>
-
-//                             {entry?.godown?.name ?? godowns?.find((g: Godown) => g.id === entry?.godownId)?.name}
-//                         </span>
-//                     </div>
-//                     <div className="text-center space-y-0 text-sm font-bold">
-//                         <div className="text-left border-b-[1px] border-dashed border-gray-900">BATCH NO.:
-//                             <span className="font-normal">{entry?.batchNo}</span></div>
-//                         <div className="grid grid-cols-2 ">
-//                             <div className="text-left">MFG:
-//                                 <span className="font-normal">{entry?.mfgDate?.toLocaleDateString()}</span></div>
-//                             <div className="text-left">
-//                                 EXP: <span className="font-normal">{entry?.expDate?.toLocaleDateString()}</span>
-//                             </div>
-//                         </div>
-//                     </div>
-//                     <div className="grid grid-cols-2 text-center">
-//                         <div>{entry?.actualQuantity} {entry?.stockUnit?.code ?? stockUnits?.find((su: StockUnit) => su.id === entry?.stockItem?.stockUnitId)?.code}</div>
-//                         <div>{entry?.billingQuantity} {entry?.stockUnit?.code ?? stockUnits?.find((su: StockUnit) => su.id === entry?.stockItem?.stockUnitId)?.code}</div>
-//                     </div>
-
-//                     <div className="text-right">{entry?.rate} </div>
-//                     <div><span className="font-bold">/</span> {entry?.rateUnit?.code ?? stockUnits?.find((su: StockUnit) => su.id === entry?.stockItem?.stockUnitId)?.code}</div>
-//                     <div className="text-right">{entry?.discountPercentage}</div>
-//                     <div className="text-right">{entry?.amount}</div>
-
-//                 </div>
-//             ))
-//         }
-//     </div>;
-// }
+}; 

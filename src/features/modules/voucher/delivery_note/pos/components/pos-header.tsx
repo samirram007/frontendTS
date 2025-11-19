@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useFormContext, type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
 import PartyLedgerForm from "../../components/sub-component/party-ledger-form";
-import PurchaseLedgerForm from "../../components/sub-component/sale-ledger-form";
+import TransactionLedgerForm from "../../components/sub-component/transaction-ledger-form";
 import type { DeliveryNoteForm } from "../../data/schema";
 
 
@@ -13,10 +13,7 @@ const PosHeader = () => {
     const form = useFormContext<DeliveryNoteForm>()
 
 
-    const voucherDate = form.watch("voucherDate")
-    // const inputValue = voucherDate
-    //     ? formatDateForInput(new Date(voucherDate))
-    //     : formatDateForInput(new Date()) // today in local timezone
+    const voucherDate = form.watch("voucherDate") 
     const dayName = voucherDate
         ? new Date(voucherDate).toLocaleDateString("en-US", { weekday: "long" })
         : ""
@@ -74,8 +71,8 @@ const PosHeader = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
-                    <PartyLedgerForm form={form} tabIndex={3} />
-                    <PurchaseLedgerForm form={form} />
+                    <PartyLedgerForm tabIndex={3} />
+                    <TransactionLedgerForm tabIndex={4} />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">

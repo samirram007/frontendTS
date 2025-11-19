@@ -15,7 +15,7 @@ export function useDayBookMutation() {
 
     return useMutation({
         mutationFn: async (data: DayBookForm & { id?: number }) => {
-            console.log("mutation Data", data)
+            // console.log("mutation Data", data)
             if (data.id) {
                 // Update if id exists
                 return await updateDayBookService(data)

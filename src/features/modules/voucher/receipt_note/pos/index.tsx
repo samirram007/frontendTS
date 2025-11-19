@@ -18,7 +18,7 @@ const Pos = ({ currentRow }: ReceiptNoteProps) => {
             { ...data, isEdit: true, } :
             { ...receiptNoteDefaultValues, isEdit: false },
     })
-    // console.log("WATCH: ", mainForm.watch('stockJournal'))
+    console.log("WATCH voucherEntries: ", mainForm.getValues())
     return (
         <>
 

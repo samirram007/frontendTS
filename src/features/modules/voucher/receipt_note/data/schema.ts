@@ -10,7 +10,7 @@ export const stockJournalGodownEntrySchema = z.object({
   godownId: z.number().int().positive().nullish(),
   batchNo: z.string().nullish(),
   mfgDate: z.coerce.date().nullish(),
-  expDate: z.coerce.date().nullish(),
+  expiryDate: z.coerce.date().nullish(),
   serialNo: z.string().nullish(),
   actualQuantity: z.number(),
   billingQuantity: z.number(),
@@ -75,14 +75,45 @@ export const voucherEntrySchema = z.object({
   credit: z.coerce.number().nullish(),
   remarks: z.string().nullish()
 })
+
+export type VoucherEntryForm = z.infer<typeof voucherEntrySchema>
 export const partySchema = z.object({
   id: z.number().int().positive().nullish(),
   name: z.string().min(1).nullish(),
-  accountLedgerId: z.number().int().nullish(),
-  accountBalance: z.coerce.number().nullish(),
+  mailingName: z.string().nullish(),
+  line1: z.string().nullish(),
+  line2: z.string().nullish(),
+  line3: z.string().nullish(),
+  stateId: z.number().int().nullish(),
+  countryId: z.number().int().nullish(),
+  gstRegistrationTypeId: z.number().int().nullish(),
+  gstin: z.string().nullish(),
+  placeOfSupplyStateId: z.number().int().nullish(),
+
 })
+export type PartyForm = z.infer<typeof partySchema>
+
+export const voucherDispatchDetailSchema = z.object({
+  id: z.number().int().positive().nullish(),
+  voucherId: z.string().min(1).nullish(),
+  orderNumber: z.string().nullish(),
+  paymentTerms: z.string().nullish(),
+  otherReferences: z.string().nullish(),
+  termsOfDelivery: z.string().nullish(),
+  receiptDocNo: z.string().nullish(),
+  dispatchedThrough: z.string().nullish(),
+  destination: z.string().nullish(),
+  carrierName: z.string().nullish(),
+  billOfLadingNo: z.string().nullish(),
+  billOfLadingDate: z.coerce.date().nullish(),
+  motorVehicleNo: z.string().nullish(),
+
+
+})
+export type VoucherDispatchDetailForm = z.infer<typeof voucherDispatchDetailSchema>
+
 export const transactionLedgerSchema = z.object({
-  id: z.number().int().positive(),
+  id: z.number().int().positive().nullish(),
   name: z.string().min(1),
   code: z.string().nullish(),
   ledgerableType: z.string().nullish(),
@@ -90,7 +121,7 @@ export const transactionLedgerSchema = z.object({
   currentBalance: z.coerce.number().nullish(),
 })
 export const partyLedgerSchema = z.object({
-  id: z.number().int().positive(),
+  id: z.number().int().positive().nullish(),
   name: z.string().min(1),
   code: z.string().nullish(),
   ledgerableType: z.string().nullish(),
@@ -110,6 +141,7 @@ export const receiptNoteSchema = z.object({
   party: partySchema.nullish(),
   partyLedger: partyLedgerSchema.nullish(),
   transactionLedger: transactionLedgerSchema.nullish(),
+  voucherDispatchDetail: voucherDispatchDetailSchema.nullish(),
   amount: z.coerce.number().nullish(),  
   remarks: z.string().nullish()
 })
@@ -132,6 +164,7 @@ export const formSchema = z
     party: partySchema.nullish(),
     partyLedger: partyLedgerSchema.nullish(),
     transactionLedger: transactionLedgerSchema.nullish(),
+    voucherDispatchDetail: voucherDispatchDetailSchema.nullish(),
     amount: z.coerce.number().nullish(), 
     remarks: z.string().nullish(),
     isEdit: z.boolean(),

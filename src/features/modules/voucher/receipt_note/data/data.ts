@@ -1,4 +1,4 @@
-import type { ReceiptNoteForm } from "./schema";
+import type { ReceiptNoteForm, VoucherDispatchDetailForm } from "./schema";
 
 export const stockJournalGodownEntryDefaultValues = {
     id: null,
@@ -6,7 +6,7 @@ export const stockJournalGodownEntryDefaultValues = {
     godownId: undefined,
     batchNo: '',
     mfgDate: null,
-    expDate: null,
+    expiryDate: null,
     serialNo: '',
     actualQuantity: 0,
     billingQuantity: 0,
@@ -62,6 +62,37 @@ export const stockJournalDefaultValues = {
 
 
 }
+export const partyDefaultValues = {
+    name: "",
+    mailingName: "",
+    line1: "",
+    line2: "",
+    line3: "",
+    stateId: 36,
+    countryId: 76,
+    gstRegistrationTypeId: 1,
+    gstin: "",
+    placeOfSupplyStateId: 36,
+}
+export const voucherDispatchDefaultValues: VoucherDispatchDetailForm = {
+    id: null,
+    voucherId: null,
+    orderNumber: '',
+    paymentTerms: '',
+    otherReferences: '',
+    termsOfDelivery: '',
+    receiptDocNo: '',
+    dispatchedThrough: '',
+    destination: '',
+    carrierName: '',
+    billOfLadingNo: '',
+    billOfLadingDate: null,
+    motorVehicleNo: '',
+
+
+}
+
+
 
 const receiptNoteDefaultValues: ReceiptNoteForm = {
     voucherNo: "new",
@@ -74,10 +105,8 @@ const receiptNoteDefaultValues: ReceiptNoteForm = {
     stockJournalId: null,
     remarks: "",
     stockJournal: stockJournalDefaultValues,
-    party: {
-        id: 2,
-        name: "SAM",
-    },
+    party: partyDefaultValues,
+    voucherDispatchDetail: voucherDispatchDefaultValues,
     voucherEntries: [],
     isEdit: false,
 }

@@ -14,6 +14,8 @@ import { TbRowRemove } from "react-icons/tb";
 import { stockJournalGodownEntryDefaultValues } from "../../../data/data";
 import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../../data/schema";
 import { GodownCombobox } from "../godown-combo-box";
+import BatchSelection from "./batch-selection";
+
 
 type StockJournalGodownEntryFormProps = {
     index: number;
@@ -30,13 +32,12 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
 
     const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
     const entryPath = `stockJournalGodownEntries.${index}` as const;
-    console.log(stockJournalEntryForm.watch(entryPath));
+
 
 
     const defaultValues = useMemo(() => {
         const base = stockJournalEntryForm.watch(entryPath) ?? stockJournalGodownEntryDefaultValues;
-        //const base = entryPath ?? stockJournalGodownEntryDefaultValues;
-        console.log("base", base)
+
         return {
             ...base,
             stockItem: base.stockItem ?? stockItem,
@@ -48,7 +49,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
             amount: base.amount ?? 0,
             batchNo: base.batchNo ?? '',
             mfgDate: base.mfgDate ? new Date(base.mfgDate) : undefined,
-            expDate: base.expDate ? new Date(base.expDate) : undefined,
+            expiryDate: base.expiryDate ? new Date(base.expiryDate) : undefined,
             rateUnit: stockJournalEntryForm.watch("rateUnit") ?? stockItem?.stockUnit!,
         };
         // Only recompute when entryPath changes (e.g., switching edit item)
@@ -89,9 +90,11 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
         // stockJournalEntryForm.reset({});
         console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
     };
+    // console.log("movementType: ", stockJournalEntryForm.getValues())
+
     return (
         <Form {...stockJournalGodownEntryForm}>
-            <div className="w-full pl-12">
+            <div className="w-full pl-1">
 
                 <div className="grid grid-cols-[1fr_280px_300px_150px_80px_80px_200px_120px]  ">
 
@@ -100,38 +103,57 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             godowns={godowns}
                             handleRemove={handleRemove}
                         />
+                        {/* {stockJournalGodownEntryForm.watch("batchNo") ?? "No BatchSelected"} */}
                     </div>
+                    {stockJournalGodownEntryForm.watch("godownId") === undefined ?
+                        <div>select godown</div> :
 
-                    <div className="grid grid-rows-2    border-0!">
-                        <div className="border-b-0! w-full  ">
-                            <FormInputField type='text' form={stockJournalGodownEntryForm}
-                                label='Batch: '
-                                gapClass="grid grid-cols-[40px_1fr] gap-0  "
-                                name="batchNo" />
-                        </div>
-                        <div className="flex flex-col justify-start">
+                        (
+                            stockJournalEntryForm?.getValues("movementType")?.toLocaleLowerCase() === 'in' ?
 
-                            <div className="grid grid-cols-2 items-center justify-start  ">
-                                <div className="border-y-0! border-x-0! pr-1 ">
-                                    <div className="grid grid-cols-[30px_1fr] justify-start items-center">
-                                        <Label>
-                                            Mfg:
-                                        </Label>
-                                    <DateBox form={stockJournalGodownEntryForm} name="mfgDate" />
-                                    </div>
+                                (
+                                    stockItem?.isMaintainBatch ?
+                                        <div className="grid grid-rows-2    border-0!">
+                                            <div className="border-b-0! w-full  ">
+                                                <FormInputField type='text' form={stockJournalGodownEntryForm}
+                                                    label='Batch: '
+                                                    gapClass="grid grid-cols-[40px_1fr] gap-0  "
+                                                    name="batchNo" />
+                                            </div>
 
-                                </div>
-                                <div className="border-y-0! border-r-0!   pl-2">
-                                    <div className="grid grid-cols-[30px_1fr] justify-end items-center">
-                                        <Label>
-                                            Exp:
-                                        </Label>
-                                    <DateBox form={stockJournalGodownEntryForm} name="expDate" />
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                            <div className="flex flex-col justify-start">
+
+                                                <div className="grid grid-cols-2 items-center justify-start  ">
+                                                    <div className="border-y-0! border-x-0! pr-1 ">
+                                                        {stockItem?.trackManufacturingDate &&
+                                                            <div className="grid grid-cols-[30px_1fr] justify-start items-center">
+                                                                <Label>
+                                                                    Mfg:
+                                                                </Label>
+                                                                <DateBox form={stockJournalGodownEntryForm} name="mfgDate" />
+                                                            </div>
+
+                                                        }
+                                                    </div>
+                                                    <div className="border-y-0! border-r-0!   pl-2">
+                                                        {stockItem?.useExpiryDate &&
+                                                            <div className="grid grid-cols-[30px_1fr] justify-end items-center">
+                                                                <Label>
+                                                                    Exp:
+                                                                </Label>
+                                                                <DateBox form={stockJournalGodownEntryForm} name="expiryDate" />
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        : <div></div>
+                                )
+                                : <BatchSelection form={stockJournalGodownEntryForm} />
+                        )
+                    }
                     <div className="grid grid-rows-1 border-0!">
                         <div className="grid grid-cols-2 items-start">
                             <div className="border-y-0! border-x-0!  ">
