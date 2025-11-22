@@ -12,15 +12,11 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import type { Godown } from "@/features/modules/godown/data/schema"
 import { getData } from "@/utils/dataClient"
 import { useQuery } from "@tanstack/react-query"
@@ -60,6 +56,7 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
     const handleSelect = (value: string) => {
         if (value === '-1') {
             handleRemove?.();
+
         } else {
             const selected = godowns.find((i) => i.id === Number(value));
             form.setValue(`godownId`, Number(value))
@@ -67,6 +64,21 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
             );
         }
         setOpen(false);
+
+        requestAnimationFrame(() => {
+            const focusable = Array.from(
+                document.querySelectorAll<
+                    HTMLElement
+                >('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+            ).filter(el => !el.hasAttribute("disabled"));
+
+            const current = document.activeElement;
+            const index = focusable.indexOf(current as HTMLElement);
+
+            if (index >= 0 && index < focusable.length - 1) {
+                focusable[index + 1].focus();
+            }
+        });
     };
     const frameworks = [
         {
@@ -98,8 +110,8 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
 
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
                 <Button
                     variant="outline"
                     role="combobox"
@@ -110,8 +122,14 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="popover-content-width-same-as-trigger p-0">
+            </SheetTrigger>
+            <SheetContent className="min-w-[450px]! p-0">
+                <SheetHeader>
+                    <SheetTitle>Search Godown</SheetTitle>
+                    <SheetDescription>
+                        Select the godown for this receipt note.
+                    </SheetDescription>
+                </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search godown..." />
                     <CommandList>
@@ -144,7 +162,7 @@ export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) =
                         </CommandGroup>
                     </CommandList>
                 </Command>
-            </PopoverContent>
-        </Popover>
+            </SheetContent>
+        </Sheet>
     )
 }

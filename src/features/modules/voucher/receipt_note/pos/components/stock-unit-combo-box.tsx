@@ -13,10 +13,10 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Sheet,
+    SheetContent,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { type UseFormReturn } from "react-hook-form"
@@ -68,8 +68,8 @@ export const StockUnitCombobox = ({ stockUnits, form }: Props) => {
 
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
                 <Button
                     variant="outline"
                     role="combobox"
@@ -79,8 +79,8 @@ export const StockUnitCombobox = ({ stockUnits, form }: Props) => {
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="popover-content-width-same-as-trigger p-0">
+            </SheetTrigger>
+            <SheetContent className="sheet-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
                     <CommandList>
@@ -105,7 +105,7 @@ export const StockUnitCombobox = ({ stockUnits, form }: Props) => {
                         </CommandGroup>
                     </CommandList>
                 </Command>
-            </PopoverContent>
-        </Popover>
+            </SheetContent>
+        </Sheet>
     )
 }

@@ -24,6 +24,9 @@ type StockJournalGodownEntryFormProps = {
     handleGodownEntryAdd: () => void;
     handleOnClickItemAddEntry: () => void
 };
+function round2(value: number) {
+    return Math.round(value * 100) / 100;
+}
 
 const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     const { index, remove, stockItem, godowns, stockUnits, handleGodownEntryAdd, handleOnClickItemAddEntry } = props;
@@ -68,10 +71,14 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     // const rateUnit = stockJournalEntryForm.watch("rateUnit") ?? null;
 
 
-    stockJournalGodownEntryForm.setValue("amount", (
-        (Number(rateUnitRatio ?? 0) * Number(billingQuantity ?? 0) * Number(rate ?? 0))
-        - Number(stockJournalGodownEntryForm.getValues("discount"))
-    ), { shouldValidate: true });
+    const amount = round2(
+        Number(rateUnitRatio ?? 0) *
+        Number(billingQuantity ?? 0) *
+        Number(rate ?? 0) -
+        Number(stockJournalGodownEntryForm.getValues("discount"))
+    );
+
+    stockJournalGodownEntryForm.setValue("amount", amount, { shouldValidate: true });
 
     const handleRemove = () => {
         if (index !== 0) {
@@ -83,10 +90,14 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     const handleSubmit = () => {
 
         const data = stockJournalGodownEntryForm.getValues();
+        // if (!data.amount) {
+        //     handleRemove();
+        //     return;
+        // }
         stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
         handleGodownEntryAdd();
         // stockJournalEntryForm.reset({});
-        console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
+        //  console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
     };
     return (
         <Form {...stockJournalGodownEntryForm}>
@@ -209,11 +220,14 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                     </div>
                     <div className="flex flex-row justify-end items-start gap-4 px-4">
 
-                        <Button type="button" className="h-6 focus:bg-black focus:text-white"
+                        <Button type="button" disabled={index === 0} variant="outline" size="sm" className="border-0  h-6 focus:bg-black focus:text-white"
                             onClick={handleSubmit}>
                             <MdKeyboardReturn />
                         </Button>
-                        <Button variant="outline" size="sm" className="h-6 focus:bg-black focus:text-white" onClick={() => remove(index)} >
+                        <Button variant="outline" size="sm"
+                            className="h-6 focus:bg-black focus:text-white"
+                            disabled={!!stockJournalGodownEntryForm.watch('godownId')}
+                            onClick={() => remove(index)} >
                             <TbRowRemove className=" text-red-700 h-4 w-4" />
                         </Button>
                     </div>

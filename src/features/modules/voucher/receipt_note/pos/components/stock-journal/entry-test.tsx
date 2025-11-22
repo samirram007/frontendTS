@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { useFocusNext } from "@/core/hooks/useFocusNext";
 import { fetchGodownService } from "@/features/modules/godown/data/api";
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api";
 import { fetchStockUnitService } from "@/features/modules/stock_unit/data/api";
@@ -11,6 +12,7 @@ import isEqual from "lodash/isEqual";
 import { Loader } from "lucide-react";
 import { useEffect } from "react";
 import { useForm, useFormContext } from "react-hook-form";
+import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
 import { stockJournalEntryDefaultValues } from "../../../data/data";
 import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data/schema";
@@ -26,7 +28,7 @@ type StockJournalEntryProps = {
 export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: StockJournalEntryProps) => {
     // 🔹 Access parent form context
     const stockJournalForm = useFormContext<StockJournalForm>();
-
+    const focusNext = useFocusNext();
     // 🔹 Path to this specific entry in parent form
     const entryPath = `stockJournalEntries.${index}` as const;
     const [stockItems, godowns, stockUnits,] = useQueries({
@@ -48,6 +50,8 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     const handleRemove = () => {
         if (index !== 0) {
             remove(index);
+            focusNext(`stockJournalEntries.${index - 1}.stockItemId`);
+
         }
 
     };
@@ -87,6 +91,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
 
                     <StockItemCombobox
                         handleRemove={handleRemove}
+
                         stockItems={stockItems?.data?.data} />
                     <div className="grid grid-cols-2 items-start  text-right">
                         <div className="pr-3">{stockJournalEntryForm.watch('actualQuantity')!} {stockJournalEntryForm.getValues('stockUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
@@ -103,7 +108,14 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
                     }</div>
                     <div className="text-right  pr-3 ">{stockJournalEntryForm.watch('amount') ? Number(stockJournalEntryForm.watch('amount')).toFixed(2) : ''}</div>
                     <div className="flex flex-row justify-end items-start gap-4 px-4">
-                        <Button variant="outline" size="sm" onClick={() => remove(index)} className="h-6 focus:bg-black focus:text-white" >
+
+                        <Button type="button" variant={'outline'} disabled className=" border-0  h-6 focus:bg-black focus:text-white"
+                            onClick={handleOnClickItemAddEntry}>
+                            <MdKeyboardReturn />
+                        </Button>
+                        <Button variant="outline" size="sm"
+                            disabled={true}
+                            onClick={() => remove(index)} className="h-6 focus:bg-black focus:text-white" >
                             <TbRowRemove className=" text-red-700 h-4 w-4" />
                         </Button>
                     </div>

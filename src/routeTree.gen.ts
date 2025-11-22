@@ -89,7 +89,6 @@ import { Route as AuthenticatedMastersPayrollLayoutCost_centerIndexRouteImport }
 import { Route as AuthenticatedMastersPayrollLayoutCost_categoryIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/cost_category/index'
 import { Route as AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/cost_allocation_rule/index'
 import { Route as AuthenticatedMastersPayrollLayoutBankIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/bank/index'
-import { Route as AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/financial_year/index'
 import { Route as AuthenticatedMastersOrganizationLayoutBranchIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/branch/index'
 import { Route as AuthenticatedMastersInventoryLayoutUnique_quantity_codeIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/unique_quantity_code/index'
 import { Route as AuthenticatedMastersInventoryLayoutStock_unitIndexRouteImport } from './routes/_authenticated/masters/inventory/_layout/stock_unit/index'
@@ -110,6 +109,7 @@ import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutRouteImport } 
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/state/_layout'
+import { Route as AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/fiscal_year/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout'
@@ -129,6 +129,7 @@ import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIndexRouteImpo
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/index'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutIndexRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/state/_layout/index'
+import { Route as AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/fiscal_year/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/index'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/index'
@@ -147,6 +148,7 @@ import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutIdRouteImport 
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout/$id'
 import { Route as AuthenticatedMastersPartyLayoutDistributorLayoutIdRouteImport } from './routes/_authenticated/masters/party/_layout/distributor/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutStateLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/state/_layout/$id'
+import { Route as AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/country/_layout/$id'
 import { Route as AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_authenticated/masters/organization/_layout/company/_layout/$id'
@@ -231,6 +233,8 @@ const AuthenticatedMastersPartyLayoutDistributorRouteImport = createFileRoute(
 const AuthenticatedMastersOrganizationLayoutStateRouteImport = createFileRoute(
   '/_authenticated/masters/organization/_layout/state',
 )()
+const AuthenticatedMastersOrganizationLayoutFiscal_yearRouteImport =
+  createFileRoute('/_authenticated/masters/organization/_layout/fiscal_year')()
 const AuthenticatedMastersOrganizationLayoutCurrencyRouteImport =
   createFileRoute('/_authenticated/masters/organization/_layout/currency')()
 const AuthenticatedMastersOrganizationLayoutCountryRouteImport =
@@ -594,6 +598,12 @@ const AuthenticatedMastersOrganizationLayoutStateRoute =
     path: '/state',
     getParentRoute: () => AuthenticatedMastersOrganizationLayoutRoute,
   } as any)
+const AuthenticatedMastersOrganizationLayoutFiscal_yearRoute =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearRouteImport.update({
+    id: '/fiscal_year',
+    path: '/fiscal_year',
+    getParentRoute: () => AuthenticatedMastersOrganizationLayoutRoute,
+  } as any)
 const AuthenticatedMastersOrganizationLayoutCurrencyRoute =
   AuthenticatedMastersOrganizationLayoutCurrencyRouteImport.update({
     id: '/currency',
@@ -954,12 +964,6 @@ const AuthenticatedMastersPayrollLayoutBankIndexRoute =
     path: '/bank/',
     getParentRoute: () => AuthenticatedMastersPayrollLayoutRoute,
   } as any)
-const AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute =
-  AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRouteImport.update({
-    id: '/financial_year/',
-    path: '/financial_year/',
-    getParentRoute: () => AuthenticatedMastersOrganizationLayoutRoute,
-  } as any)
 const AuthenticatedMastersOrganizationLayoutBranchIndexRoute =
   AuthenticatedMastersOrganizationLayoutBranchIndexRouteImport.update({
     id: '/branch/',
@@ -1079,6 +1083,12 @@ const AuthenticatedMastersOrganizationLayoutStateLayoutRoute =
     id: '/_layout',
     getParentRoute: () => AuthenticatedMastersOrganizationLayoutStateRoute,
   } as any)
+const AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () =>
+      AuthenticatedMastersOrganizationLayoutFiscal_yearRoute,
+  } as any)
 const AuthenticatedMastersOrganizationLayoutCurrencyLayoutRoute =
   AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteImport.update({
     id: '/_layout',
@@ -1197,6 +1207,15 @@ const AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute =
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutStateLayoutRoute,
   } as any)
+const AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute,
+    } as any,
+  )
 const AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute =
   AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRouteImport.update({
     id: '/',
@@ -1327,6 +1346,13 @@ const AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute =
     getParentRoute: () =>
       AuthenticatedMastersOrganizationLayoutStateLayoutRoute,
   } as any)
+const AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () =>
+      AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute,
+  } as any)
 const AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute =
   AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRouteImport.update({
     id: '/$id',
@@ -1441,6 +1467,7 @@ export interface FileRoutesByFullPath {
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutRouteWithChildren
   '/masters/organization/currency': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
+  '/masters/organization/fiscal_year': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
   '/masters/organization/state': typeof AuthenticatedMastersOrganizationLayoutStateLayoutRouteWithChildren
   '/masters/party/distributor': typeof AuthenticatedMastersPartyLayoutDistributorLayoutRouteWithChildren
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutRouteWithChildren
@@ -1461,7 +1488,6 @@ export interface FileRoutesByFullPath {
   '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryLayoutStock_unitIndexRoute
   '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryLayoutUnique_quantity_codeIndexRoute
   '/masters/organization/branch': typeof AuthenticatedMastersOrganizationLayoutBranchIndexRoute
-  '/masters/organization/financial_year': typeof AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute
   '/masters/payroll/bank': typeof AuthenticatedMastersPayrollLayoutBankIndexRoute
   '/masters/payroll/cost_allocation_rule': typeof AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute
   '/masters/payroll/cost_category': typeof AuthenticatedMastersPayrollLayoutCost_categoryIndexRoute
@@ -1508,6 +1534,7 @@ export interface FileRoutesByFullPath {
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
+  '/masters/organization/fiscal_year/$id': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute
   '/masters/organization/state/$id': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute
   '/masters/party/distributor/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
@@ -1526,6 +1553,7 @@ export interface FileRoutesByFullPath {
   '/masters/organization/company/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/masters/organization/currency/': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
+  '/masters/organization/fiscal_year/': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
   '/masters/organization/state/': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute
   '/masters/party/distributor/': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/masters/party/supplier/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
@@ -1592,6 +1620,7 @@ export interface FileRoutesByTo {
   '/masters/organization/company': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/masters/organization/currency': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
+  '/masters/organization/fiscal_year': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
   '/masters/organization/state': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute
   '/masters/party/distributor': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
@@ -1610,7 +1639,6 @@ export interface FileRoutesByTo {
   '/masters/inventory/stock_unit': typeof AuthenticatedMastersInventoryLayoutStock_unitIndexRoute
   '/masters/inventory/unique_quantity_code': typeof AuthenticatedMastersInventoryLayoutUnique_quantity_codeIndexRoute
   '/masters/organization/branch': typeof AuthenticatedMastersOrganizationLayoutBranchIndexRoute
-  '/masters/organization/financial_year': typeof AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute
   '/masters/payroll/bank': typeof AuthenticatedMastersPayrollLayoutBankIndexRoute
   '/masters/payroll/cost_allocation_rule': typeof AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute
   '/masters/payroll/cost_category': typeof AuthenticatedMastersPayrollLayoutCost_categoryIndexRoute
@@ -1657,6 +1685,7 @@ export interface FileRoutesByTo {
   '/masters/organization/company/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
+  '/masters/organization/fiscal_year/$id': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute
   '/masters/organization/state/$id': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute
   '/masters/party/distributor/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/masters/party/supplier/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
@@ -1747,6 +1776,8 @@ export interface FileRoutesById {
   '/_authenticated/masters/organization/_layout/country/_layout': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutRouteWithChildren
   '/_authenticated/masters/organization/_layout/currency': typeof AuthenticatedMastersOrganizationLayoutCurrencyRouteWithChildren
   '/_authenticated/masters/organization/_layout/currency/_layout': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
+  '/_authenticated/masters/organization/_layout/fiscal_year': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearRouteWithChildren
+  '/_authenticated/masters/organization/_layout/fiscal_year/_layout': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
   '/_authenticated/masters/organization/_layout/state': typeof AuthenticatedMastersOrganizationLayoutStateRouteWithChildren
   '/_authenticated/masters/organization/_layout/state/_layout': typeof AuthenticatedMastersOrganizationLayoutStateLayoutRouteWithChildren
   '/_authenticated/masters/party/_layout/distributor': typeof AuthenticatedMastersPartyLayoutDistributorRouteWithChildren
@@ -1776,7 +1807,6 @@ export interface FileRoutesById {
   '/_authenticated/masters/inventory/_layout/stock_unit/': typeof AuthenticatedMastersInventoryLayoutStock_unitIndexRoute
   '/_authenticated/masters/inventory/_layout/unique_quantity_code/': typeof AuthenticatedMastersInventoryLayoutUnique_quantity_codeIndexRoute
   '/_authenticated/masters/organization/_layout/branch/': typeof AuthenticatedMastersOrganizationLayoutBranchIndexRoute
-  '/_authenticated/masters/organization/_layout/financial_year/': typeof AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute
   '/_authenticated/masters/payroll/_layout/bank/': typeof AuthenticatedMastersPayrollLayoutBankIndexRoute
   '/_authenticated/masters/payroll/_layout/cost_allocation_rule/': typeof AuthenticatedMastersPayrollLayoutCost_allocation_ruleIndexRoute
   '/_authenticated/masters/payroll/_layout/cost_category/': typeof AuthenticatedMastersPayrollLayoutCost_categoryIndexRoute
@@ -1824,6 +1854,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/organization/_layout/company/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_authenticated/masters/organization/_layout/country/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIdRoute
+  '/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute
   '/_authenticated/masters/organization/_layout/state/_layout/$id': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute
   '/_authenticated/masters/party/_layout/distributor/_layout/$id': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIdRoute
   '/_authenticated/masters/party/_layout/supplier/_layout/$id': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIdRoute
@@ -1842,6 +1873,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/organization/_layout/company/_layout/': typeof AuthenticatedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/country/_layout/': typeof AuthenticatedMastersOrganizationLayoutCountryLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/currency/_layout/': typeof AuthenticatedMastersOrganizationLayoutCurrencyLayoutIndexRoute
+  '/_authenticated/masters/organization/_layout/fiscal_year/_layout/': typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
   '/_authenticated/masters/organization/_layout/state/_layout/': typeof AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute
   '/_authenticated/masters/party/_layout/distributor/_layout/': typeof AuthenticatedMastersPartyLayoutDistributorLayoutIndexRoute
   '/_authenticated/masters/party/_layout/supplier/_layout/': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
@@ -1913,6 +1945,7 @@ export interface FileRouteTypes {
     | '/masters/organization/company'
     | '/masters/organization/country'
     | '/masters/organization/currency'
+    | '/masters/organization/fiscal_year'
     | '/masters/organization/state'
     | '/masters/party/distributor'
     | '/masters/party/supplier'
@@ -1933,7 +1966,6 @@ export interface FileRouteTypes {
     | '/masters/inventory/stock_unit'
     | '/masters/inventory/unique_quantity_code'
     | '/masters/organization/branch'
-    | '/masters/organization/financial_year'
     | '/masters/payroll/bank'
     | '/masters/payroll/cost_allocation_rule'
     | '/masters/payroll/cost_category'
@@ -1980,6 +2012,7 @@ export interface FileRouteTypes {
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
+    | '/masters/organization/fiscal_year/$id'
     | '/masters/organization/state/$id'
     | '/masters/party/distributor/$id'
     | '/masters/party/supplier/$id'
@@ -1998,6 +2031,7 @@ export interface FileRouteTypes {
     | '/masters/organization/company/'
     | '/masters/organization/country/'
     | '/masters/organization/currency/'
+    | '/masters/organization/fiscal_year/'
     | '/masters/organization/state/'
     | '/masters/party/distributor/'
     | '/masters/party/supplier/'
@@ -2064,6 +2098,7 @@ export interface FileRouteTypes {
     | '/masters/organization/company'
     | '/masters/organization/country'
     | '/masters/organization/currency'
+    | '/masters/organization/fiscal_year'
     | '/masters/organization/state'
     | '/masters/party/distributor'
     | '/masters/party/supplier'
@@ -2082,7 +2117,6 @@ export interface FileRouteTypes {
     | '/masters/inventory/stock_unit'
     | '/masters/inventory/unique_quantity_code'
     | '/masters/organization/branch'
-    | '/masters/organization/financial_year'
     | '/masters/payroll/bank'
     | '/masters/payroll/cost_allocation_rule'
     | '/masters/payroll/cost_category'
@@ -2129,6 +2163,7 @@ export interface FileRouteTypes {
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
+    | '/masters/organization/fiscal_year/$id'
     | '/masters/organization/state/$id'
     | '/masters/party/distributor/$id'
     | '/masters/party/supplier/$id'
@@ -2218,6 +2253,8 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/organization/_layout/country/_layout'
     | '/_authenticated/masters/organization/_layout/currency'
     | '/_authenticated/masters/organization/_layout/currency/_layout'
+    | '/_authenticated/masters/organization/_layout/fiscal_year'
+    | '/_authenticated/masters/organization/_layout/fiscal_year/_layout'
     | '/_authenticated/masters/organization/_layout/state'
     | '/_authenticated/masters/organization/_layout/state/_layout'
     | '/_authenticated/masters/party/_layout/distributor'
@@ -2247,7 +2284,6 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/inventory/_layout/stock_unit/'
     | '/_authenticated/masters/inventory/_layout/unique_quantity_code/'
     | '/_authenticated/masters/organization/_layout/branch/'
-    | '/_authenticated/masters/organization/_layout/financial_year/'
     | '/_authenticated/masters/payroll/_layout/bank/'
     | '/_authenticated/masters/payroll/_layout/cost_allocation_rule/'
     | '/_authenticated/masters/payroll/_layout/cost_category/'
@@ -2295,6 +2331,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/organization/_layout/company/_layout/$id'
     | '/_authenticated/masters/organization/_layout/country/_layout/$id'
     | '/_authenticated/masters/organization/_layout/currency/_layout/$id'
+    | '/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id'
     | '/_authenticated/masters/organization/_layout/state/_layout/$id'
     | '/_authenticated/masters/party/_layout/distributor/_layout/$id'
     | '/_authenticated/masters/party/_layout/supplier/_layout/$id'
@@ -2313,6 +2350,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/organization/_layout/company/_layout/'
     | '/_authenticated/masters/organization/_layout/country/_layout/'
     | '/_authenticated/masters/organization/_layout/currency/_layout/'
+    | '/_authenticated/masters/organization/_layout/fiscal_year/_layout/'
     | '/_authenticated/masters/organization/_layout/state/_layout/'
     | '/_authenticated/masters/party/_layout/distributor/_layout/'
     | '/_authenticated/masters/party/_layout/supplier/_layout/'
@@ -2752,6 +2790,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutStateRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutRoute
     }
+    '/_authenticated/masters/organization/_layout/fiscal_year': {
+      id: '/_authenticated/masters/organization/_layout/fiscal_year'
+      path: '/fiscal_year'
+      fullPath: '/masters/organization/fiscal_year'
+      preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearRouteImport
+      parentRoute: typeof AuthenticatedMastersOrganizationLayoutRoute
+    }
     '/_authenticated/masters/organization/_layout/currency': {
       id: '/_authenticated/masters/organization/_layout/currency'
       path: '/currency'
@@ -3165,13 +3210,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersPayrollLayoutBankIndexRouteImport
       parentRoute: typeof AuthenticatedMastersPayrollLayoutRoute
     }
-    '/_authenticated/masters/organization/_layout/financial_year/': {
-      id: '/_authenticated/masters/organization/_layout/financial_year/'
-      path: '/financial_year'
-      fullPath: '/masters/organization/financial_year'
-      preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRouteImport
-      parentRoute: typeof AuthenticatedMastersOrganizationLayoutRoute
-    }
     '/_authenticated/masters/organization/_layout/branch/': {
       id: '/_authenticated/masters/organization/_layout/branch/'
       path: '/branch'
@@ -3312,6 +3350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutStateRoute
     }
+    '/_authenticated/masters/organization/_layout/fiscal_year/_layout': {
+      id: '/_authenticated/masters/organization/_layout/fiscal_year/_layout'
+      path: '/fiscal_year'
+      fullPath: '/masters/organization/fiscal_year'
+      preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteImport
+      parentRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearRoute
+    }
     '/_authenticated/masters/organization/_layout/currency/_layout': {
       id: '/_authenticated/masters/organization/_layout/currency/_layout'
       path: '/currency'
@@ -3445,6 +3490,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutIndexRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutRoute
     }
+    '/_authenticated/masters/organization/_layout/fiscal_year/_layout/': {
+      id: '/_authenticated/masters/organization/_layout/fiscal_year/_layout/'
+      path: '/'
+      fullPath: '/masters/organization/fiscal_year/'
+      preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRouteImport
+      parentRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute
+    }
     '/_authenticated/masters/organization/_layout/currency/_layout/': {
       id: '/_authenticated/masters/organization/_layout/currency/_layout/'
       path: '/'
@@ -3570,6 +3622,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/organization/state/$id'
       preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutIdRouteImport
       parentRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutRoute
+    }
+    '/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id': {
+      id: '/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/organization/fiscal_year/$id'
+      preLoaderRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRouteImport
+      parentRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute
     }
     '/_authenticated/masters/organization/_layout/currency/_layout/$id': {
       id: '/_authenticated/masters/organization/_layout/currency/_layout/$id'
@@ -4175,6 +4234,39 @@ const AuthenticatedMastersOrganizationLayoutCurrencyRouteWithChildren =
     AuthenticatedMastersOrganizationLayoutCurrencyRouteChildren,
   )
 
+interface AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren {
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
+}
+
+const AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren: AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren =
+  {
+    AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute:
+      AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIdRoute,
+    AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute:
+      AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute,
+  }
+
+const AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute._addFileChildren(
+    AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren,
+  )
+
+interface AuthenticatedMastersOrganizationLayoutFiscal_yearRouteChildren {
+  AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
+}
+
+const AuthenticatedMastersOrganizationLayoutFiscal_yearRouteChildren: AuthenticatedMastersOrganizationLayoutFiscal_yearRouteChildren =
+  {
+    AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRoute:
+      AuthenticatedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren,
+  }
+
+const AuthenticatedMastersOrganizationLayoutFiscal_yearRouteWithChildren =
+  AuthenticatedMastersOrganizationLayoutFiscal_yearRoute._addFileChildren(
+    AuthenticatedMastersOrganizationLayoutFiscal_yearRouteChildren,
+  )
+
 interface AuthenticatedMastersOrganizationLayoutStateLayoutRouteChildren {
   AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutIdRoute
   AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute: typeof AuthenticatedMastersOrganizationLayoutStateLayoutIndexRoute
@@ -4212,9 +4304,9 @@ interface AuthenticatedMastersOrganizationLayoutRouteChildren {
   AuthenticatedMastersOrganizationLayoutCompanyRoute: typeof AuthenticatedMastersOrganizationLayoutCompanyRouteWithChildren
   AuthenticatedMastersOrganizationLayoutCountryRoute: typeof AuthenticatedMastersOrganizationLayoutCountryRouteWithChildren
   AuthenticatedMastersOrganizationLayoutCurrencyRoute: typeof AuthenticatedMastersOrganizationLayoutCurrencyRouteWithChildren
+  AuthenticatedMastersOrganizationLayoutFiscal_yearRoute: typeof AuthenticatedMastersOrganizationLayoutFiscal_yearRouteWithChildren
   AuthenticatedMastersOrganizationLayoutStateRoute: typeof AuthenticatedMastersOrganizationLayoutStateRouteWithChildren
   AuthenticatedMastersOrganizationLayoutBranchIndexRoute: typeof AuthenticatedMastersOrganizationLayoutBranchIndexRoute
-  AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute: typeof AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute
 }
 
 const AuthenticatedMastersOrganizationLayoutRouteChildren: AuthenticatedMastersOrganizationLayoutRouteChildren =
@@ -4225,12 +4317,12 @@ const AuthenticatedMastersOrganizationLayoutRouteChildren: AuthenticatedMastersO
       AuthenticatedMastersOrganizationLayoutCountryRouteWithChildren,
     AuthenticatedMastersOrganizationLayoutCurrencyRoute:
       AuthenticatedMastersOrganizationLayoutCurrencyRouteWithChildren,
+    AuthenticatedMastersOrganizationLayoutFiscal_yearRoute:
+      AuthenticatedMastersOrganizationLayoutFiscal_yearRouteWithChildren,
     AuthenticatedMastersOrganizationLayoutStateRoute:
       AuthenticatedMastersOrganizationLayoutStateRouteWithChildren,
     AuthenticatedMastersOrganizationLayoutBranchIndexRoute:
       AuthenticatedMastersOrganizationLayoutBranchIndexRoute,
-    AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute:
-      AuthenticatedMastersOrganizationLayoutFinancial_yearIndexRoute,
   }
 
 const AuthenticatedMastersOrganizationLayoutRouteWithChildren =

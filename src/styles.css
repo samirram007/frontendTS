@@ -298,3 +298,11 @@ textarea::selection {
 .border-inside-all div {
   @apply border-[0.5px] border-gray-900;
 }
+[data-slot="sheet-overlay"] {
+  @apply bg-black/5! ; 
+   
+} 
+[data-slot="sheet-content"] {
+  @apply duration-200!; 
+   
+} 

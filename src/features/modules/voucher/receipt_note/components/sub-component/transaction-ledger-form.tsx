@@ -11,12 +11,12 @@ import VoucherDispatchDetail from "./voucher-dispatch-detail"
 
 
 
-type FormProps = {
+// type FormProps = {
 
-    tabIndex?: number;
-};
-const TransactionLedgerForm = (props: FormProps) => {
-    const { tabIndex } = props as FormProps;
+//     tabIndex?: number;
+// };
+const TransactionLedgerForm = () => {
+// const { tabIndex } = props as FormProps;
     const form = useFormContext<ReceiptNoteForm>()
     const { data: transactionLedgers, isLoading } = useQuery({
         queryKey: ["accountLedgers", "stock_in_hand"],
@@ -26,7 +26,7 @@ const TransactionLedgerForm = (props: FormProps) => {
     if (isLoading) {
         return <div>Loading...</div>
     }
-    console.log(tabIndex)
+    // console.log(tabIndex)
     return (
         <>
             <FormField

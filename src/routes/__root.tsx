@@ -1,7 +1,6 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 
 
-import TanstackQueryLayout from '../integrations/tanstack-query/layout'
 
 import { NavigationProgress } from '@/components/navigation-progress'
 import type { MyRouterContext } from '@/core/contexts/MyRouterContext'
@@ -15,7 +14,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     <>
       <NavigationProgress /> 
       <Outlet />
-      <TanstackQueryLayout />
+      {/* <TanstackQueryLayout /> */}
     </>
   ),
 

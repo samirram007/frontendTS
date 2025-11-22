@@ -15,6 +15,7 @@ export async function storeReceiptNoteService(payload: any) {
     return await postData(API_PATH, payload)
 }
 export async function updateReceiptNoteService(payload: any) {
+    console.log("Updatable Payload: ", payload)
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 

@@ -53,8 +53,7 @@ export default function SidebarNav({
         </Select>
       </div>
 
-      <ScrollArea 
-        type='auto'
+      <ScrollArea  
         className='bg-background hidden w-full min-w-40 px-1 py-2 md:block'
       >
         <nav

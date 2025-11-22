@@ -16,6 +16,7 @@
     "dev:server": "tsx   src/server.ts"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-beta.6",
     "@faker-js/faker": "^9.6.0",
     "@hookform/resolvers": "^5.1.0",
     "@radix-ui/react-alert-dialog": "^1.1.14",

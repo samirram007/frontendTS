@@ -3,8 +3,10 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
 import { Label } from "@/components/ui/label"
+import { useFocusArea } from "@/core/hooks/useFocusArea"
+import { useRestrictFocusToRef } from "@/core/hooks/useRestrictFocusToRef"
 import { cn } from "@/lib/utils"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useForm, useFormContext } from "react-hook-form"
 import { toast } from "sonner"
 import type { PartyForm, ReceiptNoteForm } from "../../../data/schema"
@@ -14,7 +16,10 @@ import { StateCombobox } from "./state"
 
 
 const PartyDetails = () => {
+    const partyRef = useRef<HTMLDivElement>(null);
     const form = useFormContext<ReceiptNoteForm>();
+    useFocusArea(partyRef as React.RefObject<HTMLElement>);
+    useRestrictFocusToRef(partyRef as React.RefObject<HTMLElement>);
     const [open, onOpenChange] = useState(false);
     const gapClass = 'grid grid-cols-[200px_1fr] gap-4';
     const partyForm = useForm<PartyForm>({
@@ -51,7 +56,7 @@ const PartyDetails = () => {
                         Click Save changes to save your party details.
                     </DialogDescription>
                 </DialogHeader>
-                <div className='-mr-4 h-full w-full  overflow-y-auto py-1 pr-4'>
+                <div ref={partyRef} className='-mr-4 h-full w-full  overflow-y-auto py-1 pr-4'>
                     <Form {...partyForm}>
                         <div className="flex flex-col justify-between gap-12 ">
 
@@ -113,7 +118,7 @@ const PartyDetails = () => {
                     </Form>
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleOnClick}  >
+                    <Button onClick={handleOnClick} className="h-8 focus:bg-black focus:text-white"  >
                         Save changes
                     </Button>
                 </DialogFooter>

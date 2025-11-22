@@ -30,7 +30,7 @@ export default function DayBook({ data }: DayBookProps) {
                     <div>
                         <h2 className='text-2xl font-bold tracking-tight'>Day Book</h2>
                         <p className='text-muted-foreground'>
-                            Manage your application modules.
+                            Manage your day book.
                         </p>
                     </div>
                     {/* <PrimaryButtons /> */}

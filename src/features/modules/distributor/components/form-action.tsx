@@ -55,7 +55,7 @@ export function FormAction({ currentRow }: Props) {
                 gstin: '',
                 pan: '',
                 status: 'active',
-                accountGroupId: 4,
+                accountGroupId: 10008,
                 contactPerson: '',
                 contactNo: '',
                 phone: '',
@@ -147,7 +147,7 @@ export function FormAction({ currentRow }: Props) {
 
             <DialogFooter className='flex flex-row justify-end! py-4 border-t-2 border-orange-900/50 max-w-full w-[95%] text-center'>
 
-                <Button type='submit' className='self-center' form='user-form'
+                <Button type='submit' className='self-center focus:bg-black focus:text-white' form='user-form'
                     disabled={isPending}>
                     {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                     {isPending ? "Saving..." : "Save changes"}

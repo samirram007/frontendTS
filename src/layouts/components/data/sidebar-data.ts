@@ -183,43 +183,49 @@ export const sidebarData: SidebarData = {
     },
     {
       title: 'Masters',
-      visible: false,
+      visible: true,
       items: [
         {
           title: 'Organization',
+          visible: true,
           icon: IconAccessPoint,
           items: [
             {
               title: 'Company',
               url: '/masters/organization/company',
+              visible: true,
               icon: IconUserCog,
             },
             {
               title: 'Branch',
               url: '/masters/organization/branch',
+              visible: false,
               icon: IconUserCog,
             },
             {
-              title: 'Financial Year',
-              url: '/masters/organization/financial_year',
+              title: 'Fiscal Year',
+              url: '/masters/organization/fiscal_year',
+              visible: false,
               icon: IconUserCog,
             },
             {
               title: 'Currency',
               url: '/masters/organization/currency',
+              visible: true,
               icon: IconUserCog,
             },
             {
               title: 'Country',
               url: '/masters/organization/country',
+              visible: true,
               icon: IconUserCog,
             },
             {
               title: 'State',
               url: '/masters/organization/state',
+              visible: true,
               icon: IconUserCog,
             },
-
 
           ]
         },

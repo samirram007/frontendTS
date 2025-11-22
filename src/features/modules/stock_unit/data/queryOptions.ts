@@ -1,7 +1,8 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query";
-import { fetchStockUnitService } from "./api";
+import { fetchStockUnitService, storeStockUnitService, updateStockUnitService } from "./api";
 import type { StockUnit } from "./schema";
 const Key = "StockUnits"
+const BASE_KEY = "stock_units"
 export const stockUnitQueryOptions = (key: string = Key) => {
     return queryOptions({
         queryKey: [key],
@@ -11,19 +12,22 @@ export const stockUnitQueryOptions = (key: string = Key) => {
     })
 }
 
-export const stockUnitMuatationOptions = (payload: StockUnit, key: string = Key) => {
-    const queryClient = useQueryClient()
-    useMutation({
-        mutationKey: [key],
-        mutationFn: async () => {
-            // Here you can call your API to create or update the stock unit
-            // For example:
-            // return await createOrUpdateStockUnitService(payload);
-            return payload; // Placeholder, replace with actual API call
+export const useStockUnitMutation = () => {
+    const queryClient = useQueryClient() 
+    return useMutation({
+        mutationFn: async (data: StockUnit & { id?: number }) => {
+            if (data.id) {
+                // Update if id exists
+                return await updateStockUnitService(data)
+            }
+            // Otherwise create
+            return await storeStockUnitService(data)
         },
         onSuccess: () => {
-            // Invalidate and refetch
-            queryClient.invalidateQueries({ queryKey: [key] })
-        }
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+        },
+        onError: (error) => {
+            console.error("Stock Item mutation failed:", error)
+        },
     })
 }

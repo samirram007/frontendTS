@@ -13,14 +13,18 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
+import { useFocusNext } from "@/core/hooks/useFocusNext"
 import type { PartyLedger } from "../../../data-schema/partyLedger/data/schema"
 import type { PartyForm, ReceiptNoteForm } from "../../data/schema"
 
@@ -32,6 +36,7 @@ interface Props {
 
 export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
     const form = useFormContext<ReceiptNoteForm>()
+    const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('partyLedger.id')?.toString())
     const [enterCount, setEnterCount] = React.useState(0)
@@ -57,6 +62,7 @@ export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
         setValue(value)
         setOpen(false);
         setEnterCount(1)
+        focusNext();
     }
     const frameworks = partyLedgers?.map((partyLedger: PartyLedger) => ({
         label: capitalizeAllWords(partyLedger.name!),
@@ -114,8 +120,8 @@ export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
     //     }
     // }, [enterCount])
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
                 <Button 
                     variant="outline"
                     role="combobox"
@@ -129,8 +135,14 @@ export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
                         : "Select party..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="popover-content-width-same-as-trigger p-0">
+            </SheetTrigger>
+            <SheetContent className="sheet-content-width-same-as-trigger p-0">
+                <SheetHeader>
+                    <SheetTitle>Search Party</SheetTitle>
+                    <SheetDescription>
+                        Select the party ledger for this receipt note.
+                    </SheetDescription>
+                </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search party..." />
                     <CommandList>
@@ -156,7 +168,7 @@ export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
                         </CommandGroup>
                     </CommandList>
                 </Command>
-            </PopoverContent>
-        </Popover>
+            </SheetContent>
+        </Sheet>
     )
 }

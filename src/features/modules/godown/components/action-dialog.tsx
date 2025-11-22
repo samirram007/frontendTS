@@ -20,6 +20,7 @@ import FormInputField from '@/components/form-input-field'
 import { useForm } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
+import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Loader2 } from 'lucide-react'
 import { useGodownMutation } from '../data/queryOptions'
 import { formSchema, type Godown, type GodownForm } from '../data/schema'
@@ -49,6 +50,8 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         parentId: 1,
         address: undefined,
         status: 'active',
+        ourStockWithThirdParty: false,
+        thirdPartyStockWithUs: false,
         isEdit,
       },
   })
@@ -57,8 +60,9 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
 
   const moduleName = "Godown"
   const onSubmit = (values: GodownForm) => {
+    console.log(values)
     form.reset()
-    //showSubmittedData(values)
+    showSubmittedData(values)
     saveGodown(
       currentRow ? { ...values, id: currentRow.id } : values
     )

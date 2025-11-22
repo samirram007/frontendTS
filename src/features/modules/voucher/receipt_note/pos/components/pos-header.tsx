@@ -14,11 +14,7 @@ const PosHeader = () => {
 
 
     const voucherDate = form.watch("voucherDate")
-    // const party = form.watch("party")
 
-    // const inputValue = voucherDate
-    //     ? formatDateForInput(new Date(voucherDate))
-    //     : formatDateForInput(new Date()) // today in local timezone
     const dayName = voucherDate
         ? new Date(voucherDate).toLocaleDateString("en-US", { weekday: "long" })
         : ""
@@ -66,7 +62,7 @@ const PosHeader = () => {
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
                     <PartyLedgerForm tabIndex={3} />
-                    <TransactionLedgerForm tabIndex={4} />
+                    <TransactionLedgerForm />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">
@@ -87,7 +83,6 @@ export default PosHeader
 
 type DateBoxProps = {
     form: UseFormReturn<ReceiptNoteForm>,
-
     name: keyof ReceiptNoteForm
     tabIndex?: number
 }
@@ -130,7 +125,6 @@ const DateBox = (props: DateBoxProps) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             e.preventDefault();
-
             parseDate();
         }
     };

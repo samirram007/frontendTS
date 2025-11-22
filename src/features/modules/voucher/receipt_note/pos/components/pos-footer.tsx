@@ -91,7 +91,7 @@ const PosFooter = () => {
     }, [total]);
 
     const handleSaving = () => {
-        console.log('Form submitted', mainForm.getValues());
+        // console.log('Form submitted', mainForm.getValues());
         createReceiptNote(mainForm.getValues())
     }
 
@@ -100,7 +100,8 @@ const PosFooter = () => {
             <div className="grid ">
 
 
-                <Button
+                <Button autoFocus={true} variant="outline" className="w-full h-20 text-left"
+
                     type="button" asChild onClick={() => {
                         console.log('Form submitted', mainForm.getValues());
                         createReceiptNote(mainForm.getValues());

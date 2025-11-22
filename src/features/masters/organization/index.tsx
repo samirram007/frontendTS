@@ -53,10 +53,10 @@ const sidebarNavItems = [
         href: '/masters/organization/branch',
     },
     {
-        title: 'Financial Year',
+        title: 'Fiscal Year',
         visible: true,
         icon: <IconUser size={18} />,
-        href: '/masters/organization/financial_year',
+        href: '/masters/organization/fiscal_year',
     },
 
     {

@@ -96,13 +96,18 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
         };
 
     }, [JSON.stringify(stockJournalGodownEntries)]);
+
+
+
     const handleGodownEntryAdd = () => {
         // const lastEntry = fields[fields.length - 1];
         // console.log("Last Entry: ", lastEntry)
-        // if (lastEntry && Number(lastEntry.amount) === 0) {
-        //     stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${fields.length - 1}.godownId`);
-        //     return;
-        // }
+        const hasZeroValue = stockJournalEntryForm.getValues('stockJournalGodownEntries').some((entry: any) => Number(entry.amount) === 0);
+        if (hasZeroValue) {
+            stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${fields.length - 1}.godownId`);
+            return;
+        }
+
 
         append(stockJournalGodownEntryDefaultValues as StockJournalGodownEntryForm);
         setAddGodownButtonVisible?.(false);

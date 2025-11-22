@@ -13,10 +13,14 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
+
 import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
@@ -33,13 +37,15 @@ interface StockItemComboboxProps {
 }
 export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemComboboxProps) => {
     const form = useFormContext<StockJournalEntryForm>()
+
+    const selectedId = form.watch('stockItemId')?.toString()
     const [open, setOpen] = React.useState(false)
     // const index = currentIndex
     // const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
-    const selectedId = form.watch('stockItemId')?.toString()
     const handleSelect = (value: string) => {
         if (value === '-1') {
             handleRemove?.();
+
             return
         }  
         const selected = stockItems.find((i) => i.id === Number(value));
@@ -52,7 +58,7 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
         form.setValue(`rateUnitId`, selected?.stockUnitId)
         form.setValue(`discountPercentage`, 0)
         form.setValue(`discount`, (form.getValues(`rate`)! * form.getValues(`discountPercentage`)! / 100 * selected?.standardCost! * quantity))
-        form.setValue(`amount`, (selected?.standardCost! * quantity - form.getValues(`discount`)!))
+        form.setValue(`amount`, Number((selected?.standardCost! * quantity - form.getValues(`discount`)!).toFixed(2)))
 
         // ✅ Safely update nested field value by index
         // console.log(form.getValues('stockJournal'), index, "index")
@@ -61,6 +67,21 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
 
         // setValue(value);
         setOpen(false);
+
+        // requestAnimationFrame(() => {
+        //     const focusable = Array.from(
+        //         document.querySelectorAll<
+        //             HTMLElement
+        //         >('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        //     ).filter(el => !el.hasAttribute("disabled"));
+
+        //     const current = document.activeElement;
+        //     const index = focusable.indexOf(current as HTMLElement);
+
+        //     if (index >= 0 && index < focusable.length - 1) {
+        //         focusable[index + 1].focus();
+        //     }
+        // });
     };
 
     const frameworks = [
@@ -89,8 +110,8 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
 
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
                 <Button
                     variant="outline"
                     role="combobox"
@@ -101,8 +122,14 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="popover-content-width-same-as-trigger p-0">
+            </SheetTrigger>
+            <SheetContent className="min-w-[450px]! p-0">
+                <SheetHeader>
+                    <SheetTitle>Search Item</SheetTitle>
+                    <SheetDescription>
+                        Select the stock item for this entry.
+                    </SheetDescription>
+                </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
                     <CommandList>
@@ -135,7 +162,7 @@ export const StockItemCombobox = ({ stockItems, handleRemove }: StockItemCombobo
                         </CommandGroup>
                     </CommandList>
                 </Command>
-            </PopoverContent>
-        </Popover>
+            </SheetContent>
+        </Sheet>
     )
 }

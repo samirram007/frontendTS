@@ -4,15 +4,21 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useFocusArea } from "@/core/hooks/useFocusArea"
+import { useRestrictFocusToRef } from "@/core/hooks/useRestrictFocusToRef"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useForm, useFormContext, type UseFormReturn } from "react-hook-form"
 import { toast } from "sonner"
 import type { ReceiptNoteForm, VoucherDispatchDetailForm } from "../../../data/schema"
 
 
 const VoucherDispatchDetail = () => {
+    const dispatchRef = useRef<HTMLDivElement>(null);
     const form = useFormContext<ReceiptNoteForm>();
+    useFocusArea(dispatchRef as React.RefObject<HTMLElement>);
+    useRestrictFocusToRef(dispatchRef as React.RefObject<HTMLElement>);
+
     const [open, onOpenChange] = useState(false);
     const gapClass01 = 'grid grid-cols-[100px_200px] gap-4';
     const gapClass02 = 'grid grid-cols-[200px_200px] gap-4';
@@ -43,18 +49,18 @@ const VoucherDispatchDetail = () => {
             }} >
             <DialogTrigger asChild>
                 <Button variant="outline" size={'sm'} className="py-1! px-2! focus:bg-black focus:text-white">
-                    Dispatch Details</Button>
+                    Receipt Details</Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-[64rem]'>
                 <DialogHeader className='text-left border-b-2 pb-2'>
                     <VisuallyHidden>
-                        <DialogTitle>Dispatch Details</DialogTitle>
+                        <DialogTitle>Receipt Details</DialogTitle>
                     </VisuallyHidden>
                     <DialogDescription>
-                        Click Save changes to save your dispatch details.
+                        Click Save changes to save your receipt details.
                     </DialogDescription>
                 </DialogHeader>
-                <div className='-mr-4 h-full w-full  overflow-y-auto py-1 pr-4'>
+                <div ref={dispatchRef} className='-mr-4 h-full w-full  overflow-y-auto py-1 pr-4'>
                     <Form {...voucherDisplayDispatchForm}>
                         <div className="flex flex-col justify-between gap-12 ">
 
@@ -110,7 +116,7 @@ const VoucherDispatchDetail = () => {
                     </Form>
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleOnClick}  >
+                    <Button onClick={handleOnClick} className="h-8 focus:bg-black focus:text-white"  >
                         Save changes
                     </Button>
                 </DialogFooter>

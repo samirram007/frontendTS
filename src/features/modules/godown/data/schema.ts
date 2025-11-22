@@ -9,7 +9,7 @@ export const godownSchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
   code: z.string().min(1),
-  description: z.string().optional(),
+  description: z.string().nullish(),
   status: ActiveInactiveStatusSchema,
   parentId: z.number().int().positive().optional().nullish(),
   parent: z.lazy(() => godownSchema).optional().nullish(),
@@ -36,7 +36,7 @@ export const formSchema = z
       .string()
       .min(1, { message: 'Status is required.' }),
     parentId: z.number().int().positive().optional().nullish(),
-    description: z.string().min(1, { message: 'Description is required.' }),
+    description: z.string().nullish(),
     address: z.lazy(() => addressSchema).nullable().nullish(),
     ourStockWithThirdParty: z.boolean(),
     thirdPartyStockWithUs: z.boolean(),

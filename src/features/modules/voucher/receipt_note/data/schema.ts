@@ -1,3 +1,5 @@
+import { companySchema } from '@/features/modules/company/data/schema';
+import { fiscalYearSchema } from '@/features/modules/fiscal_year/data/schema';
 import { godownSchema } from '@/features/modules/godown/data/schema';
 import { stockItemSchema } from '@/features/modules/stock_item/data/schema';
 import { stockUnitSchema } from '@/features/modules/stock_unit/data/schema';
@@ -40,7 +42,7 @@ export const stockJournalEntrySchema = z.object({
   rateUnitId: z.number().int().positive().nullish(),
   rateUnitRatio: z.number().int().positive().nullish(),
   discountPercentage: z.number().int().positive().nullish(),
-  discount: z.number().int().positive().nullish(),
+  discount: z.coerce.number().int().positive().nullish(),
   amount: z.coerce.number().nullish(),
   movementType: z.string().min(1).nullish(),
   stockItem: z.lazy(() => stockItemSchema.nullish()),
@@ -143,7 +145,12 @@ export const receiptNoteSchema = z.object({
   transactionLedger: transactionLedgerSchema.nullish(),
   voucherDispatchDetail: voucherDispatchDetailSchema.nullish(),
   amount: z.coerce.number().nullish(),  
-  remarks: z.string().nullish()
+  remarks: z.string().nullish(),
+  companyId: z.number().int().nullish(),
+  fiscalYearId: z.number().int().nullish(),
+  company: companySchema.nullish(),
+  fiscalYear: fiscalYearSchema.nullish(),
+
 })
 export type ReceiptNoteSchema = z.infer<typeof receiptNoteSchema>
 export const receiptNoteListSchema = z.array(receiptNoteSchema)

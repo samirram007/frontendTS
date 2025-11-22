@@ -13,14 +13,18 @@ import {
     CommandList,
 } from "@/components/ui/command"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
 
+import { useFocusNext } from "@/core/hooks/useFocusNext"
 import type { TransactionLedger } from "../../../data-schema/transactinableStockItem/data/schema"
 import type { ReceiptNoteForm } from "../../data/schema"
 
@@ -29,7 +33,7 @@ interface Props {
     transactionLedgers: TransactionLedger[];
 }
 export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) => {
-
+    const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
 
@@ -37,6 +41,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
         form.setValue("transactionLedger.id", transactionLedgers.find((transactionLedger) => transactionLedger.id === Number(value))?.id!)
         setValue(value)
         setOpen(false)
+        focusNext();
     }
     const frameworks = transactionLedgers?.map((transactionLedger: TransactionLedger) => ({
         label: capitalizeAllWords(transactionLedger.name!),
@@ -46,8 +51,8 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
 
 
     return (
-        <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
                 <Button
                     variant="outline"
                     role="combobox"
@@ -59,9 +64,16 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                         : "Select stock ledger..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
-            </PopoverTrigger>
-            <PopoverContent className="popover-content-width-same-as-trigger p-0">
+            </SheetTrigger>
+            <SheetContent className="sheet-content-width-same-as-trigger p-0">
+                <SheetHeader>
+                    <SheetTitle>Search Stock Ledger</SheetTitle>
+                    <SheetDescription>
+                        Select the stock ledger for this receipt note.
+                    </SheetDescription>
+                </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
+
                     <CommandInput placeholder="Search purchase ledger..." />
                     <CommandList>
                         <CommandEmpty>No pary found.</CommandEmpty>
@@ -85,7 +97,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                         </CommandGroup>
                     </CommandList>
                 </Command>
-            </PopoverContent>
-        </Popover>
+            </SheetContent>
+        </Sheet>
     )
 }
