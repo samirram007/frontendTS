@@ -25,6 +25,9 @@ const LabTestList = () => {
     }, [totalAmount]);
 
 
+
+
+
     // on change of test date reporting date will change
     const handleTestDateChange = (id: number, e: React.HTMLInputTypeAttribute) => {
         const selectedTests = selectTestItemList.map((item) => item.testId == id ? { ...item, testDate: new Date(e) } : item);
@@ -92,21 +95,44 @@ const LabTestList = () => {
     }
 
 
+    const handleDiscountValueChange = (e: React.ChangeEvent<HTMLInputElement>, testId: number) => {
+        const { value } = e.target;
+        const itemAmount = selectTestItemList.find((item) => item.testId == testId)?.amount;
+        const rate = (Number(value) / Number(itemAmount)) * 100;
+        const itemTestList = selectTestItemList.map((item) => item.testId == testId ? { ...item, discountedValue: Number(value), rate: rate } : item);
+        setSelectTestItemList(itemTestList);
+        const totaldiscountedValue = itemTestList.reduce((acc, curr) => {
+            return acc + Number(curr.discountedValue);
+        }, 0);
+
+        const totalItemValue = itemTestList.reduce((acc, sum) => {
+            return acc + Number(sum.amount);
+        }, 0);
+
+        const totalNetAmount = totalItemValue - totaldiscountedValue;
+        setNetAmount(totalNetAmount);
+        setDiscountedAmount(totaldiscountedValue);
+        const currentDiscountRate = (totaldiscountedValue / totalItemValue) * 100
+        setDiscountRate(currentDiscountRate);
+    }
+
+
     return (
         <div className="my-5 min-h-[30vh] relative border-2 overflow-hidden border-gray-800 rounded">
-            <div className="grid grid-cols-[60px_1fr_150px_150px_120px_90px] px-3 border-b-1 font-semibold py-2 border-black">
-                <h1>Sl no.</h1>
-                <h1>Test Name</h1>
-                <h1>Test Date</h1>
-                <h1>Reporting Date</h1>
-                <h1 className="text-right pr-2">Amount</h1>
-                <h1 className="text-center">Action</h1>
+            <div className="grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px] px-3 border-b-1 font-semibold py-2 border-black">
+                <div>Sl no.</div>
+                <div>Test Name</div>
+                <div>Test Date</div>
+                <div>Reporting Date</div>
+                <div>Discount(INR)</div>
+                <div className="text-right pr-2">Amount</div>
+                <div className="text-center">Action</div>
             </div>
             <div className={`overflow-auto h-[30vh] ${selectTestItemList.length < 1 ? 'flex justify-center items-center' : ''}`}>
                 {
                     selectTestItemList.length > 0 ?
                         selectTestItemList.map((item, index) => (
-                            <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_150px_150px_120px_90px]  items-center">
+                            <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px]  items-center">
                                 <div className="py-2 px-2">
                                     <h1>{++index}</h1>
                                 </div>
@@ -118,6 +144,9 @@ const LabTestList = () => {
                                 </div>
                                 <div className="py-2">
                                     <input type="date" onChange={(e) => handleReportDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.reportDate).toISOString().split("T")[0]} />
+                                </div>
+                                <div className="py-2">
+                                    <input value={item.discountedValue} onChange={(e) => handleDiscountValueChange(e, item.testId)} className="border-[1px] px-2 border-black w-16" />
                                 </div>
                                 <div className="border-x-2 border-black">
                                     <h1 className="text-right py-2 pr-2">{Number(item.amount).toFixed(2)}</h1>
@@ -139,8 +168,8 @@ const LabTestList = () => {
                 }
             </div>
 
-            <div className="border-t-2 sticky bottom-0 left-0 w-full py-2 bg-gray-100 z-50 border-black grid grid-cols-[60px_1fr_200px_200px_150px_200px]">
-                <div className="text-right col-span-4">
+            <div className="border-t-2 sticky bottom-0 left-0 w-full py-2 bg-gray-100 z-50 border-black grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px]">
+                <div className="text-right col-span-5">
                     <h3>Amount</h3>
                 </div>
                 <div className="border-l-2 pl-2 pr-2 border-x-2` text-right px-4 ">

@@ -25,7 +25,7 @@ export default HeaderComponent
 const topNav = [
     {
         title: 'Overview',
-        href: 'dashboard/overview',
+        href: '/transactions/booking',
         isActive: true,
         disabled: false,
     },
@@ -36,14 +36,14 @@ const topNav = [
         disabled: true,
     },
     {
-        title: 'Report',
-        href: '/transactions/booking/report',
+        title: 'Test Reporting',
+        href: '/transactions/booking/test_report',
         isActive: false,
         disabled: true,
     },
     {
-        title: 'Settings',
-        href: '/dashboard/settings',
+        title: 'Business Report',
+        href: '/reports/business-report',
         isActive: false,
         disabled: true,
     },

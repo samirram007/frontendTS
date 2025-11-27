@@ -22,7 +22,7 @@ const paramsSchema = z.object({
 
 
 export const Route = createFileRoute(
-  '/_authenticated/transactions/booking/_layout/report/$id',
+  '/_authenticated/transactions/booking/_layout/test_report/$id',
 )({
     params:{
         parse: (params) => paramsSchema.parse(params),

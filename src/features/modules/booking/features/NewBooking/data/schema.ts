@@ -2,30 +2,31 @@ import type { IResponseInterface } from "../../../data/schema";
 import type { ITestItem } from "../features/LabTestsFeature/data/schema";
 import type { AddressType, IPatient } from "../features/CreatePatientFeature/data/schema";
 import type { IVoucher } from "../../BookingList/data/schema";
-import {z} from "zod";
+import { z } from "zod";
 
 
 type MovementType = "in" | "out";
 type StatusType = "active" | "inactive"
+// type JobOrderStatus = "booked" | "collect_specimen" | "sample_collected" | "in_process" | "completed" | "deliver_to_desk" | "delivered" | "cancelled" | "drafted" | "cancellation_requested" ;
 
 export interface IJobOrder {
-  id: number;
-  patientId: number;
-  voucherId: number;
-  status: 'sample_collected' | 'pending' | 'completed' | 'cancelled' | string; // you can narrow down further if needed
-  paymentStatus: 'paid' | 'partial' | 'unpaid' | string;
-  bookedDate: string | null;
-  expectedDeliveryDate: string | null;
-  report_generated_date: string | null;
-  report_delivered_date: string | null;
-  cancelled_date: string | null;
-  report_file_path: string | null;
-  remarks: string | null;
+    id: number;
+    patientId: number;
+    voucherId: number;
+    status: 'sample_collected' | 'pending' | 'completed' | 'cancelled' | string; // you can narrow down further if needed
+    paymentStatus: 'paid' | 'partial' | 'unpaid' | string;
+    bookedDate: string | null;
+    expectedDeliveryDate: string | null;
+    report_generated_date: string | null;
+    report_delivered_date: string | null;
+    cancelled_date: string | null;
+    report_file_path: string | null;
+    remarks: string | null;
 }
 
 
 //  Stock Journal
-export interface IStockJournal{
+export interface IStockJournal {
     id: number,
     journalNo: string,
     journalDate: string,
@@ -35,7 +36,7 @@ export interface IStockJournal{
 }
 
 // Stock Journal Entry
-export interface IStockJournalEntry{
+export interface IStockJournalEntry {
     id: number,
     stockJournalId: number,
     stockItemId: number,
@@ -45,16 +46,20 @@ export interface IStockJournalEntry{
     reportDate: Date,
     unitRatio: string,
     itemCost: string,
+    discountPercentage: number,
+    discountValue: number,
+    netDiscountedAmount: number,
+    isCancelled: boolean,
     rate: string,
     movementType: MovementType,
     godownId: unknown | null,
     stockItem: IStockItem,
     stockUnit: IStockUnit,
-    jobOrder:IJobOrder | null
+    jobOrder: IJobOrder | null
 }
 
 
-export interface IStockCategory{
+export interface IStockCategory {
     id: number,
     name: string,
     code: string,
@@ -63,7 +68,7 @@ export interface IStockCategory{
     parentId: number | null
 }
 
-export interface IStockGroup{
+export interface IStockGroup {
     id: number,
     name: string,
     code: string,
@@ -74,7 +79,7 @@ export interface IStockGroup{
 }
 
 // Stock Item
-export interface IStockItem{
+export interface IStockItem {
     id: number,
     name: string,
     code: string,
@@ -125,7 +130,7 @@ export interface IStockItem{
 }
 
 
-export interface IStockUnit{
+export interface IStockUnit {
     id: number,
     name: string,
     code: string,
@@ -141,7 +146,7 @@ export interface IStockUnit{
     noOfDecimalPlaces: number
 }
 
-export interface IVoucherEntry{
+export interface IVoucherEntry {
     id: number,
     voucherId: number,
     entryOrder: number,
@@ -152,7 +157,7 @@ export interface IVoucherEntry{
     accountLedger: IAccountLedger
 }
 
-export interface IAccountLedger{
+export interface IAccountLedger {
     id: number,
     name: string,
     code: string,
@@ -162,14 +167,14 @@ export interface IAccountLedger{
     accountGroupId: number
 }
 
-export interface IVoucherReference{
+export interface IVoucherReference {
     id: number,
     voucherId: number,
     voucherReferenceId: number | null,
     voucher: IVoucher,
 }
 
-export interface IVoucherPatient{
+export interface IVoucherPatient {
     id: number,
     voucherId: number,
     patientId: number,
@@ -203,33 +208,34 @@ export interface IVoucherPatient{
     address?: AddressType
 }
 
-  
-        
-            
-            
+
+
+
+
 
 // booking payload
-export interface IBookingTest{
+export interface IBookingTest {
     bookingDate: Date,
     patientId: number,
-    agentId?:number | null ,
+    agentId?: number | null,
     physicianId?: number | null,
     tests: ITestItem[],
     discountTypeId?: number | null,
-    sampleCollectorId?:number | null,
-    rate?:number
+    sampleCollectorId?: number | null,
+    rate?: number,
+    discountPercentage?: Number | null
 }
 
 
-interface ITests{
+interface ITests {
     testName: string,
     testDate: Date,
     reportDate: Date,
     rate: string
 }
 
-export interface IBookingTestResponse extends IResponseInterface{
-    data:{
+export interface IBookingTestResponse extends IResponseInterface {
+    data: {
         bookingId: string,
         bookingDate: Date,
         totalAmount: number,
@@ -244,7 +250,7 @@ export interface IBookingTestResponse extends IResponseInterface{
 
 
 
-export interface IBooking{
+export interface IBooking {
     id: number,
     voucherNo: string,
     voucherDate: string,
@@ -263,7 +269,7 @@ export interface IBooking{
 
 
 
-export interface IBookingResponse extends IResponseInterface{
+export interface IBookingResponse extends IResponseInterface {
     data: IBooking
 }
 

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import type { IBookingPaymentSchema, IJobOrderStoreSchema } from "./schema";
-import { deleteRequestTest, storeBookingPaymentService, storeJobOrderService, updateJobOrderService } from "./api";
+import type { IBookingPaymentSchema, IJobOrderStoreSchema, ITestCancelRequest } from "./schema";
+import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, updateJobOrderService } from "./api";
 import { showErrors } from "@/utils/dataClient";
 
 
@@ -24,8 +24,21 @@ export function useBookingPaymentMutation() {
 
 export function useTestBookingCancelMutation() {
     return useMutation({
-        mutationFn: async (id: number) => {
-            return await deleteRequestTest(id);
+        mutationFn: async (payload: ITestCancelRequest) => {
+            return await deleteRequestTest(payload);
+        },
+        onError: (error) => {
+            showErrors(error);
+
+        },
+    })
+}
+
+
+export function useTestBookingRefundRequestMutation() {
+    return useMutation({
+        mutationFn: async (payload: ITestCancelRequest) => {
+            return await refundRequestTest(payload);
         },
         onError: (error) => {
             showErrors(error);

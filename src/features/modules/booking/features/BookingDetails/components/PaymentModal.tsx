@@ -22,19 +22,19 @@ import { toast } from "sonner";
 
 
 
-function PaymentNullScreen(){
-    return(
+function PaymentNullScreen() {
+    return (
         <div className="w-full h-full flex justify-center items-center">
             <h1>No Payment method selected</h1>
         </div>
     )
 }
 
-function createPayload(amount:number,payMethod:PaymentTypeSchema | null,data?: IBooking | null):IBookingPaymentSchema | null{
+function createPayload(amount: number, payMethod: PaymentTypeSchema | null, data?: IBooking | null): IBookingPaymentSchema | null {
     const CASH_LEDGER = 1000001;
     const BANK_LEDGER = 1000002;
-    if(data){
-        const paymentPayload:IBookingPaymentSchema={
+    if (data) {
+        const paymentPayload: IBookingPaymentSchema = {
             voucherId: data.id,
             amount: amount,
             patientId: data.voucherPatient.patientId,
@@ -45,7 +45,7 @@ function createPayload(amount:number,payMethod:PaymentTypeSchema | null,data?: I
     return null;
 }
 
-interface PayAndBookInterface{
+interface PayAndBookInterface {
     button: any,
 }
 
@@ -53,25 +53,25 @@ interface PayAndBookInterface{
 
 
 
-export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button}) =>{
+export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button }) => {
 
-    const {paymentMethod,setPaymentMethod,receivingAmount,setReceivingAmount} = usePayment();
-    const [open,setOpen] = useState<boolean>(false);
-    const {bookingDetail} = useBookingDetail();
-    const {mutate} = useBookingPaymentMutation();
-    const {setBookingDetail} = useBookingDetail();
+    const { paymentMethod, setPaymentMethod, receivingAmount, setReceivingAmount } = usePayment();
+    const [open, setOpen] = useState<boolean>(false);
+    const { bookingDetail } = useBookingDetail();
+    const { mutate, isPending } = useBookingPaymentMutation();
+    const { setBookingDetail } = useBookingDetail();
     const queryClient = useQueryClient();
 
-    const  handleTransaction = () =>{
-        const payload = createPayload(Number(receivingAmount),paymentMethod,bookingDetail);
-        if(payload == null){
+    const handleTransaction = () => {
+        const payload = createPayload(Number(receivingAmount), paymentMethod, bookingDetail);
+        if (payload == null) {
             return ErrorToast.launchErrorToast("Please select all options for payment");
         }
-        mutate(payload,{
-            onSuccess:(data)=>{
+        mutate(payload, {
+            onSuccess: (data) => {
                 setBookingDetail(data.data.data);
-                const {queryKey} = bookingQueryOptions(data.data.data.id);
-                queryClient.invalidateQueries({queryKey});
+                const { queryKey } = bookingQueryOptions(data.data.data.id);
+                queryClient.invalidateQueries({ queryKey });
                 setReceivingAmount('');
                 toast.success("Payment done successfully");
                 setTimeout(() => {
@@ -81,9 +81,9 @@ export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button}) =>{
         });
     }
 
-    return(
+    return (
         <>
-            <Dialog open={open} onOpenChange={(value)=>{
+            <Dialog open={open} onOpenChange={(value) => {
                 setOpen(value);
                 setPaymentMethod(PaymentTypeSchema.CASH);
             }}>
@@ -97,23 +97,23 @@ export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button}) =>{
                     <div className="grid grid-cols-2">
                         <div className="pr-4s">
                             <h1 className="text-app-base pl-1 font-medium">Select Mode</h1>
-                            <PaymentSelect className="w-full text-app-small"/>
+                            <PaymentSelect className="w-full text-app-small" />
                             <div className={`min-h-[20vh] py-4 ${paymentMethod == null || paymentMethod == PaymentTypeSchema.CASH ? 'flex justify-center items-center' : ''}`}>
                                 {
                                     paymentMethod == null ?
-                                    <PaymentNullScreen/>
-                                    :
-                                    <PaymentMethodSelected />
+                                        <PaymentNullScreen />
+                                        :
+                                        <PaymentMethodSelected />
                                 }
                             </div>
                         </div>
                         <div>
-                            <BookingAmountDetails/>
+                            <BookingAmountDetails />
                         </div>
                     </div>
                     <div className="justify-end flex">
-                        <Button onClick={handleTransaction} className="!bg-green-500 cursor-pointer">
-                            Accept Payment
+                        <Button disabled={isPending} onClick={handleTransaction} className="!bg-green-500 cursor-pointer">
+                            {isPending ? "Payment Accepting..." : "Accept Payment"}
                         </Button>
                     </div>
                 </DialogContent>

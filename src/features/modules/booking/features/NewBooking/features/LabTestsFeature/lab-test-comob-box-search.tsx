@@ -11,7 +11,7 @@ import { useBookingTest } from "../../context/new-booking-context";
 import { useGetAgentListQuery } from "./data/queryOptions";
 import { toast } from "sonner";
 import type { ITestItem } from "./data/schema";
-import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } from "../DiscountFeature/discount-actions";
+import { calculateDiscount, calculateDiscountPercent } from "../DiscountFeature/discount-actions";
 
 
 
@@ -27,8 +27,8 @@ interface ILabTestOption {
 const LabTestComboBoxSearch = () => {
     const { data, isSuccess } = useGetAgentListQuery();
     const { discountTypeId, setDiscountTypeId } = useBookingTest();
-    const { setSelectTestItemList, selectTestItemList, setLabTestItemList, labTestItemList } = useLabTestItem();
-    const { setTotalAmount, setNetAmount, selectedDiscount, setDiscountRate, setDiscountedAmount } = usePayment();
+    const { setSelectTestItemList, selectTestItemList, setLabTestItemList, labTestItemList, itemDiscountPercent } = useLabTestItem();
+    const { setTotalAmount, setNetAmount, selectedDiscount, setDiscountedAmount } = usePayment();
     const totalAmountRef = useRef<number>(0);
     const [testItemList, setTestItemList] = useState<ILabTestOption[]>([]);
     const [open, setOpen] = useState<boolean>(false)
@@ -49,6 +49,13 @@ const LabTestComboBoxSearch = () => {
             setLabTestItemList(data.data.data);
         }
     }, [data, isSuccess]);
+
+    useEffect(() => {
+        if (itemDiscountPercent && selectTestItemList.length > 0) {
+            const discountedList = selectTestItemList.map((item) => item && { ...item, discountedValue: (Number(itemDiscountPercent) / 100) * Number(item.amount), rate: itemDiscountPercent });
+            setSelectTestItemList(discountedList);
+        }
+    }, [itemDiscountPercent]);
 
     // const allIds =  Array.from(selectTestItemList.map((item)=> item.testId));
     // const filteredLabTestList = labTestItemList?.filter((item)=> !allIds.includes(item.id))?.filter((lab)=>
@@ -76,7 +83,9 @@ const LabTestComboBoxSearch = () => {
                 testDate: new Date(),
                 reportDate: new Date(),
                 amount: test.standardSellingPrice,
-                status: "active"
+                status: "active",
+                rate: itemDiscountPercent,
+                discountedValue: (itemDiscountPercent / 100) * Number(test.standardSellingPrice)
             }
             setSelectTestItemList([...selectTestItemList, testObj]);
             totalAmountRef.current = totalAmountRef.current + Number(test.standardSellingPrice);
@@ -92,29 +101,25 @@ const LabTestComboBoxSearch = () => {
                 if (isPercent === "true") {
                     const amount = calculateDiscountPercent(Number(value), totalAmountRef.current);
                     setDiscountedAmount(amount);
-                    setDiscountRate(Number(value));
                 } else {
-                    const rate = calculateDiscountRate(Number(value), totalAmountRef.current);
-                    setDiscountRate(rate);
                     setDiscountedAmount(Number(value));
                 }
                 const discountedTotalAmount: number = calculateDiscount(isPercent, Number(value), totalAmountRef.current);
                 if (discountedTotalAmount == -1) {
                     setNetAmount(totalAmountRef.current);
                     setDiscountTypeId(1);
-                    // setSelectedDiscount("none");
                     toast.error("Discount not applied");
                     return
                 } else {
                     setNetAmount(discountedTotalAmount);
                     setDiscountTypeId(Number(discountId));
-                    setDiscountRate(100);
                 }
             }
         }
 
 
     }
+
 
 
     return (

@@ -3,11 +3,17 @@ import type { ILabTestItem, ITestItem } from '../data/schema';
 
 
 
-interface LabItemContextType{
+interface LabItemContextType {
     labTestItemList: ILabTestItem[];
     setLabTestItemList: React.Dispatch<React.SetStateAction<ILabTestItem[]>>;
     selectTestItemList: ITestItem[];
-    setSelectTestItemList: React.Dispatch<React.SetStateAction<ITestItem[]>>
+    setSelectTestItemList: React.Dispatch<React.SetStateAction<ITestItem[]>>;
+    itemDiscountValue: number;
+    setItemDiscountValue: React.Dispatch<React.SetStateAction<number>>;
+    itemDiscountPercent: number;
+    setItemDiscountPercent: React.Dispatch<React.SetStateAction<number>>;
+    itemDiscountedValue: number,
+    setItemDiscountedValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 
@@ -15,16 +21,22 @@ interface LabItemContextType{
 const LabItemContext = React.createContext<LabItemContextType | null>(null);
 
 
-export default function LabTestItemProvider({children}:{children: React.ReactNode}){
+export default function LabTestItemProvider({ children }: { children: React.ReactNode }) {
 
 
-    const [labTestItemList,setLabTestItemList] = useState<ILabTestItem[]>([]);
-    const [selectTestItemList,setSelectTestItemList] = useState<ITestItem[]>([]);
+    const [labTestItemList, setLabTestItemList] = useState<ILabTestItem[]>([]);
+    const [selectTestItemList, setSelectTestItemList] = useState<ITestItem[]>([]);
+    const [itemDiscountPercent, setItemDiscountPercent] = useState<number>(0);
+    const [itemDiscountValue, setItemDiscountValue] = useState<number>(0);
+    const [itemDiscountedValue, setItemDiscountedValue] = useState<number>(0);
 
-    return(
+    return (
         <LabItemContext.Provider value={{
-            labTestItemList,setLabTestItemList,
-            selectTestItemList,setSelectTestItemList
+            labTestItemList, setLabTestItemList,
+            selectTestItemList, setSelectTestItemList,
+            itemDiscountPercent, setItemDiscountPercent,
+            itemDiscountValue, setItemDiscountValue,
+            itemDiscountedValue, setItemDiscountedValue
         }}>
             {children}
         </LabItemContext.Provider>
@@ -32,10 +44,10 @@ export default function LabTestItemProvider({children}:{children: React.ReactNod
 }
 
 
-export const useLabTestItem = () =>{
+export const useLabTestItem = () => {
     const labTestContext = React.useContext(LabItemContext);
 
-    if(!labTestContext){
+    if (!labTestContext) {
         throw new Error("useLabTest has to be used within <PatientContext>");
     }
 

@@ -1,11 +1,12 @@
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useReactToPrint } from "react-to-print";
-import type { IBooking } from "../../data/schema";
+import type { IBooking, IStockJournalEntry } from "../../data/schema";
 import { usePayment } from "@/features/modules/booking/contexts/payment-context";
 import { useAuth } from "@/features/auth/contexts/AuthContext";
 import { numberToWords } from "./data/actions";
 import { Printer } from "lucide-react";
+import { formatDateMonthYearForInput } from "@/features/modules/booking/utils/date-utils";
 
 
 
@@ -27,16 +28,45 @@ function convertDateToGBFormat(date: Date) {
 }
 
 
+
+
+const ItemStatusCard = ({ item, index }: { item: IStockJournalEntry, index: any }) => {
+    return (
+        item.isCancelled ?
+            <del className="border-b flex border-gray-400">
+                <div className="w-[5%] px-2">{index + 1}</div>
+                <div className="w-[28%] text-[11px] px-2">{item.stockItem.name}</div>
+                <div className="w-[15%] px-2">{convertDateToGBFormat(item.testDate)}</div>
+                <div className="w-[15%] px-2">{convertDateToGBFormat(item.reportDate)}</div>
+                <div className="w-[10%] text-right px-2">{item.stockItem.standardSellingPrice}</div>
+                <div className="w-[10%] text-right px-2">{item.discountPercentage}</div>
+                <div className="w-[15%] text-right px-2">{item.netDiscountedAmount}</div>
+            </del>
+            :
+            <div className="border-b flex border-gray-400">
+                <div className="w-[5%] px-2">{index + 1}</div>
+                <div className="w-[28%] text-[11px] px-2">{item.stockItem.name}</div>
+                <div className="w-[15%] px-2">{convertDateToGBFormat(item.testDate)}</div>
+                <div className="w-[15%] px-2">{convertDateToGBFormat(item.reportDate)}</div>
+                <div className="w-[10%] text-right px-2">{item.stockItem.standardSellingPrice}</div>
+                <div className="w-[10%] text-right px-2">{item.discountPercentage}</div>
+                <div className="w-[15%] text-right px-2">{item.netDiscountedAmount}</div>
+            </div>
+    )
+}
+
+
 export function InvoicesFeature({ data }: IInvoiceFeature) {
 
 
-    const { payementReceipt ,totalAmount, discountedAmount, netAmount} = usePayment();
+    const { payementReceipt, totalAmount, discountedAmount, netAmount } = usePayment();
     const { user } = useAuth();
 
     const printRef = useRef<HTMLDivElement>(null);
 
-    const totalStandardSellingPrice = data?.stockJournal.stockJournalEntries
-        .reduce((sum, item) => sum + Number(item.stockItem.standardSellingPrice ?? 0), 0);
+    const totalStandardSellingPrice = data?.stockJournal.stockJournalEntries.reduce((sum, item) => sum + Number(item.stockItem.standardSellingPrice ?? 0), 0);
+
+    const cashReceiptAmount = data?.stockJournal.stockJournalEntries.reduce((sum, item) => sum + Number(item.netDiscountedAmount ?? 0), 0);
 
     const handlePrint = useReactToPrint({
         contentRef: printRef,
@@ -143,7 +173,7 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                             </div>
                             <div className="grid grid-cols-[140px_1fr]">
                                 <h1>Booking Date</h1>
-                                <h1>: {new Date(data?.voucherDate).toDateString()}</h1>
+                                <h1>: {formatDateMonthYearForInput(data?.voucherDate)}</h1>
                             </div>
                             <div className="grid grid-cols-[140px_1fr]">
                                 <h1>Collection Type</h1>
@@ -169,15 +199,7 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                         </div>
                         {/* Table rows */}
                         {data?.stockJournal.stockJournalEntries.map((item, index) => (
-                            <div key={index} className="border-b flex border-gray-400">
-                                <div className="w-[5%] px-2">{index + 1}</div>
-                                <div className="w-[28%] text-[11px] px-2">{item.stockItem.name}</div>
-                                <div className="w-[15%] px-2">{convertDateToGBFormat(item.testDate)}</div>
-                                <div className="w-[15%] px-2">{convertDateToGBFormat(item.reportDate)}</div>
-                                <div className="w-[10%] text-right px-2">{item.stockItem.standardSellingPrice}</div>
-                                <div className="w-[10%] text-right px-2">0.00</div>
-                                <div className="w-[15%] text-right px-2">{item.stockItem.standardSellingPrice}</div>
-                            </div>
+                            <ItemStatusCard item={item} index={index} />
                         ))}
                     </div>
 
@@ -188,7 +210,7 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                                 <div className="text-right font-medium">Gross Amount</div>
                                 <div className="text-right">{totalStandardSellingPrice?.toFixed(2)}</div>
                             </div>
-                            {payementReceipt.map((item,index) => (
+                            {payementReceipt.map((item, index) => (
                                 <div key={index} className="grid grid-cols-[1fr_120px]">
                                     <div className="text-right font-medium">Receipt ({item.date})</div>
                                     <div className="text-right">{item.amount.toFixed(2)}</div>
@@ -204,8 +226,18 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
                             </div>
                             <div className="grid grid-cols-[1fr_120px]">
                                 <div className="text-right font-semibold">Cash Receipt</div>
-                                <div className="text-right">{totalStandardSellingPrice?.toFixed(2)}</div>
+                                <div className="text-right">{cashReceiptAmount?.toFixed(2)}</div>
                             </div>
+
+                            {
+                                data?.stockJournal.stockJournalEntries.filter((item) => item.isCancelled == true).map((test, index) => (
+                                    <div key={index} className="grid grid-cols-[1fr_120px]">
+                                        <div className="flex justify-end text-red-400">To be Refund</div>
+                                        <div className="flex justify-end text-red-400">{test.rate}</div>
+                                    </div>
+                                ))
+                            }
+
                             <div className="w-full flex justify-between border-t-2 border-black">
                                 <div className="font-semibold">
                                     {numberToWords(totalAmount)}
@@ -228,7 +260,7 @@ export function InvoicesFeature({ data }: IInvoiceFeature) {
 
             <div className="flex mt-2 no-print justify-center">
                 <Button variant={'default'} onClick={handlePrint}>
-                  <Printer size={22} />  Print Invoice 
+                    <Printer size={22} />  Print Invoice
                 </Button>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import axiosClient from "@/utils/axios-client";
 import type { AxiosResponse } from "axios";
 import type { IBookingResponse } from "../../NewBooking/data/schema";
-import type { IBookingPaymentSchema, IJobOrderResponse, IJobOrderStoreSchema, ITestCancellationResponse } from "./schema";
+import type { IBookingPaymentSchema, IJobOrderResponse, IJobOrderStoreSchema, ITestCancellationResponse, ITestCancelRequest } from "./schema";
 import axios from "axios";
 
 
@@ -43,9 +43,22 @@ export async function updateJobOrderService(payload: IJobOrderStoreSchema): Prom
     }
 }
 
-export async function deleteRequestTest(id: number): Promise<AxiosResponse<ITestCancellationResponse>> {
+export async function deleteRequestTest(payload: ITestCancelRequest): Promise<AxiosResponse<ITestCancellationResponse>> {
     try {
-        const response = await axiosClient.delete(`test_booking/${id}/test-cancel-request`);
+        const response = await axiosClient.post(`test_booking/${payload.id}/test-cancel-request`, payload.remark);
+        return response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error) && error.response) {
+            throw error.response.data
+        }
+        throw new Error("Network Error");
+    }
+}
+
+
+export async function refundRequestTest(payload: ITestCancelRequest): Promise<AxiosResponse<ITestCancellationResponse>> {
+    try {
+        const response = await axiosClient.post(`test_booking/${payload.id}/test-refund-request`, { remark: payload.remark ?? null });
         return response;
     } catch (error: unknown) {
         if (axios.isAxiosError(error) && error.response) {

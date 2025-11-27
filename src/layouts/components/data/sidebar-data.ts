@@ -171,8 +171,13 @@ export const sidebarData: SidebarData = {
               icon: IconClipboardList,
             },
             {
-              title: 'Reporting',
-              url: '/transactions/booking/report',
+              title: 'Test Reporting',
+              url: '/transactions/booking/test_report',
+              icon: IconClipboardList,
+            },
+            {
+              title: 'Business Report',
+              url: '/reports/business-report',
               icon: IconClipboardList,
             },
             {
@@ -401,6 +406,12 @@ export const sidebarData: SidebarData = {
         {
           title: 'Stock Summary',
           url: '/reports/stock_summary',
+          visible: true,
+          icon: IconAccessPoint,
+        },
+        {
+          title: 'Business Report',
+          url: '/reports/business-report',
           visible: true,
           icon: IconAccessPoint,
         },

@@ -63,6 +63,11 @@ export interface IDepartmentSlipData {
 }
 
 
+export interface ITestCancelRequest {
+    id: number,
+    remark: string | null,
+}
+
 export interface ITestCancellationResponse {
     status: boolean,
     code: number,

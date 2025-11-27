@@ -6,6 +6,7 @@ import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } fr
 import { toast } from "sonner";
 import { usePatient } from "@/features/modules/booking/contexts/patient-context";
 import { useEffect } from "react";
+import { useLabTestItem } from "../LabTestsFeature/context/lab-test-context";
 
 
 
@@ -15,6 +16,7 @@ const DiscountSelect = ({ className, disabled }: { className?: string, disabled?
     const { patient } = usePatient();
     const { data, isLoading, } = useGetAllDiscountTypes();
     const { setDiscountTypeId } = useBookingTest();
+    const { setItemDiscountPercent, setItemDiscountValue } = useLabTestItem();
 
     const { setDiscountedAmount, setNetAmount, totalAmount, selectedDiscount, setSelectedDiscount, setDiscountRate } = usePayment();
 
@@ -49,10 +51,12 @@ const DiscountSelect = ({ className, disabled }: { className?: string, disabled?
             const amount = calculateDiscountPercent(Number(value), totalAmount);
             setDiscountedAmount(amount);
             setDiscountRate(Number(value));
+            setItemDiscountPercent(Number(value));
         } else {
             const rate = calculateDiscountRate(Number(value), totalAmount);
             setDiscountRate(rate);
             setDiscountedAmount(Number(value));
+            setItemDiscountValue(Number(value));
         }
 
 
@@ -86,7 +90,7 @@ const DiscountSelect = ({ className, disabled }: { className?: string, disabled?
                             :
                             data?.data.data?.map((item, index) => (
                                 <SelectItem key={index} value={`${item.isPercentage},${item.value},${item.id}`}>
-                                    {item.name}{' '}{`${item.isPercentage ? `${item.value} %` : `Flat ${item.value}`}`}
+                                    {item.name}{' '}{`${item.isPercentage ? `${item.value} %` : `${item.value}`}`}
                                 </SelectItem>
                             ))
                     }

@@ -18,6 +18,8 @@ import { usePayment } from "../../contexts/payment-context";
 import { useQueryClient } from "@tanstack/react-query";
 import PatientComboBoxSearch from "./features/patient-combobox-search";
 import LabTestComboBoxSearch from "./features/LabTestsFeature/lab-test-comob-box-search";
+import BookingHeader from "./components/BookingTopHeader";
+import { useState } from "react";
 
 
 
@@ -26,6 +28,7 @@ import LabTestComboBoxSearch from "./features/LabTestsFeature/lab-test-comob-box
 const NewBookingFeature = () => {
 
     const { selectTestItemList } = useLabTestItem();
+    const [bookingDate, setBookingDate] = useState<Date>(new Date());
     const { discountRate } = usePayment();
     const { discountTypeId, sampleCollectorId } = useBookingTest();
     const { patient } = usePatient();
@@ -42,14 +45,14 @@ const NewBookingFeature = () => {
         }
         if (patient?.id != undefined && selectTestItemList) {
             const testBookingObject: IBookingTest = {
-                bookingDate: new Date(),
+                bookingDate: bookingDate,
                 patientId: patient?.id,
                 agentId: patient.agent ? patient.agent.id : null,
                 physicianId: patient.physician ? patient.physician.id : null,
                 tests: selectTestItemList,
                 discountTypeId: discountTypeId,
                 sampleCollectorId: sampleCollectorId,
-                rate: discountRate ? Number(discountRate.toFixed(2)) : 100
+                rate: discountRate ? Number(discountRate.toFixed(2)) : 100,
             }
 
             mutate(testBookingObject, {
@@ -67,57 +70,61 @@ const NewBookingFeature = () => {
 
 
     return (
-        <div className="grid grid-cols-[1fr_400px] gap-3">
-            <div>
-                <div className="grid grid-cols-[1fr_450px] gap-4 items-start">
-                    <div className="grid grid-rows-2 gap-3">
-                        <div className="flex w-full justify-between gap-3">
-                            {/* <PatientSearch /> */}
-                            <PatientComboBoxSearch />
-                            <PatientForm
-                                button={
-                                    <Button>
-                                        <Plus size={16} />
-                                    </Button>
+        <div>
+            <BookingHeader bookingDate={bookingDate} setBookingDate={setBookingDate} />
+            <div className="grid grid-cols-[1fr_400px] gap-3">
+                <div>
+                    <div className="grid grid-cols-[1fr_450px] gap-4 items-start">
+                        <div className="grid grid-rows-2 gap-3">
+                            <div className="flex w-full justify-between gap-3">
+                                {/* <PatientSearch /> */}
+                                <PatientComboBoxSearch />
+                                <PatientForm
+                                    button={
+                                        <Button>
+                                            <Plus size={16} />
+                                        </Button>
 
-                                }
-                            />
-                        </div>
-                        <div>
-                            {/* <LabTestSearch /> */}
-                            <LabTestComboBoxSearch />
-                        </div>
-
-
-                    </div>
-                    <div className="justify-end w-full items-end flex-col gap-3 flex">
-                        <div className="grid justify-end w-full items-center grid-cols-[70px_1fr]">
-                            <div className="font-bold text-right pr-3">
-                                Discount
+                                    }
+                                />
                             </div>
-                            <div className="">
-                                <DiscountSelect />
+                            <div>
+                                {/* <LabTestSearch /> */}
+                                <LabTestComboBoxSearch />
                             </div>
+
+
                         </div>
-                        <SampleCollectorSearch />
+                        <div className="justify-end w-full items-end flex-col gap-3 flex">
+                            <div className="grid justify-end w-full items-center grid-cols-[70px_1fr]">
+                                <div className="font-bold text-right pr-3">
+                                    Discount
+                                </div>
+                                <div className="">
+                                    <DiscountSelect />
+                                </div>
+                            </div>
+                            <SampleCollectorSearch />
+                        </div>
                     </div>
+                    <LabTestList />
                 </div>
-                <LabTestList />
-            </div>
-            <div>
-                <div className="border-l-0 text-app-base border-gray-400 py-3 px-2">
-                    <PatientDetail />
-                    <PaymentDetail />
-                    <div className="mt-6  w-full">
-                        <PathoProvider>
-                            <Button disabled={isPending} onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                {isPending ? "Confirm this booking" : "Booking processing"}
-                            </Button>
-                        </PathoProvider>
+                <div>
+                    <div className="border-l-0 text-app-base border-gray-400 py-3 px-2">
+                        <PatientDetail />
+                        <PaymentDetail />
+                        <div className="mt-6  w-full">
+                            <PathoProvider>
+                                <Button disabled={isPending} onClick={handleValidatePay} className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                                    {isPending == false ? "Confirm this booking" : "Booking processing"}
+                                </Button>
+                            </PathoProvider>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
     )
 }

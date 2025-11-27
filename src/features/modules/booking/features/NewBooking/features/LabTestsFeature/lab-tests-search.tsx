@@ -57,7 +57,9 @@ const LabTestSearch = () => {
             testDate: new Date(),
             reportDate: new Date(),
             amount: test.standardSellingPrice,
-            status: "active"
+            status: "active",
+            rate: 0,
+            discountedValue: 0
         }
         setSelectTestItemList([...selectTestItemList, testObj]);
         setQuery("");

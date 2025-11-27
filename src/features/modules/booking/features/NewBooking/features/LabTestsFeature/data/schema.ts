@@ -79,19 +79,21 @@ export interface ILabTestItem {
 
 
 
-export interface ILabTestListItemResponse extends IResponseInterface{
-    data: ILabTestItem[]
+export interface ILabTestListItemResponse extends IResponseInterface {
+  data: ILabTestItem[]
 }
 
 
 
-export interface ITestItem{
-    id?: number,
-    testId: number,
-    name: string,
-    testDate: Date,
-    reportDate: Date,
-    amount: string,
-    status?: string,
+export interface ITestItem {
+  id?: number,
+  testId: number,
+  name: string,
+  testDate: Date,
+  reportDate: Date,
+  amount: string,
+  status?: string,
+  rate: number,
+  discountedValue: number
 }
 
