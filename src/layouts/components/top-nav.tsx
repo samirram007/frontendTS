@@ -16,6 +16,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
     title: string
     href: string
+    visible: boolean
     isActive: boolean
     disabled?: boolean
   }[]
@@ -42,7 +43,7 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side='bottom' align='start'>
-            {links.map(({ title, href, isActive }) => (
+            {links.filter(link => link.visible).map(({ title, href, isActive }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
                 <Link
                   to={href}
@@ -64,12 +65,12 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
         )}
         {...props}
       >
-        {links.map(({ title, href, isActive }) => (
+        {links.filter(link => link.visible).map(({ title, href, isActive }) => (
           <Link
             key={`${title}-${href}`}
             to={href}
             // disabled={disabled}
-            className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? '' : 'text-muted-foreground'}`}
+            className={`text-sm font-medium transition-colors underline-offset-4  decoration-2 hover:text-primary hover:underline ${isActive ? '  animate-in  underline  decoration-red-500  text-primary' : 'text-muted-foreground decoration-red-200'}`}
           >
             {title}
           </Link>

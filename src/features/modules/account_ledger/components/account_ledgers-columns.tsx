@@ -1,4 +1,3 @@
-import LongText from '@/components/long-text'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
@@ -7,6 +6,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { accountLedgerStatusTypes, } from '@/features/modules/account_ledger/data/data'
 import type { AccountLedger } from '@/features/modules/account_ledger/data/schema'
+import { AccountLedgerView } from './account_ledger-view'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
@@ -46,9 +46,7 @@ export const columns: ColumnDef<AccountLedger>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Name' />
     ),
-    cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('name')}</LongText>
-    ),
+    cell: AccountLedgerView,
     meta: {
       className: cn(
         'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
@@ -71,7 +69,7 @@ export const columns: ColumnDef<AccountLedger>[] = [
   {
     accessorKey: 'accountGroupId',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Account Group' />
+      <DataTableColumnHeader column={column} title='Under' />
     ),
     cell: ({ row }) => {
       const { accountGroup } = row.original

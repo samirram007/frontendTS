@@ -22,10 +22,10 @@ export const stockJournalGodownEntrySchema = z.object({
   amount: z.coerce.number().nullish(),
   movementType: z.string().min(1).nullish(),
   remarks: z.string().min(1).nullish(),
-  godown: z.lazy(() => godownSchema.nullish()),
-  stockItem: z.lazy(() => stockItemSchema.nullish()),
-  stockUnit: z.lazy(() => stockUnitSchema.nullish()),
-  rateUnit: z.lazy(() => stockUnitSchema.nullish()),
+  godown: godownSchema.nullish(),
+  stockItem: stockItemSchema.nullish(),
+  stockUnit: stockUnitSchema.nullish(),
+  rateUnit: stockUnitSchema.nullish(),
 })
 export type StockJournalGodownEntryForm = z.infer<typeof stockJournalGodownEntrySchema>
 export const stockJournalEntrySchema = z.object({
@@ -45,12 +45,12 @@ export const stockJournalEntrySchema = z.object({
   discount: z.coerce.number().int().positive().nullish(),
   amount: z.coerce.number().nullish(),
   movementType: z.string().min(1).nullish(),
-  stockItem: z.lazy(() => stockItemSchema.nullish()),
-  stockUnit: z.lazy(() => stockUnitSchema.nullish()),
-  rateUnit: z.lazy(() => stockUnitSchema.nullish()),
-  stockJournalGodownEntries: z.array(stockJournalGodownEntrySchema.nullish()),
+  stockItem: stockItemSchema.nullish(),
+  stockUnit: stockUnitSchema.nullish(),
+  rateUnit: stockUnitSchema.nullish(),
+  stockJournalGodownEntries: z.array(stockJournalGodownEntrySchema).nullish().default([]),
   // remarks: z.string().nullish(),
-  alternateStockUnit: z.lazy(() => stockUnitSchema.nullish())
+  alternateStockUnit: stockUnitSchema.nullish()
 })
 
 export type StockJournalEntryForm = z.infer<typeof stockJournalEntrySchema>
@@ -59,11 +59,11 @@ export type StockJournalEntryForm = z.infer<typeof stockJournalEntrySchema>
 export const stockJournalSchema = z.object({
   id: z.number().int().positive().nullish(),
   journalNo: z.string().min(1).nullish(),
-  journalDate: z.coerce.date().nullish(),
+  journalDate: z.coerce.date().nullish().transform(val => val ?? null),
   voucherId: z.number().int().nullish(),
   type: z.string().nullish(),
   remarks: z.string().nullish(),
-  stockJournalEntries: z.array(stockJournalEntrySchema.nullish()),
+  stockJournalEntries: z.array(stockJournalEntrySchema).default([]),
 })
 export type StockJournalForm = z.infer<typeof stockJournalSchema>
 

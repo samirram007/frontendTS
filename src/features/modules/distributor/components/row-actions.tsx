@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useDistributor } from "../contexts/distributor-context"
 import type { Distributor } from "../data/schema"
 
-import { Route as DistributorDetailRoute } from '@/routes/_authenticated/masters/party/_layout/distributor/_layout/$id'
+import { Route as DistributorDetailRoute } from '@/routes/_protected/masters/party/_layout/distributor/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Distributor>

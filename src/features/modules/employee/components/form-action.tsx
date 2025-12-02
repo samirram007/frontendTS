@@ -9,12 +9,12 @@ import {
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
-import { Route as EmployeeRoute } from '@/routes/_authenticated/masters/payroll/_layout/employee/_layout'
+import { Route as EmployeeRoute } from '@/routes/_protected/masters/payroll/_layout/employee/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { useEmployeeMutation } from '../data/queryOptions'
 import { formSchema, type Employee, type EmployeeForm } from '../data/schema'
 import CurrentLiabilityGroupsDropdown from './dropdown/current_liability_group-dropdown'
@@ -35,7 +35,7 @@ export function FormAction({ currentRow }: Props) {
     const { mutate: saveEmployee, isPending } = useEmployeeMutation()
 
     const form = useForm<EmployeeForm>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as Resolver<EmployeeForm>,
         defaultValues: isEdit
             ? {
                 ...currentRow,

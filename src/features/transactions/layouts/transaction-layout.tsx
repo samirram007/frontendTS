@@ -1,11 +1,29 @@
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
 import { Main } from '@/layouts/components/main'
-import { Outlet } from '@tanstack/react-router'
+import { Link, Outlet } from '@tanstack/react-router'
 import { useTransaction } from '../context/transaction-context'
 
 
 const TransactionLayout = () => {
     const { headerVisible } = useTransaction()
+    const { userFiscalYear } = useAuth();
+
+
+    if (!userFiscalYear) {
+        return (
+            <div className='flex flex-row gap-6 items-center justify-center text-center text-red-600 font-semibold'>
+                <div>
+
+                    It looks like no Fiscal Year is assigned. Please set one or contact support.
+                </div>
+                <Button className=' text-blue-700 border-blue-600 border-2' variant='outline' size='sm' asChild>
+                    <Link to='/user-fiscal-year'>Set Fiscal Year</Link>
+                </Button>
+            </div>
+        )
+    }
     return (
 
         <Main fixed className='  overflow-hidden'>

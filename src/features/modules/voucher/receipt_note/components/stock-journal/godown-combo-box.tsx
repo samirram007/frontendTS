@@ -57,7 +57,7 @@ export const GodownCombobox = ({ godowns }: Props) => {
     const value = ''
     const handleSelect = (value: string) => {
         // const selected = godowns.find((i) => i.id === Number(value));
-        const index = form.getValues('stockJournal.stockJournalEntries').length
+        const index = form.getValues('stockJournal.stockJournalEntries')?.length
         // ✅ Safely update nested field value by index
         console.log(form.getValues('stockJournal'), index, "index")
         // form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true } 

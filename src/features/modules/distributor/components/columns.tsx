@@ -45,10 +45,10 @@ export const columns: ColumnDef<Distributor>[] = [
   {
     accessorKey: 'name',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
+      <DataTableColumnHeader column={column} title='Name' className='min-w-6/12' />
     ),
     cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('name')}</LongText>
+      <LongText className='max-w-64 text-shadow-2xs'>{row.getValue('name')}</LongText>
     ),
     meta: {
       className: cn(
@@ -69,37 +69,7 @@ export const columns: ColumnDef<Distributor>[] = [
       <div className='w-fit text-nowrap'>{row.getValue('code')}</div>
     ),
   },
-  {
-    accessorKey: 'parentId',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Under' />
-    ),
-    cell: ({ row }) => {
-      const { parentId, parent } = row.original
-      const badgeColor = 'success'
-      if (!parentId) {
-        return <div className='text-muted-foreground'>Main Distributor</div>
-      }
-      return (
-        <div className='flex space-x-2'>
-          <Badge variant='default' className={cn('capitalize', badgeColor)}>
-            {/* <div className='text-muted-foreground'>{parentId.name}: </div> */}
-            {parent?.name ?? 'Unknown'}
-          </Badge>
 
-        </div>
-      )
-    },
-    enableHiding: false,
-  },
-  {
-    accessorKey: 'description',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Description' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('description')}</div>,
-    enableSorting: false,
-  },
   {
     accessorKey: 'status',
     header: ({ column }) => (

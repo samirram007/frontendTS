@@ -1,8 +1,8 @@
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import { useEffect, useMemo } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { useForm, useFormContext, type Resolver } from "react-hook-form";
 import { stockJournalSchema, type DeliveryNoteForm, type StockJournalEntryForm, type StockJournalForm } from "../../data/schema";
 import StockJournal from "./stock-journal";
 
@@ -10,9 +10,10 @@ import StockJournal from "./stock-journal";
 
 const PosBody = () => {
     const deliveryNoteForm = useFormContext<DeliveryNoteForm>();
+
     const stockJournal = deliveryNoteForm.watch("stockJournal")
     const stockJournalForm = useForm<StockJournalForm>({
-        resolver: zodResolver(stockJournalSchema),
+        resolver: zodResolver(stockJournalSchema) as Resolver<StockJournalForm>,
         defaultValues: {
             ...stockJournal,
             stockJournalEntries: stockJournal?.stockJournalEntries ?? []
@@ -31,6 +32,8 @@ const PosBody = () => {
             totalAmount
         }
     }, [stockJournalForm.watch("stockJournalEntries")])
+
+
 
     useEffect(() => {
         // when parent changes, update child

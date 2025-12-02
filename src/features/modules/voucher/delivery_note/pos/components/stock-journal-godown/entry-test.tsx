@@ -1,5 +1,4 @@
 import FormInputField from "@/components/form-input-field";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,12 +7,12 @@ import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useMemo, useState } from "react";
-import { useForm, useFormContext, type UseFormReturn } from "react-hook-form";
+import { useForm, useFormContext, type Resolver, type UseFormReturn } from "react-hook-form";
 import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
 import { stockJournalGodownEntryDefaultValues } from "../../../data/data";
 import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../../data/schema";
-import { GodownCombobox } from "../godown-combo-box";
+import { GodownCombobox } from "../dropdown/godown-combo-box";
 import BatchSelection from "./batch-selection";
 
 
@@ -56,7 +55,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     }, [entryPath]);
 
     const stockJournalGodownEntryForm = useForm<StockJournalGodownEntryForm>({
-        resolver: zodResolver(stockJournalGodownEntrySchema),
+        resolver: zodResolver(stockJournalGodownEntrySchema) as Resolver<StockJournalGodownEntryForm>,
         defaultValues,
         mode: "onChange",
     });
@@ -88,7 +87,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
         stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
         handleGodownEntryAdd();
         // stockJournalEntryForm.reset({});
-        console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
+
     };
     // console.log("movementType: ", stockJournalEntryForm.getValues())
 
@@ -99,13 +98,16 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                 <div className="grid grid-cols-[1fr_280px_300px_150px_80px_80px_200px_120px]  ">
 
                     <div className="pr-2">
+
                         <GodownCombobox
+                            stockJournalGodownEntryForm={stockJournalGodownEntryForm}
+                            stockItem={stockItem}
                             godowns={godowns}
                             handleRemove={handleRemove}
                         />
                         {/* {stockJournalGodownEntryForm.watch("batchNo") ?? "No BatchSelected"} */}
                     </div>
-                    {stockJournalGodownEntryForm.watch("godownId") === undefined ?
+                    {(stockJournalGodownEntryForm.watch("godownId") === undefined) ?
                         <div>select godown</div> :
 
                         (
@@ -151,7 +153,8 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                                         </div>
                                         : <div></div>
                                 )
-                                : <BatchSelection form={stockJournalGodownEntryForm} />
+                                : <BatchSelection
+                                    form={stockJournalGodownEntryForm} stockItem={stockItem} godownId={Number(stockJournalGodownEntryForm.watch("godownId"))} />
                         )
                     }
                     <div className="grid grid-rows-1 border-0!">
@@ -210,20 +213,20 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                                 e.preventDefault();
-                                // handleSubmit();
+                                handleSubmit();
                             }}
 
                         />
                     </div>
                     <div className="flex flex-row justify-end items-start gap-4 px-4">
 
-                        <Button type="button" className="h-6 focus:bg-black focus:text-white"
+                        <div className="h-6 focus:bg-black focus:text-white"
                             onClick={handleSubmit}>
                             <MdKeyboardReturn />
-                        </Button>
-                        <Button variant="outline" size="sm" className="h-6 focus:bg-black focus:text-white" onClick={() => remove(index)} >
+                        </div>
+                        <div className="h-6 focus:bg-black focus:text-white" onClick={() => remove(index)} >
                             <TbRowRemove className=" text-red-700 h-4 w-4" />
-                        </Button>
+                        </div>
                     </div>
 
                 </div>

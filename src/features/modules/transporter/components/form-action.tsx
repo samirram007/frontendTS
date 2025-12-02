@@ -9,12 +9,12 @@ import {
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
-import { Route as TransporterRoute } from '@/routes/_authenticated/masters/party/_layout/transporter/_layout'
+import { Route as TransporterRoute } from '@/routes/_protected/masters/party/_layout/transporter/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { useTransporterMutation } from '../data/queryOptions'
 import { formSchema, type Transporter, type TransporterForm } from '../data/schema'
 import AccountGroupDropdown from './dropdown/account_group-dropdown'
@@ -30,7 +30,7 @@ export function FormAction({ currentRow }: Props) {
     const { mutate: saveTransporter, isPending } = useTransporterMutation()
 
     const form = useForm<TransporterForm>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as Resolver<TransporterForm>,
         defaultValues: isEdit
             ? { ...currentRow, isEdit }
             : {

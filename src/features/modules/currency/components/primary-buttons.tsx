@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button'
-import { Route as CurrencyDetailRoute } from '@/routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
+import { Route as CurrencyDetailRoute } from '@/routes/_protected/masters/organization/_layout/currency/_layout/$id'
 
 import { IconUserPlus } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'

@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useFormContext, type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
-import PartyLedgerForm from "../../components/sub-component/party-ledger-form";
-import TransactionLedgerForm from "../../components/sub-component/transaction-ledger-form";
+import PartyLedgerForm from "../../components/sub-component/party/party-ledger-form";
+import TransactionLedgerForm from "../../components/sub-component/transaction/transaction-ledger-form";
 import type { DeliveryNoteForm } from "../../data/schema";
 
 
@@ -13,7 +13,8 @@ const PosHeader = () => {
     const form = useFormContext<DeliveryNoteForm>()
 
 
-    const voucherDate = form.watch("voucherDate") 
+    const voucherDate = form.watch("voucherDate")
+
     const dayName = voucherDate
         ? new Date(voucherDate).toLocaleDateString("en-US", { weekday: "long" })
         : ""
@@ -42,18 +43,7 @@ const PosHeader = () => {
                             <DateBox tabIndex={1}
                                 form={form} name="referenceDate" />
 
-                            {/* <Input
-                                type="date"
-                                {...form.register("referenceDate", {
-                                    setValueAs: (value) => (value ? new Date(value) : null), // store as Date
-                                })}
-                                value={inputValue}
-                                onChange={(e) => {
-                                    if (e.target.value) {
-                                        form.setValue("referenceDate", new Date(e.target.value))
-                                    }
-                                }}
-                            /> */}
+
                         </div>
                     </div>
 
@@ -72,10 +62,13 @@ const PosHeader = () => {
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
                     <PartyLedgerForm tabIndex={3} />
-                    <TransactionLedgerForm tabIndex={4} />
+                    <TransactionLedgerForm />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">
+                    <pre>
+                        {JSON.stringify(form.getValues('party'), null, 2)}
+                    </pre>
                     <div className="text-right">Cost Center: </div><Input type="text" />
                 </div>
             </div>
@@ -90,7 +83,6 @@ export default PosHeader
 
 type DateBoxProps = {
     form: UseFormReturn<DeliveryNoteForm>,
-
     name: keyof DeliveryNoteForm
     tabIndex?: number
 }
@@ -133,7 +125,6 @@ const DateBox = (props: DateBoxProps) => {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             e.preventDefault();
-
             parseDate();
         }
     };

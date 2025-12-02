@@ -1,0 +1,182 @@
+"use client"
+
+import { CheckIcon, ChevronsUpDownIcon } from "lucide-react"
+import * as React from "react"
+
+import { Button } from "@/components/ui/button"
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command"
+import { cn } from "@/lib/utils"
+import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
+import { type UseFormReturn } from "react-hook-form"
+
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import type { Godown } from "@/features/modules/godown/data/schema"
+import type { StockItem } from "@/features/modules/stock_item/data/schema"
+import { getData } from "@/utils/dataClient"
+import { useQuery } from "@tanstack/react-query"
+import { FaSignOutAlt } from "react-icons/fa"
+import type { StockJournalGodownEntryForm } from "../../../data/schema"
+
+
+interface GodownComboboxProps {
+    stockJournalGodownEntryForm: UseFormReturn<StockJournalGodownEntryForm>
+    handleRemove?: () => void;
+    godowns: Godown[];
+    stockItem: StockItem | null;
+}
+export const GodownCombobox = ({ stockJournalGodownEntryForm: form, godowns, handleRemove, stockItem }: GodownComboboxProps) => {
+    // const form = useFormContext<StockJournalGodownEntryForm>()
+    const [open, setOpen] = React.useState(false)
+    const selectedId = form.watch('godownId')?.toString()
+    //const stockItem = form.watch('stockItem')
+    const { data: godownItemStocks } = useQuery({
+        queryKey: ['godownItemStocks', stockItem?.id],
+        queryFn: async () => {
+            if (!stockItem?.id) {
+                return []
+            }
+            const response = await getData(`/godown_item_stocks/${stockItem.id}`)
+
+            return response.data
+        },
+        staleTime: 1000 * 60 * 1,
+        enabled: !!stockItem?.id
+    })
+
+    const stockMap = React.useMemo(() => {
+        const map: Record<string, number> = {};
+        godownItemStocks?.forEach((row: any) => {
+            map[row.godownId] = row.stockInHand;
+        });
+        return map;
+    }, [godownItemStocks, stockItem]);
+
+    const handleSelect = (value: string) => {
+        if (value === '-1') {
+            handleRemove?.();
+
+        } else {
+            const selected = godowns.find((i) => i.id === Number(value));
+            form.setValue(`godownId`, Number(value))
+            form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
+            );
+        }
+        setOpen(false);
+
+        requestAnimationFrame(() => {
+            const focusable = Array.from(
+                document.querySelectorAll<
+                    HTMLElement
+                >('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+            ).filter(el => !el.hasAttribute("disabled"));
+
+            const current = document.activeElement;
+            const index = focusable.indexOf(current as HTMLElement);
+
+            if (index >= 0 && index < focusable.length - 1) {
+                focusable[index + 1].focus();
+            }
+        });
+    };
+
+    const handleBlur = () => {
+        if (!form.getValues('godownId'))
+            setOpen(true);
+    }
+    const frameworks = [
+        {
+            label: (
+                <div className="flex items-center  gap-2 text-red-600 hover:text-red-800 font-medium">
+                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Godown Entries
+                </div>
+            ), value: "-1",
+            stockInHand: '',
+            stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
+            className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
+        },
+        ...(godowns?.map((godown: Godown) => {
+            const stock = stockMap[godown.id] ?? 0; // fallback to zero
+
+            return {
+                label: capitalizeAllWords(godown.name!),
+                value: String(godown.id),
+                stockInHand: stock,
+                stockUnitLabel: stockItem?.stockUnit?.code || stockItem?.stockUnit?.name || '',
+                className: "min-w-full hover:bg-blue-300"
+            };
+        }) ?? [])
+    ];
+
+    const selected = frameworks.find((o) => o.value === selectedId)
+    // console.log("SELECTED GODOWN: ", selectedId, selected)
+    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select godown') : 'Select godown'
+
+    React.useEffect(() => {
+        console.log("SELECTED ITEM: ", stockItem)
+    }, [stockItem]);
+
+    return (
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+                <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className={cn("w-full justify-between")}
+                    autoFocus={true}
+                    onBlur={handleBlur}
+                >
+                    {selectedLabel}
+                    <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+            </SheetTrigger>
+            <SheetContent className="min-w-[450px]! p-0">
+                <SheetHeader>
+                    <SheetTitle>Search Godown</SheetTitle>
+                    <SheetDescription>
+                        Select the godown for this receipt note.
+                    </SheetDescription>
+                </SheetHeader>
+                <Command className="rounded-lg border shadow-md min-w-full">
+                    <CommandInput placeholder="Search godown..." />
+                    <CommandList>
+                        <CommandEmpty>No godown found.</CommandEmpty>
+                        <CommandGroup>
+
+                            {frameworks.map((framework) => (
+                                <CommandItem
+                                    className={cn("justify-start", framework.className)}
+                                    key={framework.value}
+                                    value={framework.label.toString().toLowerCase()}
+                                    onSelect={() => handleSelect(framework.value)}
+                                >
+                                    <CheckIcon
+                                        className={cn(
+                                            "mr-2 h-4 w-4",
+                                            selectedId === framework.value ? "opacity-100" : "opacity-0"
+                                        )}
+                                    />
+                                    <div className="flex flex-row justify-between w-full">
+                                        <div>
+                                            {framework.label}
+                                        </div>
+                                        <div>
+                                            {framework.stockInHand} {framework.stockUnitLabel}
+                                        </div>
+                                    </div>
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    </CommandList>
+                </Command>
+            </SheetContent>
+        </Sheet>
+    )
+}

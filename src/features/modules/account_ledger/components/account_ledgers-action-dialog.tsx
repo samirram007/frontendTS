@@ -18,7 +18,7 @@ import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 import { storeAccountLedgerService, updateAccountLedgerService } from '../data/api'
@@ -57,7 +57,7 @@ export function AccountLedgersActionDialog({ currentRow, open, onOpenChange }: P
   })
 
   const form = useForm<AccountLedgerForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<AccountLedgerForm>,
     defaultValues: isEdit && currentRow
       ? {
       name: currentRow.name ?? '',

@@ -8,7 +8,7 @@ import {
 
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Route as CompanyRoute } from '@/routes/_authenticated/masters/organization/_layout/company/_layout'
+import { Route as CompanyRoute } from '@/routes/_protected/masters/organization/_layout/company/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'

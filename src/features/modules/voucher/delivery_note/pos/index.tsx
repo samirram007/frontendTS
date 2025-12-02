@@ -1,6 +1,6 @@
 import { Form } from "@/components/ui/form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { useForm, type Resolver } from "react-hook-form"
 import deliveryNoteDefaultValues from "../data/data"
 import { formSchema, type DeliveryNoteForm } from "../data/schema"
 import PosBody from "./components/pos-body"
@@ -13,7 +13,7 @@ const Pos = ({ currentRow }: DeliveryNoteProps) => {
     const isEdit = !!currentRow
     const data = { ...currentRow }
     const mainForm = useForm<DeliveryNoteForm>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as Resolver<DeliveryNoteForm>,
         defaultValues: isEdit ?
             { ...data, isEdit: true, } :
             { ...deliveryNoteDefaultValues, isEdit: false },

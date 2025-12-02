@@ -18,6 +18,9 @@ interface TransactionProps {
 export default function Transactions({ data }: TransactionProps) {
 
     const voucherCategories = voucherCategoryViewListSchema.parse(data ?? [])
+
+
+
     return (
         <div className="w-full">
             {

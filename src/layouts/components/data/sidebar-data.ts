@@ -2,6 +2,7 @@ import {
   IconAccessPoint,
   IconBarrierBlock,
   IconBook,
+  IconBook2,
   IconBrowserCheck,
   IconBug,
   IconChecklist,
@@ -21,7 +22,7 @@ import {
   IconUserCog,
   IconUserOff
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import { AudioWaveform, Building2, Command, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
@@ -163,7 +164,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Accounts',
-          icon: IconAccessPoint,
+          icon: IconBook,
           items: [
             {
               title: 'Vouchers',
@@ -172,7 +173,7 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Day Book',
-              url: '/transactions/day_book',
+              url: '/reports/day_book',
               icon: IconBook,
             },
           ],
@@ -188,7 +189,7 @@ export const sidebarData: SidebarData = {
         {
           title: 'Organization',
           visible: true,
-          icon: IconAccessPoint,
+          icon: Building2,
           items: [
             {
               title: 'Company',
@@ -231,7 +232,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Accounts',
-          icon: IconAccessPoint,
+          icon: NotebookTabsIcon,
           items: [
 
             {
@@ -254,7 +255,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Party',
-          icon: IconAccessPoint,
+          icon: Users,
           items: [
             {
               title: 'Distributor',
@@ -276,7 +277,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Inventory',
-          icon: IconAccessPoint,
+          icon: WarehouseIcon,
           items: [
             {
               title: 'Stock Item',
@@ -307,7 +308,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Payroll',
-          icon: IconAccessPoint,
+          icon: HandCoinsIcon,
           items: [
             {
               title: 'Employee',
@@ -329,7 +330,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Statutory',
-          icon: IconAccessPoint,
+          icon: LandmarkIcon,
           items: [
             {
               title: 'Stock Item',

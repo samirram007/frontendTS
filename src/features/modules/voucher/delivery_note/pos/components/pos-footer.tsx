@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { useEffect } from 'react';
+import { useFocusArea } from '@/core/hooks/useFocusArea';
+import { useEffect, useRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useDeliveryNoteMutation } from '../../data/queryOptions';
 import type { DeliveryNoteForm } from '../../data/schema';
@@ -9,6 +10,10 @@ import NarrationBox from './special/narration-box';
 const PosFooter = () => {
     const mainForm = useFormContext<DeliveryNoteForm>();
     const { mutate: createDeliveryNote, isPending } = useDeliveryNoteMutation();
+    const footerRef = useRef<HTMLDivElement>(null);
+
+    useFocusArea(footerRef as React.RefObject<HTMLElement>);
+    // useRestrictFocusToRef(footerRef as React.RefObject<HTMLElement>);
     const { watch } = mainForm;
     const total = watch("stockJournal.stockJournalEntries")?.reduce((acc, entry) => acc + (entry?.amount || 0), 0) || 0;
     useEffect(() => {
@@ -91,37 +96,36 @@ const PosFooter = () => {
     }, [total]);
 
     const handleSaving = () => {
-        console.log('Form submitted', mainForm.getValues());
+        // console.log('Form submitted', mainForm.getValues());
         createDeliveryNote(mainForm.getValues())
     }
 
     return (
-        <div className="bg-red-300/50 grid grid-cols-[1fr_1fr] px-8">
+        <div ref={footerRef} className="bg-green-600/20 grid grid-cols-[1fr_1fr] px-8">
             <div className="grid ">
+                {/* <Button autoFocus={true} variant="outline" className="w-full h-20 text-left"
 
-
-                <Button
-                    type="button" asChild onClick={() => {
-                        console.log('Form submitted', mainForm.getValues());
-                        createDeliveryNote(mainForm.getValues());
-                    }}>
-
-                    <NarrationBox type="textarea" form={mainForm} gapClass={''} className=" " name="narration" />
-                </Button>
+                    type="button" asChild  > 
+                        </Button>*/}
+                <NarrationBox type="textarea"
+                    form={mainForm} gapClass={''} className="text-gray-200 " name="remarks" />
 
 
 
             </div>
-            <div className="grid grid-rows-[1fr_1fr] grid-cols-[1fr_140px] items-center  justify-end">
-
-                <div className="text-right font-bold  ">
+            <div className="grid grid-rows-[1fr_1fr]  items-start  justify-end">
+                <div className='grid grid-cols-[1fr_140px] pt-2'>
+                    <div className="text-right font-bold  ">
                     Total: {total ? Number(total).toFixed(2) : 0}
                 </div>
+                    <div></div>
+                </div>
+
                 <div className="text-left pl-2">
                     <Button
                         type="button"
                         variant="default"
-                        className="h-7 focus:bg-black focus:text-white"
+                        className="h-8 w-full focus:bg-black focus:text-white"
                         size="lg"
                         disabled={isPending}
                         onClick={handleSaving}>Save....</Button>

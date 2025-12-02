@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button'
-import { Route as DistributorDetailRoute } from '@/routes/_authenticated/masters/party/_layout/distributor/_layout/$id'
+import { Route as DistributorDetailRoute } from '@/routes/_protected/masters/party/_layout/distributor/_layout/$id'
 
 import { IconUserPlus } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'

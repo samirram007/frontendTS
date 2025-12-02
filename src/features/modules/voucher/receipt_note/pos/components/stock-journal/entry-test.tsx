@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useFocusNext } from "@/core/hooks/useFocusNext";
 import { fetchGodownService } from "@/features/modules/godown/data/api";
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api";
 import { fetchStockUnitService } from "@/features/modules/stock_unit/data/api";
@@ -10,25 +9,35 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueries } from "@tanstack/react-query";
 import isEqual from "lodash/isEqual";
 import { Loader } from "lucide-react";
-import { useEffect } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { useEffect, useRef } from "react";
+import { useForm, useFormContext, type Resolver } from "react-hook-form";
 import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
 import { stockJournalEntryDefaultValues } from "../../../data/data";
 import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data/schema";
 import { PosJournalEntryGodownProvider } from "../../contexts/pos-journal-entry-godown-context";
-import { StockItemCombobox } from "../stock-item-combo-box";
+
+import { useFocusArea } from "@/core/hooks/useFocusArea";
+
+import { useTransaction } from "@/features/transactions/context/transaction-context";
+import { StockItemCombobox } from "../dropdown/stock-item-combo-box";
 import StockJournalGodowns from "../stock-journal-godown";
 type StockJournalEntryProps = {
     index: number;
     remove: (index: number) => void;
     handleOnClickItemAddEntry: () => void
+
 };
 
 export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: StockJournalEntryProps) => {
     // 🔹 Access parent form context
     const stockJournalForm = useFormContext<StockJournalForm>();
-    const focusNext = useFocusNext();
+    const { config } = useTransaction()
+    // const { remarksRef, setIsRemarksDisabled } = usePos()
+    const itemEntryRef = useRef<HTMLDivElement>(null);
+
+    useFocusArea(itemEntryRef as React.RefObject<HTMLElement>);
+    // useRestrictFocusToRef(itemEntryRef as React.RefObject<HTMLElement>);
     // 🔹 Path to this specific entry in parent form
     const entryPath = `stockJournalEntries.${index}` as const;
     const [stockItems, godowns, stockUnits,] = useQueries({
@@ -40,7 +49,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     });
     // 🔹 Create isolated child form for this entry
     const stockJournalEntryForm = useForm<StockJournalEntryForm>({
-        resolver: zodResolver(stockJournalEntrySchema),
+        resolver: zodResolver(stockJournalEntrySchema) as Resolver<StockJournalEntryForm>,
         defaultValues:
             stockJournalForm.watch(entryPath) ?? stockJournalEntryDefaultValues,
         mode: "onChange",
@@ -48,11 +57,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
 
 
     const handleRemove = () => {
-        if (index !== 0) {
-            remove(index);
-            focusNext(`stockJournalEntries.${index - 1}.stockItemId`);
-
-        }
+        remove(index);
 
     };
     useEffect(() => {
@@ -84,18 +89,22 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     // console.log("THIS IS HOW: ", stockJournalForm.watch(), stockJournalEntryForm.watch("stockJournalGodownEntries"));
     return (
         <Form {...stockJournalEntryForm}>
-            <div className="w-full grid grid-rows-1">
+            <div ref={itemEntryRef} className="w-full grid grid-rows-1">
 
                 <div className="grid grid-rows-1 grid-cols-[1fr_300px_150px_80px_80px_200px_120px] 
                                 text-center border-border justify-start items-start font-bold">
 
                     <StockItemCombobox
+                        stockJournalEntryForm={stockJournalEntryForm}
                         handleRemove={handleRemove}
 
                         stockItems={stockItems?.data?.data} />
                     <div className="grid grid-cols-2 items-start  text-right">
                         <div className="pr-3">{stockJournalEntryForm.watch('actualQuantity')!} {stockJournalEntryForm.getValues('stockUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
+                        {config.find(c => c.key === 'show_actual_and_billing_quantity')?.value ? (
                         <div className="pr-3">{stockJournalEntryForm.watch('billingQuantity')!} {stockJournalEntryForm.getValues('stockUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
+                        ) : null}
+
 
                     </div>
                     <div className="text-right   pr-3 ">{

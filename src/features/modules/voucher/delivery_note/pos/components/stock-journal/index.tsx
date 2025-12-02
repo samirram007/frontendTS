@@ -3,14 +3,14 @@
 import FormInputField from "@/components/form-input-field";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
+import { useEffect } from "react";
 import { stockJournalEntryDefaultValues } from '../../../data/data';
 import { type StockJournalEntryForm, type StockJournalForm } from '../../../data/schema';
+import { usePos } from "../../contexts/pos-context";
 import { PosJournalEntryItemProvider, usePosJournalEntryItem } from "../../contexts/pos-journal-entry-item-context";
 import { StockJournalEntry } from "./entry-test";
 
-// type StockJournalProps = {
-//     stockJournalForm: UseFormReturn<StockJournalForm>;
-// }
+
 
 const StockJournal = () => {
 
@@ -56,6 +56,7 @@ export default StockJournal
 
 const StockJournalEntriesSection = () => {
     const stockJournalForm = useFormContext<StockJournalForm>();
+    const { remarksRef, setIsRemarksDisabled } = usePos()
     const { addItemEntryButtonRef, addItemButtonVisible, setAddItemButtonVisible } = usePosJournalEntryItem();
 
 
@@ -67,39 +68,61 @@ const StockJournalEntriesSection = () => {
 
     });
     const handleOnClickAddEntry = () => {
-        const lastEntry = fields[fields.length - 1];
-        if (lastEntry && Number(lastEntry.amount) === 0) {
+        // const lastEntry = fields[fields.length - 1];
+        // console.log('lastEntry: ', stockJournalForm.getValues('stockJournalEntries'), fields, lastEntry)
+        const entries = stockJournalForm.getValues('stockJournalEntries') || [];
+
+
+        const hasZeroValue = entries.some((entry: any) => Number(entry.amount) === 0);
+        // console.log("hasZeroValue: ", hasZeroValue)
+        if (hasZeroValue) {
             stockJournalForm.setFocus(`stockJournalEntries.${fields.length - 1}.stockItem`);
             return;
         }
+
         append(stockJournalEntryDefaultValues as StockJournalEntryForm);
 
         setAddItemButtonVisible?.(false);
 
     }
-    // useEffect(() => {
-    //     if (fields.length === 0) {
-    //         handleOnClickAddEntry();
-    //     }
-    // }, [])
-    // console.log("Journal Entries Section", stockJournalForm.watch(), stockJournalForm.getValues('stockJournalEntries'))
+    const handleRemove = (index: number) => {
+        if (fields.length === 1) {
+            handleOnClickAddEntry();
+        }
+
+        remove(index); // RHF handles focusing
+        setIsRemarksDisabled?.(false);
+        requestAnimationFrame(() => {
+            remarksRef?.current?.focus();
+        });
+    };
+    useEffect(() => {
+        if (fields.length === 0) {
+            handleOnClickAddEntry();
+        }
+    }, [])
+
     return (
         <div className="">
             {fields.map((field, index) => (
                 <div key={field.id} className="w-full flex  items-center gap-4 border-b pb-2">
-                    <StockJournalEntry key={field.id} index={index} remove={remove}
+                    <StockJournalEntry
+                        key={field.id}
+                        index={index}
+                        remove={handleRemove}
                         handleOnClickItemAddEntry={handleOnClickAddEntry}
                     />
 
                 </div>
             ))}
-            {(addItemButtonVisible || fields.length === 0) &&
+            {
+                (addItemButtonVisible || fields.length === 0) &&
                 <button type="button" ref={addItemEntryButtonRef}
                     className={stockJournalEntryButtonStyles}
                     onClick={handleOnClickAddEntry}>
                     + Add Item
                 </button>
-            }
+            } 
         </div>
     );
 };

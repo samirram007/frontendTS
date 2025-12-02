@@ -8,7 +8,7 @@ import {
 
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Route as UserRoute } from '@/routes/_authenticated/administration/_layout/user/_layout'
+import { Route as UserRoute } from '@/routes/_protected/administration/_layout/user/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'

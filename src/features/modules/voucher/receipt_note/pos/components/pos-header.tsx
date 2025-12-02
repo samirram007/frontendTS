@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useFormContext, type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
-import PartyLedgerForm from "../../components/sub-component/party-ledger-form";
-import TransactionLedgerForm from "../../components/sub-component/transaction-ledger-form";
+import PartyLedgerForm from "../../components/sub-component/party/party-ledger-form";
+import TransactionLedgerForm from "../../components/sub-component/transaction/transaction-ledger-form";
 import type { ReceiptNoteForm } from "../../data/schema";
 
 

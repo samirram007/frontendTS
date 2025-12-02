@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useTransporter } from "../contexts/transporter-context"
 import type { Transporter } from "../data/schema"
 
-import { Route as TransporterDetailRoute } from '@/routes/_authenticated/masters/party/_layout/transporter/_layout/$id'
+import { Route as TransporterDetailRoute } from '@/routes/_protected/masters/party/_layout/transporter/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Transporter>

@@ -1,19 +1,22 @@
 import FormInputField from "@/components/form-input-field";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useFocusArea } from "@/core/hooks/useFocusArea";
 import type { Godown } from "@/features/modules/godown/data/schema";
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
+import { useTransaction } from "@/features/transactions/context/transaction-context";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useMemo, useState } from "react";
-import { useForm, useFormContext, type UseFormReturn } from "react-hook-form";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useForm, useFormContext, type Resolver, type UseFormReturn } from "react-hook-form";
 import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
 import { stockJournalGodownEntryDefaultValues } from "../../../data/data";
 import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../../data/schema";
-import { GodownCombobox } from "../godown-combo-box";
+import { GodownCombobox } from "../dropdown/godown-combo-box";
+
 
 type StockJournalGodownEntryFormProps = {
     index: number;
@@ -31,6 +34,12 @@ function round2(value: number) {
 const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     const { index, remove, stockItem, godowns, stockUnits, handleGodownEntryAdd, handleOnClickItemAddEntry } = props;
 
+    const godownEntryRef = useRef<HTMLDivElement>(null);
+    const { config } = useTransaction()
+    const show_actual_and_billing_quantity = config.find(c => c.key === 'show_actual_and_billing_quantity')?.value
+    // const show_alternate_unit = config.find(c => c.key === 'show_alternate_unit')?.value
+    useFocusArea(godownEntryRef as React.RefObject<HTMLElement>);
+    // useRestrictFocusToRef(godownEntryRef as React.RefObject<HTMLElement>);
     const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
     const entryPath = `stockJournalGodownEntries.${index}` as const;
 
@@ -57,7 +66,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
     }, [entryPath]);
 
     const stockJournalGodownEntryForm = useForm<StockJournalGodownEntryForm>({
-        resolver: zodResolver(stockJournalGodownEntrySchema),
+        resolver: zodResolver(stockJournalGodownEntrySchema) as Resolver<StockJournalGodownEntryForm>,
         defaultValues,
         mode: "onChange",
     });
@@ -85,28 +94,36 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
             remove(index);
         }
         handleOnClickItemAddEntry()
+        // return
     };
 
     const handleSubmit = () => {
 
         const data = stockJournalGodownEntryForm.getValues();
+        if (!data.godownId) {
+            stockJournalGodownEntryForm.setFocus("godownId");
+            return;
+        }
         // if (!data.amount) {
         //     handleRemove();
         //     return;
         // }
         stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
         handleGodownEntryAdd();
+        return
         // stockJournalEntryForm.reset({});
         //  console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
     };
     return (
         <Form {...stockJournalGodownEntryForm}>
-            <div className="w-full pl-1">
+            <div className="w-full pl-1" ref={godownEntryRef}>
 
                 <div className="grid grid-cols-[1fr_280px_300px_150px_80px_80px_200px_120px]  ">
 
                     <div className="pr-2">
                         <GodownCombobox
+                            stockJournalGodownEntryForm={stockJournalGodownEntryForm}
+                            stockItem={stockItem}
                             godowns={godowns}
                             handleRemove={handleRemove}
                         />
@@ -116,7 +133,8 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
 
                             (
                                 stockItem?.isMaintainBatch ?
-                                    <div className="grid grid-rows-2    border-0!">
+                                    <div className={cn("  border-0!",
+                                        (stockItem?.trackManufacturingDate || stockItem?.useExpiryDate) ? 'grid  grid-rows-2  ' : '')}>
                                         <div className="border-b-0! w-full  ">
                                             <FormInputField type='text' form={stockJournalGodownEntryForm}
                                                 label='Batch: '
@@ -159,7 +177,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
 
                     <div className="grid grid-rows-1 border-0!">
                         <div className="grid grid-cols-2 items-start">
-                            <div className="border-y-0! border-x-0!  ">
+                            <div className={cn('border-y-0! border-x-0! ', show_actual_and_billing_quantity || 'col-span-2')}>
 
                                 <QuantityBox
                                     form={stockJournalGodownEntryForm}
@@ -168,7 +186,8 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                                     name="actualQuantity" />
 
                             </div>
-                            <div className="border-y-0! border-x-0!  ">
+                            {show_actual_and_billing_quantity ? (
+                                <div className="border-y-0! border-x-0!  ">
 
                                 <BillingQuantityBox
                                     form={stockJournalGodownEntryForm}
@@ -176,6 +195,8 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                                     stockItem={stockItem}
                                     name="billingQuantity" />
                             </div>
+                            ) : <></>}
+
 
 
                         </div>
@@ -205,6 +226,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                         {/* {stockJournalEntryForm.watch("amount")?.toFixed(2) ?? '-----'} */}
                         <Input type="number" {...stockJournalGodownEntryForm.register("amount")}
                             name="amount"
+
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                     handleSubmit();
@@ -213,23 +235,23 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                                 e.preventDefault();
-                                // handleSubmit();
+                                handleSubmit();
                             }}
 
                         />
                     </div>
                     <div className="flex flex-row justify-end items-start gap-4 px-4">
 
-                        <Button type="button" disabled={index === 0} variant="outline" size="sm" className="border-0  h-6 focus:bg-black focus:text-white"
+                        <div tabIndex={-1} className="border-0  h-6 focus:bg-black focus:text-white"
                             onClick={handleSubmit}>
                             <MdKeyboardReturn />
-                        </Button>
-                        <Button variant="outline" size="sm"
+                        </div>
+                        <div tabIndex={-1}
                             className="h-6 focus:bg-black focus:text-white"
-                            disabled={!!stockJournalGodownEntryForm.watch('godownId')}
+
                             onClick={() => remove(index)} >
                             <TbRowRemove className=" text-red-700 h-4 w-4" />
-                        </Button>
+                        </div>
                     </div>
 
                 </div>
@@ -489,9 +511,12 @@ const RateBox = (props: RateBoxProps) => {
             handleBlurOrEnter();
         }
     };
+
+
     const handleBlur = () => {
         handleBlurOrEnter();
     };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const rawValue = e.target.value;
         setBoxValue(rawValue ?? '');
@@ -513,7 +538,7 @@ const RateBox = (props: RateBoxProps) => {
     return (
         <>
             <Input
-                type="text"
+                type="number"
                 value={boxValue}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -559,6 +584,8 @@ type ConversionFactor = {
 }
 const QuantityBox = (props: QuantityBoxProps) => {
     const { form, stockItem, name, stockUnits } = props;
+    const { config } = useTransaction()
+    const show_alternate_unit = config.find(c => c.key === 'show_alternate_unit')?.value
     const [boxValue, setBoxValue] = useState<string>("")
     // const alternateUnitValue = stockItem.alternateUnitValue;
     const conversionFactors = useMemo(() => {
@@ -601,6 +628,12 @@ const QuantityBox = (props: QuantityBoxProps) => {
         return conversionFactorsTemp
     }, [stockItem.id, stockUnits])
 
+    const baseUnit = useMemo(() => {
+        return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
+    }, [conversionFactors]);
+    const baseUnitCode = baseUnit?.code || "";
+    const basenoOfDecimalPlaces = baseUnit?.noOfDecimalPlaces;
+    console.log("basenoOfDecimalPlaces: ", basenoOfDecimalPlaces)
 
     const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
         // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
@@ -622,7 +655,7 @@ const QuantityBox = (props: QuantityBoxProps) => {
 
     const handleBlurOrEnter = () => {
         const { quantity, unit: unitStr } = parseQuantityWithUnit(boxValue);
-
+        console.log(quantity, unitStr)
         if (quantity === 0) {
             form.setValue(name, 0, { shouldValidate: true });
             form.setValue('billingQuantity', 0, { shouldValidate: true });
@@ -651,7 +684,9 @@ const QuantityBox = (props: QuantityBoxProps) => {
 
         form.setValue(name, finalQuantity, { shouldValidate: true });
         form.setValue('billingQuantity', finalQuantity, { shouldValidate: true });
-        setBoxValue(`${finalQuantity.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`);
+        // const boxValueStr = `${finalQuantity.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
+        // console.log("here: ", boxValueStr)
+        // setBoxValue(boxValueStr);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -666,38 +701,37 @@ const QuantityBox = (props: QuantityBoxProps) => {
         const rawValue = e.target.value;
         setBoxValue(rawValue);
     };
-    const baseUnit = useMemo(() => {
-        return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
-    }, [conversionFactors]);
-    const baseUnitCode = baseUnit?.code || "";
-    const basenoOfDecimalPlaces = baseUnit?.noOfDecimalPlaces || 0;
+
 
     useEffect(() => {
         const value = form.watch(name);
+
+
         if (value) {
-            setBoxValue(`${value} ${baseUnitCode}`);
+            const boxValueStr = `${value.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
+            setBoxValue(boxValueStr);
         } else {
             setBoxValue("");
         }
-    }, [form.watch(name), baseUnitCode]);
-    console.log("actualQuantity: ", form.watch(name))
+    }, [form.watch(name), baseUnitCode]); 
     return (
         <>
             <Input
-                type="text"
+                type="url"
+
                 value={boxValue}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="e.g., 15 m, 1500 pkg"
-                className="text-right focus:text-left"
+                className="value-box flex justify-end items-end"
             />
             <FormInputField type="hidden" form={form}
                 label=''
                 gapClass="grid-cols-[0_1fr] gap-0"
                 name={name} />
             {/* {alternateUnitValue && <div>({alternateUnitValue})</div>} */}
-            {conversionFactors.length > 1 && (
+            {show_alternate_unit && conversionFactors.length > 1 && (
                 <div className="pr-1 text-xs  text-gray-500 mt-0 space-y-0 gap-0 flex flex-col justify-start items-end ">
 
                     {conversionFactors.map((cf, index) => (
@@ -714,6 +748,8 @@ const QuantityBox = (props: QuantityBoxProps) => {
 
 const BillingQuantityBox = (props: QuantityBoxProps) => {
     const { form, stockItem, name, stockUnits } = props;
+    const { config } = useTransaction()
+    const show_alternate_unit = config.find(c => c.key === 'show_alternate_unit')?.value
     const [boxValue, setBoxValue] = useState<string>("")
     // const alternateUnitValue = stockItem.alternateUnitValue;
     const conversionFactors = useMemo(() => {
@@ -843,14 +879,14 @@ const BillingQuantityBox = (props: QuantityBoxProps) => {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="e.g., 15 m, 1500 pkg"
-                className="text-right focus:text-left"
+                className="text-right  focus:!text-left"
             />
             <FormInputField type="hidden" form={form}
                 label=''
                 gapClass="grid-cols-[0_1fr] gap-0"
                 name={name} />
             {/* {alternateUnitValue && <div>({alternateUnitValue})</div>} */}
-            {conversionFactors.length > 1 && (
+            {show_alternate_unit && conversionFactors.length > 1 && (
                 <div className="text-xs  text-gray-500 mt-0 space-y-0 gap-0 flex flex-col justify-start items-end ">
                     {conversionFactors.map((cf, index) => (
                         !cf.isBaseUnit && <span key={index} className="mx-2">

@@ -17,7 +17,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { Loader2 } from 'lucide-react'
@@ -41,7 +41,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
 
   const form = useForm<SupplierForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<SupplierForm>,
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,

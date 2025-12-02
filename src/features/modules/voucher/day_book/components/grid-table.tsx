@@ -37,9 +37,10 @@ declare module '@tanstack/react-table' {
 interface DataTableProps {
   columns: ColumnDef<DayBookSchema>[]
   data: DayBookSchema[]
+  pagination?: boolean
 }
 
-export function GridTable({ columns, data }: DataTableProps) {
+export function GridTable({ columns, data, pagination = true }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -70,7 +71,7 @@ export function GridTable({ columns, data }: DataTableProps) {
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: pagination ? getPaginationRowModel() : undefined,
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -137,7 +138,7 @@ export function GridTable({ columns, data }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {pagination && <DataTablePagination table={table} />}
     </div>
   )
 }

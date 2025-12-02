@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useEmployee } from "../contexts/employee-context"
 import type { Employee } from "../data/schema"
 
-import { Route as EmployeeDetailRoute } from '@/routes/_authenticated/masters/payroll/_layout/employee/_layout/$id'
+import { Route as EmployeeDetailRoute } from '@/routes/_protected/masters/payroll/_layout/employee/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Employee>

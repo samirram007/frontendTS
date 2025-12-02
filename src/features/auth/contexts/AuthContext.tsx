@@ -1,4 +1,5 @@
 // src/context/AuthContext.tsx
+import type { UserFiscalYear } from '@/features/modules/user_fiscal_year/data/schema';
 import type { User } from '@/types/schema';
 import { useQueryClient } from '@tanstack/react-query';
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ export type LoginProps = {
 
 export interface AuthContextType {
     user: User | null;
+    userFiscalYear: UserFiscalYear | null;
     isLoading: boolean;
     isAuthenticated: boolean;
     login: (props: LoginProps) => Promise<void>;
@@ -24,6 +26,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const navigate = useNavigate();
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
     const [user, setUser] = useState<User | null>(null);
+    const [userFiscalYear, setUserFiscalYear] = useState<UserFiscalYear | null>(null);
     const [isLoading, setIsLoading] = useState(true)
     const queryClient = useQueryClient();
     const fetchProfile = async () => {
@@ -37,6 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             flushSync(() => {
 
                 setUser(data?.data);
+                setUserFiscalYear(data?.data?.userFiscalYear || null);
             })
             // console.log('Profile fetched successfully:', data?.data);
 
@@ -44,6 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } catch (error) {
             flushSync(() => {
                 setUser(null);
+                setUserFiscalYear(null);
 
             })
         } finally {
@@ -62,6 +67,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         else {
             flushSync(() => {
                 setUser(null);
+                setUserFiscalYear(null);
 
             })
         }
@@ -104,7 +110,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, isAuthenticated: !!user, login, logout, fetchProfile }}>
+            value={{ user, isLoading, userFiscalYear, isAuthenticated: !!user, login, logout, fetchProfile }}>
             {children}
         </AuthContext.Provider>
     )

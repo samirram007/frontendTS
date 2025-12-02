@@ -56,7 +56,7 @@ export const columns: ColumnDef<DayBookSchema>[] = [
 
       return (
         <LongText className='max-w-36 flex items-center gap-2'>
-          {row.getValue('voucherDate')}
+          {formatDDMMMYYYY(row.getValue('voucherDate'))}
         </LongText>
       );
     },
@@ -154,3 +154,12 @@ export const columns: ColumnDef<DayBookSchema>[] = [
     cell: RowActions,
   },
 ]
+
+
+const formatDDMMMYYYY = (value: string | Date) => {
+  const date = new Date(value);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};

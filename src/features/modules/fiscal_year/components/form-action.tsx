@@ -10,7 +10,8 @@ import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Route as FiscalYearRoute } from '@/routes/_authenticated/masters/organization/_layout/fiscal_year/_layout'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
+import { Route as FiscalYearRoute } from '@/routes/_protected/masters/organization/_layout/fiscal_year/_layout'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
@@ -27,12 +28,17 @@ interface Props {
     currentRow?: FiscalYear
 }
 
-const formatDDMMMYYYY = (value: string | Date) => {
+// const formatDDMMMYYYY = (value: string | Date) => {
+//     const date = new Date(value);
+//     const day = String(date.getDate()).padStart(2, "0");
+//     const month = date.toLocaleString("en-US", { month: "short" });
+//     const year = date.getFullYear();
+//     return `${day}-${month}-${year}`;
+// };
+const formatYYYY = (value: string | Date) => {
     const date = new Date(value);
-    const day = String(date.getDate()).padStart(2, "0");
-    const month = date.toLocaleString("en-US", { month: "short" });
     const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    return `${year}`;
 };
 export function FormAction({ currentRow }: Props) {
 
@@ -41,6 +47,7 @@ export function FormAction({ currentRow }: Props) {
 
     const { mutate: saveFiscalYear, isPending } = useFiscalYearMutation()
     const companyData = useSuspenseQuery(companyQueryOptions())
+    const { fetchProfile } = useAuth();
     const companyList = useMemo(() => {
         return companyData?.data?.data || [];
     }, [companyData]);
@@ -54,7 +61,6 @@ export function FormAction({ currentRow }: Props) {
             : defaultValues,
     })
 
-    //  const fiscalyearStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
     const moduleName = "FiscalYear"
     //   const handleSaving = () => {
@@ -67,6 +73,11 @@ export function FormAction({ currentRow }: Props) {
             currentRow ? { ...values, id: currentRow.id! } : values,
             {
                 onSuccess: () => {
+                    (fetchProfile || (() => Promise.resolve()))().then(() => {
+                        navigate({ to: FiscalYearRoute.to, })
+                    })
+                },
+                onError: () => {
                     navigate({ to: FiscalYearRoute.to, })
                 },
             }
@@ -76,7 +87,7 @@ export function FormAction({ currentRow }: Props) {
     useEffect(() => {
         // console.log(form.watch('startDate'), form.watch('endDate'));
         const companyName = companyList?.find((c: Company) => c.id === form.watch('companyId'))?.name;
-        const dateRange = `${formatDDMMMYYYY(form.watch('startDate'))} to ${formatDDMMMYYYY(form.watch('endDate'))}`;
+        const dateRange = `${formatYYYY(form.watch('startDate')).slice(-2)}-${formatYYYY(form.watch('endDate')).slice(-2)}`;
         const name = (companyName ? `${companyName}` : '') + ': ' + dateRange;
         // console.log(name);
         form.setValue('name', name);

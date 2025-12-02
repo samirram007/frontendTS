@@ -9,8 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import type { DeliveryNoteProps } from "../pos/contracts"
 import { StockJournalComponent } from "./stock-journal/stock-journal-component"
-import PartyLedgerForm from "./sub-component/party-ledger-form"
-import PurchaseLedgerForm from "./sub-component/transaction-ledger-form"
+import PartyLedgerForm from "./sub-component/party/party-ledger-form"
+import PurchaseLedgerForm from "./sub-component/transaction/transaction-ledger-form"
 
 
 

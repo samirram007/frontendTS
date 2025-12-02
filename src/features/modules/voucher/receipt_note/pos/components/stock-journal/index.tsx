@@ -3,19 +3,20 @@
 import FormInputField from "@/components/form-input-field";
 import { useFieldArray, useFormContext } from "react-hook-form";
 
+import { useTransaction } from "@/features/transactions/context/transaction-context";
 import { useEffect } from "react";
 import { stockJournalEntryDefaultValues } from '../../../data/data';
 import { type StockJournalEntryForm, type StockJournalForm } from '../../../data/schema';
+import { usePos } from "../../contexts/pos-context";
 import { PosJournalEntryItemProvider, usePosJournalEntryItem } from "../../contexts/pos-journal-entry-item-context";
 import { StockJournalEntry } from "./entry-test";
 
-// type StockJournalProps = {
-//     stockJournalForm: UseFormReturn<StockJournalForm>;
-// }
+
 
 const StockJournal = () => {
-
+    const { config } = useTransaction()
     const stockJournalForm = useFormContext<StockJournalForm>();
+
     return (
         <div>
             <div className="hidden grid-cols-3 gap-8 ">
@@ -31,13 +32,18 @@ const StockJournal = () => {
                 <div className="border-r-0!  ">Particulars</div>
 
 
+                {config.find(c => c.key === 'show_actual_and_billing_quantity')?.value ? (
                 <div className="grid grid-rows-2 border-0!">
                     <div className="border-b-0!  ">Quantity</div>
-                    <div className="grid grid-cols-2 items-center">
-                        <div className="border-y-0! border-x-0!  ">Actual</div>
-                        <div className="border-y-0! border-r-0!  ">Billing</div>
-                    </div>
+                        <div className="grid grid-cols-2 items-center">
+                            <div className="border-y-0! border-x-0!  ">Actual</div>
+                            <div className="border-y-0! border-r-0!  ">Billing</div>
+                        </div>
+                        <div className="grid grid-cols-2 items-center"></div>
                 </div>
+                ) :
+                    <div>Quantity</div>
+                }
                 <div className="border-l-0!">Rate</div>
                 <div className="border-l-0!">per</div>
                 <div className="border-l-0!">disc%</div>
@@ -57,6 +63,7 @@ export default StockJournal
 
 const StockJournalEntriesSection = () => {
     const stockJournalForm = useFormContext<StockJournalForm>();
+    const { remarksRef, setIsRemarksDisabled } = usePos()
     const { addItemEntryButtonRef, addItemButtonVisible, setAddItemButtonVisible } = usePosJournalEntryItem();
 
 
@@ -79,26 +86,29 @@ const StockJournalEntriesSection = () => {
             stockJournalForm.setFocus(`stockJournalEntries.${fields.length - 1}.stockItem`);
             return;
         }
-        // const hasChildZeroValue = entries.some((entry: any) =>
-        //     entry.stockJournalGodownEntries?.some((child: any) => Number(child.amount) === 0)
-        // );
-        // // console.log("hasChildZeroValue: ", hasChildZeroValue)
 
-        // if (hasChildZeroValue) {
-        //     stockJournalForm.setFocus(`stockJournalEntries.${fields.length - 1}.stockJournalGodownEntries.0.godownId`);
-        //     return;
-        // }
         append(stockJournalEntryDefaultValues as StockJournalEntryForm);
 
         setAddItemButtonVisible?.(false);
 
     }
+    const handleRemove = (index: number) => {
+        if (fields.length === 1) {
+            handleOnClickAddEntry();
+        }
+
+        remove(index); // RHF handles focusing
+        setIsRemarksDisabled?.(false);
+        requestAnimationFrame(() => {
+            remarksRef?.current?.focus();
+        });
+    };
     useEffect(() => {
         if (fields.length === 0) {
             handleOnClickAddEntry();
         }
     }, [])
-    // console.log("Journal Entries Section", stockJournalForm.watch(), stockJournalForm.getValues('stockJournalEntries'))
+
     return (
         <div className="">
             {fields.map((field, index) => (
@@ -106,7 +116,7 @@ const StockJournalEntriesSection = () => {
                     <StockJournalEntry
                         key={field.id}
                         index={index}
-                        remove={remove}
+                        remove={handleRemove}
                         handleOnClickItemAddEntry={handleOnClickAddEntry}
                     />
 
@@ -119,7 +129,7 @@ const StockJournalEntriesSection = () => {
                     onClick={handleOnClickAddEntry}>
                     + Add Item
                 </button>
-            } 
+            }
         </div>
     );
 };

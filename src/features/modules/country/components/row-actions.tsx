@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useCountry } from "../contexts/country-context"
 import type { Country } from "../data/schema"
 
-import { Route as CountryDetailRoute } from '@/routes/_authenticated/masters/organization/_layout/country/_layout/$id'
+import { Route as CountryDetailRoute } from '@/routes/_protected/masters/organization/_layout/country/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Country>

@@ -17,7 +17,7 @@ import {
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 
@@ -46,7 +46,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
 
   const form = useForm<AppModuleFeatureForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<AppModuleFeatureForm>,
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,

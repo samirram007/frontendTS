@@ -1,4 +1,4 @@
-import { Route as DayBookRoute } from '@/routes/_authenticated/transactions/day_book/_layout/'
+import { Route as DayBookRoute } from '@/routes/_protected/reports/day_book/_layout/index'
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
 import { fetchReceiptNoteByIdService, fetchReceiptNoteService, storeReceiptNoteService, updateReceiptNoteService } from "./api"

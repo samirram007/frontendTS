@@ -19,7 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 import { storeStockItemService, updateStockItemService } from '../data/api'
 import { formSchema } from '../data/schema'
@@ -54,7 +54,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   })
 
   const form = useForm<StockItemForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<StockItemForm>,
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,

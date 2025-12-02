@@ -102,7 +102,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
     const handleGodownEntryAdd = () => {
         // const lastEntry = fields[fields.length - 1];
         // console.log("Last Entry: ", lastEntry)
-        const hasZeroValue = stockJournalEntryForm.getValues('stockJournalGodownEntries').some((entry: any) => Number(entry.amount) === 0);
+        const hasZeroValue = stockJournalEntryForm.getValues('stockJournalGodownEntries')?.some((entry: any) => Number(entry.amount) === 0);
         if (hasZeroValue) {
             stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${fields.length - 1}.godownId`);
             return;

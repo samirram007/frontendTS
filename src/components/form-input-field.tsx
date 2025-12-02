@@ -244,9 +244,10 @@ const DateBox = (props: Props) => {
                             tabIndex={tabIndex}
                             autoFocus={tabIndex === 0}
                             placeholder={'Enter ' + (label ?? lowerCase(label ?? name))}
-                            type='date'
+
                             className='w-full placeholder'
                             autoComplete='off'
+                            {...rest}
                             {...field}
                             value={field.value ?? ""} 
                         />

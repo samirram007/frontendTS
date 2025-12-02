@@ -154,6 +154,10 @@ code {
       margin: 0;
     }
   }
+input[type='url']{
+    @apply text-right ;
+}
+
   input,
   select,
   button[role='combobox'],

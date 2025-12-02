@@ -17,7 +17,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 
 import FormInputField from '@/components/form-input-field'
 
@@ -61,7 +61,7 @@ export function StockUnitActionDialog({ currentRow, open, onOpenChange }: Props)
   })
 
   const form = useForm<StockUnitForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<StockUnitForm>,
     defaultValues: isEdit
       ? {
         ...currentRow,

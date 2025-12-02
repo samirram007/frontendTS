@@ -8,13 +8,13 @@ import {
 
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Route as StockItemRoute } from '@/routes/_authenticated/masters/inventory/_layout/stock_item/_layout'
+import { Route as StockItemRoute } from '@/routes/_protected/masters/inventory/_layout/stock_item/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
 import { useEffect } from 'react'
-import { useForm, type UseFormReturn } from 'react-hook-form'
+import { useForm, type Resolver, type UseFormReturn } from 'react-hook-form'
 import { useStockItem } from '../contexts/stock_item-context'
 import { useStockItemMutation } from '../data/queryOptions'
 import { formSchema, type StockItem, type StockItemForm } from '../data/schema'
@@ -41,7 +41,7 @@ export function FormAction({ currentRow }: Props) {
     const { mutate: saveStockItem, isPending } = useStockItemMutation()
 
     const form = useForm<StockItemForm>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as Resolver<StockItemForm>,
         defaultValues: isEdit
             ? { ...currentRow, isEdit }
             : {

@@ -22,11 +22,11 @@ import { useTheme } from '@/core/contexts/ThemeContextProvider'
 
 const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark'], {
-    required_error: 'Please select a theme.',
+    message: 'Please select a theme.',
   }),
   font: z.enum(fonts, {
-    invalid_type_error: 'Select a font',
-    required_error: 'Please select a font.',
+    error: 'Select a font',
+    message: 'Please select a font.',
   }),
 })
 

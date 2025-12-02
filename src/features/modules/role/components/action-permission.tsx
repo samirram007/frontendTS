@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import type { Row } from "@tanstack/react-table"
 import type { Role } from "../data/schema"
 
-import { Route as RolePermissionRoute } from '@/routes/_authenticated/administration/_layout/role/_layout/$id/_module/'
+import { Route as RolePermissionRoute } from '@/routes/_protected/administration/_layout/role/_layout/$id/_module/index'
 
 import { useNavigate } from '@tanstack/react-router'
 interface DataTableRowActionsProps {

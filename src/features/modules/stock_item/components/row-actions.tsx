@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useStockItem } from "../contexts/stock_item-context"
 import type { StockItem } from "../data/schema"
 
-import { Route as StockItemDetailRoute } from '@/routes/_authenticated/masters/inventory/_layout/stock_item/_layout/$id'
+import { Route as StockItemDetailRoute } from '@/routes/_protected/masters/inventory/_layout/stock_item/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<StockItem>

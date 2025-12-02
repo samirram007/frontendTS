@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label"
 import { useFocusArea } from "@/core/hooks/useFocusArea"
 import { useRestrictFocusToRef } from "@/core/hooks/useRestrictFocusToRef"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
-import { useEffect, useRef, useState } from "react"
+import { Loader } from "lucide-react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import { useForm, useFormContext, type UseFormReturn } from "react-hook-form"
 import { toast } from "sonner"
 import type { ReceiptNoteForm, VoucherDispatchDetailForm } from "../../../data/schema"
@@ -42,6 +43,7 @@ const VoucherDispatchDetail = () => {
         }
     }, [form.watch("voucherDispatchDetail")]);
     return (
+        <Suspense fallback={<Loader className="animate-spin" />}>
         <Dialog open={open}
             onOpenChange={(state) => {
 
@@ -122,6 +124,7 @@ const VoucherDispatchDetail = () => {
                 </DialogFooter>
             </DialogContent>
         </Dialog >
+        </Suspense>
     )
 }
 

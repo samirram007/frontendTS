@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useCurrency } from "../contexts/currency-context"
 import type { Currency } from "../data/schema"
 
-import { Route as CurrencyDetailRoute } from '@/routes/_authenticated/masters/organization/_layout/currency/_layout/$id'
+import { Route as CurrencyDetailRoute } from '@/routes/_protected/masters/organization/_layout/currency/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Currency>

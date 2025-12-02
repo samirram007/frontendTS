@@ -24,7 +24,7 @@ const AdminLayout = () => {
                         <AppSidebar /> 
                         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden ">
 
-                            <div className="min-h-dvh grid grid-rows-[auto_1fr_auto]">
+                            <div className="min-h-dvh grid grid-rows-[auto_2fr_auto]">
 
 
                                 <HeaderComponent />
@@ -32,7 +32,7 @@ const AdminLayout = () => {
 
                                 {/* <!-- ===== Main Content Start ===== --> */}
                                 <main className="max-w-screen ">
-                                    <div className="mx-auto max-w-screen px-2 rounded-xl">
+                                    <div className="mx-auto min-h-full max-w-screen px-2 rounded-xl">
 
 
                                         <Suspense fallback={<Toaster />}>

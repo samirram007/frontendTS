@@ -42,7 +42,7 @@ export const formSchema = z
     district: z.string().nullable().optional(),
     city: z.string().nullable().optional(),
     state: z.string().nullable().optional(),
-    postalCode: z.string({ required_error: 'Postal code is required.' })
+    postalCode: z.string({ message: 'Postal code is required.' })
       .max(6, { message: 'Postal code must be at most 6 characters long.' })
       .nullable().optional(),
     latitude: z.string().nullable().optional(),

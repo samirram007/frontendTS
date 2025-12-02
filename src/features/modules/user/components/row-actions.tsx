@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useUser } from "../contexts/user-context"
 import type { User } from "../data/schema"
 
-import { Route as UserDetailRoute } from '@/routes/_authenticated/administration/_layout/user/_layout/$id'
+import { Route as UserDetailRoute } from '@/routes/_protected/administration/_layout/user/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<User>

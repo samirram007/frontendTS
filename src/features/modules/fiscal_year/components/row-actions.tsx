@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useFiscalYear } from "../contexts/fiscal_year-context"
 import type { FiscalYear } from "../data/schema"
 
-import { Route as FiscalYearDetailRoute } from '@/routes/_authenticated/masters/organization/_layout/fiscal_year/_layout/$id'
+import { Route as FiscalYearDetailRoute } from '@/routes/_protected/masters/organization/_layout/fiscal_year/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<FiscalYear>

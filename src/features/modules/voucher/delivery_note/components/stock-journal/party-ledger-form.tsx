@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query"
 import type { UseFormReturn } from "react-hook-form"
 import { fetchPartyLedgerService } from "../../../data-schema/partyLedger/data/api"
 import type { DeliveryNoteForm } from "../../data/schema"
-import { PartyLedgerCombobox } from "../sub-component/party-ledger-combo-box"
+import { PartyLedgerCombobox } from "../sub-component/party/party-ledger-combo-box"
 
 
 

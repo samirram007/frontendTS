@@ -5,6 +5,7 @@ import { useTransaction } from '@/features/transactions/context/transaction-cont
 import { useEffect } from 'react';
 
 import Pos from './pos';
+import { PosProvider } from './pos/contexts/pos-context';
 import type { ReceiptNoteProps } from './pos/contracts';
 
 
@@ -18,7 +19,9 @@ const ReceiptNote = ({ currentRow }: ReceiptNoteProps) => {
     return (
 
         <>
-            <Pos currentRow={currentRow} />
+            <PosProvider>
+                <Pos currentRow={currentRow} />
+            </PosProvider>
 
         </>
     )

@@ -4,7 +4,7 @@ import type { Row } from "@tanstack/react-table"
 import { useSupplier } from "../contexts/supplier-context"
 import type { Supplier } from "../data/schema"
 
-import { Route as SupplierDetailRoute } from '@/routes/_authenticated/masters/party/_layout/supplier/_layout/$id'
+import { Route as SupplierDetailRoute } from '@/routes/_protected/masters/party/_layout/supplier/_layout/$id'
 
 interface DataTableRowActionsProps {
     row: Row<Supplier>

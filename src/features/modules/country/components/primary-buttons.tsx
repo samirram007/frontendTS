@@ -1,6 +1,6 @@
 
 import { Button } from '@/components/ui/button'
-import { Route as CountryDetailRoute } from '@/routes/_authenticated/masters/organization/_layout/country/_layout/$id'
+import { Route as CountryDetailRoute } from '@/routes/_protected/masters/organization/_layout/country/_layout/$id'
 
 import { IconUserPlus } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'

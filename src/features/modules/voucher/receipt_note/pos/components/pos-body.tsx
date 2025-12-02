@@ -1,23 +1,27 @@
 import { Form } from "@/components/ui/form";
+import { useTransaction } from "@/features/transactions/context/transaction-context";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { isEqual } from "lodash";
+
 import { useEffect, useMemo } from "react";
-import { useForm, useFormContext } from "react-hook-form";
+import { useForm, useFormContext, type Resolver } from "react-hook-form";
 import { stockJournalSchema, type ReceiptNoteForm, type StockJournalEntryForm, type StockJournalForm } from "../../data/schema";
 import StockJournal from "./stock-journal";
+import isEqual from "lodash/isEqual";
+
 
 
 
 const PosBody = () => {
     const receiptNoteForm = useFormContext<ReceiptNoteForm>();
+
     const stockJournal = receiptNoteForm.watch("stockJournal")
     const stockJournalForm = useForm<StockJournalForm>({
-        resolver: zodResolver(stockJournalSchema),
+        resolver: zodResolver(stockJournalSchema) as Resolver<StockJournalForm>,
         defaultValues: {
             ...stockJournal,
-            stockJournalEntries: stockJournal?.stockJournalEntries ?? []
-        }
-    })
+           stockJournalEntries: stockJournal?.stockJournalEntries ?? [],
+       }
+    });
     const stockJournalTotal = useMemo(() => {
         const entries = (stockJournalForm.watch("stockJournalEntries") || []).filter(
             (entry): entry is StockJournalEntryForm => entry !== undefined && entry !== null
@@ -31,6 +35,8 @@ const PosBody = () => {
             totalAmount
         }
     }, [stockJournalForm.watch("stockJournalEntries")])
+
+
 
     useEffect(() => {
         // when parent changes, update child
@@ -85,6 +91,7 @@ export default PosBody
 
 
 const StockJournalUnloadedView = () => {
+    const { config } = useTransaction()
     return (
         <div className="flex flex-col w-full gap-0   items-start overflow-y-scroll px-2  ">
             <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">
@@ -95,14 +102,16 @@ const StockJournalUnloadedView = () => {
 
                         <div className="border-r-0!  ">Particulars</div>
 
-
-                        <div className="grid grid-rows-2 border-0!">
-                            <div className="border-b-0!  ">Quantity</div>
-                            <div className="grid grid-cols-2 items-center">
-                                <div className="border-y-0! border-x-0!  ">Actual</div>
-                                <div className="border-y-0! border-r-0!  ">Billing</div>
-                            </div>
-                        </div>
+                        {config.find(c => c.key === 'show_actual_and_billing_quantity')?.value ? (
+                            <div className="grid grid-rows-2 border-0!">
+                                <div className="border-b-0!  ">Quantity</div>
+                                <div className="grid grid-cols-2 items-center">
+                                    <div className="border-y-0! border-x-0!  ">Actual</div>
+                                    <div className="border-y-0! border-r-0!  ">Billing</div>
+                                </div>
+                            </div>) :
+                            <div>Quantity</div>
+                        }
                         <div className="border-l-0!">Rate</div>
                         <div className="border-l-0!">per</div>
                         <div className="border-l-0!">disc%</div>

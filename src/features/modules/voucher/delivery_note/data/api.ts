@@ -27,3 +27,6 @@ export async function fetchSaleLedgersService() {
 export async function fetchStockInHandLedgersService() {
     return await getData('stock_in_hand_ledgers')
 }
+export async function fetchLedgerBalanceService(id: number) {
+    return await getData(`ledger_balance/${id}`)
+}

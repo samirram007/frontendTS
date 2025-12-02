@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import { cn } from "@/lib/utils";
 import { getData } from "@/utils/dataClient";
-import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
+import { capitalizeAllWords, lowerCase } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
-import { lowerCase } from "lodash";
+
 import { CheckIcon, ChevronsUpDownIcon, Loader2 } from "lucide-react";
 import React from "react";
 import type { UseFormReturn } from "react-hook-form";
@@ -13,6 +14,8 @@ import type { StockJournalGodownEntryForm } from "../../../data/schema";
 
 type BatchSelectionProps = {
     form: UseFormReturn<StockJournalGodownEntryForm>;
+    stockItem: StockItem | null;
+    godownId: number | null;
 }
 interface BatchData {
     batchNo?: string;
@@ -21,21 +24,19 @@ interface BatchData {
     stockInHand?: number;
     className?: string;
 
+
 }
 
 const BatchSelection = (props: BatchSelectionProps) => {
-    const { form } = props;
+    const { form, stockItem, godownId } = props;
     const [open, setOpen] = React.useState(false)
-    const stockItem = form.watch('stockItem');
-    const godownId = form.watch('godownId');
     const selectedId = form.watch('batchNo')?.toString()
     const batches = useQuery({
         queryKey: ['batches', stockItem?.id, godownId],
         queryFn: async () => {
             if (!stockItem?.id || !godownId) {
                 return []
-            }
-            // Replace with actual data fetching logic
+            } 
             const response = await getData(`/godown_item_batches/${stockItem.id}/${godownId}`);
 
             return response.data;
@@ -61,12 +62,13 @@ const BatchSelection = (props: BatchSelectionProps) => {
         stockUnitLabel: stockItem?.stockUnit ? capitalizeAllWords(stockItem.stockUnit.code!) : '',
         className: "min-w-full hover:bg-blue-300"
     }))
-    const selected = frameworks.find((o: { label: string; value: string; stockInHand: number; stockUnitLabel: string; className: string }) => lowerCase(o.value) === lowerCase(selectedId))
+    const selected = frameworks.find((o: { label: string; value: string; stockInHand: number; stockUnitLabel: string; className: string }) => lowerCase(o.value) === lowerCase(selectedId!))
 
     const selectedLabel = <div className="flex flex-row justify-between w-full">
         {selected ? (<><div>{selected?.label}</div> <div>{selected?.stockInHand} {selected?.stockUnitLabel}</div></>) : 'Select batch'}
     </div>;
     return (
+        <div> 
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <Button
@@ -115,6 +117,7 @@ const BatchSelection = (props: BatchSelectionProps) => {
                 </Command>
             </PopoverContent>
         </Popover>
+        </div>
     )
 }
 

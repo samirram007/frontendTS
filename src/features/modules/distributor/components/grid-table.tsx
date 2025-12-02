@@ -49,6 +49,11 @@ export function GridTable({ columns, data }: DataTableProps) {
   const table = useReactTable({
     data,
     columns,
+    initialState: {
+      pagination: {
+        pageSize: 100,  // 👈 default
+      },
+    },
     state: {
       sorting,
       columnVisibility,

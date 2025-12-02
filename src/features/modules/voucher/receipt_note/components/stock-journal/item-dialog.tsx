@@ -18,7 +18,7 @@ import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueries } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { Form, useForm, type Resolver } from "react-hook-form";
 import { stockJournalEntrySchema, type StockJournalEntryForm, } from "../../data/schema";
 import { GodownCombobox } from "./godown-combo-box";
 
@@ -46,7 +46,7 @@ export function ItemDialog() {
 
 
     const form = useForm<StockJournalEntryForm>({
-        resolver: zodResolver(stockJournalEntrySchema),
+        resolver: zodResolver(stockJournalEntrySchema) as Resolver<StockJournalEntryForm>,
         defaultValues: {
             stockJournalId: undefined,
             stockItemId: undefined,
