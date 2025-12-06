@@ -43,16 +43,12 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
 
   const form = useForm<DayBookForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,
       }
-      : {
-        name: '',
-        code: '',
-        description: '',
-        status: 'active',
+      : {    
         isEdit,
       },
   })
@@ -61,8 +57,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
 
     form.reset()
     showSubmittedData(values)
-    saveDayBook(
-      currentRow ? { ...values, id: currentRow.id } : values
+    saveDayBook(values
     )
     onOpenChange(false)
   }

@@ -107,6 +107,22 @@ export const voucherDispatchDetailSchema = z.object({
   billOfLadingNo: z.string().nullish(),
   billOfLadingDate: z.coerce.date().nullish(),
   motorVehicleNo: z.string().nullish(),
+  distance: z.coerce.number().nullish(),
+  rate: z.coerce.number().nullish(),
+  distanceUnitId: z.number().int().positive().nullish(),
+  rateUnitId: z.number().int().positive().nullish(),
+  quantity: z.coerce.number().nullish(),
+  weight: z.coerce.number().nullish(),
+  volume: z.coerce.number().nullish(),
+  loadingCharges: z.coerce.number().nullish(),
+  unloadingCharges: z.coerce.number().nullish(),
+  packingCharges: z.coerce.number().nullish(),
+  insuranceCharges: z.coerce.number().nullish(),
+  otherCharges: z.coerce.number().nullish(),
+  freightCharges: z.coerce.number().nullish(),
+  totalFare: z.coerce.number().nullish(),
+  isEdit: z.boolean().nullish(),
+
 
 
 })
@@ -132,7 +148,7 @@ export const deliveryNoteSchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherNo: z.string().min(1).nullish(),
   voucherDate: z.coerce.date(),
-  referenceNo: z.string().min(1).nullish(),
+  referenceNo: z.string().nullish(),
   referenceDate: z.coerce.date().nullish(),
   voucherTypeId: z.number().int(),
   stockJournalId: z.number().int().nullish(),

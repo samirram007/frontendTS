@@ -1,5 +1,5 @@
 import LongText from '@/components/long-text'
-import { Badge } from '@/components/ui/badge'
+
 import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 import type { ColumnDef } from '@tanstack/react-table'
@@ -7,12 +7,11 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
-import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 
-import { lowerCase } from '../../../../../utils/removeEmptyStrings'
-import { VoucherTypeColorMapping } from '../data/data'
+
+
 import type { StockInHandSchema } from '../data/schema'
-import RowActions from '../components/row-actions'
+
 
 export const columns: ColumnDef<StockInHandSchema>[] = [
   {

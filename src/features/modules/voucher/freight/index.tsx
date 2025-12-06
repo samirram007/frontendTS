@@ -8,16 +8,36 @@ import { Main } from '@/layouts/components/main'
 
 
 import { cn } from '@/lib/utils'
-import { useEffect, useState } from 'react'
-import type { FreightListSchema } from './data/schema'
+
+import type { FreightForm, FreightListSchema, FreightSchema } from './data/schema'
+import { date_format } from '@/utils/removeEmptyStrings'
+import { Form } from '@/components/ui/form'
+import { formSchema } from './data/schema';
+
+import { useForm, type Resolver, type UseFormReturn } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import FormInputField from '@/components/form-input-field'
+import { Button } from '@/components/ui/button'
+import { useFreightMutation } from './data/queryOptions'
+
+import { useEffect, useMemo, useState } from 'react'
+import type { StockUnit, StockUnitList } from '../../stock_unit/data/schema'
+
+import { Input } from '@/components/ui/input'
+import { lowerCase } from 'lodash';
+
+import VoucherDispatchDetail from './components/voucher-dispatch-detail'
+import { voucherDispatchDefaultValues } from '../delivery_note/data/data';
+import PrintFreightDialog from './components/print-freight-dialog'
 
 
 
 interface FreightProps {
     data: FreightListSchema
+    stockUnits: StockUnitList
 }
 
-export default function Freight({ data: freightListSchema }: FreightProps) {
+export default function Freight({ data: freightListSchema, stockUnits }: FreightProps & { stockUnits: StockUnitList }) {
     return (
 
         <Main className='min-h-full! min-w-full '>
@@ -34,8 +54,8 @@ export default function Freight({ data: freightListSchema }: FreightProps) {
                 {freightListSchema.length === 0 ? (
                     <div className='text-center text-gray-500'>No data available.</div>
                 ) : (
-                    <ReportView
-                        data={freightListSchema} />
+                        <RecordView
+                            data={freightListSchema} stockUnits={stockUnits} />
                 )}
             </div>
         </Main>
@@ -44,192 +64,408 @@ export default function Freight({ data: freightListSchema }: FreightProps) {
     )
 }
 
-const ReportView = ({ data }: FreightProps) => {
+const RecordView = ({ data, stockUnits }: FreightProps) => {
 
     return <div className='w-full min-h-full  grid grid-rows-[auto_1fr]'>
-        <ReportHeader />
+        <RecordHeader />
         <div className='border-2 min-h-full'>
             {data.map((item, index) => (
                 <div key={index} className={cn
-                    ('grid grid-cols-[1fr_2fr] text-center ', index % 2 === 0 ? 'bg-white' : 'bg-gray-100')
+                    ('w-full text-center ', index % 2 === 0 ? 'bg-white' : 'bg-gray-100')
                 }>
-                    <div className=' text-left pl-2 font-semibold'>{item.itemName}</div>
-                    <div className='grid grid-cols-4 '>
+                    <DeliveryNoteRecord data={item} stockUnits={stockUnits} rowIndex={index + 1} />
 
-                        <div className='grid grid-cols-2'>
-                            <div>
-                                {item.openingQuantity === 0 ? '-' :
-                                    `${item.openingQuantity} ${item.unitCode}`}
-                            </div>
-                            <div>{item.openingAmount === 0 ? '-' : item.openingAmount?.toFixed(2)}</div>
-                        </div>
-
-
-
-                        <div className='grid grid-cols-2'>
-                            <div>
-                                {item.inwardQuantity === 0 ? '-' :
-                                    `${item.inwardQuantity} ${item.unitCode}`}
-                            </div>
-                            <div>{item.inwardAmount === 0 ? '-' : item.inwardAmount?.toFixed(2)}</div>
-                        </div>
-
-
-
-                        <div className='grid grid-cols-2'>
-                            <div>
-                                {item.outwardQuantity === 0 ? '-' :
-                                    `${item.outwardQuantity} ${item.unitCode}`}
-                            </div>
-                            <div>{item.outwardAmount === 0 ? '-' : item.outwardAmount?.toFixed(2)}</div>
-                        </div>
-
-
-                        <div className='grid grid-cols-2'>
-                            <div>
-                                {item.closingQuantity === 0 ? '-' :
-                                    `${item.closingQuantity} ${item.unitCode}`}
-                            </div>
-                            <div>{item.closingAmount === 0 ? '-' : item.closingAmount?.toFixed(2)}</div>
-                        </div>
-
-
-
-
-                    </div>
                 </div>
             ))}
         </div>
-        <ReportFooter data={data} />
+        <RecordFooter data={data} stockUnits={stockUnits} />
     </div>
 }
+type DeliveryNoteRecordProps = {
+    data: FreightSchema
+    stockUnits: StockUnitList
+    rowIndex?: number
+}
 
-const ReportHeader = () => {
+const DeliveryNoteRecord = ({ data, stockUnits, rowIndex }: DeliveryNoteRecordProps) => {
+    const { mutate: saveFreight, isPending } = useFreightMutation()
+    const [freightData, setFreightData] = useState<FreightSchema | null>(null);
+    const [printDialogOpen, setPrintDialogOpen] = useState<boolean>(false);
+
+
+    const form = useForm<FreightForm>({
+        resolver: zodResolver(formSchema) as Resolver<FreightForm>,
+        defaultValues: {
+            ...data,
+            deliveryNoteId: data.id,
+            distance: data.voucherDispatchDetail?.distance || 0,
+            rate: data.voucherDispatchDetail?.rate || 0,
+            freightCharges: data.voucherDispatchDetail?.freightCharges || 0,
+            totalFare: data.voucherDispatchDetail?.totalFare || 0,
+            distanceUnitId: data.voucherDispatchDetail?.distanceUnitId || 2,
+            rateUnitId: data.voucherDispatchDetail?.rateUnitId || 2,
+            isEdit: false
+        },
+    })
+    const distance = form.watch('distance')
+    const rate = form.watch('rate')
+    const totalFare = form.watch('totalFare')
+    // Automatically calculate totalFare when distance or rate changes
+
+
+    const onSubmit = (values: FreightForm) => {
+
+        // form.reset()
+        saveFreight(values,
+            {
+                onSuccess: (data) => {
+                    setFreightData?.(data?.data as FreightSchema ?? null)
+                    setPrintDialogOpen(true);
+
+                    // Navigate({ to: FreightRoute.to, })
+                },
+            }
+        )
+
+    }
+    useEffect(() => {
+        const totalFare = distance * rate
+
+        form.setValue('totalFare', totalFare)
+        form.setValue('freightCharges', totalFare)
+    }, [distance, rate])
     return (
-        <div className=' grid grid-cols-[1fr_2fr] border-amber-950! bg-gray-100  text-center font-bold  '>
-            <div className='text-accent-foreground border-2 text-left pl-2 font-stretch-ultra-expanded  h-full flex items-center'>PARTICULARS</div>
-            <div className='grid grid-cols-4 border-2 border-l-0'>
-                <div className=''>
-                    <div className='text-accent-foreground  border-b-2'>Opening</div>
-                    <div className='grid grid-cols-2'>
-                        <div>Qty</div>
-                        <div className='border-l-2'>Val</div>
-                    </div>
-                </div>
-                <div>
-                    <div className='text-accent-foreground border-b-2 border-l-2   ' >Inward</div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>Qty</div>
-                        <div className='border-l-2'>Val</div>
-                    </div>
-                </div>
-
-                <div>
-                    <div className='text-accent-foreground border-b-2 border-l-2'>Outward</div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>Qty</div>
-                        <div className='border-l-2'>Val</div>
-                    </div>
-                </div>
-                <div>
-                    <div className='text-accent-foreground border-b-2 border-l-2'>Closing</div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>Qty</div>
-                        <div className='border-l-2'>Val</div>
-                    </div>
-                </div>
+        <Form {...form}>
 
 
+            <form id='user-form'
+                onSubmit={form.handleSubmit(onSubmit)}
+                className='space-y-4 p-0.5'>
+                <div className='grid grid-cols-[60px_120px_100px_repeat(9,1fr)]  text-left pl-2 font-semibold'>
+                    <div className='text-center'>{rowIndex}</div>
+                    <div>{date_format(data?.voucherDate)}</div>
+                    <div>{data.voucherNo}</div>
+                    <div>{data.party?.name}</div>
+                    <div>{data.voucherDispatchDetail?.billOfLadingNo}</div>
+                    <div>{data.voucherDispatchDetail?.destination}</div>
+                    <div>{data.voucherDispatchDetail?.carrierName}</div>
+                    <div>{data.voucherDispatchDetail?.motorVehicleNo}</div>
+                    <div className='px-2'><DistanceBox form={form} name='distance' stockUnits={stockUnits} /></div>
+                    <div className='px-2'><RateBox form={form} name='rate' stockUnits={stockUnits} /></div>
+                    <div className='text-right pr-4  border-x-2'>
+                        {isNaN(totalFare) ? "-" : (totalFare > 0 ? Number(totalFare).toFixed(2) : "-")}
+                        {/* <FormInputField type='text' form={form} name='totalFare' noLabel /> */}
+                    </div>
+                    <div className='flex justify-start pl-2 gap-2'>
+                        <VoucherDispatchDetail voucherDispatchDefaultValues={data.voucherDispatchDetail || voucherDispatchDefaultValues} />
+                        {(totalFare > 0) && (
+                            <>
+                                {printDialogOpen && freightData && <PrintFreightDialog open={printDialogOpen} onOpenChange={setPrintDialogOpen} freightData={freightData} />}
 
+                                <Button type='submit' className='focus:bg-slate-950 focus:text-zinc-50' variant='outline' size='sm' disabled={isPending}>
+                                    <span className='sr-only'>Save</span>
+                                    Freight Bill
+                                </Button>
+                            </>
+                        )}
+                    </div>
+
+
+
+                </div>
+            </form>
+        </Form>
+    )
+}
+
+
+const RecordHeader = () => {
+    return (
+        <div className='  border-amber-950! bg-gray-100  text-center font-bold  '>
+            <div className='grid grid-cols-[60px_120px_100px_repeat(9,1fr)] text-accent-foreground border-2 text-left pl-2 font-stretch-ultra-expanded  h-full   items-center'>
+                <div className='text-center'>Sl. No.</div>
+                <div>Date</div>
+                <div>Dl. No.</div>
+                <div>Distributor</div>
+                <div>Dispatch No.</div>
+                <div>Destination</div>
+                <div>Carrier Name</div>
+                <div>Vehicle No.</div>
+                <div className='text-right pr-4'>Distance(Km)</div>
+                <div className='text-right pr-4'>Rate(Per Km)</div>
+                <div className='text-right pr-4 border-x-2'>Total Fare</div>
+                <div className='flex justify-center'>Bill</div>
             </div>
+
         </div>
     )
 }
 
 
-const ReportFooter = ({ data }: FreightProps) => {
-    const [unitCode, setUnitCode] = useState<string>('');
-    const total = {
-        openingQuantity: 0,
-        openingAmount: 0,
-        inwardQuantity: 0,
-        inwardAmount: 0,
-        outwardQuantity: 0,
-        outwardAmount: 0,
-        closingQuantity: 0,
-        closingAmount: 0,
-        itemCount: 0,
+const RecordFooter = ({ data, stockUnits }: { data: FreightListSchema, stockUnits: StockUnitList }) => {
+    const [total, setTotal] = useState({ distance: 0, rate: 0, totalFare: 0 });
+    const [distanceUnit, setDistanceUnit] = useState<StockUnit | null>(null);
+    const [rateUnit, setRateUnit] = useState<StockUnit | null>(null);
+    console.log(rateUnit)
+    useEffect(() => {
+        setDistanceUnit(stockUnits.find((su) => su.id === data[0]?.voucherDispatchDetail?.distanceUnitId) || null);
+        setRateUnit(stockUnits.find((su) => su.id === data[0]?.voucherDispatchDetail?.rateUnitId) || null);
+    }, [data, stockUnits]);
+    useEffect(() => {
+        const totalDistance = data.reduce((sum, item) => sum + (Number(item.voucherDispatchDetail?.distance) || 0), 0);
+        const totalRate = data.reduce((sum, item) => sum + (Number(item.voucherDispatchDetail?.rate) || 0), 0);
+        const totalFare = data.reduce((sum, item) => sum + (Number(item.voucherDispatchDetail?.totalFare) || 0), 0);
+        setTotal(prev => { return { ...prev, distance: totalDistance, rate: totalRate, totalFare: totalFare } });
+    }, [data]);
+    return (
+        <div className=' border-amber-950! bg-gray-100  text-center font-bold  '>
+            <div className=' grid grid-cols-[60px_120px_100px_repeat(9,1fr)] text-accent-foreground border-2 text-right   items-center pr-2 h-full justify-between'>
+                <div className='col-span-4 text-left pl-4'>Total Records: {data.length}</div>
+
+                <div className='col-span-3'></div>
+                <div>Total:  </div>
+                <div className='pl-6 text-left'>{isNaN(total.distance) ? "-" :
+                    (total.distance > 0 ? Number(total.distance).toFixed(2) + " " + (distanceUnit?.code ?? "") : "-")}</div>
+                <div>-</div>
+                <div className='pr-2'>{isNaN(total.totalFare) ? "-" : (total.totalFare > 0 ? Number(total.totalFare).toFixed(2) : "-")}</div>
+                <div></div>
+
+            </div>
+
+        </div>
+    )
+}
+type Boxprops = {
+    form: UseFormReturn<FreightForm>
+    name: keyof FreightForm
+    stockUnits: StockUnitList
+
+}
+
+const DistanceBox = (props: Boxprops) => {
+    const { form, name, stockUnits } = props;
+    const distanceUnits = useMemo(() => {
+        return stockUnits.filter((su) => su.unitType === 'simple' && lowerCase(su.quantityType!) === 'length');
+    }, [stockUnits]);
+    const distanceUnitId = form.watch('distanceUnitId');
+    const distanceUnit = useMemo(() => {
+        return distanceUnits.find((su) => su.id === distanceUnitId);
+    }, [distanceUnitId, distanceUnits]);
+
+    const [boxValue, setBoxValue] = useState<string>("")
+
+
+
+    // const baseUnit = useMemo(() => {
+    //     return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
+    // }, [conversionFactors]);
+    const baseUnitCode = distanceUnit?.code || '';
+    const basenoOfDecimalPlaces = distanceUnit?.noOfDecimalPlaces;
+
+
+    const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
+        // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
+        const match = input.trim().match(/^(\d+\.?\d*)\s*([a-zA-Z]+)?$/);
+
+        if (!match) {
+            return { quantity: 0, unit: null };
+        }
+        const [, quantityStr, unitStr] = match;
+
+        const quantity = Number.parseFloat(quantityStr);
+
+        return { quantity, unit: unitStr ?? distanceUnit?.code };
+
+    };
+
+
+
+
+    const handleBlurOrEnter = () => {
+        const { quantity } = parseQuantityWithUnit(boxValue);
+
+        if (quantity === 0) {
+            form.setValue(name, 0, { shouldValidate: true });
+            setBoxValue("");
+            return;
+        }
+
+        let finalQuantity = quantity;
+
+        // If a unit string was provided, find the matching conversion factor
+
+
+        form.setValue(name, finalQuantity, { shouldValidate: true });
+        setBoxValue(`${finalQuantity.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`);
+
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleBlurOrEnter();
+        }
+    };
+    const handleBlur = () => {
+        handleBlurOrEnter();
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = e.target.value;
+        setBoxValue(rawValue);
+    };
+
+    const handleOnFocus = () => {
+        const value = Number(form.getValues(name))?.toFixed(basenoOfDecimalPlaces)
+        setBoxValue(Number(value) > 0 ? value?.toString() : '');
     }
 
 
-    data.forEach(item => {
-        total.openingQuantity += item.openingQuantity ?? 0;
-        total.openingAmount += item.openingAmount ?? 0;
-        total.inwardQuantity += item.inwardQuantity ?? 0;
-        total.inwardAmount += item.inwardAmount ?? 0;
-        total.outwardQuantity += item.outwardQuantity ?? 0;
-        total.outwardAmount += item.outwardAmount ?? 0;
-        total.closingQuantity += item.closingQuantity ?? 0;
-        total.closingAmount += item.closingAmount ?? 0;
-        total.itemCount += 1;
-    })
-
     useEffect(() => {
-        const uniqueUnitCode = new Set<string>();
-        data.forEach(item => {
-            if (item.unitCode) {
-                uniqueUnitCode.add(item.unitCode);
-            }
-        });
-        const uniqueUnitCodeArray = Array.from(uniqueUnitCode);
-        if (uniqueUnitCodeArray.length === 1) {
-            setUnitCode('' + uniqueUnitCodeArray.join(', '));
+        const value = form.watch(name);
+
+
+        if (value) {
+            const boxValueStr = `${Number(value).toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
+            setBoxValue(boxValueStr);
         } else {
-            setUnitCode('~');
+            setBoxValue("");
+        }
+    }, [form.watch(name), baseUnitCode]);
+    return (
+        <>
+            <Input
+                type="text"
+
+                value={boxValue}
+                onFocus={handleOnFocus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                placeholder="e.g., 15 km"
+                className="value-box flex justify-end items-end"
+            />
+            <FormInputField type="hidden" form={form}
+                label=''
+                gapClass="grid-cols-[0_1fr] gap-0"
+                name={name} />
+
+
+
+        </>
+    )
+
+}
+
+
+const RateBox = (props: Boxprops) => {
+    const { form, name, stockUnits } = props;
+    const rateUnits = useMemo(() => {
+        return stockUnits.filter((su) => su.unitType === 'simple' && lowerCase(su.quantityType!) === 'length');
+    }, [stockUnits]);
+    const rateUnitId = form.watch('rateUnitId');
+    const rateUnit = useMemo(() => {
+        return rateUnits.find((su) => su.id === rateUnitId);
+    }, [rateUnitId, rateUnits]);
+
+    const [boxValue, setBoxValue] = useState<string>("")
+
+
+
+    // const baseUnit = useMemo(() => {
+    //     return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
+    // }, [conversionFactors]);
+    const baseUnitCode = rateUnit?.code || '';
+    const basenoOfDecimalPlaces = 2;
+
+
+    const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
+        // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
+        const match = input.trim().match(/^(\d+\.?\d*)\s*([a-zA-Z]+)?$/);
+
+        if (!match) {
+            return { quantity: 0, unit: null };
+        }
+        const [, quantityStr, unitStr] = match;
+
+        const quantity = Number.parseFloat(quantityStr);
+
+        return { quantity, unit: unitStr ?? rateUnit?.code };
+
+    };
+
+
+
+
+    const handleBlurOrEnter = () => {
+        const { quantity } = parseQuantityWithUnit(boxValue);
+
+        if (quantity === 0) {
+            form.setValue(name, 0, { shouldValidate: true });
+            setBoxValue("");
+            return;
         }
 
-    }, []);
+        let finalQuantity = quantity;
 
+        // If a unit string was provided, find the matching conversion factor
+
+
+        form.setValue(name, finalQuantity, { shouldValidate: true });
+        setBoxValue(`${finalQuantity.toFixed(basenoOfDecimalPlaces)}/${baseUnitCode}`);
+
+
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleBlurOrEnter();
+        }
+    };
+    const handleBlur = () => {
+        handleBlurOrEnter();
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = e.target.value;
+        setBoxValue(rawValue);
+    };
+
+    const handleOnFocus = () => {
+        const value = Number(form.getValues(name))?.toFixed(basenoOfDecimalPlaces)
+        setBoxValue(Number(value) > 0 ? value?.toString() : '');
+    }
+
+
+    useEffect(() => {
+        const value = form.watch(name);
+
+
+        if (value) {
+            const boxValueStr = `${Number(value).toFixed(basenoOfDecimalPlaces)}/${baseUnitCode}`
+            setBoxValue(boxValueStr);
+        } else {
+            setBoxValue("");
+        }
+    }, [form.watch(name), baseUnitCode]);
     return (
-        <div className=' grid grid-cols-[1fr_2fr] border-amber-950! bg-gray-100  text-center font-bold  '>
-            <div className='text-accent-foreground border-2 text-right flex items-center pr-2 h-full justify-between'>
-                <div className='pl-4 italic text-sm font-mono'>
-                    Item count: {data.length}
-                </div>
-                <div>
-                    Total:
-                </div>
-            </div>
-            <div className='grid grid-cols-4 border-2 border-l-0'>
-                <div className=''>
-                    <div className='grid grid-cols-2'>
-                        <div>{total.openingQuantity === 0 ? '-' : (total.openingQuantity + ' ' + unitCode)}  </div>
-                        <div className='border-l-2'>{total.openingAmount === 0 ? '-' : total.openingAmount}</div>
-                    </div>
-                </div>
-                <div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>{total.inwardQuantity === 0 ? '-' : (total.inwardQuantity + ' ' + unitCode)}</div>
-                        <div className='border-l-2'>{total.inwardAmount === 0 ? '-' : total.inwardAmount}</div>
-                    </div>
-                </div>
+        <>
+            <Input
+                type="text"  
 
-                <div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>{total.outwardQuantity === 0 ? '-' : (total.outwardQuantity + ' ' + unitCode)}</div>
-                        <div className='border-l-2'>{total.outwardAmount === 0 ? '-' : total.outwardAmount}</div>
-                    </div>
-                </div>
-                <div>
-                    <div className='grid grid-cols-2'>
-                        <div className='border-l-2'>{total.closingQuantity === 0 ? '-' : (total.closingQuantity + ' ' + unitCode)}</div>
-                        <div className='border-l-2'>{total.closingAmount === 0 ? '-' : total.closingAmount}</div>
-                    </div>
-                </div>
+                value={boxValue}
+                onFocus={handleOnFocus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                placeholder="e.g., 10/km"
+                className="value-box flex justify-end items-end"
+            />
+            <FormInputField type="hidden" form={form}
+                label=''
+                gapClass="grid-cols-[0_1fr] gap-0"
+                name={name} />
 
 
 
-            </div>
-        </div>
+        </>
     )
+
 }

@@ -7,7 +7,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
-import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
+
 
 import { lowerCase } from '../../../../../utils/removeEmptyStrings'
 import { VoucherTypeColorMapping } from '../data/data'
@@ -25,13 +25,12 @@ export const columns: ColumnDef<DayBookSchema>[] = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label='Select all'
-        className='translate-y-[2px]'
+        className='translate-y-0.5'
       />
     ),
     meta: {
       className: cn(
         'sticky md:table-cell left-0 z-10 rounded-tl',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'
       ),
     },
     cell: ({ row }) => (
@@ -40,7 +39,7 @@ export const columns: ColumnDef<DayBookSchema>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label='Select row'
-        className='translate-y-[2px]'
+        className='translate-y-0.5'
       />
     ),
     enableSorting: false,
@@ -53,7 +52,9 @@ export const columns: ColumnDef<DayBookSchema>[] = [
       <DataTableColumnHeader column={column} title='Date' />
     ),
     cell: ({ row }) => {
-
+      const { voucherType } = row.original
+      const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
+      const hoverColor = VoucherTypeColorMapping.get(key);
       return (
         <LongText className='max-w-36 flex items-center gap-2'>
           {formatDDMMMYYYY(row.getValue('voucherDate'))}
@@ -63,8 +64,8 @@ export const columns: ColumnDef<DayBookSchema>[] = [
     meta: {
       className: cn(
         'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell'
+        '  transition-colors duration-200  ',
+        'sticky left-6 md:table-cell',
       ),
     },
     enableHiding: false,
@@ -110,7 +111,7 @@ export const columns: ColumnDef<DayBookSchema>[] = [
         <div className='flex space-x-2'>
           <Badge variant='default' className={cn('capitalize', badgeColor)}>
             {/* <div className='text-muted-foreground'>{parentId.name}: </div> */}
-            {voucherType?.name ?? 'Unknown'}
+            {row.original.module ? row.original.module : (voucherType?.name ?? 'Unknown')}
           </Badge>
 
         </div>
@@ -132,8 +133,8 @@ export const columns: ColumnDef<DayBookSchema>[] = [
       <DataTableColumnHeader column={column} title='Amount' className='text-right pr-8' />
     ),
     cell: ({ row }) => {
-      const { amount } = row.original
-      const badgeColor = ActiveInactiveStatusTypes.get(amount)
+
+      const badgeColor = 'text-gray-600/80 border-green-600/80'
       return (
         <div className='flex space-x-2 justify-end pr-4'>
           <Badge variant='outline' className={cn('capitalize', badgeColor, 'border-0 bg-transparent')}>

@@ -24,7 +24,7 @@ const Pos = ({ currentRow }: DeliveryNoteProps) => {
 
             <div className="voucher-entry w-full 
             grid grid-rows-[1fr_120px] 
-         h-[calc(100dvh_-_170px)]  ">
+         h-[calc(100dvh-170px)]  ">
                 <Form {...mainForm}>
                     <div className="max-h-full grid grid-rows-[150px_1fr] overflow-hidden">
 

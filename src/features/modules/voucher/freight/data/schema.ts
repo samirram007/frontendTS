@@ -1,19 +1,16 @@
 import { voucherTypeSchema } from '@/features/modules/voucher_type/data/schema';
 import { z } from 'zod';
-export const freightSchema = z.object({
-  itemId: z.number().int().positive(),
-  itemName: z.string().min(1),
-  unitCode: z.string().min(1),
-  unitName: z.string().min(1),
-  openingQuantity: z.coerce.number().nullish(),
-  openingAmount: z.coerce.number().nullish(),
-  inwardQuantity: z.coerce.number().nullish(),
-  inwardAmount: z.coerce.number().nullish(),
-  outwardQuantity: z.coerce.number().nullish(),
-  outwardAmount: z.coerce.number().nullish(),
-  closingQuantity: z.coerce.number().nullish(),
-  closingAmount: z.coerce.number().nullish(),
-})
+import { deliveryNoteSchema } from '../../delivery_note/data/schema';
+import { companySchema } from '@/features/modules/company/data/schema';
+export const freightSchema = deliveryNoteSchema.extend({
+  // Add any additional fields specific to Freight if necessary
+  voucherReferences: z.array(z.object({
+    id: z.number().int().positive().nullish(),
+    voucherId: z.number().int().positive().nullish(),
+    refVoucherId: z.number().int().positive().nullish(),
+  })),
+  company: companySchema.nullish(),
+});
 
 export type FreightSchema = z.infer<typeof freightSchema>
 
@@ -57,11 +54,13 @@ export type StockSummaryList = z.infer<typeof stockSummaryListSchema>
 
 
 export const formSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required.' }),
-  code: z.string().min(1, { message: 'Code is required.' }).nullish(),
-  status: z.string().min(1, { message: 'Status is required.' }),
-
-  description: z.string().min(1, { message: 'Description is required.' }).nullish(),
-
+  deliveryNoteId: z.number().int().positive().nullish(),
+  distance: z.coerce.number().min(0),
+  distanceUnitId: z.number().int().positive(),
+  rateUnitId: z.number().int().positive(),
+  rate: z.coerce.number().min(0),
+  freightCharges: z.coerce.number().min(0),
+  totalFare: z.coerce.number().min(0),
   isEdit: z.boolean(),
 })
+export type FreightForm = z.infer<typeof formSchema>

@@ -32,3 +32,13 @@ export const fallbackText = (str: string) => {
 
   return firstLetter + lastLetter;
 };
+
+
+export const date_format = (value: string | Date) => {
+  const date = new Date(value);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+};
+

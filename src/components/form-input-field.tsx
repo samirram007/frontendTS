@@ -136,10 +136,10 @@ const TextAreaBox = (props: Props) => {
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )}   >
-                    {!noLabel && 
-                    <FormLabel className={rtl ? 'order-last' : ''}>
-                        {label ?? capitalizeAllWords(name)}
-                    </FormLabel>
+                    {!noLabel &&
+                        <FormLabel className={rtl ? 'order-last' : ''}>
+                            {label ?? capitalizeAllWords(name)}
+                        </FormLabel>
                     }
                     <FormControl>
                         <Textarea
@@ -168,10 +168,10 @@ const TextBox = (props: Props) => {
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )}   >
-                    {!noLabel && 
-                    <FormLabel className={rtl ? 'order-last' : ''}>
-                        {label ?? capitalizeAllWords(name)}
-                    </FormLabel>
+                    {!noLabel &&
+                        <FormLabel className={rtl ? 'order-last' : ''}>
+                            {label ?? capitalizeAllWords(name)}
+                        </FormLabel>
                     }
                     <FormControl>
                         <Input
@@ -235,9 +235,9 @@ const DateBox = (props: Props) => {
                         gapClass
                     )} >
                     {!noLabel &&
-                    <FormLabel className='   '>
-                            {label ?? capitalizeAllWords(name)}  
-                    </FormLabel>
+                        <FormLabel className='   '>
+                            {label ?? capitalizeAllWords(name)}
+                        </FormLabel>
                     }
                     <FormControl>
                         <Input
@@ -249,7 +249,7 @@ const DateBox = (props: Props) => {
                             autoComplete='off'
                             {...rest}
                             {...field}
-                            value={field.value ?? ""} 
+                            value={field.value ?? ""}
                         />
                     </FormControl>
                     <FormMessage className=' col-start-2' />
@@ -260,7 +260,7 @@ const DateBox = (props: Props) => {
     )
 }
 const NumberBox = (props: Props) => {
-    const { form, name, label, type, gapClass, tabIndex, ...rest } = props
+    const { form, name, label, type, gapClass, tabIndex, noLabel, rtl, ...rest } = props
     return (
         <FormField
             control={form.control}
@@ -271,9 +271,11 @@ const NumberBox = (props: Props) => {
                         'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
                         gapClass
                     )} >
-                    <FormLabel className='   '>
-                        {label ?? capitalizeAllWords(name)}
-                    </FormLabel>
+                    {!noLabel &&
+                        <FormLabel className={rtl ? 'order-last' : ''}>
+                            {label ?? capitalizeAllWords(name)}
+                        </FormLabel>
+                    }
                     <FormControl>
                         <Input
                             tabIndex={tabIndex}

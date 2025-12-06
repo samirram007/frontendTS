@@ -11,7 +11,7 @@ export async function fetchDeliveryNoteByIdService(id: number) {
 }
 
 export async function storeDeliveryNoteService(payload: any) {
-    console.log("payload", payload)
+    console.log("Delivery Note payload", payload)
     return await postData(API_PATH, payload)
 }
 export async function updateDeliveryNoteService(payload: any) {

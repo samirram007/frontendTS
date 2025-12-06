@@ -2,7 +2,7 @@ import {
   IconAccessPoint,
   IconBarrierBlock,
   IconBook,
-  IconBook2,
+
   IconBrowserCheck,
   IconBug,
   IconChecklist,

@@ -110,7 +110,7 @@ export function GridTable({ columns, data, pagination = true }: DataTableProps) 
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='group/row grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '
+                  className='group/row grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] hover:bg-violet-400/30'
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

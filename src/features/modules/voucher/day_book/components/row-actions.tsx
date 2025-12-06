@@ -3,6 +3,7 @@ import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
 import { useDayBook } from "../contexts/day_book-context"
 import type { DayBookSchema } from "../data/schema"
+import PrintDialog from "./print-dialog"
 
 
 interface DataTableRowActionsProps {
@@ -14,6 +15,9 @@ const RowActions = (props: DataTableRowActionsProps) => {
     const navigate = useNavigate()
     const { row } = props
     return (
+        <div
+            className="flex items-center gap-2">
+            <PrintDialog data={row?.original} />
         <DataTableRowActions<DayBookSchema>
             row={row}
             onEdit={(data) => {
@@ -28,7 +32,10 @@ const RowActions = (props: DataTableRowActionsProps) => {
                 setOpen("delete")
             }}
         />
+        </div>
     )
 }
 
 export default RowActions
+
+

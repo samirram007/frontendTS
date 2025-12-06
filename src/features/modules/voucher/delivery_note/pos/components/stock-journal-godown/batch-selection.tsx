@@ -4,13 +4,14 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import { cn } from "@/lib/utils";
 import { getData } from "@/utils/dataClient";
-import { capitalizeAllWords, lowerCase } from "@/utils/removeEmptyStrings";
+import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
 import { useQuery } from "@tanstack/react-query";
 
 import { CheckIcon, ChevronsUpDownIcon, Loader2 } from "lucide-react";
 import React from "react";
 import type { UseFormReturn } from "react-hook-form";
 import type { StockJournalGodownEntryForm } from "../../../data/schema";
+import { lowerCase } from "lodash";
 
 type BatchSelectionProps = {
     form: UseFormReturn<StockJournalGodownEntryForm>;
