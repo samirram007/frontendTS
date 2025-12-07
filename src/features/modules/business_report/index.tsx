@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import type { ITestSummaryRequest } from "./features/TEST_SUMMARY/data/schema";
 import { useGetTestSummaryReport } from "./features/TEST_SUMMARY/data/queryOptions";
 import TestSummaryReport from "./features/TEST_SUMMARY";
+import DailyCollectionTestReport from "./features/DAILY_COLLECTION_REPORT";
 
 
 
@@ -45,7 +46,7 @@ const BusinessReport = () => {
         })
     }
 
-    console.log("Report value", data);
+    console.log("Report value", reportValue);
 
     return (
         <div>
@@ -85,9 +86,14 @@ const BusinessReport = () => {
                 reportValue == "" ?
                     <div>No report type selected</div>
                     :
-                    <div className="mt-6">
-                        <TestSummaryReport data={data?.data ? data?.data?.data?.contents : []} />
-                    </div>
+                    Number(reportValue) == 9005 ?
+                        <div className="mt-6">
+                            <DailyCollectionTestReport />
+                        </div>
+                        :
+                        <div className="mt-6">
+                            <TestSummaryReport data={data?.data ? data?.data?.data?.contents : []} />
+                        </div>
 
             }
 

@@ -6,7 +6,6 @@ import { getAllDepartmentTestSummaryReport, getDepartmentTestSummaryReport } fro
 
 
 export const useGetTestSummaryReport = (request: ITestSummaryRequest) => {
-    console.log("Request", request);
     return useQuery({
         queryKey: ['test-summary-report', request.startDate],
         queryFn: () => {

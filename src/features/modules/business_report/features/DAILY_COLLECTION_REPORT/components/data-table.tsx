@@ -22,9 +22,8 @@ import {
     type VisibilityState,
 } from '@tanstack/react-table'
 import { useRef, useState } from 'react'
-import type { ITestSummaryReport } from '../data/schema'
-import { DataTableToolbar } from './data-table-toolbar'
-import { useReactToPrint } from 'react-to-print'
+// import { useReactToPrint } from 'react-to-print'
+import type { DailyCollectionReport } from '../data/schema'
 
 
 declare module '@tanstack/react-table' {
@@ -35,8 +34,8 @@ declare module '@tanstack/react-table' {
 }
 
 interface DataTableProps {
-    columns: ColumnDef<ITestSummaryReport>[]
-    data: ITestSummaryReport[]
+    columns: ColumnDef<DailyCollectionReport>[]
+    data: DailyCollectionReport[]
 }
 
 export function GridTable({ columns, data }: DataTableProps) {
@@ -75,64 +74,64 @@ export function GridTable({ columns, data }: DataTableProps) {
         getFacetedRowModel: getFacetedRowModel(),
         getFacetedUniqueValues: getFacetedUniqueValues(),
     })
-    const handlePrint = useReactToPrint({
-        contentRef: printRef,
-        pageStyle: `
-            @page {
-                size: A4 landscape;
-                margin: 6mm;
-            }
-             body {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-          font-family: "Arial", sans-serif;
-          font-size: 12px;
-        }
-    
-        h1, h2, h3 {
-          margin: 0;
-          padding: 0;
-        }
-    
-        .grid {
-          display: grid;
-          gap: 2px;
-        }
-    
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-    
-        .avoid-break {
-          page-break-inside: avoid;
-        }
-    
-        @media print {
-        .print-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-    
-        .invoice-body {
-            max-height: calc(100vh - 100px); /* leave space for header/footer */
-            overflow: visible !important;
-        }
-    
-        button, .no-print {
-         display: none !important;
-        }
-    
-        .print-container {
-            box-shadow: none !important;
-            border: none !important;
-        }
-        }`,
-    });
+    // const handlePrint = useReactToPrint({
+    //     contentRef: printRef,
+    //     pageStyle: `
+    //         @page {
+    //             size: A4 landscape;
+    //             margin: 6mm;
+    //         }
+    //          body {
+    //       -webkit-print-color-adjust: exact !important;
+    //       print-color-adjust: exact !important;
+    //       font-family: "Arial", sans-serif;
+    //       font-size: 12px;
+    //     }
+
+    //     h1, h2, h3 {
+    //       margin: 0;
+    //       padding: 0;
+    //     }
+
+    //     .grid {
+    //       display: grid;
+    //       gap: 2px;
+    //     }
+
+    //     .text-center { text-align: center; }
+    //     .text-right { text-align: right; }
+
+    //     .avoid-break {
+    //       page-break-inside: avoid;
+    //     }
+
+    //     @media print {
+    //     .print-footer {
+    //         position: fixed;
+    //         bottom: 0;
+    //         left: 0;
+    //         width: 100%;
+    //     }
+
+    //     .invoice-body {
+    //         max-height: calc(100vh - 100px); /* leave space for header/footer */
+    //         overflow: visible !important;
+    //     }
+
+    //     button, .no-print {
+    //      display: none !important;
+    //     }
+
+    //     .print-container {
+    //         box-shadow: none !important;
+    //         border: none !important;
+    //     }
+    //     }`,
+    // });
 
     return (
         <div className='space-y-4'>
-            <DataTableToolbar onPdfClick={handlePrint} table={table} />
+            {/* <DataTableToolbar onPdfClick={handlePrint} table={table} /> */}
             <div className='rounded-md border'>
                 <Table ref={printRef}>
                     <TableHeader>

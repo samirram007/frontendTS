@@ -6,6 +6,9 @@ import { Separator } from "@/components/ui/separator";
 import { BookingListTable } from "../features/BookingList/booking-table/page";
 import { useState } from "react";
 import { useGetBookingListQuery } from "../features/BookingList/data/queryOptions";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RefundListTable } from "../features/RefundList/refund-table/page";
+import { useGetCancelledBookingListQuery } from "../features/RefundList/data/queryOptions";
 
 
 
@@ -18,6 +21,7 @@ const Booking = () => {
     const [selectedStartDate, setSelectedStartDate] = useState<string | null>(null);
     const [selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
     const { data, isSuccess, isFetching } = useGetBookingListQuery(selectedStartDate, selectedEndDate);
+    const { data: refundData, isSuccess: refundSuccess, isFetching: refundFetching } = useGetCancelledBookingListQuery();
 
     const handleFilterBooking = () => {
         const start = startDate.toLocaleDateString('en-CA');
@@ -58,7 +62,19 @@ const Booking = () => {
                 </div>
             </div>
             <Separator className="border-1 border-gray-500" />
-            <BookingListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />
+            <Tabs defaultValue="booking" className="w-full mt-6">
+                <TabsList>
+                    <TabsTrigger value="booking">Booking List</TabsTrigger>
+                    <TabsTrigger value="refund">Refund List</TabsTrigger>
+                </TabsList>
+                <TabsContent value="booking">
+                    <BookingListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />
+                </TabsContent>
+                <TabsContent value="refund">
+                    <RefundListTable isFetching={refundFetching} data={refundData ? refundData.data.data : []} isSuccess={refundSuccess} />
+                </TabsContent>
+            </Tabs>
+
         </div>
     )
 }

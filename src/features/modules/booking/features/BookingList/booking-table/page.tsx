@@ -14,7 +14,7 @@ export function BookingListTable({ data, isSuccess, isFetching }: { data: IAllBo
 
 
   return (
-    <div className="mx-auto py-10">
+    <div className="mx-auto py-4">
       <BookingListDataTable columns={columns} data={bookingList} loading={isFetching} />
     </div>
   )

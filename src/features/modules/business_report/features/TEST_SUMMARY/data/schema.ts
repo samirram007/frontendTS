@@ -14,7 +14,9 @@ export interface ITestSummaryRequest {
 export interface ITestSummaryReportTestDetail {
     testName: string,
     amount: string,
-    status: string
+    status: string,
+    printName: string,
+    code: string
 }
 
 
