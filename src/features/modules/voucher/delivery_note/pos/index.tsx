@@ -7,9 +7,12 @@ import PosBody from "./components/pos-body"
 import PosFooter from "./components/pos-footer"
 import PosHeader from "./components/pos-header"
 import type { DeliveryNoteProps } from "./contracts"
+import { usePos } from "../../contexts/pos-context"
+import { useEffect } from "react"
 
 
 const Pos = ({ currentRow }: DeliveryNoteProps) => {
+    const { setMovementType } = usePos()
     const isEdit = !!currentRow
     const data = { ...currentRow }
     const mainForm = useForm<DeliveryNoteForm>({
@@ -18,6 +21,10 @@ const Pos = ({ currentRow }: DeliveryNoteProps) => {
             { ...data, isEdit: true, } :
             { ...deliveryNoteDefaultValues, isEdit: false },
     })
+    useEffect(() => {
+        const movementTypeValue = isEdit ? (data?.stockJournal?.stockJournalEntries?.[0]?.movementType || "out") : "out"
+        setMovementType?.(movementTypeValue)
+    }, [isEdit, data, setMovementType])
     // console.log("WATCH: ", mainForm.watch('stockJournal'))
     return (
         <>
@@ -29,15 +36,15 @@ const Pos = ({ currentRow }: DeliveryNoteProps) => {
                     <div className="max-h-full grid grid-rows-[150px_1fr] overflow-hidden">
 
 
-                        <PosHeader />
+                        <PosHeader mainForm={mainForm} />
 
-                        <PosBody />
+                        <PosBody mainForm={mainForm} />
 
 
                     </div>
 
 
-                    <PosFooter />
+                    <PosFooter mainForm={mainForm} />
                 </Form>
             </div>
         </>

@@ -22,7 +22,8 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { type UseFormReturn } from "react-hook-form"
 
 import type { StockItem } from "@/features/modules/stock_item/data/schema"
-import type { StockJournalEntryForm } from "../../data/schema"
+import type { StockJournalEntryForm } from "../../../data-schema/voucher-schema"
+
 
 // const frameworks = [
 //     {

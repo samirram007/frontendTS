@@ -11,6 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FrontendRouteImport } from './routes/frontend'
 import { Route as ProtectedRouteImport } from './routes/_protected'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProtectedDashboardRouteImport } from './routes/_protected/dashboard'
@@ -279,6 +280,11 @@ const ProtectedAdministrationLayoutRoleLayoutIdRouteImport = createFileRoute(
   '/_protected/administration/_layout/role/_layout/$id',
 )()
 
+const FrontendRoute = FrontendRouteImport.update({
+  id: '/frontend',
+  path: '/frontend',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProtectedRoute = ProtectedRouteImport.update({
   id: '/_protected',
   getParentRoute: () => rootRouteImport,
@@ -1457,6 +1463,7 @@ const ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/frontend': typeof FrontendRoute
   '/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/otp': typeof guestOtpRoute
   '/sign-in': typeof guestSignInRoute
@@ -1623,6 +1630,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/frontend': typeof FrontendRoute
   '/otp': typeof guestOtpRoute
   '/sign-in': typeof guestSignInRoute
   '/charts': typeof ProtectedChartsRoute
@@ -1763,6 +1771,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_protected': typeof ProtectedRouteWithChildren
+  '/frontend': typeof FrontendRoute
   '/_protected/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/(guest)/otp': typeof guestOtpRoute
   '/(guest)/sign-in': typeof guestSignInRoute
@@ -1965,6 +1974,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/frontend'
     | '/settings'
     | '/otp'
     | '/sign-in'
@@ -2131,6 +2141,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/frontend'
     | '/otp'
     | '/sign-in'
     | '/charts'
@@ -2270,6 +2281,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_protected'
+    | '/frontend'
     | '/_protected/settings'
     | '/(guest)/otp'
     | '/(guest)/sign-in'
@@ -2472,6 +2484,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProtectedRoute: typeof ProtectedRouteWithChildren
+  FrontendRoute: typeof FrontendRoute
   guestOtpRoute: typeof guestOtpRoute
   guestSignInRoute: typeof guestSignInRoute
   errors401LazyRoute: typeof errors401LazyRoute
@@ -2487,6 +2500,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/frontend': {
+      id: '/frontend'
+      path: '/frontend'
+      fullPath: '/frontend'
+      preLoaderRoute: typeof FrontendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_protected': {
       id: '/_protected'
       path: ''
@@ -5247,6 +5267,7 @@ const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProtectedRoute: ProtectedRouteWithChildren,
+  FrontendRoute: FrontendRoute,
   guestOtpRoute: guestOtpRoute,
   guestSignInRoute: guestSignInRoute,
   errors401LazyRoute: errors401LazyRoute,

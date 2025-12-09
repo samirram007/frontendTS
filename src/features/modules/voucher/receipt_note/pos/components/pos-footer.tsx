@@ -1,16 +1,20 @@
 import { Button } from '@/components/ui/button';
 import { useFocusArea } from '@/core/hooks/useFocusArea';
-import { useEffect, useRef } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useReceiptNoteMutation } from '../../data/queryOptions';
+import { useEffect, useRef, useState } from 'react';
+import { type UseFormReturn } from 'react-hook-form';
+
 import type { ReceiptNoteForm } from '../../data/schema';
 import NarrationBox from './special/narration-box';
+import SaveDialog from './special/save-dialog';
 
+type PosFooterProps = {
+    mainForm: UseFormReturn<ReceiptNoteForm>
+}
 
-const PosFooter = () => {
-    const mainForm = useFormContext<ReceiptNoteForm>();
-    const { mutate: createReceiptNote, isPending } = useReceiptNoteMutation();
+const PosFooter = ({ mainForm }: PosFooterProps) => {
+
     const footerRef = useRef<HTMLDivElement>(null);
+    const [isSaving, setSaving] = useState(false);
 
     useFocusArea(footerRef as React.RefObject<HTMLElement>);
     // useRestrictFocusToRef(footerRef as React.RefObject<HTMLElement>);
@@ -95,13 +99,9 @@ const PosFooter = () => {
 
     }, [total]);
 
-    const handleSaving = () => {
-        // console.log('Form submitted', mainForm.getValues());
-        createReceiptNote(mainForm.getValues())
-    }
 
     return (
-        <div ref={footerRef} className="bg-red-300/50 grid grid-cols-[1fr_1fr] px-8">
+        <div ref={footerRef} className="bg-green-600/20 grid grid-cols-[1fr_1fr] px-8">
             <div className="grid ">
                 {/* <Button autoFocus={true} variant="outline" className="w-full h-20 text-left"
 
@@ -122,13 +122,17 @@ const PosFooter = () => {
                 </div>
 
                 <div className="text-left pl-2">
+                    {isSaving ?
+                        <SaveDialog mainForm={mainForm} isSaving={isSaving} setSaving={setSaving} />
+                        : 
                     <Button
-                        type="button"
-                        variant="default"
+                            type="button"
+                            variant="default"
                         className="h-8 w-full focus:bg-black focus:text-white"
                         size="lg"
-                        disabled={isPending}
-                        onClick={handleSaving}>Save....</Button>
+                            disabled={isSaving}
+                            onClick={() => setSaving(true)}>Save....</Button>
+                    }
 
                 </div>
             </div>

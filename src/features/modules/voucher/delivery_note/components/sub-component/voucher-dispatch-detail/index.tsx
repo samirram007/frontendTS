@@ -11,7 +11,8 @@ import { Loader } from "lucide-react"
 import { Suspense, useEffect, useRef, useState } from "react"
 import { useForm, useFormContext, type UseFormReturn } from "react-hook-form"
 import { toast } from "sonner"
-import type { DeliveryNoteForm, VoucherDispatchDetailForm } from "../../../data/schema"
+import type { DeliveryNoteForm } from "../../../data/schema"
+import type { VoucherDispatchDetailForm } from "@/features/modules/voucher/data-schema/voucher-schema"
 
 
 const VoucherDispatchDetail = () => {
@@ -248,7 +249,7 @@ const DateBox = (props: DateBoxProps) => {
                     label=''
                     noLabel
                     gapClass="grid-cols-[1fr] gap-0  "
-                    name={name} />
+                    name={name.toString()} />
             </span>
         </>
     )

@@ -10,12 +10,17 @@ import { useTransaction } from "@/features/transactions/context/transaction-cont
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useForm, useFormContext, type Resolver, type UseFormReturn } from "react-hook-form";
+import { useForm, type Resolver, type UseFormReturn } from "react-hook-form";
 import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
-import { stockJournalGodownEntryDefaultValues } from "../../../data/data";
-import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../../data/schema";
+
+
 import { GodownCombobox } from "../dropdown/godown-combo-box";
+import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../data-schema/voucher-schema";
+import BatchSelection from "./batch-selection";
+import { usePos } from "../../contexts/pos-context";
+import { lowerCase } from "lodash";
+import { stockJournalGodownEntryDefaultValues } from "../../data-schema/data";
 
 
 type StockJournalGodownEntryFormProps = {
@@ -26,27 +31,29 @@ type StockJournalGodownEntryFormProps = {
     stockUnits: StockUnit[];
     handleGodownEntryAdd: () => void;
     handleOnClickItemAddEntry: () => void
+    stockJournalEntryForm: UseFormReturn<StockJournalEntryForm>;
 };
 function round2(value: number) {
     return Math.round(value * 100) / 100;
 }
 
 const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
-    const { index, remove, stockItem, godowns, stockUnits, handleGodownEntryAdd, handleOnClickItemAddEntry } = props;
+    const { index, remove, stockItem, godowns, stockUnits, handleGodownEntryAdd, handleOnClickItemAddEntry, stockJournalEntryForm } = props;
 
     const godownEntryRef = useRef<HTMLDivElement>(null);
     const { config } = useTransaction()
+    const { movementType } = usePos()
     const show_actual_and_billing_quantity = config.find(c => c.key === 'show_actual_and_billing_quantity')?.value
     // const show_alternate_unit = config.find(c => c.key === 'show_alternate_unit')?.value
     useFocusArea(godownEntryRef as React.RefObject<HTMLElement>);
     // useRestrictFocusToRef(godownEntryRef as React.RefObject<HTMLElement>);
-    const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
+    // const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
     const entryPath = `stockJournalGodownEntries.${index}` as const;
 
 
 
     const defaultValues = useMemo(() => {
-        const base = stockJournalEntryForm.watch(entryPath) ?? stockJournalGodownEntryDefaultValues;
+        const base = stockJournalEntryForm.watch(entryPath) ?? { ...stockJournalGodownEntryDefaultValues, movementType: lowerCase(movementType) };
 
         return {
             ...base,
@@ -104,16 +111,27 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
             stockJournalGodownEntryForm.setFocus("godownId");
             return;
         }
-        // if (!data.amount) {
-        //     handleRemove();
-        //     return;
-        // }
+        if (!data.amount) {
+            //   handleRemove();
+            return;
+        }
         stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
         handleGodownEntryAdd();
         return
         // stockJournalEntryForm.reset({});
         //  console.log("Submitted Godown Entry:", stockJournalEntryForm.getValues());
     };
+    const handleAmountBlur = () => {
+        const data = stockJournalGodownEntryForm.getValues();
+        stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
+    };
+    useEffect(() => {
+        if (amount > 0) {
+            const data = stockJournalGodownEntryForm.getValues();
+            stockJournalEntryForm.setValue(entryPath, data, { shouldValidate: true });
+        }
+    }, [amount, stockJournalGodownEntryForm.watch("batchNo"), stockJournalGodownEntryForm.watch("godownId")]);
+
     return (
         <Form {...stockJournalGodownEntryForm}>
             <div className="w-full pl-1" ref={godownEntryRef}>
@@ -128,8 +146,9 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             handleRemove={handleRemove}
                         />
                     </div>
+
                     {
-                        stockJournalEntryForm?.getValues("movementType")?.toLocaleLowerCase() === 'in' ? 
+                        lowerCase(movementType) === 'in' ?
 
                             (
                                 stockItem?.isMaintainBatch ?
@@ -172,7 +191,10 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                                     </div>
                                     : <div></div>
                             )
-                            : <div>Get Batch By Godown</div>
+                            : <BatchSelection
+                                form={stockJournalGodownEntryForm}
+                                stockItem={stockItem}
+                                godownId={Number(stockJournalGodownEntryForm.watch("godownId"))} />
                     }
 
                     <div className="grid grid-rows-1 border-0!">
@@ -189,12 +211,12 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             {show_actual_and_billing_quantity ? (
                                 <div className="border-y-0! border-x-0!  ">
 
-                                <BillingQuantityBox
-                                    form={stockJournalGodownEntryForm}
-                                    stockUnits={stockUnits}
-                                    stockItem={stockItem}
-                                    name="billingQuantity" />
-                            </div>
+                                    <BillingQuantityBox
+                                        form={stockJournalGodownEntryForm}
+                                        stockUnits={stockUnits}
+                                        stockItem={stockItem}
+                                        name="billingQuantity" />
+                                </div>
                             ) : <></>}
 
 
@@ -235,7 +257,7 @@ const StockJournalGodownEntry = (props: StockJournalGodownEntryFormProps) => {
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                                 e.preventDefault();
-                                handleSubmit();
+                                handleAmountBlur();
                             }}
 
                         />
@@ -633,7 +655,7 @@ const QuantityBox = (props: QuantityBoxProps) => {
     }, [conversionFactors]);
     const baseUnitCode = baseUnit?.code || "";
     const basenoOfDecimalPlaces = baseUnit?.noOfDecimalPlaces;
-    console.log("basenoOfDecimalPlaces: ", basenoOfDecimalPlaces)
+
 
     const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
         // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
@@ -655,7 +677,7 @@ const QuantityBox = (props: QuantityBoxProps) => {
 
     const handleBlurOrEnter = () => {
         const { quantity, unit: unitStr } = parseQuantityWithUnit(boxValue);
-        console.log(quantity, unitStr)
+
         if (quantity === 0) {
             form.setValue(name, 0, { shouldValidate: true });
             form.setValue('billingQuantity', 0, { shouldValidate: true });
@@ -708,12 +730,12 @@ const QuantityBox = (props: QuantityBoxProps) => {
 
 
         if (value) {
-            const boxValueStr = `${value.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
+            const boxValueStr = `${Number(value).toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
             setBoxValue(boxValueStr);
         } else {
             setBoxValue("");
         }
-    }, [form.watch(name), baseUnitCode]); 
+    }, [form.watch(name), baseUnitCode]);
     return (
         <>
             <Input

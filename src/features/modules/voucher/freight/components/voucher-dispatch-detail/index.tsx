@@ -11,9 +11,10 @@ import { Suspense, useEffect, useRef, useState } from "react"
 import { useForm, type Resolver, type UseFormReturn } from "react-hook-form"
 import { toast } from "sonner"
 
-import { voucherDispatchDetailSchema, type VoucherDispatchDetailForm } from "../../../delivery_note/data/schema"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useVoucherDispatchDetailMutation } from "../../data/queryOptions"
+import { voucherDispatchDetailSchema, type VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
 
 
 
@@ -50,6 +51,8 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
         const sanitizedData = {
             ...dispatchData,
             id: dispatchData.id === null ? undefined : dispatchData.id,
+            voucherId: dispatchData.voucherId === null ? undefined : dispatchData.voucherId?.toString(),
+
         };
 
         saveVoucherDispatchDetail(sanitizedData, {

@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
 
-import { useFocusNext } from "@/core/hooks/useFocusNext"
+
 import type { TransactionLedger } from "../../../../data-schema/transactinableStockItem/data/schema"
 import type { DeliveryNoteForm } from "../../../data/schema"
 
@@ -33,7 +33,7 @@ interface Props {
     transactionLedgers: TransactionLedger[];
 }
 export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) => {
-    const focusNext = useFocusNext();
+    // const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
 
@@ -41,7 +41,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
         form.setValue("transactionLedger.id", transactionLedgers.find((transactionLedger) => transactionLedger.id === Number(value))?.id!)
         setValue(value)
         setOpen(false)
-        focusNext();
+        // focusNext();
     }
 
     const handleBlur = () => {

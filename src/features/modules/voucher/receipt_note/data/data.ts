@@ -1,4 +1,5 @@
-import type { ReceiptNoteForm, VoucherDispatchDetailForm } from "./schema";
+import type { VoucherDispatchDetailForm } from "../../data-schema/voucher-schema";
+import type { ReceiptNoteForm } from "./schema";
 
 export const stockJournalGodownEntryDefaultValues = {
     id: null,

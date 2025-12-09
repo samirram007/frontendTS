@@ -2,20 +2,27 @@ import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo } from "react";
-import { useForm, useFormContext, type Resolver } from "react-hook-form";
-import { stockJournalSchema, type DeliveryNoteForm, type StockJournalEntryForm, type StockJournalForm } from "../../data/schema";
-import StockJournal from "./stock-journal";
+import { useForm, type Resolver } from "react-hook-form";
+import type { DeliveryNoteForm } from "../../data/schema";
+import { stockJournalSchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data-schema/voucher-schema";
+import StockJournal from "../../../components/stock-journal";
+import { usePos } from "../../../contexts/pos-context";
+
+type PosBodyProps = {
+    mainForm: ReturnType<typeof useForm<DeliveryNoteForm>>;
+};
 
 
 
-const PosBody = () => {
-    const deliveryNoteForm = useFormContext<DeliveryNoteForm>();
 
+const PosBody = ({ mainForm: deliveryNoteForm }: PosBodyProps) => {
+    // const deliveryNoteForm = useFormContext<DeliveryNoteForm>();
+    const { movementType } = usePos()
     const stockJournal = deliveryNoteForm.watch("stockJournal")
     const stockJournalForm = useForm<StockJournalForm>({
         resolver: zodResolver(stockJournalSchema) as Resolver<StockJournalForm>,
         defaultValues: {
-            ...stockJournal,
+            ...stockJournal, type: movementType,
             stockJournalEntries: stockJournal?.stockJournalEntries ?? []
         }
     })
@@ -68,7 +75,7 @@ const PosBody = () => {
             <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">
                 <Form {...stockJournalForm}>
 
-                    <StockJournal />
+                    <StockJournal stockJournalForm={stockJournalForm} />
                 </Form>
             </div>
             {stockJournalTotal && stockJournalTotal.totalAmount > 0 && (

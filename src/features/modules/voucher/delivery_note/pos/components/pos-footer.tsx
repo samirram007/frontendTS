@@ -1,16 +1,22 @@
 import { Button } from '@/components/ui/button';
 import { useFocusArea } from '@/core/hooks/useFocusArea';
-import { useEffect, useRef } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { useDeliveryNoteMutation } from '../../data/queryOptions';
+import { useEffect, useRef, useState } from 'react';
+import { type UseFormReturn } from 'react-hook-form';
+
 import type { DeliveryNoteForm } from '../../data/schema';
 import NarrationBox from './special/narration-box';
+import SaveDialog from './special/save-dialog';
+
+type PosFooterProps = {
+    mainForm: UseFormReturn<DeliveryNoteForm>
+}
 
 
-const PosFooter = () => {
-    const mainForm = useFormContext<DeliveryNoteForm>();
-    const { mutate: createDeliveryNote, isPending } = useDeliveryNoteMutation();
+const PosFooter = ({ mainForm }: PosFooterProps) => {
+// const mainForm = useFormContext<DeliveryNoteForm>();
+
     const footerRef = useRef<HTMLDivElement>(null);
+    const [isSaving, setSaving] = useState<boolean>(false);
 
     useFocusArea(footerRef as React.RefObject<HTMLElement>);
     // useRestrictFocusToRef(footerRef as React.RefObject<HTMLElement>);
@@ -95,10 +101,7 @@ const PosFooter = () => {
 
     }, [total]);
 
-    const handleSaving = () => {
-        // console.log('Form submitted', mainForm.getValues());
-        createDeliveryNote(mainForm.getValues())
-    }
+
 
     return (
         <div ref={footerRef} className="bg-green-600/20 grid grid-cols-[1fr_1fr] px-8">
@@ -122,13 +125,17 @@ const PosFooter = () => {
                 </div>
 
                 <div className="text-left pl-2">
+                    {isSaving ?
+                        <SaveDialog mainForm={mainForm} isSaving={isSaving} setSaving={setSaving} />
+                        : 
                     <Button
-                        type="button"
-                        variant="default"
+                            type="button"
+                            variant="default"
                         className="h-8 w-full focus:bg-black focus:text-white"
                         size="lg"
-                        disabled={isPending}
-                        onClick={handleSaving}>Save....</Button>
+                            disabled={isSaving}
+                            onClick={() => setSaving(true)}>Save....</Button>
+                    }
 
                 </div>
             </div>

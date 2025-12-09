@@ -1,16 +1,18 @@
 import FormInputField from "@/components/form-input-field";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
-import { useFormContext, type UseFormReturn } from "react-hook-form";
+import { type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
 import PartyLedgerForm from "../../components/sub-component/party/party-ledger-form";
 import TransactionLedgerForm from "../../components/sub-component/transaction/transaction-ledger-form";
 import type { DeliveryNoteForm } from "../../data/schema";
 
+type PosHeaderProps = {
+    mainForm: UseFormReturn<DeliveryNoteForm>
+}
 
-
-const PosHeader = () => {
-    const form = useFormContext<DeliveryNoteForm>()
+const PosHeader = ({ mainForm: form }: PosHeaderProps) => {
+// const form = useFormContext<DeliveryNoteForm>()
 
 
     const voucherDate = form.watch("voucherDate")
@@ -188,6 +190,7 @@ const DateBox = (props: DateBoxProps) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 onBlur={handleBlur}
+                autoFocus={true}
             />
             <span className="hidden">
 

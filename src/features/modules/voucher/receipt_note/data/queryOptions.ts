@@ -22,6 +22,7 @@ export function useReceiptNoteMutation() {
     const Key = "DayBooks"
     return useMutation({
         mutationFn: async (data: ReceiptNoteForm & { id?: number }) => {
+            console.log("Saveable Data", data)
             if (data.id) {
                 // Update if id exists
                 return await updateReceiptNoteService(data)

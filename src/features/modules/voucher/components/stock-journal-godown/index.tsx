@@ -1,14 +1,17 @@
 import type { Godown } from "@/features/modules/godown/data/schema";
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray, type UseFormReturn } from "react-hook-form";
 
 
 import { useEffect, useMemo } from "react";
-import { stockJournalGodownEntryDefaultValues } from "../../../data/data";
-import type { StockJournalEntryForm, StockJournalGodownEntryForm } from "../../../data/schema";
+
+
 import { usePosJournalEntryGodown } from "../../contexts/pos-journal-entry-godown-context";
 import StockJournalGodownEntry from "./entry-test";
+import type { StockJournalEntryForm, StockJournalGodownEntryForm } from "../../data-schema/voucher-schema";
+import { stockJournalGodownEntryDefaultValues } from "../../data-schema/data";
+import { usePos } from "../../contexts/pos-context";
 
 
 
@@ -17,10 +20,13 @@ export type StockJournalGodownProps = {
     godowns: Godown[];
     stockUnits: StockUnit[];
     handleOnClickItemAddEntry: () => void
+    stockJournalEntryForm: UseFormReturn<StockJournalEntryForm>;
 }
 const StockJournalGodowns = (props: StockJournalGodownProps) => {
 
-    const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
+    // const stockJournalEntryForm = useFormContext<StockJournalEntryForm>();
+    const { movementType } = usePos()
+    const { stockJournalEntryForm } = props;
     const { addGodownEntryButtonRef, addGodownButtonVisible, setAddGodownButtonVisible } = usePosJournalEntryGodown();
     const { fields, append, remove } = useFieldArray({
         control: stockJournalEntryForm.control,
@@ -96,15 +102,20 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
         };
 
     }, [JSON.stringify(stockJournalGodownEntries)]);
+
+
+
     const handleGodownEntryAdd = () => {
         // const lastEntry = fields[fields.length - 1];
         // console.log("Last Entry: ", lastEntry)
-        // if (lastEntry && Number(lastEntry.amount) === 0) {
-        //     stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${fields.length - 1}.godownId`);
-        //     return;
-        // }
+        const hasZeroValue = stockJournalEntryForm.getValues('stockJournalGodownEntries')?.some((entry: any) => Number(entry.amount) === 0);
+        if (hasZeroValue) {
+            stockJournalEntryForm.setFocus(`stockJournalGodownEntries.${fields.length - 1}.godownId`);
+            return;
+        }
 
-        append(stockJournalGodownEntryDefaultValues as StockJournalGodownEntryForm);
+
+        append({ ...stockJournalGodownEntryDefaultValues, movementType } as StockJournalGodownEntryForm);
         setAddGodownButtonVisible?.(false);
     }
 
@@ -130,7 +141,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
 
         // console.log("hasChanged", hasChanged)
         if (hasChanged && computedTotals.amount > 0) {
-
+            //console.log("Updating totals in parent entry form");
             stockJournalEntryForm.setValue("actualQuantity", computedTotals.actualQuantity);
             stockJournalEntryForm.setValue("billingQuantity", computedTotals.billingQuantity);
             stockJournalEntryForm.setValue("rate", computedTotals.rate);
@@ -148,6 +159,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
     // console.log("HOW: ", stockJournalGodownEntries, stockJournalEntryForm.watch("stockJournalGodownEntries"));
     return (
         <div className=" pl-12 ">
+            {/* {fields?.length} */}
             {fields.map((field, index) => (
                 <div key={field.id} className="w-full flex  items-center gap-0">
                     <StockJournalGodownEntry key={field.id}
@@ -156,6 +168,7 @@ const StockJournalGodowns = (props: StockJournalGodownProps) => {
                         stockItem={props.stockItem}
                         godowns={props.godowns}
                         stockUnits={props.stockUnits}
+                        stockJournalEntryForm={stockJournalEntryForm}
                         handleGodownEntryAdd={handleGodownEntryAdd}
                         handleOnClickItemAddEntry={props.handleOnClickItemAddEntry}
                     />

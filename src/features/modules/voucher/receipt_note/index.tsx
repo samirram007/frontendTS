@@ -5,8 +5,9 @@ import { useTransaction } from '@/features/transactions/context/transaction-cont
 import { useEffect } from 'react';
 
 import Pos from './pos';
-import { PosProvider } from './pos/contexts/pos-context';
+
 import type { ReceiptNoteProps } from './pos/contracts';
+import { PosProvider } from '../contexts/pos-context';
 
 
 

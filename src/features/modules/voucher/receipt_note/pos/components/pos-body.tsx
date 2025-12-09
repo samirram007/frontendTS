@@ -3,16 +3,20 @@ import { useTransaction } from "@/features/transactions/context/transaction-cont
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useEffect, useMemo } from "react";
-import { useForm, useFormContext, type Resolver } from "react-hook-form";
-import { stockJournalSchema, type ReceiptNoteForm, type StockJournalEntryForm, type StockJournalForm } from "../../data/schema";
-import StockJournal from "./stock-journal";
+import { useForm, type Resolver } from "react-hook-form";
+
+import StockJournal from "../../../components/stock-journal";
 import isEqual from "lodash/isEqual";
+import type { ReceiptNoteForm } from "../../data/schema";
+import { stockJournalSchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data-schema/voucher-schema";
+
+type PosBodyProps = {
+    mainForm: ReturnType<typeof useForm<ReceiptNoteForm>>;
+};
 
 
-
-
-const PosBody = () => {
-    const receiptNoteForm = useFormContext<ReceiptNoteForm>();
+const PosBody = ({ mainForm: receiptNoteForm }: PosBodyProps) => {
+// const receiptNoteForm = useFormContext<ReceiptNoteForm>();
 
     const stockJournal = receiptNoteForm.watch("stockJournal")
     const stockJournalForm = useForm<StockJournalForm>({
@@ -71,7 +75,7 @@ const PosBody = () => {
             <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">
                 <Form {...stockJournalForm}>
 
-                    <StockJournal />
+                    <StockJournal stockJournalForm={stockJournalForm} />
                 </Form>
             </div>
             {stockJournalTotal && stockJournalTotal.totalAmount > 0 && (

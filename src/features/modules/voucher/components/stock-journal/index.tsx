@@ -1,21 +1,25 @@
 
 
 import FormInputField from "@/components/form-input-field";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray, type UseFormReturn } from "react-hook-form";
 
 import { useTransaction } from "@/features/transactions/context/transaction-context";
 import { useEffect } from "react";
-import { stockJournalEntryDefaultValues } from '../../../data/data';
-import { type StockJournalEntryForm, type StockJournalForm } from '../../../data/schema';
-import { usePos } from "../../contexts/pos-context";
+import { stockJournalEntryDefaultValues } from '../../receipt_note/data/data';
+
+
 import { PosJournalEntryItemProvider, usePosJournalEntryItem } from "../../contexts/pos-journal-entry-item-context";
 import { StockJournalEntry } from "./entry-test";
+import type { StockJournalEntryForm, StockJournalForm } from "../../data-schema/voucher-schema";
+import { usePos } from "../../contexts/pos-context";
 
+type StockJournalProps = {
+    stockJournalForm: UseFormReturn<StockJournalForm>;
+};
 
-
-const StockJournal = () => {
+const StockJournal = ({ stockJournalForm }: StockJournalProps) => {
     const { config } = useTransaction()
-    const stockJournalForm = useFormContext<StockJournalForm>();
+    // const stockJournalForm = useFormContext<StockJournalForm>();
 
     return (
         <div>
@@ -33,14 +37,14 @@ const StockJournal = () => {
 
 
                 {config.find(c => c.key === 'show_actual_and_billing_quantity')?.value ? (
-                <div className="grid grid-rows-2 border-0!">
-                    <div className="border-b-0!  ">Quantity</div>
+                    <div className="grid grid-rows-2 border-0!">
+                        <div className="border-b-0!  ">Quantity</div>
                         <div className="grid grid-cols-2 items-center">
                             <div className="border-y-0! border-x-0!  ">Actual</div>
                             <div className="border-y-0! border-r-0!  ">Billing</div>
                         </div>
                         <div className="grid grid-cols-2 items-center"></div>
-                </div>
+                    </div>
                 ) :
                     <div>Quantity</div>
                 }
@@ -52,7 +56,7 @@ const StockJournal = () => {
 
             </div>
             <PosJournalEntryItemProvider>
-                <StockJournalEntriesSection />
+                <StockJournalEntriesSection stockJournalForm={stockJournalForm} />
             </PosJournalEntryItemProvider>
         </div>
     )
@@ -61,9 +65,10 @@ const StockJournal = () => {
 export default StockJournal
 
 
-const StockJournalEntriesSection = () => {
-    const stockJournalForm = useFormContext<StockJournalForm>();
-    const { remarksRef, setIsRemarksDisabled } = usePos()
+const StockJournalEntriesSection = ({ stockJournalForm }: StockJournalProps) => {
+    // const stockJournalForm = useFormContext<StockJournalForm>();
+
+    const { movementType } = usePos()
     const { addItemEntryButtonRef, addItemButtonVisible, setAddItemButtonVisible } = usePosJournalEntryItem();
 
 
@@ -87,22 +92,12 @@ const StockJournalEntriesSection = () => {
             return;
         }
 
-        append(stockJournalEntryDefaultValues as StockJournalEntryForm);
+        append({ ...stockJournalEntryDefaultValues, movementType } as StockJournalEntryForm);
 
         setAddItemButtonVisible?.(false);
 
     }
-    const handleRemove = (index: number) => {
-        if (fields.length === 1) {
-            handleOnClickAddEntry();
-        }
 
-        remove(index); // RHF handles focusing
-        setIsRemarksDisabled?.(false);
-        requestAnimationFrame(() => {
-            remarksRef?.current?.focus();
-        });
-    };
     useEffect(() => {
         if (fields.length === 0) {
             handleOnClickAddEntry();
@@ -111,13 +106,17 @@ const StockJournalEntriesSection = () => {
 
     return (
         <div className="">
+            {/* {fields?.length} */}
             {fields.map((field, index) => (
                 <div key={field.id} className="w-full flex  items-center gap-4 border-b pb-2">
                     <StockJournalEntry
                         key={field.id}
                         index={index}
-                        remove={handleRemove}
+                        fieldsLength={fields.length}
+                        remove={remove}
                         handleOnClickItemAddEntry={handleOnClickAddEntry}
+                        stockJournalForm={stockJournalForm}
+
                     />
 
                 </div>

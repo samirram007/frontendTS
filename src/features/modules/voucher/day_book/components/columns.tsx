@@ -51,10 +51,8 @@ export const columns: ColumnDef<DayBookSchema>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Date' />
     ),
-    cell: ({ row }) => {
-      const { voucherType } = row.original
-      const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
-      const hoverColor = VoucherTypeColorMapping.get(key);
+    cell: ({ row }) => { 
+
       return (
         <LongText className='max-w-36 flex items-center gap-2'>
           {formatDDMMMYYYY(row.getValue('voucherDate'))}

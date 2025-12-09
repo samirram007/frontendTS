@@ -19,8 +19,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueries } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Form, useForm, type Resolver } from "react-hook-form";
-import { stockJournalEntrySchema, type StockJournalEntryForm, } from "../../data/schema";
 import { GodownCombobox } from "./godown-combo-box";
+import { stockJournalEntrySchema, type StockJournalEntryForm } from "../../../data-schema/voucher-schema";
 
 export function ItemDialog() {
 

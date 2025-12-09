@@ -26,7 +26,8 @@ import { useFormContext } from "react-hook-form"
 
 import { useFocusNext } from "@/core/hooks/useFocusNext"
 import type { PartyLedger } from "../../../../data-schema/partyLedger/data/schema"
-import type { PartyForm, ReceiptNoteForm } from "../../../data/schema"
+import type { ReceiptNoteForm } from "../../../data/schema"
+import type { PartyForm } from "@/features/modules/voucher/data-schema/voucher-schema"
 
 interface Props {
 

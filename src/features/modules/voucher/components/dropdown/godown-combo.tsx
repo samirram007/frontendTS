@@ -26,7 +26,8 @@ import type { Godown } from "@/features/modules/godown/data/schema"
 import { getData } from "@/utils/dataClient"
 import { useQuery } from "@tanstack/react-query"
 import { FaSignOutAlt } from "react-icons/fa"
-import type { StockJournalGodownEntryForm } from "../../../data/schema"
+import type { StockJournalGodownEntryForm } from "../../data-schema/voucher-schema"
+
 
 
 interface GodownComboboxProps {

@@ -1,9 +1,10 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
+import { usePos } from "@/features/modules/voucher/contexts/pos-context"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { Control, UseFormReturn } from "react-hook-form"
-import { usePos } from "../../contexts/pos-context"
+
 type Option = { label: string; value: string | boolean };
 type InputType = 'hidden' | 'text' | 'number' | 'textarea' | 'checkbox' | 'select' | 'multiselect' | 'date';
 type Props = {
@@ -64,7 +65,6 @@ const NarrationBox = (props: Props) => {
                     }
                     <FormControl>
                         <Textarea
-                            autoFocus={true}
                             readOnly={isRemarksDisabled}
                             onClick={handleOnClick}
                             ref={remarksRef!}

@@ -11,12 +11,17 @@ import { Toaster } from './components/ui/sonner'
 import { FontProvider } from './core/contexts/font-context'
 import { ThemeContextProvider } from './core/contexts/ThemeContextProvider'
 import { AuthProvider } from './features/auth/contexts/AuthContext'
+// import setupLocatorUI from "@locator/runtime";
 import './styles.css'
 
 
 
 // Render the app
 const rootElement = document.getElementById('app')
+// const process = import.meta.env
+// if (process.VITE_DEV === "true") {
+//   setupLocatorUI();
+// }
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
@@ -28,6 +33,7 @@ if (rootElement && !rootElement.innerHTML) {
             <AuthProvider>
               <Toaster position="top-center" richColors />
               <AppRouter />
+
             </AuthProvider>
           </FontProvider>
         </ThemeContextProvider>
@@ -35,6 +41,8 @@ if (rootElement && !rootElement.innerHTML) {
     </StrictMode>,
   )
 }
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -12,60 +12,64 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command"
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
-
-import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { type UseFormReturn } from "react-hook-form"
+
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import type { Godown } from "@/features/modules/godown/data/schema"
+import type { StockItem } from "@/features/modules/stock_item/data/schema"
+import { getData } from "@/utils/dataClient"
+import { useQuery } from "@tanstack/react-query"
 import { FaSignOutAlt } from "react-icons/fa"
-import type { StockJournalEntryForm } from "../../../data/schema"
+import type { StockJournalGodownEntryForm } from "../../data-schema/voucher-schema"
 
 
 
+interface GodownComboboxProps {
+    stockJournalGodownEntryForm: UseFormReturn<StockJournalGodownEntryForm>;
+    stockItem: StockItem | null;
 
-interface StockItemComboboxProps {
-    stockJournalEntryForm: UseFormReturn<StockJournalEntryForm>;
-    stockItems: StockItem[];
     handleRemove?: () => void;
+    godowns: Godown[];
 }
-export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, handleRemove }: StockItemComboboxProps) => {
-    const selectedId = form.watch('stockItemId')?.toString()
+export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, godowns, handleRemove }: GodownComboboxProps) => {
     const [open, setOpen] = React.useState(false)
-    // const index = currentIndex
-    // const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
+    const selectedId = form.watch('godownId')?.toString()
+    // const stockItem = form.watch('stockItem')
+    const { data: godownItemStocks } = useQuery({
+        queryKey: ['godownItemStocks', stockItem?.id],
+        queryFn: async () => {
+            if (!stockItem?.id) {
+                return []
+            }
+            const response = await getData(`/godown_item_stocks/${stockItem.id}`)
+
+            return response.data
+        },
+        staleTime: 1000 * 60 * 1,
+        enabled: !!stockItem?.id
+    })
+    const stockMap = React.useMemo(() => {
+        const map: Record<string, number> = {};
+        godownItemStocks?.forEach((row: any) => {
+            map[row.godownId] = row.stockInHand;
+        });
+        return map;
+    }, [godownItemStocks]);
+
     const handleSelect = (value: string) => {
         if (value === '-1') {
             handleRemove?.();
 
-            return
+        } else {
+            const selected = godowns.find((i) => i.id === Number(value));
+            form.setValue(`godownId`, Number(value))
+            form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
+            );
         }
-        const selected = stockItems.find((i) => i.id === Number(value));
-        const quantity = 1
-        form.setValue(`stockItemId`, Number(value))
-        form.setValue(`actualQuantity`, quantity)
-        form.setValue(`billingQuantity`, quantity)
-        form.setValue(`stockUnitId`, selected?.stockUnitId)
-        form.setValue(`rate`, selected?.standardCost)
-        form.setValue(`rateUnitId`, selected?.stockUnitId)
-        form.setValue(`discountPercentage`, 0)
-        form.setValue(`discount`, (form.getValues(`rate`)! * form.getValues(`discountPercentage`)! / 100 * selected?.standardCost! * quantity))
-        form.setValue(`amount`, Number((selected?.standardCost! * quantity - form.getValues(`discount`)!).toFixed(2)))
-
-        // ✅ Safely update nested field value by index
-        // console.log(form.getValues('stockJournal'), index, "index")
-        form.setValue(`stockItem`, selected ?? null, { shouldValidate: true, shouldDirty: true } // optional but recommended
-        );
-
-        // setValue(value);
         setOpen(false);
+
         requestAnimationFrame(() => {
             const focusable = Array.from(
                 document.querySelectorAll<
@@ -80,37 +84,39 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                 focusable[index + 1].focus();
             }
         });
-
     };
+
     const handleBlur = () => {
-        if (!form.getValues('stockItemId'))
+        if (!form.getValues('godownId'))
             setOpen(true);
-
     }
-
     const frameworks = [
         {
             label: (
-                <div className="flex items-center justify-end gap-2 text-red-600 hover:text-red-800 font-medium">
-                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Item Entries
+                <div className="flex items-center  gap-2 text-red-600 hover:text-red-800 font-medium">
+                    <FaSignOutAlt className="  hover:text-red-800 h-4 w-4" />Finish Godown Entries
                 </div>
             ), value: "-1",
             stockInHand: '',
             stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
-            className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
+            className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
         },
-        ...(stockItems?.map((stockItem: StockItem) => ({
-            label: capitalizeAllWords(stockItem.name!),
-            value: String(stockItem.id),
-            stockInHand: stockItem.stockInHand,
-            stockUnitLabel: stockItem.stockUnit?.code || stockItem.stockUnit?.name || '',
-            className: "min-w-full hover:bg-blue-300",
-        })) ?? []),
+        ...(godowns?.map((godown: Godown) => {
+            const stock = stockMap[godown.id] ?? 0; // fallback to zero
+
+            return {
+                label: capitalizeAllWords(godown.name!),
+                value: String(godown.id),
+                stockInHand: stock,
+                stockUnitLabel: stockItem?.stockUnit?.code || stockItem?.stockUnit?.name || '',
+                className: "min-w-full hover:bg-blue-300"
+            };
+        }) ?? [])
     ];
 
     const selected = frameworks.find((o) => o.value === selectedId)
-    const selectedLabel = selected ? (selected?.label.toString()) : 'Select item'
-
+    // console.log("SELECTED GODOWN: ", selectedId, selected)
+    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select godown') : 'Select godown'
 
 
     return (
@@ -130,19 +136,20 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
             </SheetTrigger>
             <SheetContent className="min-w-[450px]! p-0">
                 <SheetHeader>
-                    <SheetTitle>Search Item</SheetTitle>
+                    <SheetTitle>Search Godown</SheetTitle>
                     <SheetDescription>
-                        Select the stock item for this entry.
+                        Select the godown for this receipt note.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search item..." />
+                    <CommandInput placeholder="Search godown..." />
                     <CommandList>
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                        <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>
+
                             {frameworks.map((framework) => (
                                 <CommandItem
-                                    className="min-w-full"
+                                    className={cn("justify-start", framework.className)}
                                     key={framework.value}
                                     value={framework.label.toString().toLowerCase()}
                                     onSelect={() => handleSelect(framework.value)}
@@ -161,7 +168,6 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                                             {framework.stockInHand} {framework.stockUnitLabel}
                                         </div>
                                     </div>
-
                                 </CommandItem>
                             ))}
                         </CommandGroup>

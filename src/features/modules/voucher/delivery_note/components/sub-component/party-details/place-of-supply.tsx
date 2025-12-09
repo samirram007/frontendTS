@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useSuspenseQuery } from "@tanstack/react-query"
 import type { UseFormReturn } from "react-hook-form"
-import type { PartyForm } from "../../../data/schema"
+import type { PartyForm } from "@/features/modules/voucher/data-schema/voucher-schema"
 
 
 

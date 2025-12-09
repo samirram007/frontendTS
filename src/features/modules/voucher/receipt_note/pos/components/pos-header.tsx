@@ -1,16 +1,19 @@
 import FormInputField from "@/components/form-input-field";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
-import { useFormContext, type UseFormReturn } from "react-hook-form";
+import { type UseFormReturn } from "react-hook-form";
 import { Label } from "recharts";
 import PartyLedgerForm from "../../components/sub-component/party/party-ledger-form";
 import TransactionLedgerForm from "../../components/sub-component/transaction/transaction-ledger-form";
 import type { ReceiptNoteForm } from "../../data/schema";
 
+type PosHeaderProps = {
+    mainForm: UseFormReturn<ReceiptNoteForm>
+}
 
-
-const PosHeader = () => {
-    const form = useFormContext<ReceiptNoteForm>()
+const PosHeader = ({ mainForm: form }: PosHeaderProps) => {
+// const form = useFormContext<ReceiptNoteForm>()
+//const form = mainForm;
 
 
     const voucherDate = form.watch("voucherDate")

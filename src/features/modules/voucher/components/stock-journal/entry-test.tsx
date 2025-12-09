@@ -10,11 +10,11 @@ import { useQueries } from "@tanstack/react-query";
 import isEqual from "lodash/isEqual";
 import { Loader } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { useForm, useFormContext, type Resolver } from "react-hook-form";
+import { useForm, type Resolver, type UseFormReturn } from "react-hook-form";
 import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
-import { stockJournalEntryDefaultValues } from "../../../data/data";
-import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data/schema";
+import { stockJournalEntryDefaultValues } from "../../receipt_note/data/data";
+
 import { PosJournalEntryGodownProvider } from "../../contexts/pos-journal-entry-godown-context";
 
 import { useFocusArea } from "@/core/hooks/useFocusArea";
@@ -22,17 +22,25 @@ import { useFocusArea } from "@/core/hooks/useFocusArea";
 import { useTransaction } from "@/features/transactions/context/transaction-context";
 import { StockItemCombobox } from "../dropdown/stock-item-combo-box";
 import StockJournalGodowns from "../stock-journal-godown";
+import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../data-schema/voucher-schema";
+import { usePos } from "../../contexts/pos-context";
+import { lowerCase } from "lodash";
 type StockJournalEntryProps = {
     index: number;
     remove: (index: number) => void;
     handleOnClickItemAddEntry: () => void
+    fieldsLength: number;
+    stockJournalForm: UseFormReturn<StockJournalForm>;
 
 };
 
-export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: StockJournalEntryProps) => {
+export const StockJournalEntry = (props: StockJournalEntryProps) => {
+    const { index, remove, handleOnClickItemAddEntry, fieldsLength, stockJournalForm } = props;
+    const { remarksRef, setIsRemarksDisabled, movementType } = usePos()
     // 🔹 Access parent form context
-    const stockJournalForm = useFormContext<StockJournalForm>();
+    // const stockJournalForm = useFormContext<StockJournalForm>();
     const { config } = useTransaction()
+
     // const { remarksRef, setIsRemarksDisabled } = usePos()
     const itemEntryRef = useRef<HTMLDivElement>(null);
 
@@ -51,13 +59,21 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
     const stockJournalEntryForm = useForm<StockJournalEntryForm>({
         resolver: zodResolver(stockJournalEntrySchema) as Resolver<StockJournalEntryForm>,
         defaultValues:
-            stockJournalForm.watch(entryPath) ?? stockJournalEntryDefaultValues,
+            stockJournalForm.watch(entryPath) ?? { ...stockJournalEntryDefaultValues, movementType: lowerCase(movementType) },
         mode: "onChange",
     });
 
 
-    const handleRemove = () => {
+    const handleRemoveClick = () => {
         remove(index);
+        if (fieldsLength === 1) {
+            handleOnClickItemAddEntry();
+        }
+
+        setIsRemarksDisabled?.(false);
+        requestAnimationFrame(() => {
+            remarksRef?.current?.focus();
+        });
 
     };
     useEffect(() => {
@@ -76,7 +92,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
             // only update parent if the data actually differs
             const currentParentData = stockJournalForm.getValues(entryPath);
             if (!isEqual(currentParentData, value)) {
-                stockJournalForm.setValue(entryPath, value as StockJournalEntryForm, { shouldValidate: false });
+                stockJournalForm.setValue(entryPath, value as StockJournalEntryForm, { shouldValidate: true });
             }
         });
 
@@ -93,25 +109,34 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
 
                 <div className="grid grid-rows-1 grid-cols-[1fr_300px_150px_80px_80px_200px_120px] 
                                 text-center border-border justify-start items-start font-bold">
-
+                    {/* Fl {stockJournalForm.watch("stockJournalEntries")?.length} */}
                     <StockItemCombobox
                         stockJournalEntryForm={stockJournalEntryForm}
-                        handleRemove={handleRemove}
+                        handleRemove={handleRemoveClick}
+                        rowIndex={index}
 
                         stockItems={stockItems?.data?.data} />
                     <div className="grid grid-cols-2 items-start  text-right">
-                        <div className="pr-3">{stockJournalEntryForm.watch('actualQuantity')!} {stockJournalEntryForm.getValues('stockUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
+                        <div className="pr-3">
+                            {stockJournalEntryForm.watch('actualQuantity')! > 0 ? stockJournalEntryForm.watch('actualQuantity')! : '-'}
+                            {
+                                (stockJournalEntryForm.watch('actualQuantity')! > 0 && stockJournalEntryForm.getValues('stockUnit.code')) ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}
+                        </div>
                         {config.find(c => c.key === 'show_actual_and_billing_quantity')?.value ? (
-                        <div className="pr-3">{stockJournalEntryForm.watch('billingQuantity')!} {stockJournalEntryForm.getValues('stockUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
+                            <div className="pr-3">
+                                {stockJournalEntryForm.watch('billingQuantity')! > 0 ? stockJournalEntryForm.watch('billingQuantity')! : '-'}
+                                {
+                                    (stockJournalEntryForm.watch('billingQuantity')! > 0 && stockJournalEntryForm.getValues('stockUnit.code')) ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
                         ) : null}
 
 
                     </div>
                     <div className="text-right   pr-3 ">{
-                        stockJournalEntryForm.watch('rate') ? Number(stockJournalEntryForm.watch('rate')).toFixed(2)
-                            : '0'
+                        (stockJournalEntryForm.watch('billingQuantity')! > 0 && stockJournalEntryForm.watch('rate')) ? Number(stockJournalEntryForm.watch('rate')).toFixed(2)
+                            : '-'
                     } </div>
-                    <div className=""><span className="font-bold"></span> {stockJournalEntryForm.watch('rateUnit.code') ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
+                    <div className=""><span className="font-bold"></span>
+                        {(stockJournalEntryForm.watch('billingQuantity')! > 0 && stockJournalEntryForm.watch('rateUnit.code')) ?? stockUnits?.data?.data?.find((su: StockUnit) => su.id === stockJournalEntryForm.getValues('stockItem.stockUnitId'))?.code}</div>
                     <div className="text-right  pr-3 ">{
                         stockJournalEntryForm.watch('discountPercentage') ? Number(stockJournalEntryForm.watch('discountPercentage')).toFixed(2) : ''
                     }</div>
@@ -124,7 +149,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
                         </Button>
                         <Button variant="outline" size="sm"
                             disabled={true}
-                            onClick={() => remove(index)} className="h-6 focus:bg-black focus:text-white" >
+                            onClick={handleRemoveClick} className="h-6 focus:bg-black focus:text-white" >
                             <TbRowRemove className=" text-red-700 h-4 w-4" />
                         </Button>
                     </div>
@@ -149,6 +174,7 @@ export const StockJournalEntry = ({ index, remove, handleOnClickItemAddEntry }: 
                             godowns={godowns?.data?.data}
                             stockUnits={stockUnits?.data?.data}
                             handleOnClickItemAddEntry={handleOnClickItemAddEntry}
+                            stockJournalEntryForm={stockJournalEntryForm}
                         />
                     </PosJournalEntryGodownProvider>
                 }
