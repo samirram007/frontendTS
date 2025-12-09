@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { DataTableColumnHeader } from "@/features/tasks/components/data-table-column-header";
 import { formatDateMonthYearForInput } from "../../../utils/date-utils";
 import type { RefundRequest } from "../data/schema";
+import { Link } from "@tanstack/react-router";
 
 
 export const columns: ColumnDef<RefundRequest>[] = [
@@ -30,21 +31,25 @@ export const columns: ColumnDef<RefundRequest>[] = [
         size: 220
     },
     {
-        id: "voucherId",
+        accessorKey: "actions",
         header: ({ column }) => (
             <DataTableColumnHeader className="text-center" title="Action" column={column} />
         ),
         size: 60,
         minSize: 70,
-        cell: (props) => {
-
+        cell: ({ row }) => {
+            const data = row.original;
+            console.log("Selected row", data);
             return (
                 <div className="w-full flex justify-center">
-                    <Button
-                        className="text-gray-200 hover:text-gray-50 hover:bg-blue-800 flex items-center gap-2 cursor-pointer"
-                    >
-                        <Eye size={22} color="white" /> View
-                    </Button>
+                    <Link to="/transactions/booking/test_cancelled" state={{ selectedData: data }}>
+
+                        <Button
+                            className="text-gray-200 hover:text-gray-50 hover:bg-blue-800 flex items-center gap-2 cursor-pointer"
+                        >
+                            <Eye size={22} color="white" /> View
+                        </Button>
+                    </Link>
                 </div>
 
             );

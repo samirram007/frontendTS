@@ -65,7 +65,7 @@ const Booking = () => {
             <Tabs defaultValue="booking" className="w-full mt-6">
                 <TabsList>
                     <TabsTrigger value="booking">Booking List</TabsTrigger>
-                    <TabsTrigger value="refund">Refund List</TabsTrigger>
+                    <TabsTrigger value="refund">Refund Request</TabsTrigger>
                 </TabsList>
                 <TabsContent value="booking">
                     <BookingListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />

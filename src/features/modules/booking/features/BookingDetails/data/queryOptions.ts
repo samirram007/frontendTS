@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import type { IBookingPaymentSchema, IJobOrderStoreSchema, ITestCancelRequest } from "./schema";
-import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, updateJobOrderService } from "./api";
+import type { IBookingPaymentSchema, IJobOrderStoreSchema, ITestCancellationRequest, ITestCancelRequest } from "./schema";
+import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, testCancelRequest, updateJobOrderService } from "./api";
 import { showErrors } from "@/utils/dataClient";
 
 
@@ -56,6 +56,21 @@ export function useJobOderMutation() {
             }
             // Otherwise create
             return await storeJobOrderService(data)
+        },
+        onError: (error) => {
+            showErrors(error);
+
+        },
+    })
+}
+
+
+// This changes has been done due the test cancellation process addition
+
+export function useTestCancellation() {
+    return useMutation({
+        mutationFn: async (payload: ITestCancellationRequest) => {
+            return await testCancelRequest(payload);
         },
         onError: (error) => {
             showErrors(error);

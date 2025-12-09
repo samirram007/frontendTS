@@ -16,6 +16,9 @@ declare module '@tanstack/react-router' {
 
         };
     }
+    interface HistoryState {
+        selectedData?: any
+    }
 }
 
 export function AppRouter() {

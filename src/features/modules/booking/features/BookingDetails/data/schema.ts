@@ -21,6 +21,12 @@ export enum JobStatus {
     Drafted = 'Drafted',
 }
 
+export enum TestCancellationStatus {
+    CancellationRequest = 'request',
+    CancellationDiscard = 'discard',
+    CancellationApproved = 'approved'
+}
+
 
 
 export interface IJobOrderStoreSchema {
@@ -72,4 +78,25 @@ export interface ITestCancellationResponse {
     status: boolean,
     code: number,
     message: string
+}
+
+
+export interface ITestCancellationRequest {
+    stockJournalEntryId: number,
+    remarks: string | null,
+    status: TestCancellationStatus
+}
+
+export interface ITestCancellation {
+    id?: number,
+    stockJournalEntryId: number,
+    status: string,
+    cancelledBy: number,
+    requestedBy: number,
+    approvedBy: number
+}
+
+
+export interface ITestCancellationResponse extends IResponseInterface {
+    data: ITestCancellation
 }

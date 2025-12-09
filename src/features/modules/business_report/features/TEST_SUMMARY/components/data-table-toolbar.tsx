@@ -11,7 +11,7 @@ interface DataTableToolbarProps<TData> {
 }
 
 export function DataTableToolbar<TData>({
-  table, onPdfClick
+  table
 }: DataTableToolbarProps<TData>) {
   // const isFiltered = table.getState().columnFilters.length > 0
 

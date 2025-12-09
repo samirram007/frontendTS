@@ -11,8 +11,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { PaymentRuleAlertModal } from "./BookingPaymentFeature/payment-rule-alert";
 import CancelRequestModal from "./CancelFeature/CancelRequestModal";
-import { RefundAlertModal } from "./RefundFeature/RefundAlertModal";
 import { X } from "lucide-react";
+import { TestCancelRequestModal } from "./TestCancelRequestFeature/TestCancelRequestModal";
 
 const formatDateForInput = (dateString: string | Date) => {
     const date = new Date(dateString);
@@ -35,7 +35,7 @@ function CheckForProcess({ item, voucherId }: { item: IStockJournalEntry, vouche
 
     const handleJobCollectSmapleOrder = () => {
         const payload: IJobOrderStoreSchema = {
-            id: item.jobOrder?.id,
+            id: item.jobOrder?.id || undefined,
             stockJournalEntryId: item.id,
             stockItemId: item.stockItemId,
             status: "sample_collected",
@@ -135,7 +135,7 @@ const ConfirmTheTest = ({ item, voucherId }: { item: IStockJournalEntry, voucher
     }
 
     const handleReportNavigation = () => {
-        navigate({ to: `/transactions/booking/report/${item.jobOrder?.id}` })
+        navigate({ to: `/transactions/booking/test_report/${item.jobOrder?.id}` })
     }
 
 
@@ -178,9 +178,8 @@ export const ItemStatusCard = ({ item, index, isMinimumPaymentDone, bookingId }:
                         }
                     />}
                     {
-                        item.jobOrder?.status == "cancellation_requested" ? "" :
-                            item.jobOrder?.status !== "deliver_to_desk" || "cancellation_requested" || !isMinimumPaymentDone ?
-                                <CancelRequestModal itemId={item.id} bookingId={bookingId} /> : <RefundAlertModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
+                        item.jobOrder?.status !== "deliver_to_desk" || !isMinimumPaymentDone ?
+                            <CancelRequestModal itemId={item.id} bookingId={bookingId} /> : <TestCancelRequestModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
 
                     }
 
@@ -212,7 +211,7 @@ export const ItemStatusCard = ({ item, index, isMinimumPaymentDone, bookingId }:
                     />}
                     {
                         item.jobOrder?.status !== "deliver_to_desk" && !isMinimumPaymentDone ?
-                            <CancelRequestModal itemId={item.id} bookingId={bookingId} /> : <RefundAlertModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
+                            <CancelRequestModal itemId={item.id} bookingId={bookingId} /> : <TestCancelRequestModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
 
                     }
 

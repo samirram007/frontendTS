@@ -45,7 +45,7 @@ export const columns: ColumnDef<DailyCollectionReport>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader className='w-8' column={column} title='Sl No' />
         ),
-        size: 20,
+        size: 40,
         minSize: 40,
         maxSize: 40,
         cell: ({ row }) => (
@@ -65,31 +65,11 @@ export const columns: ColumnDef<DailyCollectionReport>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader className='w-8' column={column} title='Name' />
         ),
-        size: 20,
-        minSize: 40,
-        maxSize: 40,
-        cell: ({ row }) => (
-            <div className='max-w-36'>{row.original.name}</div>
-        ),
-        meta: {
-            className: cn(
-                'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
-                'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-                'sticky left-6 md:table-cell'
-            ),
-        },
-        enableHiding: false,
-    },
-    {
-        accessorKey: 'status',
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title='Status' />
-        ),
         size: 40,
         minSize: 40,
         maxSize: 40,
         cell: ({ row }) => (
-            <LongText className='max-w-36'>{row.getValue('status')}</LongText>
+            <div className='max-w-36'>{row.original.name}</div>
         ),
         meta: {
             className: cn(
