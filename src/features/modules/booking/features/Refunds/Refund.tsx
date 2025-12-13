@@ -1,24 +1,22 @@
+import { Search, SearchIcon } from "lucide-react";
+import { useState } from "react";
+import { DatePicker } from "../../components/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
-import { DatePicker } from "../components/DatePicker";
-import { Search, SearchIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import { BookingListTable } from "../features/BookingList/booking-table/page";
-import { useState } from "react";
-import { useGetBookingListQuery } from "../features/BookingList/data/queryOptions";
+import { useGetCancelledBookingListQuery } from "./data/queryOptions";
+import { RefundListTable } from "./components/refund-table/page";
 
 
 
 
 
-const Booking = () => {
-
+const RefundDashboard = () => {
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
-    const [selectedStartDate, setSelectedStartDate] = useState<string | null>(null);
-    const [selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
-    const { data, isSuccess, isFetching } = useGetBookingListQuery(selectedStartDate, selectedEndDate);
-
+    const [_selectedStartDate, setSelectedStartDate] = useState<string | null>(null);
+    const [_selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
+    const { data, isSuccess, isFetching } = useGetCancelledBookingListQuery();
 
     const handleFilterBooking = () => {
         const start = startDate.toLocaleDateString('en-CA');
@@ -28,7 +26,7 @@ const Booking = () => {
     }
 
     return (
-        <div>
+        <>
             <div className="w-full grid grid-cols-[1fr_20vw] my-4 py-2 px-2 border-[1px] border-gray-300 rounded">
                 <div className="flex gap-2">
                     <label htmlFor="search-patient" className="w-full cursor-pointer flex border-[1px] px-1 pr-2 focus-within::border-2 focus-within:border-blue-500 rounded items-center gap-2">
@@ -59,12 +57,10 @@ const Booking = () => {
                 </div>
             </div>
             <Separator className="border-1 border-gray-500" />
-
-            <BookingListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />
-
-        </div>
+            <RefundListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />
+        </>
     )
 }
 
 
-export default Booking;
+export default RefundDashboard;

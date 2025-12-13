@@ -1,3 +1,4 @@
+import { dateUtil } from "@/utils/dateUtils";
 
 
 
@@ -19,6 +20,7 @@ export default function BookingHead({ bookingDate, setBookingDate }: { bookingDa
             <div>
                 <input
                     type="date"
+                    min={dateUtil.todayDateString()}
                     id="dob"
                     value={new Date(bookingDate).toISOString().split("T")[0]}
                     onChange={(e) => {

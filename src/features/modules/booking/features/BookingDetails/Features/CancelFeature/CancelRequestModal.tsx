@@ -30,7 +30,7 @@ const CancelRequestModal: React.FC<ICancelRequestModal> = ({ itemId, bookingId }
 
 
     const onTestCancellation = () => {
-        mutate({ id: itemId, remark: remarkRef.current?.value ?? null }, {
+        mutate({ id: itemId, remark: remarkRef.current?.value ?? null, cancellationRemark: null }, {
             onSuccess: (data) => {
                 toast.success(data.data.message);
 

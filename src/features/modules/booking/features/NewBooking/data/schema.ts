@@ -50,6 +50,8 @@ export interface IStockJournalEntry {
     discountValue: number,
     netDiscountedAmount: number,
     isCancelled: boolean,
+    isApproved: boolean,
+    isRequested: boolean,
     rate: string,
     movementType: MovementType,
     godownId: unknown | null,

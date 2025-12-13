@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useBookingTest } from "../../context/new-booking-context";
 import { useEffect, useRef } from "react";
 import { calculateDiscount, calculateDiscountPercent, calculateDiscountRate } from "../DiscountFeature/discount-actions";
+import { dateUtil } from "@/utils/dateUtils";
 
 
 
@@ -140,10 +141,10 @@ const LabTestList = () => {
                                     <h1>{item.name}</h1>
                                 </div>
                                 <div className="py-2">
-                                    <input type="date" onChange={(e) => handleTestDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.testDate).toISOString().split("T")[0]} />
+                                    <input type="date" min={dateUtil.todayDateString()} onChange={(e) => handleTestDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.testDate).toISOString().split("T")[0]} />
                                 </div>
                                 <div className="py-2">
-                                    <input type="date" onChange={(e) => handleReportDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.reportDate).toISOString().split("T")[0]} />
+                                    <input type="date" min={dateUtil.todayDateString()} onChange={(e) => handleReportDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.reportDate).toISOString().split("T")[0]} />
                                 </div>
                                 <div className="py-2">
                                     <input value={item.discountedValue} onChange={(e) => handleDiscountValueChange(e, item.testId)} className="border-[1px] px-2 border-black w-16" />

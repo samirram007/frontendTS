@@ -171,6 +171,11 @@ export const sidebarData: SidebarData = {
               icon: IconClipboardList,
             },
             {
+              title: 'Refunds',
+              url: '/transactions/booking/refunds',
+              icon: IconClipboardList,
+            },
+            {
               title: 'Test Reporting',
               url: '/transactions/booking/test_report',
               icon: IconClipboardList,

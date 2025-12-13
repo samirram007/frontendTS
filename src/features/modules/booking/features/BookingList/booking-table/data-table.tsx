@@ -38,9 +38,9 @@ export function BookingListDataTable<TData, TValue>({
 
     return (
         <>
-            <div className="overflow-x-auto rounded-md border">
+            <div className="overflow-x-auto rounded-md  border border-[#009eac]/30 ">
                 <Table className="min-w-full table-fixed">
-                    <TableHeader>
+                    <TableHeader className="bg-[#009eac] !text-white">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => (
@@ -52,7 +52,7 @@ export function BookingListDataTable<TData, TValue>({
                                                 ? `${header.column.columnDef.minSize}px`
                                                 : "auto"
                                         }}
-                                        className="relative whitespace-nowrap"
+                                        className="relative whitespace-nowrap font-semibold tracking-wide border-r last:border-none border-[#ffffff30]"
                                     >
                                         {header.isPlaceholder
                                             ? null
@@ -67,7 +67,7 @@ export function BookingListDataTable<TData, TValue>({
                                                 onTouchStart={header.getResizeHandler()}
                                                 className={`absolute right-0 top-0 h-full w-1 cursor-col-resize select-none ${header.column.getIsResizing()
                                                     ? "bg-blue-500"
-                                                    : "bg-transparent hover:bg-gray-300"
+                                                    : "bg-transparent hover:bg-[#ffffff80]"
                                                     }`}
                                             />
                                         )}
@@ -88,7 +88,7 @@ export function BookingListDataTable<TData, TValue>({
                                     >
                                         <div className="flex items-center justify-center gap-7">
                                             <Spinner className="size-10" />
-                                            <span className="font-semibold text-base">Loading.....</span>
+                                            <span className="font-semibold text-base text-[#009eac]">Loading.....</span>
                                         </div>
 
                                     </TableCell>
@@ -100,6 +100,7 @@ export function BookingListDataTable<TData, TValue>({
                                         <TableRow
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
+                                            className="hover:bg-[#009eac0d] transition-colors"
                                         >
                                             {row.getVisibleCells().map((cell) => (
                                                 <TableCell

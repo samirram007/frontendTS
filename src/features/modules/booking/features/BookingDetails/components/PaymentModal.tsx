@@ -30,17 +30,29 @@ function PaymentNullScreen() {
     )
 }
 
-function createPayload(amount: number, payMethod: PaymentTypeSchema | null, data?: IBooking | null): IBookingPaymentSchema | null {
+function createPayload(amount: number, data?: IBooking | null, transactionNo?: string | null): IBookingPaymentSchema | null {
     const CASH_LEDGER = 1000001;
     const BANK_LEDGER = 1000002;
     if (data) {
-        const paymentPayload: IBookingPaymentSchema = {
-            voucherId: data.id,
-            amount: amount,
-            patientId: data.voucherPatient.patientId,
-            paymentMode: payMethod === "CASH" ? CASH_LEDGER : BANK_LEDGER
-        };
-        return paymentPayload;
+        if (transactionNo) {
+            const paymentPayload: IBookingPaymentSchema = {
+                voucherId: data.id,
+                amount: amount,
+                patientId: data.voucherPatient.patientId,
+                paymentMode: BANK_LEDGER,
+                transactionNo: transactionNo
+            };
+            return paymentPayload;
+        }
+        else {
+            const paymentPayload: IBookingPaymentSchema = {
+                voucherId: data.id,
+                amount: amount,
+                patientId: data.voucherPatient.patientId,
+                paymentMode: CASH_LEDGER,
+            };
+            return paymentPayload;
+        }
     }
     return null;
 }
@@ -55,7 +67,7 @@ interface PayAndBookInterface {
 
 export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button }) => {
 
-    const { paymentMethod, setPaymentMethod, receivingAmount, setReceivingAmount } = usePayment();
+    const { paymentMethod, setPaymentMethod, receivingAmount, setReceivingAmount, transactionNo } = usePayment();
     const [open, setOpen] = useState<boolean>(false);
     const { bookingDetail } = useBookingDetail();
     const { mutate, isPending } = useBookingPaymentMutation();
@@ -63,7 +75,7 @@ export const PayAndBookModal: React.FC<PayAndBookInterface> = ({ button }) => {
     const queryClient = useQueryClient();
 
     const handleTransaction = () => {
-        const payload = createPayload(Number(receivingAmount), paymentMethod, bookingDetail);
+        const payload = createPayload(Number(receivingAmount), bookingDetail, transactionNo);
         if (payload == null) {
             return ErrorToast.launchErrorToast("Please select all options for payment");
         }

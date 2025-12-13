@@ -35,6 +35,8 @@ interface PaymentContextType {
     setSelectedDiscount: React.Dispatch<React.SetStateAction<string>>;
     discountRate: number,
     setDiscountRate: React.Dispatch<React.SetStateAction<number>>;
+    transactionNo: string | null,
+    setTransactionNo: React.Dispatch<React.SetStateAction<string | null>>
 }
 
 
@@ -54,6 +56,7 @@ export default function PaymentProvider({ children }: { children: React.ReactNod
     const [payementReceipt, setPaymentReceipt] = useState<PaymentReceipt[]>([]);
     const [selectedDiscount, setSelectedDiscount] = useState<string>("none");
     const [discountRate, setDiscountRate] = useState<number>(100);
+    const [transactionNo, setTransactionNo] = useState<string | null>(null);
 
 
     const calculateTotalAmount = (data?: IBooking) => {
@@ -118,7 +121,8 @@ export default function PaymentProvider({ children }: { children: React.ReactNod
             payementReceipt, setPaymentReceipt,
             discountValue, setDiscountValue,
             selectedDiscount, setSelectedDiscount,
-            discountRate, setDiscountRate
+            discountRate, setDiscountRate,
+            transactionNo, setTransactionNo
         }}>
             {children}
         </PaymentContext.Provider>

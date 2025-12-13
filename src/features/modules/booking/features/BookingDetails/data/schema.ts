@@ -8,7 +8,8 @@ export interface IBookingPaymentSchema {
     voucherId: number,
     amount: number,
     patientId: number,
-    paymentMode: number
+    paymentMode: number,
+    transactionNo?: string | null
 }
 
 export enum JobStatus {
@@ -72,6 +73,7 @@ export interface IDepartmentSlipData {
 export interface ITestCancelRequest {
     id: number,
     remark: string | null,
+    cancellationRemark: string | null
 }
 
 export interface ITestCancellationResponse {
@@ -82,7 +84,8 @@ export interface ITestCancellationResponse {
 
 
 export interface ITestCancellationRequest {
-    stockJournalEntryId: number,
+    id?: number,
+    stockJournalEntryId?: number,
     remarks: string | null,
     status: TestCancellationStatus
 }

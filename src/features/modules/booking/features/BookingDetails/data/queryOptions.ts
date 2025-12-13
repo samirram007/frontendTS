@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import type { IBookingPaymentSchema, IJobOrderStoreSchema, ITestCancellationRequest, ITestCancelRequest } from "./schema";
-import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, testCancelRequest, updateJobOrderService } from "./api";
+import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, testCancelDiscard, testCancelRequest, updateJobOrderService } from "./api";
 import { showErrors } from "@/utils/dataClient";
 
 
@@ -38,6 +38,7 @@ export function useTestBookingCancelMutation() {
 export function useTestBookingRefundRequestMutation() {
     return useMutation({
         mutationFn: async (payload: ITestCancelRequest) => {
+            console.log("payload", payload);
             return await refundRequestTest(payload);
         },
         onError: (error) => {
@@ -70,6 +71,9 @@ export function useJobOderMutation() {
 export function useTestCancellation() {
     return useMutation({
         mutationFn: async (payload: ITestCancellationRequest) => {
+            if (payload.id) {
+                return await testCancelDiscard(payload);
+            }
             return await testCancelRequest(payload);
         },
         onError: (error) => {

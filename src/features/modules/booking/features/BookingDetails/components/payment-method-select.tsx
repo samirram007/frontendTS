@@ -7,29 +7,34 @@ import { usePayment } from "../../../contexts/payment-context";
 
 
 
-export default function PaymentMethodSelected(){
-    const {paymentMethod} = usePayment();
-    if(paymentMethod == PaymentTypeSchema.CASH){
-        return <PaymentCash/>
+export default function PaymentMethodSelected() {
+    const { paymentMethod, setTransactionNo } = usePayment();
+    const handleChangeTransaction = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTransactionNo(e.target.value);
     }
-    if(paymentMethod == PaymentTypeSchema.DEBIT_CARD.valueOf()){
-        return <DebitPayment/>
+    if (paymentMethod == PaymentTypeSchema.CASH) {
+        return <PaymentCash />
     }
-    if(paymentMethod == PaymentTypeSchema.CREDIT_CARD.valueOf()){
-        return <CreditPayment/>
+    if (paymentMethod == PaymentTypeSchema.DEBIT_CARD.valueOf()) {
+        return <DebitPayment />
     }
-    if(paymentMethod == PaymentTypeSchema.UPI){
-        return(
+    if (paymentMethod == PaymentTypeSchema.CREDIT_CARD.valueOf()) {
+        return <CreditPayment />
+    }
+    if (paymentMethod == PaymentTypeSchema.UPI) {
+        return (
             <>
-                <div className="flex justify-center gap-4 text-center">
-                <div className="font-bold">UPI Id:</div>
-                <div className="font-semibold">path1234@paytm</div>
-            </div>
-            <div className="flex justify-center">
-                <img src="/upiqr.jpg" alt="" className="h-32 w-32"  />
-            </div>
+                <div className="flex flex-col items-start">
+                    <h1 className="text-app-small mb-2 font-semibold">Transaction No:</h1>
+                    <input
+                        type="text"
+                        onChange={(e) => handleChangeTransaction(e)}
+                        className="placeholder:text-app-small px-2 border-[1px] border-gray-400 w-full text-app-base rounded py-2"
+                        placeholder="Enter Transaction no"
+                    />
+                </div>
             </>
-           
+
         )
     }
     return null

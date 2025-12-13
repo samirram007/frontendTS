@@ -4,7 +4,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import { useTestBookingRefundRequestMutation } from "../../data/queryOptions";
 import { toast } from "sonner";
-import { bookingQueryOptions } from "../../../NewBooking/data/queryOptions";
 import { useQueryClient } from "@tanstack/react-query";
 
 
@@ -13,19 +12,19 @@ import { useQueryClient } from "@tanstack/react-query";
 
 
 
-export function RefundAlertModal({ action, bookingId, itemId }: { action: string | React.ReactNode, bookingId: number, itemId: number }) {
+export function RefundAlertModal({ action, bookingNo, cancelRemark, itemId }: { action: string | React.ReactNode, bookingNo: string | null, cancelRemark: string, itemId: number }) {
     const [open, setOpen] = useState<boolean>(false);
     const remarkRef = useRef<HTMLTextAreaElement | null>(null);
     const { mutate, isPending } = useTestBookingRefundRequestMutation();
     const queryClient = useQueryClient();
 
+    console.log("remark", cancelRemark);
+
     const onTestCancellation = () => {
-        mutate({ id: itemId, remark: remarkRef.current?.value ?? null }, {
+        mutate({ id: itemId, remark: remarkRef.current?.value ?? null, cancellationRemark: cancelRemark ?? null }, {
             onSuccess: (data) => {
                 toast.success(data.data.message);
-
-                const { queryKey } = bookingQueryOptions(bookingId);
-                queryClient.invalidateQueries({ queryKey });
+                queryClient.invalidateQueries({ queryKey: ['cancelled-booking', bookingNo] })
                 setTimeout(() => {
                     setOpen(false);
                 }, 800);
@@ -42,25 +41,25 @@ export function RefundAlertModal({ action, bookingId, itemId }: { action: string
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogTitle>Request Approved</AlertDialogTitle>
                     <AlertDialogDescription>
                         This action cannot be undone. This will permanently delete your selected
                         test.
-                        <div className="text-red-500 font-medium">
+                        <span className="text-red-500 font-medium">
                             The test is being cancelled after payment has already been processed.
                             Kindly provide the reason for cancellation, such as incorrect test selection, customer request, duplicate booking, or operational limitation.
-                        </div>
+                        </span>
                         <Label className="font-semibold mt-4 mb-2 text-black">Cancellation Reason</Label>
                         <Textarea ref={remarkRef} placeholder="Type your cancellation reason here" />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Keep Request</AlertDialogCancel>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={(e) => {
                         e.preventDefault();
                         onTestCancellation();
-                    }} className="bg-red-600 hover:bg-red-700 text-white">
-                        {isPending ? "Wait for process" : "Cancel Test"}
+                    }} className="bg-blue-600 hover:bg-blue-700 text-white">
+                        {isPending ? "Wait for process" : "Confirm"}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

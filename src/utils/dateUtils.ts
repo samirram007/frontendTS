@@ -1,6 +1,3 @@
-
-
-
 class DateUtil {
     InitialDate(): string {
         const currentDate = new Date();
@@ -30,6 +27,18 @@ class DateUtil {
             day: '2-digit'
         })
         return formattedDate;
+    }
+
+    yesterdayDate(): string {
+        const dayBefore = new Date();
+        dayBefore.setDate(dayBefore.getDate() - 1);
+        const yesterDay = dayBefore.toISOString().split('T')[0];
+        return yesterDay;
+    }
+
+    todayDateString(): string {
+        const today = new Date().toISOString().split('T')[0];
+        return today;
     }
 }
 

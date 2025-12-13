@@ -2,9 +2,9 @@ import { type ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTableColumnHeader } from "@/features/tasks/components/data-table-column-header";
-import { formatDateMonthYearForInput } from "../../../utils/date-utils";
-import type { RefundRequest } from "../data/schema";
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
+import type { RefundRequest } from "../../data/schema";
+import { formatDateMonthYearForInput } from "@/features/modules/booking/utils/date-utils";
 
 
 export const columns: ColumnDef<RefundRequest>[] = [
@@ -15,19 +15,19 @@ export const columns: ColumnDef<RefundRequest>[] = [
     },
     {
         header: "Booking ID",
-        accessorFn: (row) => row.booking_no ?? "",
+        accessorFn: (row) => row.bookingNo ?? "",
         size: 50,
         minSize: 50
     },
     {
         header: "Booking Date",
-        accessorFn: (row) => formatDateMonthYearForInput(row.booking_date) ?? "",
+        accessorFn: (row) => formatDateMonthYearForInput(row.bookingDate) ?? "",
         size: 50,
         minSize: 50
     },
     {
         header: "Patient Name",
-        accessorFn: (row) => row.patient_name,
+        accessorFn: (row) => row.patientName,
         size: 220
     },
     {
@@ -38,18 +38,15 @@ export const columns: ColumnDef<RefundRequest>[] = [
         size: 60,
         minSize: 70,
         cell: ({ row }) => {
-            const data = row.original;
-            console.log("Selected row", data);
+            const navigate = useNavigate();
             return (
                 <div className="w-full flex justify-center">
-                    <Link to="/transactions/booking/test_cancelled" state={{ selectedData: data }}>
-
-                        <Button
-                            className="text-gray-200 hover:text-gray-50 hover:bg-blue-800 flex items-center gap-2 cursor-pointer"
-                        >
-                            <Eye size={22} color="white" /> View
-                        </Button>
-                    </Link>
+                    <Button
+                        onClick={() => navigate({ to: `/transactions/booking/refunds/${row.original.bookingNo}` })}
+                        className="text-gray-200 hover:text-gray-50 hover:bg-blue-800 flex items-center gap-2 cursor-pointer"
+                    >
+                        <Eye size={22} color="white" /> View
+                    </Button>
                 </div>
 
             );

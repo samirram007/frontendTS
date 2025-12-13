@@ -58,7 +58,7 @@ export async function deleteRequestTest(payload: ITestCancelRequest): Promise<Ax
 
 export async function refundRequestTest(payload: ITestCancelRequest): Promise<AxiosResponse<ITestCancellationResponse>> {
     try {
-        const response = await axiosClient.post(`test_booking/${payload.id}/test-refund-request`, { remark: payload.remark ?? null });
+        const response = await axiosClient.post(`test_booking/${payload.id}/test-refund-request`, { remark: payload.remark ?? null, cancellationRemark: payload.cancellationRemark });
         return response;
     } catch (error: unknown) {
         if (axios.isAxiosError(error) && error.response) {
@@ -73,6 +73,22 @@ export async function refundRequestTest(payload: ITestCancelRequest): Promise<Ax
 export async function testCancelRequest(payload: ITestCancellationRequest) {
     try {
         const response = await axiosClient.post("test_cancellation_requests", payload);
+        return response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error) && error.response) {
+            throw error.response.data;
+        }
+        throw new Error("Network Error");
+    }
+}
+
+
+export async function testCancelDiscard(payload: ITestCancellationRequest) {
+    try {
+        const response = await axiosClient.put(`test_cancellation_requests/${payload.id}`, {
+            status: payload.status,
+            remarks: payload.remarks
+        });
         return response;
     } catch (error: unknown) {
         if (axios.isAxiosError(error) && error.response) {

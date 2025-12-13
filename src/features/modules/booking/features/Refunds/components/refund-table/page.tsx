@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { RefundListDataTable } from "./data-table";
 import { columns } from "./columns";
-import type { RefundRequest } from "../data/schema";
+import type { RefundRequest } from "../../data/schema";
 
 
 

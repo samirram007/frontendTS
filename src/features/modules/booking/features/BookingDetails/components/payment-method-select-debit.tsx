@@ -1,29 +1,20 @@
-export default function DebitPayment(){
-    return(
+import { usePayment } from "../../../contexts/payment-context";
+
+export default function DebitPayment() {
+
+    const { setTransactionNo } = usePayment();
+
+    const handleChangeTransaction = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTransactionNo(e.target.value);
+    }
+    return (
         <div className="grid grid-rows-1 gap-5">
-            <div className="grid grid-cols-[110px_1fr] items-center">
-                <h1 className="text-app-small font-semibold">TID:</h1>
-                <input 
-                    type="text" 
-                    className="placeholder:text-app-small px-2 border-[1px] border-gray-400 w-full text-app-base rounded py-2" 
-                    placeholder="Enter TID no"
-                />
-            </div>
-
-            <div className="grid grid-cols-[110px_1fr] items-center">
-                <h1 className="text-app-small font-semibold">Card No:</h1>
-                <input 
-                    type="text" 
-                    className="placeholder:text-app-small px-2 border-[1px] border-gray-400 w-full text-app-base rounded py-2" 
-                    placeholder="Enter Card no"
-                />
-            </div>
-
-            <div className="grid grid-cols-[110px_1fr] items-center">
-                <h1 className="text-app-small font-semibold">Transaction No:</h1>
-                <input 
-                    type="text" 
-                    className="placeholder:text-app-small px-2 border-[1px] border-gray-400 w-full text-app-base rounded py-2" 
+            <div className="flex flex-col items-start">
+                <h1 className="text-app-small my-2 font-semibold">Transaction No:</h1>
+                <input
+                    type="text"
+                    onChange={(e) => handleChangeTransaction(e)}
+                    className="placeholder:text-app-small px-2 border-[1px] border-gray-400 w-full text-app-base rounded py-2"
                     placeholder="Enter Transaction no"
                 />
             </div>

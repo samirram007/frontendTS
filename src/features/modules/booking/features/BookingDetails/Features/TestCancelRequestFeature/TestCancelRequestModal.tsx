@@ -54,12 +54,12 @@ export function TestCancelRequestModal({ action, bookingId, itemId }: { action: 
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Keep Request</AlertDialogCancel>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={(e) => {
                         e.preventDefault();
                         onTestCancellation();
-                    }} className="bg-red-600 hover:bg-red-700 text-white">
-                        {isPending ? "Wait for process" : "Request Cancellation"}
+                    }} className="bg-blue-600 hover:bg-blue-700 text-white">
+                        {isPending ? "Wait for process" : "Confirm"}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
