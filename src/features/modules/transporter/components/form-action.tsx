@@ -55,7 +55,7 @@ export function FormAction({ currentRow }: Props) {
                 gstin: '',
                 pan: '',
                 status: 'active',
-                accountGroupId: 4,
+                accountGroupId: 20003,
                 licenseNo: '',
                 vehicleType: '',
                 contactPerson: '',

@@ -72,11 +72,12 @@ const CurrentBalance = () => {
     const { data: currentBalance, isLoading } = useQuery({
         queryKey: ["currentBalance", form.watch('partyLedger.id')],
         queryFn: () => fetchLedgerBalanceService(form.watch('partyLedger.id')!),
+        enabled: !!form.watch('partyLedger.id'),
     })
     if (isLoading) {
         return <div className="italic text-sm">Current Balance : Calculating...</div>
     }
-    console.log(currentBalance)
+
     return (
         <div className="italic text-sm">Current Balance :
             {currentBalance?.data.balance.toFixed(2)} {currentBalance?.data.nature}</div>

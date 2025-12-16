@@ -39,6 +39,9 @@ import { Route as ProtectedMastersStatutoryLayoutRouteImport } from './routes/_p
 import { Route as ProtectedMastersPayrollLayoutRouteImport } from './routes/_protected/masters/payroll/_layout'
 import { Route as ProtectedMastersPartyLayoutRouteImport } from './routes/_protected/masters/party/_layout'
 import { Route as ProtectedMastersOrganizationLayoutRouteImport } from './routes/_protected/masters/organization/_layout'
+import { Route as ProtectedMastersMiscellaneousVehicleRouteImport } from './routes/_protected/masters/miscellaneous/vehicle'
+import { Route as ProtectedMastersMiscellaneousDelivery_routesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_routes'
+import { Route as ProtectedMastersMiscellaneousDelivery_placesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_places'
 import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_protected/masters/inventory/_layout'
 import { Route as ProtectedMastersAccountsLayoutRouteImport } from './routes/_protected/masters/accounts/_layout'
 import { Route as ProtectedauthUserFiscalYearLayoutRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout'
@@ -571,6 +574,24 @@ const ProtectedMastersOrganizationLayoutRoute =
   ProtectedMastersOrganizationLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedMastersOrganizationRoute,
+  } as any)
+const ProtectedMastersMiscellaneousVehicleRoute =
+  ProtectedMastersMiscellaneousVehicleRouteImport.update({
+    id: '/masters/miscellaneous/vehicle',
+    path: '/masters/miscellaneous/vehicle',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedMastersMiscellaneousDelivery_routesRoute =
+  ProtectedMastersMiscellaneousDelivery_routesRouteImport.update({
+    id: '/masters/miscellaneous/delivery_routes',
+    path: '/masters/miscellaneous/delivery_routes',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedMastersMiscellaneousDelivery_placesRoute =
+  ProtectedMastersMiscellaneousDelivery_placesRouteImport.update({
+    id: '/masters/miscellaneous/delivery_places',
+    path: '/masters/miscellaneous/delivery_places',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersInventoryLayoutRoute =
   ProtectedMastersInventoryLayoutRouteImport.update({
@@ -1491,6 +1512,9 @@ export interface FileRoutesByFullPath {
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
+  '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
+  '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
+  '/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1657,6 +1681,9 @@ export interface FileRoutesByTo {
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
+  '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
+  '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
+  '/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1803,6 +1830,9 @@ export interface FileRoutesById {
   '/_protected/masters/accounts/_layout': typeof ProtectedMastersAccountsLayoutRouteWithChildren
   '/_protected/masters/inventory': typeof ProtectedMastersInventoryRouteWithChildren
   '/_protected/masters/inventory/_layout': typeof ProtectedMastersInventoryLayoutRouteWithChildren
+  '/_protected/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
+  '/_protected/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
+  '/_protected/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
   '/_protected/masters/organization': typeof ProtectedMastersOrganizationRouteWithChildren
   '/_protected/masters/organization/_layout': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/_protected/masters/party': typeof ProtectedMastersPartyRouteWithChildren
@@ -2002,6 +2032,9 @@ export interface FileRouteTypes {
     | '/user-fiscal-year'
     | '/masters/accounts'
     | '/masters/inventory'
+    | '/masters/miscellaneous/delivery_places'
+    | '/masters/miscellaneous/delivery_routes'
+    | '/masters/miscellaneous/vehicle'
     | '/masters/organization'
     | '/masters/party'
     | '/masters/payroll'
@@ -2168,6 +2201,9 @@ export interface FileRouteTypes {
     | '/user-fiscal-year'
     | '/masters/accounts'
     | '/masters/inventory'
+    | '/masters/miscellaneous/delivery_places'
+    | '/masters/miscellaneous/delivery_routes'
+    | '/masters/miscellaneous/vehicle'
     | '/masters/organization'
     | '/masters/party'
     | '/masters/payroll'
@@ -2313,6 +2349,9 @@ export interface FileRouteTypes {
     | '/_protected/masters/accounts/_layout'
     | '/_protected/masters/inventory'
     | '/_protected/masters/inventory/_layout'
+    | '/_protected/masters/miscellaneous/delivery_places'
+    | '/_protected/masters/miscellaneous/delivery_routes'
+    | '/_protected/masters/miscellaneous/vehicle'
     | '/_protected/masters/organization'
     | '/_protected/masters/organization/_layout'
     | '/_protected/masters/party'
@@ -2856,6 +2895,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/organization'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutRouteImport
       parentRoute: typeof ProtectedMastersOrganizationRoute
+    }
+    '/_protected/masters/miscellaneous/vehicle': {
+      id: '/_protected/masters/miscellaneous/vehicle'
+      path: '/masters/miscellaneous/vehicle'
+      fullPath: '/masters/miscellaneous/vehicle'
+      preLoaderRoute: typeof ProtectedMastersMiscellaneousVehicleRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/masters/miscellaneous/delivery_routes': {
+      id: '/_protected/masters/miscellaneous/delivery_routes'
+      path: '/masters/miscellaneous/delivery_routes'
+      fullPath: '/masters/miscellaneous/delivery_routes'
+      preLoaderRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/masters/miscellaneous/delivery_places': {
+      id: '/_protected/masters/miscellaneous/delivery_places'
+      path: '/masters/miscellaneous/delivery_places'
+      fullPath: '/masters/miscellaneous/delivery_places'
+      preLoaderRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/inventory/_layout': {
       id: '/_protected/masters/inventory/_layout'
@@ -5216,6 +5276,9 @@ interface ProtectedRouteChildren {
   ProtectedauthUserFiscalYearRoute: typeof ProtectedauthUserFiscalYearRouteWithChildren
   ProtectedMastersAccountsRoute: typeof ProtectedMastersAccountsRouteWithChildren
   ProtectedMastersInventoryRoute: typeof ProtectedMastersInventoryRouteWithChildren
+  ProtectedMastersMiscellaneousDelivery_placesRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRoute
+  ProtectedMastersMiscellaneousDelivery_routesRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRoute
+  ProtectedMastersMiscellaneousVehicleRoute: typeof ProtectedMastersMiscellaneousVehicleRoute
   ProtectedMastersOrganizationRoute: typeof ProtectedMastersOrganizationRouteWithChildren
   ProtectedMastersPartyRoute: typeof ProtectedMastersPartyRouteWithChildren
   ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
@@ -5242,6 +5305,12 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
     ProtectedauthUserFiscalYearRouteWithChildren,
   ProtectedMastersAccountsRoute: ProtectedMastersAccountsRouteWithChildren,
   ProtectedMastersInventoryRoute: ProtectedMastersInventoryRouteWithChildren,
+  ProtectedMastersMiscellaneousDelivery_placesRoute:
+    ProtectedMastersMiscellaneousDelivery_placesRoute,
+  ProtectedMastersMiscellaneousDelivery_routesRoute:
+    ProtectedMastersMiscellaneousDelivery_routesRoute,
+  ProtectedMastersMiscellaneousVehicleRoute:
+    ProtectedMastersMiscellaneousVehicleRoute,
   ProtectedMastersOrganizationRoute:
     ProtectedMastersOrganizationRouteWithChildren,
   ProtectedMastersPartyRoute: ProtectedMastersPartyRouteWithChildren,

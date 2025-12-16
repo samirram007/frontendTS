@@ -22,7 +22,7 @@ import {
   IconUserCog,
   IconUserOff
 } from '@tabler/icons-react'
-import { AudioWaveform, Building2, Command, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
+import { AudioWaveform, Building2, Command, FileMinusCornerIcon, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
@@ -357,6 +357,24 @@ export const sidebarData: SidebarData = {
               url: '/masters/inventory/godown',
               icon: IconUserCog,
             },
+          ]
+        },
+        {
+          title: 'Miscellaneous',
+          visible: true,
+          icon: FileMinusCornerIcon,
+          items: [
+            {
+              title: 'Delivery Places',
+              url: '/masters/miscellaneous/delivery_places',
+              icon: IconUserCog,
+            },
+            {
+              title: 'Delivery Routes',
+              url: '/masters/miscellaneous/delivery_routes',
+              icon: IconUserCog,
+            },
+
           ]
         },
       ],

@@ -77,9 +77,9 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
                 }} >
                 <DialogTrigger asChild>
 
-                    <div className='border-2 rounded px-2 flex items-center justify-center cursor-pointer select-none hover:bg-gray-200 active:bg-gray-300' title='Dispatch Details'  >D</div>
+                    <div className='border-2 rounded px-2 size-8 shadow-md flex items-center justify-center cursor-pointer select-none hover:bg-green-100 active:bg-green-200' title='Dispatch Details'  >D</div>
                 </DialogTrigger>
-                <DialogContent className='sm:max-w-[64rem]'>
+                <DialogContent className='sm:max-w-5xl'>
                     <DialogHeader className='text-left border-b-2 pb-2'>
                         <VisuallyHidden>
                             <DialogTitle>Dispatch Details </DialogTitle>
