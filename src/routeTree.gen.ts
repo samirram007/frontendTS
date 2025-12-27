@@ -66,6 +66,7 @@ import { Route as AuthenticatedTransactionsVouchersLayoutContraIndexRouteImport 
 import { Route as AuthenticatedTransactionsBookingLayoutTest_reportIndexRouteImport } from './routes/_authenticated/transactions/booking/_layout/test_report/index'
 import { Route as AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRouteImport } from './routes/_authenticated/transactions/booking/_layout/test_cancelled/index'
 import { Route as AuthenticatedTransactionsBookingLayoutRefundsIndexRouteImport } from './routes/_authenticated/transactions/booking/_layout/refunds/index'
+import { Route as AuthenticatedTransactionsBookingLayoutCancellationsIndexRouteImport } from './routes/_authenticated/transactions/booking/_layout/cancellations/index'
 import { Route as AuthenticatedMastersPayrollLayoutShiftIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/shift/index'
 import { Route as AuthenticatedMastersPayrollLayoutSalary_structureIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/salary_structure/index'
 import { Route as AuthenticatedMastersPayrollLayoutSalary_componentIndexRouteImport } from './routes/_authenticated/masters/payroll/_layout/salary_component/index'
@@ -94,7 +95,7 @@ import { Route as AuthenticatedMastersAccountsLayoutVoucher_categoryIndexRouteIm
 import { Route as AuthenticatedMastersAccountsLayoutAccount_natureIndexRouteImport } from './routes/_authenticated/masters/accounts/_layout/account_nature/index'
 import { Route as AuthenticatedTransactionsBookingLayoutTest_reportDetailRouteImport } from './routes/_authenticated/transactions/booking/_layout/test_report/detail'
 import { Route as AuthenticatedTransactionsBookingLayoutTest_reportIdRouteImport } from './routes/_authenticated/transactions/booking/_layout/test_report/$id'
-import { Route as AuthenticatedTransactionsBookingLayoutRefundsIdRouteImport } from './routes/_authenticated/transactions/booking/_layout/refunds/$id'
+import { Route as AuthenticatedTransactionsBookingLayoutCancellationsIdRouteImport } from './routes/_authenticated/transactions/booking/_layout/cancellations/$id'
 import { Route as AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteImport } from './routes/_authenticated/masters/payroll/_layout/employee/_layout'
 import { Route as AuthenticatedMastersPartyLayoutTransporterLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/transporter/_layout'
 import { Route as AuthenticatedMastersPartyLayoutSupplierLayoutRouteImport } from './routes/_authenticated/masters/party/_layout/supplier/_layout'
@@ -751,6 +752,12 @@ const AuthenticatedTransactionsBookingLayoutRefundsIndexRoute =
     path: '/refunds/',
     getParentRoute: () => AuthenticatedTransactionsBookingLayoutRoute,
   } as any)
+const AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute =
+  AuthenticatedTransactionsBookingLayoutCancellationsIndexRouteImport.update({
+    id: '/cancellations/',
+    path: '/cancellations/',
+    getParentRoute: () => AuthenticatedTransactionsBookingLayoutRoute,
+  } as any)
 const AuthenticatedMastersPayrollLayoutShiftIndexRoute =
   AuthenticatedMastersPayrollLayoutShiftIndexRouteImport.update({
     id: '/shift/',
@@ -923,10 +930,10 @@ const AuthenticatedTransactionsBookingLayoutTest_reportIdRoute =
     path: '/test_report/$id',
     getParentRoute: () => AuthenticatedTransactionsBookingLayoutRoute,
   } as any)
-const AuthenticatedTransactionsBookingLayoutRefundsIdRoute =
-  AuthenticatedTransactionsBookingLayoutRefundsIdRouteImport.update({
-    id: '/refunds/$id',
-    path: '/refunds/$id',
+const AuthenticatedTransactionsBookingLayoutCancellationsIdRoute =
+  AuthenticatedTransactionsBookingLayoutCancellationsIdRouteImport.update({
+    id: '/cancellations/$id',
+    path: '/cancellations/$id',
     getParentRoute: () => AuthenticatedTransactionsBookingLayoutRoute,
   } as any)
 const AuthenticatedMastersPayrollLayoutEmployeeLayoutRoute =
@@ -1270,7 +1277,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutRouteWithChildren
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
   '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
-  '/transactions/booking/refunds/$id': typeof AuthenticatedTransactionsBookingLayoutRefundsIdRoute
+  '/transactions/booking/cancellations/$id': typeof AuthenticatedTransactionsBookingLayoutCancellationsIdRoute
   '/transactions/booking/test_report/$id': typeof AuthenticatedTransactionsBookingLayoutTest_reportIdRoute
   '/transactions/booking/test_report/detail': typeof AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
@@ -1299,6 +1306,7 @@ export interface FileRoutesByFullPath {
   '/masters/payroll/salary_component': typeof AuthenticatedMastersPayrollLayoutSalary_componentIndexRoute
   '/masters/payroll/salary_structure': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/masters/payroll/shift': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
+  '/transactions/booking/cancellations': typeof AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute
   '/transactions/booking/refunds': typeof AuthenticatedTransactionsBookingLayoutRefundsIndexRoute
   '/transactions/booking/test_cancelled': typeof AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute
   '/transactions/booking/test_report': typeof AuthenticatedTransactionsBookingLayoutTest_reportIndexRoute
@@ -1406,7 +1414,7 @@ export interface FileRoutesByTo {
   '/masters/party/supplier': typeof AuthenticatedMastersPartyLayoutSupplierLayoutIndexRoute
   '/masters/party/transporter': typeof AuthenticatedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutIndexRoute
-  '/transactions/booking/refunds/$id': typeof AuthenticatedTransactionsBookingLayoutRefundsIdRoute
+  '/transactions/booking/cancellations/$id': typeof AuthenticatedTransactionsBookingLayoutCancellationsIdRoute
   '/transactions/booking/test_report/$id': typeof AuthenticatedTransactionsBookingLayoutTest_reportIdRoute
   '/transactions/booking/test_report/detail': typeof AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute
   '/masters/accounts/account_nature': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
@@ -1435,6 +1443,7 @@ export interface FileRoutesByTo {
   '/masters/payroll/salary_component': typeof AuthenticatedMastersPayrollLayoutSalary_componentIndexRoute
   '/masters/payroll/salary_structure': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/masters/payroll/shift': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
+  '/transactions/booking/cancellations': typeof AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute
   '/transactions/booking/refunds': typeof AuthenticatedTransactionsBookingLayoutRefundsIndexRoute
   '/transactions/booking/test_cancelled': typeof AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute
   '/transactions/booking/test_report': typeof AuthenticatedTransactionsBookingLayoutTest_reportIndexRoute
@@ -1556,7 +1565,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/party/_layout/transporter/_layout': typeof AuthenticatedMastersPartyLayoutTransporterLayoutRouteWithChildren
   '/_authenticated/masters/payroll/_layout/employee': typeof AuthenticatedMastersPayrollLayoutEmployeeRouteWithChildren
   '/_authenticated/masters/payroll/_layout/employee/_layout': typeof AuthenticatedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
-  '/_authenticated/transactions/booking/_layout/refunds/$id': typeof AuthenticatedTransactionsBookingLayoutRefundsIdRoute
+  '/_authenticated/transactions/booking/_layout/cancellations/$id': typeof AuthenticatedTransactionsBookingLayoutCancellationsIdRoute
   '/_authenticated/transactions/booking/_layout/test_report/$id': typeof AuthenticatedTransactionsBookingLayoutTest_reportIdRoute
   '/_authenticated/transactions/booking/_layout/test_report/detail': typeof AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute
   '/_authenticated/masters/accounts/_layout/account_nature/': typeof AuthenticatedMastersAccountsLayoutAccount_natureIndexRoute
@@ -1585,6 +1594,7 @@ export interface FileRoutesById {
   '/_authenticated/masters/payroll/_layout/salary_component/': typeof AuthenticatedMastersPayrollLayoutSalary_componentIndexRoute
   '/_authenticated/masters/payroll/_layout/salary_structure/': typeof AuthenticatedMastersPayrollLayoutSalary_structureIndexRoute
   '/_authenticated/masters/payroll/_layout/shift/': typeof AuthenticatedMastersPayrollLayoutShiftIndexRoute
+  '/_authenticated/transactions/booking/_layout/cancellations/': typeof AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute
   '/_authenticated/transactions/booking/_layout/refunds/': typeof AuthenticatedTransactionsBookingLayoutRefundsIndexRoute
   '/_authenticated/transactions/booking/_layout/test_cancelled/': typeof AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute
   '/_authenticated/transactions/booking/_layout/test_report/': typeof AuthenticatedTransactionsBookingLayoutTest_reportIndexRoute
@@ -1697,7 +1707,7 @@ export interface FileRouteTypes {
     | '/masters/party/supplier'
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
-    | '/transactions/booking/refunds/$id'
+    | '/transactions/booking/cancellations/$id'
     | '/transactions/booking/test_report/$id'
     | '/transactions/booking/test_report/detail'
     | '/masters/accounts/account_nature'
@@ -1726,6 +1736,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/salary_component'
     | '/masters/payroll/salary_structure'
     | '/masters/payroll/shift'
+    | '/transactions/booking/cancellations'
     | '/transactions/booking/refunds'
     | '/transactions/booking/test_cancelled'
     | '/transactions/booking/test_report'
@@ -1833,7 +1844,7 @@ export interface FileRouteTypes {
     | '/masters/party/supplier'
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
-    | '/transactions/booking/refunds/$id'
+    | '/transactions/booking/cancellations/$id'
     | '/transactions/booking/test_report/$id'
     | '/transactions/booking/test_report/detail'
     | '/masters/accounts/account_nature'
@@ -1862,6 +1873,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/salary_component'
     | '/masters/payroll/salary_structure'
     | '/masters/payroll/shift'
+    | '/transactions/booking/cancellations'
     | '/transactions/booking/refunds'
     | '/transactions/booking/test_cancelled'
     | '/transactions/booking/test_report'
@@ -1982,7 +1994,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/party/_layout/transporter/_layout'
     | '/_authenticated/masters/payroll/_layout/employee'
     | '/_authenticated/masters/payroll/_layout/employee/_layout'
-    | '/_authenticated/transactions/booking/_layout/refunds/$id'
+    | '/_authenticated/transactions/booking/_layout/cancellations/$id'
     | '/_authenticated/transactions/booking/_layout/test_report/$id'
     | '/_authenticated/transactions/booking/_layout/test_report/detail'
     | '/_authenticated/masters/accounts/_layout/account_nature/'
@@ -2011,6 +2023,7 @@ export interface FileRouteTypes {
     | '/_authenticated/masters/payroll/_layout/salary_component/'
     | '/_authenticated/masters/payroll/_layout/salary_structure/'
     | '/_authenticated/masters/payroll/_layout/shift/'
+    | '/_authenticated/transactions/booking/_layout/cancellations/'
     | '/_authenticated/transactions/booking/_layout/refunds/'
     | '/_authenticated/transactions/booking/_layout/test_cancelled/'
     | '/_authenticated/transactions/booking/_layout/test_report/'
@@ -2702,6 +2715,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsBookingLayoutRefundsIndexRouteImport
       parentRoute: typeof AuthenticatedTransactionsBookingLayoutRoute
     }
+    '/_authenticated/transactions/booking/_layout/cancellations/': {
+      id: '/_authenticated/transactions/booking/_layout/cancellations/'
+      path: '/cancellations'
+      fullPath: '/transactions/booking/cancellations'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingLayoutCancellationsIndexRouteImport
+      parentRoute: typeof AuthenticatedTransactionsBookingLayoutRoute
+    }
     '/_authenticated/masters/payroll/_layout/shift/': {
       id: '/_authenticated/masters/payroll/_layout/shift/'
       path: '/shift'
@@ -2898,11 +2918,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTransactionsBookingLayoutTest_reportIdRouteImport
       parentRoute: typeof AuthenticatedTransactionsBookingLayoutRoute
     }
-    '/_authenticated/transactions/booking/_layout/refunds/$id': {
-      id: '/_authenticated/transactions/booking/_layout/refunds/$id'
-      path: '/refunds/$id'
-      fullPath: '/transactions/booking/refunds/$id'
-      preLoaderRoute: typeof AuthenticatedTransactionsBookingLayoutRefundsIdRouteImport
+    '/_authenticated/transactions/booking/_layout/cancellations/$id': {
+      id: '/_authenticated/transactions/booking/_layout/cancellations/$id'
+      path: '/cancellations/$id'
+      fullPath: '/transactions/booking/cancellations/$id'
+      preLoaderRoute: typeof AuthenticatedTransactionsBookingLayoutCancellationsIdRouteImport
       parentRoute: typeof AuthenticatedTransactionsBookingLayoutRoute
     }
     '/_authenticated/masters/payroll/_layout/employee/_layout': {
@@ -4073,9 +4093,10 @@ interface AuthenticatedTransactionsBookingLayoutRouteChildren {
   AuthenticatedTransactionsBookingLayoutCreateBookingRoute: typeof AuthenticatedTransactionsBookingLayoutCreateBookingRoute
   AuthenticatedTransactionsBookingLayoutViewRoute: typeof AuthenticatedTransactionsBookingLayoutViewRoute
   AuthenticatedTransactionsBookingLayoutIndexRoute: typeof AuthenticatedTransactionsBookingLayoutIndexRoute
-  AuthenticatedTransactionsBookingLayoutRefundsIdRoute: typeof AuthenticatedTransactionsBookingLayoutRefundsIdRoute
+  AuthenticatedTransactionsBookingLayoutCancellationsIdRoute: typeof AuthenticatedTransactionsBookingLayoutCancellationsIdRoute
   AuthenticatedTransactionsBookingLayoutTest_reportIdRoute: typeof AuthenticatedTransactionsBookingLayoutTest_reportIdRoute
   AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute: typeof AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute
+  AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute: typeof AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute
   AuthenticatedTransactionsBookingLayoutRefundsIndexRoute: typeof AuthenticatedTransactionsBookingLayoutRefundsIndexRoute
   AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute: typeof AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute
   AuthenticatedTransactionsBookingLayoutTest_reportIndexRoute: typeof AuthenticatedTransactionsBookingLayoutTest_reportIndexRoute
@@ -4091,12 +4112,14 @@ const AuthenticatedTransactionsBookingLayoutRouteChildren: AuthenticatedTransact
       AuthenticatedTransactionsBookingLayoutViewRoute,
     AuthenticatedTransactionsBookingLayoutIndexRoute:
       AuthenticatedTransactionsBookingLayoutIndexRoute,
-    AuthenticatedTransactionsBookingLayoutRefundsIdRoute:
-      AuthenticatedTransactionsBookingLayoutRefundsIdRoute,
+    AuthenticatedTransactionsBookingLayoutCancellationsIdRoute:
+      AuthenticatedTransactionsBookingLayoutCancellationsIdRoute,
     AuthenticatedTransactionsBookingLayoutTest_reportIdRoute:
       AuthenticatedTransactionsBookingLayoutTest_reportIdRoute,
     AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute:
       AuthenticatedTransactionsBookingLayoutTest_reportDetailRoute,
+    AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute:
+      AuthenticatedTransactionsBookingLayoutCancellationsIndexRoute,
     AuthenticatedTransactionsBookingLayoutRefundsIndexRoute:
       AuthenticatedTransactionsBookingLayoutRefundsIndexRoute,
     AuthenticatedTransactionsBookingLayoutTest_cancelledIndexRoute:

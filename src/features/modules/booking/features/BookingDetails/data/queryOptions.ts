@@ -1,8 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { queryOptions, useMutation, useQuery } from "@tanstack/react-query";
 import type { IBookingPaymentSchema, IJobOrderStoreSchema, ITestCancellationRequest, ITestCancelRequest } from "./schema";
-import { deleteRequestTest, refundRequestTest, storeBookingPaymentService, storeJobOrderService, testCancelDiscard, testCancelRequest, updateJobOrderService } from "./api";
+import { deleteRequestTest, getPaymentVoucherById, refundRequestTest, storeBookingPaymentService, storeJobOrderService, testCancelDiscard, testCancelRequest, updateJobOrderService } from "./api";
 import { showErrors } from "@/utils/dataClient";
 
+const PAYMENT_VOUCHER_KEY = "payment-voucher-key";
 
 export function useBookingPaymentMutation() {
     return useMutation({
@@ -80,5 +81,37 @@ export function useTestCancellation() {
             showErrors(error);
 
         },
+    })
+}
+
+
+
+
+export function useGetPaymentDetailVoucher(id: number) {
+    return useQuery({
+        queryKey: [PAYMENT_VOUCHER_KEY, id],
+        queryFn: () => getPaymentVoucherById(id),
+        staleTime: 0,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchInterval: 22000,
+        retry: 2,
+        enabled: id > 0
+    });
+}
+
+
+export function paymentDetailVoucher(id: number) {
+    return queryOptions({
+        queryKey: [PAYMENT_VOUCHER_KEY, id],
+        queryFn: () => getPaymentVoucherById(id),
+        staleTime: 0,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchInterval: 22000,
+        retry: 2,
+        enabled: id > 0
     })
 }

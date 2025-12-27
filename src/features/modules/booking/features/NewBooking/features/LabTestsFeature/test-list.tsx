@@ -120,12 +120,13 @@ const LabTestList = () => {
 
     return (
         <div className="my-5 min-h-[30vh] relative border-2 overflow-hidden border-gray-800 rounded">
-            <div className="grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px] px-3 border-b-1 font-semibold py-2 border-black">
+            <div className="grid grid-cols-[60px_1fr_150px_150px_110px__120px_90px] px-3 border-b-1 font-semibold py-2 border-black">
                 <div>Sl no.</div>
                 <div>Test Name</div>
                 <div>Test Date</div>
                 <div>Reporting Date</div>
-                <div>Discount(INR)</div>
+                {/* <div>Discount(INR)</div> */}
+                <div>Discounted(INR)</div>
                 <div className="text-right pr-2">Amount</div>
                 <div className="text-center">Action</div>
             </div>
@@ -133,7 +134,7 @@ const LabTestList = () => {
                 {
                     selectTestItemList.length > 0 ?
                         selectTestItemList.map((item, index) => (
-                            <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px]  items-center">
+                            <div key={index} className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_150px_150px_110px_120px_90px]  items-center">
                                 <div className="py-2 px-2">
                                     <h1>{++index}</h1>
                                 </div>
@@ -146,8 +147,11 @@ const LabTestList = () => {
                                 <div className="py-2">
                                     <input type="date" min={dateUtil.todayDateString()} onChange={(e) => handleReportDateChange(item.testId, e.target.value)} id="test-date" value={new Date(item.reportDate).toISOString().split("T")[0]} />
                                 </div>
+                                {/* <div className="py-2"> */}
+                                <input value={item.discountedValue} onChange={(e) => handleDiscountValueChange(e, item.testId)} className="border-[1px] sr-only px-2 border-black w-16" />
+                                {/* </div> */}
                                 <div className="py-2">
-                                    <input value={item.discountedValue} onChange={(e) => handleDiscountValueChange(e, item.testId)} className="border-[1px] px-2 border-black w-16" />
+                                    {item.discountedValue > 0 ? (Number(item.amount) - item.discountedValue).toFixed(2) : 0.00}
                                 </div>
                                 <div className="border-x-2 border-black">
                                     <h1 className="text-right py-2 pr-2">{Number(item.amount).toFixed(2)}</h1>
@@ -169,8 +173,8 @@ const LabTestList = () => {
                 }
             </div>
 
-            <div className="border-t-2 sticky bottom-0 left-0 w-full py-2 bg-gray-100 z-50 border-black grid grid-cols-[60px_1fr_150px_150px_130px_120px_90px]">
-                <div className="text-right col-span-5">
+            <div className="border-t-2 sticky bottom-0 left-0 w-full py-2 bg-gray-100 z-50 border-black grid grid-cols-[60px_1fr_150px_150px_110px_120px_90px]">
+                <div className="text-right col-span-4">
                     <h3>Amount</h3>
                 </div>
                 <div className="border-l-2 pl-2 pr-2 border-x-2` text-right px-4 ">

@@ -19,7 +19,7 @@ class DateUtil {
     }
 
 
-    formatToReportDate(selectedDate: Date | undefined): string {
+    formatToReportDate(selectedDate: Date | string | undefined): string {
         const date = selectedDate == undefined ? new Date() : new Date(selectedDate);
         const formattedDate = new Date(date).toLocaleDateString('en-CA', {
             year: 'numeric',

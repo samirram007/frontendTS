@@ -1,11 +1,12 @@
 import type { IResponseInterface } from "../../../data/schema";
 import type { IStockCategory, IStockItem, IVoucherPatient } from "../../NewBooking/data/schema";
-
+import { z } from "zod";
 
 
 
 export interface IBookingPaymentSchema {
     voucherId: number,
+    voucherTypeId: number,
     amount: number,
     patientId: number,
     paymentMode: number,
@@ -86,6 +87,7 @@ export interface ITestCancellationResponse {
 export interface ITestCancellationRequest {
     id?: number,
     stockJournalEntryId?: number,
+    voucherId?: number,
     remarks: string | null,
     status: TestCancellationStatus
 }
@@ -103,3 +105,61 @@ export interface ITestCancellation {
 export interface ITestCancellationResponse extends IResponseInterface {
     data: ITestCancellation
 }
+
+
+export const voucherEntrySchema = z.object({
+    id: z.number(),
+    voucherId: z.number(),
+    entryOrder: z.number(),
+    accountLedgerId: z.number(),
+    debit: z.string(),
+    credit: z.string(),
+    remarks: z.string().nullable()
+});
+
+export type IVoucherEntry = z.infer<typeof voucherEntrySchema>;
+export const voucherEntryListSchema = z.array(voucherEntrySchema);
+export type IVoucherEntryList = z.infer<typeof voucherEntryListSchema>;
+
+export const voucherReferSchema = z.object({
+    id: z.number(),
+    voucherNo: z.string(),
+    voucherDate: z.string(),
+    voucherTypeId: z.number(),
+    remarks: z.string().nullable(),
+    status: z.string(),
+    fiscalYearId: z.number(),
+    companyId: z.number(),
+    stockJournalId: z.number(),
+    voucherEntries: voucherEntryListSchema.nullable(),
+});
+
+export const voucherReferenceSchema = z.object({
+    id: z.number(),
+    voucherId: z.number(),
+    voucherReferenceId: z.number(),
+    voucher: voucherReferSchema.nullable()
+});
+
+export const voucherSchema = z.object({
+    id: z.number(),
+    voucherNo: z.string(),
+    voucherDate: z.string(),
+    voucherTypeId: z.number(),
+    remarks: z.string().nullable(),
+    status: z.string(),
+    fiscalYearId: z.number(),
+    companyId: z.number(),
+    stockJournalId: z.number(),
+    voucherEntries: voucherEntryListSchema.nullable(),
+    voucherReferences: z.array(voucherReferenceSchema).nullable()
+});
+
+
+
+export type IVoucherSchema = z.infer<typeof voucherSchema>;
+
+export interface IPaymentVoucherResponse extends IResponseInterface {
+    data: IVoucherSchema
+}
+

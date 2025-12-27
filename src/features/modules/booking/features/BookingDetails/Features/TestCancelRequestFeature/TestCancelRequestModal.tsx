@@ -14,14 +14,14 @@ import { TestCancellationStatus } from "../../data/schema";
 
 
 
-export function TestCancelRequestModal({ action, bookingId, itemId }: { action: string | React.ReactNode, bookingId: number, itemId: number }) {
+export function TestCancelRequestModal({ action, voucherId, bookingId, itemId }: { action: string | React.ReactNode, voucherId: number, bookingId: number, itemId: number }) {
     const [open, setOpen] = useState<boolean>(false);
     const remarkRef = useRef<HTMLTextAreaElement | null>(null);
     const { mutate, isPending } = useTestCancellation();
     const queryClient = useQueryClient();
 
     const onTestCancellation = () => {
-        mutate({ stockJournalEntryId: itemId, remarks: remarkRef.current?.value ?? null, status: TestCancellationStatus.CancellationRequest }, {
+        mutate({ stockJournalEntryId: itemId, voucherId: voucherId, remarks: remarkRef.current?.value ?? null, status: TestCancellationStatus.CancellationRequest }, {
             onSuccess: (data) => {
                 toast.success(data.data.message);
 

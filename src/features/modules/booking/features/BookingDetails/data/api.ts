@@ -1,7 +1,7 @@
 import axiosClient from "@/utils/axios-client";
 import type { AxiosResponse } from "axios";
 import type { IBookingResponse } from "../../NewBooking/data/schema";
-import type { IBookingPaymentSchema, IJobOrderResponse, IJobOrderStoreSchema, ITestCancellationRequest, ITestCancellationResponse, ITestCancelRequest } from "./schema";
+import type { IBookingPaymentSchema, IJobOrderResponse, IJobOrderStoreSchema, IPaymentVoucherResponse, ITestCancellationRequest, ITestCancellationResponse, ITestCancelRequest } from "./schema";
 import axios from "axios";
 
 
@@ -93,6 +93,23 @@ export async function testCancelDiscard(payload: ITestCancellationRequest) {
     } catch (error: unknown) {
         if (axios.isAxiosError(error) && error.response) {
             throw error.response.data;
+        }
+        throw new Error("Network Error");
+    }
+}
+
+
+
+
+// process payment api calls
+
+export async function getPaymentVoucherById(id: number): Promise<AxiosResponse<IPaymentVoucherResponse>> {
+    try {
+        const response = await axiosClient.get(`/test_booking/get-payment-detail/${id}`);
+        return response;
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error) && error.response) {
+            throw error.response.data
         }
         throw new Error("Network Error");
     }

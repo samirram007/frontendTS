@@ -1,4 +1,4 @@
-import type { RefundDetailRequest } from "../../Refunds/data/schema";
+import type { ITestCancellation } from "../data/schema";
 
 
 
@@ -6,7 +6,7 @@ import type { RefundDetailRequest } from "../../Refunds/data/schema";
 
 
 
-const RefundHeader = ({ data }: { data?: RefundDetailRequest }) => {
+const RefundHeader = ({ data }: { data?: ITestCancellation }) => {
 
     return (
         <>

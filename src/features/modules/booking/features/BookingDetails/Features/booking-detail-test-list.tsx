@@ -153,50 +153,31 @@ const ConfirmTheTest = ({ item, voucherId }: { item: IStockJournalEntry, voucher
     )
 }
 
-export const ItemStatusCard = ({ item, index, isMinimumPaymentDone, bookingId }: { item: IStockJournalEntry, index: any, isMinimumPaymentDone: boolean, bookingId: number }) => {
+export const ItemStatusCard = ({ voucherId, item, index, isMinimumPaymentDone, bookingId }: { voucherId: number, item: IStockJournalEntry, index: any, isMinimumPaymentDone: boolean, bookingId: number }) => {
     return (
         item.isCancelled ?
-            <del className="text-sm px-3 border-b-[0px] grid grid-cols-[60px_1fr_200px_200px_150px_200px]  items-center">
-                <div className="py-2 px-2">
+            <div className="text-sm px-3  border-b-[0px] grid grid-cols-[60px_1fr_200px_200px_150px_200px]  items-center">
+                <div className="py-2 px-2 line-through decoration-red-500">
                     <h1>{++index}</h1>
                 </div>
-                <div className="py-2">
+                <div className="py-2 line-through decoration-red-500">
                     <h1>{item.stockItem.name}</h1>
                 </div>
-                <div className="py-2">
-                    <input disabled type="date" id="test-date" defaultValue={formatDateForInput(item.testDate)} />
+                <div className="py-2 line-through decoration-red-500">
+                    {formatDateForInput(item.testDate)}
                 </div>
-                <div className="py-2">
-                    <input disabled type="date" id="test-date" defaultValue={formatDateForInput(item.reportDate)} />
+                <div className="py-2 line-through decoration-red-500">
+                    {formatDateForInput(item.reportDate)}
                 </div>
-                <div className="border-x-2 h-full border-black">
+                <div className="border-x-2 h-full border-black line-through decoration-red-500">
                     <h1 className="text-right py-2 pr-2">{Number(item.stockItem.standardSellingPrice).toFixed(2)}</h1>
                 </div>
                 <div className=" px-2 flex justify-start items-center gap-1 py-2">
-                    {/* {isMinimumPaymentDone ? <CheckForProcess item={item} voucherId={bookingId} /> : <PaymentRuleAlertModal
-                        action={
-                            <Badge className="text-black font-medium shadow-md shadow-gray-300 bg-white" variant="outline">waiting for payment</Badge>
-                        }
-                    />} */}
-                    <Button className="border-2 hover:bg-none border-gray-50 !bg-red-600 text-black">
+                    <Badge variant={'outline'} className="border-2 no-underline w-full border-red-600">
                         Cancelled
-                    </Button>
-                    {/* {
-                        item.isCancelled ?
-                            <Button className="border-2 hover:bg-none border-red-600 !bg-gray-50 text-black">
-                                Cancellation Requested
-                            </Button>
-                            :
-                            item.jobOrder?.status !== "deliver_to_desk" || !isMinimumPaymentDone ?
-                                <CancelRequestModal itemId={item.id} bookingId={bookingId} />
-                                :
-                                <TestCancelRequestModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
-
-                    } */}
-
-
+                    </Badge>
                 </div>
-            </del>
+            </div>
             :
             item.isRequested ?
                 <div className="text-sm px-3 text-gray-500 border-b-[0px] grid grid-cols-[60px_1fr_200px_200px_150px_200px]  items-center">
@@ -276,7 +257,7 @@ export const ItemStatusCard = ({ item, index, isMinimumPaymentDone, bookingId }:
 
                                 <CancelRequestModal itemId={item.id} bookingId={bookingId} /> :
                                 item.jobOrder == null ?
-                                    <TestCancelRequestModal itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
+                                    <TestCancelRequestModal voucherId={voucherId} itemId={item.id} bookingId={bookingId} action={<X className="cursor-pointer text-red-500 hover:text-red-600 transition" size={20} />} />
                                     :
                                     <></>
 
@@ -312,7 +293,7 @@ export function BookingDetailList({ booking }: { booking?: IBooking }) {
                 {
                     booking ?
                         booking.stockJournal.stockJournalEntries.map((item, index) => (
-                            <ItemStatusCard key={index} index={index} isMinimumPaymentDone={isMinimumPaymentDone} item={item} bookingId={booking.id} />
+                            <ItemStatusCard voucherId={booking.id} key={index} index={index} isMinimumPaymentDone={isMinimumPaymentDone} item={item} bookingId={booking.id} />
                         ))
                         :
                         <div>

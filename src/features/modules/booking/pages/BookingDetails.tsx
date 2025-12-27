@@ -12,37 +12,31 @@ interface BookingDetailProps {
 }
 
 
-const BookingDetails:React.FC<BookingDetailProps> = ({data}) => {
-    
+const BookingDetails: React.FC<BookingDetailProps> = ({ data }) => {
 
-    const {calculateTotalAmount} = usePayment();
-    const {setBookingDetail,isFullPaymentDone} = useBookingDetail();
 
-    useEffect(()=>{
-        if(data){
+    const { calculateTotalAmount } = usePayment();
+    const { setBookingDetail } = useBookingDetail();
+
+    useEffect(() => {
+        if (data) {
             setBookingDetail(data);
             calculateTotalAmount(data);
         }
-    },[data]);
+    }, [data]);
 
-    return(
+    return (
         <div className="py-4 px-4">
             <BookingDetailsFeature data={data} />
             <div className="mt-3 flex justify-end w-full">
                 <div className="min-w-lg">
-                    {
-                        !isFullPaymentDone &&
-                        (
-                            <PayAndBookModal
-                                button={
-                                    <Button  className={`text-center cursor-pointer !py-3 text-lg w-full`}>
-                                        Accept Payment
-                                    </Button>
-                                }
-                            />
-                        )
-                    }
-                    
+                    <PayAndBookModal
+                        button={
+                            <Button className={`text-center cursor-pointer !py-3 text-lg w-full`}>
+                                Process Payment
+                            </Button>
+                        }
+                    />
                 </div>
             </div>
         </div>

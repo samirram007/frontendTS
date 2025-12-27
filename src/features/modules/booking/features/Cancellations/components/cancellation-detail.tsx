@@ -1,21 +1,23 @@
-import type { RefundDetailRequest, RefundRequest } from "../data/schema";
 import { Button } from "@/components/ui/button";
 import { useTestCancellation } from "../../BookingDetails/data/queryOptions";
 import { TestCancellationStatus } from "../../BookingDetails/data/schema";
 import { toast } from "sonner";
 import { showErrors } from "@/utils/dataClient";
-import RefundHeader from "./refund-header";
+import RefundHeader from "./cancellation-header";
 import { useQueryClient } from "@tanstack/react-query";
 import { RefundAlertModal } from "../../BookingDetails/Features/RefundFeature/RefundAlertModal";
+import type { ITestCancellation } from "../data/schema";
+import LongText from "@/components/long-text";
+import { dateUtil } from "@/utils/dateUtils";
 
 
 interface IRefundDetailInterface {
-    data?: RefundDetailRequest
+    data?: ITestCancellation
 }
 
 
 
-const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
+const CancellationDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
 
 
     const { mutate } = useTestCancellation();
@@ -37,7 +39,7 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
         })
     }
 
-    const totalAmount = data?.tests.reduce((acc, currentValue) => acc + Number(currentValue.amount), 0);
+    // const totalAmount = data?.tests? data?.tests.reduce((acc, currentValue) => acc + Number(currentValue.amount), 0);
 
     console.log(data, "Data of redunf");
     return (
@@ -55,7 +57,7 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
                 </div>
                 <div className={`overflow-auto h-[30vh] ${data == null ? 'flex justify-center items-center' : ''}`}>
                     {
-                        data && data?.tests?.map((item: RefundRequest, index: any) => (
+                        data && data?.tests?.map((item, index) => (
                             <div key={index} className="text-sm px-3 border-b-[0px] grid grid-cols-[60px_1fr__200px_200px_200px_150px_200px]  items-center">
                                 <div className="py-2 px-2">
                                     <h1>{++index}</h1>
@@ -64,13 +66,13 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
                                     <h1>{item.testName}</h1>
                                 </div>
                                 <div className="py-2">
-                                    <h1>{item.remarks}</h1>
+                                    <LongText>{item.remarks}</LongText>
                                 </div>
                                 <div className="py-2">
-                                    {item.testDate}
+                                    {dateUtil.formatToReportDate(item.testDate)}
                                 </div>
                                 <div className="py-2">
-                                    {item.reportDate}
+                                    {dateUtil.formatToReportDate(item.reportDate)}
                                 </div>
                                 <div className="border-x-2 h-full border-black">
                                     <h1 className="text-right py-2 pr-2">{Number(item.amount).toFixed(2)}</h1>
@@ -83,16 +85,16 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
                                             </Button>
                                             :
                                             item.status == "approved" ?
-                                                <Button className="!bg-white text-black border-2 border-green-500 w-full">
-                                                    {item.status.toUpperCase()}
+                                                <Button className="bg-blue-500 text-white border-2 border-gray-50 w-full">
+                                                    Approved
                                                 </Button>
                                                 :
                                                 (
-                                                    <div className="flex">
-                                                        <Button onClick={() => onHandleDiscard(item.id, item.remarks)} className="bg-red-500 hover:bg-red-700 border-2">Discard</Button>
+                                                    <div className="flex gap-3">
+                                                        <Button variant={'outline'} onClick={() => onHandleDiscard(item.id, item.remarks)} className="border-red-500 cursor-pointer text-black !border-l-8 border-2">Discard</Button>
                                                         <RefundAlertModal
                                                             action={
-                                                                <Button className="!bg-green-500 text-white border-2 border-gray-50">
+                                                                <Button variant={'outline'} className="border-green-500 cursor-pointer border-2 !border-l-8">
                                                                     Approve
                                                                 </Button>
                                                             }
@@ -116,7 +118,7 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
                     </div>
                     <div className="border-l-2 pl-2 pr-2 border-x-2` text-right px-4 ">
                     </div>
-                    <div className="col-span-0">{totalAmount}</div>
+                    <div className="col-span-0">{0}</div>
                 </div>
 
             </div>
@@ -124,4 +126,4 @@ const RefundDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
     )
 }
 
-export default RefundDetail;
+export default CancellationDetail;

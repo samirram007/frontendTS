@@ -1,6 +1,5 @@
-import { ErrorToast } from "@/features/modules/booking/utils/error-response";
+// import { ErrorToast } from "@/features/modules/booking/utils/error-response";
 import { usePayment } from "../../../contexts/payment-context";
-import { useBookingDetail } from "../context/booking-detail-context";
 
 const formatDate = (dateString: string | Date) => {
     const date = new Date(dateString);
@@ -10,31 +9,16 @@ const formatDate = (dateString: string | Date) => {
     return `${day}-${monthShort}-${year}`;
 };
 
-export default function BookingAmountDetails() {
+interface IBookingAmountDetailInterface {
+    refundAmount: number;
+    totalAmount: number,
+    remainingAmount: number,
+    amountPaid: number
+}
 
-    const { dueAmount, receivingAmount, setReceivingAmount, payementReceipt, netAmount } = usePayment();
-    const { isFullPaymentDone } = useBookingDetail();
+export default function BookingAmountDetails({ totalAmount, refundAmount, amountPaid, remainingAmount }: IBookingAmountDetailInterface) {
+    const { payementReceipt } = usePayment();
 
-
-    const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setReceivingAmount(e.target.value);
-        if (e.target.value == '') {
-            setReceivingAmount('');
-            return;
-        }
-
-        if (dueAmount == 0 && Number(e.target.value) > netAmount) {
-            setReceivingAmount('');
-            ErrorToast.launchErrorToast("Amount limit exceded");
-            return;
-        }
-
-        if (dueAmount != 0 && Number(e.target.value) > dueAmount) {
-            setReceivingAmount('');
-            ErrorToast.launchErrorToast("Amount limit exceded");
-            return;
-        }
-    }
 
 
 
@@ -43,11 +27,32 @@ export default function BookingAmountDetails() {
             <div className="mb-3 px-2">
                 <h1 className="font-bold underline underline-offset-2">Payment Details</h1>
             </div>
-            <div className="px-6 grid grid-rows-1 gap-4">
-                <div className="grid grid-cols-[200px_1fr]">
+            <div className="px-6 mb-4">
+                <div className="grid grid-cols-[200px_1fr] items-center mb-1">
                     <div className="font-medium">Net Payable</div>
-                    <div className="text-right text-base font-bold">{netAmount > 0 ? netAmount.toFixed(2) : '0.00'}</div>
+                    <div className="text-right text-base font-bold">{totalAmount > 0 ? totalAmount.toFixed(2) : '0.00'}</div>
                 </div>
+                <div className="grid grid-cols-[200px_1fr]">
+                    <div className="font-medium">Amount paid till date</div>
+                    <div className="text-right text-base font-bold">{amountPaid > 0 ? amountPaid.toFixed(2) : '0.00'}</div>
+                </div>
+                <div className="grid grid-cols-[200px_1fr] items-center justify-center">
+                    <div className="font-medium">Outstanding amount</div>
+                    <div className="text-right text-base font-bold">{remainingAmount > 0 ? remainingAmount.toFixed(2) : '0.00'}</div>
+                </div>
+                {
+                    refundAmount != 0 &&
+                    (
+                        <div className="grid grid-cols-[200px_1fr] items-center justify-center">
+                            <div className="font-medium">Refund amount</div>
+                            <div className="text-right text-base font-bold">{refundAmount > 0 ? refundAmount.toFixed(2) : '0.00'}</div>
+                        </div>
+                    )
+                }
+            </div>
+
+            <div className="px-6 grid grid-rows-1 gap-3">
+
                 {
                     payementReceipt.length > 0
                     &&
@@ -62,7 +67,7 @@ export default function BookingAmountDetails() {
                         }
                     </div>
                 }
-                {
+                {/* {
                     dueAmount != 0
                     &&
                     <div className="grid grid-cols-[200px_1fr]">
@@ -80,7 +85,7 @@ export default function BookingAmountDetails() {
                             </div>
                         </div>
                     )
-                }
+                } */}
             </div>
         </>
 

@@ -3,16 +3,19 @@ import { useState } from "react";
 import { DatePicker } from "../../components/DatePicker";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useGetCancelledBookingListQuery } from "./data/queryOptions";
+import { CancellationListTable } from "./components/refund-table/page";
 
 
 
 
 
-const RefundDashboard = () => {
+const CancellationDashboard = () => {
     const [startDate, setStartDate] = useState<Date>(new Date());
     const [endDate, setEndDate] = useState<Date>(new Date());
     const [_selectedStartDate, setSelectedStartDate] = useState<string | null>(null);
     const [_selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
+    const { data, isSuccess, isFetching } = useGetCancelledBookingListQuery();
 
     const handleFilterBooking = () => {
         const start = startDate.toLocaleDateString('en-CA');
@@ -45,9 +48,10 @@ const RefundDashboard = () => {
                 </div>
             </div>
             <Separator className="border-1 border-gray-500" />
+            <CancellationListTable isFetching={isFetching} data={data ? data.data.data : []} isSuccess={isSuccess} />
         </>
     )
 }
 
 
-export default RefundDashboard;
+export default CancellationDashboard;

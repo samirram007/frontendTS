@@ -36,6 +36,18 @@ const topNav = [
         disabled: true,
     },
     {
+        title: 'Cancellations',
+        href: '/transactions/booking/cancellations',
+        isActive: false,
+        disabled: true,
+    },
+    {
+        title: 'Refunds',
+        href: '/transactions/booking/refunds',
+        isActive: false,
+        disabled: true,
+    },
+    {
         title: 'Test Reporting',
         href: '/transactions/booking/test_report',
         isActive: false,
