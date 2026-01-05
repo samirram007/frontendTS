@@ -6,6 +6,8 @@ import type { ReceiptNoteForm } from "../../../data/schema";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { StockJournalEntryForm, StockJournalGodownEntryForm } from "@/features/modules/voucher/data-schema/voucher-schema";
+import { Route as ReceiptNoteRoute } from "@/routes/_protected/transactions/vouchers/_layout/receipt_note/_layout/$id";
+
 
 type SaveDialogProps = {
     mainForm: UseFormReturn<ReceiptNoteForm>
@@ -13,18 +15,25 @@ type SaveDialogProps = {
     setSaving: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
-
+const UpdateDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
+    console.log("HELLO SAVING")
     const { mutate: createReceiptNote, isPending } = useReceiptNoteMutation();
-
+    const { id } = ReceiptNoteRoute.useParams();
     const [errors, setErrors] = useState<string[]>([]);
     const [checking, setChecking] = useState(true);
     const [valid, setValid] = useState(false);  // for success animation
     const handleSaving = () => {
+        console.log('Form submitted', mainForm.getValues(), id);
 
+        if (mainForm.getValues('isEdit') && id) {
+            createReceiptNote({ ...mainForm.getValues(), id: Number(id) });
+            return;
+        }
+        else {
+            // Create new receipt note
             createReceiptNote(mainForm.getValues());
-
-
+            return;
+        }
 
     }
 
@@ -168,4 +177,4 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
 
     </div>
 }
-export default SaveDialog;
+export default UpdateDialog;

@@ -1,8 +1,14 @@
 import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
+import { useEffect } from 'react';
+import axiosClient from '@/utils/axios-client';
 
 export default function SignIn() {
+  useEffect(() => {
+    clean_logout();
+    clearAllCookies();
+  }, []);
   return (
     <AuthLayout>
       <Card className='p-6'>
@@ -34,4 +40,20 @@ export default function SignIn() {
       </Card>
     </AuthLayout>
   )
+}
+export function clean_logout() {
+  axiosClient.post('/auth/clean_logout').catch((error) => {
+    console.error('Error during logout:', error);
+  });
+
+  localStorage.removeItem('auth_token');
+  localStorage.removeItem('user_data');
+}
+export function clearAllCookies() {
+  document.cookie.split(';').forEach(cookie => {
+    const eqPos = cookie.indexOf('=');
+    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    document.cookie =
+      name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+  });
 }

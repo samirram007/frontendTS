@@ -39,7 +39,7 @@ import { Route as ProtectedMastersStatutoryLayoutRouteImport } from './routes/_p
 import { Route as ProtectedMastersPayrollLayoutRouteImport } from './routes/_protected/masters/payroll/_layout'
 import { Route as ProtectedMastersPartyLayoutRouteImport } from './routes/_protected/masters/party/_layout'
 import { Route as ProtectedMastersOrganizationLayoutRouteImport } from './routes/_protected/masters/organization/_layout'
-import { Route as ProtectedMastersMiscellaneousVehicleRouteImport } from './routes/_protected/masters/miscellaneous/vehicle'
+import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles'
 import { Route as ProtectedMastersMiscellaneousDelivery_routesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_routes'
 import { Route as ProtectedMastersMiscellaneousDelivery_placesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_places'
 import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_protected/masters/inventory/_layout'
@@ -575,10 +575,10 @@ const ProtectedMastersOrganizationLayoutRoute =
     id: '/_layout',
     getParentRoute: () => ProtectedMastersOrganizationRoute,
   } as any)
-const ProtectedMastersMiscellaneousVehicleRoute =
-  ProtectedMastersMiscellaneousVehicleRouteImport.update({
-    id: '/masters/miscellaneous/vehicle',
-    path: '/masters/miscellaneous/vehicle',
+const ProtectedMastersMiscellaneousDelivery_vehiclesRoute =
+  ProtectedMastersMiscellaneousDelivery_vehiclesRouteImport.update({
+    id: '/masters/miscellaneous/delivery_vehicles',
+    path: '/masters/miscellaneous/delivery_vehicles',
     getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersMiscellaneousDelivery_routesRoute =
@@ -1514,7 +1514,7 @@ export interface FileRoutesByFullPath {
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
+  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1683,7 +1683,7 @@ export interface FileRoutesByTo {
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
+  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1832,7 +1832,7 @@ export interface FileRoutesById {
   '/_protected/masters/inventory/_layout': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/_protected/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/_protected/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
+  '/_protected/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
   '/_protected/masters/organization': typeof ProtectedMastersOrganizationRouteWithChildren
   '/_protected/masters/organization/_layout': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/_protected/masters/party': typeof ProtectedMastersPartyRouteWithChildren
@@ -2034,7 +2034,7 @@ export interface FileRouteTypes {
     | '/masters/inventory'
     | '/masters/miscellaneous/delivery_places'
     | '/masters/miscellaneous/delivery_routes'
-    | '/masters/miscellaneous/vehicle'
+    | '/masters/miscellaneous/delivery_vehicles'
     | '/masters/organization'
     | '/masters/party'
     | '/masters/payroll'
@@ -2203,7 +2203,7 @@ export interface FileRouteTypes {
     | '/masters/inventory'
     | '/masters/miscellaneous/delivery_places'
     | '/masters/miscellaneous/delivery_routes'
-    | '/masters/miscellaneous/vehicle'
+    | '/masters/miscellaneous/delivery_vehicles'
     | '/masters/organization'
     | '/masters/party'
     | '/masters/payroll'
@@ -2351,7 +2351,7 @@ export interface FileRouteTypes {
     | '/_protected/masters/inventory/_layout'
     | '/_protected/masters/miscellaneous/delivery_places'
     | '/_protected/masters/miscellaneous/delivery_routes'
-    | '/_protected/masters/miscellaneous/vehicle'
+    | '/_protected/masters/miscellaneous/delivery_vehicles'
     | '/_protected/masters/organization'
     | '/_protected/masters/organization/_layout'
     | '/_protected/masters/party'
@@ -2896,11 +2896,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutRouteImport
       parentRoute: typeof ProtectedMastersOrganizationRoute
     }
-    '/_protected/masters/miscellaneous/vehicle': {
-      id: '/_protected/masters/miscellaneous/vehicle'
-      path: '/masters/miscellaneous/vehicle'
-      fullPath: '/masters/miscellaneous/vehicle'
-      preLoaderRoute: typeof ProtectedMastersMiscellaneousVehicleRouteImport
+    '/_protected/masters/miscellaneous/delivery_vehicles': {
+      id: '/_protected/masters/miscellaneous/delivery_vehicles'
+      path: '/masters/miscellaneous/delivery_vehicles'
+      fullPath: '/masters/miscellaneous/delivery_vehicles'
+      preLoaderRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/miscellaneous/delivery_routes': {
@@ -5278,7 +5278,7 @@ interface ProtectedRouteChildren {
   ProtectedMastersInventoryRoute: typeof ProtectedMastersInventoryRouteWithChildren
   ProtectedMastersMiscellaneousDelivery_placesRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   ProtectedMastersMiscellaneousDelivery_routesRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  ProtectedMastersMiscellaneousVehicleRoute: typeof ProtectedMastersMiscellaneousVehicleRoute
+  ProtectedMastersMiscellaneousDelivery_vehiclesRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
   ProtectedMastersOrganizationRoute: typeof ProtectedMastersOrganizationRouteWithChildren
   ProtectedMastersPartyRoute: typeof ProtectedMastersPartyRouteWithChildren
   ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
@@ -5309,8 +5309,8 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
     ProtectedMastersMiscellaneousDelivery_placesRoute,
   ProtectedMastersMiscellaneousDelivery_routesRoute:
     ProtectedMastersMiscellaneousDelivery_routesRoute,
-  ProtectedMastersMiscellaneousVehicleRoute:
-    ProtectedMastersMiscellaneousVehicleRoute,
+  ProtectedMastersMiscellaneousDelivery_vehiclesRoute:
+    ProtectedMastersMiscellaneousDelivery_vehiclesRoute,
   ProtectedMastersOrganizationRoute:
     ProtectedMastersOrganizationRouteWithChildren,
   ProtectedMastersPartyRoute: ProtectedMastersPartyRouteWithChildren,

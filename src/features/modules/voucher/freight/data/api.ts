@@ -11,6 +11,7 @@ async function fetchFreightService(type: string) {
 
 async function storeFreightService(data: any) {
     // Placeholder for actual implementation
+    console.log("storeFreightService", data)
     Promise.resolve();
 
     return await postData(`${API_PATH}`, data);
@@ -18,12 +19,14 @@ async function storeFreightService(data: any) {
 
 async function updateFreightService(data: any) {
     // Placeholder for actual implementation
+    console.log("updateFreightService", data)
     Promise.resolve();
     return await putData(`${API_PATH}/${data.id}`, data);
 }
 
 async function storeVoucherDispatchDetailService(data: any) {
     // Placeholder for actual implementation
+    console.log("storeVoucherDispatchDetailService", data)
     Promise.resolve();
     return await postData(`/voucher_dispatch_details`, data);
 }

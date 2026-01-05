@@ -6,7 +6,7 @@ const queryKey = "Freight"
 export const freightQueryOptions = (key: string = 'freight') => {
 
     return queryOptions({
-        queryKey: [queryKey, key],
+        queryKey: [queryKey],
         queryFn: () => fetchFreightService(key),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
@@ -25,6 +25,7 @@ export const useFreightMutation = () => {
             return await storeFreightService(data)
         },
         onSuccess: () => {
+            console.log("Hello Key", queryKey)
             queryClient.invalidateQueries({ queryKey: [queryKey] })
         },
         onError: (error) => {
@@ -36,6 +37,7 @@ export const useVoucherDispatchDetailMutation = () => {
     const queryClient = useQueryClient()
     return useMutation({
         mutationFn: async (data: VoucherDispatchDetailForm & { id?: number }) => {
+            console.log("data", data,)
             if (data.id) {
                 // Update if id exists
                 return await updateVoucherDispatchDetailService(data)
@@ -44,11 +46,11 @@ export const useVoucherDispatchDetailMutation = () => {
             return await storeVoucherDispatchDetailService(data)
         },
         onSuccess: () => {
-            console.log("are you here?")
-            queryClient.invalidateQueries({ queryKey: [queryKey, 'delivery_note'] })
+            // console.log("are you here?")
+            queryClient.invalidateQueries({ queryKey: [queryKey] })
         },
         onError: (error) => {
-            console.error("Transporter mutation failed:", error)
+            console.error("Dispatch mutation failed:", error)
         },
     })
 }

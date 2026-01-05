@@ -68,14 +68,7 @@ export const columns: ColumnDef<DeliveryPlace>[] = [
       <div className='w-fit text-nowrap'>{row.getValue('code')}</div>
     ),
   },
-  {
-    accessorKey: 'placeType',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Place Type' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('placeType')}</div>,
-    enableSorting: false,
-  },
+
   {
     accessorKey: 'status',
     header: ({ column }) => (

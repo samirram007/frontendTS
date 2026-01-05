@@ -6,8 +6,14 @@ export async function fetchDeliveryPlaceService() {
     return await getData(API_PATH)
 }
 export async function storeDeliveryPlaceService(payload: any) {
-    return await postData(API_PATH, payload)
+    const response = await postData(API_PATH, payload)
+    return response.data
 }
 export async function updateDeliveryPlaceService(payload: any) {
-    return await putData(`${API_PATH}/${payload.id}`, payload)
+    const response = await putData(`${API_PATH}/${payload.id}`, payload)
+    return response.data
+}
+export async function deleteDeliveryPlaceService(payload: any) {
+    const response = await putData(`${API_PATH}/${payload.id}`, payload)
+    return response.data
 }

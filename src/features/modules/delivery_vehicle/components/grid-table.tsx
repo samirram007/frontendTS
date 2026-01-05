@@ -7,8 +7,8 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
-import { DataTableToolbar } from '@/features/global/components/data-table/data-table-toolbar'
-import type { Vehicle } from '@/features/modules/delivery_place/data/schema'
+
+import type { DeliveryVehicle } from '@/features/modules/delivery_vehicle/data/schema'
 import {
   flexRender,
   getCoreRowModel,
@@ -25,6 +25,7 @@ import {
   type VisibilityState,
 } from '@tanstack/react-table'
 import { useState } from 'react'
+import { DataTableToolbar } from './data-table-toolbar'
 
 
 declare module '@tanstack/react-table' {
@@ -35,8 +36,8 @@ declare module '@tanstack/react-table' {
 }
 
 interface DataTableProps {
-  columns: ColumnDef<Vehicle>[]
-  data: Vehicle[]
+  columns: ColumnDef<DeliveryVehicle>[]
+  data: DeliveryVehicle[]
 }
 
 export function GridTable({ columns, data }: DataTableProps) {

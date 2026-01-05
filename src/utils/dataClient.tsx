@@ -11,7 +11,7 @@ export const getData = async (apiPath: string) => {
             return response.data;
         })
         .catch((err) => {
-            console.log("Error in getData:", err);
+            //  console.log("Error in getData:", err);
             errorHandler(err)
             throw err
         })
@@ -74,7 +74,11 @@ const errorHandler = (error: any) => {
                 // You can show individual field errors using toast or another method
                 // console.log('error here...', error.response.data)
                 fieldErrors.forEach((errorMessage: any) => {
-                    console.log('res', errorMessage)
+                    // console.log('res', errorMessage)
+                    // if errorMessage contains "session expired", customize the message
+                    if (errorMessage.includes("Session expired")) {
+                        errorMessage = "Your session has expired. Please log in again.";
+                    }
                     toast.error(`${errorMessage}`);
                 });
             });

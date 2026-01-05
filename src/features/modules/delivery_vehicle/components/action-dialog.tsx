@@ -13,7 +13,7 @@ import {
   Form
 } from '@/components/ui/form'
 
-import type { Vehicle, VehicleForm } from '@/features/modules/delivery_place/data/schema'
+
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -21,14 +21,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import FormInputField from '@/components/form-input-field'
 import { useForm } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
-import { storeVehicleService, updateVehicleService } from '../data/api'
-import { formSchema } from '../data/schema'
 
-import PlaceTypeDropdown from './place_type-dropdown'
+import { formSchema, type DeliveryVehicle, type DeliveryVehicleForm } from '../data/schema'
+
+import { storeDeliveryVehicleService, updateDeliveryVehicleService } from '../data/api'
+import { TransporterSelector } from './transporter-select'
+import { Label } from '@/components/ui/label';
+import { VehicleTypeSelector } from './vehicle-type-selector'
 
 
 interface Props {
-  currentRow?: Vehicle
+  currentRow?: DeliveryVehicle
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -37,45 +40,52 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
   const queryClient = useQueryClient()
   const mutateVehicle = useMutation({
-    mutationFn: async (data: VehicleForm) => {
+    mutationFn: async (data: DeliveryVehicleForm) => {
       // Here you would typically make an API call to save the account nature
       // For example:
       console.log('Saving account nature:', data);
       if (isEdit && currentRow) {
-        return await updateVehicleService({ ...data, id: currentRow.id })
+        return await updateDeliveryVehicleService({ ...data, id: currentRow.id })
       }
       else if (!isEdit) {
-        return await storeVehicleService(data);
+        return await storeDeliveryVehicleService(data);
       }
     },
-    onSuccess: (data) => {
-      console.log(data, 'Account Nature saved successfully!')
-      queryClient.invalidateQueries({ queryKey: ['vehicles'] })
+    onSuccess: () => {
+      //console.log(data, 'Account Nature saved successfully!')
+      queryClient.invalidateQueries({ queryKey: ['delivery_vehicles'] })
+      form.reset()
+      form.resetField('isEdit')
+      form.setFocus('vehicleNumber')
     },
   })
 
-  const form = useForm<VehicleForm>({
+  const form = useForm<DeliveryVehicleForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,
       }
       : {
-        name: '',
-        code: '',
-        placeType: 'destination',
+        transporterId: undefined,
+        vehicleType: undefined,
+        vehicleNumber: '',
+        driverName: '',
+        driverContact: '',
+        capacity: '',
+        description: '',
         status: 'active',
 
         isEdit,
       },
   })
-  //const vehicleStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
-  const moduleName = "Account Nature"
-  const onSubmit = (values: VehicleForm) => {
-    form.reset()
+  const moduleName = "Delivery Vehicle"
+  const onSubmit = (values: DeliveryVehicleForm) => {
+    console.log(values)
     showSubmittedData(values)
     mutateVehicle.mutate(values)
+    form.reset()
     onOpenChange(false)
   }
 
@@ -98,17 +108,27 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
+        <div className='-mr-4 h-105 w-full overflow-y-auto    py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
               onSubmit={form.handleSubmit(onSubmit)}
               className='space-y-4 p-0.5'
             >
-              <FormInputField type='text' form={form} name='name' label='Name' />
-              <FormInputField type='text' form={form} name='code' label='Code' />
-              <PlaceTypeDropdown form={form} gapClass='grid grid-cols-[110px_1fr]' />
-              <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
+              <div className="grid grid-cols-[150px_1fr] gap-2">
+                <Label className="mb-2 block text-sm font-medium">Transporter</Label>
+                <TransporterSelector form={form} />
+              </div>
+
+              <div className="grid grid-cols-[150px_1fr] gap-2">
+                <Label className="mb-2 block text-sm font-medium">Vehicle Type</Label>
+                <VehicleTypeSelector form={form} />
+              </div>
+
+              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='vehicleNumber' label='Vehicle Number' />
+              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverName' label='Driver Name' />
+              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverContact' label='Driver Contact' />
+
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },
                 { label: 'Inactive', value: 'inactive' },
@@ -118,7 +138,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form'>
+          <Button type='submit' form='user-form' disabled={mutateVehicle.isPending}>
             Save changes
           </Button>
         </DialogFooter>

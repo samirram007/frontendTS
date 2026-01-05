@@ -5,12 +5,13 @@ import { cn } from '@/lib/utils'
 import type { ColumnDef } from '@tanstack/react-table'
 
 
-import { vehicleStatusTypes } from '@/features/modules/delivery_place/data/data'
-import type { Vehicle } from '@/features/modules/delivery_place/data/schema'
+
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
 import RowActions from './row-actions'
+import type { DeliveryVehicle } from '../data/schema'
+import { deliveryVehicleStatusTypes } from '../data/data'
 
-export const columns: ColumnDef<Vehicle>[] = [
+export const columns: ColumnDef<DeliveryVehicle>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -42,12 +43,13 @@ export const columns: ColumnDef<Vehicle>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'name',
+    id: 'transporterId',
+    accessorKey: 'transporterId',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Name' />
+      <DataTableColumnHeader column={column} title='Transporter' />
     ),
     cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('name')}</LongText>
+      <LongText className='max-w-36'>{row.original.transporter?.name}</LongText>
     ),
     meta: {
       className: cn(
@@ -60,20 +62,20 @@ export const columns: ColumnDef<Vehicle>[] = [
   },
 
   {
-    accessorKey: 'code',
+    accessorKey: 'vehicleNumber',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Code' />
+      <DataTableColumnHeader column={column} title='Vehicle Number' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('code')}</div>
+      <div className='w-fit text-nowrap'>{row.getValue('vehicleNumber')}</div>
     ),
   },
   {
-    accessorKey: 'placeType',
+    accessorKey: 'vehicleType',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Place Type' />
+      <DataTableColumnHeader column={column} title='Vehicle Type' />
     ),
-    cell: ({ row }) => <div>{row.getValue('placeType')}</div>,
+    cell: ({ row }) => <div>{row.getValue('vehicleType')}</div>,
     enableSorting: false,
   },
   {
@@ -83,7 +85,7 @@ export const columns: ColumnDef<Vehicle>[] = [
     ),
     cell: ({ row }) => {
       const { status } = row.original
-      const badgeColor = vehicleStatusTypes.get(status!)?.toString()
+      const badgeColor = deliveryVehicleStatusTypes.get(status!)?.toString()
       return (
         <div className='flex space-x-2'>
           <Badge variant='outline' className={cn('capitalize', badgeColor)}>

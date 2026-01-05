@@ -10,19 +10,22 @@ import {
   IconError404,
   IconHelp,
   IconLayoutDashboard,
+  IconLocationBolt,
   IconLock,
   IconLockAccess,
   IconMessages,
+  IconMichelinStar,
   IconNotification,
   IconPackages,
   IconPalette,
+  IconRoute2,
   IconServerOff,
   IconSettings,
-  IconTool,
+  IconTool, 
   IconUserCog,
   IconUserOff
 } from '@tabler/icons-react'
-import { AudioWaveform, Building2, Command, FileMinusCornerIcon, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
+import { AudioWaveform, Building2, Command, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
@@ -362,18 +365,24 @@ export const sidebarData: SidebarData = {
         {
           title: 'Miscellaneous',
           visible: true,
-          icon: FileMinusCornerIcon,
+          icon: IconMichelinStar,
           items: [
             {
               title: 'Delivery Places',
               url: '/masters/miscellaneous/delivery_places',
-              icon: IconUserCog,
+              icon: IconLocationBolt,
             },
             {
               title: 'Delivery Routes',
               url: '/masters/miscellaneous/delivery_routes',
-              icon: IconUserCog,
+              icon: IconRoute2,
             },
+            // {
+            //   title: 'Delivery Vehicles',
+            //   visible: false,
+            //   url: '/masters/miscellaneous/delivery_vehicles',
+            //   icon: IconTruck,
+            // },
 
           ]
         },

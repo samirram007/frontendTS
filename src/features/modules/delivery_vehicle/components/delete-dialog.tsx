@@ -4,7 +4,7 @@ import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import type { Vehicle } from '@/features/modules/delivery_place/data/schema'
+import type { DeliveryVehicle } from '@/features/modules/delivery_vehicle/data/schema'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
 import { useState } from 'react'
@@ -13,7 +13,7 @@ import { useState } from 'react'
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow: Vehicle
+  currentRow: DeliveryVehicle
 }
 
 export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
@@ -45,11 +45,11 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
         <div className='space-y-4'>
           <p className='mb-2'>
             Are you sure you want to delete{' '}
-            <span className='font-bold'>{currentRow.name}</span>?
+            <span className='font-bold'>{currentRow.vehicleNumber}</span>?
             <br />
             This action will permanently remove the user with the status of{' '}
             <span className='font-bold'>
-              {currentRow.isActive ? 'Active' : 'Inactive'}
+              {currentRow.status}
             </span>{' '}
             from the system. This cannot be undone.
           </p>

@@ -1,18 +1,19 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
 import type { Row } from "@tanstack/react-table"
-import { useVehicle } from "../contexts/vehicle-context"
-import type { Vehicle } from "../data/schema"
+
+import type { DeliveryVehicle } from "../data/schema"
+import { useDeliveryVehicle } from "../contexts/delivery_vehicle-context"
 
 
 interface DataTableRowActionsProps {
-    row: Row<Vehicle>
+    row: Row<DeliveryVehicle>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const { setOpen, setCurrentRow } = useVehicle()
+    const { setOpen, setCurrentRow } = useDeliveryVehicle()
     const { row } = props
     return (
-        <DataTableRowActions<Vehicle>
+        <DataTableRowActions<DeliveryVehicle>
             row={row}
             onEdit={(data) => {
                 setCurrentRow(data)

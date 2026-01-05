@@ -1,10 +1,10 @@
-import { useVehicle } from '@/features/modules/delivery_place/contexts/delivery_place-context'
+import { useDeliveryVehicle } from '@/features/modules/delivery_vehicle/contexts/delivery_vehicle-context'
 import { ActionDialog } from './action-dialog'
 import { DeleteDialog } from './delete-dialog'
 
 
 export function Dialogs() {
-  const { open, setOpen, currentRow, setCurrentRow, keyName } = useVehicle()
+  const { open, setOpen, currentRow, setCurrentRow, keyName } = useDeliveryVehicle()
   return (
     <>
       <ActionDialog

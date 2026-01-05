@@ -7,24 +7,37 @@ import { Label } from "@/components/ui/label"
 
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { Loader } from "lucide-react"
-import { Suspense, useEffect, useRef, useState } from "react"
-import { useForm, type Resolver, type UseFormReturn } from "react-hook-form"
+import { Suspense, useEffect, useMemo, useRef, useState } from "react"
+import { useForm, useWatch, type Resolver, type UseFormReturn } from "react-hook-form"
 import { toast } from "sonner"
 
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useVoucherDispatchDetailMutation } from "../../data/queryOptions"
 import { voucherDispatchDetailSchema, type VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
+import { useFreight } from "../../contexts/freight-context"
+import { TransporterSelector } from "./transporter-selector"
+import type { StockUnit, StockUnitList } from "@/features/modules/stock_unit/data/schema"
+import { useSuspenseQuery } from "@tanstack/react-query"
+import { stockUnitQueryOptions } from "@/features/modules/stock_unit/data/queryOptions"
+import { lowerCase } from "lodash"
+import type { FreightForm } from "../../data/schema"
+
+import { DeliveryVehicleSelector } from "./delivery-vehicle-selector"
 
 
 
 type VoucherDispatchDetailFormProps = {
+    form: UseFormReturn<FreightForm>
     voucherDispatchDefaultValues: VoucherDispatchDetailForm
 }
 
-const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
+const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
+    const { form, voucherDispatchDefaultValues } = props
     const { mutate: saveVoucherDispatchDetail, isPending } = useVoucherDispatchDetailMutation();
     const dispatchRef = useRef<HTMLDivElement>(null);
+    const { config } = useFreight();
+
 
 
 
@@ -33,18 +46,64 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
     const gapClass02 = 'grid grid-cols-[200px_200px] gap-4';
     const gapClass03 = 'grid grid-cols-[50px_100px] gap-4';
     const gapClass = 'grid grid-cols-[200px_1fr] gap-4';
-    const voucherDisplayDispatchForm = useForm<VoucherDispatchDetailForm>({
-        resolver: zodResolver(voucherDispatchDetailSchema) as Resolver<VoucherDispatchDetailForm>,
-        defaultValues: prpos.voucherDispatchDefaultValues || undefined,
+
+    const [
+        deliveryNoteId,
+        freightBasis,
+        weight,
+        weightUnitId,
+        rate,
+        rateUnitId,
+        source,
+        dispatchSourceId
+    ] = useWatch({
+        control: form.control,
+        name: [
+            'deliveryNoteId',
+            'freightBasis',
+            'weight',
+            'weightUnitId',
+            'rate',
+            'rateUnitId',
+            'source',
+            'dispatchSourceId'
+        ],
     });
 
+
+    //console.log("voucherDispatchDefaultValues", voucherDispatchDefaultValues)
+    const defaultValues = {
+        ...voucherDispatchDefaultValues,
+        voucherId: deliveryNoteId as number,
+        freightBasis: freightBasis,
+        weight: weight,
+        weightUnitId: weightUnitId,
+        rate: rate,
+        rateUnitId: rateUnitId,
+        source: source,
+        dispatchSourceId: dispatchSourceId,
+        transporter: '',
+    }
+    const voucherDispatchForm = useForm<VoucherDispatchDetailForm>({
+        resolver: zodResolver(voucherDispatchDetailSchema) as Resolver<VoucherDispatchDetailForm>, 
+        defaultValues: defaultValues,
+        mode: 'onBlur',
+
+    });
+
+    // console.log("##", weight, voucherDispatchForm.watch())
+
     const handleOnClick = () => {
-        const isValid = voucherDisplayDispatchForm.trigger();
+        const isValid = voucherDispatchForm.trigger();
         if (!isValid) {
             toast.error("Please fill all required fields")
             return;
         }
-        const dispatchData = voucherDisplayDispatchForm.getValues();
+        const dispatchData = voucherDispatchForm.getValues();
+        if (!dispatchData.totalFare || dispatchData.totalFare <= 0) {
+            toast.error("Total fare must be greater than zero")
+            return;
+        }
 
 
         // Convert null values to undefined to match mutation type requirements
@@ -66,7 +125,32 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
             },
         });
     }
+    useEffect(() => {
+        const current = voucherDispatchForm.getValues();
 
+        if (
+            current.voucherId === deliveryNoteId &&
+            current.weight === weight &&
+            current.rate === rate &&
+            current.weightUnitId === weightUnitId &&
+            current.rateUnitId === rateUnitId &&
+            current.freightBasis === freightBasis &&
+            current.source === source
+        ) {
+            return;
+        }
+
+        voucherDispatchForm.reset({
+            ...voucherDispatchDefaultValues,
+            voucherId: deliveryNoteId as number,
+            freightBasis,
+            weight,
+            weightUnitId,
+            rate,
+            rateUnitId,
+            source,
+        });
+    }, [deliveryNoteId, freightBasis, weight, weightUnitId, rate, rateUnitId, source]);
 
     return (
         <Suspense fallback={<Loader className="animate-spin" />}>
@@ -85,57 +169,67 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
                             <DialogTitle>Dispatch Details </DialogTitle>
                         </VisuallyHidden>
                         <DialogDescription>
-                            Click Save changes to save your dispatch details.{voucherDisplayDispatchForm.watch('id')}
+                            Click Save changes to save your dispatch details. {weight}
                         </DialogDescription>
                     </DialogHeader>
                     <div ref={dispatchRef} className='-mr-4 h-full w-full  overflow-y-auto py-1 pr-4'>
-                        <Form {...voucherDisplayDispatchForm}>
-                            <div className="flex flex-col justify-between gap-12 ">
+                        <Form {...voucherDispatchForm}>
+                            <div className="flex flex-col justify-between gap-4 ">
+                                {config.map((item) => item.key === 'order_details' && item.value && (
 
-                                <div className="space-y-2">
-                                    <div className="text-center underline">Order Details</div>
-                                    <div className="grid grid-cols-2 gap-12">
-                                        <div>
-                                            <FormInputField type='text' gapClass={gapClass01} form={voucherDisplayDispatchForm} name='orderNumber' label='Order Number' />
 
+                                    <div key={item.key} className="space-y-2 border-b-2 pb-2">
+                                        <div className="text-center underline">Order Details</div>
+                                        <div className="grid grid-cols-2 gap-12">
+                                            <div>
+                                                <FormInputField type='text' gapClass={gapClass01} form={voucherDispatchForm} name='orderNumber' label='Order Number' />
+
+                                            </div>
+                                            <div className="space-y-2">
+                                                <FormInputField type='text' gapClass={gapClass} form={voucherDispatchForm} name='paymentTerms' label='Mode/terms of Payment' />
+                                                <FormInputField type='text' gapClass={gapClass} form={voucherDispatchForm} name='otherReferences' label='Other references' />
+                                                <FormInputField type='text' gapClass={gapClass} form={voucherDispatchForm} name='termsOfDelivery' label='Terms of Delivery' />
+                                            </div>
                                         </div>
-                                        <div className="space-y-2">
-                                            <FormInputField type='text' gapClass={gapClass} form={voucherDisplayDispatchForm} name='paymentTerms' label='Mode/terms of Payment' />
-                                            <FormInputField type='text' gapClass={gapClass} form={voucherDisplayDispatchForm} name='otherReferences' label='Other references' />
-                                            <FormInputField type='text' gapClass={gapClass} form={voucherDisplayDispatchForm} name='termsOfDelivery' label='Terms of Delivery' />
-                                        </div>
+
                                     </div>
+                                ))}
 
-                                </div>
-                                <div className="space-y-2 border-t-2 pt-1">
+                                {config.map((item) => item.key === 'receipt_details' && item.value && (
+
+                                    <div key={item.key} className="space-y-2  pt-1">
                                     <div className="text-center underline">Receipt Details</div>
                                     <div className="grid grid-cols-1 gap-12">
                                         <div className="space-y-2">
-                                            <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='receiptDocNo' label='Receipt Doc No' />
-                                            <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='dispatchedThrough' label='Dispatched Through' />
-                                            <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='destination' label='Destination' />
-                                            <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='carrierName' label='Carrier Name' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='receiptDocNo' label='Receipt Doc No' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='dispatchedThrough' label='Dispatched Through' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='source' label='Source' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='destination' label='Destination' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='carrierName' label='Carrier Name' />
                                             <div className="grid grid-cols-[1fr_1fr] gap-12">
 
-                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='billOfLadingNo' label='Bill of Lading/LR-RR No' />
+                                                    <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='billOfLadingNo' label='Bill of Lading/LR-RR No' />
 
                                                 <div className={gapClass03}>
 
                                                     <Label>Date:</Label>
                                                     <DateBox tabIndex={1}
-                                                        form={voucherDisplayDispatchForm} name="billOfLadingDate" />
+                                                            form={voucherDispatchForm} name="billOfLadingDate" />
                                                 </div>
                                             </div>
-                                            <FormInputField type='text' gapClass={gapClass02} form={voucherDisplayDispatchForm} name='motorVehicleNo' label='Motor Vehicle No' />
+                                                <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='motorVehicleNo' label='Motor Vehicle No' />
 
                                         </div>
 
                                     </div>
 
-
-
-
                                 </div>
+                                ))}
+
+                                {config.map((item) => item.key === 'receipt_details' && item.value && (
+                                    <FreightCalculator key={item.key}
+                                        form={voucherDispatchForm} />
+                                ))}
 
                             </div>
 
@@ -145,7 +239,7 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
                     </div>
                     <DialogFooter>
                         <Button onClick={handleOnClick} className="h-8 focus:bg-black focus:text-white"
-                            disabled={isPending}>
+                            disabled={isPending || voucherDispatchForm.watch('totalFare') === null || voucherDispatchForm.watch('totalFare') === undefined || voucherDispatchForm.watch('totalFare')! <= 0}>
                             {isPending && <Loader className="mr-2 h-4 w-4 animate-spin" />}
                             Save changes
                         </Button>
@@ -158,7 +252,308 @@ const VoucherDispatchDetail = (prpos: VoucherDispatchDetailFormProps) => {
 
 export default VoucherDispatchDetail
 
+type FreightCalculatorProps = {
+    form: UseFormReturn<VoucherDispatchDetailForm>
+}
 
+const FreightCalculator = ({ form }: FreightCalculatorProps) => {
+    const { data: stockUnits } = useSuspenseQuery(stockUnitQueryOptions());
+
+
+    const freightBasis = form.watch('freightBasis');
+    const rate = form.watch('rate');
+    const weight = form.watch('weight');
+    useEffect(() => {
+        if (!freightBasis) {
+            form.setValue('freightBasis', 'weight');
+        }
+        if (Number(rate) > 0 && Number(weight) > 0) {
+            const totalFare = Number(form.watch('rate')) * Number(form.watch('weight'));
+            form.setValue('totalFare', totalFare)
+            form.setValue('freightCharges', totalFare)
+        }
+    }, [freightBasis, rate, weight]);
+    return (
+        <div className="space-y-2 border-t-2 pt-2">
+            <div className="text-center underline">Freight Calculator based on {freightBasis!}  </div>
+            <div className="text-sm italic text-gray-500">Freight calculator details can be added from the main Freight Details section.</div>
+            <div className="w-full grid grid-cols-[1fr_2fr] gap-4 mb-2">
+
+                <div className="text-left ">
+                    <div>Transporter</div>
+                    <div className=""><TransporterSelector name='carrierName' form={form} /></div>
+                </div>
+                <div className="text-left">
+                    <div>Vehicle Number</div>
+                    <div className=""><DeliveryVehicleSelector name='motorVehicleNo' form={form} /></div>
+                </div>
+
+            </div>
+
+
+            <div className="w-full grid grid-cols-3 gap-4 ">
+
+                <div className="">
+                    <div className="text-left ">Weight(Mt)</div>
+
+                    <WeightBox form={form} name='weight'
+                        stockUnits={stockUnits?.data || []}
+                        freightBasis={freightBasis!}
+                    /></div>
+                <div className="">
+                    <div className="text-left ">Rate(Per Mt)</div>
+
+                    <RateBox form={form} name='rate'
+                        stockUnits={stockUnits?.data || []}
+                        freightBasis={freightBasis!}
+                    /></div>
+                <div>
+                    <div className="text-left ">Total Fare(INR)</div>
+
+                    <Input type="text" value={
+                        ((Number(form.watch('totalFare')) || 0)).toFixed(2)} readOnly className="value-box flex justify-end items-end" />
+
+                </div>
+
+            </div>
+
+
+        </div >
+    )
+}
+type Boxprops = {
+    form: UseFormReturn<VoucherDispatchDetailForm>
+    name: keyof VoucherDispatchDetailForm
+    stockUnits: StockUnitList
+    freightBasis?: string
+
+}
+const WeightBox = (props: Boxprops) => {
+    const { form, name, stockUnits, freightBasis } = props;
+    const weightUnits = useMemo(() => {
+        return stockUnits.filter((su) => su.unitType === 'simple' && lowerCase(su.quantityType!) === freightBasis);
+    }, [stockUnits]);
+    const weightUnitId = form.watch('weightUnitId');
+    const weightUnit = useMemo(() => {
+        return weightUnits.find((su) => su.id === weightUnitId);
+    }, [weightUnitId, weightUnits]);
+
+    const [boxValue, setBoxValue] = useState<string>("")
+
+
+
+    // const baseUnit = useMemo(() => {
+    //     return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
+    // }, [conversionFactors]);
+    const baseUnitCode = weightUnit?.code || '';
+    const basenoOfDecimalPlaces = weightUnit?.noOfDecimalPlaces;
+
+
+    const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
+        // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
+        const match = input.trim().match(/^(\d+\.?\d*)\s*([a-zA-Z]+)?$/);
+
+        if (!match) {
+            return { quantity: 0, unit: null };
+        }
+        const [, quantityStr, unitStr] = match;
+
+        const quantity = Number.parseFloat(quantityStr);
+
+        return { quantity, unit: unitStr ?? weightUnit?.code };
+
+    };
+
+
+
+
+    const handleBlurOrEnter = () => {
+        const { quantity } = parseQuantityWithUnit(boxValue);
+
+        if (quantity === 0) {
+            form.setValue(name, 0, { shouldValidate: true });
+            setBoxValue("");
+            return;
+        }
+
+        let finalQuantity = quantity;
+
+        // If a unit string was provided, find the matching conversion factor
+
+
+        form.setValue(name, finalQuantity, { shouldValidate: true });
+        setBoxValue(`${finalQuantity.toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`);
+
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleBlurOrEnter();
+        }
+    };
+    const handleBlur = () => {
+        handleBlurOrEnter();
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = e.target.value;
+        setBoxValue(rawValue);
+    };
+
+    const handleOnFocus = () => {
+        const value = Number(form.getValues(name))?.toFixed(basenoOfDecimalPlaces)
+        setBoxValue(Number(value) > 0 ? value?.toString() : '');
+    }
+
+
+    useEffect(() => {
+        const value = form.watch(name);
+
+
+        if (value) {
+            const boxValueStr = `${Number(value).toFixed(basenoOfDecimalPlaces)} ${baseUnitCode}`
+            setBoxValue(boxValueStr);
+        } else {
+            setBoxValue("");
+        }
+    }, [form.watch(name), baseUnitCode]);
+    return (
+        <>
+            <Input
+                type="text"
+
+                value={boxValue}
+                onFocus={handleOnFocus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                placeholder="e.g., 15 Mt"
+                className="value-box flex justify-end items-end"
+            />
+            <FormInputField type="hidden" form={form}
+                label=''
+                gapClass="grid-cols-[0_1fr] gap-0"
+                name={name} />
+
+
+
+        </>
+    )
+
+}
+const RateBox = (props: Boxprops) => {
+    const { form, name, stockUnits, freightBasis } = props;
+    console.log(freightBasis)
+    const rateUnits = useMemo(() => {
+        return stockUnits.filter((su) => su.unitType === 'simple' && lowerCase(su.quantityType!) === freightBasis!);
+    }, [stockUnits]);
+    const rateUnitId = form.watch('rateUnitId');
+    const rateUnit = useMemo(() => {
+        return rateUnits.find((su) => su.id === rateUnitId);
+    }, [rateUnitId, rateUnits]);
+
+    const [boxValue, setBoxValue] = useState<string>("")
+
+
+
+    // const baseUnit = useMemo(() => {
+    //     return conversionFactors?.find((cf: ConversionFactor) => (cf.tag === 'base' && cf.isBaseUnit))?.stockUnit || null;
+    // }, [conversionFactors]);
+    const baseUnitCode = rateUnit?.code || '';
+    const basenoOfDecimalPlaces = 2;
+
+
+    const parseQuantityWithUnit = (input: string): { quantity: number, unit: StockUnit | null } => {
+        // Extract number and unit parts (e.g., "15 m" -> ["15", "m"])
+        const match = input.trim().match(/^(\d+\.?\d*)\s*([a-zA-Z]+)?$/);
+
+        if (!match) {
+            return { quantity: 0, unit: null };
+        }
+        const [, quantityStr, unitStr] = match;
+
+        const quantity = Number.parseFloat(quantityStr);
+
+        return { quantity, unit: unitStr ?? rateUnit?.code };
+
+    };
+
+
+
+
+    const handleBlurOrEnter = () => {
+        const { quantity } = parseQuantityWithUnit(boxValue);
+
+        if (quantity === 0) {
+            form.setValue(name, 0, { shouldValidate: true });
+            setBoxValue("");
+            return;
+        }
+
+        let finalQuantity = quantity;
+
+        // If a unit string was provided, find the matching conversion factor
+
+
+        form.setValue(name, finalQuantity, { shouldValidate: true });
+        setBoxValue(`${finalQuantity.toFixed(basenoOfDecimalPlaces)}/${baseUnitCode}`);
+
+
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            handleBlurOrEnter();
+        }
+    };
+    const handleBlur = () => {
+        handleBlurOrEnter();
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = e.target.value;
+        setBoxValue(rawValue);
+    };
+
+    const handleOnFocus = () => {
+        const value = Number(form.getValues(name))?.toFixed(basenoOfDecimalPlaces)
+        setBoxValue(Number(value) > 0 ? value?.toString() : '');
+    }
+
+
+    useEffect(() => {
+        const value = form.watch(name);
+
+
+        if (value) {
+            const boxValueStr = `${Number(value).toFixed(basenoOfDecimalPlaces)}/${baseUnitCode}`
+            setBoxValue(boxValueStr);
+        } else {
+            setBoxValue("");
+        }
+    }, [form.watch(name), baseUnitCode]);
+    return (
+        <>
+            <Input
+                type="text"
+
+                value={boxValue}
+                onFocus={handleOnFocus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                placeholder="e.g., 400/Mt"
+                className="value-box flex justify-end items-end"
+            />
+            <FormInputField type="hidden" form={form}
+                label=''
+                gapClass="grid-cols-[0_1fr] gap-0"
+                name={name} />
+
+
+
+        </>
+    )
+
+}
 
 type DateBoxProps = {
     form: UseFormReturn<VoucherDispatchDetailForm>,
@@ -281,3 +676,5 @@ const DateBox = (props: DateBoxProps) => {
         </>
     )
 }
+
+

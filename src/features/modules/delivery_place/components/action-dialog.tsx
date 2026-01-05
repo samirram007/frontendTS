@@ -14,17 +14,16 @@ import {
 } from '@/components/ui/form'
 
 import type { DeliveryPlace, DeliveryPlaceForm } from '@/features/modules/delivery_place/data/schema'
-import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 import { storeDeliveryPlaceService, updateDeliveryPlaceService } from '../data/api'
 import { formSchema } from '../data/schema'
 
-import PlaceTypeDropdown from './place_type-dropdown'
+import { useEffect } from 'react'
 
 
 interface Props {
@@ -38,9 +37,6 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const queryClient = useQueryClient()
   const mutateDeliveryPlace = useMutation({
     mutationFn: async (data: DeliveryPlaceForm) => {
-      // Here you would typically make an API call to save the account nature
-      // For example:
-      console.log('Saving account nature:', data);
       if (isEdit && currentRow) {
         return await updateDeliveryPlaceService({ ...data, id: currentRow.id })
       }
@@ -48,9 +44,14 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         return await storeDeliveryPlaceService(data);
       }
     },
-    onSuccess: (data) => {
-      console.log(data, 'Account Nature saved successfully!')
+    onSuccess: () => {
+    //console.log('Delivery Place saved successfully!')
       queryClient.invalidateQueries({ queryKey: ['deliveryPlaces'] })
+      form.reset()
+      onOpenChange(false)
+    },
+    onError: () => {
+    // console.log('Error saving Delivery Place:', error)
     },
   })
 
@@ -70,17 +71,25 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
       },
   })
   //const deliveryPlaceStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
+  const name = useWatch({
+    control: form.control,
+    name: 'name',
+  })
 
-  const moduleName = "Account Nature"
+  const code = name?.toUpperCase().replace(/\s+/g, '_') || ''
+
+  const moduleName = "Delivery Place"
   const onSubmit = (values: DeliveryPlaceForm) => {
-    form.reset()
-    showSubmittedData(values)
+
     mutateDeliveryPlace.mutate(values)
-    onOpenChange(false)
+
   }
 
 
 
+  useEffect(() => {
+    form.setValue('code', code)
+  }, [code])
   return (
     <Dialog
       open={open}
@@ -98,7 +107,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
+        <div className='-mr-4 h-full w-full overflow-y-auto py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
@@ -107,7 +116,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             >
               <FormInputField type='text' form={form} name='name' label='Name' />
               <FormInputField type='text' form={form} name='code' label='Code' />
-              <PlaceTypeDropdown form={form} gapClass='grid grid-cols-[110px_1fr]' />
+              {/* <PlaceTypeDropdown form={form} gapClass='grid grid-cols-[110px_1fr]' /> */}
               <FormInputField type='textarea' form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },

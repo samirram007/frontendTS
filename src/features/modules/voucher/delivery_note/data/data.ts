@@ -29,7 +29,23 @@ export const voucherDispatchDefaultValues: VoucherDispatchDetailForm = {
     billOfLadingNo: null,
     billOfLadingDate: null,
     motorVehicleNo: null,
-
+    distance: null,
+    distanceUnitId: 2,
+    rate: null,
+    rateUnitId: 16,
+    totalFare: null,
+    quantity: null,
+    weight: null,
+    weightUnitId: 16,
+    volume: null,
+    volumeUnitId: 10,
+    freightBasis: 'weight',
+    loadingCharges: null,
+    unloadingCharges: null,
+    packingCharges: null,
+    insuranceCharges: null,
+    otherCharges: null,
+    freightCharges: null, 
 
 }
 

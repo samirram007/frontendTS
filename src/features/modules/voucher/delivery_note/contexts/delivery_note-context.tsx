@@ -1,10 +1,12 @@
-import { createContext, useContext, type KeyboardEvent } from "react"
+import React, { createContext, type KeyboardEvent } from "react"
 import type { UseFormReturn } from "react-hook-form"
 import type { DeliveryNoteForm } from "../data/schema"
 
 type DeliveryNoteContextType = UseFormReturn<DeliveryNoteForm> & {
     handleEnterAsTab: (e: KeyboardEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
+    config: { key: string, value: boolean }[]
 }
+
 
 const DeliveryNoteContext = createContext<DeliveryNoteContextType | null>(null)
 
@@ -31,10 +33,26 @@ export const DeliveryNoteProvider = ({ children }: {
     //     }
     // }
 
+    const config = [
+        { key: 'order_details', value: true },
+        { key: 'receipt_details', value: true },
+        { key: 'freight_details', value: false },
+    ]
+    const value = {
+        config
+    } as DeliveryNoteContextType
 
 
-    return <DeliveryNoteContext.Provider value={null}>{children}</DeliveryNoteContext.Provider>
+
+    return <DeliveryNoteContext.Provider value={value}>{children}</DeliveryNoteContext.Provider>
 }
 
-export const useDeliveryNoteForm = () => useContext(DeliveryNoteContext)
+export const useDeliveryNote = () => {
+    const deliveryNoteContext = React.useContext(DeliveryNoteContext)
 
+    if (!deliveryNoteContext) {
+        throw new Error('useDeliveryNote has to be used within <DeliveryNoteContext>')
+    }
+
+    return deliveryNoteContext
+}

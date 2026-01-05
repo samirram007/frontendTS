@@ -1,11 +1,9 @@
 import LongText from '@/components/long-text'
-import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 import type { ColumnDef } from '@tanstack/react-table'
 
 
-import { deliveryRouteStatusTypes } from '@/features/modules/delivery_route/data/data'
 import type { DeliveryRoute } from '@/features/modules/delivery_route/data/schema'
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
 import RowActions from './row-actions'
@@ -42,6 +40,24 @@ export const columns: ColumnDef<DeliveryRoute>[] = [
     enableHiding: false,
   },
   {
+    id: 'transporter',
+    accessorFn: (row) => row.transporter?.name,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transporter' />
+    ),
+    cell: ({ row }) => (
+      <LongText className='max-w-36'>{row.original.transporter?.name}</LongText>
+    ),
+    meta: {
+      className: cn(
+        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
+        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+        'sticky left-6 md:table-cell'
+      ),
+    },
+    enableHiding: false,
+  },
+  {
     id: 'sourcePlace',
     filterFn: 'includesString',
     accessorFn: (row) => row.sourcePlace?.name,
@@ -75,20 +91,13 @@ export const columns: ColumnDef<DeliveryRoute>[] = [
 
 
   {
-    accessorKey: 'distanceKm',
+    accessorKey: 'vehicleNo',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Distance (Km)' />
+      <DataTableColumnHeader column={column} title='Vehicle No' />
     ),
-    cell: ({ row }) => <div>{row.getValue('distanceKm') ? Number(row.getValue('distanceKm')).toFixed(0) : '-'}</div>,
+    cell: ({ row }) => <div>{row.getValue('vehicleNo')}</div>,
     enableSorting: false,
-  },
-  {
-    accessorKey: 'estimatedTimeInMinutes',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Estimated Time (Minutes)' />
-    ),
-    cell: ({ row }) => <div>{row.getValue('estimatedTimeInMinutes') ? Number(row.getValue('estimatedTimeInMinutes')).toFixed(0) : '-'}</div>,
-    enableSorting: false,
+
   },
   {
     accessorKey: 'rate',

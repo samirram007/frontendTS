@@ -1,8 +1,9 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
 import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
-import { useStockSummary } from "../contexts/stock_summary-context"
-import type { StockSummarySchema } from "../data/schema"
+import type { StockSummarySchema } from "../../stock_summary/data/schema"
+import { useStockSummary } from "../../stock_summary/contexts/stock_summary-context"
+
 
 
 interface DataTableRowActionsProps {

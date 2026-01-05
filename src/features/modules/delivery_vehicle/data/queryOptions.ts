@@ -1,27 +1,27 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchVehicleService, storeVehicleService, updateVehicleService, } from "./api"
-import type { VehicleForm } from "./schema"
+import { fetchDeliveryVehicleService, storeDeliveryVehicleService, updateDeliveryVehicleService, } from "./api"
+import type { DeliveryVehicleForm } from "./schema"
 //queryOptions.ts
-const Key = "vehicles"
-export const vehicleQueryOptions = (key: string = Key) => {
+const Key = "delivery_vehicles"
+export const deliveryVehicleQueryOptions = (key: string = Key) => {
     return queryOptions({
         queryKey: [key],
-        queryFn: fetchVehicleService,
+        queryFn: fetchDeliveryVehicleService,
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })
 }
-export function useVehicleMutation() {
+export function useDeliveryVehicleMutation() {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: VehicleForm & { id?: number }) => {
+        mutationFn: async (data: DeliveryVehicleForm & { id?: number }) => {
             if (data.id) {
                 // Update if id exists
-                return await updateVehicleService(data)
+                return await updateDeliveryVehicleService(data)
             }
             // Otherwise create
-            return await storeVehicleService(data)
+            return await storeDeliveryVehicleService(data)
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [Key] })

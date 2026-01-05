@@ -1,3 +1,4 @@
+import FreightProvider from '@/features/modules/voucher/freight/contexts/freight-context'
 import TransactionProvider from '@/features/transactions/context/transaction-context'
 import TransactionLayout from '@/features/transactions/layouts/transaction-layout'
 import { createFileRoute } from '@tanstack/react-router'
@@ -11,7 +12,9 @@ export const Route = createFileRoute(
 function RouteComponent() {
   return (
     <TransactionProvider>
-      <TransactionLayout />
+      <FreightProvider>
+        <TransactionLayout />
+      </FreightProvider>
     </TransactionProvider>
   )
 }
