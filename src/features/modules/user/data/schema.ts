@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 
 
-export const userSchema: z.ZodType<any> = z.object({
+export const userSchema = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
   email: z.string().nullish(),

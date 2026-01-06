@@ -390,7 +390,7 @@ export const sidebarData: SidebarData = {
     },
     {
       title: 'Administration',
-      visible: false,
+      visible: true,
       items: [
         {
           title: 'User',
@@ -399,8 +399,26 @@ export const sidebarData: SidebarData = {
           icon: IconUserCog,
         },
         {
+          title: 'Roles',
+          url: '/administration/role',
+          visible: true,
+          icon: IconUserCog,
+        },
+        {
+          title: 'Roles & Permissions',
+          url: '/administration/permission',
+          visible: true,
+          icon: IconUserCog,
+        },
+        {
           title: 'App Module  ',
           url: '/administration/app_module',
+          visible: true,
+          icon: IconUserCog,
+        },
+        {
+          title: 'App Features  ',
+          url: '/administration/app_module_feature',
           visible: true,
           icon: IconUserCog,
         },

@@ -1,5 +1,6 @@
 import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
 import { z } from 'zod';
+import { permissionListSchema } from '../../permission/data/schema';
 
 
 
@@ -17,6 +18,7 @@ export const roleSchema: z.ZodType<any> = z.object({
   name: z.string().min(1),
   code: z.string().min(1),
   status: ActiveInactiveStatusSchema,
+  permission: permissionListSchema.optional(),
 
 })
 export type Role = z.infer<typeof roleSchema>

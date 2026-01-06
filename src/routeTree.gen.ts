@@ -17,6 +17,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProtectedDashboardRouteImport } from './routes/_protected/dashboard'
 import { Route as ProtectedChartsRouteImport } from './routes/_protected/charts'
 import { Route as guestSignInRouteImport } from './routes/(guest)/sign-in'
+import { Route as guestRestrictRouteImport } from './routes/(guest)/restrict'
 import { Route as guestOtpRouteImport } from './routes/(guest)/otp'
 import { Route as ProtectedSettingsRouteRouteImport } from './routes/_protected/settings/route'
 import { Route as ProtectedTasksIndexRouteImport } from './routes/_protected/tasks/index'
@@ -380,6 +381,11 @@ const ProtectedChartsRoute = ProtectedChartsRouteImport.update({
 const guestSignInRoute = guestSignInRouteImport.update({
   id: '/(guest)/sign-in',
   path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const guestRestrictRoute = guestRestrictRouteImport.update({
+  id: '/(guest)/restrict',
+  path: '/restrict',
   getParentRoute: () => rootRouteImport,
 } as any)
 const guestOtpRoute = guestOtpRouteImport.update({
@@ -1487,6 +1493,7 @@ export interface FileRoutesByFullPath {
   '/frontend': typeof FrontendRoute
   '/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/otp': typeof guestOtpRoute
+  '/restrict': typeof guestRestrictRoute
   '/sign-in': typeof guestSignInRoute
   '/charts': typeof ProtectedChartsRoute
   '/dashboard': typeof ProtectedDashboardRoute
@@ -1656,6 +1663,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/frontend': typeof FrontendRoute
   '/otp': typeof guestOtpRoute
+  '/restrict': typeof guestRestrictRoute
   '/sign-in': typeof guestSignInRoute
   '/charts': typeof ProtectedChartsRoute
   '/dashboard': typeof ProtectedDashboardRoute
@@ -1801,6 +1809,7 @@ export interface FileRoutesById {
   '/frontend': typeof FrontendRoute
   '/_protected/settings': typeof ProtectedSettingsRouteRouteWithChildren
   '/(guest)/otp': typeof guestOtpRoute
+  '/(guest)/restrict': typeof guestRestrictRoute
   '/(guest)/sign-in': typeof guestSignInRoute
   '/_protected/charts': typeof ProtectedChartsRoute
   '/_protected/dashboard': typeof ProtectedDashboardRoute
@@ -2007,6 +2016,7 @@ export interface FileRouteTypes {
     | '/frontend'
     | '/settings'
     | '/otp'
+    | '/restrict'
     | '/sign-in'
     | '/charts'
     | '/dashboard'
@@ -2176,6 +2186,7 @@ export interface FileRouteTypes {
     | '/'
     | '/frontend'
     | '/otp'
+    | '/restrict'
     | '/sign-in'
     | '/charts'
     | '/dashboard'
@@ -2320,6 +2331,7 @@ export interface FileRouteTypes {
     | '/frontend'
     | '/_protected/settings'
     | '/(guest)/otp'
+    | '/(guest)/restrict'
     | '/(guest)/sign-in'
     | '/_protected/charts'
     | '/_protected/dashboard'
@@ -2525,6 +2537,7 @@ export interface RootRouteChildren {
   ProtectedRoute: typeof ProtectedRouteWithChildren
   FrontendRoute: typeof FrontendRoute
   guestOtpRoute: typeof guestOtpRoute
+  guestRestrictRoute: typeof guestRestrictRoute
   guestSignInRoute: typeof guestSignInRoute
   errors401LazyRoute: typeof errors401LazyRoute
   errors403LazyRoute: typeof errors403LazyRoute
@@ -2649,6 +2662,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof guestSignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(guest)/restrict': {
+      id: '/(guest)/restrict'
+      path: '/restrict'
+      fullPath: '/restrict'
+      preLoaderRoute: typeof guestRestrictRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(guest)/otp': {
@@ -5338,6 +5358,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProtectedRoute: ProtectedRouteWithChildren,
   FrontendRoute: FrontendRoute,
   guestOtpRoute: guestOtpRoute,
+  guestRestrictRoute: guestRestrictRoute,
   guestSignInRoute: guestSignInRoute,
   errors401LazyRoute: errors401LazyRoute,
   errors403LazyRoute: errors403LazyRoute,

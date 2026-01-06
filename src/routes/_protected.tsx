@@ -1,25 +1,24 @@
-import AdminLayout from '@/layouts/AdminLayout';
+
+import { FEATURES } from '@/data/featrures';
+import ProtectedLayout from '@/layouts/ProtectedLayout';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_protected')({
   beforeLoad: async ({ context }) => { 
     if (!context.auth?.isAuthenticated) {
-      throw redirect({ to: '/sign-in' });
-
-      //return <SignIn />
-      // throw new Error('Not authenticated')
+      throw redirect({ to: '/sign-in' }); 
+    }
+    if (!context.auth?.permissions.includes(FEATURES.AUTHENTICATION_SIGN_IN)) {
+      console.log("Redirecting from protected Route")
+      throw redirect({ to: '/restrict' });
     }
   },
-  // errorComponent: ({ error }) => {
-  //   console.log(error, "validation")
-  //   if (error.message === 'Not authenticated') {
-  //     return <SignIn />
-  //   }
 
-  //   throw error
-  // },
-  component: AdminLayout,
+  component: ProtectedLayout,
+  errorComponent: () => <div>Authenticated Error</div>,
   notFoundComponent: () => <div>Authenticated Not Found</div>,
 })
+
+
 
 

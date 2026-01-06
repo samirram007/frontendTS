@@ -5,19 +5,23 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { fetchUserProfileService, loginService, logoutService } from '../services/apis';
+import type { UserWithRole } from '../data/schema';
+import type { Permission, permissionSchema } from '@/features/modules/permission/data/schema';
+import type { Role } from '@/features/modules/role/data/schema';
 export type LoginProps = {
     email: string;
     password: string;
 }
 
 export interface AuthContextType {
-    user: User | null;
+    user: UserWithRole | null;
     userFiscalYear: UserFiscalYear | null;
     isLoading: boolean;
     isAuthenticated: boolean;
     login: (props: LoginProps) => Promise<void>;
     logout: () => Promise<void>;
     fetchProfile: () => Promise<void>;
+    permissions: string[];
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -25,8 +29,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const navigate = useNavigate();
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<UserWithRole | null>(null);
     const [userFiscalYear, setUserFiscalYear] = useState<UserFiscalYear | null>(null);
+    const [permissions, setpermissions] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true)
     const queryClient = useQueryClient();
     const fetchProfile = async () => {
@@ -38,9 +43,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             // console.log('Fetching profile...');
             const data = await fetchUserProfileService();
             flushSync(() => {
-
+                //console.log("userProfileData", data?.data)
                 setUser(data?.data);
                 setUserFiscalYear(data?.data?.userFiscalYear || null);
+                const perms: string[] = [];
+                // Extract permissions from roles
+                //must be unique permissions
+
+                data?.data?.roles?.forEach((role: Role) => {
+                    role.permissions?.forEach((permission: Permission) => {
+                        // console.log(permission, "permissions in auth context")
+                        if (permission.isAllowed && !perms.includes(permission.appModuleFeature?.code || '')) {
+                            perms.push(permission.appModuleFeature?.code || '');
+                        }
+                    });
+                });
+
+                // data?.data?.roles?.forEach((role: Role) => {
+                //     role.permission?.forEach((permission: Permission) => {
+                //         if (permission.isAllowed) {
+                //             perms.push(permission.appModuleFeature?.code || '');
+                //         }
+                //     });
+                // });
+                setpermissions(perms);
             })
             // console.log('Profile fetched successfully:', data?.data);
 
@@ -112,7 +138,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, userFiscalYear, isAuthenticated: !!user, login, logout, fetchProfile }}>
+            value={{ user, isLoading, userFiscalYear, isAuthenticated: !!user, login, logout, fetchProfile, permissions }}>
             {children}
         </AuthContext.Provider>
     )
