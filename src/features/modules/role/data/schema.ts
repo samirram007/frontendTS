@@ -1,9 +1,6 @@
-import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
-import { z } from 'zod';
-import { permissionListSchema } from '../../permission/data/schema';
-
-
-
+import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status'
+import { z } from 'zod'
+import { permissionListSchema } from '../../permission/data/schema'
 
 // export const RolePermissionSchema: z.ZodType<any> = z.object({
 //   id: z.number().int().positive(),
@@ -18,27 +15,25 @@ export const roleSchema: z.ZodType<any> = z.object({
   name: z.string().min(1),
   code: z.string().min(1),
   status: ActiveInactiveStatusSchema,
-  permission: permissionListSchema.optional(),
-
+  permission: z.lazy(() => permissionListSchema).optional(),
 })
+
+export const userRoleSchema = z.object({
+  userId: z.number().int().positive(),
+  roleId: z.number().int().positive(),
+})
+
+export type UserRole = z.infer<typeof userRoleSchema>
+
 export type Role = z.infer<typeof roleSchema>
 export const roleListSchema = z.array(roleSchema)
 export type RoleList = z.infer<typeof roleListSchema>
 
-
-
-export const formSchema = z
-  .object({
-    name: z
-      .string()
-      .min(1, { message: 'Name is required.' }),
-    code: z
-      .string()
-      .min(1, { message: 'Role is required.' }),
-    status: z
-      .string()
-      .min(1, { message: 'Status is required.' }),
-    isEdit: z.boolean(),
-  })
+export const formSchema = z.object({
+  name: z.string().min(1, { message: 'Name is required.' }),
+  code: z.string().min(1, { message: 'Role is required.' }),
+  status: z.string().min(1, { message: 'Status is required.' }),
+  isEdit: z.boolean(),
+})
 
 export type RoleForm = z.infer<typeof formSchema>
