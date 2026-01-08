@@ -68,7 +68,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
       }
       : {
         transporterId: undefined,
-        vehicleType: undefined,
+        vehicleType: 'truck',
         vehicleNumber: '',
         driverName: '',
         driverContact: '',
@@ -108,7 +108,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <div className='-mr-4 h-105 w-full overflow-y-auto    py-1 pr-4'>
+        <div className='-mr-4 h-full w-full overflow-y-auto    py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
@@ -126,8 +126,8 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
               </div>
 
               <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='vehicleNumber' label='Vehicle Number' />
-              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverName' label='Driver Name' />
-              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverContact' label='Driver Contact' />
+              {/* <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverName' label='Driver Name' />
+              <FormInputField type='text' gapClass='grid-cols-[150px_1fr] gap-2' form={form} name='driverContact' label='Driver Contact' /> */}
 
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
                 { label: 'Active', value: 'active' },

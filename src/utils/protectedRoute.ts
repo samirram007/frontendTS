@@ -1,6 +1,7 @@
 import { redirect } from '@tanstack/react-router';
 import { useAuth } from '../features/auth/contexts/AuthContext'; // or use session storage
 import axiosClient from './axios-client';
+import { toast } from 'sonner';
 
 export async function protectedLoader() {
     const { isAuthenticated } = useAuth();
@@ -17,6 +18,7 @@ export function clean_logout() {
     axiosClient.post('/auth/clean_logout')
         .then((response) => {
             console.log('Logout successful:', response.data);
+            toast.message('All cookies cleared. Please login again.');
            // document.location.href = '/sign-in';
         })
         .catch((error) => {

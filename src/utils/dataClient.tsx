@@ -55,7 +55,7 @@ export const deleteData = async (apiPath: string) => {
 }
 
 const successHandler = (response: any) => {
-    toast.success(response?.data.message)
+    toast.message(response?.data.message)
 }
 
 const errorHandler = (error: any) => {
@@ -79,19 +79,19 @@ const errorHandler = (error: any) => {
                     if (errorMessage.includes("Session expired")) {
                         errorMessage = "Your session has expired. Please log in again.";
                     }
-                    toast.error(`${errorMessage}`);
+                    toast.message(`${errorMessage}`);
                 });
             });
         } else if (error.response.data.message) {
             // If there's a general message (e.g., non-validation error)
-            //toast.error(error.response.data.message);
+            //toast.message(error.response.data.message);
 
         } else {
             // Fallback for unexpected error responses
-            toast.error('An unexpected error occurred.');
+            toast.message('An unexpected error occurred.');
         }
     } else {
         // Handle other error types, such as network errors or timeout errors
-        toast.error('Network or server error occurred.');
+        toast.message('Network or server error occurred.');
     }
 };

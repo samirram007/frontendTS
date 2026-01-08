@@ -13,8 +13,8 @@ export const deliveryVehicleSchema = z.object({
   vehicleNumber: z.string().min(1, 'Vehicle Number is required'),
   vehicleType: z.string().min(1, 'Vehicle Type is required'),
   capacity: z.string().nullable().optional(),
-  driverName: z.string().min(1, 'Driver Name is required'),
-  driverContact: z.string().min(1, 'Driver Contact is required'),
+  driverName: z.string().nullable().optional(),
+  driverContact: z.string().nullable().optional(),
   description: z.string().optional(),
   transporter: transporterSchema.optional(),
 

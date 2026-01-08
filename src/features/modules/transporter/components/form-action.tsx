@@ -138,12 +138,6 @@ export function FormAction({ currentRow }: Props) {
                                 ]} />
                             </div>
                         </div>
-
-
-
-
-
-
                     </form>
                 </Form>
             </div>

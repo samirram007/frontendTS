@@ -1,12 +1,23 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchDeliveryVehicleService, storeDeliveryVehicleService, updateDeliveryVehicleService, } from "./api"
+import { fetchDeliveryVehicleByIdService, fetchDeliveryVehicleService, storeDeliveryVehicleService, updateDeliveryVehicleService, } from "./api"
 import type { DeliveryVehicleForm } from "./schema"
 //queryOptions.ts
-const Key = "delivery_vehicles"
-export const deliveryVehicleQueryOptions = (key: string = Key) => {
+const BASE_KEY = "delivery_vehicles"
+// export const deliveryVehicleQueryOptions = (key: string = BASE_KEY) => {
+//     return queryOptions({
+//         queryKey: [key],
+//         queryFn: fetchDeliveryVehicleService,
+//         staleTime: 1000 * 60 * 5, // 5 minutes
+//         retry: 1,
+//     })
+// }
+
+export const deliveryVehicleQueryOptions = (id?: number) => {
+
     return queryOptions({
-        queryKey: [key],
-        queryFn: fetchDeliveryVehicleService,
+        queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
+        queryFn: () =>
+            id ? fetchDeliveryVehicleByIdService(id) : fetchDeliveryVehicleService(),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })
@@ -24,7 +35,7 @@ export function useDeliveryVehicleMutation() {
             return await storeDeliveryVehicleService(data)
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [Key] })
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
         },
         onError: (error) => {
             console.error("Vehicle mutation failed:", error)

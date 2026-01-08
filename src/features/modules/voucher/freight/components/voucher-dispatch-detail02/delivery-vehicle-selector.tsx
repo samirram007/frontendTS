@@ -34,6 +34,8 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 import type { VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
 import { deliveryRouteQueryOptions } from "@/features/modules/delivery_route/data/queryOptions"
 import type { DeliveryRoute } from "@/features/modules/delivery_route/data/schema"
+import { deliveryVehicleQueryOptions } from "@/features/modules/delivery_vehicle/data/queryOptions"
+import type { DeliveryVehicle } from "@/features/modules/delivery_vehicle/data/schema"
 
 
 
@@ -42,18 +44,18 @@ interface Props {
     name: keyof VoucherDispatchDetailForm;
 }
 export const DeliveryVehicleSelector = ({ form, name }: Props) => {
-    // const focusNext = useFocusNext();
+    const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues(name)?.toString())
 
     const carrierName = form.watch('carrierName');
 
 
-    const { data: deliveryVehicles } = useSuspenseQuery(deliveryRouteQueryOptions())
+    const { data: deliveryVehicles } = useSuspenseQuery(deliveryVehicleQueryOptions())
 
     const deliveryVehiclesFiltered = React.useMemo(() => {
         if (!carrierName) return [];
-        return deliveryVehicles.data?.filter((deliveryRoute: DeliveryRoute) => deliveryRoute.transporter?.name === carrierName);
+        return deliveryVehicles.data?.filter((deliveryVehicle: DeliveryVehicle) => deliveryVehicle.transporter?.name === carrierName);
     }, [carrierName, deliveryVehicles]);
 
     const handleSelect = (value: string) => {
@@ -61,7 +63,7 @@ export const DeliveryVehicleSelector = ({ form, name }: Props) => {
             setOpen(true);
             return;
         }
-        const selectedVehicle = deliveryVehiclesFiltered?.find((deliveryRoute: DeliveryRoute) => deliveryRoute.vehicleNo === value);
+        const selectedVehicle = deliveryVehiclesFiltered?.find((deliveryVehicle: DeliveryVehicle) => deliveryVehicle.vehicleNumber === value);
         if (!selectedVehicle) {
             setOpen(true);
             return;
@@ -90,15 +92,31 @@ export const DeliveryVehicleSelector = ({ form, name }: Props) => {
         setOpen(false);
     };
 
-    const handleBlur = () => {
-        if (!value) {
-            setOpen(true);
-        }
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        lastKeyRef.current = e.key;
     };
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+        // ✅ Only Tab-triggered blur
+        if (lastKeyRef.current !== 'Tab') return;
 
-    const frameworks = deliveryVehiclesFiltered?.map((deliveryRoute: DeliveryRoute) => ({
-        label: deliveryRoute.vehicleNo! + " (" + (deliveryRoute.sourcePlace?.name ?? "") + " to " + (deliveryRoute.destinationPlace?.name ?? "") + ")" + "- Rs. " + (deliveryRoute.rate ?? 0),
-        value: deliveryRoute.vehicleNo!.toString(),
+        // ✅ Value exists → ignore
+        if (value !== null && value !== undefined && value !== '') return;
+
+        const next = e.relatedTarget as HTMLElement | null;
+
+        // ✅ Outside click → relatedTarget is null
+        if (!next) return;
+
+        // ✅ Focus moved into Sheet → ignore
+        if (next.closest('[data-slot="sheet-content"]')) return;
+
+        // ✅ Only now open
+        setOpen(true);
+    }
+
+    const frameworks = deliveryVehiclesFiltered?.map((deliveryVehicle: DeliveryVehicle) => ({
+        label: deliveryVehicle.vehicleNumber!,
+        value: deliveryVehicle.vehicleNumber!,
     }))
 
 
@@ -112,6 +130,7 @@ export const DeliveryVehicleSelector = ({ form, name }: Props) => {
                     aria-expanded={open}
                     className="w-full    justify-between"
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                 >
                     {value
                         ? frameworks.find((framework: { value: string }) => framework.value === value)?.label
@@ -129,14 +148,14 @@ export const DeliveryVehicleSelector = ({ form, name }: Props) => {
                 <Command className="rounded-lg border shadow-md min-w-full">
 
                     <CommandInput placeholder="Search vehicle..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No vehicle found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem
                                     className="min-w-full"
                                     key={framework.value}
-                                    value={framework.label.toLowerCase()}
+                                    value={framework.value}
                                     onSelect={() => handleSelect(framework.value)}
                                 >
                                     <CheckIcon

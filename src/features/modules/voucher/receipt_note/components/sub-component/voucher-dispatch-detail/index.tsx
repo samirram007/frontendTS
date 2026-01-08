@@ -32,7 +32,7 @@ const VoucherDispatchDetail = () => {
 
     const handleOnClick = () => {
         form.setValue("voucherDispatchDetail", voucherDisplayDispatchForm.getValues())
-        toast.success("Dispatch details updated")
+        toast.message("Dispatch details updated")
         onOpenChange(false)
     }
 

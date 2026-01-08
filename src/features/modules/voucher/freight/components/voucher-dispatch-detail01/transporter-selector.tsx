@@ -96,7 +96,7 @@ export const TransporterSelector = ({ form, name }: Props) => {
                 <Command className="rounded-lg border shadow-md min-w-full">
 
                     <CommandInput placeholder="Search transporter..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No transporter found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (

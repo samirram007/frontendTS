@@ -11,6 +11,7 @@ import type { DeliveryNoteProps } from './pos/contracts';
 
 
 
+
 const DeliveryNote = ({ currentRow }: DeliveryNoteProps) => {
     const { setHeaderVisible } = useTransaction()
     useEffect(() => {
@@ -19,9 +20,14 @@ const DeliveryNote = ({ currentRow }: DeliveryNoteProps) => {
     return (
 
         <>
+
             <PosProvider>
+                <>
+
             <Pos currentRow={currentRow} />
+                </>
             </PosProvider>
+
 
         </>
     )

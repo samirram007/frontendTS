@@ -1,15 +1,11 @@
 import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
-import { useEffect } from 'react';
-import { clean_logout, clearAllCookies } from '@/utils/protectedRoute';
+
 
 
 export default function SignIn() {
-  useEffect(() => {
-    clean_logout();
-    clearAllCookies();
-  }, []);
+
   return (
     <AuthLayout>
       <Card className='p-6'>

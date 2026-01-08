@@ -36,58 +36,40 @@ import { deliveryRouteQueryOptions } from "@/features/modules/delivery_route/dat
 import type { DeliveryRoute } from "@/features/modules/delivery_route/data/schema"
 
 
+
 interface Props {
     form: UseFormReturn<VoucherDispatchDetailForm>;
     name: keyof VoucherDispatchDetailForm;
 }
-export const DestinationPlaceSelector = ({ form, name }: Props) => {
+export const DeliveryVehicleRouteSelector = ({ form, name }: Props) => {
     // const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues(name)?.toString())
-    const carrierName = form.watch('carrierName');
-    const source = form.watch('source');
-    const vehicleNo = form.watch('motorVehicleNo');
-    const { data: destinationPlaces } = useSuspenseQuery(deliveryRouteQueryOptions())
 
-    const destinationPlacesFiltered = React.useMemo(() => {
+    const carrierName = form.watch('carrierName');
+
+
+    const { data: deliveryVehicles } = useSuspenseQuery(deliveryRouteQueryOptions())
+
+    const deliveryVehiclesFiltered = React.useMemo(() => {
         if (!carrierName) return [];
-        if (!source && !vehicleNo) return destinationPlaces.data;
-        if (source && !vehicleNo) {
-            return destinationPlaces.data?.filter((destinationPlace: DeliveryRoute) => destinationPlace.sourcePlace?.name === source && destinationPlace.transporter?.name === carrierName);
-        }
-        if (!source && vehicleNo) {
-            return destinationPlaces.data?.filter((destinationPlace: DeliveryRoute) => destinationPlace.vehicleNo === vehicleNo && destinationPlace.transporter?.name === carrierName);
-        }
-        return destinationPlaces.data?.filter((destinationPlace: DeliveryRoute) => destinationPlace.transporter?.name === carrierName);
-    }, [carrierName, destinationPlaces]);
+        return deliveryVehicles.data?.filter((deliveryRoute: DeliveryRoute) => deliveryRoute.transporter?.name === carrierName);
+    }, [carrierName, deliveryVehicles]);
 
     const handleSelect = (value: string) => {
         if (!value) {
             setOpen(true);
             return;
         }
+        const selectedVehicle = deliveryVehiclesFiltered?.find((deliveryRoute: DeliveryRoute) => deliveryRoute.vehicleNo === value);
+        if (!selectedVehicle) {
+            setOpen(true);
+            return;
+        }
+        const rateValue = selectedVehicle.rate;
+        const sourceValue = selectedVehicle.sourcePlace?.name;
+        const destinationValue = selectedVehicle.destinationPlace?.name;
 
-        const rateValue =
-            destinationPlacesFiltered?.find((deliveryRoute: DeliveryRoute) => {
-                if (deliveryRoute.destinationPlace?.name !== value) return false;
-
-                if (source && vehicleNo) {
-                    return (
-                        deliveryRoute.sourcePlace?.name === source &&
-                        deliveryRoute.vehicleNo === vehicleNo
-                    );
-                }
-
-                if (source) {
-                    return deliveryRoute.sourcePlace?.name === source;
-                }
-
-                if (vehicleNo) {
-                    return deliveryRoute.vehicleNo === vehicleNo;
-                }
-
-                return true;
-            })?.rate ?? 0;
 
         // Atomic update
         form.reset(
@@ -95,9 +77,11 @@ export const DestinationPlaceSelector = ({ form, name }: Props) => {
                 ...form.getValues(),
                 [name]: value,
                 rate: rateValue,
+                source: sourceValue,
+                destination: destinationValue,
                 freightCharges: 0,
                 totalFare: 0,
-                dispatchedThrough: carrierName,
+                dispatchedThrough: 'Truck',
             },
             { keepDirty: true }
         );
@@ -111,9 +95,10 @@ export const DestinationPlaceSelector = ({ form, name }: Props) => {
             setOpen(true);
         }
     };
-    const frameworks = destinationPlacesFiltered?.map((destinationPlace: DeliveryRoute) => ({
-        label: destinationPlace.destinationPlace?.name!,
-        value: destinationPlace.destinationPlace?.name!.toString(),
+
+    const frameworks = deliveryVehiclesFiltered?.map((deliveryRoute: DeliveryRoute) => ({
+        label: deliveryRoute.vehicleNo! + " (" + (deliveryRoute.sourcePlace?.name ?? "") + " to " + (deliveryRoute.destinationPlace?.name ?? "") + ")" + "- Rs. " + (deliveryRoute.rate ?? 0),
+        value: deliveryRoute.vehicleNo!.toString(),
     }))
 
 
@@ -125,27 +110,27 @@ export const DestinationPlaceSelector = ({ form, name }: Props) => {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-full justify-between"
+                    className="w-full    justify-between"
                     onBlur={handleBlur}
                 >
                     {value
                         ? frameworks.find((framework: { value: string }) => framework.value === value)?.label
-                        : "Select place..."}
+                        : "Select vehicle..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </SheetTrigger>
-            <SheetContent className="sheet-content-width-same-as-trigger p-0">
+            <SheetContent className="w-1/4 sm:max-w-none p-0">
                 <SheetHeader>
-                    <SheetTitle>Search {capitalizeAllWords(name)} Place</SheetTitle>
+                    <SheetTitle>Search {capitalizeAllWords(name)} Vehicle</SheetTitle>
                     <SheetDescription>
-                        Select the {capitalizeAllWords(name)} place for this Freight.
+                        Select the {capitalizeAllWords(name)} vehicle for this Freight.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
 
-                    <CommandInput placeholder="Search place..." />
-                    <CommandList>
-                        <CommandEmpty>No place found.</CommandEmpty>
+                    <CommandInput placeholder="Search vehicle..." />
+                    <CommandList className=" max-h-full">
+                        <CommandEmpty>No vehicle found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem

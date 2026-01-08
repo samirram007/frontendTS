@@ -18,7 +18,7 @@ export const roleSchema: z.ZodType<any> = z.object({
   name: z.string().min(1),
   code: z.string().min(1),
   status: ActiveInactiveStatusSchema,
-  permission: permissionListSchema.optional(),
+  permission: z.lazy(() => permissionListSchema).nullable().optional(),
 
 })
 export type Role = z.infer<typeof roleSchema>

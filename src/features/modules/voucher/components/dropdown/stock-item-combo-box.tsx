@@ -40,6 +40,7 @@ interface StockItemComboboxProps {
     rowIndex?: number;
 }
 export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, handleRemove, rowIndex }: StockItemComboboxProps) => {
+    const lastKeyRef = React.useRef<string | null>(null);
     const selectedId = form.watch('stockItemId')?.toString()
     const autoFocusable = rowIndex! > 0 ? true : false;
     const [open, setOpen] = React.useState(false)
@@ -86,7 +87,25 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
         });
 
     };
-    const handleBlur = () => {
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        lastKeyRef.current = e.key;
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+        // ✅ Only Tab-triggered blur
+        if (lastKeyRef.current !== 'Tab') return;
+        if (selectedId !== null && selectedId !== undefined && selectedId !== '') return;
+
+        const next = e.relatedTarget as HTMLElement | null;
+
+        // ✅ Outside click → relatedTarget is null
+        if (!next) return;
+
+        // ✅ Focus moved into Sheet → ignore
+        if (next.closest('[data-slot="sheet-content"]')) return;
+
+    // ✅ Outside click → relatedTarget is null
         if (!form.getValues('stockItemId') && rowIndex !== 0) {
             setOpen(true);
         }
@@ -128,6 +147,8 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                     className={cn("w-full justify-between")}
                     autoFocus={autoFocusable}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
+
                 >
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -142,7 +163,7 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No pary found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (

@@ -32,7 +32,7 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.id.toString()}
+      disabled={value.trim() !== currentRow.id!.toString()}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
@@ -46,7 +46,7 @@ export function DeleteDialog({ open, onOpenChange, currentRow }: Props) {
         <div className='space-y-4'>
           <p className='mb-2'>
             Are you sure you want to delete{' '}
-            <span className='font-bold'>{currentRow.name}</span>?
+            <span className='font-bold'>{currentRow.appModuleFeature?.name}</span>?
             <br />
             This action will permanently remove the user with the status of{' '}
             <span className='font-bold'>

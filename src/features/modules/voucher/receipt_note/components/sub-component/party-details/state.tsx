@@ -71,7 +71,7 @@ export const StateCombobox = ({ form }: Props) => {
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search state.." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No state found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (

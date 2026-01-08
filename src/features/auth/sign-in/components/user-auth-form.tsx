@@ -17,6 +17,7 @@ import { type HTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useAuth } from '../../contexts/AuthContext';
+import { clean_logout, clearAllCookies } from '@/utils/protectedRoute';
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>;
 
@@ -120,6 +121,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   Or continue with
                 </span>
               </div>
+
             </div>
 
             <div className='flex items-center flex-row flex-nowrap gap-2 hidden'>
@@ -143,6 +145,21 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
         </form>
       </Form>
+      <FailSafe />
+    </div>
+  )
+}
+
+const FailSafe = () => {
+  const handleClick = () => {
+
+    clean_logout();
+    clearAllCookies();
+  };
+
+  return (
+    <div onClick={handleClick} className='text-xs text-center text-muted-foreground cursor-pointer hover:underline hover:text-blue-700'>
+      Click here if you are facing issues logging in.
     </div>
   )
 }

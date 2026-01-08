@@ -16,7 +16,10 @@ export const accountLedgerSchema = z.object({
   description: z.string().nullish(),
   status: accountLedgerStatusSchema,
   accountGroupId: z.coerce.number().int().positive(),
-  accountGroup: accountGroupSchema.nullish()
+  accountGroup: accountGroupSchema.nullish(),
+  ledgerableId: z.number().nullish(),
+  ledgerableType: z.string().nullish(),
+  ledgerable: z.any().nullish(),
 })
 export type AccountLedger = z.infer<typeof accountLedgerSchema>
 

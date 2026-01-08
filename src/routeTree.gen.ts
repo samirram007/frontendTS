@@ -60,6 +60,7 @@ import { Route as ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRouteI
 import { Route as ProtectedReportsStock_summaryLayoutSalebleStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/saleble-stock'
 import { Route as ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRouteImport } from './routes/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
 import { Route as ProtectedReportsStock_summaryLayoutNetStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/net-stock'
+import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles.$id'
 import { Route as ProtectedAdministrationLayoutUserLayoutRouteImport } from './routes/_protected/administration/_layout/user/_layout'
 import { Route as ProtectedAdministrationLayoutRoleLayoutRouteImport } from './routes/_protected/administration/_layout/role/_layout'
 import { Route as ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRouteImport } from './routes/_protected/transactions/vouchers/_layout/transfer_voucher/index'
@@ -814,6 +815,12 @@ const ProtectedReportsStock_summaryLayoutNetStockRoute =
     path: '/net-stock',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
   } as any)
+const ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute =
+  ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => ProtectedMastersMiscellaneousDelivery_vehiclesRoute,
+  } as any)
 const ProtectedAdministrationLayoutUserLayoutRoute =
   ProtectedAdministrationLayoutUserLayoutRouteImport.update({
     id: '/_layout',
@@ -1521,7 +1528,7 @@ export interface FileRoutesByFullPath {
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
+  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1534,6 +1541,7 @@ export interface FileRoutesByFullPath {
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
+  '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1691,7 +1699,7 @@ export interface FileRoutesByTo {
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
+  '/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren
   '/masters/organization': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
@@ -1704,6 +1712,7 @@ export interface FileRoutesByTo {
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
+  '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1841,7 +1850,7 @@ export interface FileRoutesById {
   '/_protected/masters/inventory/_layout': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/_protected/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  '/_protected/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
+  '/_protected/masters/miscellaneous/delivery_vehicles': typeof ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren
   '/_protected/masters/organization': typeof ProtectedMastersOrganizationRouteWithChildren
   '/_protected/masters/organization/_layout': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
   '/_protected/masters/party': typeof ProtectedMastersPartyRouteWithChildren
@@ -1864,6 +1873,7 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/role/_layout': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
   '/_protected/administration/_layout/user': typeof ProtectedAdministrationLayoutUserRouteWithChildren
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
+  '/_protected/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/_protected/reports/stock_summary/_layout/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/_protected/reports/stock_summary/_layout/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -2057,6 +2067,7 @@ export interface FileRouteTypes {
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
+    | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2227,6 +2238,7 @@ export interface FileRouteTypes {
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
+    | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2386,6 +2398,7 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/role/_layout'
     | '/_protected/administration/_layout/user'
     | '/_protected/administration/_layout/user/_layout'
+    | '/_protected/masters/miscellaneous/delivery_vehicles/$id'
     | '/_protected/reports/stock_summary/_layout/net-stock'
     | '/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
     | '/_protected/reports/stock_summary/_layout/saleble-stock'
@@ -3188,6 +3201,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/stock_summary/net-stock'
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
+    }
+    '/_protected/masters/miscellaneous/delivery_vehicles/$id': {
+      id: '/_protected/masters/miscellaneous/delivery_vehicles/$id'
+      path: '/$id'
+      fullPath: '/masters/miscellaneous/delivery_vehicles/$id'
+      preLoaderRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport
+      parentRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
     }
     '/_protected/administration/_layout/user/_layout': {
       id: '/_protected/administration/_layout/user/_layout'
@@ -4458,6 +4478,21 @@ const ProtectedMastersInventoryRouteWithChildren =
     ProtectedMastersInventoryRouteChildren,
   )
 
+interface ProtectedMastersMiscellaneousDelivery_vehiclesRouteChildren {
+  ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+}
+
+const ProtectedMastersMiscellaneousDelivery_vehiclesRouteChildren: ProtectedMastersMiscellaneousDelivery_vehiclesRouteChildren =
+  {
+    ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute:
+      ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute,
+  }
+
+const ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren =
+  ProtectedMastersMiscellaneousDelivery_vehiclesRoute._addFileChildren(
+    ProtectedMastersMiscellaneousDelivery_vehiclesRouteChildren,
+  )
+
 interface ProtectedMastersOrganizationLayoutCompanyLayoutRouteChildren {
   ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
@@ -5298,7 +5333,7 @@ interface ProtectedRouteChildren {
   ProtectedMastersInventoryRoute: typeof ProtectedMastersInventoryRouteWithChildren
   ProtectedMastersMiscellaneousDelivery_placesRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   ProtectedMastersMiscellaneousDelivery_routesRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRoute
-  ProtectedMastersMiscellaneousDelivery_vehiclesRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesRoute
+  ProtectedMastersMiscellaneousDelivery_vehiclesRoute: typeof ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren
   ProtectedMastersOrganizationRoute: typeof ProtectedMastersOrganizationRouteWithChildren
   ProtectedMastersPartyRoute: typeof ProtectedMastersPartyRouteWithChildren
   ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
@@ -5330,7 +5365,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedMastersMiscellaneousDelivery_routesRoute:
     ProtectedMastersMiscellaneousDelivery_routesRoute,
   ProtectedMastersMiscellaneousDelivery_vehiclesRoute:
-    ProtectedMastersMiscellaneousDelivery_vehiclesRoute,
+    ProtectedMastersMiscellaneousDelivery_vehiclesRouteWithChildren,
   ProtectedMastersOrganizationRoute:
     ProtectedMastersOrganizationRouteWithChildren,
   ProtectedMastersPartyRoute: ProtectedMastersPartyRouteWithChildren,

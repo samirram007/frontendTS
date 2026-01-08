@@ -25,12 +25,14 @@ import type { StockUnit, StockUnitList } from '../../stock_unit/data/schema'
 
 import { lowerCase } from 'lodash';
 
-import VoucherDispatchDetail from './components/voucher-dispatch-detail'
+import VoucherDispatchDetail01 from './components/voucher-dispatch-detail01'
 import { voucherDispatchDefaultValues } from '../delivery_note/data/data';
 import PrintFreightDialog from './components/print-freight-dialog'
 import type { DeliveryPlaceList } from '../../delivery_place/data/schema'
 import type { DeliveryVehicleList } from '../../delivery_vehicle/data/schema'
 import type { TransporterList } from '../../transporter/data/schema'
+import { useFreight } from './contexts/freight-context'
+import VoucherDispatchDetail02 from './components/voucher-dispatch-detail02'
 
 
 
@@ -96,7 +98,7 @@ type DeliveryNoteRecordProps = {
 
 const DeliveryNoteRecord = ({ data, rowIndex }: DeliveryNoteRecordProps) => {
 
-
+    const { config } = useFreight();
 
     const form = useForm<FreightForm>({
         resolver: zodResolver(formSchema) as Resolver<FreightForm>,
@@ -195,10 +197,17 @@ const DeliveryNoteRecord = ({ data, rowIndex }: DeliveryNoteRecordProps) => {
 
                     </div>
                     <div className='flex justify-start pl-2 gap-2'>
-                    {/* {form.watch('weight')} */}
-                    <VoucherDispatchDetail
+                    {
+                        config.find(c => c.key === 'freight_method')?.value === 1 ?
+                            <VoucherDispatchDetail01
                         form={form}
                         voucherDispatchDefaultValues={{ ...voucherDispatchDefaultValues, voucherId: data.voucherDispatchDetail?.voucherId, ...data.voucherDispatchDetail }} />
+                            :
+                            <VoucherDispatchDetail02
+                                form={form}
+                                voucherDispatchDefaultValues={{ ...voucherDispatchDefaultValues, voucherId: data.voucherDispatchDetail?.voucherId, ...data.voucherDispatchDetail }} />
+                    }
+
 
                     {(data.voucherDispatchDetail?.totalFare && data.id) && <PopulateFreightData form={form} />}
                     </div>
