@@ -92,7 +92,7 @@ export const VehicleTypeSelector = ({ form }: Props) => {
                 <Command className="rounded-lg border shadow-md min-w-full">
 
                     <CommandInput placeholder="Search vehicle type..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No vehicle type found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (

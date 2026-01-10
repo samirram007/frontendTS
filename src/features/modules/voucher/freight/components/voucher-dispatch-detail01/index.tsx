@@ -32,7 +32,7 @@ type VoucherDispatchDetailFormProps = {
     voucherDispatchDefaultValues: VoucherDispatchDetailForm
 }
 
-const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
+const VoucherDispatchDetail01 = (props: VoucherDispatchDetailFormProps) => {
     const { form, voucherDispatchDefaultValues } = props
     const { mutate: saveVoucherDispatchDetail, isPending } = useVoucherDispatchDetailMutation();
     const dispatchRef = useRef<HTMLDivElement>(null);
@@ -85,7 +85,7 @@ const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
         transporter: '',
     }
     const voucherDispatchForm = useForm<VoucherDispatchDetailForm>({
-        resolver: zodResolver(voucherDispatchDetailSchema) as Resolver<VoucherDispatchDetailForm>, 
+        resolver: zodResolver(voucherDispatchDetailSchema) as Resolver<VoucherDispatchDetailForm>,
         defaultValues: defaultValues,
         mode: 'onBlur',
 
@@ -96,12 +96,12 @@ const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
     const handleOnClick = () => {
         const isValid = voucherDispatchForm.trigger();
         if (!isValid) {
-            toast.error("Please fill all required fields")
+            toast.message("Please fill all required fields")
             return;
         }
         const dispatchData = voucherDispatchForm.getValues();
         if (!dispatchData.totalFare || dispatchData.totalFare <= 0) {
-            toast.error("Total fare must be greater than zero")
+            toast.message("Total fare must be greater than zero")
             return;
         }
 
@@ -116,12 +116,12 @@ const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
 
         saveVoucherDispatchDetail(sanitizedData, {
             onSuccess: () => {
-                toast.success("Dispatch details saved successfully");
+                toast.message("Dispatch details saved successfully");
                 onOpenChange(false)
             },
             onError: (error) => {
                 console.error("Failed to save dispatch details:", error);
-                toast.error("Failed to save dispatch details");
+                toast.message("Failed to save dispatch details");
             },
         });
     }
@@ -198,32 +198,32 @@ const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
                                 {config.map((item) => item.key === 'receipt_details' && item.value && (
 
                                     <div key={item.key} className="space-y-2  pt-1">
-                                    <div className="text-center underline">Receipt Details</div>
-                                    <div className="grid grid-cols-1 gap-12">
-                                        <div className="space-y-2">
+                                        <div className="text-center underline">Receipt Details</div>
+                                        <div className="grid grid-cols-1 gap-12">
+                                            <div className="space-y-2">
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='receiptDocNo' label='Receipt Doc No' />
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='dispatchedThrough' label='Dispatched Through' />
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='source' label='Source' />
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='destination' label='Destination' />
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='carrierName' label='Carrier Name' />
-                                            <div className="grid grid-cols-[1fr_1fr] gap-12">
+                                                <div className="grid grid-cols-[1fr_1fr] gap-12">
 
                                                     <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='billOfLadingNo' label='Bill of Lading/LR-RR No' />
 
-                                                <div className={gapClass03}>
+                                                    <div className={gapClass03}>
 
-                                                    <Label>Date:</Label>
-                                                    <DateBox tabIndex={1}
+                                                        <Label>Date:</Label>
+                                                        <DateBox tabIndex={1}
                                                             form={voucherDispatchForm} name="billOfLadingDate" />
+                                                    </div>
                                                 </div>
-                                            </div>
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='motorVehicleNo' label='Motor Vehicle No' />
+
+                                            </div>
 
                                         </div>
 
                                     </div>
-
-                                </div>
                                 ))}
 
                                 {config.map((item) => item.key === 'receipt_details' && item.value && (
@@ -250,7 +250,7 @@ const VoucherDispatchDetail = (props: VoucherDispatchDetailFormProps) => {
     )
 }
 
-export default VoucherDispatchDetail
+export default VoucherDispatchDetail01
 
 type FreightCalculatorProps = {
     form: UseFormReturn<VoucherDispatchDetailForm>

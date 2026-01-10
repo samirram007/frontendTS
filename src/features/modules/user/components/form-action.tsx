@@ -13,9 +13,9 @@ import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { Loader2 } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { useUserMutation } from '../data/queryOptions'
-import { formSchema, type User, type UserForm } from '../data/schema'
+import { formSchema, type User, type UserForm } from '../data/schema';
 
 interface Props {
     currentRow?: User
@@ -27,37 +27,21 @@ export function FormAction({ currentRow }: Props) {
     const { mutate: saveUser, isPending } = useUserMutation()
 
     const form = useForm<UserForm>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as Resolver<UserForm>,
         defaultValues: isEdit
-            ? { ...currentRow, isEdit }
+            ? {
+                ...currentRow,
+                email: currentRow.email ?? '',
+                username: currentRow.username ?? '',
+                userType: currentRow.userType ?? '',
+                isEdit
+            }
             : {
-                name: '',
-                code: '',
-                address: {
-                    line1: '',
-                    line2: '',
-                    landmark: '',
-                    countryId: 76,
-                    stateId: 36,
-                    city: 'Malda',
-                    zipCode: '',
-                    isPrimary: true,
-                    addressable: {
-                        addressableId: null,
-                        addressableType: '',
-                    }
-                },
-                email: '',
-                website: '',
-                gstin: '',
-                pan: '',
+                name: '', 
                 status: 'active',
-                accountGroupId: 4,
-                licenseNo: '',
-                vehicleType: '',
-                contactPerson: '',
-                contactNo: '',
-                phone: '',
+                email: '',
+                username: '', 
+
 
                 isEdit,
             },

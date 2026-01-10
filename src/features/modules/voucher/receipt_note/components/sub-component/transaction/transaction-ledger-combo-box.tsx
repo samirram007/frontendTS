@@ -33,7 +33,7 @@ interface Props {
     transactionLedgers: TransactionLedger[];
 }
 export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) => {
-    const focusNext = useFocusNext();
+    const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
 
@@ -41,10 +41,27 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
         form.setValue("transactionLedger.id", transactionLedgers.find((transactionLedger) => transactionLedger.id === Number(value))?.id!)
         setValue(value)
         setOpen(false)
-        focusNext();
+
+    }
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        lastKeyRef.current = e.key;
     }
 
-    const handleBlur = () => {
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+        // ✅ Only Tab-triggered blur
+        if (lastKeyRef.current !== 'Tab') return;
+
+        // ✅ Value exists → ignore
+        if (value !== null && value !== undefined && value !== '') return;
+
+        const next = e.relatedTarget as HTMLElement | null;
+
+        // ✅ Outside click → relatedTarget is null
+        if (!next) return;
+
+        // ✅ Focus moved into Sheet → ignore
+        if (next.closest('[data-slot="sheet-content"]')) return;
+
         if (!form.getValues('transactionLedger.id'))
             setOpen(true);
     }
@@ -64,6 +81,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                     aria-expanded={open}
                     className="w-full justify-between"
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label
@@ -81,7 +99,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                 <Command className="rounded-lg border shadow-md min-w-full">
 
                     <CommandInput placeholder="Search purchase ledger..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No pary found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (

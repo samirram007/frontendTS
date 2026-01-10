@@ -41,7 +41,7 @@ interface Props {
     form: UseFormReturn<VoucherDispatchDetailForm>;
     name: keyof VoucherDispatchDetailForm;
 }
-export const DeliveryVehicleSelector = ({ form, name }: Props) => {
+export const DeliveryVehicleRouteSelector = ({ form, name }: Props) => {
     // const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues(name)?.toString())
@@ -129,7 +129,7 @@ export const DeliveryVehicleSelector = ({ form, name }: Props) => {
                 <Command className="rounded-lg border shadow-md min-w-full">
 
                     <CommandInput placeholder="Search vehicle..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No vehicle found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (

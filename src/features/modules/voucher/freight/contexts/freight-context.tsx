@@ -14,7 +14,7 @@ interface FreightContextType {
   currentRow: StockSummarySchema | null
   setCurrentRow: React.Dispatch<React.SetStateAction<StockSummarySchema | null>>
   keyName: string,
-  config: { key: string, value: boolean }[]
+  config: { key: string, value: boolean | string | number }[]
 }
 
 const FreightContext = React.createContext<FreightContextType | null>(null)
@@ -30,6 +30,7 @@ export default function FreightProvider({ children }: Props) {
     { key: 'order_details', value: false },
     { key: 'receipt_details', value: true },
     { key: 'freight_details', value: true },
+    { key: 'freight_method', value: 2 },
   ]
 
   return (

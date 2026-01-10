@@ -26,40 +26,46 @@ import type { UseFormReturn } from "react-hook-form"
 
 
 
-import { useSuspenseQuery } from "@tanstack/react-query"
 
+
+import { useSuspenseQuery } from "@tanstack/react-query"
 import type { VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
-import { godownQueryOptions } from "@/features/modules/godown/data/queryOptions"
-import type { Godown } from "@/features/modules/godown/data/schema"
+import { transporterQueryOptions } from "@/features/modules/transporter/data/queryOptions"
+import type { Transporter } from "@/features/modules/transporter/data/schema"
+
+
+
+
 
 
 interface Props {
     form: UseFormReturn<VoucherDispatchDetailForm>;
     name: keyof VoucherDispatchDetailForm;
 }
-export const SourcePlaceSelector = ({ form, name }: Props) => {
+export const TransporterSelector = ({ form, name }: Props) => {
     // const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues(name)?.toString())
 
-    const { data: godowns } = useSuspenseQuery(godownQueryOptions())
+    const { data: transporters } = useSuspenseQuery(transporterQueryOptions())
 
     const handleSelect = (value: string) => {
 
         form.setValue(name, value)
+
         setValue(value)
         setOpen(false)
         // focusNext();
     }
 
     const handleBlur = () => {
-        form.setValue(name, value)
-
-        if (!value) setOpen(true);
+        if (value === null || value === undefined || value === '') {
+            setOpen(true);
+        }
     }
-    const frameworks = godowns?.data?.map((godown: Godown) => ({
-        label: capitalizeAllWords(godown.name!),
-        value: godown.name!.toString(),
+    const frameworks = transporters.data?.map((transporter: Transporter) => ({
+        label: capitalizeAllWords(transporter.name!),
+        value: transporter.name!.toString(),
     }))
 
 
@@ -76,22 +82,22 @@ export const SourcePlaceSelector = ({ form, name }: Props) => {
                 >
                     {value
                         ? frameworks.find((framework: { value: string }) => framework.value === value)?.label
-                        : "Select place..."}
+                        : "Select transporter..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </SheetTrigger>
             <SheetContent className="sheet-content-width-same-as-trigger p-0">
                 <SheetHeader>
-                    <SheetTitle>Search {capitalizeAllWords(name)} Place</SheetTitle>
+                    <SheetTitle>Search Transporter</SheetTitle>
                     <SheetDescription>
-                        Select the {capitalizeAllWords(name)} place for this Freight.
+                        Select the transporter for this delivery vehicle.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
 
-                    <CommandInput placeholder="Search place..." />
-                    <CommandList>
-                        <CommandEmpty>No place found.</CommandEmpty>
+                    <CommandInput placeholder="Search transporter..." />
+                    <CommandList className=" max-h-full">
+                        <CommandEmpty>No transporter found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem

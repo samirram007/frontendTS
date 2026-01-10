@@ -22,6 +22,7 @@ import {
   IconServerOff,
   IconSettings,
   IconTool, 
+  IconTruck, 
   IconUserCog,
   IconUserOff
 } from '@tabler/icons-react'
@@ -377,12 +378,12 @@ export const sidebarData: SidebarData = {
               url: '/masters/miscellaneous/delivery_routes',
               icon: IconRoute2,
             },
-            // {
-            //   title: 'Delivery Vehicles',
-            //   visible: false,
-            //   url: '/masters/miscellaneous/delivery_vehicles',
-            //   icon: IconTruck,
-            // },
+            {
+              title: 'Delivery Vehicles',
+              visible: false,
+              url: '/masters/miscellaneous/delivery_vehicles',
+              icon: IconTruck,
+            },
 
           ]
         },

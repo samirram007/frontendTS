@@ -78,7 +78,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
               placeholder='Search people...'
               className='text-foreground'
             />
-            <CommandList>
+            <CommandList className=" max-h-full">
               <CommandEmpty>No people found.</CommandEmpty>
               <CommandGroup>
                 {users.map((user) => (

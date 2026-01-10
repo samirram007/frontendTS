@@ -22,6 +22,8 @@ export default function Transactions({ data }: TransactionProps) {
 
 
     return (
+
+
         <div className="w-full">
             {
                 voucherCategories && voucherCategories.map(voucherCategory => (
@@ -47,6 +49,7 @@ export default function Transactions({ data }: TransactionProps) {
 
             }
         </div>
+
     )
 }
 interface VoucherTypeTabletProps {

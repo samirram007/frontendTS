@@ -8,7 +8,10 @@ export const permissionSchema = z.object({
   appModuleFeatureId: z.coerce.number().int().positive(),
   role: roleSchema?.nullable().optional(),
   isAllowed: z.boolean(),
-  appModuleFeature: appModuleFeatureSchema.nullable().optional(),
+  appModuleFeature: z
+    .lazy(() => appModuleFeatureSchema)
+    .nullable()
+    .optional(),
 })
 export type Permission = z.infer<typeof permissionSchema>
 export type RolePermission = z.infer<typeof permissionSchema>

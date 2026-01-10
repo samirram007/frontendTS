@@ -28,6 +28,7 @@ export function useDistributorMutation() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+            queryClient.invalidateQueries({ queryKey: ["accountLedgers", "distributor_ledgers"] })
         },
         onError: (error) => {
             console.error("Distributor mutation failed:", error)

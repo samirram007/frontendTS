@@ -171,7 +171,7 @@ export function AccountForm() {
                     <CommandInput placeholder='Search language...' />
                     <CommandEmpty>No language found.</CommandEmpty>
                     <CommandGroup>
-                      <CommandList>
+                      <CommandList className=" max-h-full">
                         {languages.map((language) => (
                           <CommandItem
                             value={language.label}

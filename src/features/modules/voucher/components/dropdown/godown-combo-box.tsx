@@ -34,6 +34,7 @@ interface GodownComboboxProps {
     godowns: Godown[];
 }
 export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, godowns, handleRemove }: GodownComboboxProps) => {
+    const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
     const selectedId = form.watch('godownId')?.toString()
     // const stockItem = form.watch('stockItem')
@@ -70,23 +71,40 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
         }
         setOpen(false);
 
-        requestAnimationFrame(() => {
-            const focusable = Array.from(
-                document.querySelectorAll<
-                    HTMLElement
-                >('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-            ).filter(el => !el.hasAttribute("disabled"));
+        // requestAnimationFrame(() => {
+        //     const focusable = Array.from(
+        //         document.querySelectorAll<
+        //             HTMLElement
+        //         >('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        //     ).filter(el => !el.hasAttribute("disabled"));
 
-            const current = document.activeElement;
-            const index = focusable.indexOf(current as HTMLElement);
+        //     const current = document.activeElement;
+        //     const index = focusable.indexOf(current as HTMLElement);
 
-            if (index >= 0 && index < focusable.length - 1) {
-                focusable[index + 1].focus();
-            }
-        });
+        //     if (index >= 0 && index < focusable.length - 1) {
+        //         focusable[index + 1].focus();
+        //     }
+        // });
     };
 
-    const handleBlur = () => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+        lastKeyRef.current = e.key;
+    };
+
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+        // ✅ Only Tab-triggered blur
+        if (lastKeyRef.current !== 'Tab') return;
+
+        // ✅ Value exists → ignore
+        if (selectedId !== null && selectedId !== undefined && selectedId !== '') return;
+
+        const next = e.relatedTarget as HTMLElement | null;
+
+        // ✅ Outside click → relatedTarget is null
+        if (!next) return;
+
+        // ✅ Focus moved into Sheet → ignore
+        if (next.closest('[data-slot="sheet-content"]')) return;
         if (!form.getValues('godownId'))
             setOpen(true);
     }
@@ -129,6 +147,7 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
                     className={cn("w-full justify-between")}
                     autoFocus={true}
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                 >
                     {selectedLabel}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -143,7 +162,7 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search godown..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>
 

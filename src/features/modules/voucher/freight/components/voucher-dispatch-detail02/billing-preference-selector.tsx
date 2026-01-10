@@ -28,49 +28,68 @@ import type { UseFormReturn } from "react-hook-form"
 
 
 
-import { useSuspenseQuery } from "@tanstack/react-query"
-import type { VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
-import { transporterQueryOptions } from "@/features/modules/transporter/data/queryOptions"
-import type { Transporter } from "@/features/modules/transporter/data/schema"
-
-
-
-
+import { billingPreference, billingPreferenceSchema, type VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
+import { Label } from "@/components/ui/label"
 
 
 interface Props {
     form: UseFormReturn<VoucherDispatchDetailForm>;
     name: keyof VoucherDispatchDetailForm;
+    gapClass?: string;
+    label?: string;
 }
-export const TransporterSelector = ({ form, name }: Props) => {
-    // const focusNext = useFocusNext();
+export const BillingPreferenceSelector = ({ form, name, gapClass, label }: Props) => {
+    const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues(name)?.toString())
 
-    const { data: transporters } = useSuspenseQuery(transporterQueryOptions())
+
+
 
     const handleSelect = (value: string) => {
-
-        form.setValue(name, value)
-
-        setValue(value)
-        setOpen(false)
-        // focusNext();
-    }
-
-    const handleBlur = () => {
-        if (value === null || value === undefined || value === '') {
+        if (!value) {
             setOpen(true);
+            return;
         }
+
+
+        // Atomic update
+        form.setValue(name, value);
+
+        setValue(value);
+        setOpen(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        lastKeyRef.current = e.key;
+    };
+    const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
+        // ✅ Only Tab-triggered blur
+        if (lastKeyRef.current !== 'Tab') return;
+
+        // ✅ Value exists → ignore
+        if (value !== null && value !== undefined && value !== '') return;
+
+        const next = e.relatedTarget as HTMLElement | null;
+
+        // ✅ Outside click → relatedTarget is null
+        if (!next) return;
+
+        // ✅ Focus moved into Sheet → ignore
+        if (next.closest('[data-slot="sheet-content"]')) return;
+
+        // ✅ Only now open
+        setOpen(true);
     }
-    const frameworks = transporters.data?.map((transporter: Transporter) => ({
-        label: capitalizeAllWords(transporter.name!),
-        value: transporter.name!.toString(),
-    }))
+    const frameworks = billingPreferenceSchema.options.map((item: string) => ({ label: item, value: item }))
 
 
 
-    return (
+    return (<div className={gapClass}>
+        <Label
+            htmlFor=""
+            className="  text-sm font-medium text-gray-700 mb-1"
+        >{label ?? "Billing Preference"}</Label>
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
                 <Button
@@ -79,31 +98,32 @@ export const TransporterSelector = ({ form, name }: Props) => {
                     aria-expanded={open}
                     className="w-full justify-between"
                     onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                 >
                     {value
                         ? frameworks.find((framework: { value: string }) => framework.value === value)?.label
-                        : "Select transporter..."}
+                        : `Select ${label ?? "billing preference"}...`}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </SheetTrigger>
             <SheetContent className="sheet-content-width-same-as-trigger p-0">
                 <SheetHeader>
-                    <SheetTitle>Search Transporter</SheetTitle>
+                    <SheetTitle>Search {capitalizeAllWords(name)}  </SheetTitle>
                     <SheetDescription>
-                        Select the transporter for this delivery vehicle.
+                        Select the {capitalizeAllWords(name)}  for this Freight.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
 
-                    <CommandInput placeholder="Search transporter..." />
-                    <CommandList>
-                        <CommandEmpty>No transporter found.</CommandEmpty>
+                    <CommandInput placeholder={`Search ${label ?? "preference"}...`} />
+                    <CommandList className=" max-h-full">
+                        <CommandEmpty>No preference found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem
                                     className="min-w-full"
                                     key={framework.value}
-                                    value={framework.label.toLowerCase()}
+                                    value={framework.value.toLowerCase()}
                                     onSelect={() => handleSelect(framework.value)}
                                 >
                                     <CheckIcon
@@ -120,5 +140,7 @@ export const TransporterSelector = ({ form, name }: Props) => {
                 </Command>
             </SheetContent>
         </Sheet>
+    </div>
+
     )
 }

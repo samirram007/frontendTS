@@ -15,7 +15,7 @@ export const Route = createFileRoute('/_protected')({
   },
 
   component: ProtectedLayout,
-  errorComponent: () => <div>Authenticated Error</div>,
+
   notFoundComponent: () => <div>Authenticated Not Found</div>,
 })
 

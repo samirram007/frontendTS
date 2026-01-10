@@ -1,6 +1,5 @@
 // src/context/AuthContext.tsx
 import type { UserFiscalYear } from '@/features/modules/user_fiscal_year/data/schema'
-import type { User } from '@/types/schema'
 import { useQueryClient } from '@tanstack/react-query'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { flushSync } from 'react-dom'
@@ -10,10 +9,7 @@ import {
   logoutService,
 } from '../services/apis'
 import type { UserWithRole } from '../data/schema'
-import type {
-  Permission,
-  permissionSchema,
-} from '@/features/modules/permission/data/schema'
+import type { Permission } from '@/features/modules/permission/data/schema'
 import type { Role } from '@/features/modules/role/data/schema'
 export type LoginProps = {
   email: string

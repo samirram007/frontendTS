@@ -1,30 +1,26 @@
 'use client'
 
+import { useTransaction } from '@/features/transactions/context/transaction-context'
+import { useEffect } from 'react'
 
-import { useTransaction } from '@/features/transactions/context/transaction-context';
-import { useEffect } from 'react';
-
-import Pos from './pos';
-import { PosProvider } from '../contexts/pos-context';
-import type { DeliveryNoteProps } from './pos/contracts';
-
-
-
+import Pos from './pos'
+import { PosProvider } from '../contexts/pos-context'
+import type { DeliveryNoteProps } from './pos/contracts'
 
 const DeliveryNote = ({ currentRow }: DeliveryNoteProps) => {
-    const { setHeaderVisible } = useTransaction()
-    useEffect(() => {
-        setHeaderVisible?.(false)
-    }, [])
-    return (
-
+  const { setHeaderVisible } = useTransaction()
+  useEffect(() => {
+    setHeaderVisible?.(false)
+  }, [])
+  return (
+    <>
+      <PosProvider>
         <>
-            <PosProvider>
-            <Pos currentRow={currentRow} />
-            </PosProvider>
-
+          <Pos currentRow={currentRow} />
         </>
-    )
+      </PosProvider>
+    </>
+  )
 }
 
 export default DeliveryNote

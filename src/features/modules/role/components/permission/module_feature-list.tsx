@@ -36,7 +36,7 @@ const ModuleFeatureList = (props: ModuleProps) => {
     return (
         <Command className="rounded-md border max-h-[70vh] w-full overflow-hidden shadow-md">
             <CommandInput placeholder="Type a command or search..." />
-            <CommandList className="max-h-full">
+            <CommandList className=" max-h-full"  >
                 <CommandEmpty>No results found.</CommandEmpty>
                 <CommandGroup heading="Modules">
                     {moduleOptions?.map((module: any) => (
