@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -11,49 +10,31 @@ import {
 } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 
-import type {
-  Company,
-  CompanyForm,
-} from '@/features/modules/company/data/schema'
-import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
-import { storeCompanyService, updateCompanyService } from '../data/api'
-import { formSchema } from '../data/schema'
-import AccountEffectDropdown from './dropdown/company_type-dropdown'
+import { formSchema, type Patient, type PatientForm } from '../data/schema'
+import { usePatientMutation } from '../data/queryOptions'
+import { addressSchema } from '../../address/data/schema'
+
+import AddressForm from './sub-component/address-form'
+import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-react'
 
 interface Props {
-  currentRow?: Company
+  currentRow?: Patient
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
+  const { mutate: savePatient, isPending } = usePatientMutation()
   const isEdit = !!currentRow
-  const queryClient = useQueryClient()
-  const mutateCompany = useMutation({
-    mutationFn: async (data: CompanyForm) => {
-      // Here you would typically make an API call to save the Company
-      // For example:
-      console.log('Saving Company:', data)
-      if (isEdit && currentRow) {
-        return await updateCompanyService({ ...data, id: currentRow.id })
-      } else if (!isEdit) {
-        return await storeCompanyService(data)
-      }
-    },
-    onSuccess: (data) => {
-      console.log(data, 'Company saved successfully!')
-      queryClient.invalidateQueries({ queryKey: ['companys'] })
-    },
-  })
 
-  const form = useForm<CompanyForm>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<PatientForm>({
+    resolver: zodResolver(formSchema) as Resolver<PatientForm>,
     defaultValues: isEdit
       ? {
           ...currentRow,
@@ -61,21 +42,18 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         }
       : {
           name: '',
-          code: '',
-          description: '',
+          contactNo: '',
+          email: '',
+          address: addressSchema,
           status: 'active',
-          isEdit,
         },
   })
-  //  const companyStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
-  const moduleName = 'Company'
-  const onSubmit = (values: CompanyForm) => {
-    console.log(values)
-
+  const moduleName = 'Patient'
+  const onSubmit = (values: PatientForm) => {
     form.reset()
-    showSubmittedData(values)
-    mutateCompany.mutate(values)
+    //showSubmittedData(values)
+    savePatient(currentRow ? { ...values, id: currentRow.id } : values)
     onOpenChange(false)
   }
 
@@ -112,19 +90,20 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
                 name="name"
                 label="Name"
               />
+
               <FormInputField
                 type="text"
                 form={form}
-                name="code"
-                label="Code"
+                name="contactNumber"
+                label="Contact Number"
               />
-              <AccountEffectDropdown form={form} />
               <FormInputField
-                type="textarea"
+                type="text"
                 form={form}
-                name="description"
-                label="Description (optional)"
+                name="email"
+                label="Email"
               />
+              <AddressForm form={form} />
               <FormInputField
                 type="checkbox"
                 form={form}
@@ -139,8 +118,9 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
           </Form>
         </div>
         <DialogFooter>
-          <Button type="submit" form="user-form">
-            Save changes
+          <Button type="submit" form="user-form" disabled={isPending}>
+            {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isPending ? 'Saving...' : 'Save changes'}
           </Button>
         </DialogFooter>
       </DialogContent>
