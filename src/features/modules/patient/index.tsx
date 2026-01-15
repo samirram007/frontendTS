@@ -1,12 +1,12 @@
 import { Main } from '@/layouts/components/main'
 import { columns } from './components/columns'
 
-import { usePayroll } from '@/features/masters/payroll/context/payroll-context'
 import { useEffect } from 'react'
 import { Dialogs } from './components/dialogs'
 import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
 import { patientListSchema, type PatientList } from './data/schema'
+import { useParty } from '@/features/masters/party/context/party-context'
 
 // Import the correct type for patientListSchema
 
@@ -15,7 +15,9 @@ interface PatientProps {
 }
 
 export default function Patient({ data }: PatientProps) {
-  const { setSideBarOpen } = usePayroll()
+  console.log('here')
+
+  const { setSideBarOpen } = useParty()
 
   useEffect(() => {
     setSideBarOpen && setSideBarOpen(true)

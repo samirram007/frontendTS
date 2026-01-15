@@ -2,7 +2,6 @@ import {
   IconAccessPoint,
   IconBarrierBlock,
   IconBook,
-
   IconBrowserCheck,
   IconBug,
   IconChecklist,
@@ -21,12 +20,22 @@ import {
   IconRoute2,
   IconServerOff,
   IconSettings,
-  IconTool, 
-  IconTruck, 
+  IconTool,
+  IconTruck,
   IconUserCog,
-  IconUserOff
+  IconUserOff,
 } from '@tabler/icons-react'
-import { AudioWaveform, Building2, Command, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
+import {
+  AudioWaveform,
+  Building2,
+  Command,
+  GalleryVerticalEnd,
+  HandCoinsIcon,
+  LandmarkIcon,
+  NotebookTabsIcon,
+  Users,
+  WarehouseIcon,
+} from 'lucide-react'
 import { type SidebarData } from '../types'
 
 const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
@@ -66,7 +75,6 @@ export const sidebarData: SidebarData = {
   ],
 
   navGroups: [
-
     {
       title: 'General',
       visible: true,
@@ -96,7 +104,6 @@ export const sidebarData: SidebarData = {
           badge: '3',
           icon: IconMessages,
         },
-
       ],
     },
     {
@@ -182,9 +189,7 @@ export const sidebarData: SidebarData = {
             },
           ],
         },
-
       ],
-
     },
     {
       title: 'Masters',
@@ -231,14 +236,12 @@ export const sidebarData: SidebarData = {
               visible: true,
               icon: IconUserCog,
             },
-
-          ]
+          ],
         },
         {
           title: 'Accounts',
           icon: NotebookTabsIcon,
           items: [
-
             {
               title: 'Chart of Accounts',
               url: '/masters/accounts/account_group',
@@ -254,13 +257,17 @@ export const sidebarData: SidebarData = {
               url: '/masters/accounts/voucher_type',
               icon: IconUserCog,
             },
-
-          ]
+          ],
         },
         {
           title: 'Party',
           icon: Users,
           items: [
+            {
+              title: 'Patient',
+              url: '/masters/party/patient',
+              icon: IconUserCog,
+            },
             {
               title: 'Distributor',
               url: '/masters/party/distributor',
@@ -276,8 +283,7 @@ export const sidebarData: SidebarData = {
               url: '/masters/party/transporter',
               icon: IconUserCog,
             },
-
-          ]
+          ],
         },
         {
           title: 'Inventory',
@@ -308,7 +314,7 @@ export const sidebarData: SidebarData = {
               url: '/masters/inventory/godown',
               icon: IconUserCog,
             },
-          ]
+          ],
         },
         {
           title: 'Payroll',
@@ -329,8 +335,7 @@ export const sidebarData: SidebarData = {
               url: '/masters/payroll/designation',
               icon: IconUserCog,
             },
-
-          ]
+          ],
         },
         {
           title: 'Statutory',
@@ -361,7 +366,7 @@ export const sidebarData: SidebarData = {
               url: '/masters/inventory/godown',
               icon: IconUserCog,
             },
-          ]
+          ],
         },
         {
           title: 'Miscellaneous',
@@ -384,8 +389,7 @@ export const sidebarData: SidebarData = {
               url: '/masters/miscellaneous/delivery_vehicles',
               icon: IconTruck,
             },
-
-          ]
+          ],
         },
       ],
     },
@@ -448,7 +452,7 @@ export const sidebarData: SidebarData = {
           visible: true,
           icon: IconAccessPoint,
         },
-      ]
+      ],
     },
     {
       title: 'Other',

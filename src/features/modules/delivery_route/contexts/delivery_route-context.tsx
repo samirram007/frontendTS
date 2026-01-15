@@ -2,8 +2,6 @@ import useDialogState from '@/core/hooks/use-dialog-state'
 import React, { useState } from 'react'
 import type { DeliveryRoute } from '../data/schema'
 
-
-
 type DeliveryRouteDialogType = 'invite' | 'add' | 'edit' | 'delete'
 
 interface DeliveryRouteContextType {
@@ -12,9 +10,11 @@ interface DeliveryRouteContextType {
   currentRow: DeliveryRoute | null
   setCurrentRow: React.Dispatch<React.SetStateAction<DeliveryRoute | null>>
   keyName: string
+  // filterColumns: string[]
 }
 
-const DeliveryRouteContext = React.createContext<DeliveryRouteContextType | null>(null)
+const DeliveryRouteContext =
+  React.createContext<DeliveryRouteContextType | null>(null)
 interface Props {
   children: React.ReactNode
 }
@@ -22,10 +22,19 @@ interface Props {
 export default function DeliveryRouteProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<DeliveryRouteDialogType>(null)
   const [currentRow, setCurrentRow] = useState<DeliveryRoute | null>(null)
-
+  // const filterColumns = ['rate', 'sourcePlace']
 
   return (
-    <DeliveryRouteContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "account_nature" }}>
+    <DeliveryRouteContext
+      value={{
+        open,
+        setOpen,
+        currentRow,
+        setCurrentRow,
+        // filterColumns,
+        keyName: 'delivery route',
+      }}
+    >
       {children}
     </DeliveryRouteContext>
   )
@@ -36,7 +45,9 @@ export const useDeliveryRoute = () => {
   const deliveryRouteContext = React.useContext(DeliveryRouteContext)
 
   if (!deliveryRouteContext) {
-    throw new Error('useDeliveryRoute has to be used within <DeliveryRouteContext>')
+    throw new Error(
+      'useDeliveryRoute has to be used within <DeliveryRouteContext>',
+    )
   }
 
   return deliveryRouteContext

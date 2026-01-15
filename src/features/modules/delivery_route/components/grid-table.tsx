@@ -7,6 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
+import { DataTableToolbar } from '@/features/global/components/data-table/data-table-toolbar'
 
 import type { DeliveryRoute } from '@/features/modules/delivery_route/data/schema'
 import {
@@ -25,8 +26,8 @@ import {
   type VisibilityState,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import { DataTableToolbar } from './data-table-toolbar'
-
+import { useDeliveryRoute } from '../contexts/delivery_route-context'
+// import { DataTableToolbar } from './data-table-toolbar'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -45,6 +46,10 @@ export function GridTable({ columns, data }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
+  const [globalFilter, setGlobalFilter] = useState<string>('')
+
+  // const { filterColumns, keyName } = useDeliveryRoute()
+  const { keyName } = useDeliveryRoute()
 
   const table = useReactTable({
     data,
@@ -53,8 +58,22 @@ export function GridTable({ columns, data }: DataTableProps) {
       sorting,
       columnVisibility,
       rowSelection,
+      globalFilter,
       columnFilters,
     },
+    onGlobalFilterChange: setGlobalFilter,
+
+    // globalFilterFn: (row, _columnId, value) => {
+    //   const search = String(value).toLowerCase()
+
+    //   return filterColumns.length > 0
+    //     ? filterColumns.some((col) =>
+    //         String(row.getValue(col) ?? '')
+    //           .toLowerCase()
+    //           .includes(search),
+    //       )
+    //     : false
+    // },
     filterFns: {
       // Custom filter functions can be added here if needed
       fuzzy: (row, columnId, value) => {
@@ -77,14 +96,29 @@ export function GridTable({ columns, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
+  // console.log(table.getFilteredRowModel)
+  // const filteredRows = table
+  //   .getFilteredRowModel()
+  //   .rows.map((row) => row.original)
+
+  // console.log(filteredRows)
+
+  // const exportColumns = table.getVisibleLeafColumns().map((col) => ({
+  //   header:
+  //     typeof col.columnDef.header === 'string' ? col.columnDef.header : col.id,
+  //   accessor: col.id as keyof DeliveryRoute,
+  // }))
+
+  // console.log(exportColumns)
+
   return (
-    <div className='space-y-4'>
-      <DataTableToolbar table={table} />
-      <div className='rounded-md border'>
+    <div className="space-y-4">
+      <DataTableToolbar table={table} placeHolder={`Filter ${keyName} `} />
+      <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className='group/row'>
+              <TableRow key={headerGroup.id} className="group/row">
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
@@ -95,9 +129,9 @@ export function GridTable({ columns, data }: DataTableProps) {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                     </TableHead>
                   )
                 })}
@@ -110,7 +144,7 @@ export function GridTable({ columns, data }: DataTableProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='group/row'
+                  className="group/row"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -119,7 +153,7 @@ export function GridTable({ columns, data }: DataTableProps) {
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -129,7 +163,7 @@ export function GridTable({ columns, data }: DataTableProps) {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className='h-24 text-center'
+                  className="h-24 text-center"
                 >
                   No results.
                 </TableCell>

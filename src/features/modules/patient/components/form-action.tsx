@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Route as PatientRoute } from '@/routes/_protected/masters/payroll/_layout/patient/_layout'
+import { Route as PatientRoute } from '@/routes/_protected/masters/party/_layout/patient/_layout'
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'

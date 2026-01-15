@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Route as PatientDetailRoute } from '@/routes/_protected/masters/payroll/_layout/patient/_layout/$id'
+import { Route as PatientDetailRoute } from '@/routes/_protected/masters/party/_layout/patient/_layout/$id'
 
 import { IconUserPlus } from '@tabler/icons-react'
 import { Link } from '@tanstack/react-router'

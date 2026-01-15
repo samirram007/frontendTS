@@ -20,9 +20,8 @@ import { useForm } from 'react-hook-form'
 import { useCompanyMutation } from '../data/queryOptions'
 import { formSchema, type Company, type CompanyForm } from '../data/schema'
 import CompanyTypeDropdown from './dropdown/company_type-dropdown'
-import CountryDropdown from './dropdown/country-dropdown'
 import CurrencyDropdown from './dropdown/currency-dropdown'
-import StateDropdown from './dropdown/state-dropdown'
+import AddressForm from '../sub-components/address-form'
 interface Props {
   currentRow?: Company
 }
@@ -39,8 +38,24 @@ export function FormAction({ currentRow }: Props) {
       : {
           name: '',
           code: '',
+          mailingName: '',
           companyTypeId: 1,
-          address: '',
+          address: {
+            line1: '',
+            line2: '',
+            landmark: '',
+            postOffice: 'rathbari',
+            district: 'Malda',
+            countryId: 76,
+            stateId: 36,
+            city: 'Malda',
+            zipCode: '',
+            isPrimary: true,
+            addressable: {
+              addressableId: null,
+              addressableType: '',
+            },
+          },
           phoneNo: '',
           email: '',
           website: '',
@@ -49,10 +64,6 @@ export function FormAction({ currentRow }: Props) {
           tanNo: '',
           cinNo: '',
           currencyId: 1,
-          countryId: 1,
-          stateId: 1,
-          city: '',
-          zipCode: '',
           isEdit,
         },
   })
@@ -91,85 +102,87 @@ export function FormAction({ currentRow }: Props) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 p-0.5"
           >
-            <FormInputField type="text" form={form} name="name" label="Name" />
-            <FormInputField type="text" form={form} name="code" label="Code" />
-            <CompanyTypeDropdown form={form} />
-            <FormInputField
-              type="textarea"
-              form={form}
-              name="address"
-              label="Address"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="phoneNo"
-              label="Phone No"
-            />
+            <div className="grid grid-cols-2 items-start gap-6">
+              <div className="space-y-4">
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="name"
+                  label="Name"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="code"
+                  label="Code"
+                />
+                <CompanyTypeDropdown form={form} />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="phoneNo"
+                  label="Phone No"
+                />
 
-            <FormInputField
-              type="text"
-              form={form}
-              name="email"
-              label="Email"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="website"
-              label="Website"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="gstNo"
-              label="GST No"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="panNo"
-              label="PAN No"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="tanNo"
-              label="TAN No"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="cinNo"
-              label="CIN No"
-            />
-            <CurrencyDropdown form={form} />
-            <CountryDropdown form={form} />
-            <StateDropdown form={form} />
-            <FormInputField type="text" form={form} name="city" label="City" />
-            <FormInputField
-              type="text"
-              form={form}
-              name="zipCode"
-              label="Pin Code"
-            />
-            <FormInputField
-              type="text"
-              form={form}
-              name="mailingName"
-              label="Mailing Name"
-            />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="email"
+                  label="Email"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="website"
+                  label="Website"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="gstNo"
+                  label="GST No"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="panNo"
+                  label="PAN No"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="tanNo"
+                  label="TAN No"
+                />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="cinNo"
+                  label="CIN No"
+                />
+                <CurrencyDropdown form={form} />
+                <FormInputField
+                  type="text"
+                  form={form}
+                  name="mailingName"
+                  label="Mailing Name"
+                />
 
-            <FormInputField
-              type="checkbox"
-              form={form}
-              name="status"
-              label="Status"
-              options={[
-                { label: 'Active', value: 'active' },
-                { label: 'Inactive', value: 'inactive' },
-              ]}
-            />
+                <FormInputField
+                  type="checkbox"
+                  form={form}
+                  name="status"
+                  label="Status"
+                  options={[
+                    { label: 'Active', value: 'active' },
+                    { label: 'Inactive', value: 'inactive' },
+                  ]}
+                />
+              </div>
+              <div className="space-y-4">
+                <AddressForm form={form} />
+              </div>
+            </div>
           </form>
         </Form>
       </div>

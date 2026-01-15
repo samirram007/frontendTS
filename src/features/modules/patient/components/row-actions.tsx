@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router'
 import type { Row } from '@tanstack/react-table'
 import type { Patient } from '../data/schema'
 
-import { Route as PatientDetailRoute } from '@/routes/_protected/masters/payroll/_layout/patient/_layout/$id'
+import { Route as PatientDetailRoute } from '@/routes/_protected/masters/party/_layout/patient/_layout/$id'
 import { usePatient } from '../contexts/patient-contexts'
 
 interface DataTableRowActionsProps {

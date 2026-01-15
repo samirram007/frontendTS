@@ -50,12 +50,7 @@ const sidebarNavItems = [
     icon: <IconUser size={18} />,
     href: '/masters/payroll/employee',
   },
-  {
-    title: 'Patient',
-    visible: true,
-    icon: <IconUser size={18} />,
-    href: '/masters/payroll/patient',
-  },
+
   {
     title: 'Employee Group',
     visible: true,

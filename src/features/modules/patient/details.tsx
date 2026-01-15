@@ -1,9 +1,9 @@
 import { Main } from '@/layouts/components/main'
 
-import { usePayroll } from '@/features/masters/payroll/context/payroll-context'
 import { useEffect } from 'react'
 import { ActionPages } from './components/action-page'
 import { type Patient } from './data/schema'
+import { useParty } from '@/features/masters/party/context/party-context'
 
 // Import the correct type for patientListSchema
 
@@ -14,7 +14,7 @@ interface PatientProps {
 export default function PatientDetails(props: PatientProps) {
   const keyName = 'patient'
 
-  const { setSideBarOpen } = usePayroll()
+  const { setSideBarOpen } = useParty()
   const { data } = props
   useEffect(() => {
     setSideBarOpen && setSideBarOpen(false)
