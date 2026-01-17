@@ -74,6 +74,12 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
+          title: 'Facility',
+          visible: true,
+          url: '/facility',
+          icon: IconAccessPoint,
+        },
+        {
           title: 'Tasks',
           visible: false,
           url: '/tasks',
@@ -186,6 +192,37 @@ export const sidebarData: SidebarData = {
       title: 'Masters',
       visible: true,
       items: [
+        {
+          title: "Infrastructure",
+          visible: true,
+          icon: Building2,
+          items: [
+            {
+              title: 'Building',
+              url: '/masters/infrastructure/building',
+              visible: true,
+              icon: IconUserCog,
+            },
+            {
+              title: 'Floor',
+              url: '/masters/infrastructure/floor',
+              visible: true,
+              icon: IconUserCog,
+            },
+            {
+              title: 'Room',
+              url: '/masters/infrastructure/room',
+              visible: true,
+              icon: IconUserCog,
+            },
+            {
+              title: 'Bed',
+              url: '/masters/infrastructure/bed',
+              visible: true,
+              icon: IconUserCog,
+            },
+          ]
+        },
         {
           title: 'Organization',
           visible: true,

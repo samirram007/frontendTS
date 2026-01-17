@@ -22,6 +22,7 @@ import { Route as ProtectedSettingsRouteRouteImport } from './routes/_protected/
 import { Route as ProtectedTasksIndexRouteImport } from './routes/_protected/tasks/index'
 import { Route as ProtectedSettingsIndexRouteImport } from './routes/_protected/settings/index'
 import { Route as ProtectedHelpCenterIndexRouteImport } from './routes/_protected/help-center/index'
+import { Route as ProtectedFacilityIndexRouteImport } from './routes/_protected/facility/index'
 import { Route as ProtectedChatsIndexRouteImport } from './routes/_protected/chats/index'
 import { Route as ProtectedAppsIndexRouteImport } from './routes/_protected/apps/index'
 import { Route as ProtectedSettingsNotificationsRouteImport } from './routes/_protected/settings/notifications'
@@ -43,6 +44,7 @@ import { Route as ProtectedMastersMiscellaneousVehicleRouteImport } from './rout
 import { Route as ProtectedMastersMiscellaneousDelivery_routesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_routes'
 import { Route as ProtectedMastersMiscellaneousDelivery_placesRouteImport } from './routes/_protected/masters/miscellaneous/delivery_places'
 import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_protected/masters/inventory/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout'
 import { Route as ProtectedMastersAccountsLayoutRouteImport } from './routes/_protected/masters/accounts/_layout'
 import { Route as ProtectedauthUserFiscalYearLayoutRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout'
 import { Route as ProtectedTransactionsVouchersLayoutIndexRouteImport } from './routes/_protected/transactions/vouchers/_layout/index'
@@ -109,6 +111,7 @@ import { Route as ProtectedMastersInventoryLayoutStock_unitIndexRouteImport } fr
 import { Route as ProtectedMastersInventoryLayoutStock_groupIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_group/index'
 import { Route as ProtectedMastersInventoryLayoutStock_categoryIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_category/index'
 import { Route as ProtectedMastersInventoryLayoutGodownIndexRouteImport } from './routes/_protected/masters/inventory/_layout/godown/index'
+import { Route as ProtectedMastersInfrastructureLayoutAmenityIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/amenity/index'
 import { Route as ProtectedMastersAccountsLayoutVoucher_classificationIndexRouteImport } from './routes/_protected/masters/accounts/_layout/voucher_classification/index'
 import { Route as ProtectedMastersAccountsLayoutVoucher_categoryIndexRouteImport } from './routes/_protected/masters/accounts/_layout/voucher_category/index'
 import { Route as ProtectedMastersAccountsLayoutAccount_natureIndexRouteImport } from './routes/_protected/masters/accounts/_layout/account_nature/index'
@@ -128,6 +131,12 @@ import { Route as ProtectedMastersOrganizationLayoutCurrencyLayoutRouteImport } 
 import { Route as ProtectedMastersOrganizationLayoutCountryLayoutRouteImport } from './routes/_protected/masters/organization/_layout/country/_layout'
 import { Route as ProtectedMastersOrganizationLayoutCompanyLayoutRouteImport } from './routes/_protected/masters/organization/_layout/company/_layout'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutRoomLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/room/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutFloorLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/floor/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutFacilityLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/facility/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/facility-amenity/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutBuildingLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/building/_layout'
+import { Route as ProtectedMastersInfrastructureLayoutBedLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout/bed/_layout'
 import { Route as ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteImport } from './routes/_protected/masters/accounts/_layout/voucher_type/_layout'
 import { Route as ProtectedMastersAccountsLayoutVendorLayoutRouteImport } from './routes/_protected/masters/accounts/_layout/vendor/_layout'
 import { Route as ProtectedMastersAccountsLayoutCustomerLayoutRouteImport } from './routes/_protected/masters/accounts/_layout/customer/_layout'
@@ -148,6 +157,12 @@ import { Route as ProtectedMastersOrganizationLayoutCurrencyLayoutIndexRouteImpo
 import { Route as ProtectedMastersOrganizationLayoutCountryLayoutIndexRouteImport } from './routes/_protected/masters/organization/_layout/country/_layout/index'
 import { Route as ProtectedMastersOrganizationLayoutCompanyLayoutIndexRouteImport } from './routes/_protected/masters/organization/_layout/company/_layout/index'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutRoomLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/room/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutFloorLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/floor/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/facility/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/facility-amenity/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/building/_layout/index'
+import { Route as ProtectedMastersInfrastructureLayoutBedLayoutIndexRouteImport } from './routes/_protected/masters/infrastructure/_layout/bed/_layout/index'
 import { Route as ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/voucher_type/_layout/index'
 import { Route as ProtectedMastersAccountsLayoutVendorLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/vendor/_layout/index'
 import { Route as ProtectedMastersAccountsLayoutCustomerLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/customer/_layout/index'
@@ -166,6 +181,7 @@ import { Route as ProtectedMastersOrganizationLayoutFiscal_yearLayoutIdRouteImpo
 import { Route as ProtectedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/currency/_layout/$id'
 import { Route as ProtectedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/country/_layout/$id'
 import { Route as ProtectedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/company/_layout/$id'
+import { Route as ProtectedMastersInfrastructureLayoutBuildingLayoutIdRouteImport } from './routes/_protected/masters/infrastructure/_layout/building/_layout/$id'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/$id/index'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module/index'
@@ -212,6 +228,9 @@ const ProtectedMastersOrganizationRouteImport = createFileRoute(
 )()
 const ProtectedMastersInventoryRouteImport = createFileRoute(
   '/_protected/masters/inventory',
+)()
+const ProtectedMastersInfrastructureRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure',
 )()
 const ProtectedMastersAccountsRouteImport = createFileRoute(
   '/_protected/masters/accounts',
@@ -263,6 +282,25 @@ const ProtectedMastersOrganizationLayoutCompanyRouteImport = createFileRoute(
 )()
 const ProtectedMastersInventoryLayoutStock_itemRouteImport = createFileRoute(
   '/_protected/masters/inventory/_layout/stock_item',
+)()
+const ProtectedMastersInfrastructureLayoutRoomRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure/_layout/room',
+)()
+const ProtectedMastersInfrastructureLayoutFloorRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure/_layout/floor',
+)()
+const ProtectedMastersInfrastructureLayoutFacilityRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure/_layout/facility',
+)()
+const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport =
+  createFileRoute(
+    '/_protected/masters/infrastructure/_layout/facility-amenity',
+  )()
+const ProtectedMastersInfrastructureLayoutBuildingRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure/_layout/building',
+)()
+const ProtectedMastersInfrastructureLayoutBedRouteImport = createFileRoute(
+  '/_protected/masters/infrastructure/_layout/bed',
 )()
 const ProtectedMastersAccountsLayoutVoucher_typeRouteImport = createFileRoute(
   '/_protected/masters/accounts/_layout/voucher_type',
@@ -444,6 +482,12 @@ const ProtectedMastersInventoryRoute =
     path: '/masters/inventory',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedMastersInfrastructureRoute =
+  ProtectedMastersInfrastructureRouteImport.update({
+    id: '/masters/infrastructure',
+    path: '/masters/infrastructure',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedMastersAccountsRoute =
   ProtectedMastersAccountsRouteImport.update({
     id: '/masters/accounts',
@@ -472,6 +516,11 @@ const ProtectedHelpCenterIndexRoute =
     path: '/help-center/',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedFacilityIndexRoute = ProtectedFacilityIndexRouteImport.update({
+  id: '/facility/',
+  path: '/facility/',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedChatsIndexRoute = ProtectedChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
@@ -598,6 +647,11 @@ const ProtectedMastersInventoryLayoutRoute =
     id: '/_layout',
     getParentRoute: () => ProtectedMastersInventoryRoute,
   } as any)
+const ProtectedMastersInfrastructureLayoutRoute =
+  ProtectedMastersInfrastructureLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureRoute,
+  } as any)
 const ProtectedMastersAccountsLayoutRoute =
   ProtectedMastersAccountsLayoutRouteImport.update({
     id: '/_layout',
@@ -691,6 +745,42 @@ const ProtectedMastersInventoryLayoutStock_itemRoute =
     id: '/stock_item',
     path: '/stock_item',
     getParentRoute: () => ProtectedMastersInventoryLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutRoomRoute =
+  ProtectedMastersInfrastructureLayoutRoomRouteImport.update({
+    id: '/room',
+    path: '/room',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFloorRoute =
+  ProtectedMastersInfrastructureLayoutFloorRouteImport.update({
+    id: '/floor',
+    path: '/floor',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityRoute =
+  ProtectedMastersInfrastructureLayoutFacilityRouteImport.update({
+    id: '/facility',
+    path: '/facility',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityAmenityRoute =
+  ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport.update({
+    id: '/facility-amenity',
+    path: '/facility-amenity',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutBuildingRoute =
+  ProtectedMastersInfrastructureLayoutBuildingRouteImport.update({
+    id: '/building',
+    path: '/building',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutBedRoute =
+  ProtectedMastersInfrastructureLayoutBedRouteImport.update({
+    id: '/bed',
+    path: '/bed',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutVoucher_typeRoute =
   ProtectedMastersAccountsLayoutVoucher_typeRouteImport.update({
@@ -1114,6 +1204,12 @@ const ProtectedMastersInventoryLayoutGodownIndexRoute =
     path: '/godown/',
     getParentRoute: () => ProtectedMastersInventoryLayoutRoute,
   } as any)
+const ProtectedMastersInfrastructureLayoutAmenityIndexRoute =
+  ProtectedMastersInfrastructureLayoutAmenityIndexRouteImport.update({
+    id: '/amenity/',
+    path: '/amenity/',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
+  } as any)
 const ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute =
   ProtectedMastersAccountsLayoutVoucher_classificationIndexRouteImport.update({
     id: '/voucher_classification/',
@@ -1213,6 +1309,37 @@ const ProtectedMastersInventoryLayoutStock_itemLayoutRoute =
   ProtectedMastersInventoryLayoutStock_itemLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedMastersInventoryLayoutStock_itemRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutRoomLayoutRoute =
+  ProtectedMastersInfrastructureLayoutRoomLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoomRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFloorLayoutRoute =
+  ProtectedMastersInfrastructureLayoutFloorLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutFloorRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityLayoutRoute =
+  ProtectedMastersInfrastructureLayoutFacilityLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutFacilityRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute =
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () =>
+      ProtectedMastersInfrastructureLayoutFacilityAmenityRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutBuildingLayoutRoute =
+  ProtectedMastersInfrastructureLayoutBuildingLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutBuildingRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutBedLayoutRoute =
+  ProtectedMastersInfrastructureLayoutBedLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutBedRoute,
   } as any)
 const ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute =
   ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteImport.update({
@@ -1335,6 +1462,47 @@ const ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute =
     path: '/',
     getParentRoute: () => ProtectedMastersInventoryLayoutStock_itemLayoutRoute,
   } as any)
+const ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutRoomLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoomLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutFloorLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutFloorLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      ProtectedMastersInfrastructureLayoutFacilityLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute,
+    } as any,
+  )
+const ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      ProtectedMastersInfrastructureLayoutBuildingLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute =
+  ProtectedMastersInfrastructureLayoutBedLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutBedLayoutRoute,
+  } as any)
 const ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute =
   ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRouteImport.update({
     id: '/',
@@ -1449,6 +1617,13 @@ const ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute =
     path: '/$id',
     getParentRoute: () => ProtectedMastersOrganizationLayoutCompanyLayoutRoute,
   } as any)
+const ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute =
+  ProtectedMastersInfrastructureLayoutBuildingLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () =>
+      ProtectedMastersInfrastructureLayoutBuildingLayoutRoute,
+  } as any)
 const ProtectedAdministrationLayoutRoleLayoutIdModuleRoute =
   ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport.update({
     id: '/_module',
@@ -1506,11 +1681,13 @@ export interface FileRoutesByFullPath {
   '/settings/notifications': typeof ProtectedSettingsNotificationsRoute
   '/apps': typeof ProtectedAppsIndexRoute
   '/chats': typeof ProtectedChatsIndexRoute
+  '/facility': typeof ProtectedFacilityIndexRoute
   '/help-center': typeof ProtectedHelpCenterIndexRoute
   '/settings/': typeof ProtectedSettingsIndexRoute
   '/tasks': typeof ProtectedTasksIndexRoute
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
+  '/masters/infrastructure': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
@@ -1547,6 +1724,12 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/customer': typeof ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren
   '/masters/accounts/vendor': typeof ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren
   '/masters/accounts/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
+  '/masters/infrastructure/bed': typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
+  '/masters/infrastructure/building': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
+  '/masters/infrastructure/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
+  '/masters/infrastructure/facility': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
+  '/masters/infrastructure/floor': typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
+  '/masters/infrastructure/room': typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
   '/masters/inventory/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
   '/masters/organization/company': typeof ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
   '/masters/organization/country': typeof ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren
@@ -1566,6 +1749,7 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/account_nature': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/masters/infrastructure/amenity': typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
   '/masters/inventory/godown': typeof ProtectedMastersInventoryLayoutGodownIndexRoute
   '/masters/inventory/stock_category': typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
   '/masters/inventory/stock_group': typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
@@ -1615,6 +1799,7 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/stock_journal': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/administration/role/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
+  '/masters/infrastructure/building/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
   '/masters/organization/company/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1633,6 +1818,12 @@ export interface FileRoutesByFullPath {
   '/masters/accounts/customer/': typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/masters/accounts/vendor/': typeof ProtectedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type/': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/masters/infrastructure/bed/': typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
+  '/masters/infrastructure/building/': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
+  '/masters/infrastructure/facility-amenity/': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
+  '/masters/infrastructure/facility/': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
+  '/masters/infrastructure/floor/': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
+  '/masters/infrastructure/room/': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
   '/masters/inventory/stock_item/': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/masters/organization/company/': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country/': typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -1675,11 +1866,13 @@ export interface FileRoutesByTo {
   '/settings/notifications': typeof ProtectedSettingsNotificationsRoute
   '/apps': typeof ProtectedAppsIndexRoute
   '/chats': typeof ProtectedChatsIndexRoute
+  '/facility': typeof ProtectedFacilityIndexRoute
   '/help-center': typeof ProtectedHelpCenterIndexRoute
   '/settings': typeof ProtectedSettingsIndexRoute
   '/tasks': typeof ProtectedTasksIndexRoute
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
+  '/masters/infrastructure': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
@@ -1711,6 +1904,12 @@ export interface FileRoutesByTo {
   '/masters/accounts/customer': typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/masters/accounts/vendor': typeof ProtectedMastersAccountsLayoutVendorLayoutIndexRoute
   '/masters/accounts/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/masters/infrastructure/bed': typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
+  '/masters/infrastructure/building': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
+  '/masters/infrastructure/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
+  '/masters/infrastructure/facility': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
+  '/masters/infrastructure/floor': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
+  '/masters/infrastructure/room': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
   '/masters/inventory/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/masters/organization/company': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/masters/organization/country': typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -1728,6 +1927,7 @@ export interface FileRoutesByTo {
   '/masters/accounts/account_nature': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/masters/infrastructure/amenity': typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
   '/masters/inventory/godown': typeof ProtectedMastersInventoryLayoutGodownIndexRoute
   '/masters/inventory/stock_category': typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
   '/masters/inventory/stock_group': typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
@@ -1777,6 +1977,7 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/stock_journal': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/administration/role/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
+  '/masters/infrastructure/building/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
   '/masters/organization/company/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1821,6 +2022,7 @@ export interface FileRoutesById {
   '/_protected/settings/notifications': typeof ProtectedSettingsNotificationsRoute
   '/_protected/apps/': typeof ProtectedAppsIndexRoute
   '/_protected/chats/': typeof ProtectedChatsIndexRoute
+  '/_protected/facility/': typeof ProtectedFacilityIndexRoute
   '/_protected/help-center/': typeof ProtectedHelpCenterIndexRoute
   '/_protected/settings/': typeof ProtectedSettingsIndexRoute
   '/_protected/tasks/': typeof ProtectedTasksIndexRoute
@@ -1828,6 +2030,8 @@ export interface FileRoutesById {
   '/_protected/(auth)/user-fiscal-year/_layout': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
   '/_protected/masters/accounts': typeof ProtectedMastersAccountsRouteWithChildren
   '/_protected/masters/accounts/_layout': typeof ProtectedMastersAccountsLayoutRouteWithChildren
+  '/_protected/masters/infrastructure': typeof ProtectedMastersInfrastructureRouteWithChildren
+  '/_protected/masters/infrastructure/_layout': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
   '/_protected/masters/inventory': typeof ProtectedMastersInventoryRouteWithChildren
   '/_protected/masters/inventory/_layout': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
@@ -1880,6 +2084,18 @@ export interface FileRoutesById {
   '/_protected/masters/accounts/_layout/vendor/_layout': typeof ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren
   '/_protected/masters/accounts/_layout/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeRouteWithChildren
   '/_protected/masters/accounts/_layout/voucher_type/_layout': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/bed': typeof ProtectedMastersInfrastructureLayoutBedRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/bed/_layout': typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/building': typeof ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/building/_layout': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/facility-amenity/_layout': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/facility': typeof ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/facility/_layout': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/floor': typeof ProtectedMastersInfrastructureLayoutFloorRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/floor/_layout': typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/room': typeof ProtectedMastersInfrastructureLayoutRoomRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/room/_layout': typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
   '/_protected/masters/inventory/_layout/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemRouteWithChildren
   '/_protected/masters/inventory/_layout/stock_item/_layout': typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
   '/_protected/masters/organization/_layout/company': typeof ProtectedMastersOrganizationLayoutCompanyRouteWithChildren
@@ -1913,6 +2129,7 @@ export interface FileRoutesById {
   '/_protected/masters/accounts/_layout/account_nature/': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   '/_protected/masters/accounts/_layout/voucher_category/': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/_protected/masters/accounts/_layout/voucher_classification/': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/_protected/masters/infrastructure/_layout/amenity/': typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
   '/_protected/masters/inventory/_layout/godown/': typeof ProtectedMastersInventoryLayoutGodownIndexRoute
   '/_protected/masters/inventory/_layout/stock_category/': typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
   '/_protected/masters/inventory/_layout/stock_group/': typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
@@ -1963,6 +2180,7 @@ export interface FileRoutesById {
   '/_protected/transactions/vouchers/_layout/transfer_voucher/': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/_protected/administration/_layout/role/_layout/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdRouteWithChildren
   '/_protected/administration/_layout/role/_layout/$id/_module': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
+  '/_protected/masters/infrastructure/_layout/building/_layout/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
   '/_protected/masters/organization/_layout/company/_layout/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_protected/masters/organization/_layout/country/_layout/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_protected/masters/organization/_layout/currency/_layout/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1981,6 +2199,12 @@ export interface FileRoutesById {
   '/_protected/masters/accounts/_layout/customer/_layout/': typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
   '/_protected/masters/accounts/_layout/vendor/_layout/': typeof ProtectedMastersAccountsLayoutVendorLayoutIndexRoute
   '/_protected/masters/accounts/_layout/voucher_type/_layout/': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/bed/_layout/': typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/building/_layout/': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/facility-amenity/_layout/': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/facility/_layout/': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/floor/_layout/': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
+  '/_protected/masters/infrastructure/_layout/room/_layout/': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
   '/_protected/masters/inventory/_layout/stock_item/_layout/': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute
   '/_protected/masters/organization/_layout/company/_layout/': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
   '/_protected/masters/organization/_layout/country/_layout/': typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -2026,11 +2250,13 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/apps'
     | '/chats'
+    | '/facility'
     | '/help-center'
     | '/settings/'
     | '/tasks'
     | '/user-fiscal-year'
     | '/masters/accounts'
+    | '/masters/infrastructure'
     | '/masters/inventory'
     | '/masters/miscellaneous/delivery_places'
     | '/masters/miscellaneous/delivery_routes'
@@ -2067,6 +2293,12 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer'
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
+    | '/masters/infrastructure/bed'
+    | '/masters/infrastructure/building'
+    | '/masters/infrastructure/facility-amenity'
+    | '/masters/infrastructure/facility'
+    | '/masters/infrastructure/floor'
+    | '/masters/infrastructure/room'
     | '/masters/inventory/stock_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
@@ -2086,6 +2318,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
+    | '/masters/infrastructure/amenity'
     | '/masters/inventory/godown'
     | '/masters/inventory/stock_category'
     | '/masters/inventory/stock_group'
@@ -2135,6 +2368,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/administration/role/$id'
+    | '/masters/infrastructure/building/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -2153,6 +2387,12 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer/'
     | '/masters/accounts/vendor/'
     | '/masters/accounts/voucher_type/'
+    | '/masters/infrastructure/bed/'
+    | '/masters/infrastructure/building/'
+    | '/masters/infrastructure/facility-amenity/'
+    | '/masters/infrastructure/facility/'
+    | '/masters/infrastructure/floor/'
+    | '/masters/infrastructure/room/'
     | '/masters/inventory/stock_item/'
     | '/masters/organization/company/'
     | '/masters/organization/country/'
@@ -2195,11 +2435,13 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/apps'
     | '/chats'
+    | '/facility'
     | '/help-center'
     | '/settings'
     | '/tasks'
     | '/user-fiscal-year'
     | '/masters/accounts'
+    | '/masters/infrastructure'
     | '/masters/inventory'
     | '/masters/miscellaneous/delivery_places'
     | '/masters/miscellaneous/delivery_routes'
@@ -2231,6 +2473,12 @@ export interface FileRouteTypes {
     | '/masters/accounts/customer'
     | '/masters/accounts/vendor'
     | '/masters/accounts/voucher_type'
+    | '/masters/infrastructure/bed'
+    | '/masters/infrastructure/building'
+    | '/masters/infrastructure/facility-amenity'
+    | '/masters/infrastructure/facility'
+    | '/masters/infrastructure/floor'
+    | '/masters/infrastructure/room'
     | '/masters/inventory/stock_item'
     | '/masters/organization/company'
     | '/masters/organization/country'
@@ -2248,6 +2496,7 @@ export interface FileRouteTypes {
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
+    | '/masters/infrastructure/amenity'
     | '/masters/inventory/godown'
     | '/masters/inventory/stock_category'
     | '/masters/inventory/stock_group'
@@ -2297,6 +2546,7 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
     | '/administration/role/$id'
+    | '/masters/infrastructure/building/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -2340,6 +2590,7 @@ export interface FileRouteTypes {
     | '/_protected/settings/notifications'
     | '/_protected/apps/'
     | '/_protected/chats/'
+    | '/_protected/facility/'
     | '/_protected/help-center/'
     | '/_protected/settings/'
     | '/_protected/tasks/'
@@ -2347,6 +2598,8 @@ export interface FileRouteTypes {
     | '/_protected/(auth)/user-fiscal-year/_layout'
     | '/_protected/masters/accounts'
     | '/_protected/masters/accounts/_layout'
+    | '/_protected/masters/infrastructure'
+    | '/_protected/masters/infrastructure/_layout'
     | '/_protected/masters/inventory'
     | '/_protected/masters/inventory/_layout'
     | '/_protected/masters/miscellaneous/delivery_places'
@@ -2399,6 +2652,18 @@ export interface FileRouteTypes {
     | '/_protected/masters/accounts/_layout/vendor/_layout'
     | '/_protected/masters/accounts/_layout/voucher_type'
     | '/_protected/masters/accounts/_layout/voucher_type/_layout'
+    | '/_protected/masters/infrastructure/_layout/bed'
+    | '/_protected/masters/infrastructure/_layout/bed/_layout'
+    | '/_protected/masters/infrastructure/_layout/building'
+    | '/_protected/masters/infrastructure/_layout/building/_layout'
+    | '/_protected/masters/infrastructure/_layout/facility-amenity'
+    | '/_protected/masters/infrastructure/_layout/facility-amenity/_layout'
+    | '/_protected/masters/infrastructure/_layout/facility'
+    | '/_protected/masters/infrastructure/_layout/facility/_layout'
+    | '/_protected/masters/infrastructure/_layout/floor'
+    | '/_protected/masters/infrastructure/_layout/floor/_layout'
+    | '/_protected/masters/infrastructure/_layout/room'
+    | '/_protected/masters/infrastructure/_layout/room/_layout'
     | '/_protected/masters/inventory/_layout/stock_item'
     | '/_protected/masters/inventory/_layout/stock_item/_layout'
     | '/_protected/masters/organization/_layout/company'
@@ -2432,6 +2697,7 @@ export interface FileRouteTypes {
     | '/_protected/masters/accounts/_layout/account_nature/'
     | '/_protected/masters/accounts/_layout/voucher_category/'
     | '/_protected/masters/accounts/_layout/voucher_classification/'
+    | '/_protected/masters/infrastructure/_layout/amenity/'
     | '/_protected/masters/inventory/_layout/godown/'
     | '/_protected/masters/inventory/_layout/stock_category/'
     | '/_protected/masters/inventory/_layout/stock_group/'
@@ -2482,6 +2748,7 @@ export interface FileRouteTypes {
     | '/_protected/transactions/vouchers/_layout/transfer_voucher/'
     | '/_protected/administration/_layout/role/_layout/$id'
     | '/_protected/administration/_layout/role/_layout/$id/_module'
+    | '/_protected/masters/infrastructure/_layout/building/_layout/$id'
     | '/_protected/masters/organization/_layout/company/_layout/$id'
     | '/_protected/masters/organization/_layout/country/_layout/$id'
     | '/_protected/masters/organization/_layout/currency/_layout/$id'
@@ -2500,6 +2767,12 @@ export interface FileRouteTypes {
     | '/_protected/masters/accounts/_layout/customer/_layout/'
     | '/_protected/masters/accounts/_layout/vendor/_layout/'
     | '/_protected/masters/accounts/_layout/voucher_type/_layout/'
+    | '/_protected/masters/infrastructure/_layout/bed/_layout/'
+    | '/_protected/masters/infrastructure/_layout/building/_layout/'
+    | '/_protected/masters/infrastructure/_layout/facility-amenity/_layout/'
+    | '/_protected/masters/infrastructure/_layout/facility/_layout/'
+    | '/_protected/masters/infrastructure/_layout/floor/_layout/'
+    | '/_protected/masters/infrastructure/_layout/room/_layout/'
     | '/_protected/masters/inventory/_layout/stock_item/_layout/'
     | '/_protected/masters/organization/_layout/company/_layout/'
     | '/_protected/masters/organization/_layout/country/_layout/'
@@ -2728,6 +3001,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersInventoryRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/masters/infrastructure': {
+      id: '/_protected/masters/infrastructure'
+      path: '/masters/infrastructure'
+      fullPath: '/masters/infrastructure'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/masters/accounts': {
       id: '/_protected/masters/accounts'
       path: '/masters/accounts'
@@ -2761,6 +3041,13 @@ declare module '@tanstack/react-router' {
       path: '/help-center'
       fullPath: '/help-center'
       preLoaderRoute: typeof ProtectedHelpCenterIndexRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/facility/': {
+      id: '/_protected/facility/'
+      path: '/facility'
+      fullPath: '/facility'
+      preLoaderRoute: typeof ProtectedFacilityIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/chats/': {
@@ -2924,6 +3211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutRouteImport
       parentRoute: typeof ProtectedMastersInventoryRoute
     }
+    '/_protected/masters/infrastructure/_layout': {
+      id: '/_protected/masters/infrastructure/_layout'
+      path: '/masters/infrastructure'
+      fullPath: '/masters/infrastructure'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureRoute
+    }
     '/_protected/masters/accounts/_layout': {
       id: '/_protected/masters/accounts/_layout'
       path: '/masters/accounts'
@@ -3035,6 +3329,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/inventory/stock_item'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/room': {
+      id: '/_protected/masters/infrastructure/_layout/room'
+      path: '/room'
+      fullPath: '/masters/infrastructure/room'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/floor': {
+      id: '/_protected/masters/infrastructure/_layout/floor'
+      path: '/floor'
+      fullPath: '/masters/infrastructure/floor'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility': {
+      id: '/_protected/masters/infrastructure/_layout/facility'
+      path: '/facility'
+      fullPath: '/masters/infrastructure/facility'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility-amenity': {
+      id: '/_protected/masters/infrastructure/_layout/facility-amenity'
+      path: '/facility-amenity'
+      fullPath: '/masters/infrastructure/facility-amenity'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/building': {
+      id: '/_protected/masters/infrastructure/_layout/building'
+      path: '/building'
+      fullPath: '/masters/infrastructure/building'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/bed': {
+      id: '/_protected/masters/infrastructure/_layout/bed'
+      path: '/bed'
+      fullPath: '/masters/infrastructure/bed'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBedRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/accounts/_layout/voucher_type': {
       id: '/_protected/masters/accounts/_layout/voucher_type'
@@ -3526,6 +3862,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutGodownIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
+    '/_protected/masters/infrastructure/_layout/amenity/': {
+      id: '/_protected/masters/infrastructure/_layout/amenity/'
+      path: '/amenity'
+      fullPath: '/masters/infrastructure/amenity'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutAmenityIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
+    }
     '/_protected/masters/accounts/_layout/voucher_classification/': {
       id: '/_protected/masters/accounts/_layout/voucher_classification/'
       path: '/voucher_classification'
@@ -3658,6 +4001,48 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/inventory/stock_item'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutStock_itemRoute
+    }
+    '/_protected/masters/infrastructure/_layout/room/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/room/_layout'
+      path: '/room'
+      fullPath: '/masters/infrastructure/room'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoomRoute
+    }
+    '/_protected/masters/infrastructure/_layout/floor/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/floor/_layout'
+      path: '/floor'
+      fullPath: '/masters/infrastructure/floor'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFloorRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/facility/_layout'
+      path: '/facility'
+      fullPath: '/masters/infrastructure/facility'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility-amenity/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/facility-amenity/_layout'
+      path: '/facility-amenity'
+      fullPath: '/masters/infrastructure/facility-amenity'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRoute
+    }
+    '/_protected/masters/infrastructure/_layout/building/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/building/_layout'
+      path: '/building'
+      fullPath: '/masters/infrastructure/building'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRoute
+    }
+    '/_protected/masters/infrastructure/_layout/bed/_layout': {
+      id: '/_protected/masters/infrastructure/_layout/bed/_layout'
+      path: '/bed'
+      fullPath: '/masters/infrastructure/bed'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutBedRoute
     }
     '/_protected/masters/accounts/_layout/voucher_type/_layout': {
       id: '/_protected/masters/accounts/_layout/voucher_type/_layout'
@@ -3799,6 +4184,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRoute
     }
+    '/_protected/masters/infrastructure/_layout/room/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/room/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/room/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/floor/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/floor/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/floor/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/facility/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/facility/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/facility-amenity/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/facility-amenity/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/facility-amenity/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/building/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/building/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/building/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/bed/_layout/': {
+      id: '/_protected/masters/infrastructure/_layout/bed/_layout/'
+      path: '/'
+      fullPath: '/masters/infrastructure/bed/'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRoute
+    }
     '/_protected/masters/accounts/_layout/voucher_type/_layout/': {
       id: '/_protected/masters/accounts/_layout/voucher_type/_layout/'
       path: '/'
@@ -3924,6 +4351,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/masters/organization/company/$id'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRouteImport
       parentRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/building/_layout/$id': {
+      id: '/_protected/masters/infrastructure/_layout/building/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/infrastructure/building/$id'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRoute
     }
     '/_protected/administration/_layout/role/_layout/$id/_module': {
       id: '/_protected/administration/_layout/role/_layout/$id/_module'
@@ -4355,6 +4789,237 @@ const ProtectedMastersAccountsRouteChildren: ProtectedMastersAccountsRouteChildr
 const ProtectedMastersAccountsRouteWithChildren =
   ProtectedMastersAccountsRoute._addFileChildren(
     ProtectedMastersAccountsRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren: ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutBedLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutBedRouteChildren {
+  ProtectedMastersInfrastructureLayoutBedLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutBedRouteChildren: ProtectedMastersInfrastructureLayoutBedRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutBedLayoutRoute:
+      ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutBedRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutBedRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutBedRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
+  ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren: ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute:
+      ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute,
+    ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutBuildingLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutBuildingRouteChildren {
+  ProtectedMastersInfrastructureLayoutBuildingLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutBuildingRouteChildren: ProtectedMastersInfrastructureLayoutBuildingRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutBuildingLayoutRoute:
+      ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutBuildingRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutBuildingRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren: ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren {
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren: ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFacilityAmenityRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren: ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFacilityLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFacilityRouteChildren {
+  ProtectedMastersInfrastructureLayoutFacilityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutFacilityRouteChildren: ProtectedMastersInfrastructureLayoutFacilityRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFacilityLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFacilityRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFacilityRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren: ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFloorLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutFloorRouteChildren {
+  ProtectedMastersInfrastructureLayoutFloorLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutFloorRouteChildren: ProtectedMastersInfrastructureLayoutFloorRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutFloorLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutFloorRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutFloorRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutFloorRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren: ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute:
+      ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutRoomLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutRoomRouteChildren {
+  ProtectedMastersInfrastructureLayoutRoomLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureLayoutRoomRouteChildren: ProtectedMastersInfrastructureLayoutRoomRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutRoomLayoutRoute:
+      ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureLayoutRoomRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutRoomRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutRoomRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutBedRoute: typeof ProtectedMastersInfrastructureLayoutBedRouteWithChildren
+  ProtectedMastersInfrastructureLayoutBuildingRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFacilityAmenityRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFacilityRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFloorRoute: typeof ProtectedMastersInfrastructureLayoutFloorRouteWithChildren
+  ProtectedMastersInfrastructureLayoutRoomRoute: typeof ProtectedMastersInfrastructureLayoutRoomRouteWithChildren
+  ProtectedMastersInfrastructureLayoutAmenityIndexRoute: typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
+}
+
+const ProtectedMastersInfrastructureLayoutRouteChildren: ProtectedMastersInfrastructureLayoutRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutBedRoute:
+      ProtectedMastersInfrastructureLayoutBedRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutBuildingRoute:
+      ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFacilityAmenityRoute:
+      ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFacilityRoute:
+      ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFloorRoute:
+      ProtectedMastersInfrastructureLayoutFloorRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutRoomRoute:
+      ProtectedMastersInfrastructureLayoutRoomRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutAmenityIndexRoute:
+      ProtectedMastersInfrastructureLayoutAmenityIndexRoute,
+  }
+
+const ProtectedMastersInfrastructureLayoutRouteWithChildren =
+  ProtectedMastersInfrastructureLayoutRoute._addFileChildren(
+    ProtectedMastersInfrastructureLayoutRouteChildren,
+  )
+
+interface ProtectedMastersInfrastructureRouteChildren {
+  ProtectedMastersInfrastructureLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
+}
+
+const ProtectedMastersInfrastructureRouteChildren: ProtectedMastersInfrastructureRouteChildren =
+  {
+    ProtectedMastersInfrastructureLayoutRoute:
+      ProtectedMastersInfrastructureLayoutRouteWithChildren,
+  }
+
+const ProtectedMastersInfrastructureRouteWithChildren =
+  ProtectedMastersInfrastructureRoute._addFileChildren(
+    ProtectedMastersInfrastructureRouteChildren,
   )
 
 interface ProtectedMastersInventoryLayoutStock_itemLayoutRouteChildren {
@@ -5271,10 +5936,12 @@ interface ProtectedRouteChildren {
   ProtectedAdministrationRoute: typeof ProtectedAdministrationRouteWithChildren
   ProtectedAppsIndexRoute: typeof ProtectedAppsIndexRoute
   ProtectedChatsIndexRoute: typeof ProtectedChatsIndexRoute
+  ProtectedFacilityIndexRoute: typeof ProtectedFacilityIndexRoute
   ProtectedHelpCenterIndexRoute: typeof ProtectedHelpCenterIndexRoute
   ProtectedTasksIndexRoute: typeof ProtectedTasksIndexRoute
   ProtectedauthUserFiscalYearRoute: typeof ProtectedauthUserFiscalYearRouteWithChildren
   ProtectedMastersAccountsRoute: typeof ProtectedMastersAccountsRouteWithChildren
+  ProtectedMastersInfrastructureRoute: typeof ProtectedMastersInfrastructureRouteWithChildren
   ProtectedMastersInventoryRoute: typeof ProtectedMastersInventoryRouteWithChildren
   ProtectedMastersMiscellaneousDelivery_placesRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   ProtectedMastersMiscellaneousDelivery_routesRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRoute
@@ -5299,11 +5966,14 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAdministrationRoute: ProtectedAdministrationRouteWithChildren,
   ProtectedAppsIndexRoute: ProtectedAppsIndexRoute,
   ProtectedChatsIndexRoute: ProtectedChatsIndexRoute,
+  ProtectedFacilityIndexRoute: ProtectedFacilityIndexRoute,
   ProtectedHelpCenterIndexRoute: ProtectedHelpCenterIndexRoute,
   ProtectedTasksIndexRoute: ProtectedTasksIndexRoute,
   ProtectedauthUserFiscalYearRoute:
     ProtectedauthUserFiscalYearRouteWithChildren,
   ProtectedMastersAccountsRoute: ProtectedMastersAccountsRouteWithChildren,
+  ProtectedMastersInfrastructureRoute:
+    ProtectedMastersInfrastructureRouteWithChildren,
   ProtectedMastersInventoryRoute: ProtectedMastersInventoryRouteWithChildren,
   ProtectedMastersMiscellaneousDelivery_placesRoute:
     ProtectedMastersMiscellaneousDelivery_placesRoute,

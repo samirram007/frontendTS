@@ -1,0 +1,39 @@
+import { Button } from "@/components/ui/button";
+// import FacilityOverview from "./components/facility-overview";
+import { Hospital } from "lucide-react";
+import type { FacilityList } from "./data/schema";
+import { Main } from "@/layouts/components/main";
+import { PrimaryButtons } from "../app_module_feature/components/primary-buttons";
+import { GridTable } from "./components/grid-table";
+import { columns } from "./components/columns";
+
+
+
+
+
+interface FacilityProps {
+    data: FacilityList
+}
+
+
+export default function Facility({ data }: FacilityProps) {
+    return (
+        <Main className="min-w-full">
+            <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
+                <div>
+                    <h2 className='text-2xl font-bold tracking-tight'>Facility List</h2>
+                    <p className='text-muted-foreground'>
+                        Manage your Facility  here.
+                    </p>
+                </div>
+                {/* <PrimaryButtons /> */}
+            </div>
+            <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
+                <GridTable
+                    data={data}
+                    columns={columns}
+                />
+            </div>
+        </Main>
+    )
+}

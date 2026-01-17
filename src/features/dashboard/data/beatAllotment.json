@@ -1,0 +1,515 @@
+[
+    {
+        "id": 2,
+        "section": "Floor Info",
+        "floors": [
+            {
+                "floorType": "First",
+                "code": "F-001",
+                "floorName": "First Floor – Neuro Doctors & Nursing Area",
+                "zones": [
+                    {
+                        "zoneType": "DoctorConsultation",
+                        "zoneName": "Doctors Wing",
+                        "rooms": [
+                            {
+                                "roomId": "DOC-101",
+                                "roomNo": "101",
+                                "roomName": "Consultation Room 101",
+                                "roomCategory": "Doctor Room",
+                                "assignedEmployees": [
+                                    {
+                                        "employeeId": "EMP-NEURO-01",
+                                        "name": "Dr. A. Sharma",
+                                        "role": "Doctor",
+                                        "designation": "Neurosurgeon",
+                                        "department": "Neurosurgery",
+                                        "specialization": [
+                                            "Brain Tumor",
+                                            "Spine Surgery"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Mon",
+                                                "Wed",
+                                                "Fri"
+                                            ],
+                                            "shift": "10:00-14:00"
+                                        },
+                                        "status": "available"
+                                    }
+                                ]
+                            },
+                            {
+                                "roomId": "DOC-102",
+                                "roomNo": "102",
+                                "roomName": "Consultation Room 102",
+                                "roomCategory": "Doctor Room",
+                                "assignedEmployees": [
+                                    {
+                                        "employeeId": "EMP-NEURO-02",
+                                        "name": "Dr. R. Mehta",
+                                        "role": "Doctor",
+                                        "designation": "Neurologist",
+                                        "department": "Neurology",
+                                        "specialization": [
+                                            "Epilepsy",
+                                            "Stroke"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Tue",
+                                                "Thu",
+                                                "Sat"
+                                            ],
+                                            "shift": "11:00-15:00"
+                                        },
+                                        "status": "in_consultation"
+                                    }
+                                ]
+                            },
+                            {
+                                "roomId": "DOC-103",
+                                "roomNo": "103",
+                                "roomName": "Procedure & Anesthesia Room",
+                                "roomCategory": "Doctor Room",
+                                "assignedEmployees": [
+                                    {
+                                        "employeeId": "EMP-NEURO-03",
+                                        "name": "Dr. S. Iyer",
+                                        "role": "Doctor",
+                                        "designation": "Neuro Anesthetist",
+                                        "department": "Anesthesiology",
+                                        "specialization": [
+                                            "Neuro Anesthesia"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Tue",
+                                                "Thu",
+                                                "Sat"
+                                            ],
+                                            "shift": "11:00-15:00"
+                                        },
+                                        "status": "on_call"
+                                    }
+                                ]
+                            },
+                            {
+                                "roomId": "DOC-104",
+                                "roomNo": "104",
+                                "roomName": "ICU Review Room",
+                                "roomCategory": "Doctor Room",
+                                "assignedEmployees": [
+                                    {
+                                        "employeeId": "EMP-NEURO-04",
+                                        "name": "Dr. P. Verma",
+                                        "role": "Doctor",
+                                        "designation": "Neuro Intensivist",
+                                        "department": "Neuro ICU",
+                                        "specialization": [
+                                            "Critical Care",
+                                            "Ventilator Management"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Tue",
+                                                "Thu",
+                                                "Sat"
+                                            ],
+                                            "shift": "24x7"
+                                        },
+                                        "status": "available"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "zoneType": "NursingServices",
+                        "zoneName": "Nursing & Treatment Area",
+                        "rooms": [
+                            {
+                                "roomId": "NUR-105",
+                                "roomNo": "105",
+                                "roomName": "Nurses Station",
+                                "roomCategory": "Nursing Room",
+                                "assignedEmployees": [
+                                    {
+                                        "employeeId": "EMP-NUR-01",
+                                        "name": "Nurse Kavita",
+                                        "role": "Nurse",
+                                        "designation": "Staff Nurse",
+                                        "department": "Neuro Ward",
+                                        "specialization": [
+                                            "IV Injection",
+                                            "IM Injection",
+                                            "Dressing"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Tue",
+                                                "Thu",
+                                                "Sat"
+                                            ],
+                                            "shift": "Morning"
+                                        },
+                                        "status": "on_duty"
+                                    },
+                                    {
+                                        "employeeId": "EMP-NUR-02",
+                                        "name": "Nurse Anita",
+                                        "role": "Nurse",
+                                        "designation": "Staff Nurse",
+                                        "department": "Neuro Ward",
+                                        "specialization": [
+                                            "IV Cannulation",
+                                            "Medication"
+                                        ],
+                                        "availability": {
+                                            "days": [
+                                                "Tue",
+                                                "Thu",
+                                                "Sat"
+                                            ],
+                                            "shift": "Evening"
+                                        },
+                                        "status": "on_duty"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "floorType": "Second",
+                "code": "S-012",
+                "floorName": "Second Floor – General Neuro Ward",
+                "rooms": [
+                    {
+                        "roomId": "WARD-201",
+                        "roomName": "General Ward - 201",
+                        "roomType": "General",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-201-A",
+                                "bedNo": "201-A",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            },
+                            {
+                                "bedId": "BED-201-B",
+                                "bedNo": "201-B",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-25T11:00:00",
+                                "expectedAvailableOn": "2025-12-30T09:00:00",
+                                "bookedDurationDays": 5,
+                                "bookedDurationHour": 118
+                            },
+                            {
+                                "bedId": "BED-201-C",
+                                "bedNo": "201-C",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            },
+                            {
+                                "bedId": "BED-201-D",
+                                "bedNo": "201-D",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-25T11:00:00",
+                                "expectedAvailableOn": "2025-12-30T09:00:00",
+                                "bookedDurationDays": 5,
+                                "bookedDurationHour": 118
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "WARD-202",
+                        "roomName": "General Ward - 202",
+                        "roomType": "General",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-202-A",
+                                "bedNo": "202-A",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            },
+                            {
+                                "bedId": "BED-202-B",
+                                "bedNo": "202-B",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-25T11:00:00",
+                                "expectedAvailableOn": "2025-12-30T09:00:00",
+                                "bookedDurationDays": 5,
+                                "bookedDurationHour": 118
+                            },
+                            {
+                                "bedId": "BED-202-C",
+                                "bedNo": "202-C",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            },
+                            {
+                                "bedId": "BED-202-D",
+                                "bedNo": "202-D",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-25T11:00:00",
+                                "expectedAvailableOn": "2025-12-30T09:00:00",
+                                "bookedDurationDays": 5,
+                                "bookedDurationHour": 118
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "WARD-203",
+                        "roomName": "General Ward - 203",
+                        "roomType": "General",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-203-A",
+                                "bedNo": "203-A",
+                                "currentStatus": "booked",
+                                "statusColor": "blue",
+                                "bookedFrom": "2025-12-27T06:00:00",
+                                "expectedAvailableOn": "2025-12-29T06:00:00",
+                                "bookedDurationDays": 2,
+                                "bookedDurationHour": 48
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "floorType": "Third",
+                "code": "T-012",
+                "floorName": "Third Floor – ICU & HDU",
+                "rooms": [
+                    {
+                        "roomId": "ICU-301",
+                        "roomName": "Neuro ICU - 301",
+                        "roomType": "ICU",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-301-A",
+                                "bedNo": "301-A",
+                                "currentStatus": "occupied",
+                                "statusColor": "orange",
+                                "bookedFrom": "2025-12-23T14:00:00",
+                                "expectedAvailableOn": "2025-12-29T14:00:00",
+                                "bookedDurationDays": 6,
+                                "bookedDurationHour": 144
+                            },
+                            {
+                                "bedId": "BED-301-B",
+                                "bedNo": "301-B",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "HDU-302",
+                        "roomName": "Neuro HDU - 302",
+                        "roomType": "HDU",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-302-A",
+                                "bedNo": "302-A",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-25T10:00:00",
+                                "expectedAvailableOn": "2025-12-28T10:00:00",
+                                "bookedDurationDays": 3,
+                                "bookedDurationHour": 72
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "STU-303",
+                        "roomName": "Stroke Unit - 303",
+                        "roomType": "Stroke Unit",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-303-A",
+                                "bedNo": "303-A",
+                                "currentStatus": "booked",
+                                "statusColor": "blue",
+                                "bookedFrom": "2025-12-27T06:00:00",
+                                "expectedAvailableOn": "2025-12-30T10:00:00",
+                                "bookedDurationDays": 3,
+                                "bookedDurationHour": 76
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "floorType": "Fourth",
+                "code": "F-012",
+                "floorName": "Fourth Floor – OT & Private Rooms",
+                "rooms": [
+                    {
+                        "roomId": "PR-401",
+                        "roomName": "Private AC Room - 401",
+                        "roomType": "Private",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-401-A",
+                                "bedNo": "401-A",
+                                "currentStatus": "occupied",
+                                "statusColor": "red",
+                                "bookedFrom": "2025-12-26T12:00:00",
+                                "expectedAvailableOn": "2025-12-31T12:00:00",
+                                "bookedDurationDays": 5,
+                                "bookedDurationHour": 120
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "PR-402",
+                        "roomName": "Private AC Room - 402",
+                        "roomType": "Private",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-402-A",
+                                "bedNo": "402-A",
+                                "currentStatus": "booked",
+                                "statusColor": "blue",
+                                "bookedFrom": "2025-12-27T08:00:00",
+                                "expectedAvailableOn": "2025-12-31T12:00:00",
+                                "bookedDurationDays": 4,
+                                "bookedDurationHour": 96
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "RCV-403",
+                        "roomName": "Recovery Room - 403",
+                        "roomType": "Recovery",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-403-A",
+                                "bedNo": "403-A",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "OT-404",
+                        "roomName": "Operation Theatre - 1",
+                        "roomType": "OT",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "OT-BED-404-A",
+                                "bedNo": "404-A",
+                                "currentStatus": "occupied",
+                                "statusColor": "orange",
+                                "bookedFrom": "2025-12-27T09:00:00",
+                                "expectedAvailableOn": "2025-12-27T13:00:00",
+                                "bookedDurationDays": 0,
+                                "bookedDurationHour": 4
+                            },
+                            {
+                                "bedId": "OT-BED-404-B",
+                                "bedNo": "404-B",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "OT-405",
+                        "roomName": "Operation Theatre - 2",
+                        "roomType": "OT",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "OT-BED-405-A",
+                                "bedNo": "405-A",
+                                "currentStatus": "booked",
+                                "statusColor": "blue",
+                                "bookedFrom": "2025-12-27T14:00:00",
+                                "expectedAvailableOn": "2025-12-27T18:00:00",
+                                "bookedDurationDays": 0,
+                                "bookedDurationHour": 4
+                            },
+                            {
+                                "bedId": "OT-BED-405-B",
+                                "bedNo": "405-B",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            }
+                        ]
+                    },
+                    {
+                        "roomId": "OBS-406",
+                        "roomName": "Observation Room - 406",
+                        "roomType": "Observation",
+                        "totalBeds": 16,
+                        "bedOccupied": 6,
+                        "bedBooked": 4,
+                        "bedAvailable": 6,
+                        "beds": [
+                            {
+                                "bedId": "BED-406-A",
+                                "bedNo": "406-A",
+                                "currentStatus": "available",
+                                "statusColor": "green"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "lastUpdatedAt": "2025-12-27T09:30:00"
+    }
+]

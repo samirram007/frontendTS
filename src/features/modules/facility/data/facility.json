@@ -1,0 +1,820 @@
+[
+    {
+        "facility": {
+            "id": 1,
+            "name": "Main Hospital Building",
+            "code": "BLDG_MAIN",
+            "description": "Primary hospital building housing wards, ICU and services",
+            "parent_id": null,
+            "status": "active",
+            "facility_category": {
+                "id": 1,
+                "code": "STRUCTURAL",
+                "name": "Structural / Location",
+                "description": "Physical infrastructure of hospital",
+                "allows_patient_occupancy": false,
+                "allows_bed_assignment": false,
+                "allows_inventory_storage": false,
+                "allows_staff_assignment": true,
+                "requires_license": false,
+                "requires_temperature_ctrl": false,
+                "requires_infection_control": false,
+                "status": "active"
+            },
+            "facility_type": {
+                "id": 1,
+                "code": "BUILDING",
+                "name": "Building",
+                "description": "Top-level physical structure of hospital",
+                "allows_patient_occupancy": false,
+                "allows_bed_assignment": false,
+                "allows_inventory_storage": false,
+                "allows_staff_assignment": true,
+                "requires_license": false,
+                "requires_temperature_ctrl": false,
+                "requires_infection_control": false,
+                "status": "active"
+            },
+            "building_details": {
+                "building_function": "GENERAL_HOSPITAL",
+                "no_of_floors": 5,
+                "year_constructed": 2015,
+                "has_fire_clearance": true,
+                "has_elevator": true,
+                "has_power_backup": true
+            },
+            "floors": [
+                {
+                    "id": 2,
+                    "name": "Ground Floor",
+                    "code": "FLOOR_00",
+                    "description": "Ground floor with OPD, Emergency, Radiology and Pharmacy",
+                    "parent_id": 1,
+                    "status": "active",
+                    "facility_category": {
+                        "id": 1,
+                        "code": "STRUCTURAL",
+                        "name": "Structural / Location"
+                    },
+                    "facility_type": {
+                        "id": 2,
+                        "code": "FLOOR",
+                        "name": "Floor"
+                    },
+                    "floor_details": {
+                        "floor_number": 0,
+                        "has_pharmacy": true,
+                        "has_ward": false,
+                        "restricted_access": false
+                    },
+                    "rooms": [
+                        {
+                            "id": 3,
+                            "name": "Emergency Room",
+                            "code": "ROOM_ER",
+                            "description": "Emergency department treatment area",
+                            "parent_id": 2,
+                            "status": "active",
+                            "facility_category": {
+                                "id": 1,
+                                "code": "STRUCTURAL"
+                            },
+                            "facility_type": {
+                                "id": 3,
+                                "code": "ROOM",
+                                "name": "Room"
+                            },
+                            "room_details": {
+                                "room_type": "EMERGENCY",
+                                "room_class": "NON_AC",
+                                "max_beds": 10,
+                                "gender_restriction": "NONE",
+                                "has_attached_bathroom": false,
+                                "has_attendant_space": true
+                            },
+                            "children": [
+                                {
+                                    "id": 4,
+                                    "name": "Bed ER-1",
+                                    "code": "BED_ER_1",
+                                    "parent_id": 3,
+                                    "bed_details": {
+                                        "bed_type": "EMERGENCY",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "Bed ER-2",
+                                    "code": "BED_ER_2",
+                                    "parent_id": 3,
+                                    "bed_details": {
+                                        "bed_type": "EMERGENCY",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "Bed ER-3",
+                                    "code": "BED_ER_3",
+                                    "parent_id": 3,
+                                    "bed_details": {
+                                        "bed_type": "EMERGENCY",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 7,
+                                    "name": "Bed ER-4",
+                                    "code": "BED_ER_4",
+                                    "parent_id": 3,
+                                    "bed_details": {
+                                        "bed_type": "EMERGENCY",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 8,
+                                    "name": "Bed ER-5",
+                                    "code": "BED_ER_5",
+                                    "parent_id": 3,
+                                    "bed_details": {
+                                        "bed_type": "EMERGENCY",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 9,
+                            "name": "OPD Consultation Room 1",
+                            "code": "ROOM_OPD_1",
+                            "description": "Outpatient consultation",
+                            "parent_id": 2,
+                            "status": "active",
+                            "room_details": {
+                                "room_type": "CONSULTATION",
+                                "max_beds": 0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "name": "First Floor",
+                    "code": "FLOOR_01",
+                    "description": "First floor with General Wards and Pharmacy",
+                    "parent_id": 1,
+                    "status": "active",
+                    "facility_category": {
+                        "id": 1,
+                        "code": "STRUCTURAL"
+                    },
+                    "facility_type": {
+                        "id": 2,
+                        "code": "FLOOR"
+                    },
+                    "floor_details": {
+                        "floor_number": 1,
+                        "has_pharmacy": true,
+                        "has_ward": true,
+                        "restricted_access": false
+                    },
+                    "rooms": [
+                        {
+                            "id": 11,
+                            "name": "Male General Ward",
+                            "code": "ROOM_MGW",
+                            "description": "Male general patient ward",
+                            "parent_id": 10,
+                            "status": "active",
+                            "facility_type": {
+                                "id": 3,
+                                "code": "ROOM"
+                            },
+                            "room_details": {
+                                "room_type": "GENERAL",
+                                "room_class": "NON_AC",
+                                "max_beds": 6,
+                                "gender_restriction": "MALE",
+                                "has_attached_bathroom": true
+                            },
+                            "children": [
+                                {
+                                    "id": 12,
+                                    "name": "Bed MGW-1",
+                                    "code": "BED_MGW_1",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                },
+                                {
+                                    "id": 13,
+                                    "name": "Bed MGW-2",
+                                    "code": "BED_MGW_2",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                },
+                                {
+                                    "id": 14,
+                                    "name": "Bed MGW-3",
+                                    "code": "BED_MGW_3",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                },
+                                {
+                                    "id": 15,
+                                    "name": "Bed MGW-4",
+                                    "code": "BED_MGW_4",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                },
+                                {
+                                    "id": 16,
+                                    "name": "Bed MGW-5",
+                                    "code": "BED_MGW_5",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                },
+                                {
+                                    "id": 17,
+                                    "name": "Bed MGW-6",
+                                    "code": "BED_MGW_6",
+                                    "parent_id": 11,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "has_oxygen_point": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 18,
+                            "name": "Female General Ward",
+                            "code": "ROOM_FGW",
+                            "description": "Female general patient ward",
+                            "parent_id": 10,
+                            "status": "active",
+                            "facility_type": {
+                                "id": 3,
+                                "code": "ROOM"
+                            },
+                            "room_details": {
+                                "room_type": "GENERAL",
+                                "room_class": "NON_AC",
+                                "max_beds": 6,
+                                "gender_restriction": "FEMALE"
+                            },
+                            "children": [
+                                {
+                                    "id": 19,
+                                    "name": "Bed FGW-1",
+                                    "code": "BED_FGW_1",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                },
+                                {
+                                    "id": 20,
+                                    "name": "Bed FGW-2",
+                                    "code": "BED_FGW_2",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                },
+                                {
+                                    "id": 21,
+                                    "name": "Bed FGW-3",
+                                    "code": "BED_FGW_3",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                },
+                                {
+                                    "id": 22,
+                                    "name": "Bed FGW-4",
+                                    "code": "BED_FGW_4",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                },
+                                {
+                                    "id": 23,
+                                    "name": "Bed FGW-5",
+                                    "code": "BED_FGW_5",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                },
+                                {
+                                    "id": 24,
+                                    "name": "Bed FGW-6",
+                                    "code": "BED_FGW_6",
+                                    "parent_id": 18,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 25,
+                            "name": "Room 101",
+                            "code": "ROOM_101",
+                            "description": "Private general patient room",
+                            "parent_id": 10,
+                            "status": "active",
+                            "facility_type": {
+                                "id": 3,
+                                "code": "ROOM"
+                            },
+                            "room_details": {
+                                "room_type": "PRIVATE",
+                                "room_class": "AC",
+                                "max_beds": 1,
+                                "gender_restriction": "NONE",
+                                "has_attached_bathroom": true
+                            },
+                            "children": [
+                                {
+                                    "id": 26,
+                                    "name": "Bed 101-1",
+                                    "code": "BED_101_1",
+                                    "parent_id": 25,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 27,
+                            "name": "Room 102",
+                            "code": "ROOM_102",
+                            "description": "Private general patient room",
+                            "parent_id": 10,
+                            "status": "active",
+                            "room_details": {
+                                "room_type": "PRIVATE",
+                                "room_class": "AC",
+                                "max_beds": 1
+                            },
+                            "children": [
+                                {
+                                    "id": 28,
+                                    "name": "Bed 102-1",
+                                    "code": "BED_102_1",
+                                    "parent_id": 27,
+                                    "bed_details": {
+                                        "bed_type": "GENERAL",
+                                        "is_electric": true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 29,
+                    "name": "Second Floor",
+                    "code": "FLOOR_02",
+                    "description": "Second floor with ICU, HDU and Operation Theatres",
+                    "parent_id": 1,
+                    "status": "active",
+                    "facility_category": {
+                        "id": 1,
+                        "code": "STRUCTURAL"
+                    },
+                    "facility_type": {
+                        "id": 2,
+                        "code": "FLOOR"
+                    },
+                    "floor_details": {
+                        "floor_number": 2,
+                        "has_pharmacy": false,
+                        "has_ward": true,
+                        "restricted_access": true
+                    },
+                    "rooms": [
+                        {
+                            "id": 30,
+                            "name": "Intensive Care Unit (ICU)",
+                            "code": "ROOM_ICU",
+                            "description": "Critical care unit",
+                            "parent_id": 29,
+                            "status": "active",
+                            "facility_type": {
+                                "id": 3,
+                                "code": "ROOM"
+                            },
+                            "room_details": {
+                                "room_type": "ICU",
+                                "room_class": "AC",
+                                "max_beds": 8,
+                                "gender_restriction": "NONE",
+                                "requires_infection_control": true
+                            },
+                            "children": [
+                                {
+                                    "id": 31,
+                                    "name": "Bed ICU-1",
+                                    "code": "BED_ICU_1",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true,
+                                        "is_isolation_bed": false
+                                    }
+                                },
+                                {
+                                    "id": 32,
+                                    "name": "Bed ICU-2",
+                                    "code": "BED_ICU_2",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 33,
+                                    "name": "Bed ICU-3",
+                                    "code": "BED_ICU_3",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 34,
+                                    "name": "Bed ICU-4",
+                                    "code": "BED_ICU_4",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true,
+                                        "is_isolation_bed": true
+                                    }
+                                },
+                                {
+                                    "id": 35,
+                                    "name": "Bed ICU-5",
+                                    "code": "BED_ICU_5",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 36,
+                                    "name": "Bed ICU-6",
+                                    "code": "BED_ICU_6",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 37,
+                                    "name": "Bed ICU-7",
+                                    "code": "BED_ICU_7",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                },
+                                {
+                                    "id": 38,
+                                    "name": "Bed ICU-8",
+                                    "code": "BED_ICU_8",
+                                    "parent_id": 30,
+                                    "bed_details": {
+                                        "bed_type": "ICU",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true,
+                                        "has_suction_point": true,
+                                        "has_monitoring": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 39,
+                            "name": "Operation Theatre 1",
+                            "code": "ROOM_OT_1",
+                            "description": "Major operation theatre",
+                            "parent_id": 29,
+                            "status": "active",
+                            "room_details": {
+                                "room_type": "OT",
+                                "max_beds": 1
+                            },
+                            "children": [
+                                {
+                                    "id": 40,
+                                    "name": "Bed OT-1",
+                                    "code": "BED_OT_1",
+                                    "parent_id": 39,
+                                    "bed_details": {
+                                        "bed_type": "OT",
+                                        "is_electric": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 41,
+                            "name": "Operation Theatre 2",
+                            "code": "ROOM_OT_2",
+                            "description": "Minor operation theatre",
+                            "parent_id": 29,
+                            "status": "active",
+                            "room_details": {
+                                "room_type": "OT",
+                                "max_beds": 1
+                            },
+                            "children": [
+                                {
+                                    "id": 42,
+                                    "name": "Bed OT-2",
+                                    "code": "BED_OT_2",
+                                    "parent_id": 41,
+                                    "bed_details": {
+                                        "bed_type": "OT"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 43,
+                    "name": "Third Floor",
+                    "code": "FLOOR_03",
+                    "description": "Third floor with Pediatric and Maternity wards",
+                    "parent_id": 1,
+                    "status": "active",
+                    "floor_details": {
+                        "floor_number": 3,
+                        "has_ward": true
+                    },
+                    "rooms": [
+                        {
+                            "id": 44,
+                            "name": "Pediatric Ward",
+                            "code": "ROOM_PEDI",
+                            "parent_id": 43,
+                            "room_details": {
+                                "room_type": "PEDIATRIC",
+                                "max_beds": 10,
+                                "gender_restriction": "CHILD"
+                            },
+                            "children": [
+                                {
+                                    "id": 45,
+                                    "name": "Bed PEDI-1",
+                                    "code": "BED_PEDI_1",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 46,
+                                    "name": "Bed PEDI-2",
+                                    "code": "BED_PEDI_2",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 47,
+                                    "name": "Bed PEDI-3",
+                                    "code": "BED_PEDI_3",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 48,
+                                    "name": "Bed PEDI-4",
+                                    "code": "BED_PEDI_4",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 49,
+                                    "name": "Bed PEDI-5",
+                                    "code": "BED_PEDI_5",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 50,
+                                    "name": "Bed PEDI-6",
+                                    "code": "BED_PEDI_6",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 51,
+                                    "name": "Bed PEDI-7",
+                                    "code": "BED_PEDI_7",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 52,
+                                    "name": "Bed PEDI-8",
+                                    "code": "BED_PEDI_8",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 53,
+                                    "name": "Bed PEDI-9",
+                                    "code": "BED_PEDI_9",
+                                    "parent_id": 44
+                                },
+                                {
+                                    "id": 54,
+                                    "name": "Bed PEDI-10",
+                                    "code": "BED_PEDI_10",
+                                    "parent_id": 44
+                                }
+                            ]
+                        },
+                        {
+                            "id": 55,
+                            "name": "Maternity Ward",
+                            "code": "ROOM_MAT",
+                            "parent_id": 43,
+                            "room_details": {
+                                "room_type": "MATERNITY",
+                                "max_beds": 6,
+                                "gender_restriction": "FEMALE"
+                            },
+                            "children": [
+                                {
+                                    "id": 56,
+                                    "name": "Bed MAT-1",
+                                    "code": "BED_MAT_1",
+                                    "parent_id": 55
+                                },
+                                {
+                                    "id": 57,
+                                    "name": "Bed MAT-2",
+                                    "code": "BED_MAT_2",
+                                    "parent_id": 55
+                                },
+                                {
+                                    "id": 58,
+                                    "name": "Bed MAT-3",
+                                    "code": "BED_MAT_3",
+                                    "parent_id": 55
+                                },
+                                {
+                                    "id": 59,
+                                    "name": "Bed MAT-4",
+                                    "code": "BED_MAT_4",
+                                    "parent_id": 55
+                                },
+                                {
+                                    "id": 60,
+                                    "name": "Bed MAT-5",
+                                    "code": "BED_MAT_5",
+                                    "parent_id": 55
+                                },
+                                {
+                                    "id": 61,
+                                    "name": "Bed MAT-6",
+                                    "code": "BED_MAT_6",
+                                    "parent_id": 55
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 62,
+                    "name": "Fourth Floor",
+                    "code": "FLOOR_04",
+                    "description": "Fourth floor with Deluxe and VIP rooms",
+                    "parent_id": 1,
+                    "status": "active",
+                    "floor_details": {
+                        "floor_number": 4
+                    },
+                    "rooms": [
+                        {
+                            "id": 63,
+                            "name": "Deluxe Room 401",
+                            "code": "ROOM_401",
+                            "parent_id": 62,
+                            "room_details": {
+                                "room_type": "DELUXE",
+                                "room_class": "AC",
+                                "max_beds": 2
+                            },
+                            "children": [
+                                {
+                                    "id": 64,
+                                    "name": "Bed 401-A",
+                                    "code": "BED_401_A",
+                                    "parent_id": 63,
+                                    "bed_details": {
+                                        "bed_type": "DELUXE",
+                                        "is_electric": true
+                                    }
+                                },
+                                {
+                                    "id": 65,
+                                    "name": "Bed 401-B",
+                                    "code": "BED_401_B",
+                                    "parent_id": 63,
+                                    "bed_details": {
+                                        "bed_type": "DELUXE",
+                                        "is_electric": true
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": 66,
+                            "name": "VIP Suite 402",
+                            "code": "ROOM_402",
+                            "parent_id": 62,
+                            "room_details": {
+                                "room_type": "VIP",
+                                "room_class": "AC",
+                                "max_beds": 1
+                            },
+                            "children": [
+                                {
+                                    "id": 67,
+                                    "name": "Bed VIP-1",
+                                    "code": "BED_VIP_1",
+                                    "parent_id": 66,
+                                    "bed_details": {
+                                        "bed_type": "VIP",
+                                        "is_electric": true,
+                                        "has_oxygen_point": true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 3,
+        "section": "Store Room",
+        "summary": {
+            "totalItems": 842,
+            "lowStockItems": 27,
+            "outOfStockItems": 4,
+            "nearExpiryItems": 18,
+            "expiredItems": 2,
+            "criticalShortages": 3,
+            "categorySnapshot": [
+                {
+                    "category": "Injectables",
+                    "lowStock": 6
+                },
+                {
+                    "category": "Emergency Drugs",
+                    "lowStock": 3
+                },
+                {
+                    "category": "Consumables",
+                    "lowStock": 8
+                },
+                {
+                    "category": "Neuro-Specific",
+                    "lowStock": 2
+                }
+            ],
+            "emergencyReadiness": {
+                "strokeKit": "NOT_READY",
+                "icuBackup": "LOW",
+                "otSterileStock": "READY"
+            },
+            "reorder": {
+                "itemsToReorderToday": 12,
+                "pendingPurchaseOrders": 5
+            },
+            "lastUpdatedAt": "2025-12-27T09:30:00"
+        }
+    }
+]

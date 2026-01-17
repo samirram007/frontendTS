@@ -27,5 +27,7 @@
     "titleBar.inactiveBackground": "#10332399",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#103323"
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "explorer.compactFolders": false
 }
