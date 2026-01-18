@@ -36,14 +36,15 @@ export function PrimaryButtons({ isModal = false, type = 'text' }: PrimaryButton
 
 export const TransporterModalPrimaryButtons = ({ type }: PrimaryButtonsProps) => {
   const { setOpen } = useTransporter()
-  // console.log("PrimaryButtons", open)
+
   return (
     <div className='flex gap-2'>
       <Button className='space-x-1' size={'sm'} variant={'outline'} title='Add Transporter' onClick={() => setOpen('add')}>
-        {type === 'icon' ? <IconPlus size={18} /> :
+        {type === 'icon' ? <IconPlus size={18} className='h-4' /> :
           <><span>Add Transporter</span> <IconTransformPoint size={18} /></>
         }
       </Button>
+
     </div >
   )
 };

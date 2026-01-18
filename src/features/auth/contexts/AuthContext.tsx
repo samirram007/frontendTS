@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 //must be unique permissions
 
                 data?.data?.roles?.forEach((role: Role) => {
-                    role.permissions?.forEach((permission: Permission) => {
+                    role?.permissions?.forEach((permission: Permission) => {
                         // console.log(permission, "permissions in auth context")
                         if (permission.isAllowed && !perms.includes(permission.appModuleFeature?.code || '')) {
                             perms.push(permission.appModuleFeature?.code || '');

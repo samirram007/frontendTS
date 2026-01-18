@@ -6,14 +6,16 @@ import type { UseFormReturn } from "react-hook-form";
 import { fetchCompanyTypeService } from "../../../company_type/data/api";
 import type { CompanyType } from "../../../company_type/data/schema";
 import type { CompanyForm } from "../../data/schema";
+import { cn } from "@/lib/utils";
 
 type Props = {
     form: UseFormReturn<CompanyForm>;
+    gapClass?: string;
+    rtl?: boolean;
 }
 
 const CompanyTypeDropdown = (props: Props) => {
-    const { form } = props
-
+    const { form, gapClass, rtl } = props
     const { data: companyTypeList, isLoading } = useQuery({
         queryKey: ["companyTypes"],
         queryFn: fetchCompanyTypeService,
@@ -32,21 +34,24 @@ const CompanyTypeDropdown = (props: Props) => {
             control={form.control}
             name='companyTypeId'
             render={({ field }) => (
-                <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                        Company Type
-                    </FormLabel>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass,
+                    )}
+                >
+                    <FormLabel className={rtl ? 'order-last' : ''}>Company Type</FormLabel>
                     <SelectDropdown
                         defaultValue={field.value ? field.value.toString() : ''}
                         onValueChange={(value) => handleValueChange(value)}
                         placeholder='Select an company type'
-                        className='w-full col-span-6 md:col-span-4'
+                        className='w-full'
                         items={companyTypeList?.data.map((companyType: CompanyType) => ({
                             label: capitalizeAllWords(companyType.name),
                             value: String(companyType.id),
                         }))}
                     />
-                    <FormMessage className='col-span-4 col-start-3' />
+                    <FormMessage className=' ' />
                 </FormItem>
             )}
         />

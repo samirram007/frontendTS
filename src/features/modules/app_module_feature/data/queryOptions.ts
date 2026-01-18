@@ -1,9 +1,27 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import type { AppModuleFeatureForm } from "../types/types"
 import { deleteAppModuleFeatureService, fetchAppModuleFeatureByIdService, fetchAppModuleFeatureService, storeAppModuleFeatureService, updateAppModuleFeatureService } from "./api"
+import { getData } from "@/utils/dataClient"
 const Key = "AppModuleFeatures"
 const BASE_KEY = "AppModuleFeatures"
 
+
+
+export const appModuleFeatureRoleQueryOptions = (id?: number, moduleid?: number) => {
+
+    return queryOptions({
+        queryKey: id && moduleid ? [BASE_KEY, id, moduleid] : [BASE_KEY],
+        queryFn: async () => {
+            if (!id || !moduleid) {
+                throw new Error("Both roleId and moduleId are required for this query.")
+            }
+            return await getData(`/role/${id}/module-features/${moduleid}`)
+        },
+        enabled: !!id && !!moduleid,
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: 1,
+    })
+}
 
 export const appModuleFeatureQueryOptions = (id?: number) => {
 

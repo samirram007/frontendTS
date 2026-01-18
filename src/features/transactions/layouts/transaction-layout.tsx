@@ -5,6 +5,7 @@ import { Main } from '@/layouts/components/main'
 import { Link, Outlet } from '@tanstack/react-router'
 import { useTransaction } from '../context/transaction-context'
 
+
 const TransactionLayout = () => {
     const { headerVisible } = useTransaction()
     const { userFiscalYear } = useAuth();
@@ -26,6 +27,7 @@ const TransactionLayout = () => {
     return (
 
         <Main fixed className='  overflow-hidden'>
+
             {headerVisible &&
                 <>
             <div className='space-y-0.5'>
@@ -45,6 +47,8 @@ const TransactionLayout = () => {
                     <Outlet />
                 </div>
             </div>
+            {/* <TransporterDialog />
+            <DeliveryVehicleDialog /> */}
 
         </Main>
     )

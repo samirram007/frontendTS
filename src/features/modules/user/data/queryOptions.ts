@@ -1,18 +1,27 @@
-import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchUserByIdService, fetchUserService, storeUserService, updateUserService } from "./api"
-import type { UserForm } from "./schema"
+import {
+    queryOptions,
+    useMutation,
+    useQueryClient,
+} from '@tanstack/react-query'
+import {
+    assignUserRoleService,
+    fetchUserByIdService,
+    fetchUserService,
+    storeUserService,
+    updateUserService,
+} from './api'
+import type { UserForm } from './schema'
+import type { UserRole } from '../../role/data/schema'
 
-const BASE_KEY = "user"
+const BASE_KEY = 'user'
 
 export const userQueryOptions = (id?: number) => {
-
     return queryOptions({
         queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
-        queryFn: () =>
-            id ? fetchUserByIdService(id) : fetchUserService(),
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        retry: 1,
-    })
+      queryFn: () => (id ? fetchUserByIdService(id) : fetchUserService()),
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: 1,
+  })
 }
 
 export function useUserMutation() {
@@ -30,7 +39,22 @@ export function useUserMutation() {
             queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
         },
         onError: (error) => {
-            console.error("User mutation failed:", error)
+          console.error('User mutation failed:', error)
+      },
+  })
+}
+
+export function useUserRoleMutation() {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: async (data: UserRole) => {
+            return await assignUserRoleService(data)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+        },
+        onError: (error) => {
+            console.error('User Role mutation failed:', error)
         },
     })
 }

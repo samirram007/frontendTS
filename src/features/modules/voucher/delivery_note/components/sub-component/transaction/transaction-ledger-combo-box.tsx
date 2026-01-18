@@ -79,7 +79,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                     aria-expanded={open}
                     className="w-full justify-between"
                     onBlur={handleBlur}
-
+                    onKeyDown={handleKeyDown}
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label

@@ -36,7 +36,7 @@ const TypeOfSupplySelect = (props: Props) => {
                             gapClass
                         )} >
                         <FormLabel className='pt-1  '>
-                            Unit Type
+                            Supply Type
                         </FormLabel>
                         <div className="w-full flex gap-2 flex-row items-center justify-start  space-y-1">
 

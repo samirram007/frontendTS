@@ -28,7 +28,7 @@ import type { UseFormReturn } from "react-hook-form"
 
 
 
-import { billingPreference, billingPreferenceSchema, type VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
+import { billingPreferenceSchema, type VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
 import { Label } from "@/components/ui/label"
 
 

@@ -59,6 +59,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         appModuleId: undefined,
         isEdit,
       },
+    mode: 'onChange',
   })
 
   const onSubmit = (values: AppModuleFeatureForm) => {
@@ -81,13 +82,15 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
     return name
       ? appModule?.code + "_" + name.toUpperCase().replace(/\s+/g, "_").replace(/[^A-Z0-9_]/g, "")
       : ""
-  }, [name])
+  }, [name, appModule])
 
   // reflect it in the input
   useEffect(() => {
-    form.setValue("code", code)
-    form.setValue("description", code)
-  }, [code])
+    if (form.formState.isDirty) {
+      form.setValue("code", code, { shouldDirty: true })
+      form.setValue("description", code, { shouldDirty: true })
+    }
+  }, [code, form])
   return (
     <Dialog
       open={open}
@@ -117,6 +120,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
                 <div>sample:</div>
                 <div className='flex flex-row gap-4'>
 
+                  <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'View') }}>View</Badge>
                   <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Create') }}>Create</Badge>
                   <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Edit') }}>Edit</Badge>
                   <Badge className='cursor-pointer' onClick={() => { form.setValue('name', 'Delete') }}>Delete</Badge>

@@ -1,27 +1,11 @@
+import { appModuleFeatureRoleQueryOptions } from '@/features/modules/app_module_feature/data/queryOptions'
 import FeaturePermissionList from '@/features/modules/role/components/permission/feature_permission-list'
-import { getData } from '@/utils/dataClient'
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { Loader } from 'lucide-react'
 import { Suspense } from 'react'
 import z from 'zod'
 
-const BASE_KEY = "AppModuleFeatures"
-export const appModuleFeatureRoleQueryOptions = (id?: number, moduleid?: number) => {
-
-  return queryOptions({
-    queryKey: id && moduleid ? [BASE_KEY, id, moduleid] : [BASE_KEY],
-    queryFn: async () => {
-      if (!id || !moduleid) {
-        throw new Error("Both roleId and moduleId are required for this query.")
-      }
-      return await getData(`/role/${id}/module-features/${moduleid}`)
-    },
-    enabled: !!id && !!moduleid,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    retry: 1,
-  })
-}
 
 
 const paramsSchema = z.object({

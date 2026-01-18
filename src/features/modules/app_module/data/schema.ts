@@ -1,5 +1,6 @@
 import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status';
 import { z } from 'zod';
+import { appModuleFeatureListSchema } from '../../app_module_feature/data/schema';
 
 
 export const appModuleSchema: z.ZodType<any> = z.object({
@@ -8,6 +9,7 @@ export const appModuleSchema: z.ZodType<any> = z.object({
   code: z.string().optional().nullish(),
   description: z.string().nullish(),
   status: ActiveInactiveStatusSchema.default(ActiveInactiveStatusSchema.options[0].value),
+  features: z.lazy(() => appModuleFeatureListSchema).optional().nullable(),
 
 
 })

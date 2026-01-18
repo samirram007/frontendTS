@@ -33,7 +33,7 @@ const topNav = [
         disabled: true,
     },
     {
-        title: 'Receipt Note',
+        title: 'Received(GRN)',
         href: '/transactions/vouchers/receipt_note',
         visible: true,
         isActive: false,

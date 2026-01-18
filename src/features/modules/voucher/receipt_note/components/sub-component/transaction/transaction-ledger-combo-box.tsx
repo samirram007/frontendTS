@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
 
-import { useFocusNext } from "@/core/hooks/useFocusNext"
+
 import type { TransactionLedger } from "../../../../data-schema/transactinableStockItem/data/schema"
 import type { ReceiptNoteForm } from "../../../data/schema"
 

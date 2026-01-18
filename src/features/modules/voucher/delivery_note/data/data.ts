@@ -25,7 +25,7 @@ export const voucherDispatchDefaultValues: VoucherDispatchDetailForm = {
     receiptDocNo: null,
     dispatchedThrough: null,
     destination: null,
-    destination_secondary: null,
+    destinationSecondary: null,
     carrierName: null,
     billOfLadingNo: null,
     billOfLadingDate: null,

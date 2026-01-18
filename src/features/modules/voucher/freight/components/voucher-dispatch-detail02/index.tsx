@@ -96,7 +96,7 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
 
     });
 
-    // console.log("##", weight, voucherDispatchForm.watch())
+
 
     const handleOnClick = () => {
         const isValid = voucherDispatchForm.trigger();
@@ -211,7 +211,7 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='source' label='Source' />
                                                 <div className="grid grid-cols-[1fr_1fr] gap-12">
                                                     <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='destination' label='Destination' />
-                                                    <FormInputField type='text' gapClass={gapClass04} form={voucherDispatchForm} name='destination_secondary' label='Destination' />
+                                                    <FormInputField type='text' gapClass={gapClass04} form={voucherDispatchForm} name='destinationSecondary' label='Destination' />
                                                 </div>
                                                 <div className="grid grid-cols-[1fr_1fr] gap-12">
                                                     <div className="grid grid-cols-[200px_220px_50px] items-center gap-4">

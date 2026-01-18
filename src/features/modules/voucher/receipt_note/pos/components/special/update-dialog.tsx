@@ -6,7 +6,7 @@ import type { ReceiptNoteForm } from "../../../data/schema";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { StockJournalEntryForm, StockJournalGodownEntryForm } from "@/features/modules/voucher/data-schema/voucher-schema";
-import { Route as ReceiptNoteRoute } from "@/routes/_protected/transactions/vouchers/_layout/receipt_note/_layout/$id";
+import { Route as ReceiptNoteRoute } from "@/routes/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/$id";
 
 
 type SaveDialogProps = {

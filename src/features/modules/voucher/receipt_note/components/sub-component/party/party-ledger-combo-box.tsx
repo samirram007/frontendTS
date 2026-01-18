@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
-import { useFocusNext } from "@/core/hooks/useFocusNext"
+
 import type { PartyLedger } from "../../../../data-schema/partyLedger/data/schema"
 import type { ReceiptNoteForm } from "../../../data/schema"
 import type { PartyForm } from "@/features/modules/voucher/data-schema/voucher-schema"
@@ -38,10 +38,10 @@ interface Props {
 export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
     const lastKeyRef = React.useRef<string | null>(null);
     const form = useFormContext<ReceiptNoteForm>()
-    const focusNext = useFocusNext();
+
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState(form.getValues('partyLedger.id')?.toString())
-    const [enterCount, setEnterCount] = React.useState(0)
+
 
     const handleSelect = (value: string) => {
         // form.setValue("party", partyLedgers.find((party) => party.id === Number(value)))

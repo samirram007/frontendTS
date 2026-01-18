@@ -19,7 +19,8 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
     const [checking, setChecking] = useState(true);
     const [valid, setValid] = useState(false);  // for success animation
     const handleSaving = () => {
-        // console.log('Form submitted', mainForm.getValues());
+        //console.log('Form submitted', mainForm.getValues());
+
         createDeliveryNote(mainForm.getValues())
     }
 
@@ -121,7 +122,9 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                     size="lg"
                     disabled={isSaving}><Loader className="animate-spin" /> Saving...</Button>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-5xl'>
+            <DialogContent className='sm:max-w-5xl'
+                // onEscapeKeyDown={(e) => e.preventDefault()}
+                onPointerDownOutside={(e) => e.preventDefault()}>
                 <DialogHeader className='text-left border-b-2 pb-2'>
                     <DialogTitle>Delivery Note </DialogTitle>
                     <DialogDescription>
@@ -158,6 +161,7 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                         Save changes
                     </Button>
                 </DialogFooter>
+
             </DialogContent>
         </Dialog >
 

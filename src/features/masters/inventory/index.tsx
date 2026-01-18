@@ -1,6 +1,7 @@
 import { Separator } from '@/components/ui/separator'
 import {
     IconPalette,
+    IconStack,
     IconTool
 } from '@tabler/icons-react'
 import { Outlet } from '@tanstack/react-router'
@@ -77,4 +78,10 @@ const sidebarNavItems = [
         icon: <IconPalette size={18} />,
         href: '/masters/inventory/godown',
     },
+    {
+        title: 'Storage Unit',
+        visible: true,
+        icon: <IconStack size={18} />,
+        href: '/masters/inventory/storage_unit',
+    }
 ]

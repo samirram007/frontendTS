@@ -20,7 +20,7 @@ export const deliveryNoteQueryOptions = (id?: number) => {
 export function useDeliveryNoteMutation() {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
-    const Key = "DayBooks"
+    const Key = "DeliveryNotes"
     return useMutation({
         mutationFn: async (data: DeliveryNoteForm & { id?: number }) => {
             if (data.id) {

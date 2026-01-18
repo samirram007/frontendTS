@@ -32,8 +32,7 @@ import { useSuspenseQuery } from "@tanstack/react-query"
 
 
 import type { VoucherDispatchDetailForm } from "../../../data-schema/voucher-schema"
-import { deliveryRouteQueryOptions } from "@/features/modules/delivery_route/data/queryOptions"
-import type { DeliveryRoute } from "@/features/modules/delivery_route/data/schema"
+
 import { deliveryVehicleQueryOptions } from "@/features/modules/delivery_vehicle/data/queryOptions"
 import type { DeliveryVehicle } from "@/features/modules/delivery_vehicle/data/schema"
 

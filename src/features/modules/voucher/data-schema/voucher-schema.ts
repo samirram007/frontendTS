@@ -114,7 +114,7 @@ export const voucherDispatchDetailSchema = z.object({
     dispatchedThrough: z.string().nullish(),
     source: z.string().nullish(),
     destination: z.string().nullish(),
-    destination_secondary: z.string().nullish(),
+    destinationSecondary: z.string().nullish(),
     carrierName: z.string().nullish(),
     billOfLadingNo: z.string().nullish(),
     billOfLadingDate: z.coerce.date().nullish(),

@@ -7,13 +7,16 @@ import type { UseFormReturn } from "react-hook-form";
 import { fetchCurrencyService } from "../../../currency/data/api";
 import type { Currency } from "../../../currency/data/schema";
 import type { CompanyForm } from "../../data/schema";
+import { cn } from "@/lib/utils";
 
 type Props = {
     form: UseFormReturn<CompanyForm>;
+    gapClass?: string;
+    rtl?: boolean;
 }
 
 const CurrencyDropdown = (props: Props) => {
-    const { form } = props
+    const { form, gapClass, rtl } = props
 
     const { data: currencyList, isLoading } = useQuery({
         queryKey: ["currencies"],
@@ -33,21 +36,24 @@ const CurrencyDropdown = (props: Props) => {
             control={form.control}
             name='currencyId'
             render={({ field }) => (
-                <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                        Currency
-                    </FormLabel>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass,
+                    )}
+                >
+                    <FormLabel className={rtl ? 'order-last' : ''}>Currency</FormLabel>
                     <SelectDropdown
                         defaultValue={field.value ? field.value.toString() : ''}
                         onValueChange={(value) => handleValueChange(value)}
                         placeholder='Select a currency'
-                        className='w-full col-span-6 md:col-span-4'
+                        className='w-full '
                         items={currencyList?.data.map((currency: Currency) => ({
-                            label: capitalizeAllWords(currency.name),
+                            label: `${currency.symbol} ${capitalizeAllWords(currency.name)} (${currency.code})`,
                             value: String(currency.id),
                         }))}
                     />
-                    <FormMessage className='col-span-4 col-start-3' />
+                    <FormMessage className=' ' />
                 </FormItem>
             )}
         />
