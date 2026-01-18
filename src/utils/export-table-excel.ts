@@ -1,5 +1,6 @@
 import ExcelJS from 'exceljs'
 import { saveAs } from 'file-saver'
+import { toSentenceCase } from './removeEmptyStrings'
 
 export interface ExportColumn<T> {
   header: string
@@ -23,7 +24,7 @@ export async function exportTableToExcel<T>({
   const worksheet = workbook.addWorksheet(title)
 
   worksheet.columns = columns.map((col) => ({
-    header: col.header,
+    header: toSentenceCase(col.header),
     key: col.accessor as string,
     width: 20,
   }))
