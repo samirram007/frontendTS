@@ -11,6 +11,7 @@ import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
 import DeliveryRouteProvider from './contexts/delivery_route-context'
 import { deliveryRouteListSchema, type DeliveryRouteList } from './data/schema'
+import { AppBreadcrumbs } from '@/features/global/components/AppBreadcrumb'
 
 
 // Import the correct type for deliveryRouteListSchema
@@ -22,6 +23,10 @@ interface DeliveryRouteProps {
 }
 
 export default function DeliveryRoute({ data }: DeliveryRouteProps) {
+    const breadcrumbItems = [
+        { label: 'Home', href: '/' },
+        { label: 'Delivery Places' },
+    ]
 
 
     return (
@@ -35,6 +40,9 @@ export default function DeliveryRoute({ data }: DeliveryRouteProps) {
                         <p className='text-muted-foreground'>
                             Manage your delivery route  here.
                         </p>
+                        <div className="mt-1">
+                            <AppBreadcrumbs items={breadcrumbItems} />
+                        </div>
                     </div>
                     <PrimaryButtons />
                 </div>

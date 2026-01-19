@@ -16,7 +16,7 @@ export async function storeDeliveryNoteService(payload: any) {
 }
 export async function updateDeliveryNoteService(payload: any) {
     console.log("Delivery Note payload", payload)
-    return
+    // return
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 
