@@ -7,7 +7,7 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import type { Home } from 'lucide-react'
+
 import { IconHome } from '@tabler/icons-react'
 
 export type BreadcrumbItemType = {

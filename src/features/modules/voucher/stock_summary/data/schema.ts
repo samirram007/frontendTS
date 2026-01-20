@@ -1,10 +1,9 @@
 import { voucherTypeSchema } from '@/features/modules/voucher_type/data/schema';
 import { z } from 'zod';
-export const stockInHandSchema = z.object({
-  itemId: z.number().int().positive(),
-  itemName: z.string().min(1),
-  unitCode: z.string().min(1),
-  unitName: z.string().min(1),
+
+export const godownDetailsSchema = z.object({
+  godownId: z.number().int().positive(),
+  godownName: z.string().min(1),
   openingQuantity: z.coerce.number().nullish(),
   openingAmount: z.coerce.number().nullish(),
   inwardQuantity: z.coerce.number().nullish(),
@@ -13,12 +12,47 @@ export const stockInHandSchema = z.object({
   outwardAmount: z.coerce.number().nullish(),
   closingQuantity: z.coerce.number().nullish(),
   closingAmount: z.coerce.number().nullish(),
+});
+
+export type GodownDetailsSchema = z.infer<typeof godownDetailsSchema>;
+
+
+
+
+export const stockInHandSchema = z.object({
+  itemId: z.number().int().positive(),
+  itemName: z.string().min(1),
+  unitCode: z.string().min(1),
+  unitName: z.string().min(1),
+  noOfDecimalPlaces: z.number().int().min(0).max(6),
+  openingQuantity: z.coerce.number().nullish(),
+  openingAmount: z.coerce.number().nullish(),
+  inwardQuantity: z.coerce.number().nullish(),
+  inwardAmount: z.coerce.number().nullish(),
+  outwardQuantity: z.coerce.number().nullish(),
+  outwardAmount: z.coerce.number().nullish(),
+  closingQuantity: z.coerce.number().nullish(),
+  closingAmount: z.coerce.number().nullish(),
+
 })
 
 export type StockInHandSchema = z.infer<typeof stockInHandSchema>
 
 export const stockInHandListSchema = z.array(stockInHandSchema)
 export type StockInHandListSchema = z.infer<typeof stockInHandListSchema>
+
+
+
+export const stockInHandItemInDetailsSchema = stockInHandSchema.extend({
+  godownDetails: z.array(godownDetailsSchema)
+})
+
+export type StockInHandItemInDetailsSchema = z.infer<typeof stockInHandItemInDetailsSchema>
+
+export const stockInHandItemInDetailsListSchema = z.array(stockInHandItemInDetailsSchema)
+export type StockInHandItemInDetailsListSchema = z.infer<typeof stockInHandItemInDetailsListSchema>
+
+
 
 export const stockSummarySchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),

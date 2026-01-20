@@ -77,7 +77,7 @@ export function DataTableToolbar<TData>({
         onClick={() =>
           exportTableToPdf({
             title: 'Delivery Routes',
-            columnData: filteredColumn,
+            columnData: filteredColumn as any,
             data: exportData,
             fileName: 'delivery-route-table.pdf',
           })
@@ -91,7 +91,7 @@ export function DataTableToolbar<TData>({
         onClick={() =>
           exportTableToExcel({
             title: 'Delivery Routes',
-            columnData: filteredColumn,
+            columnData: filteredColumn as any,
             data: exportData,
             fileName: 'delivery-route-table.xlsx',
           })

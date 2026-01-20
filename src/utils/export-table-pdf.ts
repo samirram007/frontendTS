@@ -2,20 +2,15 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { toSentenceCase } from './removeEmptyStrings'
 
-interface ExportColumn<T> {
-    header: string
-    accessor: keyof T
-}
-
-export function exportTableToPdf<T>({
+export function exportTableToPdf<T extends Record<string, any>>({
     title,
     columnData: columns,
     data,
     fileName = 'table.pdf',
 }: {
     title?: string
-    columnData: any[]
-    data: any[]
+        columnData: { header: string; accessor: keyof T }[]
+        data: T[]
     fileName?: string
 }) {
     const doc = new jsPDF()
