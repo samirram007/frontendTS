@@ -4,25 +4,25 @@
 
 
 
-import { type StockInHandItemInDetailsListSchema } from '../data/schema'
+import { type StockInHandItemWiseListSchema } from '../data/schema'
 import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 
 
 
-interface StockInHandItemInDetailsProps {
-    data: StockInHandItemInDetailsListSchema
+interface StockInHandItemWiseProps {
+    data: StockInHandItemWiseListSchema
 }
 
-export default function StockInHandItemInDetails({ data: stockInHandItemInDetailsListSchema }: StockInHandItemInDetailsProps) {
+export default function StockInHandItemWise({ data: stockInHandItemWiseListSchema }: StockInHandItemWiseProps) {
     return (
 
         <>
-            {stockInHandItemInDetailsListSchema.length === 0 ? (
+            {stockInHandItemWiseListSchema.length === 0 ? (
                 <div className='text-center text-gray-500'>No data available.</div>
             ) : (
                 <ReportView
-                    data={stockInHandItemInDetailsListSchema} />
+                    data={stockInHandItemWiseListSchema} />
             )}
 
         </>
@@ -31,7 +31,7 @@ export default function StockInHandItemInDetails({ data: stockInHandItemInDetail
     )
 }
 
-const ReportView = ({ data }: { data: StockInHandItemInDetailsListSchema }) => {
+const ReportView = ({ data }: { data: StockInHandItemWiseListSchema }) => {
     return <div className='w-full min-h-full  grid grid-rows-[auto_1fr]'>
         <ReportHeader />
         <div className='border-2 min-h-full'>
@@ -197,7 +197,7 @@ const ReportHeader = () => {
 }
 
 
-const ReportFooter = ({ data }: { data: StockInHandItemInDetailsListSchema }) => {
+const ReportFooter = ({ data }: { data: StockInHandItemWiseListSchema }) => {
     const [unitCode, setUnitCode] = useState<string>('');
     const [noOfDecimalPlaces, setNoOfDecimalPlaces] = useState<number>(0);
 

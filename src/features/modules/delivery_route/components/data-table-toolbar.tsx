@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from '@/features/tasks/components/data-table-view-options'
-import { exportTableToPdf } from '@/utils/export-table-pdf'
+// import { exportTableToPdf } from '@/utils/export-table-pdf'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
-import { exportTableToExcel } from '../../../../utils/export-table-excel'
+// import { exportTableToExcel } from '../../../../utils/export-table-excel'
+import { useMemo } from 'react'
 
 // interface filteredRowTypes {
 //   sourcePlace: string
@@ -32,18 +33,20 @@ export function DataTableToolbar<TData>({
 }: DataTableToolbarProps<TData>) {
   console.log(filteredRows)
 
-  const exportData = (filteredRows as any[]).map((row) => ({
-    transporter: row.transporter?.name ?? '',
-    sourcePlace: row.sourcePlace?.name ?? '',
-    destinationPlace: row.destinationPlace?.name ?? '',
-    rate: row.rate ?? 0,
-    vehicleNo: row.vehicleNo ?? '',
-  }))
+  const exportData = useMemo(() => {
+    return (filteredRows as any[]).map((row) => ({
+      transporter: row.transporter?.name ?? '',
+      sourcePlace: row.sourcePlace?.name ?? '',
+      destinationPlace: row.destinationPlace?.name ?? '',
+      rate: row.rate ?? 0,
+      vehicleNo: row.vehicleNo ?? '',
+    }))
+  }, [filteredRows])
 
   const filteredColumn = exportColumnsData.filter((col) => {
     return col.header !== 'actions' && col.header !== 'select'
   })
-  console.log(filteredColumn)
+  // console.log(filteredColumn)
 
   const isFiltered =
     table.getState().columnFilters.length > 0 || !!table.getState().globalFilter
@@ -74,28 +77,30 @@ export function DataTableToolbar<TData>({
       <Button
         variant="link"
         className="h-8 px-2 lg:px-3"
-        onClick={() =>
+        onClick={async () => {
+          const { default: exportTableToPdf } = await import('@/utils/export-table-pdf')
           exportTableToPdf({
             title: 'Delivery Routes',
             columnData: filteredColumn as any,
             data: exportData,
             fileName: 'delivery-route-table.pdf',
           })
-        }
+        }}
       >
         Export PDF
       </Button>
       <Button
         variant="link"
         className="h-8 px-2 lg:px-3"
-        onClick={() =>
+        onClick={async () => {
+          const { default: exportTableToExcel } = await import('@/utils/export-table-excel')
           exportTableToExcel({
             title: 'Delivery Routes',
             columnData: filteredColumn as any,
             data: exportData,
             fileName: 'delivery-route-table.xlsx',
           })
-        }
+        }}
       >
         Export EXCEL
       </Button>

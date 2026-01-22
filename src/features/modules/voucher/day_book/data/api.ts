@@ -4,7 +4,7 @@ import { getData, postData, putData } from "@/utils/dataClient";
 const API_PATH = "/day_books"
 
 async function fetchDayBookService() {
-    console.log('day_books api called')
+
     return await getData(API_PATH)
 }
 async function storeDayBookService(payload: any) {

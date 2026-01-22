@@ -43,15 +43,22 @@ export type StockInHandListSchema = z.infer<typeof stockInHandListSchema>
 
 
 
-export const stockInHandItemInDetailsSchema = stockInHandSchema.extend({
+export const stockInHandItemWiseSchema = stockInHandSchema.extend({
   godownDetails: z.array(godownDetailsSchema)
 })
 
-export type StockInHandItemInDetailsSchema = z.infer<typeof stockInHandItemInDetailsSchema>
+export type StockInHandItemWiseSchema = z.infer<typeof stockInHandItemWiseSchema>
+export const stockInHandItemWiseListSchema = z.array(stockInHandItemWiseSchema)
+export type StockInHandItemWiseListSchema = z.infer<typeof stockInHandItemWiseListSchema>
 
-export const stockInHandItemInDetailsListSchema = z.array(stockInHandItemInDetailsSchema)
-export type StockInHandItemInDetailsListSchema = z.infer<typeof stockInHandItemInDetailsListSchema>
+export const stockInHandGodownWiseSchema = godownDetailsSchema.extend({
+  itemDetails: z.array(stockInHandSchema)
+})
 
+export type StockInHandGodownWiseSchema = z.infer<typeof stockInHandGodownWiseSchema>
+
+export const stockInHandGodownWiseListSchema = z.array(stockInHandGodownWiseSchema)
+export type StockInHandGodownWiseListSchema = z.infer<typeof stockInHandGodownWiseListSchema>
 
 
 export const stockSummarySchema: z.ZodType<any> = z.object({

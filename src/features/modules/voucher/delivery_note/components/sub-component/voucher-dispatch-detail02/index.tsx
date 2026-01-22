@@ -65,11 +65,11 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
             toast.message("Please fill all required fields")
             return;
         }
-        const dispatchData = voucherDispatchForm.getValues();
-        if (!dispatchData.totalFare || dispatchData.totalFare <= 0) {
-            toast.message("Total fare must be greater than zero")
-            return;
-        }
+        // const dispatchData = voucherDispatchForm.getValues();
+        // if (!dispatchData.totalFare || dispatchData.totalFare <= 0) {
+        //     toast.message("Total fare must be greater than zero")
+        //     return;
+        // }
 
         form.setValue("voucherDispatchDetail", voucherDispatchForm.getValues())
         toast.message("Dispatch details updated")

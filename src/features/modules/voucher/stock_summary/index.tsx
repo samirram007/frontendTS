@@ -9,27 +9,55 @@ import { Main } from '@/layouts/components/main'
 
 
 
-import { Outlet, useNavigate } from '@tanstack/react-router'
+import { Outlet, useLocation, useNavigate } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
 import { useStockSummary } from './contexts/stock_summary-context'
 import { toSentenceCase, capitalizeAllWords } from '../../../../utils/removeEmptyStrings';
 import { IconCheck } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
-
+import { reportLinks } from '@/layouts/links/report-links'
+import { useLayoutEffect, useMemo } from 'react';
 
 
 
 
 export default function StockSummary() {
+    const location = useLocation();
+    const { currentReport, setCurrentReport } = useStockSummary();
+    const allLinksPlucked = useMemo(() => {
+        return reportLinks.flatMap(report =>
+            report.menus.map(menu => ({
+                href: menu.href,
+                title: menu.title,
+            }))
+        );
+    }, []);
+    useLayoutEffect(() => {
 
 
+        const currentLink =
+            allLinksPlucked.find(
+                item =>
+                    location.pathname === item.href ||
+                    location.pathname.startsWith(`${item.href}/`)
+            ) ?? { href: '', title: '' };
+
+        const reportName = currentLink.title.split('/').pop() || '';
+
+        setCurrentReport(reportName);
+
+        document.title = `AIPT - ${capitalizeAllWords(
+            toSentenceCase(reportName)
+        ).replace(/_/g, ' ')}`;
+    }, [location.pathname]);
     return (
 
         <Main className='min-w-full min-h-full!'>
             <div className='mb-2 flex flex-wrap items-center justify-between space-y-2 pr-8'>
                 <div>
-                    <h3 className='text-2xl font-bold tracking-tight'>Stock Summary</h3>
+                    <h3 className='text-2xl font-bold tracking-tight'>
+                        {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')} </h3>
                     <p className='text-muted-foreground'>
                         Check stock summary....
                     </p>
@@ -48,11 +76,16 @@ const PrimaryButtons = () => {
 
     const { currentReport } = useStockSummary();
 
-    const reports = [
-        { label: 'Stock Summary', link: 'stock-in-hand' },
-        { label: 'Stock In Hand Item wise', link: 'stock-in-hand-item-in-details' },
-    ]
-
+    const reports = useMemo(() => {
+        const allLinksPlucked = reportLinks.flatMap(report =>
+            report.menus.filter(menu => menu.visible).map(menu => ({
+                link: menu.href.split('/').pop() || '',
+                label: menu.title,
+                visible: menu.visible,
+            }))
+        );
+        return allLinksPlucked;
+    }, []);
 
     return (
         <div className='flex space-x-2'>
@@ -71,6 +104,7 @@ const PrimaryButtons = () => {
                             key={report.link}
                             label={report.label}
                             link={report.link}
+                            visible={report.visible}
                         />
                     ))}
 
@@ -81,17 +115,32 @@ const PrimaryButtons = () => {
     )
 }
 
-const DropdownItem = ({ label, link }: { label: string, link: string }) => {
+const DropdownItem = ({ label, link, visible }: { label: string, link: string, visible: boolean }) => {
     const navigate = useNavigate();
+
     const { currentReport, setCurrentReport } = useStockSummary();
+
     const handleOnclick = () => {
-        setCurrentReport(link);
+        //get links and title from reportLinks
+
+        const allLinksPlucked = reportLinks.flatMap(report =>
+            report.menus.map(menu => ({
+                href: menu.href,
+                title: menu.title,
+            }))
+        );
+
+        const currentLink = allLinksPlucked.find((href) => href.href.includes(link)) || { href: '', title: '' };
+
+        setCurrentReport(currentLink.title.split('/').pop() || '');
         navigate({ to: `/reports/stock_summary/${link}` });
     }
 
     return (
+        visible &&
         <DropdownMenuItem onClick={handleOnclick} className={currentReport === link ? 'bg-gray-200' : ''}>
             <IconCheck size={18} className={cn('mr-2 h-4 w-4', currentReport === link ? 'visible' : 'invisible')} />   {label}
-        </DropdownMenuItem>
+            </DropdownMenuItem>
+
     )
 }

@@ -4,7 +4,7 @@ import { getData, postData, putData } from "@/utils/dataClient";
 const API_PATH = "/app_modules"
 
 async function fetchAppModuleService() {
-    console.log('api called')
+
     return await getData(API_PATH)
 }
 async function storeAppModuleService(payload: any) {

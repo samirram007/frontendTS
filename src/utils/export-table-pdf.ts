@@ -2,7 +2,7 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { toSentenceCase } from './removeEmptyStrings'
 
-export function exportTableToPdf<T extends Record<string, any>>({
+export default function exportTableToPdf<T extends Record<string, any>>({
     title,
     columnData: columns,
     data,

@@ -14,7 +14,7 @@ interface ExportToExcelProps<T> {
     data: T[]
 }
 
-export async function exportTableToExcel<T>({
+export default async function exportTableToExcel<T>({
     title,
     fileName,
     columnData: columns,

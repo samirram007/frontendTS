@@ -37,7 +37,7 @@ interface Props {
 
 
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
-  console.log("currentRow", currentRow)
+
   const { mutate: saveTransporter, isPending } = useTransporterMutation()
   const isEdit = !!currentRow
   const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
