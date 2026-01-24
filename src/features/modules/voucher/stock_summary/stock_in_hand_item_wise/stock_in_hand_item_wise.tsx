@@ -6,6 +6,7 @@
 
 import { type StockInHandItemWiseListSchema } from '../data/schema'
 import { cn } from '@/lib/utils'
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 
@@ -41,7 +42,14 @@ const ReportView = ({ data }: { data: StockInHandItemWiseListSchema }) => {
                     <div className={cn
                         ('grid grid-cols-[1fr_2fr] text-center  font-semibold', index % 2 === 0 ? 'bg-white' : 'bg-gray-100')
                     }>
-                        <div className=' text-left pl-2'>{item.itemName}</div>
+                        <div className=' text-left pl-2'>
+                            <Link to={'/reports/stock_summary/stock-in-hand'}
+                                className='inline-block mr-2   hover:text-blue-700'
+                            >
+
+                                {item.itemName}
+                            </Link>
+                        </div>
                         <div className='grid grid-cols-4 '>
 
                             <div className='grid grid-cols-2'>
@@ -97,12 +105,15 @@ const ReportView = ({ data }: { data: StockInHandItemWiseListSchema }) => {
                                         ('grid grid-cols-[1fr_2fr] text-center ', index % 2 === 0 ? 'bg-white' : 'bg-gray-100', !godown.godownId ? 'font-semibold text-red-400' : '')
                                     }>
                                         <div className=' text-left pl-8 font-semibold'>
+                                            <Link to={'/reports/stock_summary/stock-in-hand-godown-wise'} className='inline-block mr-2   hover:text-blue-700'
+                                            >
                                             {
                                                 godown.godownId ?
                                                     `Storage: ${godown.godownName}`
                                                     :
                                                     `${godown.godownName}`
                                             }
+                                            </Link>
                                         </div>
                                         <div className='grid grid-cols-4 '>
                                             <div className='grid grid-cols-2'>

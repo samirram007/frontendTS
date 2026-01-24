@@ -1,5 +1,18 @@
 export const reportLinks = [
     {
+        title: 'Transaction Reports',
+        visible: true,
+        menus: [
+            {
+                title: 'Day Book',
+                href: '/reports/day_book',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+        ]
+    },
+    {
         title: 'Stock Reports',
         visible: true,
         menus: [
@@ -20,6 +33,13 @@ export const reportLinks = [
             {
                 title: 'Stock In Hand (Godown Wise)',
                 href: '/reports/stock_summary/stock-in-hand-godown-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Stock In Hand (Voucher Wise)',
+                href: '/reports/stock_summary/stock-in-hand-voucher-wise',
                 visible: true,
                 isActive: false,
                 disabled: false,

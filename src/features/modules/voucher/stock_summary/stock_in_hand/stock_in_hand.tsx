@@ -5,6 +5,8 @@
 
 import { type StockInHandListSchema } from '../data/schema'
 import { cn } from '@/lib/utils'
+import { Link } from '@tanstack/react-router'
+
 import { useEffect, useState } from 'react'
 
 
@@ -42,7 +44,12 @@ const ReportView = ({ data }: StockInHandProps) => {
                 <div key={index} className={cn
                     ('grid grid-cols-[1fr_2fr] text-center ', index % 2 === 0 ? 'bg-white' : 'bg-gray-100')
                 }>
-                    <div className=' text-left pl-2 font-semibold'>{item.itemName}</div>
+                    <div className=' text-left pl-2 font-semibold'>
+                        <Link to={'/reports/stock_summary/stock-in-hand-item-wise'} className='inline-block mr-2 text-gray-500 hover:text-blue-700'
+                        >
+                            {item.itemName}
+                        </Link>
+                    </div>
                     <div className='grid grid-cols-4 '>
 
                         <div className='grid grid-cols-2'>

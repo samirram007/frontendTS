@@ -33,7 +33,7 @@ export const topNavLinks = [
     {
         title: 'Day Book',
         href: '/reports/day_book',
-        visible: true,
+        visible: false,
         isActive: true,
         disabled: false,
     },

@@ -1,6 +1,24 @@
 import { voucherTypeSchema } from '@/features/modules/voucher_type/data/schema';
 import { z } from 'zod';
 
+export const voucherDetailsSchema = z.object({
+  voucherId: z.number().int().positive(),
+  voucherNo: z.string().min(1),
+  voucherDate: z.string(),
+  voucherType: z.string().min(1),
+  openingQuantity: z.coerce.number().nullish(),
+  openingAmount: z.coerce.number().nullish(),
+  inwardQuantity: z.coerce.number().nullish(),
+  inwardAmount: z.coerce.number().nullish(),
+  outwardQuantity: z.coerce.number().nullish(),
+  outwardAmount: z.coerce.number().nullish(),
+  closingQuantity: z.coerce.number().nullish(),
+  closingAmount: z.coerce.number().nullish(),
+});
+
+export type VoucherDetailsSchema = z.infer<typeof voucherDetailsSchema>;
+
+
 export const godownDetailsSchema = z.object({
   godownId: z.number().int().positive(),
   godownName: z.string().min(1),
@@ -60,6 +78,13 @@ export type StockInHandGodownWiseSchema = z.infer<typeof stockInHandGodownWiseSc
 export const stockInHandGodownWiseListSchema = z.array(stockInHandGodownWiseSchema)
 export type StockInHandGodownWiseListSchema = z.infer<typeof stockInHandGodownWiseListSchema>
 
+export const StockInHandVoucherWiseSchema = stockInHandSchema.extend({
+  voucherDetails: z.array(voucherDetailsSchema)
+})
+export type StockInHandVoucherWiseSchema = z.infer<typeof StockInHandVoucherWiseSchema>
+
+export const StockInHandVoucherWiseListSchema = z.array(StockInHandVoucherWiseSchema)
+export type StockInHandVoucherWiseListSchema = z.infer<typeof StockInHandVoucherWiseListSchema>
 
 export const stockSummarySchema: z.ZodType<any> = z.object({
   id: z.number().int().positive(),

@@ -70,7 +70,7 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
       >
         {links.filter(link => link.visible).map(({ hasSubmenu, submenuItems, title, href, isActive }) => (
           hasSubmenu ?
-            (<DropdownMenu key={`${title}-${href}`} modal={false}>
+            (<DropdownMenu key={`${title}-${href}`} modal={false} >
               <DropdownMenuTrigger asChild>
                 <span className={cn(
                   'flex cursor-pointer items-center text-sm font-medium transition-colors underline-offset-4 decoration-2 hover:text-primary hover:underline',
@@ -80,7 +80,7 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                   <IconChevronDown size={16} className='ml-auto' />
                 </span>
               </DropdownMenuTrigger>
-              <DropdownMenuContent side='bottom' align='center' className='min-w-max'>
+              <DropdownMenuContent side='bottom' align='center' className='min-w-max '>
 
                 <div className='flex flex-row bg-accent/10 px-4 space-x-8'>
                   {
