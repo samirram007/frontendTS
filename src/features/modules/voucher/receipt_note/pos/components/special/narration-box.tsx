@@ -3,6 +3,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { usePos } from "@/features/modules/voucher/contexts/pos-context"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
+import { useRef } from "react"
 import type { Control, UseFormReturn } from "react-hook-form"
 
 type Option = { label: string; value: string | boolean };
@@ -24,18 +25,42 @@ type Props = {
     handleSaving?: () => Promise<void>;
 }
 const NarrationBox = (props: Props) => {
-    const { form, name, gapClass, rtl, label, noLabel, handleSaving, ...rest } = props
+    const { form, name, gapClass, rtl, label, noLabel, handleSaving, isSaving, setSaving, ...rest } = props
     const { remarksRef, isRemarksDisabled, setIsRemarksDisabled } = usePos();
 
     //ondouble enter save
+    // const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === "Enter" && e.nativeEvent.getModifierState("Shift")) {
+    //         e.preventDefault();
+    //         if (handleSaving) {
+    //             await handleSaving();
+    //         }
+    //     }
+    // };
+
+    const lastEnterTimeRef = useRef<number>(0);
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter" && e.nativeEvent.getModifierState("Shift")) {
+        if (e.key === "Enter" && (e.shiftKey || e.ctrlKey)) {
             e.preventDefault();
+            setSaving(true);
             if (handleSaving) {
                 await handleSaving();
             }
         }
+        if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey) {
+            const now = Date.now();
+            if (now - lastEnterTimeRef.current < 400) {
+                e.preventDefault();
+                setSaving(true);
+                if (handleSaving) {
+                    await handleSaving();
+                }
+            }
+            lastEnterTimeRef.current = now;
+        }
     };
+
+
     const handleOnClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
         if (isRemarksDisabled) {
             setIsRemarksDisabled?.(false);   // unlock

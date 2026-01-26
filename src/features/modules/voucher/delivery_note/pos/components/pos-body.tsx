@@ -2,7 +2,7 @@ import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import isEqual from "lodash/isEqual";
 import { useEffect, useMemo } from "react";
-import { useForm, type Resolver } from "react-hook-form";
+import { useForm, useWatch, type Resolver } from "react-hook-form";
 import type { DeliveryNoteForm } from "../../data/schema";
 import { stockJournalSchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data-schema/voucher-schema";
 import StockJournal from "../../../components/stock-journal";
@@ -26,21 +26,34 @@ const PosBody = ({ mainForm: deliveryNoteForm }: PosBodyProps) => {
             stockJournalEntries: stockJournal?.stockJournalEntries ?? []
         }
     })
+
+    // const stockJournalTotal = useMemo(() => {
+    //     const entries = (stockJournalForm.watch("stockJournalEntries") || []).filter(
+    //         (entry): entry is StockJournalEntryForm => entry !== undefined && entry !== null
+    //     );
+    //     const totalAmount = entries.reduce((acc: number, entry: StockJournalEntryForm) => {
+    //         const amount = Number(entry.amount) || 0;
+    //         acc += amount;
+    //         return acc;
+    //     }, 0);
+    //     return {
+    //         totalAmount
+    //     }
+    // }, [stockJournalForm.watch("stockJournalEntries")])
+
+    const stockJournalEntries = useWatch({
+        control: stockJournalForm.control,
+        name: "stockJournalEntries",
+    });
+
     const stockJournalTotal = useMemo(() => {
-        const entries = (stockJournalForm.watch("stockJournalEntries") || []).filter(
-            (entry): entry is StockJournalEntryForm => entry !== undefined && entry !== null
-        );
-        const totalAmount = entries.reduce((acc: number, entry: StockJournalEntryForm) => {
-            const amount = Number(entry.amount) || 0;
-            acc += amount;
-            return acc;
+        const entries = stockJournalEntries || [];
+        const totalAmount = entries.reduce((acc, entry) => {
+            return acc + (Number(entry?.amount) || 0);
         }, 0);
-        return {
-            totalAmount
-        }
-    }, [stockJournalForm.watch("stockJournalEntries")])
 
-
+        return { totalAmount };
+    }, [stockJournalEntries]);
 
     useEffect(() => {
         // when parent changes, update child

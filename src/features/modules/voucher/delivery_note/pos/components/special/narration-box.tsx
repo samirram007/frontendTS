@@ -3,6 +3,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { usePos } from "@/features/modules/voucher/contexts/pos-context"
 import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
+import { useRef } from "react"
 import type { Control, UseFormReturn } from "react-hook-form"
 
 type Option = { label: string; value: string | boolean };
@@ -28,12 +29,31 @@ const NarrationBox = (props: Props) => {
     const { remarksRef, isRemarksDisabled, setIsRemarksDisabled } = usePos();
 
     //ondouble enter save
+    // const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === "Enter" && (e.shiftKey || e.ctrlKey)) {
+    //         e.preventDefault();
+    //        setSaving(true);
+    //     }
+    // };
+
+    const lastEnterTimeRef = useRef<number>(0);
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === "Enter" && (e.shiftKey || e.ctrlKey)) {
             e.preventDefault();
-           setSaving(true);
+            setSaving(true);
+            return;
+        }
+        if (e.key === "Enter" && !e.shiftKey && !e.ctrlKey) {
+            const now = Date.now();
+            if (now - lastEnterTimeRef.current < 400) {
+                e.preventDefault();
+                setSaving(true);
+            }
+            lastEnterTimeRef.current = now;
         }
     };
+
+
     const handleOnClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
         if (isRemarksDisabled) {
             setIsRemarksDisabled?.(false);   // unlock
