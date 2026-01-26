@@ -57,7 +57,7 @@ export const reportLinks = [
     },
     {
         title: 'Freight Reports',
-        visible: false,
+        visible: true,
         menus: [
             {
                 title: 'Freight (Godown Wise)',

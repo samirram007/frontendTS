@@ -13,11 +13,12 @@ import { Outlet, useLocation, useNavigate } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
 import { useStockSummary } from './contexts/stock_summary-context'
-import { toSentenceCase, capitalizeAllWords } from '../../../../utils/removeEmptyStrings';
+import { toSentenceCase, capitalizeAllWords, date_format } from '../../../../utils/removeEmptyStrings';
 import { IconCheck } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { reportLinks } from '@/layouts/links/report-links'
 import { useLayoutEffect, useMemo } from 'react';
+import { useAuth } from '@/features/auth/contexts/AuthContext'
 
 
 
@@ -59,7 +60,7 @@ export default function StockSummary() {
                     <h3 className='text-2xl font-bold tracking-tight'>
                         {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')} </h3>
                     <p className='text-muted-foreground'>
-                        Check stock summary....
+                        <Period />
                     </p>
                 </div>
                 <PrimaryButtons />
@@ -69,6 +70,17 @@ export default function StockSummary() {
             </div>
         </Main>
 
+    )
+}
+
+const Period = () => {
+    const { period } = useAuth();
+    console.log("Period in layout:", period);
+    return (
+        <span>
+
+            {period ? `Period: ${date_format(period.startDate)} to ${date_format(period.endDate)}` : ''}
+        </span>
     )
 }
 

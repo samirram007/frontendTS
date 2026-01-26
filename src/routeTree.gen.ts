@@ -34,6 +34,7 @@ import { Route as ProtectedAdministrationLayoutRouteImport } from './routes/_pro
 import { Route as ProtectedReportsProfit_lossIndexRouteImport } from './routes/_protected/reports/profit_loss/index'
 import { Route as ProtectedReportsBalance_sheetIndexRouteImport } from './routes/_protected/reports/balance_sheet/index'
 import { Route as ProtectedReportsStock_summaryLayoutRouteImport } from './routes/_protected/reports/stock_summary/_layout'
+import { Route as ProtectedReportsFreightLayoutRouteImport } from './routes/_protected/reports/freight/_layout'
 import { Route as ProtectedReportsDay_bookLayoutRouteImport } from './routes/_protected/reports/day_book/_layout'
 import { Route as ProtectedMastersStatutoryLayoutRouteImport } from './routes/_protected/masters/statutory/_layout'
 import { Route as ProtectedMastersPayrollLayoutRouteImport } from './routes/_protected/masters/payroll/_layout'
@@ -62,6 +63,7 @@ import { Route as ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRouteI
 import { Route as ProtectedReportsStock_summaryLayoutSalebleStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/saleble-stock'
 import { Route as ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRouteImport } from './routes/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
 import { Route as ProtectedReportsStock_summaryLayoutNetStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/net-stock'
+import { Route as ProtectedReportsFreightLayoutFreightGodownWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-godown-wise'
 import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles.$id'
 import { Route as ProtectedAdministrationLayoutUserLayoutRouteImport } from './routes/_protected/administration/_layout/user/_layout'
 import { Route as ProtectedAdministrationLayoutRoleLayoutRouteImport } from './routes/_protected/administration/_layout/role/_layout'
@@ -200,6 +202,9 @@ const errors403LazyRouteImport = createFileRoute('/(errors)/403')()
 const errors401LazyRouteImport = createFileRoute('/(errors)/401')()
 const ProtectedReportsStock_summaryRouteImport = createFileRoute(
   '/_protected/reports/stock_summary',
+)()
+const ProtectedReportsFreightRouteImport = createFileRoute(
+  '/_protected/reports/freight',
 )()
 const ProtectedReportsDay_bookRouteImport = createFileRoute(
   '/_protected/reports/day_book',
@@ -427,6 +432,11 @@ const ProtectedReportsStock_summaryRoute =
     path: '/reports/stock_summary',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedReportsFreightRoute = ProtectedReportsFreightRouteImport.update({
+  id: '/reports/freight',
+  path: '/reports/freight',
+  getParentRoute: () => ProtectedRoute,
+} as any)
 const ProtectedReportsDay_bookRoute =
   ProtectedReportsDay_bookRouteImport.update({
     id: '/reports/day_book',
@@ -573,6 +583,11 @@ const ProtectedReportsStock_summaryLayoutRoute =
   ProtectedReportsStock_summaryLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedReportsStock_summaryRoute,
+  } as any)
+const ProtectedReportsFreightLayoutRoute =
+  ProtectedReportsFreightLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedReportsFreightRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutRoute =
   ProtectedReportsDay_bookLayoutRouteImport.update({
@@ -841,6 +856,12 @@ const ProtectedReportsStock_summaryLayoutNetStockRoute =
     id: '/net-stock',
     path: '/net-stock',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
+  } as any)
+const ProtectedReportsFreightLayoutFreightGodownWiseRoute =
+  ProtectedReportsFreightLayoutFreightGodownWiseRouteImport.update({
+    id: '/freight-godown-wise',
+    path: '/freight-godown-wise',
+    getParentRoute: () => ProtectedReportsFreightLayoutRoute,
   } as any)
 const ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute =
   ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport.update({
@@ -1631,12 +1652,14 @@ export interface FileRoutesByFullPath {
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
+  '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1809,12 +1832,14 @@ export interface FileRoutesByTo {
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1972,6 +1997,8 @@ export interface FileRoutesById {
   '/_protected/masters/statutory/_layout': typeof ProtectedMastersStatutoryLayoutRoute
   '/_protected/reports/day_book': typeof ProtectedReportsDay_bookRouteWithChildren
   '/_protected/reports/day_book/_layout': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
+  '/_protected/reports/freight': typeof ProtectedReportsFreightRouteWithChildren
+  '/_protected/reports/freight/_layout': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/_protected/reports/stock_summary': typeof ProtectedReportsStock_summaryRouteWithChildren
   '/_protected/reports/stock_summary/_layout': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/_protected/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
@@ -1981,6 +2008,7 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/user': typeof ProtectedAdministrationLayoutUserRouteWithChildren
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/_protected/reports/freight/_layout/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/_protected/reports/stock_summary/_layout/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/_protected/reports/stock_summary/_layout/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -2179,12 +2207,14 @@ export interface FileRouteTypes {
     | '/masters/payroll'
     | '/masters/statutory'
     | '/reports/day_book'
+    | '/reports/freight'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
+    | '/reports/freight/freight-godown-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2357,12 +2387,14 @@ export interface FileRouteTypes {
     | '/masters/payroll'
     | '/masters/statutory'
     | '/reports/day_book'
+    | '/reports/freight'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
+    | '/reports/freight/freight-godown-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2519,6 +2551,8 @@ export interface FileRouteTypes {
     | '/_protected/masters/statutory/_layout'
     | '/_protected/reports/day_book'
     | '/_protected/reports/day_book/_layout'
+    | '/_protected/reports/freight'
+    | '/_protected/reports/freight/_layout'
     | '/_protected/reports/stock_summary'
     | '/_protected/reports/stock_summary/_layout'
     | '/_protected/reports/balance_sheet/'
@@ -2528,6 +2562,7 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/user'
     | '/_protected/administration/_layout/user/_layout'
     | '/_protected/masters/miscellaneous/delivery_vehicles/$id'
+    | '/_protected/reports/freight/_layout/freight-godown-wise'
     | '/_protected/reports/stock_summary/_layout/net-stock'
     | '/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
     | '/_protected/reports/stock_summary/_layout/saleble-stock'
@@ -2852,6 +2887,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/reports/freight': {
+      id: '/_protected/reports/freight'
+      path: '/reports/freight'
+      fullPath: '/reports/freight'
+      preLoaderRoute: typeof ProtectedReportsFreightRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/reports/day_book': {
       id: '/_protected/reports/day_book'
       path: '/reports/day_book'
@@ -3033,6 +3075,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/stock_summary'
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryRoute
+    }
+    '/_protected/reports/freight/_layout': {
+      id: '/_protected/reports/freight/_layout'
+      path: '/reports/freight'
+      fullPath: '/reports/freight'
+      preLoaderRoute: typeof ProtectedReportsFreightLayoutRouteImport
+      parentRoute: typeof ProtectedReportsFreightRoute
     }
     '/_protected/reports/day_book/_layout': {
       id: '/_protected/reports/day_book/_layout'
@@ -3355,6 +3404,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/stock_summary/net-stock'
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
+    }
+    '/_protected/reports/freight/_layout/freight-godown-wise': {
+      id: '/_protected/reports/freight/_layout/freight-godown-wise'
+      path: '/freight-godown-wise'
+      fullPath: '/reports/freight/freight-godown-wise'
+      preLoaderRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRouteImport
+      parentRoute: typeof ProtectedReportsFreightLayoutRoute
     }
     '/_protected/masters/miscellaneous/delivery_vehicles/$id': {
       id: '/_protected/masters/miscellaneous/delivery_vehicles/$id'
@@ -5545,6 +5601,36 @@ const ProtectedReportsDay_bookRouteWithChildren =
     ProtectedReportsDay_bookRouteChildren,
   )
 
+interface ProtectedReportsFreightLayoutRouteChildren {
+  ProtectedReportsFreightLayoutFreightGodownWiseRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+}
+
+const ProtectedReportsFreightLayoutRouteChildren: ProtectedReportsFreightLayoutRouteChildren =
+  {
+    ProtectedReportsFreightLayoutFreightGodownWiseRoute:
+      ProtectedReportsFreightLayoutFreightGodownWiseRoute,
+  }
+
+const ProtectedReportsFreightLayoutRouteWithChildren =
+  ProtectedReportsFreightLayoutRoute._addFileChildren(
+    ProtectedReportsFreightLayoutRouteChildren,
+  )
+
+interface ProtectedReportsFreightRouteChildren {
+  ProtectedReportsFreightLayoutRoute: typeof ProtectedReportsFreightLayoutRouteWithChildren
+}
+
+const ProtectedReportsFreightRouteChildren: ProtectedReportsFreightRouteChildren =
+  {
+    ProtectedReportsFreightLayoutRoute:
+      ProtectedReportsFreightLayoutRouteWithChildren,
+  }
+
+const ProtectedReportsFreightRouteWithChildren =
+  ProtectedReportsFreightRoute._addFileChildren(
+    ProtectedReportsFreightRouteChildren,
+  )
+
 interface ProtectedReportsStock_summaryLayoutRouteChildren {
   ProtectedReportsStock_summaryLayoutNetStockRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute: typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
@@ -5620,6 +5706,7 @@ interface ProtectedRouteChildren {
   ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
   ProtectedMastersStatutoryRoute: typeof ProtectedMastersStatutoryRouteWithChildren
   ProtectedReportsDay_bookRoute: typeof ProtectedReportsDay_bookRouteWithChildren
+  ProtectedReportsFreightRoute: typeof ProtectedReportsFreightRouteWithChildren
   ProtectedReportsStock_summaryRoute: typeof ProtectedReportsStock_summaryRouteWithChildren
   ProtectedReportsBalance_sheetIndexRoute: typeof ProtectedReportsBalance_sheetIndexRoute
   ProtectedReportsProfit_lossIndexRoute: typeof ProtectedReportsProfit_lossIndexRoute
@@ -5652,6 +5739,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedMastersPayrollRoute: ProtectedMastersPayrollRouteWithChildren,
   ProtectedMastersStatutoryRoute: ProtectedMastersStatutoryRouteWithChildren,
   ProtectedReportsDay_bookRoute: ProtectedReportsDay_bookRouteWithChildren,
+  ProtectedReportsFreightRoute: ProtectedReportsFreightRouteWithChildren,
   ProtectedReportsStock_summaryRoute:
     ProtectedReportsStock_summaryRouteWithChildren,
   ProtectedReportsBalance_sheetIndexRoute:

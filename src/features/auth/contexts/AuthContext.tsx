@@ -12,6 +12,10 @@ export type LoginProps = {
     password: string;
 }
 
+export type PeriodType = {
+    startDate: string;
+    endDate: string;
+}
 export interface AuthContextType {
     user: UserWithRole | null;
     userFiscalYear: UserFiscalYear | null;
@@ -21,6 +25,8 @@ export interface AuthContextType {
     logout: () => Promise<void>;
     fetchProfile: () => Promise<void>;
     permissions: string[];
+    period: PeriodType | null;
+    setPeriod: (period: PeriodType | null) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -30,6 +36,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
     const [user, setUser] = useState<UserWithRole | null>(null);
     const [userFiscalYear, setUserFiscalYear] = useState<UserFiscalYear | null>(null);
+    const [period, setPeriod] = useState<PeriodType | null>(null);
     const [permissions, setpermissions] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true)
     const queryClient = useQueryClient();
@@ -45,6 +52,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 //console.log("userProfileData", data?.data)
                 setUser(data?.data);
                 setUserFiscalYear(data?.data?.userFiscalYear || null);
+
+                setPeriod(data?.data?.userFiscalYear ? {
+                    startDate: data?.data?.userFiscalYear.startDate,
+                    endDate: data?.data?.userFiscalYear.endDate
+                } : null);
                 const perms: string[] = [];
                 // Extract permissions from roles
                 //must be unique permissions
@@ -137,7 +149,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, userFiscalYear, isAuthenticated: !!user, login, logout, fetchProfile, permissions }}>
+            value={{ user, isLoading, userFiscalYear, period, setPeriod, isAuthenticated: !!user, login, logout, fetchProfile, permissions }}>
             {children}
         </AuthContext.Provider>
     )
