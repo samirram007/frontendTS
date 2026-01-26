@@ -28,6 +28,8 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
 
     }
 
+    const saveButtonRef = React.useRef<HTMLButtonElement>(null);
+
     useEffect(() => {
         let timer: any = null;
 
@@ -112,6 +114,11 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
         return () => clearTimeout(timer);
     }, [isPending, setSaving]);
 
+    useEffect(() => {
+        if (valid) {
+            saveButtonRef.current?.focus();
+        }
+    }, [valid]);
 
     return <div>
         <Dialog open={isSaving}
@@ -158,8 +165,9 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                 </div>
                 <DialogFooter>
                     <Button onClick={handleSaving}
+                        ref={saveButtonRef}
                         disabled={isPending || errors.length > 0 || checking || !valid}
-                        className="h-8 focus:bg-black focus:text-white"  >
+                        className={`h-8 ${valid ? "focus:bg-black focus:text-white" : ""}`}   >
                         Save changes
                     </Button>
                 </DialogFooter>

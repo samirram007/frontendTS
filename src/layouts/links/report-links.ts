@@ -87,7 +87,13 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
-
+            {
+                title: 'Freight (Voucher Wise)',
+                href: '/reports/freight/freight-voucher-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
         ]
 
     }
