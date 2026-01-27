@@ -2,7 +2,7 @@ import { DataTableRowActions } from "@/features/global/components/data-table/dat
 import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
 
-import { Route as CompanyDetailRoute } from '@/routes/_protected/masters/organization/_layout/company/_layout/$id'
+import { Route as RoomDetailRoute } from '@/routes/_protected/masters/infrastructure/_layout/room/_layout/$id'
 
 import { useRoom } from "../context/room-context"
 import type { Room } from "../data/schema"
@@ -13,18 +13,17 @@ interface DataTableRowActionsProps {
 
 const RowActions = (props: DataTableRowActionsProps) => {
     const navigate = useNavigate()
-    const { setOpen, currentRow, setCurrentRow } = useRoom()
+    const { setOpen, setCurrentRow } = useRoom()
     const { row } = props
     return (
         <DataTableRowActions<Room>
             row={row}
             onEdit={(data) => {
                 setCurrentRow(data)
-                console.log("row Action: ", currentRow)
-                // navigate({
-                //     to: CompanyDetailRoute.to,
-                //     params: { id: data.id! },
-                // })
+                navigate({
+                    to: RoomDetailRoute.to,
+                    params: { id: data.id! },
+                })
 
             }}
             onDelete={(data) => {

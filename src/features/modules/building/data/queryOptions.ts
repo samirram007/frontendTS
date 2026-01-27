@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchBuildingByIdService, fetchBuildingService, storeBuildingService } from "./api";
+import { fetchBuildingByIdService, fetchBuildingService, storeBuildingService, udpateBuildingService } from "./api";
 import type { BuildingForm } from "./schema";
 
 
@@ -26,8 +26,7 @@ export function useBuildingMutation() {
     return useMutation({
         mutationFn: async (data: BuildingForm & { id?: string }) => {
             if (data.id) {
-                // update service is to be returned
-                return null;
+                return await udpateBuildingService(data)
             }
             return await storeBuildingService(data);
         },

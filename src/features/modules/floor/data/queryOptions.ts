@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchFloorService, storeFloorService } from "./api";
+import { fetchFloorByIdService, fetchFloorService, storeFloorService, udpateFloorService } from "./api";
 import type { FloorForm } from "./schema";
 
 
@@ -8,10 +8,10 @@ import type { FloorForm } from "./schema";
 const BASE_KEY = 'floors';
 
 
-export const floorQueryOptions = () => {
+export const floorQueryOptions = (id: string) => {
     return queryOptions({
-        queryKey: [BASE_KEY],
-        queryFn: () => fetchFloorService(),
+        queryKey: [BASE_KEY, id],
+        queryFn: () => id ? fetchFloorByIdService(id) : fetchFloorService(),
         staleTime: 1000 * 60 * 5,
         retry: 1
     });
@@ -26,8 +26,7 @@ export function useFloorMutation() {
     return useMutation({
         mutationFn: async (data: FloorForm & { id?: string }) => {
             if (data.id) {
-                // update service is to be returned
-                return null;
+                return await udpateFloorService(data);
             }
             return await storeFloorService(data);
         },

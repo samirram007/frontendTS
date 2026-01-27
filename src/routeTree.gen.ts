@@ -47,6 +47,7 @@ import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_p
 import { Route as ProtectedMastersInfrastructureLayoutRouteImport } from './routes/_protected/masters/infrastructure/_layout'
 import { Route as ProtectedMastersAccountsLayoutRouteImport } from './routes/_protected/masters/accounts/_layout'
 import { Route as ProtectedauthUserFiscalYearLayoutRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout'
+import { Route as ProtectedauthProfileIndexRouteImport } from './routes/_protected/(auth)/profile/index.'
 import { Route as ProtectedTransactionsVouchersLayoutIndexRouteImport } from './routes/_protected/transactions/vouchers/_layout/index'
 import { Route as ProtectedTransactionsFreightLayoutIndexRouteImport } from './routes/_protected/transactions/freight/_layout/index'
 import { Route as ProtectedReportsStock_summaryLayoutIndexRouteImport } from './routes/_protected/reports/stock_summary/_layout/index'
@@ -55,7 +56,6 @@ import { Route as ProtectedAdministrationLayoutPermissionIndexRouteImport } from
 import { Route as ProtectedAdministrationLayoutApp_module_featureIndexRouteImport } from './routes/_protected/administration/_layout/app_module_feature/index'
 import { Route as ProtectedAdministrationLayoutApp_moduleIndexRouteImport } from './routes/_protected/administration/_layout/app_module/index'
 import { Route as ProtectedauthUserFiscalYearLayoutIndexRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout/index'
-import { Route as ProtectedauthProfileIndexRouteImport } from './routes/_protected/(auth)/profile/index.'
 import { Route as ProtectedReportsStock_summaryLayoutStockInHandRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand'
 import { Route as ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRouteImport } from './routes/_protected/reports/stock_summary/_layout/sales-order-outstanding'
 import { Route as ProtectedReportsStock_summaryLayoutSalebleStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/saleble-stock'
@@ -181,6 +181,8 @@ import { Route as ProtectedMastersOrganizationLayoutFiscal_yearLayoutIdRouteImpo
 import { Route as ProtectedMastersOrganizationLayoutCurrencyLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/currency/_layout/$id'
 import { Route as ProtectedMastersOrganizationLayoutCountryLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/country/_layout/$id'
 import { Route as ProtectedMastersOrganizationLayoutCompanyLayoutIdRouteImport } from './routes/_protected/masters/organization/_layout/company/_layout/$id'
+import { Route as ProtectedMastersInfrastructureLayoutRoomLayoutIdRouteImport } from './routes/_protected/masters/infrastructure/_layout/room/_layout/$id'
+import { Route as ProtectedMastersInfrastructureLayoutFloorLayoutIdRouteImport } from './routes/_protected/masters/infrastructure/_layout/floor/_layout/$id'
 import { Route as ProtectedMastersInfrastructureLayoutBuildingLayoutIdRouteImport } from './routes/_protected/masters/infrastructure/_layout/building/_layout/$id'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/$id/index'
@@ -188,9 +190,6 @@ import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRouteImpor
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/$id/configuration'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module/$moduleid'
 
-const ProtectedAdministrationRouteImport = createFileRoute(
-  '/_protected/administration',
-)()
 const guestSigninLazyRouteImport = createFileRoute('/(guest)/signin')()
 const guestSignUpLazyRouteImport = createFileRoute('/(guest)/sign-up')()
 const guestSignIn2LazyRouteImport = createFileRoute('/(guest)/sign-in-2')()
@@ -202,124 +201,6 @@ const errors500LazyRouteImport = createFileRoute('/(errors)/500')()
 const errors404LazyRouteImport = createFileRoute('/(errors)/404')()
 const errors403LazyRouteImport = createFileRoute('/(errors)/403')()
 const errors401LazyRouteImport = createFileRoute('/(errors)/401')()
-const ProtectedTransactionsVouchersRouteImport = createFileRoute(
-  '/_protected/transactions/vouchers',
-)()
-const ProtectedTransactionsFreightRouteImport = createFileRoute(
-  '/_protected/transactions/freight',
-)()
-const ProtectedReportsStock_summaryRouteImport = createFileRoute(
-  '/_protected/reports/stock_summary',
-)()
-const ProtectedReportsDay_bookRouteImport = createFileRoute(
-  '/_protected/reports/day_book',
-)()
-const ProtectedMastersStatutoryRouteImport = createFileRoute(
-  '/_protected/masters/statutory',
-)()
-const ProtectedMastersPayrollRouteImport = createFileRoute(
-  '/_protected/masters/payroll',
-)()
-const ProtectedMastersPartyRouteImport = createFileRoute(
-  '/_protected/masters/party',
-)()
-const ProtectedMastersOrganizationRouteImport = createFileRoute(
-  '/_protected/masters/organization',
-)()
-const ProtectedMastersInventoryRouteImport = createFileRoute(
-  '/_protected/masters/inventory',
-)()
-const ProtectedMastersInfrastructureRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure',
-)()
-const ProtectedMastersAccountsRouteImport = createFileRoute(
-  '/_protected/masters/accounts',
-)()
-const ProtectedauthUserFiscalYearRouteImport = createFileRoute(
-  '/_protected/(auth)/user-fiscal-year',
-)()
-const ProtectedAdministrationLayoutUserRouteImport = createFileRoute(
-  '/_protected/administration/_layout/user',
-)()
-const ProtectedAdministrationLayoutRoleRouteImport = createFileRoute(
-  '/_protected/administration/_layout/role',
-)()
-const ProtectedTransactionsVouchersLayoutReceipt_noteRouteImport =
-  createFileRoute('/_protected/transactions/vouchers/_layout/receipt_note')()
-const ProtectedTransactionsVouchersLayoutDelivery_noteRouteImport =
-  createFileRoute('/_protected/transactions/vouchers/_layout/delivery_note')()
-const ProtectedReportsDay_bookLayoutReceipt_noteRouteImport = createFileRoute(
-  '/_protected/reports/day_book/_layout/receipt_note',
-)()
-const ProtectedReportsDay_bookLayoutDelivery_noteRouteImport = createFileRoute(
-  '/_protected/reports/day_book/_layout/delivery_note',
-)()
-const ProtectedMastersPayrollLayoutEmployeeRouteImport = createFileRoute(
-  '/_protected/masters/payroll/_layout/employee',
-)()
-const ProtectedMastersPartyLayoutTransporterRouteImport = createFileRoute(
-  '/_protected/masters/party/_layout/transporter',
-)()
-const ProtectedMastersPartyLayoutSupplierRouteImport = createFileRoute(
-  '/_protected/masters/party/_layout/supplier',
-)()
-const ProtectedMastersPartyLayoutDistributorRouteImport = createFileRoute(
-  '/_protected/masters/party/_layout/distributor',
-)()
-const ProtectedMastersOrganizationLayoutStateRouteImport = createFileRoute(
-  '/_protected/masters/organization/_layout/state',
-)()
-const ProtectedMastersOrganizationLayoutFiscal_yearRouteImport =
-  createFileRoute('/_protected/masters/organization/_layout/fiscal_year')()
-const ProtectedMastersOrganizationLayoutCurrencyRouteImport = createFileRoute(
-  '/_protected/masters/organization/_layout/currency',
-)()
-const ProtectedMastersOrganizationLayoutCountryRouteImport = createFileRoute(
-  '/_protected/masters/organization/_layout/country',
-)()
-const ProtectedMastersOrganizationLayoutCompanyRouteImport = createFileRoute(
-  '/_protected/masters/organization/_layout/company',
-)()
-const ProtectedMastersInventoryLayoutStock_itemRouteImport = createFileRoute(
-  '/_protected/masters/inventory/_layout/stock_item',
-)()
-const ProtectedMastersInfrastructureLayoutRoomRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure/_layout/room',
-)()
-const ProtectedMastersInfrastructureLayoutFloorRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure/_layout/floor',
-)()
-const ProtectedMastersInfrastructureLayoutFacilityRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure/_layout/facility',
-)()
-const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport =
-  createFileRoute(
-    '/_protected/masters/infrastructure/_layout/facility-amenity',
-  )()
-const ProtectedMastersInfrastructureLayoutBuildingRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure/_layout/building',
-)()
-const ProtectedMastersInfrastructureLayoutBedRouteImport = createFileRoute(
-  '/_protected/masters/infrastructure/_layout/bed',
-)()
-const ProtectedMastersAccountsLayoutVoucher_typeRouteImport = createFileRoute(
-  '/_protected/masters/accounts/_layout/voucher_type',
-)()
-const ProtectedMastersAccountsLayoutVendorRouteImport = createFileRoute(
-  '/_protected/masters/accounts/_layout/vendor',
-)()
-const ProtectedMastersAccountsLayoutCustomerRouteImport = createFileRoute(
-  '/_protected/masters/accounts/_layout/customer',
-)()
-const ProtectedMastersAccountsLayoutAccount_ledgerRouteImport = createFileRoute(
-  '/_protected/masters/accounts/_layout/account_ledger',
-)()
-const ProtectedMastersAccountsLayoutAccount_groupRouteImport = createFileRoute(
-  '/_protected/masters/accounts/_layout/account_group',
-)()
-const ProtectedAdministrationLayoutRoleLayoutIdRouteImport = createFileRoute(
-  '/_protected/administration/_layout/role/_layout/$id',
-)()
 
 const FrontendRoute = FrontendRouteImport.update({
   id: '/frontend',
@@ -334,11 +215,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const ProtectedAdministrationRoute = ProtectedAdministrationRouteImport.update({
-  id: '/administration',
-  path: '/administration',
-  getParentRoute: () => ProtectedRoute,
 } as any)
 const guestSigninLazyRoute = guestSigninLazyRouteImport
   .update({
@@ -430,76 +306,6 @@ const ProtectedSettingsRouteRoute = ProtectedSettingsRouteRouteImport.update({
   path: '/settings',
   getParentRoute: () => ProtectedRoute,
 } as any)
-const ProtectedTransactionsVouchersRoute =
-  ProtectedTransactionsVouchersRouteImport.update({
-    id: '/transactions/vouchers',
-    path: '/transactions/vouchers',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedTransactionsFreightRoute =
-  ProtectedTransactionsFreightRouteImport.update({
-    id: '/transactions/freight',
-    path: '/transactions/freight',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedReportsStock_summaryRoute =
-  ProtectedReportsStock_summaryRouteImport.update({
-    id: '/reports/stock_summary',
-    path: '/reports/stock_summary',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedReportsDay_bookRoute =
-  ProtectedReportsDay_bookRouteImport.update({
-    id: '/reports/day_book',
-    path: '/reports/day_book',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedMastersStatutoryRoute =
-  ProtectedMastersStatutoryRouteImport.update({
-    id: '/masters/statutory',
-    path: '/masters/statutory',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedMastersPayrollRoute = ProtectedMastersPayrollRouteImport.update({
-  id: '/masters/payroll',
-  path: '/masters/payroll',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedMastersPartyRoute = ProtectedMastersPartyRouteImport.update({
-  id: '/masters/party',
-  path: '/masters/party',
-  getParentRoute: () => ProtectedRoute,
-} as any)
-const ProtectedMastersOrganizationRoute =
-  ProtectedMastersOrganizationRouteImport.update({
-    id: '/masters/organization',
-    path: '/masters/organization',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedMastersInventoryRoute =
-  ProtectedMastersInventoryRouteImport.update({
-    id: '/masters/inventory',
-    path: '/masters/inventory',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedMastersInfrastructureRoute =
-  ProtectedMastersInfrastructureRouteImport.update({
-    id: '/masters/infrastructure',
-    path: '/masters/infrastructure',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedMastersAccountsRoute =
-  ProtectedMastersAccountsRouteImport.update({
-    id: '/masters/accounts',
-    path: '/masters/accounts',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
-const ProtectedauthUserFiscalYearRoute =
-  ProtectedauthUserFiscalYearRouteImport.update({
-    id: '/(auth)/user-fiscal-year',
-    path: '/user-fiscal-year',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
 const ProtectedTasksIndexRoute = ProtectedTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -557,20 +363,9 @@ const ProtectedSettingsAccountRoute =
   } as any)
 const ProtectedAdministrationLayoutRoute =
   ProtectedAdministrationLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedAdministrationRoute,
-  } as any)
-const ProtectedAdministrationLayoutUserRoute =
-  ProtectedAdministrationLayoutUserRouteImport.update({
-    id: '/user',
-    path: '/user',
-    getParentRoute: () => ProtectedAdministrationLayoutRoute,
-  } as any)
-const ProtectedAdministrationLayoutRoleRoute =
-  ProtectedAdministrationLayoutRoleRouteImport.update({
-    id: '/role',
-    path: '/role',
-    getParentRoute: () => ProtectedAdministrationLayoutRoute,
+    id: '/administration/_layout',
+    path: '/administration',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedReportsProfit_lossIndexRoute =
   ProtectedReportsProfit_lossIndexRouteImport.update({
@@ -586,43 +381,51 @@ const ProtectedReportsBalance_sheetIndexRoute =
   } as any)
 const ProtectedTransactionsVouchersLayoutRoute =
   ProtectedTransactionsVouchersLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedTransactionsVouchersRoute,
+    id: '/transactions/vouchers/_layout',
+    path: '/transactions/vouchers',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedTransactionsFreightLayoutRoute =
   ProtectedTransactionsFreightLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedTransactionsFreightRoute,
+    id: '/transactions/freight/_layout',
+    path: '/transactions/freight',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedReportsStock_summaryLayoutRoute =
   ProtectedReportsStock_summaryLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedReportsStock_summaryRoute,
+    id: '/reports/stock_summary/_layout',
+    path: '/reports/stock_summary',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutRoute =
   ProtectedReportsDay_bookLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedReportsDay_bookRoute,
+    id: '/reports/day_book/_layout',
+    path: '/reports/day_book',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersStatutoryLayoutRoute =
   ProtectedMastersStatutoryLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersStatutoryRoute,
+    id: '/masters/statutory/_layout',
+    path: '/masters/statutory',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersPayrollLayoutRoute =
   ProtectedMastersPayrollLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPayrollRoute,
+    id: '/masters/payroll/_layout',
+    path: '/masters/payroll',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersPartyLayoutRoute =
   ProtectedMastersPartyLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPartyRoute,
+    id: '/masters/party/_layout',
+    path: '/masters/party',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutRoute =
   ProtectedMastersOrganizationLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationRoute,
+    id: '/masters/organization/_layout',
+    path: '/masters/organization',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersMiscellaneousVehicleRoute =
   ProtectedMastersMiscellaneousVehicleRouteImport.update({
@@ -644,173 +447,33 @@ const ProtectedMastersMiscellaneousDelivery_placesRoute =
   } as any)
 const ProtectedMastersInventoryLayoutRoute =
   ProtectedMastersInventoryLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInventoryRoute,
+    id: '/masters/inventory/_layout',
+    path: '/masters/inventory',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutRoute =
   ProtectedMastersInfrastructureLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureRoute,
+    id: '/masters/infrastructure/_layout',
+    path: '/masters/infrastructure',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedMastersAccountsLayoutRoute =
   ProtectedMastersAccountsLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsRoute,
+    id: '/masters/accounts/_layout',
+    path: '/masters/accounts',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedauthUserFiscalYearLayoutRoute =
   ProtectedauthUserFiscalYearLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedauthUserFiscalYearRoute,
+    id: '/(auth)/user-fiscal-year/_layout',
+    path: '/user-fiscal-year',
+    getParentRoute: () => ProtectedRoute,
   } as any)
-const ProtectedTransactionsVouchersLayoutReceipt_noteRoute =
-  ProtectedTransactionsVouchersLayoutReceipt_noteRouteImport.update({
-    id: '/receipt_note',
-    path: '/receipt_note',
-    getParentRoute: () => ProtectedTransactionsVouchersLayoutRoute,
-  } as any)
-const ProtectedTransactionsVouchersLayoutDelivery_noteRoute =
-  ProtectedTransactionsVouchersLayoutDelivery_noteRouteImport.update({
-    id: '/delivery_note',
-    path: '/delivery_note',
-    getParentRoute: () => ProtectedTransactionsVouchersLayoutRoute,
-  } as any)
-const ProtectedReportsDay_bookLayoutReceipt_noteRoute =
-  ProtectedReportsDay_bookLayoutReceipt_noteRouteImport.update({
-    id: '/receipt_note',
-    path: '/receipt_note',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
-  } as any)
-const ProtectedReportsDay_bookLayoutDelivery_noteRoute =
-  ProtectedReportsDay_bookLayoutDelivery_noteRouteImport.update({
-    id: '/delivery_note',
-    path: '/delivery_note',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
-  } as any)
-const ProtectedMastersPayrollLayoutEmployeeRoute =
-  ProtectedMastersPayrollLayoutEmployeeRouteImport.update({
-    id: '/employee',
-    path: '/employee',
-    getParentRoute: () => ProtectedMastersPayrollLayoutRoute,
-  } as any)
-const ProtectedMastersPartyLayoutTransporterRoute =
-  ProtectedMastersPartyLayoutTransporterRouteImport.update({
-    id: '/transporter',
-    path: '/transporter',
-    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
-  } as any)
-const ProtectedMastersPartyLayoutSupplierRoute =
-  ProtectedMastersPartyLayoutSupplierRouteImport.update({
-    id: '/supplier',
-    path: '/supplier',
-    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
-  } as any)
-const ProtectedMastersPartyLayoutDistributorRoute =
-  ProtectedMastersPartyLayoutDistributorRouteImport.update({
-    id: '/distributor',
-    path: '/distributor',
-    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
-  } as any)
-const ProtectedMastersOrganizationLayoutStateRoute =
-  ProtectedMastersOrganizationLayoutStateRouteImport.update({
-    id: '/state',
-    path: '/state',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
-  } as any)
-const ProtectedMastersOrganizationLayoutFiscal_yearRoute =
-  ProtectedMastersOrganizationLayoutFiscal_yearRouteImport.update({
-    id: '/fiscal_year',
-    path: '/fiscal_year',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
-  } as any)
-const ProtectedMastersOrganizationLayoutCurrencyRoute =
-  ProtectedMastersOrganizationLayoutCurrencyRouteImport.update({
-    id: '/currency',
-    path: '/currency',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
-  } as any)
-const ProtectedMastersOrganizationLayoutCountryRoute =
-  ProtectedMastersOrganizationLayoutCountryRouteImport.update({
-    id: '/country',
-    path: '/country',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
-  } as any)
-const ProtectedMastersOrganizationLayoutCompanyRoute =
-  ProtectedMastersOrganizationLayoutCompanyRouteImport.update({
-    id: '/company',
-    path: '/company',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
-  } as any)
-const ProtectedMastersInventoryLayoutStock_itemRoute =
-  ProtectedMastersInventoryLayoutStock_itemRouteImport.update({
-    id: '/stock_item',
-    path: '/stock_item',
-    getParentRoute: () => ProtectedMastersInventoryLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutRoomRoute =
-  ProtectedMastersInfrastructureLayoutRoomRouteImport.update({
-    id: '/room',
-    path: '/room',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutFloorRoute =
-  ProtectedMastersInfrastructureLayoutFloorRouteImport.update({
-    id: '/floor',
-    path: '/floor',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutFacilityRoute =
-  ProtectedMastersInfrastructureLayoutFacilityRouteImport.update({
-    id: '/facility',
-    path: '/facility',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutFacilityAmenityRoute =
-  ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport.update({
-    id: '/facility-amenity',
-    path: '/facility-amenity',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutBuildingRoute =
-  ProtectedMastersInfrastructureLayoutBuildingRouteImport.update({
-    id: '/building',
-    path: '/building',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersInfrastructureLayoutBedRoute =
-  ProtectedMastersInfrastructureLayoutBedRouteImport.update({
-    id: '/bed',
-    path: '/bed',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
-  } as any)
-const ProtectedMastersAccountsLayoutVoucher_typeRoute =
-  ProtectedMastersAccountsLayoutVoucher_typeRouteImport.update({
-    id: '/voucher_type',
-    path: '/voucher_type',
-    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
-  } as any)
-const ProtectedMastersAccountsLayoutVendorRoute =
-  ProtectedMastersAccountsLayoutVendorRouteImport.update({
-    id: '/vendor',
-    path: '/vendor',
-    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
-  } as any)
-const ProtectedMastersAccountsLayoutCustomerRoute =
-  ProtectedMastersAccountsLayoutCustomerRouteImport.update({
-    id: '/customer',
-    path: '/customer',
-    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
-  } as any)
-const ProtectedMastersAccountsLayoutAccount_ledgerRoute =
-  ProtectedMastersAccountsLayoutAccount_ledgerRouteImport.update({
-    id: '/account_ledger',
-    path: '/account_ledger',
-    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
-  } as any)
-const ProtectedMastersAccountsLayoutAccount_groupRoute =
-  ProtectedMastersAccountsLayoutAccount_groupRouteImport.update({
-    id: '/account_group',
-    path: '/account_group',
-    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
+const ProtectedauthProfileIndexRoute =
+  ProtectedauthProfileIndexRouteImport.update({
+    id: '/(auth)/profile/index/',
+    path: '/profile/index/',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedTransactionsVouchersLayoutIndexRoute =
   ProtectedTransactionsVouchersLayoutIndexRouteImport.update({
@@ -860,12 +523,6 @@ const ProtectedauthUserFiscalYearLayoutIndexRoute =
     path: '/',
     getParentRoute: () => ProtectedauthUserFiscalYearLayoutRoute,
   } as any)
-const ProtectedauthProfileIndexRoute =
-  ProtectedauthProfileIndexRouteImport.update({
-    id: '/(auth)/profile/index/',
-    path: '/profile/index/',
-    getParentRoute: () => ProtectedRoute,
-  } as any)
 const ProtectedReportsStock_summaryLayoutStockInHandRoute =
   ProtectedReportsStock_summaryLayoutStockInHandRouteImport.update({
     id: '/stock-in-hand',
@@ -900,19 +557,15 @@ const ProtectedReportsStock_summaryLayoutNetStockRoute =
   } as any)
 const ProtectedAdministrationLayoutUserLayoutRoute =
   ProtectedAdministrationLayoutUserLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedAdministrationLayoutUserRoute,
+    id: '/user/_layout',
+    path: '/user',
+    getParentRoute: () => ProtectedAdministrationLayoutRoute,
   } as any)
 const ProtectedAdministrationLayoutRoleLayoutRoute =
   ProtectedAdministrationLayoutRoleLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedAdministrationLayoutRoleRoute,
-  } as any)
-const ProtectedAdministrationLayoutRoleLayoutIdRoute =
-  ProtectedAdministrationLayoutRoleLayoutIdRouteImport.update({
-    id: '/$id',
-    path: '/$id',
-    getParentRoute: () => ProtectedAdministrationLayoutRoleLayoutRoute,
+    id: '/role/_layout',
+    path: '/role',
+    getParentRoute: () => ProtectedAdministrationLayoutRoute,
   } as any)
 const ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute =
   ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRouteImport.update({
@@ -1242,129 +895,153 @@ const ProtectedAdministrationLayoutRoleLayoutIndexRoute =
   } as any)
 const ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRoute =
   ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedTransactionsVouchersLayoutReceipt_noteRoute,
+    id: '/receipt_note/_layout',
+    path: '/receipt_note',
+    getParentRoute: () => ProtectedTransactionsVouchersLayoutRoute,
   } as any)
 const ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRoute =
   ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedTransactionsVouchersLayoutDelivery_noteRoute,
+    id: '/delivery_note/_layout',
+    path: '/delivery_note',
+    getParentRoute: () => ProtectedTransactionsVouchersLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute =
   ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutReceipt_noteRoute,
+    id: '/receipt_note/_layout',
+    path: '/receipt_note',
+    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute =
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutDelivery_noteRoute,
+    id: '/delivery_note/_layout',
+    path: '/delivery_note',
+    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
   } as any)
 const ProtectedMastersPayrollLayoutEmployeeLayoutRoute =
   ProtectedMastersPayrollLayoutEmployeeLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPayrollLayoutEmployeeRoute,
+    id: '/employee/_layout',
+    path: '/employee',
+    getParentRoute: () => ProtectedMastersPayrollLayoutRoute,
   } as any)
 const ProtectedMastersPartyLayoutTransporterLayoutRoute =
   ProtectedMastersPartyLayoutTransporterLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPartyLayoutTransporterRoute,
+    id: '/transporter/_layout',
+    path: '/transporter',
+    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
   } as any)
 const ProtectedMastersPartyLayoutSupplierLayoutRoute =
   ProtectedMastersPartyLayoutSupplierLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPartyLayoutSupplierRoute,
+    id: '/supplier/_layout',
+    path: '/supplier',
+    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
   } as any)
 const ProtectedMastersPartyLayoutDistributorLayoutRoute =
   ProtectedMastersPartyLayoutDistributorLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersPartyLayoutDistributorRoute,
+    id: '/distributor/_layout',
+    path: '/distributor',
+    getParentRoute: () => ProtectedMastersPartyLayoutRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutStateLayoutRoute =
   ProtectedMastersOrganizationLayoutStateLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutStateRoute,
+    id: '/state/_layout',
+    path: '/state',
+    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute =
   ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutFiscal_yearRoute,
+    id: '/fiscal_year/_layout',
+    path: '/fiscal_year',
+    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutCurrencyLayoutRoute =
   ProtectedMastersOrganizationLayoutCurrencyLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutCurrencyRoute,
+    id: '/currency/_layout',
+    path: '/currency',
+    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutCountryLayoutRoute =
   ProtectedMastersOrganizationLayoutCountryLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutCountryRoute,
+    id: '/country/_layout',
+    path: '/country',
+    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
   } as any)
 const ProtectedMastersOrganizationLayoutCompanyLayoutRoute =
   ProtectedMastersOrganizationLayoutCompanyLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersOrganizationLayoutCompanyRoute,
+    id: '/company/_layout',
+    path: '/company',
+    getParentRoute: () => ProtectedMastersOrganizationLayoutRoute,
   } as any)
 const ProtectedMastersInventoryLayoutStock_itemLayoutRoute =
   ProtectedMastersInventoryLayoutStock_itemLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInventoryLayoutStock_itemRoute,
+    id: '/stock_item/_layout',
+    path: '/stock_item',
+    getParentRoute: () => ProtectedMastersInventoryLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutRoomLayoutRoute =
   ProtectedMastersInfrastructureLayoutRoomLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoomRoute,
+    id: '/room/_layout',
+    path: '/room',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutFloorLayoutRoute =
   ProtectedMastersInfrastructureLayoutFloorLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutFloorRoute,
+    id: '/floor/_layout',
+    path: '/floor',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutFacilityLayoutRoute =
   ProtectedMastersInfrastructureLayoutFacilityLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutFacilityRoute,
+    id: '/facility/_layout',
+    path: '/facility',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute =
   ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () =>
-      ProtectedMastersInfrastructureLayoutFacilityAmenityRoute,
+    id: '/facility-amenity/_layout',
+    path: '/facility-amenity',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutBuildingLayoutRoute =
   ProtectedMastersInfrastructureLayoutBuildingLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutBuildingRoute,
+    id: '/building/_layout',
+    path: '/building',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersInfrastructureLayoutBedLayoutRoute =
   ProtectedMastersInfrastructureLayoutBedLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersInfrastructureLayoutBedRoute,
+    id: '/bed/_layout',
+    path: '/bed',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute =
   ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsLayoutVoucher_typeRoute,
+    id: '/voucher_type/_layout',
+    path: '/voucher_type',
+    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutVendorLayoutRoute =
   ProtectedMastersAccountsLayoutVendorLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsLayoutVendorRoute,
+    id: '/vendor/_layout',
+    path: '/vendor',
+    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutCustomerLayoutRoute =
   ProtectedMastersAccountsLayoutCustomerLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsLayoutCustomerRoute,
+    id: '/customer/_layout',
+    path: '/customer',
+    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutAccount_ledgerLayoutRoute =
   ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsLayoutAccount_ledgerRoute,
+    id: '/account_ledger/_layout',
+    path: '/account_ledger',
+    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
   } as any)
 const ProtectedMastersAccountsLayoutAccount_groupLayoutRoute =
   ProtectedMastersAccountsLayoutAccount_groupLayoutRouteImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProtectedMastersAccountsLayoutAccount_groupRoute,
+    id: '/account_group/_layout',
+    path: '/account_group',
+    getParentRoute: () => ProtectedMastersAccountsLayoutRoute,
   } as any)
 const ProtectedAdministrationLayoutUserLayoutIdRoute =
   ProtectedAdministrationLayoutUserLayoutIdRouteImport.update({
@@ -1617,6 +1294,18 @@ const ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute =
     path: '/$id',
     getParentRoute: () => ProtectedMastersOrganizationLayoutCompanyLayoutRoute,
   } as any)
+const ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute =
+  ProtectedMastersInfrastructureLayoutRoomLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutRoomLayoutRoute,
+  } as any)
+const ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute =
+  ProtectedMastersInfrastructureLayoutFloorLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => ProtectedMastersInfrastructureLayoutFloorLayoutRoute,
+  } as any)
 const ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute =
   ProtectedMastersInfrastructureLayoutBuildingLayoutIdRouteImport.update({
     id: '/$id',
@@ -1626,8 +1315,9 @@ const ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute =
   } as any)
 const ProtectedAdministrationLayoutRoleLayoutIdModuleRoute =
   ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport.update({
-    id: '/_module',
-    getParentRoute: () => ProtectedAdministrationLayoutRoleLayoutIdRoute,
+    id: '/$id/_module',
+    path: '/$id',
+    getParentRoute: () => ProtectedAdministrationLayoutRoleLayoutRoute,
   } as any)
 const ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute =
   ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport.update({
@@ -1679,12 +1369,12 @@ export interface FileRoutesByFullPath {
   '/settings/appearance': typeof ProtectedSettingsAppearanceRoute
   '/settings/display': typeof ProtectedSettingsDisplayRoute
   '/settings/notifications': typeof ProtectedSettingsNotificationsRoute
-  '/apps': typeof ProtectedAppsIndexRoute
-  '/chats': typeof ProtectedChatsIndexRoute
-  '/facility': typeof ProtectedFacilityIndexRoute
-  '/help-center': typeof ProtectedHelpCenterIndexRoute
+  '/apps/': typeof ProtectedAppsIndexRoute
+  '/chats/': typeof ProtectedChatsIndexRoute
+  '/facility/': typeof ProtectedFacilityIndexRoute
+  '/help-center/': typeof ProtectedHelpCenterIndexRoute
   '/settings/': typeof ProtectedSettingsIndexRoute
-  '/tasks': typeof ProtectedTasksIndexRoute
+  '/tasks/': typeof ProtectedTasksIndexRoute
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
   '/masters/infrastructure': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
@@ -1700,8 +1390,8 @@ export interface FileRoutesByFullPath {
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/transactions/freight': typeof ProtectedTransactionsFreightLayoutRouteWithChildren
   '/transactions/vouchers': typeof ProtectedTransactionsVouchersLayoutRouteWithChildren
-  '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
-  '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
+  '/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
+  '/reports/profit_loss/': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
@@ -1709,11 +1399,11 @@ export interface FileRoutesByFullPath {
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
   '/reports/stock_summary/sales-order-outstanding': typeof ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRoute
   '/reports/stock_summary/stock-in-hand': typeof ProtectedReportsStock_summaryLayoutStockInHandRoute
-  '/profile/index': typeof ProtectedauthProfileIndexRoute
+  '/profile/index/': typeof ProtectedauthProfileIndexRoute
   '/user-fiscal-year/': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
-  '/administration/app_module': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
-  '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
-  '/administration/permission': typeof ProtectedAdministrationLayoutPermissionIndexRoute
+  '/administration/app_module/': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
+  '/administration/app_module_feature/': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
+  '/administration/permission/': typeof ProtectedAdministrationLayoutPermissionIndexRoute
   '/reports/day_book/': typeof ProtectedReportsDay_bookLayoutIndexRoute
   '/reports/stock_summary/': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/transactions/freight/': typeof ProtectedTransactionsFreightLayoutIndexRoute
@@ -1746,60 +1436,62 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/administration/role/': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user/': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
-  '/masters/accounts/account_nature': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
-  '/masters/accounts/voucher_category': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
-  '/masters/accounts/voucher_classification': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
-  '/masters/infrastructure/amenity': typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
-  '/masters/inventory/godown': typeof ProtectedMastersInventoryLayoutGodownIndexRoute
-  '/masters/inventory/stock_category': typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
-  '/masters/inventory/stock_group': typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
-  '/masters/inventory/stock_unit': typeof ProtectedMastersInventoryLayoutStock_unitIndexRoute
-  '/masters/inventory/unique_quantity_code': typeof ProtectedMastersInventoryLayoutUnique_quantity_codeIndexRoute
-  '/masters/organization/branch': typeof ProtectedMastersOrganizationLayoutBranchIndexRoute
-  '/masters/payroll/bank': typeof ProtectedMastersPayrollLayoutBankIndexRoute
-  '/masters/payroll/cost_allocation_rule': typeof ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRoute
-  '/masters/payroll/cost_category': typeof ProtectedMastersPayrollLayoutCost_categoryIndexRoute
-  '/masters/payroll/cost_center': typeof ProtectedMastersPayrollLayoutCost_centerIndexRoute
-  '/masters/payroll/department': typeof ProtectedMastersPayrollLayoutDepartmentIndexRoute
-  '/masters/payroll/designation': typeof ProtectedMastersPayrollLayoutDesignationIndexRoute
-  '/masters/payroll/employee_group': typeof ProtectedMastersPayrollLayoutEmployee_groupIndexRoute
-  '/masters/payroll/grade': typeof ProtectedMastersPayrollLayoutGradeIndexRoute
-  '/masters/payroll/holiday': typeof ProtectedMastersPayrollLayoutHolidayIndexRoute
-  '/masters/payroll/leave_type': typeof ProtectedMastersPayrollLayoutLeave_typeIndexRoute
-  '/masters/payroll/salary': typeof ProtectedMastersPayrollLayoutSalaryIndexRoute
-  '/masters/payroll/salary_component': typeof ProtectedMastersPayrollLayoutSalary_componentIndexRoute
-  '/masters/payroll/salary_structure': typeof ProtectedMastersPayrollLayoutSalary_structureIndexRoute
-  '/masters/payroll/shift': typeof ProtectedMastersPayrollLayoutShiftIndexRoute
-  '/reports/day_book/contra': typeof ProtectedReportsDay_bookLayoutContraIndexRoute
-  '/reports/day_book/journal': typeof ProtectedReportsDay_bookLayoutJournalIndexRoute
-  '/reports/day_book/manufacturing_journal': typeof ProtectedReportsDay_bookLayoutManufacturing_journalIndexRoute
-  '/reports/day_book/payment': typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
-  '/reports/day_book/physical_stock': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
-  '/reports/day_book/purchase': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
-  '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
-  '/reports/day_book/receipt': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
-  '/reports/day_book/rejection_in': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
-  '/reports/day_book/rejection_out': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
-  '/reports/day_book/sales': typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
-  '/reports/day_book/sales_order': typeof ProtectedReportsDay_bookLayoutSales_orderIndexRoute
-  '/reports/day_book/stock_journal': typeof ProtectedReportsDay_bookLayoutStock_journalIndexRoute
-  '/reports/day_book/transfer_voucher': typeof ProtectedReportsDay_bookLayoutTransfer_voucherIndexRoute
-  '/transactions/vouchers/contra': typeof ProtectedTransactionsVouchersLayoutContraIndexRoute
-  '/transactions/vouchers/journal': typeof ProtectedTransactionsVouchersLayoutJournalIndexRoute
-  '/transactions/vouchers/manufacturing_journal': typeof ProtectedTransactionsVouchersLayoutManufacturing_journalIndexRoute
-  '/transactions/vouchers/payment': typeof ProtectedTransactionsVouchersLayoutPaymentIndexRoute
-  '/transactions/vouchers/physical_stock': typeof ProtectedTransactionsVouchersLayoutPhysical_stockIndexRoute
-  '/transactions/vouchers/purchase': typeof ProtectedTransactionsVouchersLayoutPurchaseIndexRoute
-  '/transactions/vouchers/purchase_order': typeof ProtectedTransactionsVouchersLayoutPurchase_orderIndexRoute
-  '/transactions/vouchers/receipt': typeof ProtectedTransactionsVouchersLayoutReceiptIndexRoute
-  '/transactions/vouchers/rejection_in': typeof ProtectedTransactionsVouchersLayoutRejection_inIndexRoute
-  '/transactions/vouchers/rejection_out': typeof ProtectedTransactionsVouchersLayoutRejection_outIndexRoute
-  '/transactions/vouchers/sales': typeof ProtectedTransactionsVouchersLayoutSalesIndexRoute
-  '/transactions/vouchers/sales_order': typeof ProtectedTransactionsVouchersLayoutSales_orderIndexRoute
-  '/transactions/vouchers/stock_journal': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
-  '/transactions/vouchers/transfer_voucher': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
+  '/masters/accounts/account_nature/': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
+  '/masters/accounts/voucher_category/': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
+  '/masters/accounts/voucher_classification/': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
+  '/masters/infrastructure/amenity/': typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
+  '/masters/inventory/godown/': typeof ProtectedMastersInventoryLayoutGodownIndexRoute
+  '/masters/inventory/stock_category/': typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
+  '/masters/inventory/stock_group/': typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
+  '/masters/inventory/stock_unit/': typeof ProtectedMastersInventoryLayoutStock_unitIndexRoute
+  '/masters/inventory/unique_quantity_code/': typeof ProtectedMastersInventoryLayoutUnique_quantity_codeIndexRoute
+  '/masters/organization/branch/': typeof ProtectedMastersOrganizationLayoutBranchIndexRoute
+  '/masters/payroll/bank/': typeof ProtectedMastersPayrollLayoutBankIndexRoute
+  '/masters/payroll/cost_allocation_rule/': typeof ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRoute
+  '/masters/payroll/cost_category/': typeof ProtectedMastersPayrollLayoutCost_categoryIndexRoute
+  '/masters/payroll/cost_center/': typeof ProtectedMastersPayrollLayoutCost_centerIndexRoute
+  '/masters/payroll/department/': typeof ProtectedMastersPayrollLayoutDepartmentIndexRoute
+  '/masters/payroll/designation/': typeof ProtectedMastersPayrollLayoutDesignationIndexRoute
+  '/masters/payroll/employee_group/': typeof ProtectedMastersPayrollLayoutEmployee_groupIndexRoute
+  '/masters/payroll/grade/': typeof ProtectedMastersPayrollLayoutGradeIndexRoute
+  '/masters/payroll/holiday/': typeof ProtectedMastersPayrollLayoutHolidayIndexRoute
+  '/masters/payroll/leave_type/': typeof ProtectedMastersPayrollLayoutLeave_typeIndexRoute
+  '/masters/payroll/salary/': typeof ProtectedMastersPayrollLayoutSalaryIndexRoute
+  '/masters/payroll/salary_component/': typeof ProtectedMastersPayrollLayoutSalary_componentIndexRoute
+  '/masters/payroll/salary_structure/': typeof ProtectedMastersPayrollLayoutSalary_structureIndexRoute
+  '/masters/payroll/shift/': typeof ProtectedMastersPayrollLayoutShiftIndexRoute
+  '/reports/day_book/contra/': typeof ProtectedReportsDay_bookLayoutContraIndexRoute
+  '/reports/day_book/journal/': typeof ProtectedReportsDay_bookLayoutJournalIndexRoute
+  '/reports/day_book/manufacturing_journal/': typeof ProtectedReportsDay_bookLayoutManufacturing_journalIndexRoute
+  '/reports/day_book/payment/': typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
+  '/reports/day_book/physical_stock/': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
+  '/reports/day_book/purchase/': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
+  '/reports/day_book/purchase_order/': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
+  '/reports/day_book/receipt/': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
+  '/reports/day_book/rejection_in/': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
+  '/reports/day_book/rejection_out/': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
+  '/reports/day_book/sales/': typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
+  '/reports/day_book/sales_order/': typeof ProtectedReportsDay_bookLayoutSales_orderIndexRoute
+  '/reports/day_book/stock_journal/': typeof ProtectedReportsDay_bookLayoutStock_journalIndexRoute
+  '/reports/day_book/transfer_voucher/': typeof ProtectedReportsDay_bookLayoutTransfer_voucherIndexRoute
+  '/transactions/vouchers/contra/': typeof ProtectedTransactionsVouchersLayoutContraIndexRoute
+  '/transactions/vouchers/journal/': typeof ProtectedTransactionsVouchersLayoutJournalIndexRoute
+  '/transactions/vouchers/manufacturing_journal/': typeof ProtectedTransactionsVouchersLayoutManufacturing_journalIndexRoute
+  '/transactions/vouchers/payment/': typeof ProtectedTransactionsVouchersLayoutPaymentIndexRoute
+  '/transactions/vouchers/physical_stock/': typeof ProtectedTransactionsVouchersLayoutPhysical_stockIndexRoute
+  '/transactions/vouchers/purchase/': typeof ProtectedTransactionsVouchersLayoutPurchaseIndexRoute
+  '/transactions/vouchers/purchase_order/': typeof ProtectedTransactionsVouchersLayoutPurchase_orderIndexRoute
+  '/transactions/vouchers/receipt/': typeof ProtectedTransactionsVouchersLayoutReceiptIndexRoute
+  '/transactions/vouchers/rejection_in/': typeof ProtectedTransactionsVouchersLayoutRejection_inIndexRoute
+  '/transactions/vouchers/rejection_out/': typeof ProtectedTransactionsVouchersLayoutRejection_outIndexRoute
+  '/transactions/vouchers/sales/': typeof ProtectedTransactionsVouchersLayoutSalesIndexRoute
+  '/transactions/vouchers/sales_order/': typeof ProtectedTransactionsVouchersLayoutSales_orderIndexRoute
+  '/transactions/vouchers/stock_journal/': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
+  '/transactions/vouchers/transfer_voucher/': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
   '/administration/role/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
   '/masters/infrastructure/building/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
+  '/masters/infrastructure/floor/$id': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute
+  '/masters/infrastructure/room/$id': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute
   '/masters/organization/company/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1841,7 +1533,7 @@ export interface FileRoutesByFullPath {
   '/administration/role/$id/$moduleid': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
   '/administration/role/$id/': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
-  '/masters/inventory/stock_item/$id': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
+  '/masters/inventory/stock_item/$id/': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1870,7 +1562,6 @@ export interface FileRoutesByTo {
   '/help-center': typeof ProtectedHelpCenterIndexRoute
   '/settings': typeof ProtectedSettingsIndexRoute
   '/tasks': typeof ProtectedTasksIndexRoute
-  '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/masters/accounts': typeof ProtectedMastersAccountsLayoutRouteWithChildren
   '/masters/infrastructure': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
   '/masters/inventory': typeof ProtectedMastersInventoryLayoutRouteWithChildren
@@ -1881,49 +1572,25 @@ export interface FileRoutesByTo {
   '/masters/party': typeof ProtectedMastersPartyLayoutRouteWithChildren
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
-  '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
-  '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
-  '/transactions/freight': typeof ProtectedTransactionsFreightLayoutIndexRoute
-  '/transactions/vouchers': typeof ProtectedTransactionsVouchersLayoutIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
-  '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
-  '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
   '/reports/stock_summary/sales-order-outstanding': typeof ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRoute
   '/reports/stock_summary/stock-in-hand': typeof ProtectedReportsStock_summaryLayoutStockInHandRoute
   '/profile/index': typeof ProtectedauthProfileIndexRoute
+  '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/administration/app_module': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
   '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/administration/permission': typeof ProtectedAdministrationLayoutPermissionIndexRoute
+  '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
+  '/transactions/freight': typeof ProtectedTransactionsFreightLayoutIndexRoute
+  '/transactions/vouchers': typeof ProtectedTransactionsVouchersLayoutIndexRoute
   '/administration/user/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
-  '/masters/accounts/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
-  '/masters/accounts/account_ledger': typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
-  '/masters/accounts/customer': typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
-  '/masters/accounts/vendor': typeof ProtectedMastersAccountsLayoutVendorLayoutIndexRoute
-  '/masters/accounts/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
-  '/masters/infrastructure/bed': typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
-  '/masters/infrastructure/building': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
-  '/masters/infrastructure/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
-  '/masters/infrastructure/facility': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
-  '/masters/infrastructure/floor': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
-  '/masters/infrastructure/room': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
-  '/masters/inventory/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute
-  '/masters/organization/company': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
-  '/masters/organization/country': typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
-  '/masters/organization/currency': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIndexRoute
-  '/masters/organization/fiscal_year': typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
-  '/masters/organization/state': typeof ProtectedMastersOrganizationLayoutStateLayoutIndexRoute
-  '/masters/party/distributor': typeof ProtectedMastersPartyLayoutDistributorLayoutIndexRoute
-  '/masters/party/supplier': typeof ProtectedMastersPartyLayoutSupplierLayoutIndexRoute
-  '/masters/party/transporter': typeof ProtectedMastersPartyLayoutTransporterLayoutIndexRoute
-  '/masters/payroll/employee': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIndexRoute
-  '/reports/day_book/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
-  '/reports/day_book/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
-  '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
-  '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
+  '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
+  '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/masters/accounts/account_nature': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
   '/masters/accounts/voucher_classification': typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
@@ -1976,8 +1643,9 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/sales_order': typeof ProtectedTransactionsVouchersLayoutSales_orderIndexRoute
   '/transactions/vouchers/stock_journal': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
   '/transactions/vouchers/transfer_voucher': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
-  '/administration/role/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
   '/masters/infrastructure/building/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
+  '/masters/infrastructure/floor/$id': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute
+  '/masters/infrastructure/room/$id': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute
   '/masters/organization/company/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/masters/organization/country/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/masters/organization/currency/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -1991,8 +1659,34 @@ export interface FileRoutesByTo {
   '/reports/day_book/receipt_note/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
   '/transactions/vouchers/delivery_note/$id': typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutIdRoute
   '/transactions/vouchers/receipt_note/$id': typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
+  '/masters/accounts/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
+  '/masters/accounts/account_ledger': typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
+  '/masters/accounts/customer': typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
+  '/masters/accounts/vendor': typeof ProtectedMastersAccountsLayoutVendorLayoutIndexRoute
+  '/masters/accounts/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
+  '/masters/infrastructure/bed': typeof ProtectedMastersInfrastructureLayoutBedLayoutIndexRoute
+  '/masters/infrastructure/building': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIndexRoute
+  '/masters/infrastructure/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
+  '/masters/infrastructure/facility': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutIndexRoute
+  '/masters/infrastructure/floor': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
+  '/masters/infrastructure/room': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
+  '/masters/inventory/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIndexRoute
+  '/masters/organization/company': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIndexRoute
+  '/masters/organization/country': typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
+  '/masters/organization/currency': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIndexRoute
+  '/masters/organization/fiscal_year': typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
+  '/masters/organization/state': typeof ProtectedMastersOrganizationLayoutStateLayoutIndexRoute
+  '/masters/party/distributor': typeof ProtectedMastersPartyLayoutDistributorLayoutIndexRoute
+  '/masters/party/supplier': typeof ProtectedMastersPartyLayoutSupplierLayoutIndexRoute
+  '/masters/party/transporter': typeof ProtectedMastersPartyLayoutTransporterLayoutIndexRoute
+  '/masters/payroll/employee': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIndexRoute
+  '/reports/day_book/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
+  '/reports/day_book/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
+  '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutIndexRoute
+  '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
   '/administration/role/$id/$moduleid': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
+  '/administration/role/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
   '/masters/inventory/stock_item/$id': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
 export interface FileRoutesById {
@@ -2014,7 +1708,6 @@ export interface FileRoutesById {
   '/(guest)/sign-in-2': typeof guestSignIn2LazyRoute
   '/(guest)/sign-up': typeof guestSignUpLazyRoute
   '/(guest)/signin': typeof guestSigninLazyRoute
-  '/_protected/administration': typeof ProtectedAdministrationRouteWithChildren
   '/_protected/administration/_layout': typeof ProtectedAdministrationLayoutRouteWithChildren
   '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
   '/_protected/settings/appearance': typeof ProtectedSettingsAppearanceRoute
@@ -2026,38 +1719,24 @@ export interface FileRoutesById {
   '/_protected/help-center/': typeof ProtectedHelpCenterIndexRoute
   '/_protected/settings/': typeof ProtectedSettingsIndexRoute
   '/_protected/tasks/': typeof ProtectedTasksIndexRoute
-  '/_protected/(auth)/user-fiscal-year': typeof ProtectedauthUserFiscalYearRouteWithChildren
   '/_protected/(auth)/user-fiscal-year/_layout': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
-  '/_protected/masters/accounts': typeof ProtectedMastersAccountsRouteWithChildren
   '/_protected/masters/accounts/_layout': typeof ProtectedMastersAccountsLayoutRouteWithChildren
-  '/_protected/masters/infrastructure': typeof ProtectedMastersInfrastructureRouteWithChildren
   '/_protected/masters/infrastructure/_layout': typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
-  '/_protected/masters/inventory': typeof ProtectedMastersInventoryRouteWithChildren
   '/_protected/masters/inventory/_layout': typeof ProtectedMastersInventoryLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_places': typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   '/_protected/masters/miscellaneous/delivery_routes': typeof ProtectedMastersMiscellaneousDelivery_routesRoute
   '/_protected/masters/miscellaneous/vehicle': typeof ProtectedMastersMiscellaneousVehicleRoute
-  '/_protected/masters/organization': typeof ProtectedMastersOrganizationRouteWithChildren
   '/_protected/masters/organization/_layout': typeof ProtectedMastersOrganizationLayoutRouteWithChildren
-  '/_protected/masters/party': typeof ProtectedMastersPartyRouteWithChildren
   '/_protected/masters/party/_layout': typeof ProtectedMastersPartyLayoutRouteWithChildren
-  '/_protected/masters/payroll': typeof ProtectedMastersPayrollRouteWithChildren
   '/_protected/masters/payroll/_layout': typeof ProtectedMastersPayrollLayoutRouteWithChildren
-  '/_protected/masters/statutory': typeof ProtectedMastersStatutoryRouteWithChildren
   '/_protected/masters/statutory/_layout': typeof ProtectedMastersStatutoryLayoutRoute
-  '/_protected/reports/day_book': typeof ProtectedReportsDay_bookRouteWithChildren
   '/_protected/reports/day_book/_layout': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
-  '/_protected/reports/stock_summary': typeof ProtectedReportsStock_summaryRouteWithChildren
   '/_protected/reports/stock_summary/_layout': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
-  '/_protected/transactions/freight': typeof ProtectedTransactionsFreightRouteWithChildren
   '/_protected/transactions/freight/_layout': typeof ProtectedTransactionsFreightLayoutRouteWithChildren
-  '/_protected/transactions/vouchers': typeof ProtectedTransactionsVouchersRouteWithChildren
   '/_protected/transactions/vouchers/_layout': typeof ProtectedTransactionsVouchersLayoutRouteWithChildren
   '/_protected/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
   '/_protected/reports/profit_loss/': typeof ProtectedReportsProfit_lossIndexRoute
-  '/_protected/administration/_layout/role': typeof ProtectedAdministrationLayoutRoleRouteWithChildren
   '/_protected/administration/_layout/role/_layout': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
-  '/_protected/administration/_layout/user': typeof ProtectedAdministrationLayoutUserRouteWithChildren
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/_protected/reports/stock_summary/_layout/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
@@ -2074,55 +1753,30 @@ export interface FileRoutesById {
   '/_protected/transactions/freight/_layout/': typeof ProtectedTransactionsFreightLayoutIndexRoute
   '/_protected/transactions/vouchers/_layout/': typeof ProtectedTransactionsVouchersLayoutIndexRoute
   '/_protected/administration/_layout/user/_layout/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
-  '/_protected/masters/accounts/_layout/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren
   '/_protected/masters/accounts/_layout/account_group/_layout': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
-  '/_protected/masters/accounts/_layout/account_ledger': typeof ProtectedMastersAccountsLayoutAccount_ledgerRouteWithChildren
   '/_protected/masters/accounts/_layout/account_ledger/_layout': typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren
-  '/_protected/masters/accounts/_layout/customer': typeof ProtectedMastersAccountsLayoutCustomerRouteWithChildren
   '/_protected/masters/accounts/_layout/customer/_layout': typeof ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren
-  '/_protected/masters/accounts/_layout/vendor': typeof ProtectedMastersAccountsLayoutVendorRouteWithChildren
   '/_protected/masters/accounts/_layout/vendor/_layout': typeof ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren
-  '/_protected/masters/accounts/_layout/voucher_type': typeof ProtectedMastersAccountsLayoutVoucher_typeRouteWithChildren
   '/_protected/masters/accounts/_layout/voucher_type/_layout': typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/bed': typeof ProtectedMastersInfrastructureLayoutBedRouteWithChildren
   '/_protected/masters/infrastructure/_layout/bed/_layout': typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/building': typeof ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren
   '/_protected/masters/infrastructure/_layout/building/_layout': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/facility-amenity': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren
   '/_protected/masters/infrastructure/_layout/facility-amenity/_layout': typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/facility': typeof ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren
   '/_protected/masters/infrastructure/_layout/facility/_layout': typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/floor': typeof ProtectedMastersInfrastructureLayoutFloorRouteWithChildren
   '/_protected/masters/infrastructure/_layout/floor/_layout': typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
-  '/_protected/masters/infrastructure/_layout/room': typeof ProtectedMastersInfrastructureLayoutRoomRouteWithChildren
   '/_protected/masters/infrastructure/_layout/room/_layout': typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
-  '/_protected/masters/inventory/_layout/stock_item': typeof ProtectedMastersInventoryLayoutStock_itemRouteWithChildren
   '/_protected/masters/inventory/_layout/stock_item/_layout': typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
-  '/_protected/masters/organization/_layout/company': typeof ProtectedMastersOrganizationLayoutCompanyRouteWithChildren
   '/_protected/masters/organization/_layout/company/_layout': typeof ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
-  '/_protected/masters/organization/_layout/country': typeof ProtectedMastersOrganizationLayoutCountryRouteWithChildren
   '/_protected/masters/organization/_layout/country/_layout': typeof ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren
-  '/_protected/masters/organization/_layout/currency': typeof ProtectedMastersOrganizationLayoutCurrencyRouteWithChildren
   '/_protected/masters/organization/_layout/currency/_layout': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
-  '/_protected/masters/organization/_layout/fiscal_year': typeof ProtectedMastersOrganizationLayoutFiscal_yearRouteWithChildren
   '/_protected/masters/organization/_layout/fiscal_year/_layout': typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
-  '/_protected/masters/organization/_layout/state': typeof ProtectedMastersOrganizationLayoutStateRouteWithChildren
   '/_protected/masters/organization/_layout/state/_layout': typeof ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren
-  '/_protected/masters/party/_layout/distributor': typeof ProtectedMastersPartyLayoutDistributorRouteWithChildren
   '/_protected/masters/party/_layout/distributor/_layout': typeof ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren
-  '/_protected/masters/party/_layout/supplier': typeof ProtectedMastersPartyLayoutSupplierRouteWithChildren
   '/_protected/masters/party/_layout/supplier/_layout': typeof ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren
-  '/_protected/masters/party/_layout/transporter': typeof ProtectedMastersPartyLayoutTransporterRouteWithChildren
   '/_protected/masters/party/_layout/transporter/_layout': typeof ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren
-  '/_protected/masters/payroll/_layout/employee': typeof ProtectedMastersPayrollLayoutEmployeeRouteWithChildren
   '/_protected/masters/payroll/_layout/employee/_layout': typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
-  '/_protected/reports/day_book/_layout/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren
   '/_protected/reports/day_book/_layout/delivery_note/_layout': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
-  '/_protected/reports/day_book/_layout/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren
   '/_protected/reports/day_book/_layout/receipt_note/_layout': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
-  '/_protected/transactions/vouchers/_layout/delivery_note': typeof ProtectedTransactionsVouchersLayoutDelivery_noteRouteWithChildren
   '/_protected/transactions/vouchers/_layout/delivery_note/_layout': typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
-  '/_protected/transactions/vouchers/_layout/receipt_note': typeof ProtectedTransactionsVouchersLayoutReceipt_noteRouteWithChildren
   '/_protected/transactions/vouchers/_layout/receipt_note/_layout': typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/_protected/administration/_layout/role/_layout/': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/_protected/administration/_layout/user/_layout/': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
@@ -2178,9 +1832,10 @@ export interface FileRoutesById {
   '/_protected/transactions/vouchers/_layout/sales_order/': typeof ProtectedTransactionsVouchersLayoutSales_orderIndexRoute
   '/_protected/transactions/vouchers/_layout/stock_journal/': typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRoute
   '/_protected/transactions/vouchers/_layout/transfer_voucher/': typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRoute
-  '/_protected/administration/_layout/role/_layout/$id': typeof ProtectedAdministrationLayoutRoleLayoutIdRouteWithChildren
   '/_protected/administration/_layout/role/_layout/$id/_module': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
   '/_protected/masters/infrastructure/_layout/building/_layout/$id': typeof ProtectedMastersInfrastructureLayoutBuildingLayoutIdRoute
+  '/_protected/masters/infrastructure/_layout/floor/_layout/$id': typeof ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute
+  '/_protected/masters/infrastructure/_layout/room/_layout/$id': typeof ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute
   '/_protected/masters/organization/_layout/company/_layout/$id': typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRoute
   '/_protected/masters/organization/_layout/country/_layout/$id': typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   '/_protected/masters/organization/_layout/currency/_layout/$id': typeof ProtectedMastersOrganizationLayoutCurrencyLayoutIdRoute
@@ -2248,12 +1903,12 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps'
-    | '/chats'
-    | '/facility'
-    | '/help-center'
+    | '/apps/'
+    | '/chats/'
+    | '/facility/'
+    | '/help-center/'
     | '/settings/'
-    | '/tasks'
+    | '/tasks/'
     | '/user-fiscal-year'
     | '/masters/accounts'
     | '/masters/infrastructure'
@@ -2269,8 +1924,8 @@ export interface FileRouteTypes {
     | '/reports/stock_summary'
     | '/transactions/freight'
     | '/transactions/vouchers'
-    | '/reports/balance_sheet'
-    | '/reports/profit_loss'
+    | '/reports/balance_sheet/'
+    | '/reports/profit_loss/'
     | '/administration/role'
     | '/administration/user'
     | '/reports/stock_summary/net-stock'
@@ -2278,11 +1933,11 @@ export interface FileRouteTypes {
     | '/reports/stock_summary/saleble-stock'
     | '/reports/stock_summary/sales-order-outstanding'
     | '/reports/stock_summary/stock-in-hand'
-    | '/profile/index'
+    | '/profile/index/'
     | '/user-fiscal-year/'
-    | '/administration/app_module'
-    | '/administration/app_module_feature'
-    | '/administration/permission'
+    | '/administration/app_module/'
+    | '/administration/app_module_feature/'
+    | '/administration/permission/'
     | '/reports/day_book/'
     | '/reports/stock_summary/'
     | '/transactions/freight/'
@@ -2315,60 +1970,62 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/receipt_note'
     | '/administration/role/'
     | '/administration/user/'
-    | '/masters/accounts/account_nature'
-    | '/masters/accounts/voucher_category'
-    | '/masters/accounts/voucher_classification'
-    | '/masters/infrastructure/amenity'
-    | '/masters/inventory/godown'
-    | '/masters/inventory/stock_category'
-    | '/masters/inventory/stock_group'
-    | '/masters/inventory/stock_unit'
-    | '/masters/inventory/unique_quantity_code'
-    | '/masters/organization/branch'
-    | '/masters/payroll/bank'
-    | '/masters/payroll/cost_allocation_rule'
-    | '/masters/payroll/cost_category'
-    | '/masters/payroll/cost_center'
-    | '/masters/payroll/department'
-    | '/masters/payroll/designation'
-    | '/masters/payroll/employee_group'
-    | '/masters/payroll/grade'
-    | '/masters/payroll/holiday'
-    | '/masters/payroll/leave_type'
-    | '/masters/payroll/salary'
-    | '/masters/payroll/salary_component'
-    | '/masters/payroll/salary_structure'
-    | '/masters/payroll/shift'
-    | '/reports/day_book/contra'
-    | '/reports/day_book/journal'
-    | '/reports/day_book/manufacturing_journal'
-    | '/reports/day_book/payment'
-    | '/reports/day_book/physical_stock'
-    | '/reports/day_book/purchase'
-    | '/reports/day_book/purchase_order'
-    | '/reports/day_book/receipt'
-    | '/reports/day_book/rejection_in'
-    | '/reports/day_book/rejection_out'
-    | '/reports/day_book/sales'
-    | '/reports/day_book/sales_order'
-    | '/reports/day_book/stock_journal'
-    | '/reports/day_book/transfer_voucher'
-    | '/transactions/vouchers/contra'
-    | '/transactions/vouchers/journal'
-    | '/transactions/vouchers/manufacturing_journal'
-    | '/transactions/vouchers/payment'
-    | '/transactions/vouchers/physical_stock'
-    | '/transactions/vouchers/purchase'
-    | '/transactions/vouchers/purchase_order'
-    | '/transactions/vouchers/receipt'
-    | '/transactions/vouchers/rejection_in'
-    | '/transactions/vouchers/rejection_out'
-    | '/transactions/vouchers/sales'
-    | '/transactions/vouchers/sales_order'
-    | '/transactions/vouchers/stock_journal'
-    | '/transactions/vouchers/transfer_voucher'
+    | '/masters/accounts/account_nature/'
+    | '/masters/accounts/voucher_category/'
+    | '/masters/accounts/voucher_classification/'
+    | '/masters/infrastructure/amenity/'
+    | '/masters/inventory/godown/'
+    | '/masters/inventory/stock_category/'
+    | '/masters/inventory/stock_group/'
+    | '/masters/inventory/stock_unit/'
+    | '/masters/inventory/unique_quantity_code/'
+    | '/masters/organization/branch/'
+    | '/masters/payroll/bank/'
+    | '/masters/payroll/cost_allocation_rule/'
+    | '/masters/payroll/cost_category/'
+    | '/masters/payroll/cost_center/'
+    | '/masters/payroll/department/'
+    | '/masters/payroll/designation/'
+    | '/masters/payroll/employee_group/'
+    | '/masters/payroll/grade/'
+    | '/masters/payroll/holiday/'
+    | '/masters/payroll/leave_type/'
+    | '/masters/payroll/salary/'
+    | '/masters/payroll/salary_component/'
+    | '/masters/payroll/salary_structure/'
+    | '/masters/payroll/shift/'
+    | '/reports/day_book/contra/'
+    | '/reports/day_book/journal/'
+    | '/reports/day_book/manufacturing_journal/'
+    | '/reports/day_book/payment/'
+    | '/reports/day_book/physical_stock/'
+    | '/reports/day_book/purchase/'
+    | '/reports/day_book/purchase_order/'
+    | '/reports/day_book/receipt/'
+    | '/reports/day_book/rejection_in/'
+    | '/reports/day_book/rejection_out/'
+    | '/reports/day_book/sales/'
+    | '/reports/day_book/sales_order/'
+    | '/reports/day_book/stock_journal/'
+    | '/reports/day_book/transfer_voucher/'
+    | '/transactions/vouchers/contra/'
+    | '/transactions/vouchers/journal/'
+    | '/transactions/vouchers/manufacturing_journal/'
+    | '/transactions/vouchers/payment/'
+    | '/transactions/vouchers/physical_stock/'
+    | '/transactions/vouchers/purchase/'
+    | '/transactions/vouchers/purchase_order/'
+    | '/transactions/vouchers/receipt/'
+    | '/transactions/vouchers/rejection_in/'
+    | '/transactions/vouchers/rejection_out/'
+    | '/transactions/vouchers/sales/'
+    | '/transactions/vouchers/sales_order/'
+    | '/transactions/vouchers/stock_journal/'
+    | '/transactions/vouchers/transfer_voucher/'
     | '/administration/role/$id'
     | '/masters/infrastructure/building/$id'
+    | '/masters/infrastructure/floor/$id'
+    | '/masters/infrastructure/room/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -2410,7 +2067,7 @@ export interface FileRouteTypes {
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
     | '/administration/role/$id/'
-    | '/masters/inventory/stock_item/$id'
+    | '/masters/inventory/stock_item/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -2439,7 +2096,6 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/settings'
     | '/tasks'
-    | '/user-fiscal-year'
     | '/masters/accounts'
     | '/masters/infrastructure'
     | '/masters/inventory'
@@ -2450,49 +2106,25 @@ export interface FileRouteTypes {
     | '/masters/party'
     | '/masters/payroll'
     | '/masters/statutory'
-    | '/reports/day_book'
-    | '/reports/stock_summary'
-    | '/transactions/freight'
-    | '/transactions/vouchers'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
-    | '/administration/role'
-    | '/administration/user'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
     | '/reports/stock_summary/sales-order-outstanding'
     | '/reports/stock_summary/stock-in-hand'
     | '/profile/index'
+    | '/user-fiscal-year'
     | '/administration/app_module'
     | '/administration/app_module_feature'
     | '/administration/permission'
+    | '/reports/day_book'
+    | '/reports/stock_summary'
+    | '/transactions/freight'
+    | '/transactions/vouchers'
     | '/administration/user/$id'
-    | '/masters/accounts/account_group'
-    | '/masters/accounts/account_ledger'
-    | '/masters/accounts/customer'
-    | '/masters/accounts/vendor'
-    | '/masters/accounts/voucher_type'
-    | '/masters/infrastructure/bed'
-    | '/masters/infrastructure/building'
-    | '/masters/infrastructure/facility-amenity'
-    | '/masters/infrastructure/facility'
-    | '/masters/infrastructure/floor'
-    | '/masters/infrastructure/room'
-    | '/masters/inventory/stock_item'
-    | '/masters/organization/company'
-    | '/masters/organization/country'
-    | '/masters/organization/currency'
-    | '/masters/organization/fiscal_year'
-    | '/masters/organization/state'
-    | '/masters/party/distributor'
-    | '/masters/party/supplier'
-    | '/masters/party/transporter'
-    | '/masters/payroll/employee'
-    | '/reports/day_book/delivery_note'
-    | '/reports/day_book/receipt_note'
-    | '/transactions/vouchers/delivery_note'
-    | '/transactions/vouchers/receipt_note'
+    | '/administration/role'
+    | '/administration/user'
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
     | '/masters/accounts/voucher_classification'
@@ -2545,8 +2177,9 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/sales_order'
     | '/transactions/vouchers/stock_journal'
     | '/transactions/vouchers/transfer_voucher'
-    | '/administration/role/$id'
     | '/masters/infrastructure/building/$id'
+    | '/masters/infrastructure/floor/$id'
+    | '/masters/infrastructure/room/$id'
     | '/masters/organization/company/$id'
     | '/masters/organization/country/$id'
     | '/masters/organization/currency/$id'
@@ -2560,8 +2193,34 @@ export interface FileRouteTypes {
     | '/reports/day_book/receipt_note/$id'
     | '/transactions/vouchers/delivery_note/$id'
     | '/transactions/vouchers/receipt_note/$id'
+    | '/masters/accounts/account_group'
+    | '/masters/accounts/account_ledger'
+    | '/masters/accounts/customer'
+    | '/masters/accounts/vendor'
+    | '/masters/accounts/voucher_type'
+    | '/masters/infrastructure/bed'
+    | '/masters/infrastructure/building'
+    | '/masters/infrastructure/facility-amenity'
+    | '/masters/infrastructure/facility'
+    | '/masters/infrastructure/floor'
+    | '/masters/infrastructure/room'
+    | '/masters/inventory/stock_item'
+    | '/masters/organization/company'
+    | '/masters/organization/country'
+    | '/masters/organization/currency'
+    | '/masters/organization/fiscal_year'
+    | '/masters/organization/state'
+    | '/masters/party/distributor'
+    | '/masters/party/supplier'
+    | '/masters/party/transporter'
+    | '/masters/payroll/employee'
+    | '/reports/day_book/delivery_note'
+    | '/reports/day_book/receipt_note'
+    | '/transactions/vouchers/delivery_note'
+    | '/transactions/vouchers/receipt_note'
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
+    | '/administration/role/$id'
     | '/masters/inventory/stock_item/$id'
   id:
     | '__root__'
@@ -2582,7 +2241,6 @@ export interface FileRouteTypes {
     | '/(guest)/sign-in-2'
     | '/(guest)/sign-up'
     | '/(guest)/signin'
-    | '/_protected/administration'
     | '/_protected/administration/_layout'
     | '/_protected/settings/account'
     | '/_protected/settings/appearance'
@@ -2594,38 +2252,24 @@ export interface FileRouteTypes {
     | '/_protected/help-center/'
     | '/_protected/settings/'
     | '/_protected/tasks/'
-    | '/_protected/(auth)/user-fiscal-year'
     | '/_protected/(auth)/user-fiscal-year/_layout'
-    | '/_protected/masters/accounts'
     | '/_protected/masters/accounts/_layout'
-    | '/_protected/masters/infrastructure'
     | '/_protected/masters/infrastructure/_layout'
-    | '/_protected/masters/inventory'
     | '/_protected/masters/inventory/_layout'
     | '/_protected/masters/miscellaneous/delivery_places'
     | '/_protected/masters/miscellaneous/delivery_routes'
     | '/_protected/masters/miscellaneous/vehicle'
-    | '/_protected/masters/organization'
     | '/_protected/masters/organization/_layout'
-    | '/_protected/masters/party'
     | '/_protected/masters/party/_layout'
-    | '/_protected/masters/payroll'
     | '/_protected/masters/payroll/_layout'
-    | '/_protected/masters/statutory'
     | '/_protected/masters/statutory/_layout'
-    | '/_protected/reports/day_book'
     | '/_protected/reports/day_book/_layout'
-    | '/_protected/reports/stock_summary'
     | '/_protected/reports/stock_summary/_layout'
-    | '/_protected/transactions/freight'
     | '/_protected/transactions/freight/_layout'
-    | '/_protected/transactions/vouchers'
     | '/_protected/transactions/vouchers/_layout'
     | '/_protected/reports/balance_sheet/'
     | '/_protected/reports/profit_loss/'
-    | '/_protected/administration/_layout/role'
     | '/_protected/administration/_layout/role/_layout'
-    | '/_protected/administration/_layout/user'
     | '/_protected/administration/_layout/user/_layout'
     | '/_protected/reports/stock_summary/_layout/net-stock'
     | '/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
@@ -2642,55 +2286,30 @@ export interface FileRouteTypes {
     | '/_protected/transactions/freight/_layout/'
     | '/_protected/transactions/vouchers/_layout/'
     | '/_protected/administration/_layout/user/_layout/$id'
-    | '/_protected/masters/accounts/_layout/account_group'
     | '/_protected/masters/accounts/_layout/account_group/_layout'
-    | '/_protected/masters/accounts/_layout/account_ledger'
     | '/_protected/masters/accounts/_layout/account_ledger/_layout'
-    | '/_protected/masters/accounts/_layout/customer'
     | '/_protected/masters/accounts/_layout/customer/_layout'
-    | '/_protected/masters/accounts/_layout/vendor'
     | '/_protected/masters/accounts/_layout/vendor/_layout'
-    | '/_protected/masters/accounts/_layout/voucher_type'
     | '/_protected/masters/accounts/_layout/voucher_type/_layout'
-    | '/_protected/masters/infrastructure/_layout/bed'
     | '/_protected/masters/infrastructure/_layout/bed/_layout'
-    | '/_protected/masters/infrastructure/_layout/building'
     | '/_protected/masters/infrastructure/_layout/building/_layout'
-    | '/_protected/masters/infrastructure/_layout/facility-amenity'
     | '/_protected/masters/infrastructure/_layout/facility-amenity/_layout'
-    | '/_protected/masters/infrastructure/_layout/facility'
     | '/_protected/masters/infrastructure/_layout/facility/_layout'
-    | '/_protected/masters/infrastructure/_layout/floor'
     | '/_protected/masters/infrastructure/_layout/floor/_layout'
-    | '/_protected/masters/infrastructure/_layout/room'
     | '/_protected/masters/infrastructure/_layout/room/_layout'
-    | '/_protected/masters/inventory/_layout/stock_item'
     | '/_protected/masters/inventory/_layout/stock_item/_layout'
-    | '/_protected/masters/organization/_layout/company'
     | '/_protected/masters/organization/_layout/company/_layout'
-    | '/_protected/masters/organization/_layout/country'
     | '/_protected/masters/organization/_layout/country/_layout'
-    | '/_protected/masters/organization/_layout/currency'
     | '/_protected/masters/organization/_layout/currency/_layout'
-    | '/_protected/masters/organization/_layout/fiscal_year'
     | '/_protected/masters/organization/_layout/fiscal_year/_layout'
-    | '/_protected/masters/organization/_layout/state'
     | '/_protected/masters/organization/_layout/state/_layout'
-    | '/_protected/masters/party/_layout/distributor'
     | '/_protected/masters/party/_layout/distributor/_layout'
-    | '/_protected/masters/party/_layout/supplier'
     | '/_protected/masters/party/_layout/supplier/_layout'
-    | '/_protected/masters/party/_layout/transporter'
     | '/_protected/masters/party/_layout/transporter/_layout'
-    | '/_protected/masters/payroll/_layout/employee'
     | '/_protected/masters/payroll/_layout/employee/_layout'
-    | '/_protected/reports/day_book/_layout/delivery_note'
     | '/_protected/reports/day_book/_layout/delivery_note/_layout'
-    | '/_protected/reports/day_book/_layout/receipt_note'
     | '/_protected/reports/day_book/_layout/receipt_note/_layout'
-    | '/_protected/transactions/vouchers/_layout/delivery_note'
     | '/_protected/transactions/vouchers/_layout/delivery_note/_layout'
-    | '/_protected/transactions/vouchers/_layout/receipt_note'
     | '/_protected/transactions/vouchers/_layout/receipt_note/_layout'
     | '/_protected/administration/_layout/role/_layout/'
     | '/_protected/administration/_layout/user/_layout/'
@@ -2746,9 +2365,10 @@ export interface FileRouteTypes {
     | '/_protected/transactions/vouchers/_layout/sales_order/'
     | '/_protected/transactions/vouchers/_layout/stock_journal/'
     | '/_protected/transactions/vouchers/_layout/transfer_voucher/'
-    | '/_protected/administration/_layout/role/_layout/$id'
     | '/_protected/administration/_layout/role/_layout/$id/_module'
     | '/_protected/masters/infrastructure/_layout/building/_layout/$id'
+    | '/_protected/masters/infrastructure/_layout/floor/_layout/$id'
+    | '/_protected/masters/infrastructure/_layout/room/_layout/$id'
     | '/_protected/masters/organization/_layout/company/_layout/$id'
     | '/_protected/masters/organization/_layout/country/_layout/$id'
     | '/_protected/masters/organization/_layout/currency/_layout/$id'
@@ -2822,7 +2442,7 @@ declare module '@tanstack/react-router' {
     '/_protected': {
       id: '/_protected'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof ProtectedRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -2832,13 +2452,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_protected/administration': {
-      id: '/_protected/administration'
-      path: '/administration'
-      fullPath: '/administration'
-      preLoaderRoute: typeof ProtectedAdministrationRouteImport
-      parentRoute: typeof ProtectedRoute
     }
     '/(guest)/signin': {
       id: '/(guest)/signin'
@@ -2938,94 +2551,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedSettingsRouteRouteImport
       parentRoute: typeof ProtectedRoute
     }
-    '/_protected/transactions/vouchers': {
-      id: '/_protected/transactions/vouchers'
-      path: '/transactions/vouchers'
-      fullPath: '/transactions/vouchers'
-      preLoaderRoute: typeof ProtectedTransactionsVouchersRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/transactions/freight': {
-      id: '/_protected/transactions/freight'
-      path: '/transactions/freight'
-      fullPath: '/transactions/freight'
-      preLoaderRoute: typeof ProtectedTransactionsFreightRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/reports/stock_summary': {
-      id: '/_protected/reports/stock_summary'
-      path: '/reports/stock_summary'
-      fullPath: '/reports/stock_summary'
-      preLoaderRoute: typeof ProtectedReportsStock_summaryRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/reports/day_book': {
-      id: '/_protected/reports/day_book'
-      path: '/reports/day_book'
-      fullPath: '/reports/day_book'
-      preLoaderRoute: typeof ProtectedReportsDay_bookRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/statutory': {
-      id: '/_protected/masters/statutory'
-      path: '/masters/statutory'
-      fullPath: '/masters/statutory'
-      preLoaderRoute: typeof ProtectedMastersStatutoryRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/payroll': {
-      id: '/_protected/masters/payroll'
-      path: '/masters/payroll'
-      fullPath: '/masters/payroll'
-      preLoaderRoute: typeof ProtectedMastersPayrollRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/party': {
-      id: '/_protected/masters/party'
-      path: '/masters/party'
-      fullPath: '/masters/party'
-      preLoaderRoute: typeof ProtectedMastersPartyRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/organization': {
-      id: '/_protected/masters/organization'
-      path: '/masters/organization'
-      fullPath: '/masters/organization'
-      preLoaderRoute: typeof ProtectedMastersOrganizationRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/inventory': {
-      id: '/_protected/masters/inventory'
-      path: '/masters/inventory'
-      fullPath: '/masters/inventory'
-      preLoaderRoute: typeof ProtectedMastersInventoryRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/infrastructure': {
-      id: '/_protected/masters/infrastructure'
-      path: '/masters/infrastructure'
-      fullPath: '/masters/infrastructure'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/masters/accounts': {
-      id: '/_protected/masters/accounts'
-      path: '/masters/accounts'
-      fullPath: '/masters/accounts'
-      preLoaderRoute: typeof ProtectedMastersAccountsRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
-    '/_protected/(auth)/user-fiscal-year': {
-      id: '/_protected/(auth)/user-fiscal-year'
-      path: '/user-fiscal-year'
-      fullPath: '/user-fiscal-year'
-      preLoaderRoute: typeof ProtectedauthUserFiscalYearRouteImport
-      parentRoute: typeof ProtectedRoute
-    }
     '/_protected/tasks/': {
       id: '/_protected/tasks/'
       path: '/tasks'
-      fullPath: '/tasks'
+      fullPath: '/tasks/'
       preLoaderRoute: typeof ProtectedTasksIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
@@ -3039,28 +2568,28 @@ declare module '@tanstack/react-router' {
     '/_protected/help-center/': {
       id: '/_protected/help-center/'
       path: '/help-center'
-      fullPath: '/help-center'
+      fullPath: '/help-center/'
       preLoaderRoute: typeof ProtectedHelpCenterIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/facility/': {
       id: '/_protected/facility/'
       path: '/facility'
-      fullPath: '/facility'
+      fullPath: '/facility/'
       preLoaderRoute: typeof ProtectedFacilityIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/chats/': {
       id: '/_protected/chats/'
       path: '/chats'
-      fullPath: '/chats'
+      fullPath: '/chats/'
       preLoaderRoute: typeof ProtectedChatsIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/apps/': {
       id: '/_protected/apps/'
       path: '/apps'
-      fullPath: '/apps'
+      fullPath: '/apps/'
       preLoaderRoute: typeof ProtectedAppsIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
@@ -3097,33 +2626,19 @@ declare module '@tanstack/react-router' {
       path: '/administration'
       fullPath: '/administration'
       preLoaderRoute: typeof ProtectedAdministrationLayoutRouteImport
-      parentRoute: typeof ProtectedAdministrationRoute
-    }
-    '/_protected/administration/_layout/user': {
-      id: '/_protected/administration/_layout/user'
-      path: '/user'
-      fullPath: '/administration/user'
-      preLoaderRoute: typeof ProtectedAdministrationLayoutUserRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutRoute
-    }
-    '/_protected/administration/_layout/role': {
-      id: '/_protected/administration/_layout/role'
-      path: '/role'
-      fullPath: '/administration/role'
-      preLoaderRoute: typeof ProtectedAdministrationLayoutRoleRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/profit_loss/': {
       id: '/_protected/reports/profit_loss/'
       path: '/reports/profit_loss'
-      fullPath: '/reports/profit_loss'
+      fullPath: '/reports/profit_loss/'
       preLoaderRoute: typeof ProtectedReportsProfit_lossIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/balance_sheet/': {
       id: '/_protected/reports/balance_sheet/'
       path: '/reports/balance_sheet'
-      fullPath: '/reports/balance_sheet'
+      fullPath: '/reports/balance_sheet/'
       preLoaderRoute: typeof ProtectedReportsBalance_sheetIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
@@ -3132,56 +2647,56 @@ declare module '@tanstack/react-router' {
       path: '/transactions/vouchers'
       fullPath: '/transactions/vouchers'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutRouteImport
-      parentRoute: typeof ProtectedTransactionsVouchersRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/transactions/freight/_layout': {
       id: '/_protected/transactions/freight/_layout'
       path: '/transactions/freight'
       fullPath: '/transactions/freight'
       preLoaderRoute: typeof ProtectedTransactionsFreightLayoutRouteImport
-      parentRoute: typeof ProtectedTransactionsFreightRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/stock_summary/_layout': {
       id: '/_protected/reports/stock_summary/_layout'
       path: '/reports/stock_summary'
       fullPath: '/reports/stock_summary'
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutRouteImport
-      parentRoute: typeof ProtectedReportsStock_summaryRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/day_book/_layout': {
       id: '/_protected/reports/day_book/_layout'
       path: '/reports/day_book'
       fullPath: '/reports/day_book'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/statutory/_layout': {
       id: '/_protected/masters/statutory/_layout'
       path: '/masters/statutory'
       fullPath: '/masters/statutory'
       preLoaderRoute: typeof ProtectedMastersStatutoryLayoutRouteImport
-      parentRoute: typeof ProtectedMastersStatutoryRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/payroll/_layout': {
       id: '/_protected/masters/payroll/_layout'
       path: '/masters/payroll'
       fullPath: '/masters/payroll'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPayrollRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/party/_layout': {
       id: '/_protected/masters/party/_layout'
       path: '/masters/party'
       fullPath: '/masters/party'
       preLoaderRoute: typeof ProtectedMastersPartyLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPartyRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/organization/_layout': {
       id: '/_protected/masters/organization/_layout'
       path: '/masters/organization'
       fullPath: '/masters/organization'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/miscellaneous/vehicle': {
       id: '/_protected/masters/miscellaneous/vehicle'
@@ -3209,203 +2724,35 @@ declare module '@tanstack/react-router' {
       path: '/masters/inventory'
       fullPath: '/masters/inventory'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInventoryRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/infrastructure/_layout': {
       id: '/_protected/masters/infrastructure/_layout'
       path: '/masters/infrastructure'
       fullPath: '/masters/infrastructure'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/masters/accounts/_layout': {
       id: '/_protected/masters/accounts/_layout'
       path: '/masters/accounts'
       fullPath: '/masters/accounts'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsRoute
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/(auth)/user-fiscal-year/_layout': {
       id: '/_protected/(auth)/user-fiscal-year/_layout'
       path: '/user-fiscal-year'
       fullPath: '/user-fiscal-year'
       preLoaderRoute: typeof ProtectedauthUserFiscalYearLayoutRouteImport
-      parentRoute: typeof ProtectedauthUserFiscalYearRoute
+      parentRoute: typeof ProtectedRoute
     }
-    '/_protected/transactions/vouchers/_layout/receipt_note': {
-      id: '/_protected/transactions/vouchers/_layout/receipt_note'
-      path: '/receipt_note'
-      fullPath: '/transactions/vouchers/receipt_note'
-      preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteRouteImport
-      parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
-    }
-    '/_protected/transactions/vouchers/_layout/delivery_note': {
-      id: '/_protected/transactions/vouchers/_layout/delivery_note'
-      path: '/delivery_note'
-      fullPath: '/transactions/vouchers/delivery_note'
-      preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteRouteImport
-      parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
-    }
-    '/_protected/reports/day_book/_layout/receipt_note': {
-      id: '/_protected/reports/day_book/_layout/receipt_note'
-      path: '/receipt_note'
-      fullPath: '/reports/day_book/receipt_note'
-      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
-    }
-    '/_protected/reports/day_book/_layout/delivery_note': {
-      id: '/_protected/reports/day_book/_layout/delivery_note'
-      path: '/delivery_note'
-      fullPath: '/reports/day_book/delivery_note'
-      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
-    }
-    '/_protected/masters/payroll/_layout/employee': {
-      id: '/_protected/masters/payroll/_layout/employee'
-      path: '/employee'
-      fullPath: '/masters/payroll/employee'
-      preLoaderRoute: typeof ProtectedMastersPayrollLayoutEmployeeRouteImport
-      parentRoute: typeof ProtectedMastersPayrollLayoutRoute
-    }
-    '/_protected/masters/party/_layout/transporter': {
-      id: '/_protected/masters/party/_layout/transporter'
-      path: '/transporter'
-      fullPath: '/masters/party/transporter'
-      preLoaderRoute: typeof ProtectedMastersPartyLayoutTransporterRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutRoute
-    }
-    '/_protected/masters/party/_layout/supplier': {
-      id: '/_protected/masters/party/_layout/supplier'
-      path: '/supplier'
-      fullPath: '/masters/party/supplier'
-      preLoaderRoute: typeof ProtectedMastersPartyLayoutSupplierRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutRoute
-    }
-    '/_protected/masters/party/_layout/distributor': {
-      id: '/_protected/masters/party/_layout/distributor'
-      path: '/distributor'
-      fullPath: '/masters/party/distributor'
-      preLoaderRoute: typeof ProtectedMastersPartyLayoutDistributorRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutRoute
-    }
-    '/_protected/masters/organization/_layout/state': {
-      id: '/_protected/masters/organization/_layout/state'
-      path: '/state'
-      fullPath: '/masters/organization/state'
-      preLoaderRoute: typeof ProtectedMastersOrganizationLayoutStateRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
-    }
-    '/_protected/masters/organization/_layout/fiscal_year': {
-      id: '/_protected/masters/organization/_layout/fiscal_year'
-      path: '/fiscal_year'
-      fullPath: '/masters/organization/fiscal_year'
-      preLoaderRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
-    }
-    '/_protected/masters/organization/_layout/currency': {
-      id: '/_protected/masters/organization/_layout/currency'
-      path: '/currency'
-      fullPath: '/masters/organization/currency'
-      preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCurrencyRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
-    }
-    '/_protected/masters/organization/_layout/country': {
-      id: '/_protected/masters/organization/_layout/country'
-      path: '/country'
-      fullPath: '/masters/organization/country'
-      preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCountryRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
-    }
-    '/_protected/masters/organization/_layout/company': {
-      id: '/_protected/masters/organization/_layout/company'
-      path: '/company'
-      fullPath: '/masters/organization/company'
-      preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCompanyRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
-    }
-    '/_protected/masters/inventory/_layout/stock_item': {
-      id: '/_protected/masters/inventory/_layout/stock_item'
-      path: '/stock_item'
-      fullPath: '/masters/inventory/stock_item'
-      preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemRouteImport
-      parentRoute: typeof ProtectedMastersInventoryLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/room': {
-      id: '/_protected/masters/infrastructure/_layout/room'
-      path: '/room'
-      fullPath: '/masters/infrastructure/room'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/floor': {
-      id: '/_protected/masters/infrastructure/_layout/floor'
-      path: '/floor'
-      fullPath: '/masters/infrastructure/floor'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/facility': {
-      id: '/_protected/masters/infrastructure/_layout/facility'
-      path: '/facility'
-      fullPath: '/masters/infrastructure/facility'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/facility-amenity': {
-      id: '/_protected/masters/infrastructure/_layout/facility-amenity'
-      path: '/facility-amenity'
-      fullPath: '/masters/infrastructure/facility-amenity'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/building': {
-      id: '/_protected/masters/infrastructure/_layout/building'
-      path: '/building'
-      fullPath: '/masters/infrastructure/building'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/infrastructure/_layout/bed': {
-      id: '/_protected/masters/infrastructure/_layout/bed'
-      path: '/bed'
-      fullPath: '/masters/infrastructure/bed'
-      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBedRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
-    }
-    '/_protected/masters/accounts/_layout/voucher_type': {
-      id: '/_protected/masters/accounts/_layout/voucher_type'
-      path: '/voucher_type'
-      fullPath: '/masters/accounts/voucher_type'
-      preLoaderRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
-    }
-    '/_protected/masters/accounts/_layout/vendor': {
-      id: '/_protected/masters/accounts/_layout/vendor'
-      path: '/vendor'
-      fullPath: '/masters/accounts/vendor'
-      preLoaderRoute: typeof ProtectedMastersAccountsLayoutVendorRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
-    }
-    '/_protected/masters/accounts/_layout/customer': {
-      id: '/_protected/masters/accounts/_layout/customer'
-      path: '/customer'
-      fullPath: '/masters/accounts/customer'
-      preLoaderRoute: typeof ProtectedMastersAccountsLayoutCustomerRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
-    }
-    '/_protected/masters/accounts/_layout/account_ledger': {
-      id: '/_protected/masters/accounts/_layout/account_ledger'
-      path: '/account_ledger'
-      fullPath: '/masters/accounts/account_ledger'
-      preLoaderRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
-    }
-    '/_protected/masters/accounts/_layout/account_group': {
-      id: '/_protected/masters/accounts/_layout/account_group'
-      path: '/account_group'
-      fullPath: '/masters/accounts/account_group'
-      preLoaderRoute: typeof ProtectedMastersAccountsLayoutAccount_groupRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
+    '/_protected/(auth)/profile/index/': {
+      id: '/_protected/(auth)/profile/index/'
+      path: '/profile/index'
+      fullPath: '/profile/index/'
+      preLoaderRoute: typeof ProtectedauthProfileIndexRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/transactions/vouchers/_layout/': {
       id: '/_protected/transactions/vouchers/_layout/'
@@ -3438,21 +2785,21 @@ declare module '@tanstack/react-router' {
     '/_protected/administration/_layout/permission/': {
       id: '/_protected/administration/_layout/permission/'
       path: '/permission'
-      fullPath: '/administration/permission'
+      fullPath: '/administration/permission/'
       preLoaderRoute: typeof ProtectedAdministrationLayoutPermissionIndexRouteImport
       parentRoute: typeof ProtectedAdministrationLayoutRoute
     }
     '/_protected/administration/_layout/app_module_feature/': {
       id: '/_protected/administration/_layout/app_module_feature/'
       path: '/app_module_feature'
-      fullPath: '/administration/app_module_feature'
+      fullPath: '/administration/app_module_feature/'
       preLoaderRoute: typeof ProtectedAdministrationLayoutApp_module_featureIndexRouteImport
       parentRoute: typeof ProtectedAdministrationLayoutRoute
     }
     '/_protected/administration/_layout/app_module/': {
       id: '/_protected/administration/_layout/app_module/'
       path: '/app_module'
-      fullPath: '/administration/app_module'
+      fullPath: '/administration/app_module/'
       preLoaderRoute: typeof ProtectedAdministrationLayoutApp_moduleIndexRouteImport
       parentRoute: typeof ProtectedAdministrationLayoutRoute
     }
@@ -3462,13 +2809,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/user-fiscal-year/'
       preLoaderRoute: typeof ProtectedauthUserFiscalYearLayoutIndexRouteImport
       parentRoute: typeof ProtectedauthUserFiscalYearLayoutRoute
-    }
-    '/_protected/(auth)/profile/index/': {
-      id: '/_protected/(auth)/profile/index/'
-      path: '/profile/index'
-      fullPath: '/profile/index'
-      preLoaderRoute: typeof ProtectedauthProfileIndexRouteImport
-      parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/stock_summary/_layout/stock-in-hand': {
       id: '/_protected/reports/stock_summary/_layout/stock-in-hand'
@@ -3510,383 +2850,376 @@ declare module '@tanstack/react-router' {
       path: '/user'
       fullPath: '/administration/user'
       preLoaderRoute: typeof ProtectedAdministrationLayoutUserLayoutRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutUserRoute
+      parentRoute: typeof ProtectedAdministrationLayoutRoute
     }
     '/_protected/administration/_layout/role/_layout': {
       id: '/_protected/administration/_layout/role/_layout'
       path: '/role'
       fullPath: '/administration/role'
       preLoaderRoute: typeof ProtectedAdministrationLayoutRoleLayoutRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutRoleRoute
-    }
-    '/_protected/administration/_layout/role/_layout/$id': {
-      id: '/_protected/administration/_layout/role/_layout/$id'
-      path: '/$id'
-      fullPath: '/administration/role/$id'
-      preLoaderRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutRoleLayoutRoute
+      parentRoute: typeof ProtectedAdministrationLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/transfer_voucher/': {
       id: '/_protected/transactions/vouchers/_layout/transfer_voucher/'
       path: '/transfer_voucher'
-      fullPath: '/transactions/vouchers/transfer_voucher'
+      fullPath: '/transactions/vouchers/transfer_voucher/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutTransfer_voucherIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/stock_journal/': {
       id: '/_protected/transactions/vouchers/_layout/stock_journal/'
       path: '/stock_journal'
-      fullPath: '/transactions/vouchers/stock_journal'
+      fullPath: '/transactions/vouchers/stock_journal/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutStock_journalIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/sales_order/': {
       id: '/_protected/transactions/vouchers/_layout/sales_order/'
       path: '/sales_order'
-      fullPath: '/transactions/vouchers/sales_order'
+      fullPath: '/transactions/vouchers/sales_order/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutSales_orderIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/sales/': {
       id: '/_protected/transactions/vouchers/_layout/sales/'
       path: '/sales'
-      fullPath: '/transactions/vouchers/sales'
+      fullPath: '/transactions/vouchers/sales/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutSalesIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/rejection_out/': {
       id: '/_protected/transactions/vouchers/_layout/rejection_out/'
       path: '/rejection_out'
-      fullPath: '/transactions/vouchers/rejection_out'
+      fullPath: '/transactions/vouchers/rejection_out/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutRejection_outIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/rejection_in/': {
       id: '/_protected/transactions/vouchers/_layout/rejection_in/'
       path: '/rejection_in'
-      fullPath: '/transactions/vouchers/rejection_in'
+      fullPath: '/transactions/vouchers/rejection_in/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutRejection_inIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/receipt/': {
       id: '/_protected/transactions/vouchers/_layout/receipt/'
       path: '/receipt'
-      fullPath: '/transactions/vouchers/receipt'
+      fullPath: '/transactions/vouchers/receipt/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutReceiptIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/purchase_order/': {
       id: '/_protected/transactions/vouchers/_layout/purchase_order/'
       path: '/purchase_order'
-      fullPath: '/transactions/vouchers/purchase_order'
+      fullPath: '/transactions/vouchers/purchase_order/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutPurchase_orderIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/purchase/': {
       id: '/_protected/transactions/vouchers/_layout/purchase/'
       path: '/purchase'
-      fullPath: '/transactions/vouchers/purchase'
+      fullPath: '/transactions/vouchers/purchase/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutPurchaseIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/physical_stock/': {
       id: '/_protected/transactions/vouchers/_layout/physical_stock/'
       path: '/physical_stock'
-      fullPath: '/transactions/vouchers/physical_stock'
+      fullPath: '/transactions/vouchers/physical_stock/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutPhysical_stockIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/payment/': {
       id: '/_protected/transactions/vouchers/_layout/payment/'
       path: '/payment'
-      fullPath: '/transactions/vouchers/payment'
+      fullPath: '/transactions/vouchers/payment/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutPaymentIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/manufacturing_journal/': {
       id: '/_protected/transactions/vouchers/_layout/manufacturing_journal/'
       path: '/manufacturing_journal'
-      fullPath: '/transactions/vouchers/manufacturing_journal'
+      fullPath: '/transactions/vouchers/manufacturing_journal/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutManufacturing_journalIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/journal/': {
       id: '/_protected/transactions/vouchers/_layout/journal/'
       path: '/journal'
-      fullPath: '/transactions/vouchers/journal'
+      fullPath: '/transactions/vouchers/journal/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutJournalIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/contra/': {
       id: '/_protected/transactions/vouchers/_layout/contra/'
       path: '/contra'
-      fullPath: '/transactions/vouchers/contra'
+      fullPath: '/transactions/vouchers/contra/'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutContraIndexRouteImport
       parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/reports/day_book/_layout/transfer_voucher/': {
       id: '/_protected/reports/day_book/_layout/transfer_voucher/'
       path: '/transfer_voucher'
-      fullPath: '/reports/day_book/transfer_voucher'
+      fullPath: '/reports/day_book/transfer_voucher/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutTransfer_voucherIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/stock_journal/': {
       id: '/_protected/reports/day_book/_layout/stock_journal/'
       path: '/stock_journal'
-      fullPath: '/reports/day_book/stock_journal'
+      fullPath: '/reports/day_book/stock_journal/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutStock_journalIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/sales_order/': {
       id: '/_protected/reports/day_book/_layout/sales_order/'
       path: '/sales_order'
-      fullPath: '/reports/day_book/sales_order'
+      fullPath: '/reports/day_book/sales_order/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutSales_orderIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/sales/': {
       id: '/_protected/reports/day_book/_layout/sales/'
       path: '/sales'
-      fullPath: '/reports/day_book/sales'
+      fullPath: '/reports/day_book/sales/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutSalesIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/rejection_out/': {
       id: '/_protected/reports/day_book/_layout/rejection_out/'
       path: '/rejection_out'
-      fullPath: '/reports/day_book/rejection_out'
+      fullPath: '/reports/day_book/rejection_out/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutRejection_outIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/rejection_in/': {
       id: '/_protected/reports/day_book/_layout/rejection_in/'
       path: '/rejection_in'
-      fullPath: '/reports/day_book/rejection_in'
+      fullPath: '/reports/day_book/rejection_in/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutRejection_inIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/receipt/': {
       id: '/_protected/reports/day_book/_layout/receipt/'
       path: '/receipt'
-      fullPath: '/reports/day_book/receipt'
+      fullPath: '/reports/day_book/receipt/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceiptIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/purchase_order/': {
       id: '/_protected/reports/day_book/_layout/purchase_order/'
       path: '/purchase_order'
-      fullPath: '/reports/day_book/purchase_order'
+      fullPath: '/reports/day_book/purchase_order/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/purchase/': {
       id: '/_protected/reports/day_book/_layout/purchase/'
       path: '/purchase'
-      fullPath: '/reports/day_book/purchase'
+      fullPath: '/reports/day_book/purchase/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchaseIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/physical_stock/': {
       id: '/_protected/reports/day_book/_layout/physical_stock/'
       path: '/physical_stock'
-      fullPath: '/reports/day_book/physical_stock'
+      fullPath: '/reports/day_book/physical_stock/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/payment/': {
       id: '/_protected/reports/day_book/_layout/payment/'
       path: '/payment'
-      fullPath: '/reports/day_book/payment'
+      fullPath: '/reports/day_book/payment/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPaymentIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/manufacturing_journal/': {
       id: '/_protected/reports/day_book/_layout/manufacturing_journal/'
       path: '/manufacturing_journal'
-      fullPath: '/reports/day_book/manufacturing_journal'
+      fullPath: '/reports/day_book/manufacturing_journal/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutManufacturing_journalIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/journal/': {
       id: '/_protected/reports/day_book/_layout/journal/'
       path: '/journal'
-      fullPath: '/reports/day_book/journal'
+      fullPath: '/reports/day_book/journal/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutJournalIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/contra/': {
       id: '/_protected/reports/day_book/_layout/contra/'
       path: '/contra'
-      fullPath: '/reports/day_book/contra'
+      fullPath: '/reports/day_book/contra/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutContraIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/masters/payroll/_layout/shift/': {
       id: '/_protected/masters/payroll/_layout/shift/'
       path: '/shift'
-      fullPath: '/masters/payroll/shift'
+      fullPath: '/masters/payroll/shift/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutShiftIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/salary_structure/': {
       id: '/_protected/masters/payroll/_layout/salary_structure/'
       path: '/salary_structure'
-      fullPath: '/masters/payroll/salary_structure'
+      fullPath: '/masters/payroll/salary_structure/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutSalary_structureIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/salary_component/': {
       id: '/_protected/masters/payroll/_layout/salary_component/'
       path: '/salary_component'
-      fullPath: '/masters/payroll/salary_component'
+      fullPath: '/masters/payroll/salary_component/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutSalary_componentIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/salary/': {
       id: '/_protected/masters/payroll/_layout/salary/'
       path: '/salary'
-      fullPath: '/masters/payroll/salary'
+      fullPath: '/masters/payroll/salary/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutSalaryIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/leave_type/': {
       id: '/_protected/masters/payroll/_layout/leave_type/'
       path: '/leave_type'
-      fullPath: '/masters/payroll/leave_type'
+      fullPath: '/masters/payroll/leave_type/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutLeave_typeIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/holiday/': {
       id: '/_protected/masters/payroll/_layout/holiday/'
       path: '/holiday'
-      fullPath: '/masters/payroll/holiday'
+      fullPath: '/masters/payroll/holiday/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutHolidayIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/grade/': {
       id: '/_protected/masters/payroll/_layout/grade/'
       path: '/grade'
-      fullPath: '/masters/payroll/grade'
+      fullPath: '/masters/payroll/grade/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutGradeIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/employee_group/': {
       id: '/_protected/masters/payroll/_layout/employee_group/'
       path: '/employee_group'
-      fullPath: '/masters/payroll/employee_group'
+      fullPath: '/masters/payroll/employee_group/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutEmployee_groupIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/designation/': {
       id: '/_protected/masters/payroll/_layout/designation/'
       path: '/designation'
-      fullPath: '/masters/payroll/designation'
+      fullPath: '/masters/payroll/designation/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutDesignationIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/department/': {
       id: '/_protected/masters/payroll/_layout/department/'
       path: '/department'
-      fullPath: '/masters/payroll/department'
+      fullPath: '/masters/payroll/department/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutDepartmentIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/cost_center/': {
       id: '/_protected/masters/payroll/_layout/cost_center/'
       path: '/cost_center'
-      fullPath: '/masters/payroll/cost_center'
+      fullPath: '/masters/payroll/cost_center/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutCost_centerIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/cost_category/': {
       id: '/_protected/masters/payroll/_layout/cost_category/'
       path: '/cost_category'
-      fullPath: '/masters/payroll/cost_category'
+      fullPath: '/masters/payroll/cost_category/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutCost_categoryIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/cost_allocation_rule/': {
       id: '/_protected/masters/payroll/_layout/cost_allocation_rule/'
       path: '/cost_allocation_rule'
-      fullPath: '/masters/payroll/cost_allocation_rule'
+      fullPath: '/masters/payroll/cost_allocation_rule/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/payroll/_layout/bank/': {
       id: '/_protected/masters/payroll/_layout/bank/'
       path: '/bank'
-      fullPath: '/masters/payroll/bank'
+      fullPath: '/masters/payroll/bank/'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutBankIndexRouteImport
       parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/organization/_layout/branch/': {
       id: '/_protected/masters/organization/_layout/branch/'
       path: '/branch'
-      fullPath: '/masters/organization/branch'
+      fullPath: '/masters/organization/branch/'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutBranchIndexRouteImport
       parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/inventory/_layout/unique_quantity_code/': {
       id: '/_protected/masters/inventory/_layout/unique_quantity_code/'
       path: '/unique_quantity_code'
-      fullPath: '/masters/inventory/unique_quantity_code'
+      fullPath: '/masters/inventory/unique_quantity_code/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutUnique_quantity_codeIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/inventory/_layout/stock_unit/': {
       id: '/_protected/masters/inventory/_layout/stock_unit/'
       path: '/stock_unit'
-      fullPath: '/masters/inventory/stock_unit'
+      fullPath: '/masters/inventory/stock_unit/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_unitIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/inventory/_layout/stock_group/': {
       id: '/_protected/masters/inventory/_layout/stock_group/'
       path: '/stock_group'
-      fullPath: '/masters/inventory/stock_group'
+      fullPath: '/masters/inventory/stock_group/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_groupIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/inventory/_layout/stock_category/': {
       id: '/_protected/masters/inventory/_layout/stock_category/'
       path: '/stock_category'
-      fullPath: '/masters/inventory/stock_category'
+      fullPath: '/masters/inventory/stock_category/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_categoryIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/inventory/_layout/godown/': {
       id: '/_protected/masters/inventory/_layout/godown/'
       path: '/godown'
-      fullPath: '/masters/inventory/godown'
+      fullPath: '/masters/inventory/godown/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutGodownIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/amenity/': {
       id: '/_protected/masters/infrastructure/_layout/amenity/'
       path: '/amenity'
-      fullPath: '/masters/infrastructure/amenity'
+      fullPath: '/masters/infrastructure/amenity/'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutAmenityIndexRouteImport
       parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/accounts/_layout/voucher_classification/': {
       id: '/_protected/masters/accounts/_layout/voucher_classification/'
       path: '/voucher_classification'
-      fullPath: '/masters/accounts/voucher_classification'
+      fullPath: '/masters/accounts/voucher_classification/'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRouteImport
       parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/voucher_category/': {
       id: '/_protected/masters/accounts/_layout/voucher_category/'
       path: '/voucher_category'
-      fullPath: '/masters/accounts/voucher_category'
+      fullPath: '/masters/accounts/voucher_category/'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRouteImport
       parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/account_nature/': {
       id: '/_protected/masters/accounts/_layout/account_nature/'
       path: '/account_nature'
-      fullPath: '/masters/accounts/account_nature'
+      fullPath: '/masters/accounts/account_nature/'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutAccount_natureIndexRouteImport
       parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
@@ -3909,175 +3242,175 @@ declare module '@tanstack/react-router' {
       path: '/receipt_note'
       fullPath: '/transactions/vouchers/receipt_note'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteImport
-      parentRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteRoute
+      parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/transactions/vouchers/_layout/delivery_note/_layout': {
       id: '/_protected/transactions/vouchers/_layout/delivery_note/_layout'
       path: '/delivery_note'
       fullPath: '/transactions/vouchers/delivery_note'
       preLoaderRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteImport
-      parentRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteRoute
+      parentRoute: typeof ProtectedTransactionsVouchersLayoutRoute
     }
     '/_protected/reports/day_book/_layout/receipt_note/_layout': {
       id: '/_protected/reports/day_book/_layout/receipt_note/_layout'
       path: '/receipt_note'
       fullPath: '/reports/day_book/receipt_note'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRoute
+      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/delivery_note/_layout': {
       id: '/_protected/reports/day_book/_layout/delivery_note/_layout'
       path: '/delivery_note'
       fullPath: '/reports/day_book/delivery_note'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteRoute
+      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/masters/payroll/_layout/employee/_layout': {
       id: '/_protected/masters/payroll/_layout/employee/_layout'
       path: '/employee'
       fullPath: '/masters/payroll/employee'
       preLoaderRoute: typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPayrollLayoutEmployeeRoute
+      parentRoute: typeof ProtectedMastersPayrollLayoutRoute
     }
     '/_protected/masters/party/_layout/transporter/_layout': {
       id: '/_protected/masters/party/_layout/transporter/_layout'
       path: '/transporter'
       fullPath: '/masters/party/transporter'
       preLoaderRoute: typeof ProtectedMastersPartyLayoutTransporterLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutTransporterRoute
+      parentRoute: typeof ProtectedMastersPartyLayoutRoute
     }
     '/_protected/masters/party/_layout/supplier/_layout': {
       id: '/_protected/masters/party/_layout/supplier/_layout'
       path: '/supplier'
       fullPath: '/masters/party/supplier'
       preLoaderRoute: typeof ProtectedMastersPartyLayoutSupplierLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutSupplierRoute
+      parentRoute: typeof ProtectedMastersPartyLayoutRoute
     }
     '/_protected/masters/party/_layout/distributor/_layout': {
       id: '/_protected/masters/party/_layout/distributor/_layout'
       path: '/distributor'
       fullPath: '/masters/party/distributor'
       preLoaderRoute: typeof ProtectedMastersPartyLayoutDistributorLayoutRouteImport
-      parentRoute: typeof ProtectedMastersPartyLayoutDistributorRoute
+      parentRoute: typeof ProtectedMastersPartyLayoutRoute
     }
     '/_protected/masters/organization/_layout/state/_layout': {
       id: '/_protected/masters/organization/_layout/state/_layout'
       path: '/state'
       fullPath: '/masters/organization/state'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutStateLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutStateRoute
+      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/organization/_layout/fiscal_year/_layout': {
       id: '/_protected/masters/organization/_layout/fiscal_year/_layout'
       path: '/fiscal_year'
       fullPath: '/masters/organization/fiscal_year'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearRoute
+      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/organization/_layout/currency/_layout': {
       id: '/_protected/masters/organization/_layout/currency/_layout'
       path: '/currency'
       fullPath: '/masters/organization/currency'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCurrencyLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutCurrencyRoute
+      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/organization/_layout/country/_layout': {
       id: '/_protected/masters/organization/_layout/country/_layout'
       path: '/country'
       fullPath: '/masters/organization/country'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCountryLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutCountryRoute
+      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/organization/_layout/company/_layout': {
       id: '/_protected/masters/organization/_layout/company/_layout'
       path: '/company'
       fullPath: '/masters/organization/company'
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutRouteImport
-      parentRoute: typeof ProtectedMastersOrganizationLayoutCompanyRoute
+      parentRoute: typeof ProtectedMastersOrganizationLayoutRoute
     }
     '/_protected/masters/inventory/_layout/stock_item/_layout': {
       id: '/_protected/masters/inventory/_layout/stock_item/_layout'
       path: '/stock_item'
       fullPath: '/masters/inventory/stock_item'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInventoryLayoutStock_itemRoute
+      parentRoute: typeof ProtectedMastersInventoryLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/room/_layout': {
       id: '/_protected/masters/infrastructure/_layout/room/_layout'
       path: '/room'
       fullPath: '/masters/infrastructure/room'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoomRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/floor/_layout': {
       id: '/_protected/masters/infrastructure/_layout/floor/_layout'
       path: '/floor'
       fullPath: '/masters/infrastructure/floor'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutFloorRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/facility/_layout': {
       id: '/_protected/masters/infrastructure/_layout/facility/_layout'
       path: '/facility'
       fullPath: '/masters/infrastructure/facility'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/facility-amenity/_layout': {
       id: '/_protected/masters/infrastructure/_layout/facility-amenity/_layout'
       path: '/facility-amenity'
       fullPath: '/masters/infrastructure/facility-amenity'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/building/_layout': {
       id: '/_protected/masters/infrastructure/_layout/building/_layout'
       path: '/building'
       fullPath: '/masters/infrastructure/building'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/infrastructure/_layout/bed/_layout': {
       id: '/_protected/masters/infrastructure/_layout/bed/_layout'
       path: '/bed'
       fullPath: '/masters/infrastructure/bed'
       preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteImport
-      parentRoute: typeof ProtectedMastersInfrastructureLayoutBedRoute
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoute
     }
     '/_protected/masters/accounts/_layout/voucher_type/_layout': {
       id: '/_protected/masters/accounts/_layout/voucher_type/_layout'
       path: '/voucher_type'
       fullPath: '/masters/accounts/voucher_type'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeRoute
+      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/vendor/_layout': {
       id: '/_protected/masters/accounts/_layout/vendor/_layout'
       path: '/vendor'
       fullPath: '/masters/accounts/vendor'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutVendorLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutVendorRoute
+      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/customer/_layout': {
       id: '/_protected/masters/accounts/_layout/customer/_layout'
       path: '/customer'
       fullPath: '/masters/accounts/customer'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutCustomerLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutCustomerRoute
+      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/account_ledger/_layout': {
       id: '/_protected/masters/accounts/_layout/account_ledger/_layout'
       path: '/account_ledger'
       fullPath: '/masters/accounts/account_ledger'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerRoute
+      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/masters/accounts/_layout/account_group/_layout': {
       id: '/_protected/masters/accounts/_layout/account_group/_layout'
       path: '/account_group'
       fullPath: '/masters/accounts/account_group'
       preLoaderRoute: typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteImport
-      parentRoute: typeof ProtectedMastersAccountsLayoutAccount_groupRoute
+      parentRoute: typeof ProtectedMastersAccountsLayoutRoute
     }
     '/_protected/administration/_layout/user/_layout/$id': {
       id: '/_protected/administration/_layout/user/_layout/$id'
@@ -4352,6 +3685,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutIdRouteImport
       parentRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutRoute
     }
+    '/_protected/masters/infrastructure/_layout/room/_layout/$id': {
+      id: '/_protected/masters/infrastructure/_layout/room/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/infrastructure/room/$id'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutIdRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRoute
+    }
+    '/_protected/masters/infrastructure/_layout/floor/_layout/$id': {
+      id: '/_protected/masters/infrastructure/_layout/floor/_layout/$id'
+      path: '/$id'
+      fullPath: '/masters/infrastructure/floor/$id'
+      preLoaderRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutIdRouteImport
+      parentRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRoute
+    }
     '/_protected/masters/infrastructure/_layout/building/_layout/$id': {
       id: '/_protected/masters/infrastructure/_layout/building/_layout/$id'
       path: '/$id'
@@ -4364,12 +3711,12 @@ declare module '@tanstack/react-router' {
       path: '/$id'
       fullPath: '/administration/role/$id'
       preLoaderRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport
-      parentRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdRoute
+      parentRoute: typeof ProtectedAdministrationLayoutRoleLayoutRoute
     }
     '/_protected/masters/inventory/_layout/stock_item/_layout/$id/': {
       id: '/_protected/masters/inventory/_layout/stock_item/_layout/$id/'
       path: '/$id'
-      fullPath: '/masters/inventory/stock_item/$id'
+      fullPath: '/masters/inventory/stock_item/$id/'
       preLoaderRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport
       parentRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRoute
     }
@@ -4437,52 +3784,22 @@ const ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren =
     ProtectedAdministrationLayoutRoleLayoutIdModuleRouteChildren,
   )
 
-interface ProtectedAdministrationLayoutRoleLayoutIdRouteChildren {
-  ProtectedAdministrationLayoutRoleLayoutIdModuleRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
-}
-
-const ProtectedAdministrationLayoutRoleLayoutIdRouteChildren: ProtectedAdministrationLayoutRoleLayoutIdRouteChildren =
-  {
-    ProtectedAdministrationLayoutRoleLayoutIdModuleRoute:
-      ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren,
-  }
-
-const ProtectedAdministrationLayoutRoleLayoutIdRouteWithChildren =
-  ProtectedAdministrationLayoutRoleLayoutIdRoute._addFileChildren(
-    ProtectedAdministrationLayoutRoleLayoutIdRouteChildren,
-  )
-
 interface ProtectedAdministrationLayoutRoleLayoutRouteChildren {
   ProtectedAdministrationLayoutRoleLayoutIndexRoute: typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
-  ProtectedAdministrationLayoutRoleLayoutIdRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdRouteWithChildren
+  ProtectedAdministrationLayoutRoleLayoutIdModuleRoute: typeof ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren
 }
 
 const ProtectedAdministrationLayoutRoleLayoutRouteChildren: ProtectedAdministrationLayoutRoleLayoutRouteChildren =
   {
     ProtectedAdministrationLayoutRoleLayoutIndexRoute:
       ProtectedAdministrationLayoutRoleLayoutIndexRoute,
-    ProtectedAdministrationLayoutRoleLayoutIdRoute:
-      ProtectedAdministrationLayoutRoleLayoutIdRouteWithChildren,
+    ProtectedAdministrationLayoutRoleLayoutIdModuleRoute:
+      ProtectedAdministrationLayoutRoleLayoutIdModuleRouteWithChildren,
   }
 
 const ProtectedAdministrationLayoutRoleLayoutRouteWithChildren =
   ProtectedAdministrationLayoutRoleLayoutRoute._addFileChildren(
     ProtectedAdministrationLayoutRoleLayoutRouteChildren,
-  )
-
-interface ProtectedAdministrationLayoutRoleRouteChildren {
-  ProtectedAdministrationLayoutRoleLayoutRoute: typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
-}
-
-const ProtectedAdministrationLayoutRoleRouteChildren: ProtectedAdministrationLayoutRoleRouteChildren =
-  {
-    ProtectedAdministrationLayoutRoleLayoutRoute:
-      ProtectedAdministrationLayoutRoleLayoutRouteWithChildren,
-  }
-
-const ProtectedAdministrationLayoutRoleRouteWithChildren =
-  ProtectedAdministrationLayoutRoleRoute._addFileChildren(
-    ProtectedAdministrationLayoutRoleRouteChildren,
   )
 
 interface ProtectedAdministrationLayoutUserLayoutRouteChildren {
@@ -4503,24 +3820,9 @@ const ProtectedAdministrationLayoutUserLayoutRouteWithChildren =
     ProtectedAdministrationLayoutUserLayoutRouteChildren,
   )
 
-interface ProtectedAdministrationLayoutUserRouteChildren {
-  ProtectedAdministrationLayoutUserLayoutRoute: typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
-}
-
-const ProtectedAdministrationLayoutUserRouteChildren: ProtectedAdministrationLayoutUserRouteChildren =
-  {
-    ProtectedAdministrationLayoutUserLayoutRoute:
-      ProtectedAdministrationLayoutUserLayoutRouteWithChildren,
-  }
-
-const ProtectedAdministrationLayoutUserRouteWithChildren =
-  ProtectedAdministrationLayoutUserRoute._addFileChildren(
-    ProtectedAdministrationLayoutUserRouteChildren,
-  )
-
 interface ProtectedAdministrationLayoutRouteChildren {
-  ProtectedAdministrationLayoutRoleRoute: typeof ProtectedAdministrationLayoutRoleRouteWithChildren
-  ProtectedAdministrationLayoutUserRoute: typeof ProtectedAdministrationLayoutUserRouteWithChildren
+  ProtectedAdministrationLayoutRoleLayoutRoute: typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
+  ProtectedAdministrationLayoutUserLayoutRoute: typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   ProtectedAdministrationLayoutApp_moduleIndexRoute: typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
   ProtectedAdministrationLayoutApp_module_featureIndexRoute: typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   ProtectedAdministrationLayoutPermissionIndexRoute: typeof ProtectedAdministrationLayoutPermissionIndexRoute
@@ -4528,10 +3830,10 @@ interface ProtectedAdministrationLayoutRouteChildren {
 
 const ProtectedAdministrationLayoutRouteChildren: ProtectedAdministrationLayoutRouteChildren =
   {
-    ProtectedAdministrationLayoutRoleRoute:
-      ProtectedAdministrationLayoutRoleRouteWithChildren,
-    ProtectedAdministrationLayoutUserRoute:
-      ProtectedAdministrationLayoutUserRouteWithChildren,
+    ProtectedAdministrationLayoutRoleLayoutRoute:
+      ProtectedAdministrationLayoutRoleLayoutRouteWithChildren,
+    ProtectedAdministrationLayoutUserLayoutRoute:
+      ProtectedAdministrationLayoutUserLayoutRouteWithChildren,
     ProtectedAdministrationLayoutApp_moduleIndexRoute:
       ProtectedAdministrationLayoutApp_moduleIndexRoute,
     ProtectedAdministrationLayoutApp_module_featureIndexRoute:
@@ -4543,21 +3845,6 @@ const ProtectedAdministrationLayoutRouteChildren: ProtectedAdministrationLayoutR
 const ProtectedAdministrationLayoutRouteWithChildren =
   ProtectedAdministrationLayoutRoute._addFileChildren(
     ProtectedAdministrationLayoutRouteChildren,
-  )
-
-interface ProtectedAdministrationRouteChildren {
-  ProtectedAdministrationLayoutRoute: typeof ProtectedAdministrationLayoutRouteWithChildren
-}
-
-const ProtectedAdministrationRouteChildren: ProtectedAdministrationRouteChildren =
-  {
-    ProtectedAdministrationLayoutRoute:
-      ProtectedAdministrationLayoutRouteWithChildren,
-  }
-
-const ProtectedAdministrationRouteWithChildren =
-  ProtectedAdministrationRoute._addFileChildren(
-    ProtectedAdministrationRouteChildren,
   )
 
 interface ProtectedauthUserFiscalYearLayoutRouteChildren {
@@ -4575,21 +3862,6 @@ const ProtectedauthUserFiscalYearLayoutRouteWithChildren =
     ProtectedauthUserFiscalYearLayoutRouteChildren,
   )
 
-interface ProtectedauthUserFiscalYearRouteChildren {
-  ProtectedauthUserFiscalYearLayoutRoute: typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
-}
-
-const ProtectedauthUserFiscalYearRouteChildren: ProtectedauthUserFiscalYearRouteChildren =
-  {
-    ProtectedauthUserFiscalYearLayoutRoute:
-      ProtectedauthUserFiscalYearLayoutRouteWithChildren,
-  }
-
-const ProtectedauthUserFiscalYearRouteWithChildren =
-  ProtectedauthUserFiscalYearRoute._addFileChildren(
-    ProtectedauthUserFiscalYearRouteChildren,
-  )
-
 interface ProtectedMastersAccountsLayoutAccount_groupLayoutRouteChildren {
   ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute: typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
 }
@@ -4603,21 +3875,6 @@ const ProtectedMastersAccountsLayoutAccount_groupLayoutRouteChildren: ProtectedM
 const ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren =
   ProtectedMastersAccountsLayoutAccount_groupLayoutRoute._addFileChildren(
     ProtectedMastersAccountsLayoutAccount_groupLayoutRouteChildren,
-  )
-
-interface ProtectedMastersAccountsLayoutAccount_groupRouteChildren {
-  ProtectedMastersAccountsLayoutAccount_groupLayoutRoute: typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsLayoutAccount_groupRouteChildren: ProtectedMastersAccountsLayoutAccount_groupRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutAccount_groupLayoutRoute:
-      ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren =
-  ProtectedMastersAccountsLayoutAccount_groupRoute._addFileChildren(
-    ProtectedMastersAccountsLayoutAccount_groupRouteChildren,
   )
 
 interface ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteChildren {
@@ -4635,21 +3892,6 @@ const ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren =
     ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteChildren,
   )
 
-interface ProtectedMastersAccountsLayoutAccount_ledgerRouteChildren {
-  ProtectedMastersAccountsLayoutAccount_ledgerLayoutRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsLayoutAccount_ledgerRouteChildren: ProtectedMastersAccountsLayoutAccount_ledgerRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutAccount_ledgerLayoutRoute:
-      ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsLayoutAccount_ledgerRouteWithChildren =
-  ProtectedMastersAccountsLayoutAccount_ledgerRoute._addFileChildren(
-    ProtectedMastersAccountsLayoutAccount_ledgerRouteChildren,
-  )
-
 interface ProtectedMastersAccountsLayoutCustomerLayoutRouteChildren {
   ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute: typeof ProtectedMastersAccountsLayoutCustomerLayoutIndexRoute
 }
@@ -4663,21 +3905,6 @@ const ProtectedMastersAccountsLayoutCustomerLayoutRouteChildren: ProtectedMaster
 const ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren =
   ProtectedMastersAccountsLayoutCustomerLayoutRoute._addFileChildren(
     ProtectedMastersAccountsLayoutCustomerLayoutRouteChildren,
-  )
-
-interface ProtectedMastersAccountsLayoutCustomerRouteChildren {
-  ProtectedMastersAccountsLayoutCustomerLayoutRoute: typeof ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsLayoutCustomerRouteChildren: ProtectedMastersAccountsLayoutCustomerRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutCustomerLayoutRoute:
-      ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsLayoutCustomerRouteWithChildren =
-  ProtectedMastersAccountsLayoutCustomerRoute._addFileChildren(
-    ProtectedMastersAccountsLayoutCustomerRouteChildren,
   )
 
 interface ProtectedMastersAccountsLayoutVendorLayoutRouteChildren {
@@ -4695,21 +3922,6 @@ const ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren =
     ProtectedMastersAccountsLayoutVendorLayoutRouteChildren,
   )
 
-interface ProtectedMastersAccountsLayoutVendorRouteChildren {
-  ProtectedMastersAccountsLayoutVendorLayoutRoute: typeof ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsLayoutVendorRouteChildren: ProtectedMastersAccountsLayoutVendorRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutVendorLayoutRoute:
-      ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsLayoutVendorRouteWithChildren =
-  ProtectedMastersAccountsLayoutVendorRoute._addFileChildren(
-    ProtectedMastersAccountsLayoutVendorRouteChildren,
-  )
-
 interface ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteChildren {
   ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutIndexRoute
 }
@@ -4725,27 +3937,12 @@ const ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren =
     ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteChildren,
   )
 
-interface ProtectedMastersAccountsLayoutVoucher_typeRouteChildren {
-  ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsLayoutVoucher_typeRouteChildren: ProtectedMastersAccountsLayoutVoucher_typeRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute:
-      ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsLayoutVoucher_typeRouteWithChildren =
-  ProtectedMastersAccountsLayoutVoucher_typeRoute._addFileChildren(
-    ProtectedMastersAccountsLayoutVoucher_typeRouteChildren,
-  )
-
 interface ProtectedMastersAccountsLayoutRouteChildren {
-  ProtectedMastersAccountsLayoutAccount_groupRoute: typeof ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren
-  ProtectedMastersAccountsLayoutAccount_ledgerRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerRouteWithChildren
-  ProtectedMastersAccountsLayoutCustomerRoute: typeof ProtectedMastersAccountsLayoutCustomerRouteWithChildren
-  ProtectedMastersAccountsLayoutVendorRoute: typeof ProtectedMastersAccountsLayoutVendorRouteWithChildren
-  ProtectedMastersAccountsLayoutVoucher_typeRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeRouteWithChildren
+  ProtectedMastersAccountsLayoutAccount_groupLayoutRoute: typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
+  ProtectedMastersAccountsLayoutAccount_ledgerLayoutRoute: typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren
+  ProtectedMastersAccountsLayoutCustomerLayoutRoute: typeof ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren
+  ProtectedMastersAccountsLayoutVendorLayoutRoute: typeof ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren
+  ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute: typeof ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren
   ProtectedMastersAccountsLayoutAccount_natureIndexRoute: typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute: typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
   ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute: typeof ProtectedMastersAccountsLayoutVoucher_classificationIndexRoute
@@ -4753,16 +3950,16 @@ interface ProtectedMastersAccountsLayoutRouteChildren {
 
 const ProtectedMastersAccountsLayoutRouteChildren: ProtectedMastersAccountsLayoutRouteChildren =
   {
-    ProtectedMastersAccountsLayoutAccount_groupRoute:
-      ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren,
-    ProtectedMastersAccountsLayoutAccount_ledgerRoute:
-      ProtectedMastersAccountsLayoutAccount_ledgerRouteWithChildren,
-    ProtectedMastersAccountsLayoutCustomerRoute:
-      ProtectedMastersAccountsLayoutCustomerRouteWithChildren,
-    ProtectedMastersAccountsLayoutVendorRoute:
-      ProtectedMastersAccountsLayoutVendorRouteWithChildren,
-    ProtectedMastersAccountsLayoutVoucher_typeRoute:
-      ProtectedMastersAccountsLayoutVoucher_typeRouteWithChildren,
+    ProtectedMastersAccountsLayoutAccount_groupLayoutRoute:
+      ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren,
+    ProtectedMastersAccountsLayoutAccount_ledgerLayoutRoute:
+      ProtectedMastersAccountsLayoutAccount_ledgerLayoutRouteWithChildren,
+    ProtectedMastersAccountsLayoutCustomerLayoutRoute:
+      ProtectedMastersAccountsLayoutCustomerLayoutRouteWithChildren,
+    ProtectedMastersAccountsLayoutVendorLayoutRoute:
+      ProtectedMastersAccountsLayoutVendorLayoutRouteWithChildren,
+    ProtectedMastersAccountsLayoutVoucher_typeLayoutRoute:
+      ProtectedMastersAccountsLayoutVoucher_typeLayoutRouteWithChildren,
     ProtectedMastersAccountsLayoutAccount_natureIndexRoute:
       ProtectedMastersAccountsLayoutAccount_natureIndexRoute,
     ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute:
@@ -4774,21 +3971,6 @@ const ProtectedMastersAccountsLayoutRouteChildren: ProtectedMastersAccountsLayou
 const ProtectedMastersAccountsLayoutRouteWithChildren =
   ProtectedMastersAccountsLayoutRoute._addFileChildren(
     ProtectedMastersAccountsLayoutRouteChildren,
-  )
-
-interface ProtectedMastersAccountsRouteChildren {
-  ProtectedMastersAccountsLayoutRoute: typeof ProtectedMastersAccountsLayoutRouteWithChildren
-}
-
-const ProtectedMastersAccountsRouteChildren: ProtectedMastersAccountsRouteChildren =
-  {
-    ProtectedMastersAccountsLayoutRoute:
-      ProtectedMastersAccountsLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersAccountsRouteWithChildren =
-  ProtectedMastersAccountsRoute._addFileChildren(
-    ProtectedMastersAccountsRouteChildren,
   )
 
 interface ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren {
@@ -4804,21 +3986,6 @@ const ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren: ProtectedMaste
 const ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren =
   ProtectedMastersInfrastructureLayoutBedLayoutRoute._addFileChildren(
     ProtectedMastersInfrastructureLayoutBedLayoutRouteChildren,
-  )
-
-interface ProtectedMastersInfrastructureLayoutBedRouteChildren {
-  ProtectedMastersInfrastructureLayoutBedLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutBedRouteChildren: ProtectedMastersInfrastructureLayoutBedRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutBedLayoutRoute:
-      ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutBedRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutBedRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutBedRouteChildren,
   )
 
 interface ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren {
@@ -4839,21 +4006,6 @@ const ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren =
     ProtectedMastersInfrastructureLayoutBuildingLayoutRouteChildren,
   )
 
-interface ProtectedMastersInfrastructureLayoutBuildingRouteChildren {
-  ProtectedMastersInfrastructureLayoutBuildingLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutBuildingRouteChildren: ProtectedMastersInfrastructureLayoutBuildingRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutBuildingLayoutRoute:
-      ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutBuildingRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutBuildingRouteChildren,
-  )
-
 interface ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren {
   ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutIndexRoute
 }
@@ -4867,21 +4019,6 @@ const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren: Pr
 const ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren =
   ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute._addFileChildren(
     ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteChildren,
-  )
-
-interface ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren {
-  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren: ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute:
-      ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutFacilityAmenityRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutFacilityAmenityRouteChildren,
   )
 
 interface ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren {
@@ -4899,27 +4036,15 @@ const ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren =
     ProtectedMastersInfrastructureLayoutFacilityLayoutRouteChildren,
   )
 
-interface ProtectedMastersInfrastructureLayoutFacilityRouteChildren {
-  ProtectedMastersInfrastructureLayoutFacilityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutFacilityRouteChildren: ProtectedMastersInfrastructureLayoutFacilityRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutFacilityLayoutRoute:
-      ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutFacilityRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutFacilityRouteChildren,
-  )
-
 interface ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute
   ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute
 }
 
 const ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren: ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren =
   {
+    ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute:
+      ProtectedMastersInfrastructureLayoutFloorLayoutIdRoute,
     ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute:
       ProtectedMastersInfrastructureLayoutFloorLayoutIndexRoute,
   }
@@ -4929,27 +4054,15 @@ const ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren =
     ProtectedMastersInfrastructureLayoutFloorLayoutRouteChildren,
   )
 
-interface ProtectedMastersInfrastructureLayoutFloorRouteChildren {
-  ProtectedMastersInfrastructureLayoutFloorLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutFloorRouteChildren: ProtectedMastersInfrastructureLayoutFloorRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutFloorLayoutRoute:
-      ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutFloorRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutFloorRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutFloorRouteChildren,
-  )
-
 interface ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren {
+  ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute
   ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute
 }
 
 const ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren: ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren =
   {
+    ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute:
+      ProtectedMastersInfrastructureLayoutRoomLayoutIdRoute,
     ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute:
       ProtectedMastersInfrastructureLayoutRoomLayoutIndexRoute,
   }
@@ -4959,45 +4072,30 @@ const ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren =
     ProtectedMastersInfrastructureLayoutRoomLayoutRouteChildren,
   )
 
-interface ProtectedMastersInfrastructureLayoutRoomRouteChildren {
-  ProtectedMastersInfrastructureLayoutRoomLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureLayoutRoomRouteChildren: ProtectedMastersInfrastructureLayoutRoomRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutRoomLayoutRoute:
-      ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureLayoutRoomRouteWithChildren =
-  ProtectedMastersInfrastructureLayoutRoomRoute._addFileChildren(
-    ProtectedMastersInfrastructureLayoutRoomRouteChildren,
-  )
-
 interface ProtectedMastersInfrastructureLayoutRouteChildren {
-  ProtectedMastersInfrastructureLayoutBedRoute: typeof ProtectedMastersInfrastructureLayoutBedRouteWithChildren
-  ProtectedMastersInfrastructureLayoutBuildingRoute: typeof ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren
-  ProtectedMastersInfrastructureLayoutFacilityAmenityRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren
-  ProtectedMastersInfrastructureLayoutFacilityRoute: typeof ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren
-  ProtectedMastersInfrastructureLayoutFloorRoute: typeof ProtectedMastersInfrastructureLayoutFloorRouteWithChildren
-  ProtectedMastersInfrastructureLayoutRoomRoute: typeof ProtectedMastersInfrastructureLayoutRoomRouteWithChildren
+  ProtectedMastersInfrastructureLayoutBedLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutBuildingLayoutRoute: typeof ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFacilityLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutFloorLayoutRoute: typeof ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutRoomLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren
   ProtectedMastersInfrastructureLayoutAmenityIndexRoute: typeof ProtectedMastersInfrastructureLayoutAmenityIndexRoute
 }
 
 const ProtectedMastersInfrastructureLayoutRouteChildren: ProtectedMastersInfrastructureLayoutRouteChildren =
   {
-    ProtectedMastersInfrastructureLayoutBedRoute:
-      ProtectedMastersInfrastructureLayoutBedRouteWithChildren,
-    ProtectedMastersInfrastructureLayoutBuildingRoute:
-      ProtectedMastersInfrastructureLayoutBuildingRouteWithChildren,
-    ProtectedMastersInfrastructureLayoutFacilityAmenityRoute:
-      ProtectedMastersInfrastructureLayoutFacilityAmenityRouteWithChildren,
-    ProtectedMastersInfrastructureLayoutFacilityRoute:
-      ProtectedMastersInfrastructureLayoutFacilityRouteWithChildren,
-    ProtectedMastersInfrastructureLayoutFloorRoute:
-      ProtectedMastersInfrastructureLayoutFloorRouteWithChildren,
-    ProtectedMastersInfrastructureLayoutRoomRoute:
-      ProtectedMastersInfrastructureLayoutRoomRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutBedLayoutRoute:
+      ProtectedMastersInfrastructureLayoutBedLayoutRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutBuildingLayoutRoute:
+      ProtectedMastersInfrastructureLayoutBuildingLayoutRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFacilityAmenityLayoutRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFacilityLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFacilityLayoutRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutFloorLayoutRoute:
+      ProtectedMastersInfrastructureLayoutFloorLayoutRouteWithChildren,
+    ProtectedMastersInfrastructureLayoutRoomLayoutRoute:
+      ProtectedMastersInfrastructureLayoutRoomLayoutRouteWithChildren,
     ProtectedMastersInfrastructureLayoutAmenityIndexRoute:
       ProtectedMastersInfrastructureLayoutAmenityIndexRoute,
   }
@@ -5005,21 +4103,6 @@ const ProtectedMastersInfrastructureLayoutRouteChildren: ProtectedMastersInfrast
 const ProtectedMastersInfrastructureLayoutRouteWithChildren =
   ProtectedMastersInfrastructureLayoutRoute._addFileChildren(
     ProtectedMastersInfrastructureLayoutRouteChildren,
-  )
-
-interface ProtectedMastersInfrastructureRouteChildren {
-  ProtectedMastersInfrastructureLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
-}
-
-const ProtectedMastersInfrastructureRouteChildren: ProtectedMastersInfrastructureRouteChildren =
-  {
-    ProtectedMastersInfrastructureLayoutRoute:
-      ProtectedMastersInfrastructureLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInfrastructureRouteWithChildren =
-  ProtectedMastersInfrastructureRoute._addFileChildren(
-    ProtectedMastersInfrastructureRouteChildren,
   )
 
 interface ProtectedMastersInventoryLayoutStock_itemLayoutRouteChildren {
@@ -5043,23 +4126,8 @@ const ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren =
     ProtectedMastersInventoryLayoutStock_itemLayoutRouteChildren,
   )
 
-interface ProtectedMastersInventoryLayoutStock_itemRouteChildren {
-  ProtectedMastersInventoryLayoutStock_itemLayoutRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
-}
-
-const ProtectedMastersInventoryLayoutStock_itemRouteChildren: ProtectedMastersInventoryLayoutStock_itemRouteChildren =
-  {
-    ProtectedMastersInventoryLayoutStock_itemLayoutRoute:
-      ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInventoryLayoutStock_itemRouteWithChildren =
-  ProtectedMastersInventoryLayoutStock_itemRoute._addFileChildren(
-    ProtectedMastersInventoryLayoutStock_itemRouteChildren,
-  )
-
 interface ProtectedMastersInventoryLayoutRouteChildren {
-  ProtectedMastersInventoryLayoutStock_itemRoute: typeof ProtectedMastersInventoryLayoutStock_itemRouteWithChildren
+  ProtectedMastersInventoryLayoutStock_itemLayoutRoute: typeof ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren
   ProtectedMastersInventoryLayoutGodownIndexRoute: typeof ProtectedMastersInventoryLayoutGodownIndexRoute
   ProtectedMastersInventoryLayoutStock_categoryIndexRoute: typeof ProtectedMastersInventoryLayoutStock_categoryIndexRoute
   ProtectedMastersInventoryLayoutStock_groupIndexRoute: typeof ProtectedMastersInventoryLayoutStock_groupIndexRoute
@@ -5069,8 +4137,8 @@ interface ProtectedMastersInventoryLayoutRouteChildren {
 
 const ProtectedMastersInventoryLayoutRouteChildren: ProtectedMastersInventoryLayoutRouteChildren =
   {
-    ProtectedMastersInventoryLayoutStock_itemRoute:
-      ProtectedMastersInventoryLayoutStock_itemRouteWithChildren,
+    ProtectedMastersInventoryLayoutStock_itemLayoutRoute:
+      ProtectedMastersInventoryLayoutStock_itemLayoutRouteWithChildren,
     ProtectedMastersInventoryLayoutGodownIndexRoute:
       ProtectedMastersInventoryLayoutGodownIndexRoute,
     ProtectedMastersInventoryLayoutStock_categoryIndexRoute:
@@ -5086,21 +4154,6 @@ const ProtectedMastersInventoryLayoutRouteChildren: ProtectedMastersInventoryLay
 const ProtectedMastersInventoryLayoutRouteWithChildren =
   ProtectedMastersInventoryLayoutRoute._addFileChildren(
     ProtectedMastersInventoryLayoutRouteChildren,
-  )
-
-interface ProtectedMastersInventoryRouteChildren {
-  ProtectedMastersInventoryLayoutRoute: typeof ProtectedMastersInventoryLayoutRouteWithChildren
-}
-
-const ProtectedMastersInventoryRouteChildren: ProtectedMastersInventoryRouteChildren =
-  {
-    ProtectedMastersInventoryLayoutRoute:
-      ProtectedMastersInventoryLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersInventoryRouteWithChildren =
-  ProtectedMastersInventoryRoute._addFileChildren(
-    ProtectedMastersInventoryRouteChildren,
   )
 
 interface ProtectedMastersOrganizationLayoutCompanyLayoutRouteChildren {
@@ -5121,21 +4174,6 @@ const ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren =
     ProtectedMastersOrganizationLayoutCompanyLayoutRouteChildren,
   )
 
-interface ProtectedMastersOrganizationLayoutCompanyRouteChildren {
-  ProtectedMastersOrganizationLayoutCompanyLayoutRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationLayoutCompanyRouteChildren: ProtectedMastersOrganizationLayoutCompanyRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutCompanyLayoutRoute:
-      ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationLayoutCompanyRouteWithChildren =
-  ProtectedMastersOrganizationLayoutCompanyRoute._addFileChildren(
-    ProtectedMastersOrganizationLayoutCompanyRouteChildren,
-  )
-
 interface ProtectedMastersOrganizationLayoutCountryLayoutRouteChildren {
   ProtectedMastersOrganizationLayoutCountryLayoutIdRoute: typeof ProtectedMastersOrganizationLayoutCountryLayoutIdRoute
   ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute: typeof ProtectedMastersOrganizationLayoutCountryLayoutIndexRoute
@@ -5152,21 +4190,6 @@ const ProtectedMastersOrganizationLayoutCountryLayoutRouteChildren: ProtectedMas
 const ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren =
   ProtectedMastersOrganizationLayoutCountryLayoutRoute._addFileChildren(
     ProtectedMastersOrganizationLayoutCountryLayoutRouteChildren,
-  )
-
-interface ProtectedMastersOrganizationLayoutCountryRouteChildren {
-  ProtectedMastersOrganizationLayoutCountryLayoutRoute: typeof ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationLayoutCountryRouteChildren: ProtectedMastersOrganizationLayoutCountryRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutCountryLayoutRoute:
-      ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationLayoutCountryRouteWithChildren =
-  ProtectedMastersOrganizationLayoutCountryRoute._addFileChildren(
-    ProtectedMastersOrganizationLayoutCountryRouteChildren,
   )
 
 interface ProtectedMastersOrganizationLayoutCurrencyLayoutRouteChildren {
@@ -5187,21 +4210,6 @@ const ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren =
     ProtectedMastersOrganizationLayoutCurrencyLayoutRouteChildren,
   )
 
-interface ProtectedMastersOrganizationLayoutCurrencyRouteChildren {
-  ProtectedMastersOrganizationLayoutCurrencyLayoutRoute: typeof ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationLayoutCurrencyRouteChildren: ProtectedMastersOrganizationLayoutCurrencyRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutCurrencyLayoutRoute:
-      ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationLayoutCurrencyRouteWithChildren =
-  ProtectedMastersOrganizationLayoutCurrencyRoute._addFileChildren(
-    ProtectedMastersOrganizationLayoutCurrencyRouteChildren,
-  )
-
 interface ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren {
   ProtectedMastersOrganizationLayoutFiscal_yearLayoutIdRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutIdRoute
   ProtectedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutIndexRoute
@@ -5218,21 +4226,6 @@ const ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren: Protecte
 const ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren =
   ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute._addFileChildren(
     ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteChildren,
-  )
-
-interface ProtectedMastersOrganizationLayoutFiscal_yearRouteChildren {
-  ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationLayoutFiscal_yearRouteChildren: ProtectedMastersOrganizationLayoutFiscal_yearRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute:
-      ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationLayoutFiscal_yearRouteWithChildren =
-  ProtectedMastersOrganizationLayoutFiscal_yearRoute._addFileChildren(
-    ProtectedMastersOrganizationLayoutFiscal_yearRouteChildren,
   )
 
 interface ProtectedMastersOrganizationLayoutStateLayoutRouteChildren {
@@ -5253,42 +4246,27 @@ const ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren =
     ProtectedMastersOrganizationLayoutStateLayoutRouteChildren,
   )
 
-interface ProtectedMastersOrganizationLayoutStateRouteChildren {
-  ProtectedMastersOrganizationLayoutStateLayoutRoute: typeof ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationLayoutStateRouteChildren: ProtectedMastersOrganizationLayoutStateRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutStateLayoutRoute:
-      ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationLayoutStateRouteWithChildren =
-  ProtectedMastersOrganizationLayoutStateRoute._addFileChildren(
-    ProtectedMastersOrganizationLayoutStateRouteChildren,
-  )
-
 interface ProtectedMastersOrganizationLayoutRouteChildren {
-  ProtectedMastersOrganizationLayoutCompanyRoute: typeof ProtectedMastersOrganizationLayoutCompanyRouteWithChildren
-  ProtectedMastersOrganizationLayoutCountryRoute: typeof ProtectedMastersOrganizationLayoutCountryRouteWithChildren
-  ProtectedMastersOrganizationLayoutCurrencyRoute: typeof ProtectedMastersOrganizationLayoutCurrencyRouteWithChildren
-  ProtectedMastersOrganizationLayoutFiscal_yearRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearRouteWithChildren
-  ProtectedMastersOrganizationLayoutStateRoute: typeof ProtectedMastersOrganizationLayoutStateRouteWithChildren
+  ProtectedMastersOrganizationLayoutCompanyLayoutRoute: typeof ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren
+  ProtectedMastersOrganizationLayoutCountryLayoutRoute: typeof ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren
+  ProtectedMastersOrganizationLayoutCurrencyLayoutRoute: typeof ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren
+  ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute: typeof ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren
+  ProtectedMastersOrganizationLayoutStateLayoutRoute: typeof ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren
   ProtectedMastersOrganizationLayoutBranchIndexRoute: typeof ProtectedMastersOrganizationLayoutBranchIndexRoute
 }
 
 const ProtectedMastersOrganizationLayoutRouteChildren: ProtectedMastersOrganizationLayoutRouteChildren =
   {
-    ProtectedMastersOrganizationLayoutCompanyRoute:
-      ProtectedMastersOrganizationLayoutCompanyRouteWithChildren,
-    ProtectedMastersOrganizationLayoutCountryRoute:
-      ProtectedMastersOrganizationLayoutCountryRouteWithChildren,
-    ProtectedMastersOrganizationLayoutCurrencyRoute:
-      ProtectedMastersOrganizationLayoutCurrencyRouteWithChildren,
-    ProtectedMastersOrganizationLayoutFiscal_yearRoute:
-      ProtectedMastersOrganizationLayoutFiscal_yearRouteWithChildren,
-    ProtectedMastersOrganizationLayoutStateRoute:
-      ProtectedMastersOrganizationLayoutStateRouteWithChildren,
+    ProtectedMastersOrganizationLayoutCompanyLayoutRoute:
+      ProtectedMastersOrganizationLayoutCompanyLayoutRouteWithChildren,
+    ProtectedMastersOrganizationLayoutCountryLayoutRoute:
+      ProtectedMastersOrganizationLayoutCountryLayoutRouteWithChildren,
+    ProtectedMastersOrganizationLayoutCurrencyLayoutRoute:
+      ProtectedMastersOrganizationLayoutCurrencyLayoutRouteWithChildren,
+    ProtectedMastersOrganizationLayoutFiscal_yearLayoutRoute:
+      ProtectedMastersOrganizationLayoutFiscal_yearLayoutRouteWithChildren,
+    ProtectedMastersOrganizationLayoutStateLayoutRoute:
+      ProtectedMastersOrganizationLayoutStateLayoutRouteWithChildren,
     ProtectedMastersOrganizationLayoutBranchIndexRoute:
       ProtectedMastersOrganizationLayoutBranchIndexRoute,
   }
@@ -5296,21 +4274,6 @@ const ProtectedMastersOrganizationLayoutRouteChildren: ProtectedMastersOrganizat
 const ProtectedMastersOrganizationLayoutRouteWithChildren =
   ProtectedMastersOrganizationLayoutRoute._addFileChildren(
     ProtectedMastersOrganizationLayoutRouteChildren,
-  )
-
-interface ProtectedMastersOrganizationRouteChildren {
-  ProtectedMastersOrganizationLayoutRoute: typeof ProtectedMastersOrganizationLayoutRouteWithChildren
-}
-
-const ProtectedMastersOrganizationRouteChildren: ProtectedMastersOrganizationRouteChildren =
-  {
-    ProtectedMastersOrganizationLayoutRoute:
-      ProtectedMastersOrganizationLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersOrganizationRouteWithChildren =
-  ProtectedMastersOrganizationRoute._addFileChildren(
-    ProtectedMastersOrganizationRouteChildren,
   )
 
 interface ProtectedMastersPartyLayoutDistributorLayoutRouteChildren {
@@ -5331,21 +4294,6 @@ const ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren =
     ProtectedMastersPartyLayoutDistributorLayoutRouteChildren,
   )
 
-interface ProtectedMastersPartyLayoutDistributorRouteChildren {
-  ProtectedMastersPartyLayoutDistributorLayoutRoute: typeof ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren
-}
-
-const ProtectedMastersPartyLayoutDistributorRouteChildren: ProtectedMastersPartyLayoutDistributorRouteChildren =
-  {
-    ProtectedMastersPartyLayoutDistributorLayoutRoute:
-      ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersPartyLayoutDistributorRouteWithChildren =
-  ProtectedMastersPartyLayoutDistributorRoute._addFileChildren(
-    ProtectedMastersPartyLayoutDistributorRouteChildren,
-  )
-
 interface ProtectedMastersPartyLayoutSupplierLayoutRouteChildren {
   ProtectedMastersPartyLayoutSupplierLayoutIdRoute: typeof ProtectedMastersPartyLayoutSupplierLayoutIdRoute
   ProtectedMastersPartyLayoutSupplierLayoutIndexRoute: typeof ProtectedMastersPartyLayoutSupplierLayoutIndexRoute
@@ -5362,21 +4310,6 @@ const ProtectedMastersPartyLayoutSupplierLayoutRouteChildren: ProtectedMastersPa
 const ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren =
   ProtectedMastersPartyLayoutSupplierLayoutRoute._addFileChildren(
     ProtectedMastersPartyLayoutSupplierLayoutRouteChildren,
-  )
-
-interface ProtectedMastersPartyLayoutSupplierRouteChildren {
-  ProtectedMastersPartyLayoutSupplierLayoutRoute: typeof ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren
-}
-
-const ProtectedMastersPartyLayoutSupplierRouteChildren: ProtectedMastersPartyLayoutSupplierRouteChildren =
-  {
-    ProtectedMastersPartyLayoutSupplierLayoutRoute:
-      ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersPartyLayoutSupplierRouteWithChildren =
-  ProtectedMastersPartyLayoutSupplierRoute._addFileChildren(
-    ProtectedMastersPartyLayoutSupplierRouteChildren,
   )
 
 interface ProtectedMastersPartyLayoutTransporterLayoutRouteChildren {
@@ -5397,54 +4330,25 @@ const ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren =
     ProtectedMastersPartyLayoutTransporterLayoutRouteChildren,
   )
 
-interface ProtectedMastersPartyLayoutTransporterRouteChildren {
-  ProtectedMastersPartyLayoutTransporterLayoutRoute: typeof ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren
-}
-
-const ProtectedMastersPartyLayoutTransporterRouteChildren: ProtectedMastersPartyLayoutTransporterRouteChildren =
-  {
-    ProtectedMastersPartyLayoutTransporterLayoutRoute:
-      ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersPartyLayoutTransporterRouteWithChildren =
-  ProtectedMastersPartyLayoutTransporterRoute._addFileChildren(
-    ProtectedMastersPartyLayoutTransporterRouteChildren,
-  )
-
 interface ProtectedMastersPartyLayoutRouteChildren {
-  ProtectedMastersPartyLayoutDistributorRoute: typeof ProtectedMastersPartyLayoutDistributorRouteWithChildren
-  ProtectedMastersPartyLayoutSupplierRoute: typeof ProtectedMastersPartyLayoutSupplierRouteWithChildren
-  ProtectedMastersPartyLayoutTransporterRoute: typeof ProtectedMastersPartyLayoutTransporterRouteWithChildren
+  ProtectedMastersPartyLayoutDistributorLayoutRoute: typeof ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren
+  ProtectedMastersPartyLayoutSupplierLayoutRoute: typeof ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren
+  ProtectedMastersPartyLayoutTransporterLayoutRoute: typeof ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren
 }
 
 const ProtectedMastersPartyLayoutRouteChildren: ProtectedMastersPartyLayoutRouteChildren =
   {
-    ProtectedMastersPartyLayoutDistributorRoute:
-      ProtectedMastersPartyLayoutDistributorRouteWithChildren,
-    ProtectedMastersPartyLayoutSupplierRoute:
-      ProtectedMastersPartyLayoutSupplierRouteWithChildren,
-    ProtectedMastersPartyLayoutTransporterRoute:
-      ProtectedMastersPartyLayoutTransporterRouteWithChildren,
+    ProtectedMastersPartyLayoutDistributorLayoutRoute:
+      ProtectedMastersPartyLayoutDistributorLayoutRouteWithChildren,
+    ProtectedMastersPartyLayoutSupplierLayoutRoute:
+      ProtectedMastersPartyLayoutSupplierLayoutRouteWithChildren,
+    ProtectedMastersPartyLayoutTransporterLayoutRoute:
+      ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren,
   }
 
 const ProtectedMastersPartyLayoutRouteWithChildren =
   ProtectedMastersPartyLayoutRoute._addFileChildren(
     ProtectedMastersPartyLayoutRouteChildren,
-  )
-
-interface ProtectedMastersPartyRouteChildren {
-  ProtectedMastersPartyLayoutRoute: typeof ProtectedMastersPartyLayoutRouteWithChildren
-}
-
-const ProtectedMastersPartyRouteChildren: ProtectedMastersPartyRouteChildren = {
-  ProtectedMastersPartyLayoutRoute:
-    ProtectedMastersPartyLayoutRouteWithChildren,
-}
-
-const ProtectedMastersPartyRouteWithChildren =
-  ProtectedMastersPartyRoute._addFileChildren(
-    ProtectedMastersPartyRouteChildren,
   )
 
 interface ProtectedMastersPayrollLayoutEmployeeLayoutRouteChildren {
@@ -5465,23 +4369,8 @@ const ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren =
     ProtectedMastersPayrollLayoutEmployeeLayoutRouteChildren,
   )
 
-interface ProtectedMastersPayrollLayoutEmployeeRouteChildren {
-  ProtectedMastersPayrollLayoutEmployeeLayoutRoute: typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
-}
-
-const ProtectedMastersPayrollLayoutEmployeeRouteChildren: ProtectedMastersPayrollLayoutEmployeeRouteChildren =
-  {
-    ProtectedMastersPayrollLayoutEmployeeLayoutRoute:
-      ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersPayrollLayoutEmployeeRouteWithChildren =
-  ProtectedMastersPayrollLayoutEmployeeRoute._addFileChildren(
-    ProtectedMastersPayrollLayoutEmployeeRouteChildren,
-  )
-
 interface ProtectedMastersPayrollLayoutRouteChildren {
-  ProtectedMastersPayrollLayoutEmployeeRoute: typeof ProtectedMastersPayrollLayoutEmployeeRouteWithChildren
+  ProtectedMastersPayrollLayoutEmployeeLayoutRoute: typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
   ProtectedMastersPayrollLayoutBankIndexRoute: typeof ProtectedMastersPayrollLayoutBankIndexRoute
   ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRoute: typeof ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRoute
   ProtectedMastersPayrollLayoutCost_categoryIndexRoute: typeof ProtectedMastersPayrollLayoutCost_categoryIndexRoute
@@ -5500,8 +4389,8 @@ interface ProtectedMastersPayrollLayoutRouteChildren {
 
 const ProtectedMastersPayrollLayoutRouteChildren: ProtectedMastersPayrollLayoutRouteChildren =
   {
-    ProtectedMastersPayrollLayoutEmployeeRoute:
-      ProtectedMastersPayrollLayoutEmployeeRouteWithChildren,
+    ProtectedMastersPayrollLayoutEmployeeLayoutRoute:
+      ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren,
     ProtectedMastersPayrollLayoutBankIndexRoute:
       ProtectedMastersPayrollLayoutBankIndexRoute,
     ProtectedMastersPayrollLayoutCost_allocation_ruleIndexRoute:
@@ -5537,35 +4426,6 @@ const ProtectedMastersPayrollLayoutRouteWithChildren =
     ProtectedMastersPayrollLayoutRouteChildren,
   )
 
-interface ProtectedMastersPayrollRouteChildren {
-  ProtectedMastersPayrollLayoutRoute: typeof ProtectedMastersPayrollLayoutRouteWithChildren
-}
-
-const ProtectedMastersPayrollRouteChildren: ProtectedMastersPayrollRouteChildren =
-  {
-    ProtectedMastersPayrollLayoutRoute:
-      ProtectedMastersPayrollLayoutRouteWithChildren,
-  }
-
-const ProtectedMastersPayrollRouteWithChildren =
-  ProtectedMastersPayrollRoute._addFileChildren(
-    ProtectedMastersPayrollRouteChildren,
-  )
-
-interface ProtectedMastersStatutoryRouteChildren {
-  ProtectedMastersStatutoryLayoutRoute: typeof ProtectedMastersStatutoryLayoutRoute
-}
-
-const ProtectedMastersStatutoryRouteChildren: ProtectedMastersStatutoryRouteChildren =
-  {
-    ProtectedMastersStatutoryLayoutRoute: ProtectedMastersStatutoryLayoutRoute,
-  }
-
-const ProtectedMastersStatutoryRouteWithChildren =
-  ProtectedMastersStatutoryRoute._addFileChildren(
-    ProtectedMastersStatutoryRouteChildren,
-  )
-
 interface ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
@@ -5582,21 +4442,6 @@ const ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteChildren: ProtectedR
 const ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren =
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute._addFileChildren(
     ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteChildren,
-  )
-
-interface ProtectedReportsDay_bookLayoutDelivery_noteRouteChildren {
-  ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
-}
-
-const ProtectedReportsDay_bookLayoutDelivery_noteRouteChildren: ProtectedReportsDay_bookLayoutDelivery_noteRouteChildren =
-  {
-    ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute:
-      ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren,
-  }
-
-const ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren =
-  ProtectedReportsDay_bookLayoutDelivery_noteRoute._addFileChildren(
-    ProtectedReportsDay_bookLayoutDelivery_noteRouteChildren,
   )
 
 interface ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteChildren {
@@ -5617,25 +4462,10 @@ const ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren =
     ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteChildren,
   )
 
-interface ProtectedReportsDay_bookLayoutReceipt_noteRouteChildren {
-  ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
-}
-
-const ProtectedReportsDay_bookLayoutReceipt_noteRouteChildren: ProtectedReportsDay_bookLayoutReceipt_noteRouteChildren =
-  {
-    ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute:
-      ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren,
-  }
-
-const ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren =
-  ProtectedReportsDay_bookLayoutReceipt_noteRoute._addFileChildren(
-    ProtectedReportsDay_bookLayoutReceipt_noteRouteChildren,
-  )
-
 interface ProtectedReportsDay_bookLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutIndexRoute
-  ProtectedReportsDay_bookLayoutDelivery_noteRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren
-  ProtectedReportsDay_bookLayoutReceipt_noteRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren
+  ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
+  ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
   ProtectedReportsDay_bookLayoutContraIndexRoute: typeof ProtectedReportsDay_bookLayoutContraIndexRoute
   ProtectedReportsDay_bookLayoutJournalIndexRoute: typeof ProtectedReportsDay_bookLayoutJournalIndexRoute
   ProtectedReportsDay_bookLayoutManufacturing_journalIndexRoute: typeof ProtectedReportsDay_bookLayoutManufacturing_journalIndexRoute
@@ -5656,10 +4486,10 @@ const ProtectedReportsDay_bookLayoutRouteChildren: ProtectedReportsDay_bookLayou
   {
     ProtectedReportsDay_bookLayoutIndexRoute:
       ProtectedReportsDay_bookLayoutIndexRoute,
-    ProtectedReportsDay_bookLayoutDelivery_noteRoute:
-      ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren,
-    ProtectedReportsDay_bookLayoutReceipt_noteRoute:
-      ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren,
+    ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute:
+      ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren,
+    ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute:
+      ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren,
     ProtectedReportsDay_bookLayoutContraIndexRoute:
       ProtectedReportsDay_bookLayoutContraIndexRoute,
     ProtectedReportsDay_bookLayoutJournalIndexRoute:
@@ -5695,21 +4525,6 @@ const ProtectedReportsDay_bookLayoutRouteWithChildren =
     ProtectedReportsDay_bookLayoutRouteChildren,
   )
 
-interface ProtectedReportsDay_bookRouteChildren {
-  ProtectedReportsDay_bookLayoutRoute: typeof ProtectedReportsDay_bookLayoutRouteWithChildren
-}
-
-const ProtectedReportsDay_bookRouteChildren: ProtectedReportsDay_bookRouteChildren =
-  {
-    ProtectedReportsDay_bookLayoutRoute:
-      ProtectedReportsDay_bookLayoutRouteWithChildren,
-  }
-
-const ProtectedReportsDay_bookRouteWithChildren =
-  ProtectedReportsDay_bookRoute._addFileChildren(
-    ProtectedReportsDay_bookRouteChildren,
-  )
-
 interface ProtectedReportsStock_summaryLayoutRouteChildren {
   ProtectedReportsStock_summaryLayoutNetStockRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute: typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
@@ -5740,21 +4555,6 @@ const ProtectedReportsStock_summaryLayoutRouteWithChildren =
     ProtectedReportsStock_summaryLayoutRouteChildren,
   )
 
-interface ProtectedReportsStock_summaryRouteChildren {
-  ProtectedReportsStock_summaryLayoutRoute: typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
-}
-
-const ProtectedReportsStock_summaryRouteChildren: ProtectedReportsStock_summaryRouteChildren =
-  {
-    ProtectedReportsStock_summaryLayoutRoute:
-      ProtectedReportsStock_summaryLayoutRouteWithChildren,
-  }
-
-const ProtectedReportsStock_summaryRouteWithChildren =
-  ProtectedReportsStock_summaryRoute._addFileChildren(
-    ProtectedReportsStock_summaryRouteChildren,
-  )
-
 interface ProtectedTransactionsFreightLayoutRouteChildren {
   ProtectedTransactionsFreightLayoutIndexRoute: typeof ProtectedTransactionsFreightLayoutIndexRoute
 }
@@ -5768,21 +4568,6 @@ const ProtectedTransactionsFreightLayoutRouteChildren: ProtectedTransactionsFrei
 const ProtectedTransactionsFreightLayoutRouteWithChildren =
   ProtectedTransactionsFreightLayoutRoute._addFileChildren(
     ProtectedTransactionsFreightLayoutRouteChildren,
-  )
-
-interface ProtectedTransactionsFreightRouteChildren {
-  ProtectedTransactionsFreightLayoutRoute: typeof ProtectedTransactionsFreightLayoutRouteWithChildren
-}
-
-const ProtectedTransactionsFreightRouteChildren: ProtectedTransactionsFreightRouteChildren =
-  {
-    ProtectedTransactionsFreightLayoutRoute:
-      ProtectedTransactionsFreightLayoutRouteWithChildren,
-  }
-
-const ProtectedTransactionsFreightRouteWithChildren =
-  ProtectedTransactionsFreightRoute._addFileChildren(
-    ProtectedTransactionsFreightRouteChildren,
   )
 
 interface ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren {
@@ -5803,21 +4588,6 @@ const ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren =
     ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteChildren,
   )
 
-interface ProtectedTransactionsVouchersLayoutDelivery_noteRouteChildren {
-  ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
-}
-
-const ProtectedTransactionsVouchersLayoutDelivery_noteRouteChildren: ProtectedTransactionsVouchersLayoutDelivery_noteRouteChildren =
-  {
-    ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRoute:
-      ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren,
-  }
-
-const ProtectedTransactionsVouchersLayoutDelivery_noteRouteWithChildren =
-  ProtectedTransactionsVouchersLayoutDelivery_noteRoute._addFileChildren(
-    ProtectedTransactionsVouchersLayoutDelivery_noteRouteChildren,
-  )
-
 interface ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteChildren {
   ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIdRoute
   ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutIndexRoute
@@ -5836,25 +4606,10 @@ const ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren =
     ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteChildren,
   )
 
-interface ProtectedTransactionsVouchersLayoutReceipt_noteRouteChildren {
-  ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
-}
-
-const ProtectedTransactionsVouchersLayoutReceipt_noteRouteChildren: ProtectedTransactionsVouchersLayoutReceipt_noteRouteChildren =
-  {
-    ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRoute:
-      ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren,
-  }
-
-const ProtectedTransactionsVouchersLayoutReceipt_noteRouteWithChildren =
-  ProtectedTransactionsVouchersLayoutReceipt_noteRoute._addFileChildren(
-    ProtectedTransactionsVouchersLayoutReceipt_noteRouteChildren,
-  )
-
 interface ProtectedTransactionsVouchersLayoutRouteChildren {
   ProtectedTransactionsVouchersLayoutIndexRoute: typeof ProtectedTransactionsVouchersLayoutIndexRoute
-  ProtectedTransactionsVouchersLayoutDelivery_noteRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteRouteWithChildren
-  ProtectedTransactionsVouchersLayoutReceipt_noteRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteRouteWithChildren
+  ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRoute: typeof ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren
+  ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRoute: typeof ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren
   ProtectedTransactionsVouchersLayoutContraIndexRoute: typeof ProtectedTransactionsVouchersLayoutContraIndexRoute
   ProtectedTransactionsVouchersLayoutJournalIndexRoute: typeof ProtectedTransactionsVouchersLayoutJournalIndexRoute
   ProtectedTransactionsVouchersLayoutManufacturing_journalIndexRoute: typeof ProtectedTransactionsVouchersLayoutManufacturing_journalIndexRoute
@@ -5875,10 +4630,10 @@ const ProtectedTransactionsVouchersLayoutRouteChildren: ProtectedTransactionsVou
   {
     ProtectedTransactionsVouchersLayoutIndexRoute:
       ProtectedTransactionsVouchersLayoutIndexRoute,
-    ProtectedTransactionsVouchersLayoutDelivery_noteRoute:
-      ProtectedTransactionsVouchersLayoutDelivery_noteRouteWithChildren,
-    ProtectedTransactionsVouchersLayoutReceipt_noteRoute:
-      ProtectedTransactionsVouchersLayoutReceipt_noteRouteWithChildren,
+    ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRoute:
+      ProtectedTransactionsVouchersLayoutDelivery_noteLayoutRouteWithChildren,
+    ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRoute:
+      ProtectedTransactionsVouchersLayoutReceipt_noteLayoutRouteWithChildren,
     ProtectedTransactionsVouchersLayoutContraIndexRoute:
       ProtectedTransactionsVouchersLayoutContraIndexRoute,
     ProtectedTransactionsVouchersLayoutJournalIndexRoute:
@@ -5914,46 +4669,31 @@ const ProtectedTransactionsVouchersLayoutRouteWithChildren =
     ProtectedTransactionsVouchersLayoutRouteChildren,
   )
 
-interface ProtectedTransactionsVouchersRouteChildren {
-  ProtectedTransactionsVouchersLayoutRoute: typeof ProtectedTransactionsVouchersLayoutRouteWithChildren
-}
-
-const ProtectedTransactionsVouchersRouteChildren: ProtectedTransactionsVouchersRouteChildren =
-  {
-    ProtectedTransactionsVouchersLayoutRoute:
-      ProtectedTransactionsVouchersLayoutRouteWithChildren,
-  }
-
-const ProtectedTransactionsVouchersRouteWithChildren =
-  ProtectedTransactionsVouchersRoute._addFileChildren(
-    ProtectedTransactionsVouchersRouteChildren,
-  )
-
 interface ProtectedRouteChildren {
   ProtectedSettingsRouteRoute: typeof ProtectedSettingsRouteRouteWithChildren
   ProtectedChartsRoute: typeof ProtectedChartsRoute
   ProtectedDashboardRoute: typeof ProtectedDashboardRoute
-  ProtectedAdministrationRoute: typeof ProtectedAdministrationRouteWithChildren
+  ProtectedAdministrationLayoutRoute: typeof ProtectedAdministrationLayoutRouteWithChildren
   ProtectedAppsIndexRoute: typeof ProtectedAppsIndexRoute
   ProtectedChatsIndexRoute: typeof ProtectedChatsIndexRoute
   ProtectedFacilityIndexRoute: typeof ProtectedFacilityIndexRoute
   ProtectedHelpCenterIndexRoute: typeof ProtectedHelpCenterIndexRoute
   ProtectedTasksIndexRoute: typeof ProtectedTasksIndexRoute
-  ProtectedauthUserFiscalYearRoute: typeof ProtectedauthUserFiscalYearRouteWithChildren
-  ProtectedMastersAccountsRoute: typeof ProtectedMastersAccountsRouteWithChildren
-  ProtectedMastersInfrastructureRoute: typeof ProtectedMastersInfrastructureRouteWithChildren
-  ProtectedMastersInventoryRoute: typeof ProtectedMastersInventoryRouteWithChildren
+  ProtectedauthUserFiscalYearLayoutRoute: typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
+  ProtectedMastersAccountsLayoutRoute: typeof ProtectedMastersAccountsLayoutRouteWithChildren
+  ProtectedMastersInfrastructureLayoutRoute: typeof ProtectedMastersInfrastructureLayoutRouteWithChildren
+  ProtectedMastersInventoryLayoutRoute: typeof ProtectedMastersInventoryLayoutRouteWithChildren
   ProtectedMastersMiscellaneousDelivery_placesRoute: typeof ProtectedMastersMiscellaneousDelivery_placesRoute
   ProtectedMastersMiscellaneousDelivery_routesRoute: typeof ProtectedMastersMiscellaneousDelivery_routesRoute
   ProtectedMastersMiscellaneousVehicleRoute: typeof ProtectedMastersMiscellaneousVehicleRoute
-  ProtectedMastersOrganizationRoute: typeof ProtectedMastersOrganizationRouteWithChildren
-  ProtectedMastersPartyRoute: typeof ProtectedMastersPartyRouteWithChildren
-  ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
-  ProtectedMastersStatutoryRoute: typeof ProtectedMastersStatutoryRouteWithChildren
-  ProtectedReportsDay_bookRoute: typeof ProtectedReportsDay_bookRouteWithChildren
-  ProtectedReportsStock_summaryRoute: typeof ProtectedReportsStock_summaryRouteWithChildren
-  ProtectedTransactionsFreightRoute: typeof ProtectedTransactionsFreightRouteWithChildren
-  ProtectedTransactionsVouchersRoute: typeof ProtectedTransactionsVouchersRouteWithChildren
+  ProtectedMastersOrganizationLayoutRoute: typeof ProtectedMastersOrganizationLayoutRouteWithChildren
+  ProtectedMastersPartyLayoutRoute: typeof ProtectedMastersPartyLayoutRouteWithChildren
+  ProtectedMastersPayrollLayoutRoute: typeof ProtectedMastersPayrollLayoutRouteWithChildren
+  ProtectedMastersStatutoryLayoutRoute: typeof ProtectedMastersStatutoryLayoutRoute
+  ProtectedReportsDay_bookLayoutRoute: typeof ProtectedReportsDay_bookLayoutRouteWithChildren
+  ProtectedReportsStock_summaryLayoutRoute: typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
+  ProtectedTransactionsFreightLayoutRoute: typeof ProtectedTransactionsFreightLayoutRouteWithChildren
+  ProtectedTransactionsVouchersLayoutRoute: typeof ProtectedTransactionsVouchersLayoutRouteWithChildren
   ProtectedReportsBalance_sheetIndexRoute: typeof ProtectedReportsBalance_sheetIndexRoute
   ProtectedReportsProfit_lossIndexRoute: typeof ProtectedReportsProfit_lossIndexRoute
   ProtectedauthProfileIndexRoute: typeof ProtectedauthProfileIndexRoute
@@ -5963,36 +4703,42 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedSettingsRouteRoute: ProtectedSettingsRouteRouteWithChildren,
   ProtectedChartsRoute: ProtectedChartsRoute,
   ProtectedDashboardRoute: ProtectedDashboardRoute,
-  ProtectedAdministrationRoute: ProtectedAdministrationRouteWithChildren,
+  ProtectedAdministrationLayoutRoute:
+    ProtectedAdministrationLayoutRouteWithChildren,
   ProtectedAppsIndexRoute: ProtectedAppsIndexRoute,
   ProtectedChatsIndexRoute: ProtectedChatsIndexRoute,
   ProtectedFacilityIndexRoute: ProtectedFacilityIndexRoute,
   ProtectedHelpCenterIndexRoute: ProtectedHelpCenterIndexRoute,
   ProtectedTasksIndexRoute: ProtectedTasksIndexRoute,
-  ProtectedauthUserFiscalYearRoute:
-    ProtectedauthUserFiscalYearRouteWithChildren,
-  ProtectedMastersAccountsRoute: ProtectedMastersAccountsRouteWithChildren,
-  ProtectedMastersInfrastructureRoute:
-    ProtectedMastersInfrastructureRouteWithChildren,
-  ProtectedMastersInventoryRoute: ProtectedMastersInventoryRouteWithChildren,
+  ProtectedauthUserFiscalYearLayoutRoute:
+    ProtectedauthUserFiscalYearLayoutRouteWithChildren,
+  ProtectedMastersAccountsLayoutRoute:
+    ProtectedMastersAccountsLayoutRouteWithChildren,
+  ProtectedMastersInfrastructureLayoutRoute:
+    ProtectedMastersInfrastructureLayoutRouteWithChildren,
+  ProtectedMastersInventoryLayoutRoute:
+    ProtectedMastersInventoryLayoutRouteWithChildren,
   ProtectedMastersMiscellaneousDelivery_placesRoute:
     ProtectedMastersMiscellaneousDelivery_placesRoute,
   ProtectedMastersMiscellaneousDelivery_routesRoute:
     ProtectedMastersMiscellaneousDelivery_routesRoute,
   ProtectedMastersMiscellaneousVehicleRoute:
     ProtectedMastersMiscellaneousVehicleRoute,
-  ProtectedMastersOrganizationRoute:
-    ProtectedMastersOrganizationRouteWithChildren,
-  ProtectedMastersPartyRoute: ProtectedMastersPartyRouteWithChildren,
-  ProtectedMastersPayrollRoute: ProtectedMastersPayrollRouteWithChildren,
-  ProtectedMastersStatutoryRoute: ProtectedMastersStatutoryRouteWithChildren,
-  ProtectedReportsDay_bookRoute: ProtectedReportsDay_bookRouteWithChildren,
-  ProtectedReportsStock_summaryRoute:
-    ProtectedReportsStock_summaryRouteWithChildren,
-  ProtectedTransactionsFreightRoute:
-    ProtectedTransactionsFreightRouteWithChildren,
-  ProtectedTransactionsVouchersRoute:
-    ProtectedTransactionsVouchersRouteWithChildren,
+  ProtectedMastersOrganizationLayoutRoute:
+    ProtectedMastersOrganizationLayoutRouteWithChildren,
+  ProtectedMastersPartyLayoutRoute:
+    ProtectedMastersPartyLayoutRouteWithChildren,
+  ProtectedMastersPayrollLayoutRoute:
+    ProtectedMastersPayrollLayoutRouteWithChildren,
+  ProtectedMastersStatutoryLayoutRoute: ProtectedMastersStatutoryLayoutRoute,
+  ProtectedReportsDay_bookLayoutRoute:
+    ProtectedReportsDay_bookLayoutRouteWithChildren,
+  ProtectedReportsStock_summaryLayoutRoute:
+    ProtectedReportsStock_summaryLayoutRouteWithChildren,
+  ProtectedTransactionsFreightLayoutRoute:
+    ProtectedTransactionsFreightLayoutRouteWithChildren,
+  ProtectedTransactionsVouchersLayoutRoute:
+    ProtectedTransactionsVouchersLayoutRouteWithChildren,
   ProtectedReportsBalance_sheetIndexRoute:
     ProtectedReportsBalance_sheetIndexRoute,
   ProtectedReportsProfit_lossIndexRoute: ProtectedReportsProfit_lossIndexRoute,

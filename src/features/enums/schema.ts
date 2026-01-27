@@ -27,3 +27,23 @@ export const TypeOfSupplyEnum = z.enum([
     "services",
 ]);
 export type TypeOfSupply = z.infer<typeof TypeOfSupplyEnum>;
+
+export const BuildingTypeEnum = z.enum([
+    "main_hospital_block",
+    "opd_block",
+    "emergency_block",
+    "icu_block",
+    "ot_block",
+    "lab_block",
+    "diagnostic_block",
+    "pharmacy_block",
+    "admin_block",
+    "hostel_quarters",
+    "staff_quarters",
+    "parking_block",
+    "storage_warehouse",
+    "laundry_block",
+    "kitchen_cafeteria",
+]);
+
+export type BuildingType = z.infer<typeof BuildingTypeEnum>;

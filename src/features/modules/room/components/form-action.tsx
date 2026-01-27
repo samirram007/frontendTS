@@ -1,14 +1,21 @@
-import { useNavigate } from "@tanstack/react-router";
+// import { useNavigate } from "@tanstack/react-router";
 import { formSchema, type Room, type RoomForm } from "../data/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storeRoomService, udpateRoomService } from "../data/api";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { showSubmittedData } from "@/utils/show-submitted-data";
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Route as FloorRoute } from '@/routes/_protected/masters/infrastructure/_layout/floor/_layout';
 import { lowerCase } from "@/utils/removeEmptyStrings";
 import { Button } from "@/components/ui/button";
 import FormInputField from "@/components/form-input-field";
+import {
+    Form
+} from '@/components/ui/form'
+import { useNavigate } from "@tanstack/react-router";
+import StatusDropdown from "./dropdown/room-status-dropdown";
+
 
 
 interface Props {
@@ -20,11 +27,12 @@ interface Props {
 
 
 export function FormAction({ currentRow }: Props) {
-    const isEdit = !!currentRow
+    const isEdit = !!currentRow;
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const mutateRoom = useMutation({
+    const mutateBuilding = useMutation({
         mutationFn: async (data: RoomForm) => {
-            console.log("Room saving", data);
+            console.log("Building saving", data);
             if (isEdit && currentRow) {
                 return await udpateRoomService({ ...data, id: currentRow.id });
             }
@@ -33,31 +41,38 @@ export function FormAction({ currentRow }: Props) {
             }
         },
         onSuccess: (data) => {
-            console.log(data, "Room saved successfully");
-            queryClient.invalidateQueries({ queryKey: ['rooms'] });
+            console.log(data, "Building saved successfully");
+            queryClient.invalidateQueries({ queryKey: ['buildings'] });
         },
     })
 
     const form = useForm<RoomForm>({
         resolver: zodResolver(formSchema),
-        defaultValues: isEdit ? {
-            ...currentRow
-        }
-            :
-            {
-                name: '',
-                code: '',
-                status: '',
-                description: '',
-                roomNumber: 0
+        defaultValues: isEdit
+            ? {
+                ...currentRow,
+                isEdit,
             }
+            : {
+                name: "",
+                code: "",
+                status: "",
+                description: "",
+                roomNumber: 0,
+                isEdit
+            },
     });
 
     const moduleName = "room";
     const onSubmit = (values: RoomForm) => {
+        console.log(values, "values");
         form.reset();
         showSubmittedData(values);
-        mutateRoom.mutate(values);
+        mutateBuilding.mutate(values, {
+            onSuccess: () => {
+                navigate({ to: FloorRoute.to, })
+            }
+        });
     }
 
     return (
@@ -70,7 +85,7 @@ export function FormAction({ currentRow }: Props) {
                     Click save when you&apos;re done.
                 </DialogDescription>
             </DialogHeader>
-            <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
+            <div className='-mr-4 h-[17.25rem] w-full overflow-y-auto py-1 pr-4'>
                 <Form {...form}>
                     <form
                         id='user-form'
@@ -79,12 +94,9 @@ export function FormAction({ currentRow }: Props) {
                     >
                         <FormInputField type='text' form={form} name='name' label='Name' />
                         <FormInputField type='text' form={form} name='code' label='Code' />
-                        <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
-                            { label: 'Active', value: 'active' },
-                            { label: 'Inactive', value: 'inactive' },
-                        ]} />
+                        <StatusDropdown form={form} />
                         <FormInputField type='text' form={form} name='description' label='Description' />
-                        <FormInputField type='text' form={form} name='roomNumber' label='Room Number' />
+                        <FormInputField type='text' form={form} name='floorNumber' label='Building Number' />
                     </form>
                 </Form>
             </div>

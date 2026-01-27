@@ -1,3 +1,4 @@
+import PhysicalStock from '@/features/modules/voucher/physical_stock'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
@@ -8,6 +9,6 @@ export const Route = createFileRoute(
 
 function RouteComponent() {
   return (
-    <div>Hello "/_protected/transactions/vouchers/physical_stock/"!</div>
+    <PhysicalStock />
   )
 }

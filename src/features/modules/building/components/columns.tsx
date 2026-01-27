@@ -1,5 +1,4 @@
 import LongText from '@/components/long-text'
-import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 import type { ColumnDef } from '@tanstack/react-table'
@@ -86,30 +85,6 @@ export const columns: ColumnDef<Building>[] = [
             <div className='w-fit text-nowrap'>{row.getValue('buildingType')}</div>
         ),
     },
-    // {
-    //     accessorKey: 'buildingType',
-    //     header: ({ column }) => (
-    //         <DataTableColumnHeader column={column} title='Building Type' />
-    //     ),
-    //     cell: ({ row }) => {
-
-    //         return (
-    //             <div className='flex space-x-2'>
-    //                 <Badge variant='outline' >
-    //                     {'sdsds'}
-    //                 </Badge>
-    //             </div >
-    //         )
-    //     },
-    //     filterFn: (row, id, value) => {
-    //         return value.includes(row.getValue(id))
-    //     },
-    //     enableSorting: false,
-    //     enableHiding: false,
-    // },
-
-
-
     {
         id: 'actions',
         cell: RowActions,

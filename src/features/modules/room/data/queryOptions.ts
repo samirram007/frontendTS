@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchRoomService, storeRoomService } from "./api";
+import { fetchRoomByIdService, fetchRoomService, storeRoomService } from "./api";
 import type { RoomForm } from "./schema";
 
 
@@ -8,10 +8,10 @@ import type { RoomForm } from "./schema";
 const BASE_KEY = 'rooms';
 
 
-export const roomQueryOptions = () => {
+export const roomQueryOptions = (id: string) => {
     return queryOptions({
-        queryKey: [BASE_KEY],
-        queryFn: () => fetchRoomService(),
+        queryKey: [BASE_KEY, id],
+        queryFn: () => id ? fetchRoomByIdService(id) : fetchRoomService(),
         staleTime: 1000 * 60 * 5,
         retry: 1
     });

@@ -67,7 +67,6 @@ const VoucherTypeTablet = ({ voucherType, moduleLink }: VoucherTypeTabletProps) 
     const navigate = useNavigate()
     const handleClick = () => {
         const link = moduleLinkCollection.find(item => item.title === voucherType.name)?.href ?? moduleLink
-        alert(link)
 
 
         navigate({ to: `/${router.pathname}/${lowerCase(voucherType.name.replace(' ', '_'))}` })

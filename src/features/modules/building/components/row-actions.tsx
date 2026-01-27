@@ -2,7 +2,7 @@ import { DataTableRowActions } from "@/features/global/components/data-table/dat
 import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
 
-import { Route as CompanyDetailRoute } from '@/routes/_protected/masters/organization/_layout/company/_layout/$id'
+import { Route as BuildingDetailRoute } from '@/routes/_protected/masters/infrastructure/_layout/building/_layout/$id';
 
 import { useBuilding } from "../context/building-context"
 import type { Building } from "../data/schema"
@@ -21,10 +21,10 @@ const RowActions = (props: DataTableRowActionsProps) => {
             onEdit={(data) => {
                 setCurrentRow(data)
                 console.log("row Action: ", currentRow)
-                // navigate({
-                //     to: CompanyDetailRoute.to,
-                //     params: { id: data.id! },
-                // })
+                navigate({
+                    to: BuildingDetailRoute.to,
+                    params: { id: data.id! },
+                })
 
             }}
             onDelete={(data) => {

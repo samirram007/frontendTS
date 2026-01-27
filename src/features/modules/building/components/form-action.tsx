@@ -2,10 +2,11 @@
 import { formSchema, type Building, type BuildingForm } from "../data/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storeBuildingService, udpateBuildingService } from "../data/api";
-import { useForm, type Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { showSubmittedData } from "@/utils/show-submitted-data";
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Route as BuildingRoute } from '@/routes/_protected/masters/infrastructure/_layout/building/_layout';
 import { lowerCase } from "@/utils/removeEmptyStrings";
 import { Button } from "@/components/ui/button";
 import FormInputField from "@/components/form-input-field";
@@ -13,6 +14,9 @@ import {
     Form
 } from '@/components/ui/form'
 import StatusDropdown from "./dropdown/building-status-dropdown";
+import BuildingTypeSelect from "./dropdown/building_type_select";
+import type { BuildingType } from "@/features/enums/schema";
+import { useNavigate } from "@tanstack/react-router";
 
 
 
@@ -25,13 +29,14 @@ interface Props {
 
 
 export function FormAction({ currentRow }: Props) {
-    const isEdit = !!currentRow
+    const isEdit = !!currentRow;
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const mutateBuilding = useMutation({
         mutationFn: async (data: BuildingForm) => {
             console.log("Building saving", data);
             if (isEdit && currentRow) {
-                return await udpateBuildingService({ ...data, id: currentRow });
+                return await udpateBuildingService({ ...data, id: currentRow.id });
             }
             else if (!isEdit) {
                 return await storeBuildingService(data);
@@ -42,26 +47,30 @@ export function FormAction({ currentRow }: Props) {
             queryClient.invalidateQueries({ queryKey: ['buildings'] });
         },
     })
+    const gapClass = 'grid grid-cols-[200px_1fr]! gap-x-0   justify-start '
 
     const form = useForm<BuildingForm>({
-        resolver: zodResolver(formSchema) as Resolver<BuildingForm>,
-        defaultValues: isEdit ? {
-            ...currentRow, isEdit
-        }
-            :
-            {
-                name: '',
-                code: '',
-                status: '',
-                icon: '',
-                buildingType: '',
-                totalAreaSqft: 0,
-                coveredAreaSqft: 0,
+        resolver: zodResolver(formSchema),
+        defaultValues: isEdit
+            ? {
+                ...currentRow,
+                isEdit,
+                buildingType: currentRow?.buildingType as BuildingType,
+                icon: currentRow?.icon ?? undefined,
+            }
+            : {
+                name: "",
+                code: "",
+                status: "",
+                icon: undefined,
+                buildingType: undefined,
+                totalAreaSqft: '',
+                coveredAreaSqft: '',
                 yearOfConstruction: new Date().toISOString().slice(0, 10),
                 sesmicZoneCompliance: false,
-                structuralType: '',
+                structuralType: "",
                 isEdit,
-            }
+            },
     });
 
     const moduleName = "building";
@@ -69,7 +78,11 @@ export function FormAction({ currentRow }: Props) {
         console.log(values, "values");
         form.reset();
         showSubmittedData(values);
-        mutateBuilding.mutate(values);
+        mutateBuilding.mutate(values, {
+            onSuccess: () => {
+                navigate({ to: BuildingRoute.to, })
+            }
+        });
     }
 
     return (
@@ -94,7 +107,7 @@ export function FormAction({ currentRow }: Props) {
                         <StatusDropdown form={form} />
                         <FormInputField type='text' form={form} name='description' label='Description' />
                         <FormInputField type='text' form={form} name='buildingNumber' label='Building Number' />
-                        <FormInputField type='text' form={form} name='buildingType' label='Building Type' />
+                        <BuildingTypeSelect form={form} gapClass={gapClass} />
                         <FormInputField type='number' form={form} name='totalAreaSqft' label='Total Square Foot' />
                         <FormInputField type='number' form={form} name='coveredAreaSqft' label='Covered Square Foot' />
                         <FormInputField type='date' form={form} name='yearOfConstruction' label='Year of construction' />
