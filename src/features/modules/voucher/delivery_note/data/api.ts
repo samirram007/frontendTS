@@ -15,6 +15,8 @@ export async function storeDeliveryNoteService(payload: any) {
     return await postData(API_PATH, payload)
 }
 export async function updateDeliveryNoteService(payload: any) {
+    console.log("Delivery Note payload", payload)
+    // return
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 

@@ -2,8 +2,10 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/features/auth/contexts/AuthContext'
 import { Main } from '@/layouts/components/main'
-import { Link, Outlet } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { useReport } from '../context/report-context'
+import StockSummary from '@/features/modules/voucher/stock_summary'
+import StockSummaryProvider from '@/features/modules/voucher/stock_summary/contexts/stock_summary-context'
 
 
 const ReportLayout = () => {
@@ -31,7 +33,7 @@ const ReportLayout = () => {
                 <>
                     <div className='space-y-0.5'>
                         <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-                            Transaction Gateway
+                        Report Gateway
                         </h1>
                         <p className='text-muted-foreground'>
                             Manage your transaction.
@@ -43,7 +45,9 @@ const ReportLayout = () => {
             <div className='flex flex-1  flex-col space-y-2 overflow-hidden md:space-y-0 lg:flex-row lg:space-y-0 '>
 
                 <div className='flex w-full overflow-y-hidden  '>
-                    <Outlet />
+                    <StockSummaryProvider>
+                        <StockSummary />
+                    </StockSummaryProvider>
                 </div>
             </div>
         </Main>

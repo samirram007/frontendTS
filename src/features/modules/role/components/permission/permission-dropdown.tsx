@@ -23,10 +23,16 @@ type PermissionDropDownProps = {
 export function PermissionDropDown(props: PermissionDropDownProps) {
     const { rolePermission, appModuleId } = props;
     const queryClient = useQueryClient()
-    const mutation = usePermissionMutation();
+    const { mutate: permissionMutate } = usePermissionMutation();
     const handleSelect = (action: boolean) => {
-        console.log(`${action} permission`, rolePermission)
-        mutation.mutate({ ...rolePermission, isAllowed: action }, {
+        // console.log(`${action} permission`, rolePermission)
+        if (!rolePermission) return;
+
+        permissionMutate({
+            ...rolePermission,
+            isAllowed: action,
+            isEdit: !!rolePermission.id
+        }, {
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: ['AppModuleFeatures', rolePermission?.roleId, appModuleId] });
                 //   console.log("Permission updated successfully");

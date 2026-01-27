@@ -4,12 +4,19 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { cn } from '@/lib/utils'
 import type { ColumnDef } from '@tanstack/react-table'
 
-
-
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 import type { AppModule } from '../data/schema'
 import RowActions from './row-actions'
+
+import { ActionDialog as ModuleFeatureActionDialog } from '../../app_module_feature/components/action-dialog'
+
+
+
+import type { AppModuleFeature } from '../../app_module_feature/data/schema'
+import React from 'react'
+
+import { IconPlus } from '@tabler/icons-react'
 
 export const columns: ColumnDef<AppModule>[] = [
   {
@@ -86,6 +93,31 @@ export const columns: ColumnDef<AppModule>[] = [
     enableSorting: false,
   },
   {
+    accessorKey: 'features',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Features' />
+    ),
+    cell: ({ row }) => {
+      const features = row.getValue('features') as AppModuleFeature[] | undefined
+      return (
+        <div className='flex flex-wrap gap-2'>
+          <AppModuleFeatureAddButton currentRow={row.original} />
+          {features?.map((feature: AppModuleFeature) => (
+            feature &&
+
+            <AppModuleFeatureButton key={feature.id} currentRow={feature} />
+
+
+          ))}
+        </div>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
+
+
+  },
+  {
     accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
@@ -113,3 +145,47 @@ export const columns: ColumnDef<AppModule>[] = [
     cell: RowActions,
   },
 ]
+
+
+const AppModuleFeatureAddButton = ({ currentRow }: { currentRow: AppModuleFeature }) => {
+  const [open, setOpen] = React.useState(false)
+  const keyName = 'app-module-feature'
+  return (
+    <>
+      <Badge variant='outline' className='cursor-pointer' onClick={() => setOpen(true)}>
+        <IconPlus className='mr-2 h-4 w-4' />
+      </Badge>
+      <ModuleFeatureActionDialog
+        key={`${keyName}-add-${currentRow?.id}`}
+        currentRow={currentRow}
+        open={open}
+        onOpenChange={() => {
+          setOpen(!open)
+
+        }}
+
+      />
+    </>)
+
+}
+const AppModuleFeatureButton = ({ currentRow }: { currentRow: AppModuleFeature }) => {
+  const [open, setOpen] = React.useState(false)
+  const keyName = 'app-module-feature'
+  return (
+    <>
+      <Badge variant='outline' className='cursor-pointer' onClick={() => setOpen(true)}>
+        {currentRow.name}
+      </Badge>
+      <ModuleFeatureActionDialog
+        key={`${keyName}-edit-${currentRow?.id}`}
+        currentRow={currentRow}
+        open={open}
+        onOpenChange={() => {
+          setOpen(!open)
+
+        }}
+
+      />
+    </>)
+
+}

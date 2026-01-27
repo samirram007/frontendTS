@@ -10,11 +10,11 @@ import { Route as RoleModuleFeatureRoute } from '@/routes/_protected/administrat
 interface ModuleProps {
     modules?: AppModule[]
     role?: Role
+    isDialog?: boolean
 }
 const ModuleFeatureList = (props: ModuleProps) => {
     const { setCurrentRow } = useRolePermission()
-    const { modules, role } = props
-
+    const { modules, role, isDialog = false } = props
     const moduleOptions = useMemo(() => {
         return (
             modules?.map((m: { id: number; name: string }) => ({
@@ -25,9 +25,10 @@ const ModuleFeatureList = (props: ModuleProps) => {
     }, [modules])
 
     const handleOnSelect = (value: string) => {
+
         const selectedModule = modules?.find((module: any) => module.id.toString() === value)
         if (selectedModule) {
-            console.log('selectedModule', selectedModule)
+            //   console.log('selectedModule', selectedModule)
             setCurrentRow(selectedModule)
         }
     }
@@ -36,14 +37,18 @@ const ModuleFeatureList = (props: ModuleProps) => {
     return (
         <Command className="rounded-md border max-h-[70vh] w-full overflow-hidden shadow-md">
             <CommandInput placeholder="Type a command or search..." />
-            <CommandList className="max-h-full">
+            <CommandList className=" max-h-full"  >
                 <CommandEmpty>No results found.</CommandEmpty>
                 <CommandGroup heading="Modules">
                     {moduleOptions?.map((module: any) => (
                         <CommandItem key={module.value} className="cursor-pointer" asChild
                             onSelect={() => handleOnSelect(module.value)}
                         >
-                            <Link to={RoleModuleFeatureRoute.to} params={{ id: role?.id, moduleid: module.value }}>{module.label}</Link>
+                            {isDialog ? (
+                                <ModuleComponent module={module} handleSelect={handleOnSelect} />
+                            ) : (
+                                <Link to={RoleModuleFeatureRoute.to} params={{ id: role?.id!, moduleid: module.value }}>{module.label}</Link>
+                            )}
                         </CommandItem>
                     ))}
 
@@ -58,17 +63,13 @@ const ModuleFeatureList = (props: ModuleProps) => {
 }
 export default ModuleFeatureList
 
-const Feature = ({ module }: { module: any }) => {
+const ModuleComponent = ({ module, handleSelect }: { module: any, handleSelect: (value: string) => void }) => {
     return (
         <div className="mb-1 cursor-pointer rounded-md p-2 hover:bg-gray-200">
-            <div className="text-md font-semibold">{module.label}</div>
-            {/* <ul className="list-disc list-inside">
-                            {module.features.map((feature: any) => (
-                                <li key={feature.id}>{feature.name}</li>
-                            ))}
-                        </ul> */}
+            <div className="text-sm font-semibold" onClick={() => handleSelect(module.value)}>{module.label}</div>
+
         </div>
     )
 }
 
-export { Feature }
+export { ModuleComponent }

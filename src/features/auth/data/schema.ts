@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export interface UserProfileResponse {
     status: "success" | "error";
     message: string;
@@ -31,3 +32,16 @@ export interface FiscalYear {
     companyId: number;
     status: string;
 }
+=======
+import { roleListSchema } from '@/features/modules/role/data/schema';
+import { userSchema } from '../../modules/user/data/schema';
+import type z from 'zod';
+
+
+export const userSchemaWithRole = userSchema.extend({
+    roles: roleListSchema.optional(),
+
+});
+
+export type UserWithRole = z.infer<typeof userSchemaWithRole>;
+>>>>>>> fff46fa0b5afb5ee171703236191fc4cbda7df07

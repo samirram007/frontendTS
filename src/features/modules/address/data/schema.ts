@@ -41,7 +41,10 @@ export const formSchema = z
     postOffice: z.string().nullable().optional(),
     district: z.string().nullable().optional(),
     city: z.string().nullable().optional(),
-    state: z.string().nullable().optional(),
+    stateId: z.number().nullish(),
+    countryId: z.number().nullish(),
+    country: countrySchema.nullable().optional(),
+    state: stateSchema.nullable().optional(),
     postalCode: z.string({ message: 'Postal code is required.' })
       .max(6, { message: 'Postal code must be at most 6 characters long.' })
       .nullable().optional(),

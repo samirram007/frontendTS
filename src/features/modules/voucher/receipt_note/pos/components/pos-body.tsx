@@ -3,7 +3,7 @@ import { useTransaction } from "@/features/transactions/context/transaction-cont
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useEffect, useMemo } from "react";
-import { useForm, type Resolver } from "react-hook-form";
+import { useForm, useWatch, type Resolver } from "react-hook-form";
 
 import StockJournal from "../../../components/stock-journal";
 import isEqual from "lodash/isEqual";
@@ -26,19 +26,33 @@ const PosBody = ({ mainForm: receiptNoteForm }: PosBodyProps) => {
            stockJournalEntries: stockJournal?.stockJournalEntries ?? [],
        }
     });
+    // const stockJournalTotal = useMemo(() => {
+    //     const entries = (stockJournalForm.watch("stockJournalEntries") || []).filter(
+    //         (entry): entry is StockJournalEntryForm => entry !== undefined && entry !== null
+    //     );
+    //     const totalAmount = entries.reduce((acc: number, entry: StockJournalEntryForm) => {
+    //         const amount = Number(entry.amount) || 0;
+    //         acc += amount;
+    //         return acc;
+    //     }, 0);
+    //     return {
+    //         totalAmount
+    //     }
+    // }, [stockJournalForm.watch("stockJournalEntries")])
+
+    const stockJournalEntries = useWatch({
+        control: stockJournalForm.control,
+        name: "stockJournalEntries",
+    });
+
     const stockJournalTotal = useMemo(() => {
-        const entries = (stockJournalForm.watch("stockJournalEntries") || []).filter(
-            (entry): entry is StockJournalEntryForm => entry !== undefined && entry !== null
-        );
-        const totalAmount = entries.reduce((acc: number, entry: StockJournalEntryForm) => {
-            const amount = Number(entry.amount) || 0;
-            acc += amount;
-            return acc;
+        const entries = stockJournalEntries || [];
+        const totalAmount = entries.reduce((acc, entry) => {
+            return acc + (Number(entry?.amount) || 0);
         }, 0);
-        return {
-            totalAmount
-        }
-    }, [stockJournalForm.watch("stockJournalEntries")])
+
+        return { totalAmount };
+    }, [stockJournalEntries]);
 
 
 

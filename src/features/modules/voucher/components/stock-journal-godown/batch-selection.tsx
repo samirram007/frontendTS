@@ -104,7 +104,7 @@ const BatchSelection = (props: BatchSelectionProps) => {
                 <PopoverContent className="popover-content-width-same-as-trigger p-0">
                     <Command className="rounded-lg border shadow-md min-w-full">
                         <CommandInput placeholder="Search batch..." />
-                        <CommandList>
+                        <CommandList className=" max-h-full">
                             <CommandEmpty>No batch found.</CommandEmpty>
                             <CommandGroup>
 

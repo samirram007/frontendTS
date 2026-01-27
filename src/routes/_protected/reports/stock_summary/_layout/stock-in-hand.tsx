@@ -17,3 +17,4 @@ export const Route = createFileRoute(
   errorComponent: () => <div>Error loading stock summary data.</div>,
   pendingComponent: () => <Loader className="animate-spin" />,
 })
+

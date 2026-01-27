@@ -100,7 +100,7 @@ export const columns: ColumnDef<Role>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Permissions' />
     ),
-    cell: ({ row }) => <ActionPermission row={row} />,
+    cell: ({ row }) => <ActionPermission row={row} isModal={true} />,
   },
   {
     id: 'actions',

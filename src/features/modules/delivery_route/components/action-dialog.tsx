@@ -14,20 +14,17 @@ import {
 } from '@/components/ui/form'
 
 import type { DeliveryRoute, DeliveryRouteForm } from '@/features/modules/delivery_route/data/schema'
-import { showSubmittedData } from '@/utils/show-submitted-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import FormInputField from '@/components/form-input-field'
 import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
-import { storeDeliveryRouteService, updateDeliveryRouteService } from '../data/api'
 import { formSchema } from '../data/schema'
 
-import DeliveryPlaceDropdown from './delivery_place-dropdown'
-import { use } from 'react'
 import { useDeliveryRouteMutation } from '../data/queryOptions'
-import { toast } from 'sonner'
+import SourcePlaceDropdown from './source-dropdown'
+import DestinationPlaceDropdown from './destination-dropdown'
+import TransporterDropdown from './transporter-dropdown'
 
 
 interface Props {
@@ -47,32 +44,27 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         ...currentRow, isEdit,
       }
       : {
-        sourcePlaceId: undefined,
+
+        transporterId: undefined,
+        sourcePlaceId: 1,
         destinationPlaceId: undefined,
+        vehicleNo: '',
         distanceKm: undefined,
         estimatedTimeInMinutes: undefined,
         rate: undefined,
+        rateUnitId: 16,
         isEdit,
       },
   })
   //const deliveryRouteStatusOptions: ActiveInactiveStatus[] = ['active', 'inactive'];
 
-  const moduleName = "Account Nature"
+  const moduleName = "Transporter Route"
   const onSubmit = (values: DeliveryRouteForm) => {
-    if (isPending) return;
-    if (values.sourcePlaceId === values.destinationPlaceId) {
-      toast.error("Source and Destination places cannot be the same.");
-      return;
-    }
-    if (isEdit) {
-      mutateDeliveryRoute(values)
-      onOpenChange(false)
-      return;
-    }
+    if (isPending) return; 
 
+    mutateDeliveryRoute(currentRow ? { ...values, id: currentRow.id } : values)
     form.reset()
-    showSubmittedData(values)
-    mutateDeliveryRoute(values)
+    //showSubmittedData(values)
     onOpenChange(false)
   }
 
@@ -102,12 +94,13 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
               onSubmit={form.handleSubmit(onSubmit)}
               className='space-y-4 p-0.5'
             >
-              <DeliveryPlaceDropdown form={form} gapClass='grid grid-cols-[110px_1fr]' name="sourcePlaceId" />
-              <DeliveryPlaceDropdown form={form} gapClass='grid grid-cols-[110px_1fr]' name="destinationPlaceId" />
-              <FormInputField type='number' form={form} name='distanceKm' label='Distance (Km)' />
-              <FormInputField type='number' form={form} name='estimatedTimeInMinutes' label='Estimated Time (Minutes)' />
-              <FormInputField type='number' form={form} name='rate' label='Rate' />
-
+              <TransporterDropdown form={form} gapClass='grid grid-cols-[150px_1fr] gap-2' name="transporterId" label="Transporter" />
+              <SourcePlaceDropdown form={form} gapClass='grid grid-cols-[150px_1fr] gap-2' name="sourcePlaceId" />
+              <DestinationPlaceDropdown form={form} gapClass='grid grid-cols-[150px_1fr] gap-2' name="destinationPlaceId" />
+              <FormInputField type='text' gapClass='grid grid-cols-[150px_1fr] gap-2' form={form} name='vehicleNo' label='Vehicle No' />
+              {/* <FormInputField type='number' gapClass='grid grid-cols-[150px_1fr] gap-2' form={form} name='distanceKm' label='Distance (Km)' />
+              <FormInputField type='number' gapClass='grid grid-cols-[150px_1fr] gap-2' form={form} name='estimatedTimeInMinutes' label='Estimated Time (Minutes)' /> */}
+              <FormInputField type='number' gapClass='grid grid-cols-[150px_1fr] gap-2' form={form} name='rate' label='Rate/MT' /> 
             </form>
           </Form>
         </div>

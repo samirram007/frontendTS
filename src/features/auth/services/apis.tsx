@@ -9,7 +9,7 @@ import { getData, postData } from "@/utils/dataClient";
 
 
 export async function fetchUserProfileService() {
-    console.log('loginService called');
+    // console.log('loginService called');
 
     return await getData("/auth/profile")
 }

@@ -67,12 +67,12 @@ export function FormAction({ currentRow }: Props) {
     const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
     const moduleName = "Distributor"
     const onSubmit = (values: DistributorForm) => {
-        console.log("here: ", values)
-        form.reset()
+
         saveDistributor(
             currentRow ? { ...values, id: currentRow.id! } : values,
             {
                 onSuccess: () => {
+                    form.reset()
                     navigate({ to: DistributorRoute.to, })
                 },
             }

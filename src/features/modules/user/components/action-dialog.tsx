@@ -17,12 +17,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { Loader2 } from 'lucide-react'
-import { accountLedgerSchema } from '../../account_ledger/data/schema'
-import { addressSchema } from '../../address/data/schema'
 import { useUserMutation } from '../data/queryOptions'
 import { formSchema, type User, type UserForm } from '../data/schema'
 
@@ -40,24 +38,22 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const isEdit = !!currentRow
 
   const form = useForm<UserForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<UserForm>,
     defaultValues: isEdit
       ? {
-        ...currentRow, isEdit,
+        ...currentRow,
+        email: currentRow.email ?? '',
+        username: currentRow.username ?? '',
+        userType: currentRow.userType ?? '',
+        isEdit
       }
       : {
-        name: '',
-        code: '',
-        gstin: '',
-        pan: '',
-        contactPerson: '',
-        contactNo: '',
-        phone: '',
-        email: '',
-        accountGroupId: 1,
-        accountLedger: accountLedgerSchema,
-        address: addressSchema,
+        name: '', 
         status: 'active',
+        email: '',
+        username: '',
+
+
         isEdit,
       },
   })

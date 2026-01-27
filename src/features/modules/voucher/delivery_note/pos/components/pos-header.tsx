@@ -64,7 +64,7 @@ const PosHeader = ({ mainForm: form }: PosHeaderProps) => {
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
                     <PartyLedgerForm tabIndex={3} />
-                    <TransactionLedgerForm />
+                    <TransactionLedgerForm tabIndex={4} form={form} />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">

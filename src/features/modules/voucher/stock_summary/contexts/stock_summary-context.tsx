@@ -12,6 +12,8 @@ interface StockSummaryContextType {
   setOpen: (str: StockSummaryDialogType | null) => void
   currentRow: StockSummarySchema | null
   setCurrentRow: React.Dispatch<React.SetStateAction<StockSummarySchema | null>>
+  currentReport: string
+  setCurrentReport: React.Dispatch<React.SetStateAction<string>>
   keyName: string
 }
 
@@ -24,11 +26,14 @@ interface Props {
 export default function StockSummaryProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<StockSummaryDialogType>(null)
   const [currentRow, setCurrentRow] = useState<StockSummarySchema | null>(null)
-
+  const [currentReport, setCurrentReport] = useState('stock_in_hand');
   return (
-    <StockSummaryContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "day_books" }}>
+    <StockSummaryContext.Provider value={{
+      open, setOpen,
+      currentRow, setCurrentRow, currentReport, setCurrentReport, keyName: "day_books"
+    }}>
       {children}
-    </StockSummaryContext>
+    </StockSummaryContext.Provider>
   )
 }
 

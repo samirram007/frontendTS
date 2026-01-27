@@ -97,6 +97,12 @@ export const partySchema = z.object({
 })
 export type PartyForm = z.infer<typeof partySchema>
 
+export const billingPreference = ['advance', 'current', 'due'] as const;
+export type BillingPreference = (typeof billingPreference)[number];
+
+export const billingPreferenceSchema = z.enum(billingPreference);
+export type BillingPreferenceForm = z.infer<typeof billingPreferenceSchema>
+
 export const voucherDispatchDetailSchema = z.object({
     id: z.number().int().positive().nullish(),
     voucherId: z.number().int().positive().nullish(),
@@ -106,18 +112,23 @@ export const voucherDispatchDetailSchema = z.object({
     termsOfDelivery: z.string().nullish(),
     receiptDocNo: z.string().nullish(),
     dispatchedThrough: z.string().nullish(),
+    source: z.string().nullish(),
     destination: z.string().nullish(),
+    destinationSecondary: z.string().nullish(),
     carrierName: z.string().nullish(),
     billOfLadingNo: z.string().nullish(),
     billOfLadingDate: z.coerce.date().nullish(),
     motorVehicleNo: z.string().nullish(),
     distance: z.coerce.number().nullish(),
-    rate: z.coerce.number().nullish(),
     distanceUnitId: z.number().int().positive().nullish(),
+    rate: z.coerce.number().nullish(), 
     rateUnitId: z.number().int().positive().nullish(),
     quantity: z.coerce.number().nullish(),
     weight: z.coerce.number().nullish(),
+    weightUnitId: z.number().int().positive().nullish(),
     volume: z.coerce.number().nullish(),
+    volumeUnitId: z.number().int().positive().nullish(),
+    freightBasis: z.string().nullish(),
     loadingCharges: z.coerce.number().nullish(),
     unloadingCharges: z.coerce.number().nullish(),
     packingCharges: z.coerce.number().nullish(),
@@ -125,6 +136,7 @@ export const voucherDispatchDetailSchema = z.object({
     otherCharges: z.coerce.number().nullish(),
     freightCharges: z.coerce.number().nullish(),
     totalFare: z.coerce.number().nullish(),
+    billingPreference: billingPreferenceSchema.nullish(),
     isEdit: z.boolean().nullish(),
 
 

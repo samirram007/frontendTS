@@ -7,6 +7,10 @@ import { useEffect } from 'react';
 import Pos from './pos';
 import { PosProvider } from '../contexts/pos-context';
 import type { DeliveryNoteProps } from './pos/contracts';
+import { DeliveryNoteProvider } from './contexts/delivery_note-context';
+
+
+
 
 
 
@@ -19,9 +23,18 @@ const DeliveryNote = ({ currentRow }: DeliveryNoteProps) => {
     return (
 
         <>
+
             <PosProvider>
-            <Pos currentRow={currentRow} />
+                <DeliveryNoteProvider>
+
+                    <>
+
+                        <Pos currentRow={currentRow} />
+                    </>
+
+                </DeliveryNoteProvider>
             </PosProvider>
+
 
         </>
     )

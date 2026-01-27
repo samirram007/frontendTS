@@ -1,8 +1,7 @@
 'use client'
 
+import type { StockSummarySchema } from "../../stock_summary/data/schema"
 
-
-import { type StockSummarySchema } from '../data/schema'
 
 
 

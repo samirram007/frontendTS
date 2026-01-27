@@ -104,6 +104,11 @@ export const columns: ColumnDef<AccountGroup>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Account Nature' />
     ),
+    filterFn: (row, columnId, filterValues: string[]) => {
+      if (!filterValues || filterValues.length === 0) return true;
+      const accountNatureId = row.getValue<number>(columnId);
+      return filterValues.map(Number).includes(accountNatureId);
+    },
     cell: ({ row }) => {
       const { accountNature } = row.original
       if (!accountNature) {

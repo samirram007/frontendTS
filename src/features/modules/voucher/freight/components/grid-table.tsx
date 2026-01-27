@@ -24,7 +24,8 @@ import {
   type VisibilityState,
 } from '@tanstack/react-table'
 import { useState } from 'react'
-import type { StockSummarySchema } from '../data/schema'
+import type { StockSummarySchema } from '../../stock_summary/data/schema'
+
 
 
 declare module '@tanstack/react-table' {

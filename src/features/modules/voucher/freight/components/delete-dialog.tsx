@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { IconAlertTriangle } from '@tabler/icons-react'
 import { useState } from 'react'
-import type { StockSummarySchema } from '../data/schema'
+import type { StockSummarySchema } from '../../stock_summary/data/schema'
 
 
 interface Props {

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 
 import { IconPlus } from '@tabler/icons-react'
-import { useStockSummary } from '../contexts/stock_summary-context'
+import { useStockSummary } from '../../stock_summary/contexts/stock_summary-context'
 
 
 export function PrimaryButtons() {

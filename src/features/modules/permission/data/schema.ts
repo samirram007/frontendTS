@@ -5,13 +5,13 @@ import { roleSchema } from '../../role/data/schema';
 
 
 
-export const permissionSchema: z.ZodType<any> = z.object({
+export const permissionSchema = z.object({
   id: z.number().int().positive().optional(),
   roleId: z.coerce.number().int().positive(),
   appModuleFeatureId: z.coerce.number().int().positive(),
-  role: roleSchema.nullable().optional(),
-  appModuleFeature: appModuleFeatureSchema.nullable().optional(),
+  role: z.lazy(() => roleSchema).nullable().optional(),
   isAllowed: z.boolean(),
+  appModuleFeature: z.lazy(() => appModuleFeatureSchema).nullable().optional(),
 
 
 
@@ -27,7 +27,7 @@ export const formSchema = z
   .object({
     roleId: z.coerce.number().int().positive(),
     appModuleFeatureId: z.coerce.number().int().positive(),
-    role: roleSchema.nullable().optional(),
+    role: roleSchema?.nullable().optional(),
     appModuleFeature: appModuleFeatureSchema.nullable().optional(),
     isAllowed: z.boolean(),
     isEdit: z.boolean(),

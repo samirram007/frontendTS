@@ -6,8 +6,6 @@ import type { ReceiptNoteForm } from "../../../data/schema";
 import { Loader } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import type { StockJournalEntryForm, StockJournalGodownEntryForm } from "@/features/modules/voucher/data-schema/voucher-schema";
-import { Route as ReceiptNoteRoute } from "@/routes/_protected/transactions/vouchers/_layout/receipt_note/_layout/$id";
-
 
 type SaveDialogProps = {
     mainForm: UseFormReturn<ReceiptNoteForm>
@@ -16,25 +14,21 @@ type SaveDialogProps = {
 }
 
 const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
+
     const { mutate: createReceiptNote, isPending } = useReceiptNoteMutation();
-    const { id } = ReceiptNoteRoute.useParams();
+
     const [errors, setErrors] = useState<string[]>([]);
     const [checking, setChecking] = useState(true);
     const [valid, setValid] = useState(false);  // for success animation
     const handleSaving = () => {
-        console.log('Form submitted', mainForm.getValues(), id);
 
-        if (mainForm.getValues('isEdit') && id) {
-            createReceiptNote({ ...mainForm.getValues(), id: Number(id) });
-            return;
-        }
-        else {
-            // Create new receipt note
             createReceiptNote(mainForm.getValues());
-            return;
-        }
+
+
 
     }
+
+    const saveButtonRef = React.useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         let timer: any = null;
@@ -120,6 +114,11 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
         return () => clearTimeout(timer);
     }, [isPending, setSaving]);
 
+    useEffect(() => {
+        if (valid) {
+            saveButtonRef.current?.focus();
+        }
+    }, [valid]);
 
     return <div>
         <Dialog open={isSaving}
@@ -166,8 +165,9 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                 </div>
                 <DialogFooter>
                     <Button onClick={handleSaving}
+                        ref={saveButtonRef}
                         disabled={isPending || errors.length > 0 || checking || !valid}
-                        className="h-8 focus:bg-black focus:text-white"  >
+                        className={`h-8 ${valid ? "focus:bg-black focus:text-white" : ""}`}   >
                         Save changes
                     </Button>
                 </DialogFooter>

@@ -9,6 +9,8 @@ import { fetchLedgerBalanceService } from "../../../data/api"
 import type { ReceiptNoteForm } from "../../../data/schema"
 import PartyDetails from "../party-details"
 import { PartyLedgerCombobox } from "./party-ledger-combo-box"
+import type { AccountLedger } from "@/features/modules/account_ledger/data/schema"
+
 
 
 
@@ -17,12 +19,14 @@ type FormProps = {
     tabIndex?: number;
 };
 const PartyLedgerForm = (props: FormProps) => {
+
     const { tabIndex } = props as FormProps;
     const form = useFormContext<ReceiptNoteForm>()
     const { data: partyLedgers, isLoading } = useQuery({
         queryKey: ["accountLedgers", "supplier_ledgers"],
         queryFn: () => fetchPartyLedgerService('supplier_ledgers'),
     })
+    const filteredPartyLedgers = partyLedgers?.data.filter((ledger: AccountLedger) => ledger.ledgerableType === 'supplier');
 
     if (isLoading) {
         return <div>Loading...</div>
@@ -42,7 +46,7 @@ const PartyLedgerForm = (props: FormProps) => {
                             </FormLabel>
                             <div className={cn(form.getValues('partyLedger.id') ? "w-8/12" : "w-10/12", "grid grid-cols-[auto_1fr_100px] gap-2 items-center  ")}>
                                 <div className="text-right" >:</div>
-                                <PartyLedgerCombobox partyLedgers={partyLedgers?.data} tabIndex={tabIndex} />
+                                <PartyLedgerCombobox partyLedgers={filteredPartyLedgers} tabIndex={tabIndex} />
 
                                 {
                                     form.getValues('partyLedger.id') &&

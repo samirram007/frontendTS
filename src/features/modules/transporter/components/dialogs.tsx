@@ -5,6 +5,7 @@ import { DeleteDialog } from './delete-dialog'
 
 export function Dialogs() {
   const { open, setOpen, currentRow, setCurrentRow, keyName } = useTransporter()
+
   return (
     <>
       <ActionDialog

@@ -310,7 +310,7 @@ const SelectBox = (props: Props) => {
                         <SelectDropdown
                             defaultValue={field.value ? field.value.toString() : ''}
                             onValueChange={(value) => form.setValue(name, value)}
-                            placeholder={`Select a ${name}`}
+                            placeholder={`Select a ${label ?? capitalizeAllWords(name)}`}
                             className='w-full'
                             items={items}
                         />

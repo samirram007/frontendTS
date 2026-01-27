@@ -18,6 +18,6 @@ export function handleServerError(error: unknown) {
   if (error instanceof AxiosError) {
     errMsg = error.response?.data.title
   }
-  toast.error(errMsg)
+  toast.message(errMsg)
   // toast({ variant: 'destructive', title: errMsg })
 }

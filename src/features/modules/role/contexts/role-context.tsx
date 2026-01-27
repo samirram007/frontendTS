@@ -12,6 +12,8 @@ interface RoleContextType {
   currentRow: Role | null
   setCurrentRow: React.Dispatch<React.SetStateAction<Role | null>>
   keyName: string
+  isModal?: boolean
+  setIsModal?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const RoleContext = React.createContext<RoleContextType | null>(null)
@@ -23,12 +25,17 @@ interface Props {
 export default function RoleProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<RoleDialogType>(null)
   const [currentRow, setCurrentRow] = useState<Role | null>(null)
+  const [isModal, setIsModal] = useState<boolean>(false)
+
 
 
   return (
-    <RoleContext value={{ open, setOpen, currentRow, setCurrentRow, keyName: "role" }}>
+    <RoleContext.Provider value={{
+      open, setOpen, currentRow, setCurrentRow, keyName: "role",
+      isModal, setIsModal
+    }}>
       {children}
-    </RoleContext>
+    </RoleContext.Provider>
   )
 }
 

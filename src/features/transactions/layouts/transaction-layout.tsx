@@ -27,6 +27,7 @@ const TransactionLayout = () => {
     return (
 
         <Main fixed className='  overflow-hidden'>
+
             {headerVisible &&
                 <>
             <div className='space-y-0.5'>
@@ -46,6 +47,9 @@ const TransactionLayout = () => {
                     <Outlet />
                 </div>
             </div>
+            {/* <TransporterDialog />
+            <DeliveryVehicleDialog /> */}
+
         </Main>
     )
 }

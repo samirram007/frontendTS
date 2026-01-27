@@ -1,5 +1,6 @@
 
-import { useStockSummary } from '../contexts/stock_summary-context'
+
+import { useStockSummary } from '../../stock_summary/contexts/stock_summary-context'
 import { ActionDialog } from './action-dialog'
 import { DeleteDialog } from './delete-dialog'
 

@@ -45,7 +45,7 @@ export function GridTable({ columns, data }: DataTableProps) {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
-
+  const [globalFilter, setGlobalFilter] = useState<string>('')
   const table = useReactTable({
     data,
     columns,
@@ -54,7 +54,9 @@ export function GridTable({ columns, data }: DataTableProps) {
       columnVisibility,
       rowSelection,
       columnFilters,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
     filterFns: {
       // Custom filter functions can be added here if needed
       fuzzy: (row, columnId, value) => {
@@ -77,9 +79,24 @@ export function GridTable({ columns, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
+  const filteredRows = table
+    .getFilteredRowModel()
+    .rows.map((row) => row.original)
+
+  // console.log(filteredRows)
+
+  const exportColumnsData = table.getVisibleLeafColumns().map((col) => ({
+    header:
+      typeof col.columnDef.header === 'string' ? col.columnDef.header : col.id,
+    accessor: col.id as keyof DeliveryRoute,
+  }))
+  const keyName = 'Delivery Routes'
+
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} placeHolder={`Filter ${keyName} `}
+        filteredRows={filteredRows}
+        exportColumnsData={exportColumnsData} />
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge"
 import { Command, CommandEmpty, CommandItem, CommandList } from "@/components/ui/command"
 import type { AppModuleFeature } from "@/features/modules/app_module_feature/data/schema"
 import type { RolePermission } from "@/features/modules/permission/data/schema"
-import { Suspense } from "react"
+
 import { PermissionDropDown } from "./permission-dropdown"
 interface RolePermissionProps {
     data?: AppModuleFeature[],
@@ -15,10 +15,10 @@ const FeaturePermissionList = (props: RolePermissionProps) => {
 
     return (
 
-        <Command className="rounded-md border max-h-[70vh] w-full overflow-hidden shadow-md">
+        <Command className=" max-h-[70vh] w-full overflow-hidden ">
             {/* <CommandInput placeholder="Type a command or search..." /> */}
             <div className="text-xl ">Feature Permissions</div>
-            <Suspense fallback={<div>Loading...</div>}></Suspense>
+            <CommandEmpty>No features found.</CommandEmpty>
             <CommandList className="max-h-full grid grid-cols-[1fr_1fr] gap-4 p-4">
                 <CommandEmpty>No results found.</CommandEmpty>
                 {data?.map((feature: any) => (
@@ -70,11 +70,7 @@ const Feature = ({ module }: { module: any }) => {
     return (
         <div className="mb-1 cursor-pointer rounded-md p-2 hover:bg-gray-200">
             <div className="text-md font-semibold">{module.label}</div>
-            {/* <ul className="list-disc list-inside">
-                            {module.features.map((feature: any) => (
-                                <li key={feature.id}>{feature.name}</li>
-                            ))}
-                        </ul> */}
+
         </div>
     )
 }

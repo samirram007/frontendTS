@@ -1,53 +1,64 @@
-import { SelectDropdown } from "@/components/select-dropdown";
-import { FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
-import { useQuery } from "@tanstack/react-query";
-import type { UseFormReturn } from "react-hook-form";
+import { SelectDropdown } from '@/components/select-dropdown'
+import {
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form'
+import { capitalizeAllWords } from '@/utils/removeEmptyStrings'
+import { useQuery } from '@tanstack/react-query'
+import type { UseFormReturn } from 'react-hook-form'
 
-import { fetchCountryService } from "../../../country/data/api";
-import type { Country } from "../../../country/data/schema";
-import type { CompanyForm } from "../../data/schema";
+import { cn } from '@/lib/utils'
+import type { CompanyForm } from '../../data/schema'
+import { fetchCountryService } from '@/features/modules/country/data/api'
+import type { Country } from '@/features/modules/country/data/schema'
+
 
 type Props = {
-    form: UseFormReturn<CompanyForm>;
+    form: UseFormReturn<CompanyForm>
+    gapClass?: string
+    rtl?: boolean
 }
 
 const CountryDropdown = (props: Props) => {
-    const { form } = props
+    const { form, gapClass, rtl } = props
 
     const { data: countryList, isLoading } = useQuery({
-        queryKey: ["countries"],
+        queryKey: ['countries'],
         queryFn: fetchCountryService,
-    });
+    })
 
     //const countryId = form.watch('countryId') as string | number | undefined;; // Watch form value for reactivity
     const handleValueChange = (value: string) => {
-        form.setValue('countryId', Number(value));
-
-    };
+        form.setValue('address.countryId', Number(value))
+    }
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>
     }
     return (
         <FormField
             control={form.control}
-            name='countryId'
+            name="address.countryId"
             render={({ field }) => (
-                <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-right'>
-                        Country
-                    </FormLabel>
+                <FormItem
+                    className={cn(
+                        'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                        gapClass,
+                    )}
+                >
+                    <FormLabel className={rtl ? 'order-last' : ''}>Country</FormLabel>
                     <SelectDropdown
                         defaultValue={field.value ? field.value.toString() : ''}
                         onValueChange={(value) => handleValueChange(value)}
-                        placeholder='Select a country'
-                        className='w-full col-span-6 md:col-span-4'
+                        placeholder="Select a country"
+                        className="w-full placeholder"
                         items={countryList?.data.map((country: Country) => ({
                             label: capitalizeAllWords(country.name),
                             value: String(country.id),
                         }))}
                     />
-                    <FormMessage className='col-span-4 col-start-3' />
+                    <FormMessage className="col-span-4 col-start-3" />
                 </FormItem>
             )}
         />

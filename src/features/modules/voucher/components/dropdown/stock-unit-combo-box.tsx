@@ -64,7 +64,7 @@ export const StockUnitCombobox = ({ stockUnits, form }: Props) => {
             <SheetContent className="sheet-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No Unit found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (
