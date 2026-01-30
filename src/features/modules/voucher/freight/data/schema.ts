@@ -21,7 +21,7 @@ export type FreightListSchema = z.infer<typeof freightListSchema>
 
 // Dipika Starting
 
-const ledgerSchema = z.object({
+export const ledgerSchema = z.object({
   id: z.number().int().positive().nullish(),
   name: z.string(),
   code: z.string(),

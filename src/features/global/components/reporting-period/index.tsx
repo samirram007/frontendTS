@@ -44,7 +44,7 @@ const Period = ({ setopen }: { setopen: (value: boolean) => void }) => {
 
 
 export const PeriodDetailsDialog = ({ open, setopen }: { open: boolean, setopen: (value: boolean) => void }) => {
-    const { period, fetchProfile, userFiscalYear } = useAuth();
+    const { period, fetchProfile } = useAuth();
     const { mutate: saveReportingPeriod, isPending } = useReportingPeriodMutation();
 
     const form = useForm<ReportingPeriodForm>({

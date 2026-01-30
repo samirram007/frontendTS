@@ -8,7 +8,7 @@ import { useForm, useWatch, type Resolver } from "react-hook-form";
 import StockJournal from "../../../components/stock-journal";
 import isEqual from "lodash/isEqual";
 import type { ReceiptNoteForm } from "../../data/schema";
-import { stockJournalSchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data-schema/voucher-schema";
+import { stockJournalSchema, type StockJournalForm } from "../../../data-schema/voucher-schema";
 
 type PosBodyProps = {
     mainForm: ReturnType<typeof useForm<ReceiptNoteForm>>;

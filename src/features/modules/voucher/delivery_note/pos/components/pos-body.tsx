@@ -4,7 +4,7 @@ import isEqual from "lodash/isEqual";
 import { useEffect, useMemo } from "react";
 import { useForm, useWatch, type Resolver } from "react-hook-form";
 import type { DeliveryNoteForm } from "../../data/schema";
-import { stockJournalSchema, type StockJournalEntryForm, type StockJournalForm } from "../../../data-schema/voucher-schema";
+import { stockJournalSchema, type StockJournalForm } from "../../../data-schema/voucher-schema";
 import StockJournal from "../../../components/stock-journal";
 import { usePos } from "../../../contexts/pos-context";
 
