@@ -7,13 +7,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
+import type { FreightListSchema } from '../data/schema'
 
 
 
-import type { StockInHandSchema } from '../data/schema'
 
 
-export const columns: ColumnDef<StockInHandSchema>[] = [
+export const columns: ColumnDef<FreightListSchema>[] = [
   {
     id: 'select',
     header: ({ table }) => (

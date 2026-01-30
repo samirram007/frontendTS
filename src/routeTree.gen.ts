@@ -63,6 +63,7 @@ import { Route as ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRouteI
 import { Route as ProtectedReportsStock_summaryLayoutSalebleStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/saleble-stock'
 import { Route as ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRouteImport } from './routes/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
 import { Route as ProtectedReportsStock_summaryLayoutNetStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/net-stock'
+import { Route as ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-voucher-wise'
 import { Route as ProtectedReportsFreightLayoutFreightGodownWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-godown-wise'
 import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles.$id'
 import { Route as ProtectedAdministrationLayoutUserLayoutRouteImport } from './routes/_protected/administration/_layout/user/_layout'
@@ -856,6 +857,12 @@ const ProtectedReportsStock_summaryLayoutNetStockRoute =
     id: '/net-stock',
     path: '/net-stock',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
+  } as any)
+const ProtectedReportsFreightLayoutFreightVoucherWiseRoute =
+  ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport.update({
+    id: '/freight-voucher-wise',
+    path: '/freight-voucher-wise',
+    getParentRoute: () => ProtectedReportsFreightLayoutRoute,
   } as any)
 const ProtectedReportsFreightLayoutFreightGodownWiseRoute =
   ProtectedReportsFreightLayoutFreightGodownWiseRouteImport.update({
@@ -1660,6 +1667,7 @@ export interface FileRoutesByFullPath {
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1840,6 +1848,7 @@ export interface FileRoutesByTo {
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -2009,6 +2018,7 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/_protected/reports/freight/_layout/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/_protected/reports/freight/_layout/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/_protected/reports/stock_summary/_layout/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/_protected/reports/stock_summary/_layout/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -2215,6 +2225,7 @@ export interface FileRouteTypes {
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/freight/freight-godown-wise'
+    | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2395,6 +2406,7 @@ export interface FileRouteTypes {
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/freight/freight-godown-wise'
+    | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2563,6 +2575,7 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/user/_layout'
     | '/_protected/masters/miscellaneous/delivery_vehicles/$id'
     | '/_protected/reports/freight/_layout/freight-godown-wise'
+    | '/_protected/reports/freight/_layout/freight-voucher-wise'
     | '/_protected/reports/stock_summary/_layout/net-stock'
     | '/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
     | '/_protected/reports/stock_summary/_layout/saleble-stock'
@@ -3404,6 +3417,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/stock_summary/net-stock'
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
+    }
+    '/_protected/reports/freight/_layout/freight-voucher-wise': {
+      id: '/_protected/reports/freight/_layout/freight-voucher-wise'
+      path: '/freight-voucher-wise'
+      fullPath: '/reports/freight/freight-voucher-wise'
+      preLoaderRoute: typeof ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport
+      parentRoute: typeof ProtectedReportsFreightLayoutRoute
     }
     '/_protected/reports/freight/_layout/freight-godown-wise': {
       id: '/_protected/reports/freight/_layout/freight-godown-wise'
@@ -5603,12 +5623,15 @@ const ProtectedReportsDay_bookRouteWithChildren =
 
 interface ProtectedReportsFreightLayoutRouteChildren {
   ProtectedReportsFreightLayoutFreightGodownWiseRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  ProtectedReportsFreightLayoutFreightVoucherWiseRoute: typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
 }
 
 const ProtectedReportsFreightLayoutRouteChildren: ProtectedReportsFreightLayoutRouteChildren =
   {
     ProtectedReportsFreightLayoutFreightGodownWiseRoute:
       ProtectedReportsFreightLayoutFreightGodownWiseRoute,
+    ProtectedReportsFreightLayoutFreightVoucherWiseRoute:
+      ProtectedReportsFreightLayoutFreightVoucherWiseRoute,
   }
 
 const ProtectedReportsFreightLayoutRouteWithChildren =

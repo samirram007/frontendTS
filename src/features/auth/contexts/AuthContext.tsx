@@ -13,8 +13,8 @@ export type LoginProps = {
 }
 
 export type PeriodType = {
-    startDate: string;
-    endDate: string;
+    startDate: Date | null;
+    endDate: Date | null;
 }
 export interface AuthContextType {
     user: UserWithRole | null;
@@ -54,8 +54,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 setUserFiscalYear(data?.data?.userFiscalYear || null);
 
                 setPeriod(data?.data?.userFiscalYear ? {
-                    startDate: data?.data?.userFiscalYear.startDate,
-                    endDate: data?.data?.userFiscalYear.endDate
+                    startDate: new Date(data?.data?.userFiscalYear.startDate),
+                    endDate: new Date(data?.data?.userFiscalYear.endDate)
                 } : null);
                 const perms: string[] = [];
                 // Extract permissions from roles

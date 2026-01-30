@@ -38,6 +38,7 @@ declare module '@tanstack/react-table' {
 interface DataTableProps {
   columns: ColumnDef<StockSummarySchema>[]
   data: StockSummarySchema[]
+  pagination?: boolean
 }
 
 export function GridTable({ columns, data }: DataTableProps) {
@@ -77,6 +78,13 @@ export function GridTable({ columns, data }: DataTableProps) {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
+  const totalAmount = table
+    .getFilteredRowModel()
+    .rows.reduce((sum, row) => {
+      return sum + Number(row.original.amount ?? 0)
+    }, 0)
+
+
   return (
     <div className='space-y-4'>
       {/* <DataTableToolbar table={table} /> */}
@@ -84,7 +92,7 @@ export function GridTable({ columns, data }: DataTableProps) {
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className='group/row grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '>
+              <TableRow key={headerGroup.id} className=' grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
@@ -110,7 +118,7 @@ export function GridTable({ columns, data }: DataTableProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='group/row grid  grid-cols-[repeat(7,_1fr)] '
+                  className='group/row grid  grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -138,7 +146,19 @@ export function GridTable({ columns, data }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="grid  grid-cols-[20px_100px_1fr_150px_150px_150px_80px] items-center px-2">
+        <div></div>
+        <div>Count: {table.getRowModel().rows.length}</div>
+        <div></div>
+        <div></div>
+        <div className='text-right font-bold'>Total:</div>
+        <div className="col-start-6 text-sm font-semibold text-right flex space-x-2 justify-end pr-4">
+          {totalAmount.toFixed(2)}
+        </div>
+        <div> </div>
+      </div>
+
+      {/* <DataTablePagination table={table} /> */}
     </div>
   )
 }
