@@ -28,12 +28,22 @@ const Pos = ({ currentRow }: PhysicalStockProps) => {
     // console.log("WATCH: ", mainForm.watch('stockJournal'))
     return (
         <>
-            <div className="voucher-entry w-full grid grid-rows-[1fr_120px] h-[calc(100dvh-170px)]">
+
+            <div className="voucher-entry w-full 
+            grid grid-rows-[1fr_120px] 
+         h-[calc(100dvh-170px)]  ">
                 <Form {...mainForm}>
                     <div className="max-h-full grid grid-rows-[150px_1fr] overflow-hidden">
+
+
                         <PosHeader mainForm={mainForm} />
+
                         <PosBody mainForm={mainForm} />
+
+
                     </div>
+
+
                     <PosFooter mainForm={mainForm} />
                 </Form>
             </div>

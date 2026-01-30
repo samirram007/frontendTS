@@ -115,7 +115,7 @@ const VoucherHeader = () => {
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
                     <PartyLedgerForm />
-                    <PurchaseLedgerForm />
+                    <PurchaseLedgerForm form={methods} />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">

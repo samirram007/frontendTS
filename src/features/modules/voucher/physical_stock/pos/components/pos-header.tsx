@@ -27,8 +27,8 @@ const PosHeader = ({ mainForm: form }: PosHeaderProps) => {
             <div className="grid grid-cols-[350px_1fr_100px]   border-0">
 
                 <div className="space-y-0">
-                    <div className="grid grid-cols-[125px_200px] gap-2 ">
-                        <div className="bg-green-600 text-gray-100 px-2 shadow-md  ">Physical Stock</div>
+                    <div className="grid grid-cols-[150px_200px] gap-2 ">
+                        <div className="bg-[#DCA06D] text-gray-800 px-2 shadow-md  ">Physical Stock</div>
                         <div>no:
                             <span className=" uppercase font-bold text-lg text-teal-800 underline underline-offset-2 decoration-1 pl-2 space-r-1">
                                 {form.getValues('voucherNo') ?? 'new'}
@@ -64,7 +64,7 @@ const PosHeader = ({ mainForm: form }: PosHeaderProps) => {
             <div className="grid grid-cols-2 gap-2 pb-2">
                 <div className="grid grid-rows-2 gap-2 items-center">
                     <PartyLedgerForm tabIndex={3} />
-                    <TransactionLedgerForm />
+                    <TransactionLedgerForm tabIndex={4} form={form} />
 
                 </div>
                 <div className="sm:hidden grid grid-cols-2 gap-2 items-center">

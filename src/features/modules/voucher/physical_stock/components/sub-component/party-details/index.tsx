@@ -32,7 +32,7 @@ const PartyDetails = () => {
 
     const handleOnClick = () => {
         form.setValue("party", partyForm.getValues())
-        toast.success("Party details updated")
+        toast.message("Party details updated")
         onOpenChange(false)
     }
 

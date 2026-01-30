@@ -25,34 +25,12 @@ import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import type { StockJournalEntryForm } from "../../../data-schema/voucher-schema"
 
 
-// const frameworks = [
-//     {
-//         value: "next.js",
-//         label: "Next.js",
-//     },
-//     {
-//         value: "sveltekit",
-//         label: "SvelteKit",
-//     },
-//     {
-//         value: "nuxt.js",
-//         label: "Nuxt.js",
-//     },
-//     {
-//         value: "remix",
-//         label: "Remix",
-//     },
-//     {
-//         value: "astro",
-//         label: "Astro",
-//     },
-// ]
 interface Props {
     stockItems: StockItem[]; 
     form: UseFormReturn<StockJournalEntryForm>;
 }
 export const StockItemCombobox = ({ stockItems, form }: Props) => {
-    //const form = useFormContext<ReceiptNoteForm>()
+
     const [open, setOpen] = React.useState(false)
     // const index = currentIndex
     const [value, setValue] = React.useState(form.getValues(`stockItemId`)?.toString())
@@ -94,8 +72,8 @@ export const StockItemCombobox = ({ stockItems, form }: Props) => {
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
-                    <CommandList>
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                    <CommandList className=" max-h-full">
+                        <CommandEmpty>No item found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (
                                 <CommandItem

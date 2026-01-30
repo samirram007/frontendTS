@@ -19,10 +19,12 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
     const [checking, setChecking] = useState(true);
     const [valid, setValid] = useState(false);  // for success animation
     const handleSaving = () => {
-        // console.log('Form submitted', mainForm.getValues());
+        //console.log('Form submitted', mainForm.getValues());
+
         createPhysicalStock(mainForm.getValues())
     }
 
+    const saveButtonRef = React.useRef<HTMLButtonElement>(null);
     useEffect(() => {
         let timer: any = null;
 
@@ -107,6 +109,11 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
         return () => clearTimeout(timer);
     }, [isPending, setSaving]);
 
+    useEffect(() => {
+        if (valid) {
+            saveButtonRef.current?.focus();
+        }
+    }, [valid]);
 
     return <div>
         <Dialog open={isSaving}
@@ -121,7 +128,9 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                     size="lg"
                     disabled={isSaving}><Loader className="animate-spin" /> Saving...</Button>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-5xl'>
+            <DialogContent className='sm:max-w-5xl'
+                // onEscapeKeyDown={(e) => e.preventDefault()}
+                onPointerDownOutside={(e) => e.preventDefault()}>
                 <DialogHeader className='text-left border-b-2 pb-2'>
                     <DialogTitle>Delivery Note </DialogTitle>
                     <DialogDescription>
@@ -153,11 +162,13 @@ const SaveDialog = ({ mainForm, isSaving, setSaving }: SaveDialogProps) => {
                 </div>
                 <DialogFooter>
                     <Button onClick={handleSaving}
+                        ref={saveButtonRef}
                         disabled={isPending || errors.length > 0 || checking || !valid}
-                        className="h-8 focus:bg-black focus:text-white"  >
+                        className={`h-8 ${valid ? "focus:bg-black focus:text-white" : ""}`}  >
                         Save changes
                     </Button>
                 </DialogFooter>
+
             </DialogContent>
         </Dialog >
 

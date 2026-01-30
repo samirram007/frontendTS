@@ -1,7 +1,7 @@
 import { getData, postData, putData } from "@/utils/dataClient"
 
 
-const API_PATH = "/vouchers"
+const API_PATH = "/physical_stocks"
 export async function fetchPhysicalStockService() {
     return await getData(API_PATH)
 }
@@ -15,6 +15,8 @@ export async function storePhysicalStockService(payload: any) {
     return await postData(API_PATH, payload)
 }
 export async function updatePhysicalStockService(payload: any) {
+    console.log("Delivery Note payload", payload)
+    // return
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 

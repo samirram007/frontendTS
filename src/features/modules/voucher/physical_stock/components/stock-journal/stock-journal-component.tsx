@@ -4,7 +4,7 @@ import { fetchGodownService } from "@/features/modules/godown/data/api"
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api"
 import { useQueries } from "@tanstack/react-query"
 import { useFieldArray, useFormContext } from "react-hook-form"
-import type { DeliveryNoteForm } from "../../data/schema"
+import type { PhysicalStockForm } from "../../data/schema"
 import { RHFSelect } from "./RHFSelect"
 import { ItemDialog } from "./item-dialog"
 
@@ -43,7 +43,7 @@ const stockUnits = [
 // ]
 const StockJournalEntries = () => {
 
-    const { control, register } = useFormContext<DeliveryNoteForm>()
+    const { control, register } = useFormContext<PhysicalStockForm>()
 
 
     const results = useQueries(

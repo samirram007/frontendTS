@@ -4,14 +4,14 @@ import { useQuery } from "@tanstack/react-query"
 
 import type { UseFormReturn } from "react-hook-form"
 import { fetchPartyLedgerService } from "../../../data-schema/partyLedger/data/api"
-import type { DeliveryNoteForm } from "../../data/schema"
+import type { PhysicalStockForm } from "../../data/schema"
 import { PartyLedgerCombobox } from "../sub-component/party/party-ledger-combo-box"
 
 
 
 
 type FormProps = {
-    form: UseFormReturn<DeliveryNoteForm>;
+    form: UseFormReturn<PhysicalStockForm>;
 };
 const PartyLedgerForm = (props: FormProps) => {
     const { form } = props as FormProps;

@@ -89,6 +89,6 @@ export function SmartDateBox<T extends FieldValues>({
 }
 
 
-export const DeliveryNoteForm = {
+export const PhysicalStockForm = {
     DateBox: SmartDateBox,
 };

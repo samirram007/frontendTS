@@ -9,6 +9,9 @@ import { fetchLedgerBalanceService } from "../../../data/api"
 import type { PhysicalStockForm } from "../../../data/schema"
 import PartyDetails from "../party-details"
 import { PartyLedgerCombobox } from "./party-ledger-combo-box"
+import { PrimaryButtons as CreateDistributorButton } from "@/features/modules/distributor/components/primary-buttons"
+import type { AccountLedger } from "@/features/modules/account_ledger/data/schema"
+
 
 
 
@@ -23,7 +26,7 @@ const PartyLedgerForm = (props: FormProps) => {
         queryKey: ["accountLedgers", "distributor_ledgers"],
         queryFn: () => fetchPartyLedgerService('distributor_ledgers'),
     })
-
+    const filteredPartyLedgers = partyLedgers?.data.filter((ledger: AccountLedger) => ledger.ledgerableType === 'distributor');
     if (isLoading) {
         return <div>Loading...</div>
     }
@@ -40,10 +43,10 @@ const PartyLedgerForm = (props: FormProps) => {
                             <FormLabel htmlFor="" className=' text-right'>
                                 Party's A/c Name
                             </FormLabel>
-                            <div className={cn(form.getValues('partyLedger.id') ? "w-8/12" : "w-10/12", "grid grid-cols-[auto_1fr_100px] gap-2 items-center  ")}>
+                            <div className={cn(form.getValues('partyLedger.id') ? "w-8/12" : "w-10/12", "grid grid-cols-[auto_1fr_auto_100px] gap-2 items-center  ")}>
                                 <div className="text-right" >:</div>
-                                <PartyLedgerCombobox partyLedgers={partyLedgers?.data} tabIndex={tabIndex} />
-
+                                <PartyLedgerCombobox partyLedgers={filteredPartyLedgers} tabIndex={tabIndex} />
+                                <CreateDistributorButton type="icon" isModal={true} />
                                 {
                                     form.getValues('partyLedger.id') &&
 
@@ -51,6 +54,7 @@ const PartyLedgerForm = (props: FormProps) => {
                                 }
 
                             </div>
+
                             <FormMessage className=' col-start-3' />
                         </div>
                         <div className="grid grid-cols-[160px_1fr] items-center justify-start ">

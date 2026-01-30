@@ -28,7 +28,6 @@ export const TypeOfSupplyEnum = z.enum([
 ]);
 export type TypeOfSupply = z.infer<typeof TypeOfSupplyEnum>;
 
-<<<<<<< HEAD
 export const BuildingTypeEnum = z.enum([
     "main_hospital_block",
     "opd_block",
@@ -48,7 +47,6 @@ export const BuildingTypeEnum = z.enum([
 ]);
 
 export type BuildingType = z.infer<typeof BuildingTypeEnum>;
-=======
 export const StorageUnitTypeEnum = z.enum([
     "FACILITY",
     "WAREHOUSE",
@@ -103,4 +101,3 @@ export const StorageUnitCategoryEnum = z.enum([
 ]);
 export type StorageUnitCategory = z.infer<typeof StorageUnitCategoryEnum>;
 
->>>>>>> fff46fa0b5afb5ee171703236191fc4cbda7df07

@@ -7,6 +7,10 @@ import { useEffect } from 'react';
 import Pos from './pos';
 import { PosProvider } from '../contexts/pos-context';
 import type { PhysicalStockProps } from './pos/contracts';
+import { PhysicalStockProvider } from './contexts/physical_stock-context';
+
+
+
 
 
 
@@ -19,9 +23,18 @@ const PhysicalStock = ({ currentRow }: PhysicalStockProps) => {
     return (
 
         <>
+
             <PosProvider>
-                <Pos currentRow={currentRow} />
+                <PhysicalStockProvider>
+
+                    <>
+
+                        <Pos currentRow={currentRow} />
+                    </>
+
+                </PhysicalStockProvider>
             </PosProvider>
+
 
         </>
     )

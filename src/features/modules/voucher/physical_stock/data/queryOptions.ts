@@ -12,7 +12,7 @@ export const physicalStockQueryOptions = (id?: number) => {
         queryKey: id ? [BASE_KEY, id] : [BASE_KEY],
         queryFn: () =>
             id ? fetchPhysicalStockByIdService(id) : fetchPhysicalStockService(),
-        staleTime: 1000 * 60 * 1, // 1 minute
+        staleTime: id ? 1000 : 1000 * 60 * 1, // 1 minute
         retry: 1,
     })
 }
@@ -20,7 +20,7 @@ export const physicalStockQueryOptions = (id?: number) => {
 export function usePhysicalStockMutation() {
     const queryClient = useQueryClient()
     const navigate = useNavigate()
-    const Key = "DayBooks"
+    const Key = "PhysicalStocks"
     return useMutation({
         mutationFn: async (data: PhysicalStockForm & { id?: number }) => {
             if (data.id) {
@@ -32,6 +32,8 @@ export function usePhysicalStockMutation() {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: [Key] })
+            queryClient.invalidateQueries({ queryKey: [BASE_KEY] })
+            queryClient.invalidateQueries({ queryKey: ['DayBooks'] })
             queryClient.invalidateQueries({ queryKey: ["godownItemStocks"] })
             queryClient.invalidateQueries({ queryKey: ["batches"] })
             queryClient.invalidateQueries({ queryKey: ["stockItems"] })

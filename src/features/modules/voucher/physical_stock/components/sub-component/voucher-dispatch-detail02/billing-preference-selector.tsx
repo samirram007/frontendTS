@@ -25,28 +25,42 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import type { UseFormReturn } from "react-hook-form"
 
 
-import type { TransactionLedger } from "../../../../data-schema/transactinableStockItem/data/schema"
-import type { PhysicalStockForm } from "../../../data/schema"
+
+import { Label } from "@/components/ui/label"
+import { billingPreferenceSchema, type VoucherDispatchDetailForm } from "@/features/modules/voucher/data-schema/voucher-schema"
+
 
 interface Props {
-    form: UseFormReturn<PhysicalStockForm>;
-    transactionLedgers: TransactionLedger[];
+    form: UseFormReturn<VoucherDispatchDetailForm>;
+    name: keyof VoucherDispatchDetailForm;
+    gapClass?: string;
+    label?: string;
 }
-export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) => {
+export const BillingPreferenceSelector = ({ form, name, gapClass, label }: Props) => {
     const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState(form.getValues('transactionLedger.id')?.toString())
+    const [value, setValue] = React.useState(form.getValues(name)?.toString())
+
+
+
 
     const handleSelect = (value: string) => {
-        form.setValue("transactionLedger.id", transactionLedgers.find((transactionLedger) => transactionLedger.id === Number(value))?.id!)
-        setValue(value)
-        setOpen(false)
-        // focusNext();
-    }
+        if (!value) {
+            setOpen(true);
+            return;
+        }
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+
+        // Atomic update
+        form.setValue(name, value);
+
+        setValue(value);
+        setOpen(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
         lastKeyRef.current = e.key;
-    }
+    };
     const handleBlur = (e: React.FocusEvent<HTMLButtonElement>) => {
         // ✅ Only Tab-triggered blur
         if (lastKeyRef.current !== 'Tab') return;
@@ -61,16 +75,19 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
 
         // ✅ Focus moved into Sheet → ignore
         if (next.closest('[data-slot="sheet-content"]')) return;
+
+        // ✅ Only now open
         setOpen(true);
     }
-    const frameworks = transactionLedgers?.map((transactionLedger: TransactionLedger) => ({
-        label: capitalizeAllWords(transactionLedger.name!),
-        value: String(transactionLedger.id),
-    }))
+    const frameworks = billingPreferenceSchema.options.map((item: string) => ({ label: item, value: item }))
 
 
 
-    return (
+    return (<div className={gapClass}>
+        <Label
+            htmlFor=""
+            className="  text-sm font-medium text-gray-700 mb-1"
+        >{label ?? "Billing Preference"}</Label>
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
                 <Button
@@ -82,29 +99,29 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                     onKeyDown={handleKeyDown}
                 >
                     {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select stock ledger..."}
+                        ? frameworks.find((framework: { value: string }) => framework.value === value)?.label
+                        : `Select ${label ?? "billing preference"}...`}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </SheetTrigger>
             <SheetContent className="sheet-content-width-same-as-trigger p-0">
                 <SheetHeader>
-                    <SheetTitle>Search Stock Ledger</SheetTitle>
+                    <SheetTitle>Search {capitalizeAllWords(name)}  </SheetTitle>
                     <SheetDescription>
-                        Select the stock ledger for this receipt note.
+                        Select the {capitalizeAllWords(name)}  for this Freight.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
 
-                    <CommandInput placeholder="Search purchase ledger..." />
+                    <CommandInput placeholder={`Search ${label ?? "preference"}...`} />
                     <CommandList className=" max-h-full">
-                        <CommandEmpty>No pary found.</CommandEmpty>
+                        <CommandEmpty>No preference found.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {frameworks.map((framework: { label: string; value: string }) => (
                                 <CommandItem
                                     className="min-w-full"
                                     key={framework.value}
-                                    value={framework.label.toLowerCase()}
+                                    value={framework.value.toLowerCase()}
                                     onSelect={() => handleSelect(framework.value)}
                                 >
                                     <CheckIcon
@@ -113,7 +130,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                                             value === framework.value ? "opacity-100" : "opacity-0"
                                         )}
                                     />
-                                    {framework.label} [{framework.value}]
+                                    {framework.label}
                                 </CommandItem>
                             ))}
                         </CommandGroup>
@@ -121,5 +138,7 @@ export const TransactionLedgerCombobox = ({ form, transactionLedgers }: Props) =
                 </Command>
             </SheetContent>
         </Sheet>
+    </div>
+
     )
 }

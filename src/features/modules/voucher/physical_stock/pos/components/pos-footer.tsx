@@ -111,7 +111,10 @@ const PosFooter = ({ mainForm }: PosFooterProps) => {
                     type="button" asChild  > 
                         </Button>*/}
                 <NarrationBox type="textarea"
-                    form={mainForm} gapClass={''} className="text-gray-200 " name="remarks" />
+                    form={mainForm}
+                    isSaving={isSaving}
+                    setSaving={setSaving}
+                    gapClass={''} className="text-gray-200 " name="remarks" />
 
 
 

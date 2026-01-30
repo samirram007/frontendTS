@@ -15,7 +15,7 @@ import type { PhysicalStockForm } from "../../../data/schema"
 import type { VoucherDispatchDetailForm } from "@/features/modules/voucher/data-schema/voucher-schema"
 
 
-const VoucherDispatchDetail = () => {
+const VoucherDispatchDetail01 = () => {
     const dispatchRef = useRef<HTMLDivElement>(null);
     const form = useFormContext<PhysicalStockForm>();
     useFocusArea(dispatchRef as React.RefObject<HTMLElement>);
@@ -32,7 +32,7 @@ const VoucherDispatchDetail = () => {
 
     const handleOnClick = () => {
         form.setValue("voucherDispatchDetail", voucherDisplayDispatchForm.getValues())
-        toast.success("Dispatch details updated")
+        toast.message("Dispatch details updated")
         onOpenChange(false)
     }
 
@@ -51,7 +51,7 @@ const VoucherDispatchDetail = () => {
                     onOpenChange(state)
                 }} >
                 <DialogTrigger asChild>
-                    <Button variant="outline" size={'sm'} className="py-1! px-2! focus:bg-black focus:text-white">
+                    <Button variant="outline" size={'sm'} className="w-[150px] py-1! px-2! focus:bg-black focus:text-white">
                         Dispatch Details</Button>
                 </DialogTrigger>
                 <DialogContent className='sm:max-w-[64rem]'>
@@ -129,7 +129,7 @@ const VoucherDispatchDetail = () => {
     )
 }
 
-export default VoucherDispatchDetail
+export default VoucherDispatchDetail01
 
 
 

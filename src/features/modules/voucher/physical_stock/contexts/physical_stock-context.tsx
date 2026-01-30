@@ -1,40 +1,40 @@
-import { createContext, useContext, type KeyboardEvent } from "react"
-import type { UseFormReturn } from "react-hook-form"
-import type { PhysicalStockForm } from "../data/schema"
+import React, { createContext } from "react"
 
-type PhysicalStockContextType = UseFormReturn<PhysicalStockForm> & {
-    handleEnterAsTab: (e: KeyboardEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
+
+type PhysicalStockContextType = {
+
+    config: { key: string, value: boolean }[]
 }
+
 
 const PhysicalStockContext = createContext<PhysicalStockContextType | null>(null)
 
-export const PhysicalStockProvider = ({ children }: {
-    children: React.ReactNode
-} & UseFormReturn<PhysicalStockForm>) => {
-    // const handleEnterAsTab = (e: KeyboardEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    //     if (e.key === "Enter") {
-    //         e.preventDefault() // prevent form submit
+export const PhysicalStockProvider = ({ children }: { children: React.ReactNode }) => {
 
-    //         const form = e.currentTarget.form
-    //         if (!form) return
 
-    //         const focusable = Array.from(
-    //             form.querySelectorAll<HTMLElement>(
-    //                 'input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled])'
-    //             )
-    //         ).filter((el) => el.tabIndex >= 0)
-
-    //         const index = focusable.indexOf(e.currentTarget)
-    //         if (index >= 0 && index < focusable.length - 1) {
-    //             focusable[index + 1].focus()
-    //         }
-    //     }
-    // }
+    const config = [
+        { key: 'order_details', value: false },
+        { key: 'receipt_details', value: true },
+        { key: 'freight_details', value: true },
+        { key: 'freight_method', value: 2 },
+    ]
+    const value = {
+        config
+    } as PhysicalStockContextType
 
 
 
-    return <PhysicalStockContext.Provider value={null}>{children}</PhysicalStockContext.Provider>
+    return <PhysicalStockContext.Provider value={value}>
+        {children}
+    </PhysicalStockContext.Provider>
 }
 
-export const usePhysicalStockForm = () => useContext(PhysicalStockContext)
+export const usePhysicalStock = () => {
+    const physicalStockContext = React.useContext(PhysicalStockContext)
 
+    if (!physicalStockContext) {
+        throw new Error('usePhysicalStock has to be used within <PhysicalStockContext>')
+    }
+
+    return physicalStockContext
+}

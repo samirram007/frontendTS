@@ -56,11 +56,8 @@
     "date-fns": "^4.1.0",
     "exceljs": "^4.4.0",
     "express": "^5.1.0",
-<<<<<<< HEAD
     "framer-motion": "^12.25.0",
-=======
     "file-saver": "^2.0.5",
->>>>>>> fff46fa0b5afb5ee171703236191fc4cbda7df07
     "fs": "^0.0.1-security",
     "js-cookie": "^3.0.5",
     "jspdf": "^4.0.0",

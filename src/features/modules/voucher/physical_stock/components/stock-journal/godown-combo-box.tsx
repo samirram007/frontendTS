@@ -22,7 +22,7 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
 import type { Godown } from "@/features/modules/godown/data/schema"
-import type { DeliveryNoteForm } from "../../data/schema"
+import type { PhysicalStockForm } from "../../data/schema"
 
 // const frameworks = [
 //     {
@@ -50,7 +50,7 @@ interface Props {
     godowns: Godown[];
 }
 export const GodownCombobox = ({ godowns }: Props) => {
-    const form = useFormContext<DeliveryNoteForm>()
+    const form = useFormContext<PhysicalStockForm>()
     const [open, setOpen] = React.useState(false)
     // const index = form.getValues('stockJournal.stockJournalEntries').length
     // const [value, setValue] = React.useState('')
@@ -92,7 +92,7 @@ export const GodownCombobox = ({ godowns }: Props) => {
             <PopoverContent className="popover-content-width-same-as-trigger p-0">
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
-                    <CommandList>
+                    <CommandList className=" max-h-full">
                         <CommandEmpty>No godown found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (

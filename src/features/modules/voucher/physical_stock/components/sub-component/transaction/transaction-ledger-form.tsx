@@ -3,21 +3,22 @@ import { FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/for
 import { useQuery } from "@tanstack/react-query"
 
 import { cn } from "@/lib/utils"
-import { useFormContext } from "react-hook-form"
+import { useFormContext, type UseFormReturn } from "react-hook-form"
 import { fetchLedgerBalanceService, fetchStockInHandLedgersService } from "../../../data/api"
 import type { PhysicalStockForm } from "../../../data/schema"
-import VoucherDispatchDetail from "../voucher-dispatch-detail"
 import { TransactionLedgerCombobox } from './transaction-ledger-combo-box'
+import VoucherDispatchDetail02 from "../voucher-dispatch-detail02"
 
 
+interface TransactionLedgerFormProps {
+    form: UseFormReturn<PhysicalStockForm>
+    tabIndex?: number
+}
 
-// type FormProps = {
 
-//     tabIndex?: number;
-// };
-const TransactionLedgerForm = () => {
-    // const { tabIndex } = props as FormProps;
-    const form = useFormContext<PhysicalStockForm>()
+const TransactionLedgerForm = (props: TransactionLedgerFormProps) => {
+    const { form } = props;
+    // const form = useFormContext<PhysicalStockForm>()
     const { data: transactionLedgers, isLoading } = useQuery({
         queryKey: ["accountLedgers", "stock_in_hand"],
         queryFn: () => fetchStockInHandLedgersService(),
@@ -46,7 +47,7 @@ const TransactionLedgerForm = () => {
                                 {
                                     form.getValues('transactionLedger.id') &&
 
-                                    <VoucherDispatchDetail />
+                                    <VoucherDispatchDetail02 form={form} />
                                 }
                             </div>
                             <FormMessage className=' col-start-3' />
