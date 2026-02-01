@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
-import { fetchFreightService, storeFreightService, storeVoucherDispatchDetailService, updateFreightService, updateVoucherDispatchDetailService } from "./api"
+import { fetchFreightReportService, fetchFreightService, storeFreightService, storeVoucherDispatchDetailService, updateFreightService, updateVoucherDispatchDetailService } from "./api"
 import type { FreightForm } from "./schema"
 import type { VoucherDispatchDetailForm } from "../../stock_journal/data/schema"
 const queryKey = "Freight"
@@ -8,6 +8,15 @@ export const freightQueryOptions = (key: string = 'freight') => {
     return queryOptions({
         queryKey: [queryKey],
         queryFn: () => fetchFreightService(key),
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        retry: 1,
+    })
+}
+export const freightReportQueryOptions = (key: string = 'freight_report') => {
+
+    return queryOptions({
+        queryKey: ['FreightReport', key],
+        queryFn: () => fetchFreightReportService(key),
         staleTime: 1000 * 60 * 5, // 5 minutes
         retry: 1,
     })

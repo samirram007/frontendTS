@@ -8,6 +8,10 @@ async function fetchFreightService(type: string) {
 
     return await getData(`${API_PATH}/${type}`);
 }
+async function fetchFreightReportService(type: string) {
+
+    return await getData(`${API_PATH}/${type}`);
+}
 
 async function storeFreightService(data: any) {
     // Placeholder for actual implementation
@@ -37,4 +41,4 @@ async function updateVoucherDispatchDetailService(data: any) {
     return await putData(`/voucher_dispatch_details/${data.id}`, data);
 }
 
-export { fetchFreightService, storeFreightService, updateFreightService, storeVoucherDispatchDetailService, updateVoucherDispatchDetailService };
+export { fetchFreightService, fetchFreightReportService, storeFreightService, updateFreightService, storeVoucherDispatchDetailService, updateVoucherDispatchDetailService };

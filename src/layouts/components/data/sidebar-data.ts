@@ -29,7 +29,9 @@ import {
 import { AudioWaveform, Building2, Command, GalleryVerticalEnd, HandCoinsIcon, LandmarkIcon, NotebookTabsIcon, Users, WarehouseIcon } from 'lucide-react'
 import { type SidebarData } from '../types'
 
-const APP_NAME = import.meta.env.VITE_APP_NAME || 'Shadcn Admin'
+
+
+const APP_NAME = import.meta.env.VITE_APP_NAME || 'AIPT Admin'
 const APP_SUBTITLE = import.meta.env.VITE_APP_SUBTITLE || 'Admin Dashboard'
 export const sidebarData: SidebarData = {
   user: {
@@ -423,7 +425,7 @@ export const sidebarData: SidebarData = {
           visible: true,
           icon: IconUserCog,
         },
-      ],
+      ]
     },
 
     {

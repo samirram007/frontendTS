@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { deliveryNoteSchema } from '../../delivery_note/data/schema';
 import { companySchema } from '@/features/modules/company/data/schema';
 import { accountLedgerSchema } from '@/features/modules/account_ledger/data/schema';
+import { voucherSchema } from '../../data-schema/voucher-schema';
 
 export const freightSchema = deliveryNoteSchema.extend({
   // Add any additional fields specific to Freight if necessary
@@ -10,6 +11,8 @@ export const freightSchema = deliveryNoteSchema.extend({
     id: z.number().int().positive().nullish(),
     voucherId: z.number().int().positive().nullish(),
     refVoucherId: z.number().int().positive().nullish(),
+    voucher: z.lazy(() => voucherSchema.nullish()),
+    referenceVoucher: z.lazy(() => voucherSchema.nullish()),
   })),
   company: companySchema.nullish(),
 });

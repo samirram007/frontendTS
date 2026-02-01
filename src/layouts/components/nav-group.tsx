@@ -29,11 +29,22 @@ import {
 import { Link, useLocation } from '@tanstack/react-router'
 import type { ReactNode } from 'react'
 import { type NavCollapsible, type NavGroup, type NavItem, type NavLink } from './types'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
+import { FEATURES } from '../../data/features';
 
 export function NavGroup({ title, items }: NavGroup) {
   const { state } = useSidebar()
   const location = useLocation()
+  const { permissions } = useAuth()
+
   const href = location.pathname
+
+  if (title === 'Administration' && !permissions.includes(FEATURES.ADMINISTRATION_MENU_VIEW)) {
+    return null
+  }
+  if (title === 'Transactions' && !permissions.includes(FEATURES.TRANSACTION_MENU_VIEW)) {
+    return null
+  }
 
   return (
     <SidebarGroup>

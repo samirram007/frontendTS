@@ -24,6 +24,7 @@ import EmployeeGroupDropdown from './dropdown/employee_group-dropdown'
 import GradeDropdown from './dropdown/grade-dropdown'
 import ShiftDropdown from './dropdown/shift-dropdown'
 import AddressForm from './sub-component/address-form'
+import { toast } from 'sonner'
 
 interface Props {
     currentRow?: Employee
@@ -85,14 +86,18 @@ export function FormAction({ currentRow }: Props) {
     const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
     const moduleName = "Employee"
     const onSubmit = (values: EmployeeForm) => {
-        console.log("here: ", values)
-        form.reset()
+        // console.log("here: ", values)
+
         saveEmployee(
             currentRow ? { ...values, id: currentRow.id! } : values,
             {
                 onSuccess: () => {
                     navigate({ to: EmployeeRoute.to, })
+                    form.reset()
                 },
+                onError: (error) => {
+                    toast.error(error.message)
+                }
             }
         )
 
