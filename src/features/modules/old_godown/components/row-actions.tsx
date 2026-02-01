@@ -1,18 +1,18 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
 import type { Row } from "@tanstack/react-table"
-import { useGodown } from "../contexts/godown-context"
-import type { Godown } from "../data/schema"
+import { useStorageUnit } from "../contexts/storage-unit-context"
+import type { StorageUnit } from "../data/schema"
 
 
 interface DataTableRowActionsProps {
-    row: Row<Godown>
+    row: Row<StorageUnit>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const { setOpen, setCurrentRow } = useGodown()
+    const { setOpen, setCurrentRow } = useStorageUnit()
     const { row } = props
     return (
-        <DataTableRowActions<Godown>
+        <DataTableRowActions<StorageUnit>
             row={row}
             onEdit={(data) => {
                 setCurrentRow(data)

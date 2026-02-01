@@ -10,23 +10,22 @@ import { lowerCase } from '../../../utils/removeEmptyStrings'
 import { Dialogs } from './components/dialogs'
 import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
-import GodownProvider from './contexts/godown-context'
-import { godownListSchema, type GodownList } from './data/schema'
-
-
-// Import the correct type for godownListSchema
+import { storageUnitListSchema, type StorageUnitList } from './data/schema'
+import StorageUnitProvider from './contexts/storage-unit-context'
 
 
 
-interface GodownProps {
-  data: GodownList
+
+
+interface StorageUnitProps {
+  data: StorageUnitList
 }
 
-export default function Godown({ data }: GodownProps) {
-  const moduleName = "Godown"
+export default function StorageUnit({ data }: StorageUnitProps) {
+  const moduleName = "StorageUnit"
 
   return (
-    <GodownProvider>
+    <StorageUnitProvider>
 
       <Main className='min-w-full'>
         <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
@@ -40,12 +39,12 @@ export default function Godown({ data }: GodownProps) {
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
           <GridTable
-            data={godownListSchema.parse(data ?? [])}
+            data={storageUnitListSchema.parse(data ?? [])}
             columns={columns} />
         </div>
       </Main>
 
       <Dialogs />
-    </GodownProvider>
+    </StorageUnitProvider>
   )
 }

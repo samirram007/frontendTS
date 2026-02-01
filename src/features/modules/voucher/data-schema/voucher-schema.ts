@@ -1,9 +1,9 @@
-import { godownSchema } from '@/features/modules/godown/data/schema';
 import { stockItemSchema } from '@/features/modules/stock_item/data/schema';
 import { stockUnitSchema } from '@/features/modules/stock_unit/data/schema';
 import { z } from 'zod';
 import { stateSchema } from '../../state/data/schema';
 import { countrySchema } from '../../country/data/schema';
+import { storageunitSchema } from '../../storage_unit/data/schema';
 
 
 export const stockJournalGodownEntrySchema = z.object({
@@ -22,12 +22,36 @@ export const stockJournalGodownEntrySchema = z.object({
     amount: z.coerce.number().nullish(),
     movementType: z.string().min(1).nullish(),
     remarks: z.string().min(1).nullish(),
-    godown: z.lazy(() => godownSchema.nullish()),
+    godown: z.lazy(() => storageunitSchema.nullish()),
     stockItem: z.lazy(() => stockItemSchema.nullish()),
     stockUnit: z.lazy(() => stockUnitSchema.nullish()),
     rateUnit: z.lazy(() => stockUnitSchema.nullish()),
 })
 export type StockJournalGodownEntryForm = z.infer<typeof stockJournalGodownEntrySchema>
+
+export const stockJournalStorageUnitEntrySchema = z.object({
+    id: z.number().int().positive().nullish(),
+    stockJournalEntryId: z.number().int().positive().nullish(),
+    storageUnitId: z.number().int().positive().nullish(),
+    batchNo: z.string().nullish(),
+    mfgDate: z.coerce.date().nullish(),
+    expiryDate: z.coerce.date().nullish(),
+    serialNo: z.string().nullish(),
+    actualQuantity: z.coerce.number().nonnegative(),
+    billingQuantity: z.coerce.number().nonnegative(),
+    rate: z.coerce.number().nonnegative().nullish(),
+    discountPercentage: z.coerce.number().nonnegative().nullish(),
+    discount: z.coerce.number().nonnegative().nullish(),
+    amount: z.coerce.number().nullish(),
+    movementType: z.string().min(1).nullish(),
+    remarks: z.string().min(1).nullish(),
+    storageUnit: z.lazy(() => storageunitSchema.nullish()),
+    stockItem: z.lazy(() => stockItemSchema.nullish()),
+    stockUnit: z.lazy(() => stockUnitSchema.nullish()),
+    rateUnit: z.lazy(() => stockUnitSchema.nullish()),
+})
+export type StockJournalStorageUnitEntryForm = z.infer<typeof stockJournalStorageUnitEntrySchema>
+
 export const stockJournalEntrySchema = z.object({
     id: z.number().int().positive().nullish(),
     stockJournalId: z.number().int().positive().nullish(),
@@ -121,7 +145,7 @@ export const voucherDispatchDetailSchema = z.object({
     motorVehicleNo: z.string().nullish(),
     distance: z.coerce.number().nullish(),
     distanceUnitId: z.number().int().positive().nullish(),
-    rate: z.coerce.number().nullish(), 
+    rate: z.coerce.number().nullish(),
     rateUnitId: z.number().int().positive().nullish(),
     quantity: z.coerce.number().nullish(),
     weight: z.coerce.number().nullish(),

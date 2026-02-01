@@ -1,7 +1,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { fetchGodownService } from "@/features/modules/godown/data/api";
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api";
 import { fetchStockUnitService } from "@/features/modules/stock_unit/data/api";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
@@ -25,6 +24,7 @@ import StockJournalGodowns from "../stock-journal-godown";
 import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../data-schema/voucher-schema";
 import { usePos } from "../../contexts/pos-context";
 import { lowerCase } from "lodash";
+import { fetchStorageUnitService } from "@/features/modules/storage_unit/data/api";
 type StockJournalEntryProps = {
     index: number;
     remove: (index: number) => void;
@@ -51,7 +51,7 @@ export const StockJournalEntry = (props: StockJournalEntryProps) => {
     const [stockItems, godowns, stockUnits,] = useQueries({
         queries: [
             { queryKey: ["stockItems"], queryFn: fetchStockItemService },
-            { queryKey: ["godowns"], queryFn: fetchGodownService },
+            { queryKey: ["storageUnits"], queryFn: fetchStorageUnitService },
             { queryKey: ["stockUnits"], queryFn: fetchStockUnitService },
         ],
     });

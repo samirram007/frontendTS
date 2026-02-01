@@ -1,10 +1,10 @@
-import { useGodown } from '../contexts/godown-context'
+import { useStorageUnit } from '../../storage_unit/contexts/storage_unit-context'
 import { ActionDialog } from './action-dialog'
 import { DeleteDialog } from './delete-dialog'
 
 
 export function Dialogs() {
-  const { open, setOpen, currentRow, setCurrentRow, keyName } = useGodown()
+  const { open, setOpen, currentRow, setCurrentRow, keyName } = useStorageUnit()
   return (
     <>
       <ActionDialog

@@ -124,23 +124,23 @@ const HospitalSchema = z.array(
 
 export default HospitalSchema;
 
-const amenityCategorySchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    code: z.string(),
-    description: z.string(),
-    status: z.string()
-});
+// const amenityCategorySchema = z.object({
+//     id: z.string(),
+//     name: z.string(),
+//     code: z.string(),
+//     description: z.string(),
+//     status: z.string()
+// });
 
 
-const amenitySchema = z.object({
-    id: z.string(),
-    name: z.string(),
-    code: z.string(),
-    status: z.string(),
-    amenityCategoryId: z.string(),
-    amenityCategory: amenityCategorySchema.nullable()
-});
+// const amenitySchema = z.object({
+//     id: z.string(),
+//     name: z.string(),
+//     code: z.string(),
+//     status: z.string(),
+//     amenityCategoryId: z.string(),
+//     amenityCategory: amenityCategorySchema.nullable()
+// });
 
 
 const facilitySchema = z.object({

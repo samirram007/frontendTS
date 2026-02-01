@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { fetchGodownService } from "@/features/modules/godown/data/api";
 import { fetchStockItemService } from "@/features/modules/stock_item/data/api";
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import { fetchStockUnitService } from "@/features/modules/stock_unit/data/api";
@@ -20,8 +19,9 @@ import { useQueries } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Form, useForm, type Resolver } from "react-hook-form";
 
-import { GodownCombobox } from "./godown-combo-box";
+import { StorageUnitCombobox } from "./storage_unit-combo-box";
 import { stockJournalEntrySchema, type StockJournalEntryForm } from "../../../data-schema/voucher-schema";
+import { fetchStorageUnitService } from "@/features/modules/storage_unit/data/api";
 
 export function ItemDialog() {
 
@@ -32,8 +32,8 @@ export function ItemDialog() {
                 queryFn: fetchStockItemService,
             },
             {
-                queryKey: ["godowns"],
-                queryFn: fetchGodownService,
+                queryKey: ["storageUnits"],
+                queryFn: fetchStorageUnitService,
             },
             {
                 queryKey: ["stockUnits"],
@@ -43,7 +43,7 @@ export function ItemDialog() {
     })
     const [stockItem] = useState<StockItem>()
     const [stockItemUnits, setStockItemUnits] = useState<StockUnit[]>([])
-    const [stockItems, godowns,] = results
+    const [stockItems, storageUnits,] = results
 
 
     const form = useForm<StockJournalEntryForm>({
@@ -107,7 +107,7 @@ export function ItemDialog() {
                     >
 
 
-                <DialogHeader>
+                        <DialogHeader>
                             <DialogTitle>
                                 <div className="grid grid-cols-3  justify-center items-center gap-2">
                                     <div></div>
@@ -129,24 +129,24 @@ export function ItemDialog() {
                             </DialogTitle>
 
 
-                </DialogHeader>
+                        </DialogHeader>
                         <div>
 
                             <div className="bg-amber-100 grid grid-cols-6 gap-6 justify-center items-start">
-                                <GodownCombobox godowns={godowns?.data?.data} />
+                                <StorageUnitCombobox storageUnits={storageUnits?.data?.data} />
                                 <Input name={'batchNo'} placeholder={'BatchNo'} />
                                 <Input name={'quantity'} placeholder={'Quantity'} />
 
                                 {/* <StockUnitCombobox stockUnits={stockUnits?.data?.data} form={form} /> */}
                                 <Input name="rate" placeholder="Rate" />
                             </div>
-                </div>
-                <DialogFooter>
-                    <DialogClose asChild>
-                        <Button variant="outline">Cancel</Button>
-                    </DialogClose>
-                    <Button type="submit">Save changes</Button>
-                </DialogFooter>
+                        </div>
+                        <DialogFooter>
+                            <DialogClose asChild>
+                                <Button variant="outline">Cancel</Button>
+                            </DialogClose>
+                            <Button type="submit">Save changes</Button>
+                        </DialogFooter>
                     </form>
                 </Form>
             </DialogContent>

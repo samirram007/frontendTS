@@ -6,7 +6,6 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 
 
-import type { Company } from '@/features/modules/company/data/schema'
 
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
 import type { FacilityInterface } from '../data/schema'
@@ -73,7 +72,7 @@ export const columns: ColumnDef<FacilityInterface>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title='Company Type' />
         ),
-        cell: ({ row }) => {
+        cell: ({ }) => {
 
             return (
                 <div className='flex space-x-2'>

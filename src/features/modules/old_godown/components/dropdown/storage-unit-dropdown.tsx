@@ -6,22 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import type { UseFormReturn } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
-import { fetchGodownService } from "../../data/api";
-import type { Godown, GodownForm } from "../../data/schema";
+import { fetchStorageUnitService } from "../../data/api";
+import type { StorageUnit, StorageUnitForm } from "../../data/schema";
 
 
 
 
 type Props = {
-    form: UseFormReturn<GodownForm>;
+    form: UseFormReturn<StorageUnitForm>;
     gapClass?: string;
     rtl?: boolean;
 };
-const GodownDropdown = (props: Props) => {
+const StorageUnitDropdown = (props: Props) => {
     const { form, gapClass, rtl } = props as Props;
-    const { data: GodownList, isLoading } = useQuery({
-        queryKey: ["Godowns"],
-        queryFn: fetchGodownService,
+    const { data: StorageUnitList, isLoading } = useQuery({
+        queryKey: ["StorageUnits"],
+        queryFn: fetchStorageUnitService,
     });
 
 
@@ -51,11 +51,11 @@ const GodownDropdown = (props: Props) => {
                         <SelectDropdown
                             defaultValue={field.value ? field.value.toString() : ''}
                             onValueChange={(value) => handleValueChange(value)}
-                            placeholder='Select a godown'
+                            placeholder='Select a Storage unit'
                             className='w-11/12 '
-                            items={GodownList?.data.map((godown: Godown) => ({
-                                label: capitalizeAllWords(godown.name),
-                                value: String(godown.id),
+                            items={StorageUnitList?.data.map((storageUnit: StorageUnit) => ({
+                                label: capitalizeAllWords(storageUnit.name),
+                                value: String(storageUnit.id),
                             }))}
                         />
                         <FormMessage className='col-span-4 col-start-3' />
@@ -67,4 +67,4 @@ const GodownDropdown = (props: Props) => {
     )
 }
 
-export default GodownDropdown
+export default StorageUnitDropdown

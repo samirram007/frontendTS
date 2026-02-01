@@ -8,8 +8,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
-import type { Shift } from '../data/schema'
-import RowActions from './row-actions'
+import type { Shift } from '../data/schema';
 
 export const columns: ColumnDef<Shift>[] = [
   {
@@ -93,8 +92,8 @@ export const columns: ColumnDef<Shift>[] = [
     enableSorting: false,
   },
 
-  {
-    id: 'actions',
-    cell: RowActions,
-  },
+  // {
+  //   id: 'actions',
+  //   cell: RowActions,
+  // },
 ]

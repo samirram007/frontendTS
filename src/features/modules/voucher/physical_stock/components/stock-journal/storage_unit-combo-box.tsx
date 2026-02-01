@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils"
 import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { useFormContext } from "react-hook-form"
 
-import type { Godown } from "@/features/modules/godown/data/schema"
 import type { PhysicalStockForm } from "../../data/schema"
+import type { StorageUnit } from "@/features/modules/storage_unit/data/schema"
 
 // const frameworks = [
 //     {
@@ -47,29 +47,23 @@ import type { PhysicalStockForm } from "../../data/schema"
 //     },
 // ]
 interface Props {
-    godowns: Godown[];
+    storageUnits: StorageUnit[];
 }
-export const GodownCombobox = ({ godowns }: Props) => {
+export const StorageUnitCombobox = ({ storageUnits }: Props) => {
     const form = useFormContext<PhysicalStockForm>()
     const [open, setOpen] = React.useState(false)
     // const index = form.getValues('stockJournal.stockJournalEntries').length
     // const [value, setValue] = React.useState('')
     const value = ''
     const handleSelect = (value: string) => {
-        // const selected = godowns.find((i) => i.id === Number(value));
         const index = form.getValues('stockJournal.stockJournalEntries')?.length
-        // ✅ Safely update nested field value by index
         console.log(form.getValues('stockJournal'), index, "index")
-        // form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true } 
-        //     // optional but recommended
-        // );
         console.log(value)
-        // setValue(value);
         setOpen(false);
     };
-    const frameworks = godowns?.map((godown: Godown) => ({
-        label: capitalizeAllWords(godown.name!),
-        value: String(godown.id),
+    const frameworks = storageUnits?.map((storageUnit: StorageUnit) => ({
+        label: capitalizeAllWords(storageUnit.name!),
+        value: String(storageUnit.id),
     }))
 
 
@@ -85,7 +79,7 @@ export const GodownCombobox = ({ godowns }: Props) => {
                 >
                     {value
                         ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Select godown..."}
+                        : "Select Storage Unit..."}
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -93,7 +87,7 @@ export const GodownCombobox = ({ godowns }: Props) => {
                 <Command className="rounded-lg border shadow-md min-w-full">
                     <CommandInput placeholder="Search item..." />
                     <CommandList className=" max-h-full">
-                        <CommandEmpty>No godown found.</CommandEmpty>
+                        <CommandEmpty>No Storage Unit found.</CommandEmpty>
                         <CommandGroup>
                             {frameworks.map((framework) => (
                                 <CommandItem

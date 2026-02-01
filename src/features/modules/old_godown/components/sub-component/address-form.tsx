@@ -2,7 +2,7 @@
 import type { UseFormReturn } from "react-hook-form";
 
 import FormInputField from "@/components/form-input-field";
-import type { GodownForm } from "../../data/schema";
+import type { StorageUnitForm } from "../../data/schema";
 import CountryDropdown from "../dropdown/country-dropdown";
 import StateDropdown from "../dropdown/state-dropdown";
 
@@ -10,7 +10,7 @@ import StateDropdown from "../dropdown/state-dropdown";
 
 
 type FormProps = {
-    form: UseFormReturn<GodownForm>;
+    form: UseFormReturn<StorageUnitForm>;
 };
 const AddressForm = (props: FormProps) => {
     const { form } = props as FormProps;

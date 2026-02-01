@@ -1,5 +1,4 @@
 import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
-import { useNavigate } from "@tanstack/react-router"
 import type { Row } from "@tanstack/react-table"
 
 import type { FacilityInterface } from "../data/schema"
@@ -10,7 +9,6 @@ interface DataTableRowActionsProps {
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const navigate = useNavigate()
     const { setOpen, currentRow, setCurrentRow } = useFacility()
     const { row } = props
     return (

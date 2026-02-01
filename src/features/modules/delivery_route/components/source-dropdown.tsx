@@ -7,8 +7,8 @@ import type { UseFormReturn } from "react-hook-form";
 
 import type { DeliveryRouteForm } from "../data/schema";
 import { capitalizeWords } from '../../../../utils/removeEmptyStrings';
-import { fetchGodownService } from "../../godown/data/api";
-import type { Godown } from "../../godown/data/schema";
+import { fetchStorageUnitService } from "../../storage_unit/data/api";
+import type { StorageUnit } from "../../storage_unit/data/schema";
 
 
 
@@ -20,9 +20,9 @@ type Props = {
 };
 const SourcePlaceDropdown = (props: Props) => {
     const { form, name } = props as Props;
-    const { data: godownList, isLoading } = useQuery({
-        queryKey: ["godowns"],
-        queryFn: fetchGodownService,
+    const { data: storageUnitList, isLoading } = useQuery({
+        queryKey: ["storageUnits"],
+        queryFn: fetchStorageUnitService,
     });
 
     // const placeId = form.watch(name) as string | number | undefined; // Watch  
@@ -50,9 +50,9 @@ const SourcePlaceDropdown = (props: Props) => {
                                 onValueChange={(value) => handleValueChange(value)}
                                 placeholder={`Select a ${capitalizeWords(name === 'sourcePlaceId' ? 'Source Place' : 'Destination Place')}`}
                                 className='w-full col-span-6 md:col-span-4'
-                                items={godownList?.data?.map((godown: Godown) => ({
-                                    label: capitalizeAllWords(godown.name),
-                                    value: String(godown.id),
+                                items={storageUnitList?.data?.map((storageUnit: StorageUnit) => ({
+                                    label: capitalizeAllWords(storageUnit.name),
+                                    value: String(storageUnit.id),
                                 }))}
                             />
 

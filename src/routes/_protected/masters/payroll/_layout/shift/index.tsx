@@ -1,7 +1,7 @@
 
+
 import Shift from '@/features/modules/shift';
 import { shiftQueryOptions } from '@/features/modules/shift/data/queryOptions';
-
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Loader } from 'lucide-react';

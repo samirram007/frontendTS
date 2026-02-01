@@ -1,4 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
 import { formSchema, type Bed, type BedForm } from "../data/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { storeBedService, udpateBedService } from "../data/api";

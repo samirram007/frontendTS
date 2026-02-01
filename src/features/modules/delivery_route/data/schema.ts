@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { deliveryPlaceSchema } from '../../delivery_place/data/schema';
 import { stockUnitSchema } from '../../stock_unit/data/schema';
 import { transporterSchema } from '../../transporter/data/schema';
-import { godownSchema } from '../../godown/data/schema';
+import { storageunitSchema } from '../../storage_unit/data/schema';
 
 
 
@@ -17,7 +17,7 @@ export const deliveryRouteSchema = z.object({
   distanceKm: z.coerce.number().min(0).optional(),
   estimatedTimeInMinutes: z.coerce.number().min(0).optional(),
   rate: z.coerce.number().min(0).optional(),
-  sourcePlace: godownSchema.nullish(),
+  sourcePlace: storageunitSchema.nullish(),
   destinationPlace: deliveryPlaceSchema.nullish(),
   rateUnitId: z.number().int().positive().optional(),
   transporter: transporterSchema.nullish(),

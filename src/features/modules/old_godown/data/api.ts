@@ -1,13 +1,13 @@
 import { getData, postData, putData } from "@/utils/dataClient"
 
 
-const API_PATH = "/godowns"
-export async function fetchGodownService() {
+const API_PATH = "/storage_units"
+export async function fetchStorageUnitService() {
     return await getData(API_PATH)
 }
-export async function storeGodownService(payload: any) {
+export async function storeStorageUnitService(payload: any) {
     return await postData(API_PATH, payload)
 }
-export async function updateGodownService(payload: any) {
+export async function updateStorageUnitService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }

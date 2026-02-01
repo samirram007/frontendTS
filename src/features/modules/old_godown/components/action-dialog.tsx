@@ -22,22 +22,22 @@ import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Loader2 } from 'lucide-react'
-import { useGodownMutation } from '../data/queryOptions'
-import { formSchema, type Godown, type GodownForm } from '../data/schema'
-import GodownDropdown from './dropdown/godown-dropdown'
+import { useStorageUnitMutation } from '../data/queryOptions'
+import { formSchema, type StorageUnit, type StorageUnitForm } from '../data/schema'
 import AddressForm from './sub-component/address-form'
+import StorageUnitDropdown from './dropdown/storage-unit-dropdown'
 
 
 interface Props {
-  currentRow?: Godown
+  currentRow?: StorageUnit
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
 export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
-  const { mutate: saveGodown, isPending } = useGodownMutation()
+  const { mutate: saveStorageUnit, isPending } = useStorageUnitMutation()
   const isEdit = !!currentRow
-  const form = useForm<GodownForm>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
@@ -47,23 +47,36 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         name: '',
         code: '',
         description: '',
-        parentId: 1,
-        address: undefined,
         status: 'active',
+        storageUnitType: undefined,
+        storageUnitCategory: undefined,
+        address: undefined,
+
         ourStockWithThirdParty: false,
         thirdPartyStockWithUs: false,
+
+        isVirtual: false,
+        isMobile: false,
+
+        capacityValue: 0,
+        capacityUnitId: 0,
+
+        temperatureMin: 0,
+        temperatureMax: 0,
+
+        parentId: 1,
         isEdit,
       },
   })
 
   const gapClass = 'grid grid-cols-[120px_1fr] gap-4'
 
-  const moduleName = "Godown"
-  const onSubmit = (values: GodownForm) => {
+  const moduleName = "StorageUnit"
+  const onSubmit = (values: StorageUnitForm) => {
     console.log(values)
     form.reset()
     showSubmittedData(values)
-    saveGodown(
+    saveStorageUnit(
       currentRow ? { ...values, id: currentRow.id } : values
     )
     onOpenChange(false)
@@ -100,13 +113,13 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
                   <h6 className=" font-semibold text-md  ">GENERAL</h6>
                   <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
                   <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
-                  <GodownDropdown form={form} gapClass={gapClass} />
+                  <StorageUnitDropdown form={form} gapClass={gapClass} />
 
                   <FormInputField type='textarea' gapClass={gapClass} form={form} name='description' label='Description (optional)' />
-              <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
-                { label: 'Active', value: 'active' },
-                { label: 'Inactive', value: 'inactive' },
-              ]} />
+                  <FormInputField type='checkbox' form={form} name='status' label='Status' options={[
+                    { label: 'Active', value: 'active' },
+                    { label: 'Inactive', value: 'inactive' },
+                  ]} />
                 </div>
                 <div className='space-y-4'>
                   <AddressForm form={form} />

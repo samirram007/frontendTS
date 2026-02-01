@@ -3,7 +3,6 @@ import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useFocusArea } from "@/core/hooks/useFocusArea";
-import type { Godown } from "@/features/modules/godown/data/schema";
 import type { StockItem } from "@/features/modules/stock_item/data/schema";
 import type { StockUnit } from "@/features/modules/stock_unit/data/schema";
 import { useTransaction } from "@/features/transactions/context/transaction-context";
@@ -15,19 +14,20 @@ import { MdKeyboardReturn } from "react-icons/md";
 import { TbRowRemove } from "react-icons/tb";
 
 
-import { GodownCombobox } from "../dropdown/godown-combo-box";
+import { GodownCombobox } from "../dropdown/storage_unit-combo-box";
 import { stockJournalGodownEntrySchema, type StockJournalEntryForm, type StockJournalGodownEntryForm } from "../../data-schema/voucher-schema";
 import BatchSelection from "./batch-selection";
 import { usePos } from "../../contexts/pos-context";
 import { lowerCase } from "lodash";
 import { stockJournalGodownEntryDefaultValues } from "../../data-schema/data";
+import type { StorageUnit } from "@/features/modules/storage_unit/data/schema";
 
 
 type StockJournalGodownEntryFormProps = {
     index: number;
     remove: (index: number) => void;
     stockItem: StockItem;
-    godowns: Godown[];
+    storageUnits: StorageUnit[];
     stockUnits: StockUnit[];
     handleGodownEntryAdd: () => void;
     handleOnClickItemAddEntry: () => void

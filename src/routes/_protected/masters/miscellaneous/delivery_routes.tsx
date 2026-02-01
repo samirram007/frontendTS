@@ -1,7 +1,7 @@
 import { deliveryPlaceQueryOptions } from '@/features/modules/delivery_place/data/queryOptions'
 import DeliveryRoute from '@/features/modules/delivery_route'
 import { deliveryRouteQueryOptions } from '@/features/modules/delivery_route/data/queryOptions'
-import { godownQueryOptions } from '@/features/modules/godown/data/queryOptions'
+import { storageUnitQueryOptions } from '@/features/modules/storage_unit/data/queryOptions'
 import { transporterQueryOptions } from '@/features/modules/transporter/data/queryOptions'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
@@ -15,7 +15,7 @@ export const Route = createFileRoute(
     const client = context.queryClient;
     await Promise.all([
       client.ensureQueryData(transporterQueryOptions()),
-      client.ensureQueryData(godownQueryOptions()),
+      client.ensureQueryData(storageUnitQueryOptions()),
       client.ensureQueryData(deliveryRouteQueryOptions()),
       client.ensureQueryData(deliveryPlaceQueryOptions()),
     ]);

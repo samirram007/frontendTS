@@ -7,10 +7,10 @@ import type { UseFormReturn } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { fetchStateService } from "../../../state/data/api";
 import type { State } from "../../../state/data/schema";
-import type { GodownForm } from "../../data/schema";
+import type { StorageUnitForm } from "../../data/schema";
 
 type Props = {
-    form: UseFormReturn<GodownForm>;
+    form: UseFormReturn<StorageUnitForm>;
     gapClass?: string;
     rtl?: boolean;
 }

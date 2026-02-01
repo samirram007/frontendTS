@@ -17,26 +17,26 @@ import { capitalizeAllWords } from "@/utils/removeEmptyStrings"
 import { type UseFormReturn } from "react-hook-form"
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import type { Godown } from "@/features/modules/godown/data/schema"
 import type { StockItem } from "@/features/modules/stock_item/data/schema"
 import { getData } from "@/utils/dataClient"
 import { useQuery } from "@tanstack/react-query"
 import { FaSignOutAlt } from "react-icons/fa"
-import type { StockJournalGodownEntryForm } from "../../data-schema/voucher-schema"
+import type { StockJournalStorageUnitEntryForm } from "../../data-schema/voucher-schema"
+import type { StorageUnit } from "@/features/modules/storage_unit/data/schema"
 
 
 
-interface GodownComboboxProps {
-    stockJournalGodownEntryForm: UseFormReturn<StockJournalGodownEntryForm>;
+interface StorageUnitComboboxProps {
+    stockJournalStorageUnitEntryForm: UseFormReturn<StockJournalStorageUnitEntryForm>;
     stockItem: StockItem | null;
 
     handleRemove?: () => void;
-    godowns: Godown[];
+    storageUnits: StorageUnit[];
 }
-export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, godowns, handleRemove }: GodownComboboxProps) => {
+export const StorageUnitCombobox = ({ stockJournalStorageUnitEntryForm: form, stockItem, storageUnits, handleRemove }: StorageUnitComboboxProps) => {
     const lastKeyRef = React.useRef<string | null>(null);
     const [open, setOpen] = React.useState(false)
-    const selectedId = form.watch('godownId')?.toString()
+    const selectedId = form.watch('storageUnitId')?.toString()
     // const stockItem = form.watch('stockItem')
     const { data: godownItemStocks } = useQuery({
         queryKey: ['godownItemStocks', stockItem?.id],
@@ -64,7 +64,7 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
             handleRemove?.();
 
         } else {
-            const selected = godowns.find((i) => i.id === Number(value));
+            const selected = storageUnits.find((i) => i.id === Number(value));
             form.setValue(`godownId`, Number(value))
             form.setValue(`godown`, selected ?? null, { shouldValidate: true, shouldDirty: true }
             );
@@ -119,12 +119,12 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
             stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
             className: "flex flex-row justify-end text-right min-w-full   active:bg-red-200 data-[selected=true]:bg-red-200 [selected=true]:text-gray-200  "
         },
-        ...(godowns?.map((godown: Godown) => {
-            const stock = stockMap[godown.id] ?? 0; // fallback to zero
+        ...(storageUnits?.map((storageUnit: StorageUnit) => {
+            const stock = stockMap[storageUnit.id!] ?? 0; // fallback to zero
 
             return {
-                label: capitalizeAllWords(godown.name!),
-                value: String(godown.id),
+                label: capitalizeAllWords(storageUnit.name!),
+                value: String(storageUnit.id),
                 stockInHand: stock,
                 stockUnitLabel: stockItem?.stockUnit?.code || stockItem?.stockUnit?.name || '',
                 className: "min-w-full hover:bg-blue-300"
@@ -134,7 +134,7 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
 
     const selected = frameworks.find((o) => o.value === selectedId)
     // console.log("SELECTED GODOWN: ", selectedId, selected)
-    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select godown') : 'Select godown'
+    const selectedLabel = selected ? (selected?.label?.toString() ?? 'Select storage unit') : 'Select storage unit'
 
 
     return (
@@ -155,15 +155,15 @@ export const GodownCombobox = ({ stockJournalGodownEntryForm: form, stockItem, g
             </SheetTrigger>
             <SheetContent className="min-w-[450px]! p-0">
                 <SheetHeader>
-                    <SheetTitle>Search Godown</SheetTitle>
+                    <SheetTitle>Search Storage Unit</SheetTitle>
                     <SheetDescription>
-                        Select the godown for this receipt note.
+                        Select the storage unit for this receipt note.
                     </SheetDescription>
                 </SheetHeader>
                 <Command className="rounded-lg border shadow-md min-w-full">
-                    <CommandInput placeholder="Search godown..." />
+                    <CommandInput placeholder="Search storage unit..." />
                     <CommandList className=" max-h-full">
-                        <CommandEmpty>No godown found.</CommandEmpty>
+                        <CommandEmpty>No Storage Unit found.</CommandEmpty>
                         <CommandGroup>
 
                             {frameworks.map((framework) => (

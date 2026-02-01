@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
 // import FacilityOverview from "./components/facility-overview";
-import { Hospital } from "lucide-react";
 import type { FacilityList } from "./data/schema";
 import { Main } from "@/layouts/components/main";
-import { PrimaryButtons } from "../app_module_feature/components/primary-buttons";
 import { GridTable } from "./components/grid-table";
 import { columns } from "./components/columns";
 

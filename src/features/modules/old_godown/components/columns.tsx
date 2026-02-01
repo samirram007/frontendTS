@@ -8,10 +8,10 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
 import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
-import type { Godown } from '../data/schema'
+import type { StorageUnit } from '../data/schema'
 import RowActions from './row-actions'
 
-export const columns: ColumnDef<Godown>[] = [
+export const columns: ColumnDef<StorageUnit>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -78,7 +78,7 @@ export const columns: ColumnDef<Godown>[] = [
       const { parentId, parent } = row.original
       const badgeColor = 'success'
       if (!parentId) {
-        return <div className='text-muted-foreground'>Main Godown</div>
+        return <div className='text-muted-foreground'>Main Storage Unit</div>
       }
       return (
         <div className='flex space-x-2'>

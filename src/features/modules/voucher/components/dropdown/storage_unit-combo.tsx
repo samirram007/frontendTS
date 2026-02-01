@@ -27,14 +27,15 @@ import { getData } from "@/utils/dataClient"
 import { useQuery } from "@tanstack/react-query"
 import { FaSignOutAlt } from "react-icons/fa"
 import type { StockJournalGodownEntryForm } from "../../data-schema/voucher-schema"
+import type { StorageUnit } from "@/features/modules/storage_unit/data/schema"
 
 
 
-interface GodownComboboxProps {
+interface StorageUnitComboboxProps {
     handleRemove?: () => void;
-    godowns: Godown[];
+    godowns: StorageUnit[];
 }
-export const GodownCombobox = ({ godowns, handleRemove }: GodownComboboxProps) => {
+export const GodownCombobox = ({ godowns, handleRemove }: StorageUnitComboboxProps) => {
     const form = useFormContext<StockJournalGodownEntryForm>()
     const focusNext = useFocusNext();
     const [open, setOpen] = React.useState(false)
