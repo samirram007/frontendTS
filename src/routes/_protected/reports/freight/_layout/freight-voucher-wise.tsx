@@ -1,4 +1,4 @@
-import { freightQueryOptions } from '@/features/modules/voucher/freight/data/queryOptions'
+import { freightReportQueryOptions } from '@/features/modules/voucher/freight/data/queryOptions'
 import FreightVoucherWise from '@/features/modules/voucher/freight/voucher-wise'
 
 import { useSuspenseQuery } from '@tanstack/react-query'
@@ -9,9 +9,9 @@ export const Route = createFileRoute(
     '/_protected/reports/freight/_layout/freight-voucher-wise',
 )({
     loader: ({ context }) =>
-        context.queryClient.ensureQueryData(freightQueryOptions('voucher_wise')),
+        context.queryClient.ensureQueryData(freightReportQueryOptions('voucher_wise')),
     component: () => {
-        const { data: freightVoucherWise } = useSuspenseQuery(freightQueryOptions('voucher_wise'))
+        const { data: freightVoucherWise } = useSuspenseQuery(freightReportQueryOptions('voucher_wise'))
         return <FreightVoucherWise data={freightVoucherWise?.data} />
     },
     errorComponent: () => <div>Error loading freight voucher wise data.</div>,

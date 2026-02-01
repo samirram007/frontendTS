@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Dialog } from "@radix-ui/react-dialog"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import type { FreightSchema } from "../../data/schema";
 import { date_format } from '../../../../../../utils/removeEmptyStrings';
 //import type { boolean } from "zod";
@@ -19,6 +19,12 @@ type Props = {
 const PrintFreightDialog = (props: Props) => {
     const printRef = useRef<HTMLDivElement>(null);
     const { open, onOpenChange, freightData } = props;
+
+    const dispatchDetail = useMemo(() => {
+        return freightData?.voucherReferences
+            ?.find((vr) => vr.referenceVoucher?.voucherTypeId === 2001)
+            ?.referenceVoucher?.voucherDispatchDetail;
+    }, [freightData]);
 
     const handleOnClick = () => {
         // onOpenChange(false);
@@ -37,6 +43,7 @@ const PrintFreightDialog = (props: Props) => {
 
 
     }
+    console.log("freightData in print dialog:", freightData);
     return (
         <Dialog open={open}
             onOpenChange={(state) => { onOpenChange(state) }} >
@@ -44,7 +51,7 @@ const PrintFreightDialog = (props: Props) => {
 
                 <div className=' ' title='Print Freight'  ></div>
             </DialogTrigger>
-            <DialogContent className='sm:max-w-[64rem]'>
+            <DialogContent className='sm:max-w-5xl'>
                 <DialogHeader className='text-left border-b-2 pb-2'>
                     <VisuallyHidden>
                         <DialogTitle>Freight Receipt</DialogTitle>
@@ -55,8 +62,8 @@ const PrintFreightDialog = (props: Props) => {
                         </div>
                     </DialogDescription>
                 </DialogHeader>
-                <div ref={printRef} className='mx-auto max-h-[750px] w-[900px] 
-                h-full grid  grid-rows-[auto_1fr_150px]
+                <div ref={printRef} className='mx-auto max-h-[700px] w-[900px] 
+                h-full grid  grid-rows-[auto_1fr_150px]  
                  text-xl font-monospace  ' >
 
                     <div className="x-header">
@@ -86,14 +93,23 @@ const PrintFreightDialog = (props: Props) => {
 
                             <div className="grid grid-cols-[auto_1fr] items-start  gap-4">
 
+                                <div>Paid to :-</div>
+                                <div className="border-b-2 border-y-zinc-400 border-dotted text-xl">
+                                    <span className="px-4"></span>{dispatchDetail?.carrierName}</div>
+
+                            </div>
+                            {/* <div className="grid grid-cols-[auto_1fr] items-start  gap-4">
+
                                 <div>Received with thanks from</div>
                                 <div className="border-b-2 border-y-zinc-400 border-dotted text-xl">
                                     <span className="px-4"></span>{freightData?.partyLedger?.name}</div>
 
-                            </div>
+                            </div> */}
                             <div className="grid grid-cols-1 gap-4 border-dotted">
-
-                                <div className="italic space-y-8 underline decoration-2 decoration-dotted text-justify underline-offset-8">{freightData?.remarks}</div>
+                                <div className="italic line-clamp-4 leading-relaxed text-justify underline decoration-2 decoration-dotted underline-offset-8">
+                                    {`Being the payment towards Freight Charges For material shifting to party:-${freightData?.partyLedger?.name} Destination:- ${dispatchDetail?.destination}, through by vehicle:-${dispatchDetail?.motorVehicleNo} `}
+                                </div>
+                                {/* <div className="italic space-y-8 underline decoration-2 decoration-dotted text-justify underline-offset-8">{freightData?.remarks}</div> */}
                             </div>
                             <div>
 
@@ -110,7 +126,7 @@ const PrintFreightDialog = (props: Props) => {
                                     <div className="border-gray-900 border-r-2">Rs.</div>
                                     <div className="border-2 text-center">P.</div>
                                 </div>
-                                <div className="h-26 grid grid-cols-[1fr_60px]   border-gray-900 border-t-2   text-left">
+                                <div className="h-36 grid grid-cols-[1fr_60px]   border-gray-900 border-t-2   text-left">
                                     <div className="pl-2 border-gray-900  border-r-2"> {freightData?.amount?.toFixed(0)}</div>
                                     <div className="text-center">
                                         {((freightData?.amount ?? 0) % 1).toFixed(2).split('.')[1]}

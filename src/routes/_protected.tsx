@@ -1,5 +1,5 @@
 
-import { FEATURES } from '@/data/featrures';
+import { FEATURES } from '@/data/features';
 import ProtectedLayout from '@/layouts/ProtectedLayout';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 
