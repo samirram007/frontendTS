@@ -92,7 +92,7 @@ export function GridTable({ columns, data }: DataTableProps) {
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className=' grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '>
+              <TableRow key={headerGroup.id} className=' grid grid-cols-[20px_100px_1fr_150px_150px_150px_auto] '>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
@@ -118,7 +118,7 @@ export function GridTable({ columns, data }: DataTableProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='group/row grid  grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '
+                  className='group/row grid  grid-cols-[20px_100px_1fr_150px_150px_150px_auto] '
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell

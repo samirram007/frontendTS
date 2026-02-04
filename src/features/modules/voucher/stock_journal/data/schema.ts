@@ -77,6 +77,9 @@ export const voucherEntrySchema = z.object({
 })
 
 export type VoucherEntryForm = z.infer<typeof voucherEntrySchema>
+
+
+
 export const partySchema = z.object({
     id: z.number().int().positive().nullish(),
     name: z.string().min(1).nullish(),
