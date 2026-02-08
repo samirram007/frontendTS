@@ -1,12 +1,22 @@
+'use client'
+
 import { useTransaction } from '@/features/transactions/context/transaction-context'
+import { useEffect } from 'react'
+import Pos from './pos'
 
-const TransferVoucher = () => {
+import type { TransferVoucherProps } from './pos/contracts'
+import { PosProvider } from '../contexts/pos-context'
+
+const TransferVoucher = ({ currentRow }: TransferVoucherProps) => {
   const { setHeaderVisible } = useTransaction()
-  console.log(setHeaderVisible)
-
+  useEffect(() => {
+    setHeaderVisible?.(false)
+  }, [])
   return (
     <>
-      <h1>Transfer Voucher</h1>
+      <PosProvider>
+        <Pos currentRow={currentRow} />
+      </PosProvider>
     </>
   )
 }

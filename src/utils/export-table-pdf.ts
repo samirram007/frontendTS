@@ -7,14 +7,14 @@ interface ExportColumn<T> {
   accessor: keyof T
 }
 
-export function exportTableToPdf<T>({
+export default function exportTableToPdf<T>({
   title,
   columnData: columns,
   data,
   fileName = 'table.pdf',
 }: {
   title?: string
-  columnData: any[]
+  columnData: ExportColumn<T>[]
   data: any[]
   fileName?: string
 }) {

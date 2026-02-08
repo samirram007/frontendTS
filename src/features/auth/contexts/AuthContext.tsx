@@ -7,15 +7,20 @@ import {
   fetchUserProfileService,
   loginService,
   logoutService,
+  changePasswordService,
 } from '../services/apis'
 import type { UserWithRole } from '../data/schema'
 import type { Permission } from '@/features/modules/permission/data/schema'
 import type { Role } from '@/features/modules/role/data/schema'
+
 export type LoginProps = {
   email: string
   password: string
 }
 
+export type ChangePasswordProps = {
+  password: string
+}
 export interface AuthContextType {
   user: UserWithRole | null
   userFiscalYear: UserFiscalYear | null
@@ -25,6 +30,7 @@ export interface AuthContextType {
   logout: () => Promise<void>
   fetchProfile: () => Promise<void>
   permissions: string[]
+  changePassword: (props: ChangePasswordProps) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -89,6 +95,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setIsLoading(false)
     }
   }
+
+  // const changePassword =
   const login = React.useCallback(async ({ email, password }: LoginProps) => {
     console.log('Auth Called')
 
@@ -106,6 +114,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // axiosClient.get('/cookie-test').then(console.log);
     // await fetchProfile();
   }, [])
+
+  const changePassword = React.useCallback(
+    async ({ password }: ChangePasswordProps) => {
+      console.log('Auth Called')
+
+      setIsLoading(true)
+      const response = await changePasswordService({ password })
+      if (response?.status === 'success') {
+        await fetchProfile()
+      } else {
+        flushSync(() => {
+          setUser(null)
+          setUserFiscalYear(null)
+        })
+      }
+      setIsLoading(false)
+      // axiosClient.get('/cookie-test').then(console.log);
+      // await fetchProfile();
+    },
+    [],
+  )
 
   const logout = React.useCallback(async () => {
     console.log('Logging out...')
@@ -143,6 +172,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         logout,
         fetchProfile,
         permissions,
+        changePassword,
       }}
     >
       {children}

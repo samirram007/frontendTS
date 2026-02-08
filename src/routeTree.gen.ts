@@ -22,6 +22,7 @@ import { Route as guestOtpRouteImport } from './routes/(guest)/otp'
 import { Route as ProtectedSettingsRouteRouteImport } from './routes/_protected/settings/route'
 import { Route as ProtectedTasksIndexRouteImport } from './routes/_protected/tasks/index'
 import { Route as ProtectedSettingsIndexRouteImport } from './routes/_protected/settings/index'
+import { Route as ProtectedProfileIndexRouteImport } from './routes/_protected/profile/index'
 import { Route as ProtectedHelpCenterIndexRouteImport } from './routes/_protected/help-center/index'
 import { Route as ProtectedChatsIndexRouteImport } from './routes/_protected/chats/index'
 import { Route as ProtectedAppsIndexRouteImport } from './routes/_protected/apps/index'
@@ -483,6 +484,11 @@ const ProtectedSettingsIndexRoute = ProtectedSettingsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProtectedSettingsRouteRoute,
+} as any)
+const ProtectedProfileIndexRoute = ProtectedProfileIndexRouteImport.update({
+  id: '/profile/',
+  path: '/profile/',
+  getParentRoute: () => ProtectedRoute,
 } as any)
 const ProtectedHelpCenterIndexRoute =
   ProtectedHelpCenterIndexRouteImport.update({
@@ -1570,6 +1576,7 @@ export interface FileRoutesByFullPath {
   '/apps': typeof ProtectedAppsIndexRoute
   '/chats': typeof ProtectedChatsIndexRoute
   '/help-center': typeof ProtectedHelpCenterIndexRoute
+  '/profile': typeof ProtectedProfileIndexRoute
   '/settings/': typeof ProtectedSettingsIndexRoute
   '/tasks': typeof ProtectedTasksIndexRoute
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutRouteWithChildren
@@ -1745,6 +1752,7 @@ export interface FileRoutesByTo {
   '/apps': typeof ProtectedAppsIndexRoute
   '/chats': typeof ProtectedChatsIndexRoute
   '/help-center': typeof ProtectedHelpCenterIndexRoute
+  '/profile': typeof ProtectedProfileIndexRoute
   '/settings': typeof ProtectedSettingsIndexRoute
   '/tasks': typeof ProtectedTasksIndexRoute
   '/user-fiscal-year': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
@@ -1895,6 +1903,7 @@ export interface FileRoutesById {
   '/_protected/apps/': typeof ProtectedAppsIndexRoute
   '/_protected/chats/': typeof ProtectedChatsIndexRoute
   '/_protected/help-center/': typeof ProtectedHelpCenterIndexRoute
+  '/_protected/profile/': typeof ProtectedProfileIndexRoute
   '/_protected/settings/': typeof ProtectedSettingsIndexRoute
   '/_protected/tasks/': typeof ProtectedTasksIndexRoute
   '/_protected/(auth)/user-fiscal-year': typeof ProtectedauthUserFiscalYearRouteWithChildren
@@ -2108,6 +2117,7 @@ export interface FileRouteTypes {
     | '/apps'
     | '/chats'
     | '/help-center'
+    | '/profile'
     | '/settings/'
     | '/tasks'
     | '/user-fiscal-year'
@@ -2283,6 +2293,7 @@ export interface FileRouteTypes {
     | '/apps'
     | '/chats'
     | '/help-center'
+    | '/profile'
     | '/settings'
     | '/tasks'
     | '/user-fiscal-year'
@@ -2432,6 +2443,7 @@ export interface FileRouteTypes {
     | '/_protected/apps/'
     | '/_protected/chats/'
     | '/_protected/help-center/'
+    | '/_protected/profile/'
     | '/_protected/settings/'
     | '/_protected/tasks/'
     | '/_protected/(auth)/user-fiscal-year'
@@ -2861,6 +2873,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/'
       preLoaderRoute: typeof ProtectedSettingsIndexRouteImport
       parentRoute: typeof ProtectedSettingsRouteRoute
+    }
+    '/_protected/profile/': {
+      id: '/_protected/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProtectedProfileIndexRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/help-center/': {
       id: '/_protected/help-center/'
@@ -5508,6 +5527,7 @@ interface ProtectedRouteChildren {
   ProtectedAppsIndexRoute: typeof ProtectedAppsIndexRoute
   ProtectedChatsIndexRoute: typeof ProtectedChatsIndexRoute
   ProtectedHelpCenterIndexRoute: typeof ProtectedHelpCenterIndexRoute
+  ProtectedProfileIndexRoute: typeof ProtectedProfileIndexRoute
   ProtectedTasksIndexRoute: typeof ProtectedTasksIndexRoute
   ProtectedauthUserFiscalYearRoute: typeof ProtectedauthUserFiscalYearRouteWithChildren
   ProtectedMastersAccountsRoute: typeof ProtectedMastersAccountsRouteWithChildren
@@ -5536,6 +5556,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedAppsIndexRoute: ProtectedAppsIndexRoute,
   ProtectedChatsIndexRoute: ProtectedChatsIndexRoute,
   ProtectedHelpCenterIndexRoute: ProtectedHelpCenterIndexRoute,
+  ProtectedProfileIndexRoute: ProtectedProfileIndexRoute,
   ProtectedTasksIndexRoute: ProtectedTasksIndexRoute,
   ProtectedauthUserFiscalYearRoute:
     ProtectedauthUserFiscalYearRouteWithChildren,

@@ -10,7 +10,6 @@ import type { AccountNature } from '../../account_nature/data/schema'
 import { fetchAccountNatureService } from '../../account_nature/data/api'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
-import { useAccountGroup } from '../contexts/account_group-context'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>

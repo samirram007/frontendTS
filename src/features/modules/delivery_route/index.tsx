@@ -6,7 +6,6 @@ import { GridTable } from './components/grid-table'
 import { PrimaryButtons } from './components/primary-buttons'
 import DeliveryRouteProvider from './contexts/delivery_route-context'
 import { deliveryRouteListSchema, type DeliveryRouteList } from './data/schema'
-import { exportTableToPdf } from '@/utils/export-table-pdf'
 import { AppBreadcrumbs } from '@/features/global/components/AppBreadcrumb'
 
 // Import the correct type for deliveryRouteListSchema

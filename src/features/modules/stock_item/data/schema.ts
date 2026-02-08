@@ -1,14 +1,14 @@
-import { CostingMethodSchema } from '@/features/enums/costing_method';
-import { MarketValuationMethodSchema } from '@/features/enums/market_valuation_method';
-import { TypeOfSupplyEnum } from '@/features/enums/schema';
-import { z } from 'zod';
-import { currencySchema } from '../../currency/data/schema';
-import { stockCategorySchema } from '../../stock_category/data/schema';
-import { stockGroupSchema } from '../../stock_group/data/schema';
-import { stockUnitSchema } from '../../stock_unit/data/schema';
-
-
-
+import { CostingMethodSchema } from '@/features/enums/costing_method'
+import { MarketValuationMethodSchema } from '@/features/enums/market_valuation_method'
+import { TypeOfSupplyEnum } from '@/features/enums/schema'
+import { z } from 'zod'
+import { currencySchema } from '../../currency/data/schema'
+import { stockCategorySchema } from '../../stock_category/data/schema'
+import { stockGroupSchema } from '../../stock_group/data/schema'
+import { stockUnitSchema } from '../../stock_unit/data/schema'
+import { ActiveInactiveStatusSchema } from '@/types/active-inactive-status'
+import StockItem from '..'
+import { id } from 'date-fns/locale'
 
 export const stockItemSchema = z.object({
   id: z.number().int().positive().nullish(),
@@ -65,16 +65,12 @@ export const stockItemSchema = z.object({
 
   currency: currencySchema.nullish(),
   stockInHand: z.coerce.number().nullish(),
-
 })
 export type StockItem = z.infer<typeof stockItemSchema>
 export const stockItemListSchema = z.array(stockItemSchema)
 export type StockItemList = z.infer<typeof stockItemListSchema>
 
-
-
 export const formSchema = z.object({
-
   name: z.string().min(1, { message: 'Name is required.' }),
   code: z.string().min(1, { message: 'Role is required.' }),
   printName: z.string().min(1),
@@ -127,7 +123,49 @@ export const formSchema = z.object({
   stockInHand: z.coerce.number().nullish(),
 
   isEdit: z.boolean(),
+})
+export type StockItemForm = z.infer<typeof formSchema>
 
+export const bomDetailSchema = z.object({
+  id: z.number().int().positive().nullish(),
+  bomId: z.number().int().positive().nullish(),
+  stockItemId: z.number().int().positive().nullish(),
+  qty: z.coerce.number().positive().nullish(),
+  stockItem: StockItem,
+  rate: z.coerce.number().nonnegative().nullish(),
+  amount: z.coerce.number().nonnegative().nullish(),
+})
+export type BomDetail = z.infer<typeof bomDetailSchema>
+
+export const bomDetailFormSchema = z.object({
+  bomId: z.number().int().positive().nullish(),
+  stockItemId: z.number().int().positive().nullish(),
+  qty: z.coerce.number().positive().nullish(),
+  rate: z.coerce.number().nonnegative().nullish(),
+  amount: z.coerce.number().nonnegative().nullish(),
+})
+export type BomDetailForm = z.infer<typeof bomDetailFormSchema>
+
+export const bomDetailListSchema = z.array(bomDetailSchema)
+
+export const bomSchema = z.object({
+  id: z.number().int().positive().nullish(),
+  name: z.string().min(1),
+  stockItemId: z.number().int().positive().nullish(),
+  status: ActiveInactiveStatusSchema,
+  stockItem: StockItem,
+  bomDetails: z.array(bomDetailSchema).nullish(),
 })
 
-export type StockItemForm = z.infer<typeof formSchema>
+export type Bom = z.infer<typeof bomSchema>
+
+export const bomListSchema = z.array(bomSchema)
+
+export type BomList = z.infer<typeof bomListSchema>
+
+export const bomFormSchema = z.object({
+  name: z.string().min(1),
+  stockItemId: z.number().int().positive().nullish(),
+})
+
+export type BomForm = z.infer<typeof bomFormSchema>

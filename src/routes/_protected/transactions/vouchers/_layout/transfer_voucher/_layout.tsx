@@ -9,8 +9,6 @@ export const Route = createFileRoute(
 function RouteComponent() {
   return (
     <div>
-      Hello
-      "/_protected/transactions/vouchers/_layout/transfer_voucher/_layout"!
       <Outlet />
     </div>
   )

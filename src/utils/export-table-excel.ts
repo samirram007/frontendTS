@@ -10,11 +10,11 @@ export interface ExportColumn<T> {
 interface ExportToExcelProps<T> {
   title: string
   fileName: string
-  columnData: any[]
+  columnData: ExportColumn<T>[]
   data: any[]
 }
 
-export async function exportTableToExcel<T>({
+export default async function exportTableToExcel<T>({
   title,
   fileName,
   columnData: columns,

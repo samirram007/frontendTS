@@ -28,7 +28,7 @@ import {
 import { useState } from 'react'
 import { useDeliveryRoute } from '../contexts/delivery_route-context'
 import { DataTableToolbar } from './data-table-toolbar'
-import { de } from 'date-fns/locale'
+// import { de } from 'date-fns/locale'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
