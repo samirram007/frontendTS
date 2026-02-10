@@ -33,7 +33,7 @@ export default ReportingPeriod
 
 const Period = ({ setopen }: { setopen: (value: boolean) => void }) => {
     const { period } = useAuth();
-    console.log("Period in layout:", period);
+
     return (
         <Button variant={'outline'} onClick={() => setopen(true)} className="cursor-pointer underline"      >
 

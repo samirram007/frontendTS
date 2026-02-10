@@ -44,7 +44,7 @@ const ReportLayout = () => {
             }
             <div className='flex flex-1  flex-col space-y-2 overflow-hidden md:space-y-0 lg:flex-row lg:space-y-0 '>
 
-                <div className='flex w-full overflow-y-hidden  '>
+                <div className='flex w-full overflow-hidden  '>
                     <StockSummaryProvider>
                         <StockSummary />
                     </StockSummaryProvider>

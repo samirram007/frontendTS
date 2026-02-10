@@ -172,7 +172,7 @@ export const voucherSchema = z.object({
     stockJournal: z.lazy(() => stockJournalSchema.nullish()),
     voucherEntries: z.array(z.lazy(() => voucherEntrySchema)),
     party: partySchema.nullish(),
-    partyLedger: partyLedgerSchema.nullish(),
+    partyLedger: z.lazy(() => partyLedgerSchema.nullish()),
     transactionLedger: transactionLedgerSchema.nullish(),
     voucherDispatchDetail: voucherDispatchDetailSchema.nullish(),
     amount: z.coerce.number().nullish(),

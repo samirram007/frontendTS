@@ -1,5 +1,6 @@
 import {
   IconAccessPoint,
+  IconApps,
   IconBarrierBlock,
   IconBook,
 
@@ -18,6 +19,10 @@ import {
   IconNotification,
   IconPackages,
   IconPalette,
+  IconPaperBag,
+  IconPremiumRights,
+  IconProng,
+  IconRadar2,
   IconRoute2,
   IconServerOff,
   IconSettings,
@@ -36,8 +41,8 @@ const APP_SUBTITLE = import.meta.env.VITE_APP_SUBTITLE || 'Admin Dashboard'
 export const sidebarData: SidebarData = {
   user: {
     name: 'samir',
-    visible: true,
-    email: 'samir.dev@gmail.com',
+    visible: false,
+    email: 'admin@admin.com',
     avatar: '/avatars/shadcn.jpg',
   },
   header: {
@@ -405,25 +410,25 @@ export const sidebarData: SidebarData = {
           title: 'Roles',
           url: '/administration/role',
           visible: true,
-          icon: IconUserCog,
+          icon: IconRadar2,
         },
         {
           title: 'Roles & Permissions',
           url: '/administration/permission',
           visible: true,
-          icon: IconUserCog,
+          icon: IconPremiumRights,
         },
         {
           title: 'App Module  ',
           url: '/administration/app_module',
           visible: true,
-          icon: IconUserCog,
+          icon: IconApps,
         },
         {
           title: 'App Features  ',
           url: '/administration/app_module_feature',
           visible: true,
-          icon: IconUserCog,
+          icon: IconPaperBag,
         },
       ]
     },

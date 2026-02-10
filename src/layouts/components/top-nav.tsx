@@ -6,6 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { FEATURES } from '@/data/features'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
 import { cn } from '@/lib/utils'
 import { IconChevronDown, IconMenu } from '@tabler/icons-react'
 import { Link, useLocation } from '@tanstack/react-router'
@@ -26,6 +28,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
 
 export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) {
   const location = useLocation();
+  const { permissions } = useAuth()
   const [links, setLinks] = useState([...arrayLinks]);
   useEffect(() => {
 
@@ -36,6 +39,13 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
       }))
     );
   }, [location.pathname]);
+
+
+
+
+  // if (title === 'Transactions' && !permissions.includes(FEATURES.TRANSACTION_MENU_VIEW)) {
+  //   return null
+  // }
   return (
     <>
       <div className='lg:hidden'>
@@ -85,6 +95,10 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                 <div className='flex flex-row bg-accent/10 px-4 space-x-8'>
                   {
                     submenuItems?.filter(submenu => submenu.visible).map((submenu, index) =>
+                      (
+                        submenu.title === 'Freight Reports' && !permissions.includes(FEATURES.FREIGHT_REPORT_MENU_VIEW)) ? null : (
+
+
                       <DropdownMenuItem key={`${title}-${submenu.title}`} asChild>
 
                         <div className='flex flex-col justify-start items-start'>
@@ -110,12 +124,15 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                         </div>
 
                       </DropdownMenuItem>
+                        )
                     )
                   }
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>)
             : (
+              title === 'Freight' && !permissions.includes(FEATURES.FREIGHT_MENU_VIEW)) ? null : (
+
           <Link
             key={`${title}-${href}`}
             to={href}

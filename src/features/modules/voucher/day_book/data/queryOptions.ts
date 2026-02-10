@@ -6,7 +6,7 @@ export const dayBookQueryOptions = (key: string = Key) => {
     return queryOptions({
         queryKey: [key],
         queryFn: fetchDayBookService,
-        staleTime: 1000 * 60 * 5, // 5 minutes
+        staleTime: 1000 * 30, // 30 seconds
         retry: 1,
     })
 }

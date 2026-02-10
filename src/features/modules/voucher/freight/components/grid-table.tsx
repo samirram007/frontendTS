@@ -25,6 +25,7 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import type { StockSummarySchema } from '../../stock_summary/data/schema'
+import { cn } from '@/lib/utils'
 
 
 
@@ -83,16 +84,16 @@ export function GridTable({ columns, data }: DataTableProps) {
     .rows.reduce((sum, row) => {
       return sum + Number(row.original.amount ?? 0)
     }, 0)
-
+  const gridClass = 'grid grid-cols-[20px_100px_1fr_150px_150px_150px_300px]'
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-1'>
       {/* <DataTableToolbar table={table} /> */}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className=' grid grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '>
+              <TableRow key={headerGroup.id} className={cn(gridClass)}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
@@ -118,7 +119,7 @@ export function GridTable({ columns, data }: DataTableProps) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='group/row grid  grid-cols-[20px_100px_1fr_150px_150px_150px_80px] '
+                  className={cn('group/row', gridClass)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
@@ -146,13 +147,13 @@ export function GridTable({ columns, data }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <div className="grid  grid-cols-[20px_100px_1fr_150px_150px_150px_80px] items-center px-2">
+      <div className={cn('grid', gridClass, 'items-center px-2', ' bg-accent border-b-2 border-gray-200')}>
         <div></div>
         <div>Count: {table.getRowModel().rows.length}</div>
         <div></div>
         <div></div>
         <div className='text-right font-bold'>Total:</div>
-        <div className="col-start-6 text-sm font-semibold text-right flex space-x-2 justify-end pr-4">
+        <div className={cn("col-start-6 text-sm font-semibold text-right flex space-x-2 justify-end  ", 'pr-8 ')}>
           {totalAmount.toFixed(2)}
         </div>
         <div> </div>

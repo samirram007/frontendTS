@@ -32,14 +32,17 @@ export const Route = createFileRoute(
     },
     component: () => {
         const { id } = Route.useParams()
+
         if (id === "new") return <CompanyDetails />
 
         const { data: company } = useSuspenseQuery(companyQueryOptions(id))
+
+
         return <Suspense fallback={<Loader className="animate-spin" />}>
             <CompanyDetails data={company?.data} />
         </Suspense>
     },
-    errorComponent: () => <div> <span className='bg-red-400  '>By ID:</span> Error loading company data[]. </div>
+    errorComponent: () => <div> <span className='bg-red-400  '>By ID:</span> Error loading company data  . </div>
     ,
     pendingComponent: () => <Loader className="animate-spin" />,
 })

@@ -31,6 +31,7 @@ import { Route as ProtectedSettingsDisplayRouteImport } from './routes/_protecte
 import { Route as ProtectedSettingsAppearanceRouteImport } from './routes/_protected/settings/appearance'
 import { Route as ProtectedSettingsAccountRouteImport } from './routes/_protected/settings/account'
 import { Route as ProtectedAdministrationLayoutRouteImport } from './routes/_protected/administration/_layout'
+import { Route as ProtectedauthChangePasswordRouteImport } from './routes/_protected/(auth)/change-password'
 import { Route as ProtectedReportsProfit_lossIndexRouteImport } from './routes/_protected/reports/profit_loss/index'
 import { Route as ProtectedReportsBalance_sheetIndexRouteImport } from './routes/_protected/reports/balance_sheet/index'
 import { Route as ProtectedReportsStock_summaryLayoutRouteImport } from './routes/_protected/reports/stock_summary/_layout'
@@ -162,6 +163,7 @@ import { Route as ProtectedMastersAccountsLayoutAccount_ledgerLayoutIndexRouteIm
 import { Route as ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/account_group/_layout/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout'
 import { Route as ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout'
+import { Route as ProtectedTransactionsProviderFreightLayoutIdReceiptRouteImport } from './routes/_protected/transactions/_provider/freight/_layout/$id/receipt'
 import { Route as ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRouteImport } from './routes/_protected/reports/day_book/_layout/receipt_note/_layout/$id'
 import { Route as ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRouteImport } from './routes/_protected/reports/day_book/_layout/delivery_note/_layout/$id'
 import { Route as ProtectedMastersPayrollLayoutEmployeeLayoutIdRouteImport } from './routes/_protected/masters/payroll/_layout/employee/_layout/$id'
@@ -543,6 +545,12 @@ const ProtectedAdministrationLayoutRoute =
   ProtectedAdministrationLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedAdministrationRoute,
+  } as any)
+const ProtectedauthChangePasswordRoute =
+  ProtectedauthChangePasswordRouteImport.update({
+    id: '/(auth)/change-password',
+    path: '/change-password',
+    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedTransactionsProviderVouchersRoute =
   ProtectedTransactionsProviderVouchersRouteImport.update({
@@ -1475,6 +1483,12 @@ const ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRoute =
         ProtectedTransactionsProviderVouchersLayoutDelivery_noteRoute,
     } as any,
   )
+const ProtectedTransactionsProviderFreightLayoutIdReceiptRoute =
+  ProtectedTransactionsProviderFreightLayoutIdReceiptRouteImport.update({
+    id: '/$id/receipt',
+    path: '/$id/receipt',
+    getParentRoute: () => ProtectedTransactionsProviderFreightLayoutRoute,
+  } as any)
 const ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute =
   ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRouteImport.update({
     id: '/$id',
@@ -1637,6 +1651,7 @@ export interface FileRoutesByFullPath {
   '/sign-in-2': typeof guestSignIn2LazyRoute
   '/sign-up': typeof guestSignUpLazyRoute
   '/signin': typeof guestSigninLazyRoute
+  '/change-password': typeof ProtectedauthChangePasswordRoute
   '/administration': typeof ProtectedAdministrationLayoutRouteWithChildren
   '/settings/account': typeof ProtectedSettingsAccountRoute
   '/settings/appearance': typeof ProtectedSettingsAppearanceRoute
@@ -1758,6 +1773,7 @@ export interface FileRoutesByFullPath {
   '/masters/payroll/employee/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/reports/day_book/delivery_note/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/reports/day_book/receipt_note/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/transactions/freight/$id/receipt': typeof ProtectedTransactionsProviderFreightLayoutIdReceiptRoute
   '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteWithChildren
   '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/masters/accounts/account_group/': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
@@ -1818,6 +1834,7 @@ export interface FileRoutesByTo {
   '/sign-in-2': typeof guestSignIn2LazyRoute
   '/sign-up': typeof guestSignUpLazyRoute
   '/signin': typeof guestSigninLazyRoute
+  '/change-password': typeof ProtectedauthChangePasswordRoute
   '/administration': typeof ProtectedAdministrationLayoutRouteWithChildren
   '/settings/account': typeof ProtectedSettingsAccountRoute
   '/settings/appearance': typeof ProtectedSettingsAppearanceRoute
@@ -1932,6 +1949,7 @@ export interface FileRoutesByTo {
   '/masters/payroll/employee/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/reports/day_book/delivery_note/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/reports/day_book/receipt_note/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/transactions/freight/$id/receipt': typeof ProtectedTransactionsProviderFreightLayoutIdReceiptRoute
   '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRoute
   '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute
   '/transactions/vouchers/contra': typeof ProtectedTransactionsProviderVouchersLayoutContraIndexRoute
@@ -1974,6 +1992,7 @@ export interface FileRoutesById {
   '/(guest)/sign-in-2': typeof guestSignIn2LazyRoute
   '/(guest)/sign-up': typeof guestSignUpLazyRoute
   '/(guest)/signin': typeof guestSigninLazyRoute
+  '/_protected/(auth)/change-password': typeof ProtectedauthChangePasswordRoute
   '/_protected/administration': typeof ProtectedAdministrationRouteWithChildren
   '/_protected/administration/_layout': typeof ProtectedAdministrationLayoutRouteWithChildren
   '/_protected/settings/account': typeof ProtectedSettingsAccountRoute
@@ -2130,6 +2149,7 @@ export interface FileRoutesById {
   '/_protected/masters/payroll/_layout/employee/_layout/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/_protected/reports/day_book/_layout/delivery_note/_layout/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
   '/_protected/reports/day_book/_layout/receipt_note/_layout/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
+  '/_protected/transactions/_provider/freight/_layout/$id/receipt': typeof ProtectedTransactionsProviderFreightLayoutIdReceiptRoute
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteWithChildren
@@ -2195,6 +2215,7 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
+    | '/change-password'
     | '/administration'
     | '/settings/account'
     | '/settings/appearance'
@@ -2316,6 +2337,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/employee/$id'
     | '/reports/day_book/delivery_note/$id'
     | '/reports/day_book/receipt_note/$id'
+    | '/transactions/freight/$id/receipt'
     | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/receipt_note'
     | '/masters/accounts/account_group/'
@@ -2376,6 +2398,7 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
+    | '/change-password'
     | '/administration'
     | '/settings/account'
     | '/settings/appearance'
@@ -2490,6 +2513,7 @@ export interface FileRouteTypes {
     | '/masters/payroll/employee/$id'
     | '/reports/day_book/delivery_note/$id'
     | '/reports/day_book/receipt_note/$id'
+    | '/transactions/freight/$id/receipt'
     | '/transactions/vouchers/delivery_note'
     | '/transactions/vouchers/receipt_note'
     | '/transactions/vouchers/contra'
@@ -2531,6 +2555,7 @@ export interface FileRouteTypes {
     | '/(guest)/sign-in-2'
     | '/(guest)/sign-up'
     | '/(guest)/signin'
+    | '/_protected/(auth)/change-password'
     | '/_protected/administration'
     | '/_protected/administration/_layout'
     | '/_protected/settings/account'
@@ -2687,6 +2712,7 @@ export interface FileRouteTypes {
     | '/_protected/masters/payroll/_layout/employee/_layout/$id'
     | '/_protected/reports/day_book/_layout/delivery_note/_layout/$id'
     | '/_protected/reports/day_book/_layout/receipt_note/_layout/$id'
+    | '/_protected/transactions/_provider/freight/_layout/$id/receipt'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt_note'
@@ -3039,6 +3065,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/administration'
       preLoaderRoute: typeof ProtectedAdministrationLayoutRouteImport
       parentRoute: typeof ProtectedAdministrationRoute
+    }
+    '/_protected/(auth)/change-password': {
+      id: '/_protected/(auth)/change-password'
+      path: '/change-password'
+      fullPath: '/change-password'
+      preLoaderRoute: typeof ProtectedauthChangePasswordRouteImport
+      parentRoute: typeof ProtectedRoute
     }
     '/_protected/transactions/_provider/vouchers': {
       id: '/_protected/transactions/_provider/vouchers'
@@ -4132,6 +4165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteRoute
     }
+    '/_protected/transactions/_provider/freight/_layout/$id/receipt': {
+      id: '/_protected/transactions/_provider/freight/_layout/$id/receipt'
+      path: '/$id/receipt'
+      fullPath: '/transactions/freight/$id/receipt'
+      preLoaderRoute: typeof ProtectedTransactionsProviderFreightLayoutIdReceiptRouteImport
+      parentRoute: typeof ProtectedTransactionsProviderFreightLayoutRoute
+    }
     '/_protected/reports/day_book/_layout/receipt_note/_layout/$id': {
       id: '/_protected/reports/day_book/_layout/receipt_note/_layout/$id'
       path: '/$id'
@@ -4447,12 +4487,15 @@ const ProtectedAdministrationRouteWithChildren =
 
 interface ProtectedTransactionsProviderFreightLayoutRouteChildren {
   ProtectedTransactionsProviderFreightLayoutIndexRoute: typeof ProtectedTransactionsProviderFreightLayoutIndexRoute
+  ProtectedTransactionsProviderFreightLayoutIdReceiptRoute: typeof ProtectedTransactionsProviderFreightLayoutIdReceiptRoute
 }
 
 const ProtectedTransactionsProviderFreightLayoutRouteChildren: ProtectedTransactionsProviderFreightLayoutRouteChildren =
   {
     ProtectedTransactionsProviderFreightLayoutIndexRoute:
       ProtectedTransactionsProviderFreightLayoutIndexRoute,
+    ProtectedTransactionsProviderFreightLayoutIdReceiptRoute:
+      ProtectedTransactionsProviderFreightLayoutIdReceiptRoute,
   }
 
 const ProtectedTransactionsProviderFreightLayoutRouteWithChildren =
@@ -5712,6 +5755,7 @@ interface ProtectedRouteChildren {
   ProtectedSettingsRouteRoute: typeof ProtectedSettingsRouteRouteWithChildren
   ProtectedChartsRoute: typeof ProtectedChartsRoute
   ProtectedDashboardRoute: typeof ProtectedDashboardRoute
+  ProtectedauthChangePasswordRoute: typeof ProtectedauthChangePasswordRoute
   ProtectedAdministrationRoute: typeof ProtectedAdministrationRouteWithChildren
   ProtectedTransactionsRoute: typeof ProtectedTransactionsRouteWithChildren
   ProtectedAppsIndexRoute: typeof ProtectedAppsIndexRoute
@@ -5740,6 +5784,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedSettingsRouteRoute: ProtectedSettingsRouteRouteWithChildren,
   ProtectedChartsRoute: ProtectedChartsRoute,
   ProtectedDashboardRoute: ProtectedDashboardRoute,
+  ProtectedauthChangePasswordRoute: ProtectedauthChangePasswordRoute,
   ProtectedAdministrationRoute: ProtectedAdministrationRouteWithChildren,
   ProtectedTransactionsRoute: ProtectedTransactionsRouteWithChildren,
   ProtectedAppsIndexRoute: ProtectedAppsIndexRoute,

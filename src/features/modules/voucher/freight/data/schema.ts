@@ -39,7 +39,18 @@ const voucherEntrySchema = z.object({
   accountLedger: accountLedgerSchema,
 });
 
-export const freightVoucherSchema = z.object({
+export const voucherReferenceSchema = z.lazy(() =>
+  z.object({
+    id: z.number().int().positive().nullish(),
+    voucher_id: z.number().int().positive().nullish(),
+    ref_voucher_id: z.number().int().positive().nullish(),
+    voucher: voucherSchema.nullish(),
+    reference_voucher: voucherSchema.nullish(),
+    type: z.string().nullable(),
+  })
+);
+
+export const freightVoucherBaseSchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherNo: z.string(),
   voucherDate: z.string(),
@@ -49,10 +60,17 @@ export const freightVoucherSchema = z.object({
   remarks: z.string().nullable(),
   status: z.string(),
   amount: z.number(),
+  paymentStatus: z.string(),
   company: companySchema.nullish(),
   partyLedger: accountLedgerSchema.nullish(),
   voucherEntries: z.array(voucherEntrySchema),
 });
+
+export const freightVoucherSchema = z.lazy(() =>
+  freightVoucherBaseSchema.extend({
+    voucherReferences: z.array(voucherReferenceSchema).optional(),
+  })
+);
 
 export const freightVoucherListSchema = z.array(freightVoucherSchema);
 
@@ -82,6 +100,7 @@ export const formSchema = z.object({
   freightCharges: z.coerce.number().min(0),
   totalFare: z.coerce.number().min(0),
   dispatchSourceId: z.number().int().positive().nullish(),
+  paymentStatus: z.string().nullish(),
   isEdit: z.boolean(),
 })
 export type FreightForm = z.infer<typeof formSchema>

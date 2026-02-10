@@ -53,7 +53,7 @@ export function FormAction({ currentRow }: Props) {
                     isPrimary: true,
                     addressable: {
                         addressableId: null,
-                        addressableType: '',
+                        addressableType: 'company',
                     },
                 },
                 phoneNo: '',
@@ -64,6 +64,7 @@ export function FormAction({ currentRow }: Props) {
                 tanNo: '',
                 cinNo: '',
                 currencyId: 1,
+                status: 'active',
                 isEdit,
             },
     })

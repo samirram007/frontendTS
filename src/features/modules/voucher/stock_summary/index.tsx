@@ -83,14 +83,15 @@ const PrimaryButtons = () => {
     const reports = useMemo(() => {
         const allLinksPlucked = reportLinks.flatMap(report =>
             report.menus.filter(menu => menu.visible).map(menu => ({
-                link: menu.href.split('/').pop() || '',
+                // link: menu.href.split('/').pop() || '',
+                link: menu.href || '',
                 label: menu.title,
                 visible: menu.visible,
             }))
         );
         return allLinksPlucked;
     }, []);
-
+    console.log("reports", reportLinks)
     return (
         <div className='flex space-x-2'>
             {/* Add Dropdown  here */}
@@ -137,7 +138,7 @@ const DropdownItem = ({ label, link, visible }: { label: string, link: string, v
         const currentLink = allLinksPlucked.find((href) => href.href.includes(link)) || { href: '', title: '' };
 
         setCurrentReport(currentLink.title.split('/').pop() || '');
-        navigate({ to: `/reports/stock_summary/${link}` });
+        navigate({ to: `${link}` });
     }
 
     return (

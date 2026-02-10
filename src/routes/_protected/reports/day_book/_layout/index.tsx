@@ -1,3 +1,4 @@
+import { SkeletonTable } from '@/components/skeleton';
 import DayBook from '@/features/modules/voucher/day_book';
 import { dayBookQueryOptions } from '@/features/modules/voucher/day_book/data/queryOptions';
 
@@ -13,8 +14,8 @@ export const Route = createFileRoute(
     context.queryClient.ensureQueryData(dayBookQueryOptions()),
   component: () => {
     const { data: daybook } = useSuspenseQuery(dayBookQueryOptions())
-    //console.log("DayBook Data: ", daybook)
-    return <Suspense fallback={<Loader className="animate-spin" />}>
+    console.log("DayBook Data: ", daybook)
+    return <Suspense fallback={<SkeletonTable />}>
       <DayBook data={daybook?.data} />
     </Suspense>
   },

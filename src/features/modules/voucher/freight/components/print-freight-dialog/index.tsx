@@ -43,7 +43,7 @@ const PrintFreightDialog = (props: Props) => {
 
 
     }
-    console.log("freightData in print dialog:", freightData);
+
     return (
         <Dialog open={open}
             onOpenChange={(state) => { onOpenChange(state) }} >

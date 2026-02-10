@@ -6,7 +6,9 @@ import LongText from "@/components/long-text";
 import { DataTableColumnHeader } from "@/features/global/components/data-table/data-table-column-header";
 import { Badge } from "@/components/ui/badge";
 import { VoucherTypeColorMapping } from "../data/data";
-import RowActions from "../components/row-actions";
+
+import { DataTableRowActions } from "../components/data-table-row-actions";
+import { toSentenceCase } from "@/utils/removeEmptyStrings";
 
 export const columns: ColumnDef<FreightVoucherSchema>[] = [
     {
@@ -19,7 +21,7 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
                 }
                 onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
                 aria-label='Select all'
-                className='translate-y-[2px]'
+                className='translate-y-0.5'
             />
         ),
         meta: {
@@ -33,7 +35,7 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
                 checked={row.getIsSelected()}
                 onCheckedChange={(value) => row.toggleSelected(!!value)}
                 aria-label='Select row'
-                className='translate-y-[2px]'
+                className='translate-y-0.5'
             />
         ),
         enableSorting: false,
@@ -112,24 +114,28 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
     {
         accessorKey: 'voucherNo',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title='VchNo.' />
+            <DataTableColumnHeader column={column} className="text-center justify-center" title='VchNo.' />
         ),
-        cell: ({ row }) => <div>{row.getValue('voucherNo')}</div>,
-        enableSorting: false,
+        cell: ({ row }) => <div className="text-center">{row.getValue('voucherNo')}</div>,
+        enableSorting: true,
     },
     {
         accessorKey: 'amount',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title='Amount' className='text-right pr-8' />
+            <DataTableColumnHeader column={column} title='Amount' className='text-right justify-end pr-4' />
         ),
         cell: ({ row }) => {
+            const { paymentStatus } = row.original;
 
-            const badgeColor = 'text-gray-600/80 border-green-600/80'
+            const badgeColor = 'bg-purple-100 text-purple-900';
             return (
-                <div className='flex space-x-2 justify-end pr-4'>
+                <div className='flex flex-col items-end text-right space-x-2 justify-end pr-4'>
                     <Badge variant='outline' className={cn('capitalize', badgeColor, 'border-0 bg-transparent')}>
                         {Number(row.getValue('amount')).toFixed(2)}
                     </Badge>
+                    <div className="pr-4 text-xs text-muted-foreground">
+                        ({paymentStatus ? toSentenceCase(paymentStatus) : 'Unknown'})
+                    </div>
                 </div>
             )
         },
@@ -137,11 +143,11 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
             return value.includes(row.getValue(id))
         },
         enableHiding: false,
-        enableSorting: false,
+        enableSorting: true,
     },
     {
         id: 'actions',
-        cell: RowActions,
+        cell: DataTableRowActions,
     },
 
 

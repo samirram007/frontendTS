@@ -1,14 +1,17 @@
 import { Separator } from '@/components/ui/separator'
-import {
-    IconUser,
-    IconUserCog
-} from '@tabler/icons-react'
+
 import { Outlet } from '@tanstack/react-router'
 
 import SidebarInner from '@/features/global/components/sidebar-inner'
 import { Main } from '@/layouts/components/main'
 import { useAdministration } from './context/administration-context'
-
+import { AdministrationLinks } from '@/layouts/links/administration-links'
+const sidebarNavItems = [...AdministrationLinks.map((item) => ({
+    title: item.title,
+    href: item.url,
+    visible: item.visible,
+    icon: <item.icon />
+}))]
 export default function Administration() {
 
     const { sideBarOpen, headerVisible } = useAdministration()
@@ -44,35 +47,4 @@ export default function Administration() {
     )
 }
 
-const sidebarNavItems = [
-    {
-        title: 'User',
-        visible: true,
-        href: '/administration/user',
-        icon: <IconUserCog />,
-    },
-    {
-        title: 'Role & Permission',
-        visible: true,
-        icon: <IconUser size={18} />,
-        href: '/administration/role',
-    },
-    {
-        title: 'Permission',
-        visible: true,
-        href: '/administration/permission',
-        icon: <IconUserCog />,
-    },
-    {
-        title: 'App Module',
-        visible: true,
-        href: '/administration/app_module',
-        icon: <IconUserCog />,
-    },
-    {
-        title: 'App Feature',
-        visible: true,
-        href: '/administration/app_module_feature',
-        icon: <IconUserCog />,
-    },
-]
+

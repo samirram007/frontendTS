@@ -13,6 +13,8 @@ export const Route = createFileRoute('/_protected/masters/organization/_layout/c
     context.queryClient.ensureQueryData(companyQueryOptions()),
   component: () => {
     const { data: company } = useSuspenseQuery(companyQueryOptions())
+
+
     return (
       <Suspense fallback={<Loader className="animate-spin" />}>
 
