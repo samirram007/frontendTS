@@ -4,6 +4,8 @@ import { stockUnitSchema } from '@/features/modules/stock_unit/data/schema';
 import { z } from 'zod';
 import { stateSchema } from '../../state/data/schema';
 import { countrySchema } from '../../country/data/schema';
+import { voucherTypeSchema } from '../../voucher_type/data/schema';
+
 
 
 export const stockJournalGodownEntrySchema = z.object({
@@ -167,6 +169,7 @@ export const voucherSchema = z.object({
     referenceNo: z.string().nullish(),
     referenceDate: z.coerce.date().nullish(),
     voucherTypeId: z.number().int(),
+    voucherType: z.lazy(() => voucherTypeSchema.nullish()),
     module: z.string().nullish(),
     stockJournalId: z.number().int().nullish(),
     stockJournal: z.lazy(() => stockJournalSchema.nullish()),
@@ -176,7 +179,8 @@ export const voucherSchema = z.object({
     transactionLedger: transactionLedgerSchema.nullish(),
     voucherDispatchDetail: voucherDispatchDetailSchema.nullish(),
     amount: z.coerce.number().nullish(),
-    remarks: z.string().nullish()
+    remarks: z.string().nullish(),
+
 })
 export type VoucherSchema = z.infer<typeof voucherSchema>
 export const voucherListSchema = z.array(voucherSchema)

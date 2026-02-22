@@ -15,7 +15,7 @@ interface GlobalContextType {
     supplier: Supplier | null;
     setSupplier: (value: Supplier | null) => void;
 };
-const globalContext = createContext<GlobalContextType | undefined>(undefined);
+const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
 
 
@@ -26,7 +26,7 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
     const [supplier, setSupplier] = useState<Supplier | null>(null);
 
     return (
-        <globalContext.Provider
+        <GlobalContext.Provider
             value={{
                 transporter,
                 setTransporter,
@@ -39,12 +39,12 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
             }}
         >
             {children}
-        </globalContext.Provider>
+        </GlobalContext.Provider>
     );
 };
 
 export const useGlobalContext = () => {
-    const context = React.useContext(globalContext);
+    const context = React.useContext(GlobalContext);
     if (context === undefined) {
         throw new Error("useGlobalContext must be used within a GlobalContextProvider");
     }

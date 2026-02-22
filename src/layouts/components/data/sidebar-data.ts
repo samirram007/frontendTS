@@ -21,7 +21,7 @@ import {
   IconPalette,
   IconPaperBag,
   IconPremiumRights,
-  IconProng,
+
   IconRadar2,
   IconRoute2,
   IconServerOff,

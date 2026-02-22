@@ -10,6 +10,29 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
+            {
+                title: 'Day Book (Self)',
+                href: '/reports/day_book/self',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Receipt Book',
+                href: '/reports/receipt_book',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Distributor Book',
+                href: '/reports/distributor_book',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+
+
         ]
     },
     {

@@ -42,10 +42,10 @@ const voucherEntrySchema = z.object({
 export const voucherReferenceSchema = z.lazy(() =>
   z.object({
     id: z.number().int().positive().nullish(),
-    voucher_id: z.number().int().positive().nullish(),
-    ref_voucher_id: z.number().int().positive().nullish(),
+    voucherId: z.number().int().positive().nullish(),
+    refVoucherId: z.number().int().positive().nullish(),
     voucher: voucherSchema.nullish(),
-    reference_voucher: voucherSchema.nullish(),
+    referenceVoucher: voucherSchema.nullish(),
     type: z.string().nullable(),
   })
 );

@@ -23,8 +23,10 @@ export function useFreightReceiptMutation() {
         },
         onSuccess: () => {
             // console.log("Freight receipt created successfully")
+            queryClient.invalidateQueries({ queryKey: ['Receipts'] })
             queryClient.invalidateQueries({ queryKey: ['FreightReport'] })
             queryClient.invalidateQueries({ queryKey: [queryKey] })
+
             toast.success("Freight receipt saved successfully")
         },
         onError: (error) => {

@@ -95,19 +95,30 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                 <div className='flex flex-row bg-accent/10 px-4 space-x-8'>
                   {
                     submenuItems?.filter(submenu => submenu.visible).map((submenu, index) =>
-                      (
-                        submenu.title === 'Freight Reports' && !permissions.includes(FEATURES.FREIGHT_REPORT_MENU_VIEW)) ? null : (
+
+                      (submenu.title === 'Freight Reports' && !permissions.includes(FEATURES.FREIGHT_REPORT_MENU_VIEW)
+                      )
+                        ? null : (
 
 
                       <DropdownMenuItem key={`${title}-${submenu.title}`} asChild>
 
                         <div className='flex flex-col justify-start items-start'>
                           <div className=' min-w-[200px] font-semibold text-sm hover:underline hover:text-primary border-b border-gray-200 py-1' >
-                            {submenu.title}
+                                {submenu.title}
                           </div>
                           <div className=' flex flex-col'>
                             {
                               submenu.menus?.filter((item: any) => item.visible).map((item: any) =>
+                                (
+                                  (item.title === 'Day Book' && !permissions.includes(FEATURES.DAYBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Day Book (Self)' && !permissions.includes(FEATURES.DAYBOOK_SELF_MENU_VIEW)) ||
+                                  (item.title === 'Receipt Book' && !permissions.includes(FEATURES.RECEIPTBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Distributor Book' && !permissions.includes(FEATURES.DISTRIBUTORBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Item Summary)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Item Wise)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Godown Wise)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW))
+                                ) ? null : (
                                 <Link
                                   key={`${submenu.title}-${item.title}-${index}`}
                                   to={item.href}
@@ -118,7 +129,7 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                                 >
                                   {item.title}
                                 </Link>
-                              )
+                                ))
                             }
                           </div>
                         </div>
@@ -138,7 +149,7 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
             to={href}
             // disabled={disabled}
             className={`text-sm font-medium transition-colors underline-offset-4  decoration-2 hover:text-primary hover:underline ${isActive ? '  animate-in  underline  decoration-red-500  text-primary' : 'text-muted-foreground decoration-red-200'}`}
-              >              {title}
+                >              {title}
 
           </Link>
             )))}

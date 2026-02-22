@@ -7,6 +7,11 @@ async function fetchDayBookService() {
 
     return await getData(API_PATH)
 }
+async function fetchDayBookSelfService() {
+
+    return await getData(`${API_PATH}_self`)
+}
+
 async function storeDayBookService(payload: any) {
     return await postData(API_PATH, payload)
 }
@@ -17,5 +22,5 @@ async function deleteDayBookService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
 
-export { deleteDayBookService, fetchDayBookService, storeDayBookService, updateDayBookService };
+export { deleteDayBookService, fetchDayBookService, fetchDayBookSelfService, storeDayBookService, updateDayBookService };
 

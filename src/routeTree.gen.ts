@@ -35,7 +35,9 @@ import { Route as ProtectedauthChangePasswordRouteImport } from './routes/_prote
 import { Route as ProtectedReportsProfit_lossIndexRouteImport } from './routes/_protected/reports/profit_loss/index'
 import { Route as ProtectedReportsBalance_sheetIndexRouteImport } from './routes/_protected/reports/balance_sheet/index'
 import { Route as ProtectedReportsStock_summaryLayoutRouteImport } from './routes/_protected/reports/stock_summary/_layout'
+import { Route as ProtectedReportsReceipt_bookLayoutRouteImport } from './routes/_protected/reports/receipt_book/_layout'
 import { Route as ProtectedReportsFreightLayoutRouteImport } from './routes/_protected/reports/freight/_layout'
+import { Route as ProtectedReportsDistributor_bookLayoutRouteImport } from './routes/_protected/reports/distributor_book/_layout'
 import { Route as ProtectedReportsDay_bookLayoutRouteImport } from './routes/_protected/reports/day_book/_layout'
 import { Route as ProtectedMastersStatutoryLayoutRouteImport } from './routes/_protected/masters/statutory/_layout'
 import { Route as ProtectedMastersPayrollLayoutRouteImport } from './routes/_protected/masters/payroll/_layout'
@@ -48,6 +50,8 @@ import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_p
 import { Route as ProtectedMastersAccountsLayoutRouteImport } from './routes/_protected/masters/accounts/_layout'
 import { Route as ProtectedauthUserFiscalYearLayoutRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout'
 import { Route as ProtectedReportsStock_summaryLayoutIndexRouteImport } from './routes/_protected/reports/stock_summary/_layout/index'
+import { Route as ProtectedReportsReceipt_bookLayoutIndexRouteImport } from './routes/_protected/reports/receipt_book/_layout/index'
+import { Route as ProtectedReportsDistributor_bookLayoutIndexRouteImport } from './routes/_protected/reports/distributor_book/_layout/index'
 import { Route as ProtectedReportsDay_bookLayoutIndexRouteImport } from './routes/_protected/reports/day_book/_layout/index'
 import { Route as ProtectedAdministrationLayoutPermissionIndexRouteImport } from './routes/_protected/administration/_layout/permission/index'
 import { Route as ProtectedAdministrationLayoutApp_module_featureIndexRouteImport } from './routes/_protected/administration/_layout/app_module_feature/index'
@@ -66,6 +70,8 @@ import { Route as ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRou
 import { Route as ProtectedReportsStock_summaryLayoutNetStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/net-stock'
 import { Route as ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-voucher-wise'
 import { Route as ProtectedReportsFreightLayoutFreightGodownWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-godown-wise'
+import { Route as ProtectedReportsDistributor_bookLayoutIdRouteImport } from './routes/_protected/reports/distributor_book/_layout/$id'
+import { Route as ProtectedReportsDay_bookLayoutSelfRouteImport } from './routes/_protected/reports/day_book/_layout/self'
 import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles.$id'
 import { Route as ProtectedAdministrationLayoutUserLayoutRouteImport } from './routes/_protected/administration/_layout/user/_layout'
 import { Route as ProtectedAdministrationLayoutRoleLayoutRouteImport } from './routes/_protected/administration/_layout/role/_layout'
@@ -77,7 +83,6 @@ import { Route as ProtectedReportsDay_bookLayoutSales_orderIndexRouteImport } fr
 import { Route as ProtectedReportsDay_bookLayoutSalesIndexRouteImport } from './routes/_protected/reports/day_book/_layout/sales/index'
 import { Route as ProtectedReportsDay_bookLayoutRejection_outIndexRouteImport } from './routes/_protected/reports/day_book/_layout/rejection_out/index'
 import { Route as ProtectedReportsDay_bookLayoutRejection_inIndexRouteImport } from './routes/_protected/reports/day_book/_layout/rejection_in/index'
-import { Route as ProtectedReportsDay_bookLayoutReceiptIndexRouteImport } from './routes/_protected/reports/day_book/_layout/receipt/index'
 import { Route as ProtectedReportsDay_bookLayoutPurchase_orderIndexRouteImport } from './routes/_protected/reports/day_book/_layout/purchase_order/index'
 import { Route as ProtectedReportsDay_bookLayoutPurchaseIndexRouteImport } from './routes/_protected/reports/day_book/_layout/purchase/index'
 import { Route as ProtectedReportsDay_bookLayoutPhysical_stockIndexRouteImport } from './routes/_protected/reports/day_book/_layout/physical_stock/index'
@@ -206,8 +211,14 @@ const errors401LazyRouteImport = createFileRoute('/(errors)/401')()
 const ProtectedReportsStock_summaryRouteImport = createFileRoute(
   '/_protected/reports/stock_summary',
 )()
+const ProtectedReportsReceipt_bookRouteImport = createFileRoute(
+  '/_protected/reports/receipt_book',
+)()
 const ProtectedReportsFreightRouteImport = createFileRoute(
   '/_protected/reports/freight',
+)()
+const ProtectedReportsDistributor_bookRouteImport = createFileRoute(
+  '/_protected/reports/distributor_book',
 )()
 const ProtectedReportsDay_bookRouteImport = createFileRoute(
   '/_protected/reports/day_book',
@@ -435,11 +446,23 @@ const ProtectedReportsStock_summaryRoute =
     path: '/reports/stock_summary',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedReportsReceipt_bookRoute =
+  ProtectedReportsReceipt_bookRouteImport.update({
+    id: '/reports/receipt_book',
+    path: '/reports/receipt_book',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedReportsFreightRoute = ProtectedReportsFreightRouteImport.update({
   id: '/reports/freight',
   path: '/reports/freight',
   getParentRoute: () => ProtectedRoute,
 } as any)
+const ProtectedReportsDistributor_bookRoute =
+  ProtectedReportsDistributor_bookRouteImport.update({
+    id: '/reports/distributor_book',
+    path: '/reports/distributor_book',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedReportsDay_bookRoute =
   ProtectedReportsDay_bookRouteImport.update({
     id: '/reports/day_book',
@@ -593,10 +616,20 @@ const ProtectedReportsStock_summaryLayoutRoute =
     id: '/_layout',
     getParentRoute: () => ProtectedReportsStock_summaryRoute,
   } as any)
+const ProtectedReportsReceipt_bookLayoutRoute =
+  ProtectedReportsReceipt_bookLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedReportsReceipt_bookRoute,
+  } as any)
 const ProtectedReportsFreightLayoutRoute =
   ProtectedReportsFreightLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedReportsFreightRoute,
+  } as any)
+const ProtectedReportsDistributor_bookLayoutRoute =
+  ProtectedReportsDistributor_bookLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedReportsDistributor_bookRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutRoute =
   ProtectedReportsDay_bookLayoutRouteImport.update({
@@ -770,6 +803,18 @@ const ProtectedReportsStock_summaryLayoutIndexRoute =
     path: '/',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
   } as any)
+const ProtectedReportsReceipt_bookLayoutIndexRoute =
+  ProtectedReportsReceipt_bookLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedReportsReceipt_bookLayoutRoute,
+  } as any)
+const ProtectedReportsDistributor_bookLayoutIndexRoute =
+  ProtectedReportsDistributor_bookLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedReportsDistributor_bookLayoutRoute,
+  } as any)
 const ProtectedReportsDay_bookLayoutIndexRoute =
   ProtectedReportsDay_bookLayoutIndexRouteImport.update({
     id: '/',
@@ -878,6 +923,18 @@ const ProtectedReportsFreightLayoutFreightGodownWiseRoute =
     path: '/freight-godown-wise',
     getParentRoute: () => ProtectedReportsFreightLayoutRoute,
   } as any)
+const ProtectedReportsDistributor_bookLayoutIdRoute =
+  ProtectedReportsDistributor_bookLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () => ProtectedReportsDistributor_bookLayoutRoute,
+  } as any)
+const ProtectedReportsDay_bookLayoutSelfRoute =
+  ProtectedReportsDay_bookLayoutSelfRouteImport.update({
+    id: '/self',
+    path: '/self',
+    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
+  } as any)
 const ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute =
   ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport.update({
     id: '/$id',
@@ -958,12 +1015,6 @@ const ProtectedReportsDay_bookLayoutRejection_inIndexRoute =
   ProtectedReportsDay_bookLayoutRejection_inIndexRouteImport.update({
     id: '/rejection_in/',
     path: '/rejection_in/',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
-  } as any)
-const ProtectedReportsDay_bookLayoutReceiptIndexRoute =
-  ProtectedReportsDay_bookLayoutReceiptIndexRouteImport.update({
-    id: '/receipt/',
-    path: '/receipt/',
     getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute =
@@ -1674,13 +1725,17 @@ export interface FileRoutesByFullPath {
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
+  '/reports/distributor_book': typeof ProtectedReportsDistributor_bookLayoutRouteWithChildren
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/reports/receipt_book': typeof ProtectedReportsReceipt_bookLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/reports/day_book/self': typeof ProtectedReportsDay_bookLayoutSelfRoute
+  '/reports/distributor_book/$id': typeof ProtectedReportsDistributor_bookLayoutIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
@@ -1699,6 +1754,8 @@ export interface FileRoutesByFullPath {
   '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/administration/permission': typeof ProtectedAdministrationLayoutPermissionIndexRoute
   '/reports/day_book/': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/reports/distributor_book/': typeof ProtectedReportsDistributor_bookLayoutIndexRoute
+  '/reports/receipt_book/': typeof ProtectedReportsReceipt_bookLayoutIndexRoute
   '/reports/stock_summary/': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/administration/user/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
   '/masters/accounts/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
@@ -1751,7 +1808,6 @@ export interface FileRoutesByFullPath {
   '/reports/day_book/physical_stock': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/reports/day_book/purchase': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
   '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
-  '/reports/day_book/receipt': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/reports/day_book/rejection_in': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/reports/day_book/rejection_out': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
   '/reports/day_book/sales': typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
@@ -1857,13 +1913,17 @@ export interface FileRoutesByTo {
   '/masters/payroll': typeof ProtectedMastersPayrollLayoutRouteWithChildren
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/reports/distributor_book': typeof ProtectedReportsDistributor_bookLayoutIndexRoute
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/reports/receipt_book': typeof ProtectedReportsReceipt_bookLayoutIndexRoute
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/reports/day_book/self': typeof ProtectedReportsDay_bookLayoutSelfRoute
+  '/reports/distributor_book/$id': typeof ProtectedReportsDistributor_bookLayoutIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
@@ -1929,7 +1989,6 @@ export interface FileRoutesByTo {
   '/reports/day_book/physical_stock': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/reports/day_book/purchase': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
   '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
-  '/reports/day_book/receipt': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/reports/day_book/rejection_in': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/reports/day_book/rejection_out': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
   '/reports/day_book/sales': typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
@@ -2025,8 +2084,12 @@ export interface FileRoutesById {
   '/_protected/masters/statutory/_layout': typeof ProtectedMastersStatutoryLayoutRoute
   '/_protected/reports/day_book': typeof ProtectedReportsDay_bookRouteWithChildren
   '/_protected/reports/day_book/_layout': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
+  '/_protected/reports/distributor_book': typeof ProtectedReportsDistributor_bookRouteWithChildren
+  '/_protected/reports/distributor_book/_layout': typeof ProtectedReportsDistributor_bookLayoutRouteWithChildren
   '/_protected/reports/freight': typeof ProtectedReportsFreightRouteWithChildren
   '/_protected/reports/freight/_layout': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/_protected/reports/receipt_book': typeof ProtectedReportsReceipt_bookRouteWithChildren
+  '/_protected/reports/receipt_book/_layout': typeof ProtectedReportsReceipt_bookLayoutRouteWithChildren
   '/_protected/reports/stock_summary': typeof ProtectedReportsStock_summaryRouteWithChildren
   '/_protected/reports/stock_summary/_layout': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/_protected/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
@@ -2036,6 +2099,8 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/user': typeof ProtectedAdministrationLayoutUserRouteWithChildren
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
+  '/_protected/reports/day_book/_layout/self': typeof ProtectedReportsDay_bookLayoutSelfRoute
+  '/_protected/reports/distributor_book/_layout/$id': typeof ProtectedReportsDistributor_bookLayoutIdRoute
   '/_protected/reports/freight/_layout/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   '/_protected/reports/freight/_layout/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
@@ -2056,6 +2121,8 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/app_module_feature/': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/_protected/administration/_layout/permission/': typeof ProtectedAdministrationLayoutPermissionIndexRoute
   '/_protected/reports/day_book/_layout/': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/_protected/reports/distributor_book/_layout/': typeof ProtectedReportsDistributor_bookLayoutIndexRoute
+  '/_protected/reports/receipt_book/_layout/': typeof ProtectedReportsReceipt_bookLayoutIndexRoute
   '/_protected/reports/stock_summary/_layout/': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/_protected/administration/_layout/user/_layout/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
   '/_protected/masters/accounts/_layout/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren
@@ -2126,7 +2193,6 @@ export interface FileRoutesById {
   '/_protected/reports/day_book/_layout/physical_stock/': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/_protected/reports/day_book/_layout/purchase/': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
   '/_protected/reports/day_book/_layout/purchase_order/': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
-  '/_protected/reports/day_book/_layout/receipt/': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/_protected/reports/day_book/_layout/rejection_in/': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/_protected/reports/day_book/_layout/rejection_out/': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
   '/_protected/reports/day_book/_layout/sales/': typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
@@ -2238,13 +2304,17 @@ export interface FileRouteTypes {
     | '/masters/payroll'
     | '/masters/statutory'
     | '/reports/day_book'
+    | '/reports/distributor_book'
     | '/reports/freight'
+    | '/reports/receipt_book'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
+    | '/reports/day_book/self'
+    | '/reports/distributor_book/$id'
     | '/reports/freight/freight-godown-wise'
     | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
@@ -2263,6 +2333,8 @@ export interface FileRouteTypes {
     | '/administration/app_module_feature'
     | '/administration/permission'
     | '/reports/day_book/'
+    | '/reports/distributor_book/'
+    | '/reports/receipt_book/'
     | '/reports/stock_summary/'
     | '/administration/user/$id'
     | '/masters/accounts/account_group'
@@ -2315,7 +2387,6 @@ export interface FileRouteTypes {
     | '/reports/day_book/physical_stock'
     | '/reports/day_book/purchase'
     | '/reports/day_book/purchase_order'
-    | '/reports/day_book/receipt'
     | '/reports/day_book/rejection_in'
     | '/reports/day_book/rejection_out'
     | '/reports/day_book/sales'
@@ -2421,13 +2492,17 @@ export interface FileRouteTypes {
     | '/masters/payroll'
     | '/masters/statutory'
     | '/reports/day_book'
+    | '/reports/distributor_book'
     | '/reports/freight'
+    | '/reports/receipt_book'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
+    | '/reports/day_book/self'
+    | '/reports/distributor_book/$id'
     | '/reports/freight/freight-godown-wise'
     | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
@@ -2493,7 +2568,6 @@ export interface FileRouteTypes {
     | '/reports/day_book/physical_stock'
     | '/reports/day_book/purchase'
     | '/reports/day_book/purchase_order'
-    | '/reports/day_book/receipt'
     | '/reports/day_book/rejection_in'
     | '/reports/day_book/rejection_out'
     | '/reports/day_book/sales'
@@ -2588,8 +2662,12 @@ export interface FileRouteTypes {
     | '/_protected/masters/statutory/_layout'
     | '/_protected/reports/day_book'
     | '/_protected/reports/day_book/_layout'
+    | '/_protected/reports/distributor_book'
+    | '/_protected/reports/distributor_book/_layout'
     | '/_protected/reports/freight'
     | '/_protected/reports/freight/_layout'
+    | '/_protected/reports/receipt_book'
+    | '/_protected/reports/receipt_book/_layout'
     | '/_protected/reports/stock_summary'
     | '/_protected/reports/stock_summary/_layout'
     | '/_protected/reports/balance_sheet/'
@@ -2599,6 +2677,8 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/user'
     | '/_protected/administration/_layout/user/_layout'
     | '/_protected/masters/miscellaneous/delivery_vehicles/$id'
+    | '/_protected/reports/day_book/_layout/self'
+    | '/_protected/reports/distributor_book/_layout/$id'
     | '/_protected/reports/freight/_layout/freight-godown-wise'
     | '/_protected/reports/freight/_layout/freight-voucher-wise'
     | '/_protected/reports/stock_summary/_layout/net-stock'
@@ -2619,6 +2699,8 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/app_module_feature/'
     | '/_protected/administration/_layout/permission/'
     | '/_protected/reports/day_book/_layout/'
+    | '/_protected/reports/distributor_book/_layout/'
+    | '/_protected/reports/receipt_book/_layout/'
     | '/_protected/reports/stock_summary/_layout/'
     | '/_protected/administration/_layout/user/_layout/$id'
     | '/_protected/masters/accounts/_layout/account_group'
@@ -2689,7 +2771,6 @@ export interface FileRouteTypes {
     | '/_protected/reports/day_book/_layout/physical_stock/'
     | '/_protected/reports/day_book/_layout/purchase/'
     | '/_protected/reports/day_book/_layout/purchase_order/'
-    | '/_protected/reports/day_book/_layout/receipt/'
     | '/_protected/reports/day_book/_layout/rejection_in/'
     | '/_protected/reports/day_book/_layout/rejection_out/'
     | '/_protected/reports/day_book/_layout/sales/'
@@ -2926,11 +3007,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/reports/receipt_book': {
+      id: '/_protected/reports/receipt_book'
+      path: '/reports/receipt_book'
+      fullPath: '/reports/receipt_book'
+      preLoaderRoute: typeof ProtectedReportsReceipt_bookRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/reports/freight': {
       id: '/_protected/reports/freight'
       path: '/reports/freight'
       fullPath: '/reports/freight'
       preLoaderRoute: typeof ProtectedReportsFreightRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/reports/distributor_book': {
+      id: '/_protected/reports/distributor_book'
+      path: '/reports/distributor_book'
+      fullPath: '/reports/distributor_book'
+      preLoaderRoute: typeof ProtectedReportsDistributor_bookRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/day_book': {
@@ -3122,12 +3217,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryRoute
     }
+    '/_protected/reports/receipt_book/_layout': {
+      id: '/_protected/reports/receipt_book/_layout'
+      path: '/reports/receipt_book'
+      fullPath: '/reports/receipt_book'
+      preLoaderRoute: typeof ProtectedReportsReceipt_bookLayoutRouteImport
+      parentRoute: typeof ProtectedReportsReceipt_bookRoute
+    }
     '/_protected/reports/freight/_layout': {
       id: '/_protected/reports/freight/_layout'
       path: '/reports/freight'
       fullPath: '/reports/freight'
       preLoaderRoute: typeof ProtectedReportsFreightLayoutRouteImport
       parentRoute: typeof ProtectedReportsFreightRoute
+    }
+    '/_protected/reports/distributor_book/_layout': {
+      id: '/_protected/reports/distributor_book/_layout'
+      path: '/reports/distributor_book'
+      fullPath: '/reports/distributor_book'
+      preLoaderRoute: typeof ProtectedReportsDistributor_bookLayoutRouteImport
+      parentRoute: typeof ProtectedReportsDistributor_bookRoute
     }
     '/_protected/reports/day_book/_layout': {
       id: '/_protected/reports/day_book/_layout'
@@ -3339,6 +3448,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutIndexRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
     }
+    '/_protected/reports/receipt_book/_layout/': {
+      id: '/_protected/reports/receipt_book/_layout/'
+      path: '/'
+      fullPath: '/reports/receipt_book/'
+      preLoaderRoute: typeof ProtectedReportsReceipt_bookLayoutIndexRouteImport
+      parentRoute: typeof ProtectedReportsReceipt_bookLayoutRoute
+    }
+    '/_protected/reports/distributor_book/_layout/': {
+      id: '/_protected/reports/distributor_book/_layout/'
+      path: '/'
+      fullPath: '/reports/distributor_book/'
+      preLoaderRoute: typeof ProtectedReportsDistributor_bookLayoutIndexRouteImport
+      parentRoute: typeof ProtectedReportsDistributor_bookLayoutRoute
+    }
     '/_protected/reports/day_book/_layout/': {
       id: '/_protected/reports/day_book/_layout/'
       path: '/'
@@ -3465,6 +3588,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRouteImport
       parentRoute: typeof ProtectedReportsFreightLayoutRoute
     }
+    '/_protected/reports/distributor_book/_layout/$id': {
+      id: '/_protected/reports/distributor_book/_layout/$id'
+      path: '/$id'
+      fullPath: '/reports/distributor_book/$id'
+      preLoaderRoute: typeof ProtectedReportsDistributor_bookLayoutIdRouteImport
+      parentRoute: typeof ProtectedReportsDistributor_bookLayoutRoute
+    }
+    '/_protected/reports/day_book/_layout/self': {
+      id: '/_protected/reports/day_book/_layout/self'
+      path: '/self'
+      fullPath: '/reports/day_book/self'
+      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutSelfRouteImport
+      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
+    }
     '/_protected/masters/miscellaneous/delivery_vehicles/$id': {
       id: '/_protected/masters/miscellaneous/delivery_vehicles/$id'
       path: '/$id'
@@ -3561,13 +3698,6 @@ declare module '@tanstack/react-router' {
       path: '/rejection_in'
       fullPath: '/reports/day_book/rejection_in'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutRejection_inIndexRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
-    }
-    '/_protected/reports/day_book/_layout/receipt/': {
-      id: '/_protected/reports/day_book/_layout/receipt/'
-      path: '/receipt'
-      fullPath: '/reports/day_book/receipt'
-      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceiptIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/purchase_order/': {
@@ -5587,6 +5717,7 @@ const ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren =
   )
 
 interface ProtectedReportsDay_bookLayoutRouteChildren {
+  ProtectedReportsDay_bookLayoutSelfRoute: typeof ProtectedReportsDay_bookLayoutSelfRoute
   ProtectedReportsDay_bookLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutIndexRoute
   ProtectedReportsDay_bookLayoutDelivery_noteRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren
   ProtectedReportsDay_bookLayoutReceipt_noteRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren
@@ -5597,7 +5728,6 @@ interface ProtectedReportsDay_bookLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute: typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   ProtectedReportsDay_bookLayoutPurchaseIndexRoute: typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
   ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
-  ProtectedReportsDay_bookLayoutReceiptIndexRoute: typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   ProtectedReportsDay_bookLayoutRejection_inIndexRoute: typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   ProtectedReportsDay_bookLayoutRejection_outIndexRoute: typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
   ProtectedReportsDay_bookLayoutSalesIndexRoute: typeof ProtectedReportsDay_bookLayoutSalesIndexRoute
@@ -5608,6 +5738,8 @@ interface ProtectedReportsDay_bookLayoutRouteChildren {
 
 const ProtectedReportsDay_bookLayoutRouteChildren: ProtectedReportsDay_bookLayoutRouteChildren =
   {
+    ProtectedReportsDay_bookLayoutSelfRoute:
+      ProtectedReportsDay_bookLayoutSelfRoute,
     ProtectedReportsDay_bookLayoutIndexRoute:
       ProtectedReportsDay_bookLayoutIndexRoute,
     ProtectedReportsDay_bookLayoutDelivery_noteRoute:
@@ -5628,8 +5760,6 @@ const ProtectedReportsDay_bookLayoutRouteChildren: ProtectedReportsDay_bookLayou
       ProtectedReportsDay_bookLayoutPurchaseIndexRoute,
     ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute:
       ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute,
-    ProtectedReportsDay_bookLayoutReceiptIndexRoute:
-      ProtectedReportsDay_bookLayoutReceiptIndexRoute,
     ProtectedReportsDay_bookLayoutRejection_inIndexRoute:
       ProtectedReportsDay_bookLayoutRejection_inIndexRoute,
     ProtectedReportsDay_bookLayoutRejection_outIndexRoute:
@@ -5664,6 +5794,39 @@ const ProtectedReportsDay_bookRouteWithChildren =
     ProtectedReportsDay_bookRouteChildren,
   )
 
+interface ProtectedReportsDistributor_bookLayoutRouteChildren {
+  ProtectedReportsDistributor_bookLayoutIdRoute: typeof ProtectedReportsDistributor_bookLayoutIdRoute
+  ProtectedReportsDistributor_bookLayoutIndexRoute: typeof ProtectedReportsDistributor_bookLayoutIndexRoute
+}
+
+const ProtectedReportsDistributor_bookLayoutRouteChildren: ProtectedReportsDistributor_bookLayoutRouteChildren =
+  {
+    ProtectedReportsDistributor_bookLayoutIdRoute:
+      ProtectedReportsDistributor_bookLayoutIdRoute,
+    ProtectedReportsDistributor_bookLayoutIndexRoute:
+      ProtectedReportsDistributor_bookLayoutIndexRoute,
+  }
+
+const ProtectedReportsDistributor_bookLayoutRouteWithChildren =
+  ProtectedReportsDistributor_bookLayoutRoute._addFileChildren(
+    ProtectedReportsDistributor_bookLayoutRouteChildren,
+  )
+
+interface ProtectedReportsDistributor_bookRouteChildren {
+  ProtectedReportsDistributor_bookLayoutRoute: typeof ProtectedReportsDistributor_bookLayoutRouteWithChildren
+}
+
+const ProtectedReportsDistributor_bookRouteChildren: ProtectedReportsDistributor_bookRouteChildren =
+  {
+    ProtectedReportsDistributor_bookLayoutRoute:
+      ProtectedReportsDistributor_bookLayoutRouteWithChildren,
+  }
+
+const ProtectedReportsDistributor_bookRouteWithChildren =
+  ProtectedReportsDistributor_bookRoute._addFileChildren(
+    ProtectedReportsDistributor_bookRouteChildren,
+  )
+
 interface ProtectedReportsFreightLayoutRouteChildren {
   ProtectedReportsFreightLayoutFreightGodownWiseRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
   ProtectedReportsFreightLayoutFreightVoucherWiseRoute: typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
@@ -5695,6 +5858,36 @@ const ProtectedReportsFreightRouteChildren: ProtectedReportsFreightRouteChildren
 const ProtectedReportsFreightRouteWithChildren =
   ProtectedReportsFreightRoute._addFileChildren(
     ProtectedReportsFreightRouteChildren,
+  )
+
+interface ProtectedReportsReceipt_bookLayoutRouteChildren {
+  ProtectedReportsReceipt_bookLayoutIndexRoute: typeof ProtectedReportsReceipt_bookLayoutIndexRoute
+}
+
+const ProtectedReportsReceipt_bookLayoutRouteChildren: ProtectedReportsReceipt_bookLayoutRouteChildren =
+  {
+    ProtectedReportsReceipt_bookLayoutIndexRoute:
+      ProtectedReportsReceipt_bookLayoutIndexRoute,
+  }
+
+const ProtectedReportsReceipt_bookLayoutRouteWithChildren =
+  ProtectedReportsReceipt_bookLayoutRoute._addFileChildren(
+    ProtectedReportsReceipt_bookLayoutRouteChildren,
+  )
+
+interface ProtectedReportsReceipt_bookRouteChildren {
+  ProtectedReportsReceipt_bookLayoutRoute: typeof ProtectedReportsReceipt_bookLayoutRouteWithChildren
+}
+
+const ProtectedReportsReceipt_bookRouteChildren: ProtectedReportsReceipt_bookRouteChildren =
+  {
+    ProtectedReportsReceipt_bookLayoutRoute:
+      ProtectedReportsReceipt_bookLayoutRouteWithChildren,
+  }
+
+const ProtectedReportsReceipt_bookRouteWithChildren =
+  ProtectedReportsReceipt_bookRoute._addFileChildren(
+    ProtectedReportsReceipt_bookRouteChildren,
   )
 
 interface ProtectedReportsStock_summaryLayoutRouteChildren {
@@ -5773,7 +5966,9 @@ interface ProtectedRouteChildren {
   ProtectedMastersPayrollRoute: typeof ProtectedMastersPayrollRouteWithChildren
   ProtectedMastersStatutoryRoute: typeof ProtectedMastersStatutoryRouteWithChildren
   ProtectedReportsDay_bookRoute: typeof ProtectedReportsDay_bookRouteWithChildren
+  ProtectedReportsDistributor_bookRoute: typeof ProtectedReportsDistributor_bookRouteWithChildren
   ProtectedReportsFreightRoute: typeof ProtectedReportsFreightRouteWithChildren
+  ProtectedReportsReceipt_bookRoute: typeof ProtectedReportsReceipt_bookRouteWithChildren
   ProtectedReportsStock_summaryRoute: typeof ProtectedReportsStock_summaryRouteWithChildren
   ProtectedReportsBalance_sheetIndexRoute: typeof ProtectedReportsBalance_sheetIndexRoute
   ProtectedReportsProfit_lossIndexRoute: typeof ProtectedReportsProfit_lossIndexRoute
@@ -5807,7 +6002,11 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedMastersPayrollRoute: ProtectedMastersPayrollRouteWithChildren,
   ProtectedMastersStatutoryRoute: ProtectedMastersStatutoryRouteWithChildren,
   ProtectedReportsDay_bookRoute: ProtectedReportsDay_bookRouteWithChildren,
+  ProtectedReportsDistributor_bookRoute:
+    ProtectedReportsDistributor_bookRouteWithChildren,
   ProtectedReportsFreightRoute: ProtectedReportsFreightRouteWithChildren,
+  ProtectedReportsReceipt_bookRoute:
+    ProtectedReportsReceipt_bookRouteWithChildren,
   ProtectedReportsStock_summaryRoute:
     ProtectedReportsStock_summaryRouteWithChildren,
   ProtectedReportsBalance_sheetIndexRoute:
