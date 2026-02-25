@@ -55,6 +55,8 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
         const selected = stockItems.find((i) => i.id === Number(value));
         const quantity = 0
         form.setValue(`stockItemId`, Number(value))
+        //Added
+        form.setValue(`orderQuantity`, quantity)
         form.setValue(`actualQuantity`, quantity)
         form.setValue(`billingQuantity`, quantity)
         form.setValue(`stockUnitId`, selected?.stockUnitId)

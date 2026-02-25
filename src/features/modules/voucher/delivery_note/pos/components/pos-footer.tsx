@@ -101,7 +101,7 @@ const PosFooter = ({ mainForm }: PosFooterProps) => {
 
     }, [total]);
 
-
+    // console.log("Main form ", mainForm.watch());
 
     return (
         <div ref={footerRef} className="bg-green-600/20 grid grid-cols-[1fr_1fr] px-8">

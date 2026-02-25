@@ -25,7 +25,7 @@ const Pos = ({ currentRow }: DeliveryNoteProps) => {
         const movementTypeValue = isEdit ? (data?.stockJournal?.stockJournalEntries?.[0]?.movementType || "out") : "out"
         setMovementType?.(movementTypeValue)
     }, [isEdit, data, setMovementType])
-    // console.log("WATCH: ", mainForm.watch('stockJournal'))
+    
     return (
         <>
 

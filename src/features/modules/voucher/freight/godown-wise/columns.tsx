@@ -10,10 +10,10 @@ import { DataTableColumnHeader } from '@/features/global/components/data-table/d
 
 
 
-import type { StockInHandSchema } from '../data/schema'
+import type { FreightListSchema } from '../data/schema'
 
 
-export const columns: ColumnDef<StockInHandSchema>[] = [
+export const columns: ColumnDef<FreightListSchema>[] = [
   {
     id: 'select',
     header: ({ table }) => (

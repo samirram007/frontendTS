@@ -25,13 +25,13 @@ import StockJournalGodowns from "../stock-journal-godown";
 import { stockJournalEntrySchema, type StockJournalEntryForm, type StockJournalForm } from "../../data-schema/voucher-schema";
 import { usePos } from "../../contexts/pos-context";
 import { lowerCase } from "lodash";
+
 type StockJournalEntryProps = {
     index: number;
     remove: (index: number) => void;
     handleOnClickItemAddEntry: () => void
     fieldsLength: number;
     stockJournalForm: UseFormReturn<StockJournalForm>;
-
 };
 
 export const StockJournalEntry = (props: StockJournalEntryProps) => {
@@ -102,7 +102,8 @@ export const StockJournalEntry = (props: StockJournalEntryProps) => {
     if ([stockItems, godowns, stockUnits].some((r) => r.isLoading))
         return <Loader size={20} className="animate-spin" />;
 
-    // console.log("THIS IS HOW: ", stockJournalForm.watch(), stockJournalEntryForm.watch("stockJournalGodownEntries"));
+    // console.log(stockJournalForm.watch());
+
     return (
         <Form {...stockJournalEntryForm}>
             <div ref={itemEntryRef} className="w-full grid grid-rows-1">

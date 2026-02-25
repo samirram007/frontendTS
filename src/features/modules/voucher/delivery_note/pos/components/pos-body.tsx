@@ -82,7 +82,9 @@ const PosBody = ({ mainForm: deliveryNoteForm }: PosBodyProps) => {
     if (deliveryNoteForm.watch("transactionLedger.id") === undefined || deliveryNoteForm.watch("partyLedger.id") === undefined) {
         return <StockJournalUnloadedView />
     }
-    // console.log("PosBody Level: ", deliveryNoteForm.watch("stockJournal"), stockJournalForm.watch("stockJournalEntries"));
+
+    console.log(stockJournalForm.watch());
+
     return (
         <div className="flex flex-col w-full gap-0   items-start overflow-y-scroll px-2  ">
             <div className="grid grid-cols-1 w-full gap-2   items-start overflow-y-scroll px-2  ">

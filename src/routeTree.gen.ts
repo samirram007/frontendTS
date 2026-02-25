@@ -34,6 +34,7 @@ import { Route as ProtectedAdministrationLayoutRouteImport } from './routes/_pro
 import { Route as ProtectedReportsProfit_lossIndexRouteImport } from './routes/_protected/reports/profit_loss/index'
 import { Route as ProtectedReportsBalance_sheetIndexRouteImport } from './routes/_protected/reports/balance_sheet/index'
 import { Route as ProtectedReportsStock_summaryLayoutRouteImport } from './routes/_protected/reports/stock_summary/_layout'
+import { Route as ProtectedReportsOrder_bookLayoutRouteImport } from './routes/_protected/reports/order_book/_layout'
 import { Route as ProtectedReportsFreightLayoutRouteImport } from './routes/_protected/reports/freight/_layout'
 import { Route as ProtectedReportsDay_bookLayoutRouteImport } from './routes/_protected/reports/day_book/_layout'
 import { Route as ProtectedMastersStatutoryLayoutRouteImport } from './routes/_protected/masters/statutory/_layout'
@@ -47,6 +48,7 @@ import { Route as ProtectedMastersInventoryLayoutRouteImport } from './routes/_p
 import { Route as ProtectedMastersAccountsLayoutRouteImport } from './routes/_protected/masters/accounts/_layout'
 import { Route as ProtectedauthUserFiscalYearLayoutRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout'
 import { Route as ProtectedReportsStock_summaryLayoutIndexRouteImport } from './routes/_protected/reports/stock_summary/_layout/index'
+import { Route as ProtectedReportsOrder_bookLayoutIndexRouteImport } from './routes/_protected/reports/order_book/_layout/index'
 import { Route as ProtectedReportsDay_bookLayoutIndexRouteImport } from './routes/_protected/reports/day_book/_layout/index'
 import { Route as ProtectedAdministrationLayoutPermissionIndexRouteImport } from './routes/_protected/administration/_layout/permission/index'
 import { Route as ProtectedAdministrationLayoutApp_module_featureIndexRouteImport } from './routes/_protected/administration/_layout/app_module_feature/index'
@@ -63,6 +65,7 @@ import { Route as ProtectedReportsStock_summaryLayoutSalesOrderOutstandingRouteI
 import { Route as ProtectedReportsStock_summaryLayoutSalebleStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/saleble-stock'
 import { Route as ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRouteImport } from './routes/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
 import { Route as ProtectedReportsStock_summaryLayoutNetStockRouteImport } from './routes/_protected/reports/stock_summary/_layout/net-stock'
+import { Route as ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-voucher-wise'
 import { Route as ProtectedReportsFreightLayoutFreightGodownWiseRouteImport } from './routes/_protected/reports/freight/_layout/freight-godown-wise'
 import { Route as ProtectedMastersMiscellaneousDelivery_vehiclesIdRouteImport } from './routes/_protected/masters/miscellaneous/delivery_vehicles.$id'
 import { Route as ProtectedAdministrationLayoutUserLayoutRouteImport } from './routes/_protected/administration/_layout/user/_layout'
@@ -76,7 +79,6 @@ import { Route as ProtectedReportsDay_bookLayoutSalesIndexRouteImport } from './
 import { Route as ProtectedReportsDay_bookLayoutRejection_outIndexRouteImport } from './routes/_protected/reports/day_book/_layout/rejection_out/index'
 import { Route as ProtectedReportsDay_bookLayoutRejection_inIndexRouteImport } from './routes/_protected/reports/day_book/_layout/rejection_in/index'
 import { Route as ProtectedReportsDay_bookLayoutReceiptIndexRouteImport } from './routes/_protected/reports/day_book/_layout/receipt/index'
-import { Route as ProtectedReportsDay_bookLayoutPurchase_orderIndexRouteImport } from './routes/_protected/reports/day_book/_layout/purchase_order/index'
 import { Route as ProtectedReportsDay_bookLayoutPurchaseIndexRouteImport } from './routes/_protected/reports/day_book/_layout/purchase/index'
 import { Route as ProtectedReportsDay_bookLayoutPhysical_stockIndexRouteImport } from './routes/_protected/reports/day_book/_layout/physical_stock/index'
 import { Route as ProtectedReportsDay_bookLayoutPaymentIndexRouteImport } from './routes/_protected/reports/day_book/_layout/payment/index'
@@ -109,6 +111,7 @@ import { Route as ProtectedMastersAccountsLayoutAccount_natureIndexRouteImport }
 import { Route as ProtectedAdministrationLayoutUserLayoutIndexRouteImport } from './routes/_protected/administration/_layout/user/_layout/index'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIndexRouteImport } from './routes/_protected/administration/_layout/role/_layout/index'
 import { Route as ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteImport } from './routes/_protected/reports/day_book/_layout/receipt_note/_layout'
+import { Route as ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteImport } from './routes/_protected/reports/day_book/_layout/purchase_order/_layout'
 import { Route as ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteImport } from './routes/_protected/reports/day_book/_layout/delivery_note/_layout'
 import { Route as ProtectedMastersPayrollLayoutEmployeeLayoutRouteImport } from './routes/_protected/masters/payroll/_layout/employee/_layout'
 import { Route as ProtectedMastersPartyLayoutTransporterLayoutRouteImport } from './routes/_protected/masters/party/_layout/transporter/_layout'
@@ -134,7 +137,6 @@ import { Route as ProtectedTransactionsProviderVouchersLayoutSalesIndexRouteImpo
 import { Route as ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/rejection_out/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/rejection_in/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutReceiptIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/receipt/index'
-import { Route as ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/purchase_order/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/purchase/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/physical_stock/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutPaymentIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/payment/index'
@@ -142,6 +144,7 @@ import { Route as ProtectedTransactionsProviderVouchersLayoutManufacturing_journ
 import { Route as ProtectedTransactionsProviderVouchersLayoutJournalIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/journal/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutContraIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/contra/index'
 import { Route as ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRouteImport } from './routes/_protected/reports/day_book/_layout/receipt_note/_layout/index'
+import { Route as ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRouteImport } from './routes/_protected/reports/day_book/_layout/purchase_order/_layout/index'
 import { Route as ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRouteImport } from './routes/_protected/reports/day_book/_layout/delivery_note/_layout/index'
 import { Route as ProtectedMastersPayrollLayoutEmployeeLayoutIndexRouteImport } from './routes/_protected/masters/payroll/_layout/employee/_layout/index'
 import { Route as ProtectedMastersPartyLayoutTransporterLayoutIndexRouteImport } from './routes/_protected/masters/party/_layout/transporter/_layout/index'
@@ -160,8 +163,10 @@ import { Route as ProtectedMastersAccountsLayoutCustomerLayoutIndexRouteImport }
 import { Route as ProtectedMastersAccountsLayoutAccount_ledgerLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/account_ledger/_layout/index'
 import { Route as ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRouteImport } from './routes/_protected/masters/accounts/_layout/account_group/_layout/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout'
+import { Route as ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout'
 import { Route as ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout'
 import { Route as ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRouteImport } from './routes/_protected/reports/day_book/_layout/receipt_note/_layout/$id'
+import { Route as ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRouteImport } from './routes/_protected/reports/day_book/_layout/purchase_order/_layout/$id'
 import { Route as ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRouteImport } from './routes/_protected/reports/day_book/_layout/delivery_note/_layout/$id'
 import { Route as ProtectedMastersPayrollLayoutEmployeeLayoutIdRouteImport } from './routes/_protected/masters/payroll/_layout/employee/_layout/$id'
 import { Route as ProtectedMastersPartyLayoutTransporterLayoutIdRouteImport } from './routes/_protected/masters/party/_layout/transporter/_layout/$id'
@@ -175,10 +180,12 @@ import { Route as ProtectedMastersOrganizationLayoutCompanyLayoutIdRouteImport }
 import { Route as ProtectedMastersInventoryLayoutStorage_unitLayoutIdRouteImport } from './routes/_protected/masters/inventory/_layout/storage_unit/_layout/$id'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module'
 import { Route as ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/index'
+import { Route as ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/index'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/$id/index'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module/index'
 import { Route as ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/$id'
+import { Route as ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/$id'
 import { Route as ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIdRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/$id'
 import { Route as ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRouteImport } from './routes/_protected/masters/inventory/_layout/stock_item/_layout/$id/configuration'
 import { Route as ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRouteImport } from './routes/_protected/administration/_layout/role/_layout/$id/_module/$moduleid'
@@ -202,6 +209,9 @@ const errors403LazyRouteImport = createFileRoute('/(errors)/403')()
 const errors401LazyRouteImport = createFileRoute('/(errors)/401')()
 const ProtectedReportsStock_summaryRouteImport = createFileRoute(
   '/_protected/reports/stock_summary',
+)()
+const ProtectedReportsOrder_bookRouteImport = createFileRoute(
+  '/_protected/reports/order_book',
 )()
 const ProtectedReportsFreightRouteImport = createFileRoute(
   '/_protected/reports/freight',
@@ -244,6 +254,9 @@ const ProtectedAdministrationLayoutRoleRouteImport = createFileRoute(
 )()
 const ProtectedReportsDay_bookLayoutReceipt_noteRouteImport = createFileRoute(
   '/_protected/reports/day_book/_layout/receipt_note',
+)()
+const ProtectedReportsDay_bookLayoutPurchase_orderRouteImport = createFileRoute(
+  '/_protected/reports/day_book/_layout/purchase_order',
 )()
 const ProtectedReportsDay_bookLayoutDelivery_noteRouteImport = createFileRoute(
   '/_protected/reports/day_book/_layout/delivery_note',
@@ -298,6 +311,10 @@ const ProtectedMastersAccountsLayoutAccount_groupRouteImport = createFileRoute(
 const ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteImport =
   createFileRoute(
     '/_protected/transactions/_provider/vouchers/_layout/receipt_note',
+  )()
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteImport =
+  createFileRoute(
+    '/_protected/transactions/_provider/vouchers/_layout/purchase_order',
   )()
 const ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteImport =
   createFileRoute(
@@ -430,6 +447,12 @@ const ProtectedReportsStock_summaryRoute =
   ProtectedReportsStock_summaryRouteImport.update({
     id: '/reports/stock_summary',
     path: '/reports/stock_summary',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
+const ProtectedReportsOrder_bookRoute =
+  ProtectedReportsOrder_bookRouteImport.update({
+    id: '/reports/order_book',
+    path: '/reports/order_book',
     getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedReportsFreightRoute = ProtectedReportsFreightRouteImport.update({
@@ -584,6 +607,11 @@ const ProtectedReportsStock_summaryLayoutRoute =
     id: '/_layout',
     getParentRoute: () => ProtectedReportsStock_summaryRoute,
   } as any)
+const ProtectedReportsOrder_bookLayoutRoute =
+  ProtectedReportsOrder_bookLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedReportsOrder_bookRoute,
+  } as any)
 const ProtectedReportsFreightLayoutRoute =
   ProtectedReportsFreightLayoutRouteImport.update({
     id: '/_layout',
@@ -651,6 +679,12 @@ const ProtectedReportsDay_bookLayoutReceipt_noteRoute =
   ProtectedReportsDay_bookLayoutReceipt_noteRouteImport.update({
     id: '/receipt_note',
     path: '/receipt_note',
+    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
+  } as any)
+const ProtectedReportsDay_bookLayoutPurchase_orderRoute =
+  ProtectedReportsDay_bookLayoutPurchase_orderRouteImport.update({
+    id: '/purchase_order',
+    path: '/purchase_order',
     getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutDelivery_noteRoute =
@@ -761,6 +795,12 @@ const ProtectedReportsStock_summaryLayoutIndexRoute =
     path: '/',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
   } as any)
+const ProtectedReportsOrder_bookLayoutIndexRoute =
+  ProtectedReportsOrder_bookLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => ProtectedReportsOrder_bookLayoutRoute,
+  } as any)
 const ProtectedReportsDay_bookLayoutIndexRoute =
   ProtectedReportsDay_bookLayoutIndexRouteImport.update({
     id: '/',
@@ -857,6 +897,12 @@ const ProtectedReportsStock_summaryLayoutNetStockRoute =
     path: '/net-stock',
     getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
   } as any)
+const ProtectedReportsFreightLayoutFreightVoucherWiseRoute =
+  ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport.update({
+    id: '/freight-voucher-wise',
+    path: '/freight-voucher-wise',
+    getParentRoute: () => ProtectedReportsFreightLayoutRoute,
+  } as any)
 const ProtectedReportsFreightLayoutFreightGodownWiseRoute =
   ProtectedReportsFreightLayoutFreightGodownWiseRouteImport.update({
     id: '/freight-godown-wise',
@@ -883,6 +929,12 @@ const ProtectedTransactionsProviderVouchersLayoutReceipt_noteRoute =
   ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteImport.update({
     id: '/receipt_note',
     path: '/receipt_note',
+    getParentRoute: () => ProtectedTransactionsProviderVouchersLayoutRoute,
+  } as any)
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteImport.update({
+    id: '/purchase_order',
+    path: '/purchase_order',
     getParentRoute: () => ProtectedTransactionsProviderVouchersLayoutRoute,
   } as any)
 const ProtectedTransactionsProviderVouchersLayoutDelivery_noteRoute =
@@ -949,12 +1001,6 @@ const ProtectedReportsDay_bookLayoutReceiptIndexRoute =
   ProtectedReportsDay_bookLayoutReceiptIndexRouteImport.update({
     id: '/receipt/',
     path: '/receipt/',
-    getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
-  } as any)
-const ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute =
-  ProtectedReportsDay_bookLayoutPurchase_orderIndexRouteImport.update({
-    id: '/purchase_order/',
-    path: '/purchase_order/',
     getParentRoute: () => ProtectedReportsDay_bookLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutPurchaseIndexRoute =
@@ -1148,6 +1194,11 @@ const ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute =
     id: '/_layout',
     getParentRoute: () => ProtectedReportsDay_bookLayoutReceipt_noteRoute,
   } as any)
+const ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute =
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => ProtectedReportsDay_bookLayoutPurchase_orderRoute,
+  } as any)
 const ProtectedReportsDay_bookLayoutDelivery_noteLayoutRoute =
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteImport.update({
     id: '/_layout',
@@ -1291,14 +1342,6 @@ const ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute =
     path: '/receipt/',
     getParentRoute: () => ProtectedTransactionsProviderVouchersLayoutRoute,
   } as any)
-const ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute =
-  ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRouteImport.update(
-    {
-      id: '/purchase_order/',
-      path: '/purchase_order/',
-      getParentRoute: () => ProtectedTransactionsProviderVouchersLayoutRoute,
-    } as any,
-  )
 const ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute =
   ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRouteImport.update({
     id: '/purchase/',
@@ -1344,6 +1387,13 @@ const ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute,
+  } as any)
+const ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute =
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () =>
+      ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute =
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRouteImport.update({
@@ -1460,6 +1510,14 @@ const ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRoute =
         ProtectedTransactionsProviderVouchersLayoutReceipt_noteRoute,
     } as any,
   )
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteImport.update(
+    {
+      id: '/_layout',
+      getParentRoute: () =>
+        ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute,
+    } as any,
+  )
 const ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRoute =
   ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteImport.update(
     {
@@ -1473,6 +1531,13 @@ const ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute =
     id: '/$id',
     path: '/$id',
     getParentRoute: () => ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute,
+  } as any)
+const ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute =
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRouteImport.update({
+    id: '/$id',
+    path: '/$id',
+    getParentRoute: () =>
+      ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute,
   } as any)
 const ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute =
   ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRouteImport.update({
@@ -1557,6 +1622,15 @@ const ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute =
         ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRoute,
     } as any,
   )
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRouteImport.update(
+    {
+      id: '/',
+      path: '/',
+      getParentRoute: () =>
+        ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute,
+    } as any,
+  )
 const ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRoute =
   ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRouteImport.update(
     {
@@ -1585,6 +1659,15 @@ const ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute =
       path: '/$id',
       getParentRoute: () =>
         ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRoute,
+    } as any,
+  )
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRouteImport.update(
+    {
+      id: '/$id',
+      path: '/$id',
+      getParentRoute: () =>
+        ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute,
     } as any,
   )
 const ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIdRoute =
@@ -1653,6 +1736,7 @@ export interface FileRoutesByFullPath {
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/reports/order_book': typeof ProtectedReportsOrder_bookLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
@@ -1660,6 +1744,7 @@ export interface FileRoutesByFullPath {
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1676,6 +1761,7 @@ export interface FileRoutesByFullPath {
   '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/administration/permission': typeof ProtectedAdministrationLayoutPermissionIndexRoute
   '/reports/day_book/': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/reports/order_book/': typeof ProtectedReportsOrder_bookLayoutIndexRoute
   '/reports/stock_summary/': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/administration/user/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
   '/masters/accounts/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutRouteWithChildren
@@ -1695,6 +1781,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/transporter': typeof ProtectedMastersPartyLayoutTransporterLayoutRouteWithChildren
   '/masters/payroll/employee': typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
   '/reports/day_book/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
+  '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteWithChildren
   '/reports/day_book/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
   '/administration/role/': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
   '/administration/user/': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
@@ -1727,7 +1814,6 @@ export interface FileRoutesByFullPath {
   '/reports/day_book/payment': typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
   '/reports/day_book/physical_stock': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/reports/day_book/purchase': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
-  '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
   '/reports/day_book/receipt': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/reports/day_book/rejection_in': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/reports/day_book/rejection_out': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
@@ -1749,8 +1835,10 @@ export interface FileRoutesByFullPath {
   '/masters/party/transporter/$id': typeof ProtectedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/reports/day_book/delivery_note/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
+  '/reports/day_book/purchase_order/$id': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute
   '/reports/day_book/receipt_note/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
   '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteWithChildren
+  '/transactions/vouchers/purchase_order': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteWithChildren
   '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/masters/accounts/account_group/': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
   '/masters/accounts/account_ledger/': typeof ProtectedMastersAccountsLayoutAccount_ledgerLayoutIndexRoute
@@ -1769,6 +1857,7 @@ export interface FileRoutesByFullPath {
   '/masters/party/transporter/': typeof ProtectedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee/': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIndexRoute
   '/reports/day_book/delivery_note/': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
+  '/reports/day_book/purchase_order/': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute
   '/reports/day_book/receipt_note/': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
   '/transactions/vouchers/contra': typeof ProtectedTransactionsProviderVouchersLayoutContraIndexRoute
   '/transactions/vouchers/journal': typeof ProtectedTransactionsProviderVouchersLayoutJournalIndexRoute
@@ -1776,7 +1865,6 @@ export interface FileRoutesByFullPath {
   '/transactions/vouchers/payment': typeof ProtectedTransactionsProviderVouchersLayoutPaymentIndexRoute
   '/transactions/vouchers/physical_stock': typeof ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute
   '/transactions/vouchers/purchase': typeof ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute
-  '/transactions/vouchers/purchase_order': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute
   '/transactions/vouchers/receipt': typeof ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute
   '/transactions/vouchers/rejection_in': typeof ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute
   '/transactions/vouchers/rejection_out': typeof ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRoute
@@ -1787,10 +1875,12 @@ export interface FileRoutesByFullPath {
   '/administration/role/$id/$moduleid': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
   '/transactions/vouchers/delivery_note/$id': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIdRoute
+  '/transactions/vouchers/purchase_order/$id': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute
   '/transactions/vouchers/receipt_note/$id': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute
   '/administration/role/$id/': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
   '/masters/inventory/stock_item/$id': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
   '/transactions/vouchers/delivery_note/': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRoute
+  '/transactions/vouchers/purchase_order/': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute
   '/transactions/vouchers/receipt_note/': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute
 }
 export interface FileRoutesByTo {
@@ -1833,6 +1923,7 @@ export interface FileRoutesByTo {
   '/masters/statutory': typeof ProtectedMastersStatutoryLayoutRoute
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/reports/order_book': typeof ProtectedReportsOrder_bookLayoutIndexRoute
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
@@ -1840,6 +1931,7 @@ export interface FileRoutesByTo {
   '/administration/user': typeof ProtectedAdministrationLayoutUserLayoutIndexRoute
   '/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/reports/freight/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/reports/freight/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/reports/stock_summary/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/reports/stock_summary/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/reports/stock_summary/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -1872,6 +1964,7 @@ export interface FileRoutesByTo {
   '/masters/party/transporter': typeof ProtectedMastersPartyLayoutTransporterLayoutIndexRoute
   '/masters/payroll/employee': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIndexRoute
   '/reports/day_book/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
+  '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute
   '/reports/day_book/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
   '/masters/accounts/account_nature': typeof ProtectedMastersAccountsLayoutAccount_natureIndexRoute
   '/masters/accounts/voucher_category': typeof ProtectedMastersAccountsLayoutVoucher_categoryIndexRoute
@@ -1902,7 +1995,6 @@ export interface FileRoutesByTo {
   '/reports/day_book/payment': typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
   '/reports/day_book/physical_stock': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/reports/day_book/purchase': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
-  '/reports/day_book/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
   '/reports/day_book/receipt': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/reports/day_book/rejection_in': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/reports/day_book/rejection_out': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
@@ -1922,8 +2014,10 @@ export interface FileRoutesByTo {
   '/masters/party/transporter/$id': typeof ProtectedMastersPartyLayoutTransporterLayoutIdRoute
   '/masters/payroll/employee/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/reports/day_book/delivery_note/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
+  '/reports/day_book/purchase_order/$id': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute
   '/reports/day_book/receipt_note/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
   '/transactions/vouchers/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRoute
+  '/transactions/vouchers/purchase_order': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute
   '/transactions/vouchers/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute
   '/transactions/vouchers/contra': typeof ProtectedTransactionsProviderVouchersLayoutContraIndexRoute
   '/transactions/vouchers/journal': typeof ProtectedTransactionsProviderVouchersLayoutJournalIndexRoute
@@ -1931,7 +2025,6 @@ export interface FileRoutesByTo {
   '/transactions/vouchers/payment': typeof ProtectedTransactionsProviderVouchersLayoutPaymentIndexRoute
   '/transactions/vouchers/physical_stock': typeof ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute
   '/transactions/vouchers/purchase': typeof ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute
-  '/transactions/vouchers/purchase_order': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute
   '/transactions/vouchers/receipt': typeof ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute
   '/transactions/vouchers/rejection_in': typeof ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute
   '/transactions/vouchers/rejection_out': typeof ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRoute
@@ -1942,6 +2035,7 @@ export interface FileRoutesByTo {
   '/administration/role/$id/$moduleid': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/masters/inventory/stock_item/$id/configuration': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
   '/transactions/vouchers/delivery_note/$id': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIdRoute
+  '/transactions/vouchers/purchase_order/$id': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute
   '/transactions/vouchers/receipt_note/$id': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute
   '/masters/inventory/stock_item/$id': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
 }
@@ -1999,6 +2093,8 @@ export interface FileRoutesById {
   '/_protected/reports/day_book/_layout': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
   '/_protected/reports/freight': typeof ProtectedReportsFreightRouteWithChildren
   '/_protected/reports/freight/_layout': typeof ProtectedReportsFreightLayoutRouteWithChildren
+  '/_protected/reports/order_book': typeof ProtectedReportsOrder_bookRouteWithChildren
+  '/_protected/reports/order_book/_layout': typeof ProtectedReportsOrder_bookLayoutRouteWithChildren
   '/_protected/reports/stock_summary': typeof ProtectedReportsStock_summaryRouteWithChildren
   '/_protected/reports/stock_summary/_layout': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
   '/_protected/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
@@ -2009,6 +2105,7 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/user/_layout': typeof ProtectedAdministrationLayoutUserLayoutRouteWithChildren
   '/_protected/masters/miscellaneous/delivery_vehicles/$id': typeof ProtectedMastersMiscellaneousDelivery_vehiclesIdRoute
   '/_protected/reports/freight/_layout/freight-godown-wise': typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  '/_protected/reports/freight/_layout/freight-voucher-wise': typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
   '/_protected/reports/stock_summary/_layout/net-stock': typeof ProtectedReportsStock_summaryLayoutNetStockRoute
   '/_protected/reports/stock_summary/_layout/purchase-order-outstanding': typeof ProtectedReportsStock_summaryLayoutPurchaseOrderOutstandingRoute
   '/_protected/reports/stock_summary/_layout/saleble-stock': typeof ProtectedReportsStock_summaryLayoutSalebleStockRoute
@@ -2027,6 +2124,7 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/app_module_feature/': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/_protected/administration/_layout/permission/': typeof ProtectedAdministrationLayoutPermissionIndexRoute
   '/_protected/reports/day_book/_layout/': typeof ProtectedReportsDay_bookLayoutIndexRoute
+  '/_protected/reports/order_book/_layout/': typeof ProtectedReportsOrder_bookLayoutIndexRoute
   '/_protected/reports/stock_summary/_layout/': typeof ProtectedReportsStock_summaryLayoutIndexRoute
   '/_protected/administration/_layout/user/_layout/$id': typeof ProtectedAdministrationLayoutUserLayoutIdRoute
   '/_protected/masters/accounts/_layout/account_group': typeof ProtectedMastersAccountsLayoutAccount_groupRouteWithChildren
@@ -2063,6 +2161,8 @@ export interface FileRoutesById {
   '/_protected/masters/payroll/_layout/employee/_layout': typeof ProtectedMastersPayrollLayoutEmployeeLayoutRouteWithChildren
   '/_protected/reports/day_book/_layout/delivery_note': typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren
   '/_protected/reports/day_book/_layout/delivery_note/_layout': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutRouteWithChildren
+  '/_protected/reports/day_book/_layout/purchase_order': typeof ProtectedReportsDay_bookLayoutPurchase_orderRouteWithChildren
+  '/_protected/reports/day_book/_layout/purchase_order/_layout': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteWithChildren
   '/_protected/reports/day_book/_layout/receipt_note': typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren
   '/_protected/reports/day_book/_layout/receipt_note/_layout': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteWithChildren
   '/_protected/administration/_layout/role/_layout/': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
@@ -2096,7 +2196,6 @@ export interface FileRoutesById {
   '/_protected/reports/day_book/_layout/payment/': typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
   '/_protected/reports/day_book/_layout/physical_stock/': typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   '/_protected/reports/day_book/_layout/purchase/': typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
-  '/_protected/reports/day_book/_layout/purchase_order/': typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
   '/_protected/reports/day_book/_layout/receipt/': typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   '/_protected/reports/day_book/_layout/rejection_in/': typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   '/_protected/reports/day_book/_layout/rejection_out/': typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
@@ -2119,9 +2218,12 @@ export interface FileRoutesById {
   '/_protected/masters/party/_layout/transporter/_layout/$id': typeof ProtectedMastersPartyLayoutTransporterLayoutIdRoute
   '/_protected/masters/payroll/_layout/employee/_layout/$id': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIdRoute
   '/_protected/reports/day_book/_layout/delivery_note/_layout/$id': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIdRoute
+  '/_protected/reports/day_book/_layout/purchase_order/_layout/$id': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute
   '/_protected/reports/day_book/_layout/receipt_note/_layout/$id': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutRouteWithChildren
+  '/_protected/transactions/_provider/vouchers/_layout/purchase_order': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteWithChildren
+  '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout/receipt_note': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteWithChildren
   '/_protected/masters/accounts/_layout/account_group/_layout/': typeof ProtectedMastersAccountsLayoutAccount_groupLayoutIndexRoute
@@ -2141,6 +2243,7 @@ export interface FileRoutesById {
   '/_protected/masters/party/_layout/transporter/_layout/': typeof ProtectedMastersPartyLayoutTransporterLayoutIndexRoute
   '/_protected/masters/payroll/_layout/employee/_layout/': typeof ProtectedMastersPayrollLayoutEmployeeLayoutIndexRoute
   '/_protected/reports/day_book/_layout/delivery_note/_layout/': typeof ProtectedReportsDay_bookLayoutDelivery_noteLayoutIndexRoute
+  '/_protected/reports/day_book/_layout/purchase_order/_layout/': typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute
   '/_protected/reports/day_book/_layout/receipt_note/_layout/': typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/contra/': typeof ProtectedTransactionsProviderVouchersLayoutContraIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/journal/': typeof ProtectedTransactionsProviderVouchersLayoutJournalIndexRoute
@@ -2148,7 +2251,6 @@ export interface FileRoutesById {
   '/_protected/transactions/_provider/vouchers/_layout/payment/': typeof ProtectedTransactionsProviderVouchersLayoutPaymentIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/physical_stock/': typeof ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/purchase/': typeof ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute
-  '/_protected/transactions/_provider/vouchers/_layout/purchase_order/': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/receipt/': typeof ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/rejection_in/': typeof ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/rejection_out/': typeof ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRoute
@@ -2159,10 +2261,12 @@ export interface FileRoutesById {
   '/_protected/administration/_layout/role/_layout/$id/_module/$moduleid': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleModuleidRoute
   '/_protected/masters/inventory/_layout/stock_item/_layout/$id/configuration': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdConfigurationRoute
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/$id': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIdRoute
+  '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/$id': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute
   '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/$id': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute
   '/_protected/administration/_layout/role/_layout/$id/_module/': typeof ProtectedAdministrationLayoutRoleLayoutIdModuleIndexRoute
   '/_protected/masters/inventory/_layout/stock_item/_layout/$id/': typeof ProtectedMastersInventoryLayoutStock_itemLayoutIdIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/': typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteLayoutIndexRoute
+  '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/': typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute
   '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/': typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute
 }
 export interface FileRouteTypes {
@@ -2208,6 +2312,7 @@ export interface FileRouteTypes {
     | '/masters/statutory'
     | '/reports/day_book'
     | '/reports/freight'
+    | '/reports/order_book'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
@@ -2215,6 +2320,7 @@ export interface FileRouteTypes {
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/freight/freight-godown-wise'
+    | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2231,6 +2337,7 @@ export interface FileRouteTypes {
     | '/administration/app_module_feature'
     | '/administration/permission'
     | '/reports/day_book/'
+    | '/reports/order_book/'
     | '/reports/stock_summary/'
     | '/administration/user/$id'
     | '/masters/accounts/account_group'
@@ -2250,6 +2357,7 @@ export interface FileRouteTypes {
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
     | '/reports/day_book/delivery_note'
+    | '/reports/day_book/purchase_order'
     | '/reports/day_book/receipt_note'
     | '/administration/role/'
     | '/administration/user/'
@@ -2282,7 +2390,6 @@ export interface FileRouteTypes {
     | '/reports/day_book/payment'
     | '/reports/day_book/physical_stock'
     | '/reports/day_book/purchase'
-    | '/reports/day_book/purchase_order'
     | '/reports/day_book/receipt'
     | '/reports/day_book/rejection_in'
     | '/reports/day_book/rejection_out'
@@ -2304,8 +2411,10 @@ export interface FileRouteTypes {
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
     | '/reports/day_book/delivery_note/$id'
+    | '/reports/day_book/purchase_order/$id'
     | '/reports/day_book/receipt_note/$id'
     | '/transactions/vouchers/delivery_note'
+    | '/transactions/vouchers/purchase_order'
     | '/transactions/vouchers/receipt_note'
     | '/masters/accounts/account_group/'
     | '/masters/accounts/account_ledger/'
@@ -2324,6 +2433,7 @@ export interface FileRouteTypes {
     | '/masters/party/transporter/'
     | '/masters/payroll/employee/'
     | '/reports/day_book/delivery_note/'
+    | '/reports/day_book/purchase_order/'
     | '/reports/day_book/receipt_note/'
     | '/transactions/vouchers/contra'
     | '/transactions/vouchers/journal'
@@ -2331,7 +2441,6 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/payment'
     | '/transactions/vouchers/physical_stock'
     | '/transactions/vouchers/purchase'
-    | '/transactions/vouchers/purchase_order'
     | '/transactions/vouchers/receipt'
     | '/transactions/vouchers/rejection_in'
     | '/transactions/vouchers/rejection_out'
@@ -2342,10 +2451,12 @@ export interface FileRouteTypes {
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
     | '/transactions/vouchers/delivery_note/$id'
+    | '/transactions/vouchers/purchase_order/$id'
     | '/transactions/vouchers/receipt_note/$id'
     | '/administration/role/$id/'
     | '/masters/inventory/stock_item/$id'
     | '/transactions/vouchers/delivery_note/'
+    | '/transactions/vouchers/purchase_order/'
     | '/transactions/vouchers/receipt_note/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -2388,6 +2499,7 @@ export interface FileRouteTypes {
     | '/masters/statutory'
     | '/reports/day_book'
     | '/reports/freight'
+    | '/reports/order_book'
     | '/reports/stock_summary'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
@@ -2395,6 +2507,7 @@ export interface FileRouteTypes {
     | '/administration/user'
     | '/masters/miscellaneous/delivery_vehicles/$id'
     | '/reports/freight/freight-godown-wise'
+    | '/reports/freight/freight-voucher-wise'
     | '/reports/stock_summary/net-stock'
     | '/reports/stock_summary/purchase-order-outstanding'
     | '/reports/stock_summary/saleble-stock'
@@ -2427,6 +2540,7 @@ export interface FileRouteTypes {
     | '/masters/party/transporter'
     | '/masters/payroll/employee'
     | '/reports/day_book/delivery_note'
+    | '/reports/day_book/purchase_order'
     | '/reports/day_book/receipt_note'
     | '/masters/accounts/account_nature'
     | '/masters/accounts/voucher_category'
@@ -2457,7 +2571,6 @@ export interface FileRouteTypes {
     | '/reports/day_book/payment'
     | '/reports/day_book/physical_stock'
     | '/reports/day_book/purchase'
-    | '/reports/day_book/purchase_order'
     | '/reports/day_book/receipt'
     | '/reports/day_book/rejection_in'
     | '/reports/day_book/rejection_out'
@@ -2477,8 +2590,10 @@ export interface FileRouteTypes {
     | '/masters/party/transporter/$id'
     | '/masters/payroll/employee/$id'
     | '/reports/day_book/delivery_note/$id'
+    | '/reports/day_book/purchase_order/$id'
     | '/reports/day_book/receipt_note/$id'
     | '/transactions/vouchers/delivery_note'
+    | '/transactions/vouchers/purchase_order'
     | '/transactions/vouchers/receipt_note'
     | '/transactions/vouchers/contra'
     | '/transactions/vouchers/journal'
@@ -2486,7 +2601,6 @@ export interface FileRouteTypes {
     | '/transactions/vouchers/payment'
     | '/transactions/vouchers/physical_stock'
     | '/transactions/vouchers/purchase'
-    | '/transactions/vouchers/purchase_order'
     | '/transactions/vouchers/receipt'
     | '/transactions/vouchers/rejection_in'
     | '/transactions/vouchers/rejection_out'
@@ -2497,6 +2611,7 @@ export interface FileRouteTypes {
     | '/administration/role/$id/$moduleid'
     | '/masters/inventory/stock_item/$id/configuration'
     | '/transactions/vouchers/delivery_note/$id'
+    | '/transactions/vouchers/purchase_order/$id'
     | '/transactions/vouchers/receipt_note/$id'
     | '/masters/inventory/stock_item/$id'
   id:
@@ -2553,6 +2668,8 @@ export interface FileRouteTypes {
     | '/_protected/reports/day_book/_layout'
     | '/_protected/reports/freight'
     | '/_protected/reports/freight/_layout'
+    | '/_protected/reports/order_book'
+    | '/_protected/reports/order_book/_layout'
     | '/_protected/reports/stock_summary'
     | '/_protected/reports/stock_summary/_layout'
     | '/_protected/reports/balance_sheet/'
@@ -2563,6 +2680,7 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/user/_layout'
     | '/_protected/masters/miscellaneous/delivery_vehicles/$id'
     | '/_protected/reports/freight/_layout/freight-godown-wise'
+    | '/_protected/reports/freight/_layout/freight-voucher-wise'
     | '/_protected/reports/stock_summary/_layout/net-stock'
     | '/_protected/reports/stock_summary/_layout/purchase-order-outstanding'
     | '/_protected/reports/stock_summary/_layout/saleble-stock'
@@ -2581,6 +2699,7 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/app_module_feature/'
     | '/_protected/administration/_layout/permission/'
     | '/_protected/reports/day_book/_layout/'
+    | '/_protected/reports/order_book/_layout/'
     | '/_protected/reports/stock_summary/_layout/'
     | '/_protected/administration/_layout/user/_layout/$id'
     | '/_protected/masters/accounts/_layout/account_group'
@@ -2617,6 +2736,8 @@ export interface FileRouteTypes {
     | '/_protected/masters/payroll/_layout/employee/_layout'
     | '/_protected/reports/day_book/_layout/delivery_note'
     | '/_protected/reports/day_book/_layout/delivery_note/_layout'
+    | '/_protected/reports/day_book/_layout/purchase_order'
+    | '/_protected/reports/day_book/_layout/purchase_order/_layout'
     | '/_protected/reports/day_book/_layout/receipt_note'
     | '/_protected/reports/day_book/_layout/receipt_note/_layout'
     | '/_protected/administration/_layout/role/_layout/'
@@ -2650,7 +2771,6 @@ export interface FileRouteTypes {
     | '/_protected/reports/day_book/_layout/payment/'
     | '/_protected/reports/day_book/_layout/physical_stock/'
     | '/_protected/reports/day_book/_layout/purchase/'
-    | '/_protected/reports/day_book/_layout/purchase_order/'
     | '/_protected/reports/day_book/_layout/receipt/'
     | '/_protected/reports/day_book/_layout/rejection_in/'
     | '/_protected/reports/day_book/_layout/rejection_out/'
@@ -2673,9 +2793,12 @@ export interface FileRouteTypes {
     | '/_protected/masters/party/_layout/transporter/_layout/$id'
     | '/_protected/masters/payroll/_layout/employee/_layout/$id'
     | '/_protected/reports/day_book/_layout/delivery_note/_layout/$id'
+    | '/_protected/reports/day_book/_layout/purchase_order/_layout/$id'
     | '/_protected/reports/day_book/_layout/receipt_note/_layout/$id'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout'
+    | '/_protected/transactions/_provider/vouchers/_layout/purchase_order'
+    | '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt_note'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout'
     | '/_protected/masters/accounts/_layout/account_group/_layout/'
@@ -2695,6 +2818,7 @@ export interface FileRouteTypes {
     | '/_protected/masters/party/_layout/transporter/_layout/'
     | '/_protected/masters/payroll/_layout/employee/_layout/'
     | '/_protected/reports/day_book/_layout/delivery_note/_layout/'
+    | '/_protected/reports/day_book/_layout/purchase_order/_layout/'
     | '/_protected/reports/day_book/_layout/receipt_note/_layout/'
     | '/_protected/transactions/_provider/vouchers/_layout/contra/'
     | '/_protected/transactions/_provider/vouchers/_layout/journal/'
@@ -2702,7 +2826,6 @@ export interface FileRouteTypes {
     | '/_protected/transactions/_provider/vouchers/_layout/payment/'
     | '/_protected/transactions/_provider/vouchers/_layout/physical_stock/'
     | '/_protected/transactions/_provider/vouchers/_layout/purchase/'
-    | '/_protected/transactions/_provider/vouchers/_layout/purchase_order/'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt/'
     | '/_protected/transactions/_provider/vouchers/_layout/rejection_in/'
     | '/_protected/transactions/_provider/vouchers/_layout/rejection_out/'
@@ -2713,10 +2836,12 @@ export interface FileRouteTypes {
     | '/_protected/administration/_layout/role/_layout/$id/_module/$moduleid'
     | '/_protected/masters/inventory/_layout/stock_item/_layout/$id/configuration'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/$id'
+    | '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/$id'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/$id'
     | '/_protected/administration/_layout/role/_layout/$id/_module/'
     | '/_protected/masters/inventory/_layout/stock_item/_layout/$id/'
     | '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/'
+    | '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/'
     | '/_protected/transactions/_provider/vouchers/_layout/receipt_note/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -2885,6 +3010,13 @@ declare module '@tanstack/react-router' {
       path: '/reports/stock_summary'
       fullPath: '/reports/stock_summary'
       preLoaderRoute: typeof ProtectedReportsStock_summaryRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
+    '/_protected/reports/order_book': {
+      id: '/_protected/reports/order_book'
+      path: '/reports/order_book'
+      fullPath: '/reports/order_book'
+      preLoaderRoute: typeof ProtectedReportsOrder_bookRouteImport
       parentRoute: typeof ProtectedRoute
     }
     '/_protected/reports/freight': {
@@ -3076,6 +3208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryRoute
     }
+    '/_protected/reports/order_book/_layout': {
+      id: '/_protected/reports/order_book/_layout'
+      path: '/reports/order_book'
+      fullPath: '/reports/order_book'
+      preLoaderRoute: typeof ProtectedReportsOrder_bookLayoutRouteImport
+      parentRoute: typeof ProtectedReportsOrder_bookRoute
+    }
     '/_protected/reports/freight/_layout': {
       id: '/_protected/reports/freight/_layout'
       path: '/reports/freight'
@@ -3165,6 +3304,13 @@ declare module '@tanstack/react-router' {
       path: '/receipt_note'
       fullPath: '/reports/day_book/receipt_note'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteImport
+      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
+    }
+    '/_protected/reports/day_book/_layout/purchase_order': {
+      id: '/_protected/reports/day_book/_layout/purchase_order'
+      path: '/purchase_order'
+      fullPath: '/reports/day_book/purchase_order'
+      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/delivery_note': {
@@ -3293,6 +3439,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutIndexRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
     }
+    '/_protected/reports/order_book/_layout/': {
+      id: '/_protected/reports/order_book/_layout/'
+      path: '/'
+      fullPath: '/reports/order_book/'
+      preLoaderRoute: typeof ProtectedReportsOrder_bookLayoutIndexRouteImport
+      parentRoute: typeof ProtectedReportsOrder_bookLayoutRoute
+    }
     '/_protected/reports/day_book/_layout/': {
       id: '/_protected/reports/day_book/_layout/'
       path: '/'
@@ -3405,6 +3558,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutNetStockRouteImport
       parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
     }
+    '/_protected/reports/freight/_layout/freight-voucher-wise': {
+      id: '/_protected/reports/freight/_layout/freight-voucher-wise'
+      path: '/freight-voucher-wise'
+      fullPath: '/reports/freight/freight-voucher-wise'
+      preLoaderRoute: typeof ProtectedReportsFreightLayoutFreightVoucherWiseRouteImport
+      parentRoute: typeof ProtectedReportsFreightLayoutRoute
+    }
     '/_protected/reports/freight/_layout/freight-godown-wise': {
       id: '/_protected/reports/freight/_layout/freight-godown-wise'
       path: '/freight-godown-wise'
@@ -3438,6 +3598,13 @@ declare module '@tanstack/react-router' {
       path: '/receipt_note'
       fullPath: '/transactions/vouchers/receipt_note'
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteImport
+      parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutRoute
+    }
+    '/_protected/transactions/_provider/vouchers/_layout/purchase_order': {
+      id: '/_protected/transactions/_provider/vouchers/_layout/purchase_order'
+      path: '/purchase_order'
+      fullPath: '/transactions/vouchers/purchase_order'
+      preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutRoute
     }
     '/_protected/transactions/_provider/vouchers/_layout/delivery_note': {
@@ -3515,13 +3682,6 @@ declare module '@tanstack/react-router' {
       path: '/receipt'
       fullPath: '/reports/day_book/receipt'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceiptIndexRouteImport
-      parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
-    }
-    '/_protected/reports/day_book/_layout/purchase_order/': {
-      id: '/_protected/reports/day_book/_layout/purchase_order/'
-      path: '/purchase_order'
-      fullPath: '/reports/day_book/purchase_order'
-      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutRoute
     }
     '/_protected/reports/day_book/_layout/purchase/': {
@@ -3748,6 +3908,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRoute
     }
+    '/_protected/reports/day_book/_layout/purchase_order/_layout': {
+      id: '/_protected/reports/day_book/_layout/purchase_order/_layout'
+      path: '/purchase_order'
+      fullPath: '/reports/day_book/purchase_order'
+      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteImport
+      parentRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderRoute
+    }
     '/_protected/reports/day_book/_layout/delivery_note/_layout': {
       id: '/_protected/reports/day_book/_layout/delivery_note/_layout'
       path: '/delivery_note'
@@ -3923,13 +4090,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceiptIndexRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutRoute
     }
-    '/_protected/transactions/_provider/vouchers/_layout/purchase_order/': {
-      id: '/_protected/transactions/_provider/vouchers/_layout/purchase_order/'
-      path: '/purchase_order'
-      fullPath: '/transactions/vouchers/purchase_order'
-      preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRouteImport
-      parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutRoute
-    }
     '/_protected/transactions/_provider/vouchers/_layout/purchase/': {
       id: '/_protected/transactions/_provider/vouchers/_layout/purchase/'
       path: '/purchase'
@@ -3978,6 +4138,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/day_book/receipt_note/'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute
+    }
+    '/_protected/reports/day_book/_layout/purchase_order/_layout/': {
+      id: '/_protected/reports/day_book/_layout/purchase_order/_layout/'
+      path: '/'
+      fullPath: '/reports/day_book/purchase_order/'
+      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRouteImport
+      parentRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute
     }
     '/_protected/reports/day_book/_layout/delivery_note/_layout/': {
       id: '/_protected/reports/day_book/_layout/delivery_note/_layout/'
@@ -4105,6 +4272,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteRoute
     }
+    '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout': {
+      id: '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout'
+      path: '/purchase_order'
+      fullPath: '/transactions/vouchers/purchase_order'
+      preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteImport
+      parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute
+    }
     '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout': {
       id: '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout'
       path: '/delivery_note'
@@ -4118,6 +4292,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reports/day_book/receipt_note/$id'
       preLoaderRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRouteImport
       parentRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutRoute
+    }
+    '/_protected/reports/day_book/_layout/purchase_order/_layout/$id': {
+      id: '/_protected/reports/day_book/_layout/purchase_order/_layout/$id'
+      path: '/$id'
+      fullPath: '/reports/day_book/purchase_order/$id'
+      preLoaderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRouteImport
+      parentRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute
     }
     '/_protected/reports/day_book/_layout/delivery_note/_layout/$id': {
       id: '/_protected/reports/day_book/_layout/delivery_note/_layout/$id'
@@ -4210,6 +4391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRoute
     }
+    '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/': {
+      id: '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/'
+      path: '/'
+      fullPath: '/transactions/vouchers/purchase_order/'
+      preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRouteImport
+      parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute
+    }
     '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/': {
       id: '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/'
       path: '/'
@@ -4237,6 +4425,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/transactions/vouchers/receipt_note/$id'
       preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRouteImport
       parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRoute
+    }
+    '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/$id': {
+      id: '/_protected/transactions/_provider/vouchers/_layout/purchase_order/_layout/$id'
+      path: '/$id'
+      fullPath: '/transactions/vouchers/purchase_order/$id'
+      preLoaderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRouteImport
+      parentRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute
     }
     '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/$id': {
       id: '/_protected/transactions/_provider/vouchers/_layout/delivery_note/_layout/$id'
@@ -4488,6 +4683,39 @@ const ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteWithChildren 
     ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteChildren,
   )
 
+interface ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteChildren {
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute
+}
+
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteChildren: ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteChildren =
+  {
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute:
+      ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIdRoute,
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute:
+      ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutIndexRoute,
+  }
+
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteWithChildren =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute._addFileChildren(
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteChildren,
+  )
+
+interface ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteChildren {
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteWithChildren
+}
+
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteChildren: ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteChildren =
+  {
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRoute:
+      ProtectedTransactionsProviderVouchersLayoutPurchase_orderLayoutRouteWithChildren,
+  }
+
+const ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteWithChildren =
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute._addFileChildren(
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteChildren,
+  )
+
 interface ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutRouteChildren {
   ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIdRoute
   ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteLayoutIndexRoute
@@ -4524,6 +4752,7 @@ const ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteWithChildren =
 interface ProtectedTransactionsProviderVouchersLayoutRouteChildren {
   ProtectedTransactionsProviderVouchersLayoutIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutIndexRoute
   ProtectedTransactionsProviderVouchersLayoutDelivery_noteRoute: typeof ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteWithChildren
+  ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteWithChildren
   ProtectedTransactionsProviderVouchersLayoutReceipt_noteRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteWithChildren
   ProtectedTransactionsProviderVouchersLayoutContraIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutContraIndexRoute
   ProtectedTransactionsProviderVouchersLayoutJournalIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutJournalIndexRoute
@@ -4531,7 +4760,6 @@ interface ProtectedTransactionsProviderVouchersLayoutRouteChildren {
   ProtectedTransactionsProviderVouchersLayoutPaymentIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutPaymentIndexRoute
   ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute
   ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute
-  ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute
   ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute
   ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute
   ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRoute: typeof ProtectedTransactionsProviderVouchersLayoutRejection_outIndexRoute
@@ -4547,6 +4775,8 @@ const ProtectedTransactionsProviderVouchersLayoutRouteChildren: ProtectedTransac
       ProtectedTransactionsProviderVouchersLayoutIndexRoute,
     ProtectedTransactionsProviderVouchersLayoutDelivery_noteRoute:
       ProtectedTransactionsProviderVouchersLayoutDelivery_noteRouteWithChildren,
+    ProtectedTransactionsProviderVouchersLayoutPurchase_orderRoute:
+      ProtectedTransactionsProviderVouchersLayoutPurchase_orderRouteWithChildren,
     ProtectedTransactionsProviderVouchersLayoutReceipt_noteRoute:
       ProtectedTransactionsProviderVouchersLayoutReceipt_noteRouteWithChildren,
     ProtectedTransactionsProviderVouchersLayoutContraIndexRoute:
@@ -4561,8 +4791,6 @@ const ProtectedTransactionsProviderVouchersLayoutRouteChildren: ProtectedTransac
       ProtectedTransactionsProviderVouchersLayoutPhysical_stockIndexRoute,
     ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute:
       ProtectedTransactionsProviderVouchersLayoutPurchaseIndexRoute,
-    ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute:
-      ProtectedTransactionsProviderVouchersLayoutPurchase_orderIndexRoute,
     ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute:
       ProtectedTransactionsProviderVouchersLayoutReceiptIndexRoute,
     ProtectedTransactionsProviderVouchersLayoutRejection_inIndexRoute:
@@ -5490,6 +5718,39 @@ const ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren =
     ProtectedReportsDay_bookLayoutDelivery_noteRouteChildren,
   )
 
+interface ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteChildren {
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute
+}
+
+const ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteChildren: ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteChildren =
+  {
+    ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute:
+      ProtectedReportsDay_bookLayoutPurchase_orderLayoutIdRoute,
+    ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute:
+      ProtectedReportsDay_bookLayoutPurchase_orderLayoutIndexRoute,
+  }
+
+const ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteWithChildren =
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute._addFileChildren(
+    ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteChildren,
+  )
+
+interface ProtectedReportsDay_bookLayoutPurchase_orderRouteChildren {
+  ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteWithChildren
+}
+
+const ProtectedReportsDay_bookLayoutPurchase_orderRouteChildren: ProtectedReportsDay_bookLayoutPurchase_orderRouteChildren =
+  {
+    ProtectedReportsDay_bookLayoutPurchase_orderLayoutRoute:
+      ProtectedReportsDay_bookLayoutPurchase_orderLayoutRouteWithChildren,
+  }
+
+const ProtectedReportsDay_bookLayoutPurchase_orderRouteWithChildren =
+  ProtectedReportsDay_bookLayoutPurchase_orderRoute._addFileChildren(
+    ProtectedReportsDay_bookLayoutPurchase_orderRouteChildren,
+  )
+
 interface ProtectedReportsDay_bookLayoutReceipt_noteLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIdRoute
   ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteLayoutIndexRoute
@@ -5526,6 +5787,7 @@ const ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren =
 interface ProtectedReportsDay_bookLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutIndexRoute: typeof ProtectedReportsDay_bookLayoutIndexRoute
   ProtectedReportsDay_bookLayoutDelivery_noteRoute: typeof ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren
+  ProtectedReportsDay_bookLayoutPurchase_orderRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderRouteWithChildren
   ProtectedReportsDay_bookLayoutReceipt_noteRoute: typeof ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren
   ProtectedReportsDay_bookLayoutContraIndexRoute: typeof ProtectedReportsDay_bookLayoutContraIndexRoute
   ProtectedReportsDay_bookLayoutJournalIndexRoute: typeof ProtectedReportsDay_bookLayoutJournalIndexRoute
@@ -5533,7 +5795,6 @@ interface ProtectedReportsDay_bookLayoutRouteChildren {
   ProtectedReportsDay_bookLayoutPaymentIndexRoute: typeof ProtectedReportsDay_bookLayoutPaymentIndexRoute
   ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute: typeof ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute
   ProtectedReportsDay_bookLayoutPurchaseIndexRoute: typeof ProtectedReportsDay_bookLayoutPurchaseIndexRoute
-  ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute: typeof ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute
   ProtectedReportsDay_bookLayoutReceiptIndexRoute: typeof ProtectedReportsDay_bookLayoutReceiptIndexRoute
   ProtectedReportsDay_bookLayoutRejection_inIndexRoute: typeof ProtectedReportsDay_bookLayoutRejection_inIndexRoute
   ProtectedReportsDay_bookLayoutRejection_outIndexRoute: typeof ProtectedReportsDay_bookLayoutRejection_outIndexRoute
@@ -5549,6 +5810,8 @@ const ProtectedReportsDay_bookLayoutRouteChildren: ProtectedReportsDay_bookLayou
       ProtectedReportsDay_bookLayoutIndexRoute,
     ProtectedReportsDay_bookLayoutDelivery_noteRoute:
       ProtectedReportsDay_bookLayoutDelivery_noteRouteWithChildren,
+    ProtectedReportsDay_bookLayoutPurchase_orderRoute:
+      ProtectedReportsDay_bookLayoutPurchase_orderRouteWithChildren,
     ProtectedReportsDay_bookLayoutReceipt_noteRoute:
       ProtectedReportsDay_bookLayoutReceipt_noteRouteWithChildren,
     ProtectedReportsDay_bookLayoutContraIndexRoute:
@@ -5563,8 +5826,6 @@ const ProtectedReportsDay_bookLayoutRouteChildren: ProtectedReportsDay_bookLayou
       ProtectedReportsDay_bookLayoutPhysical_stockIndexRoute,
     ProtectedReportsDay_bookLayoutPurchaseIndexRoute:
       ProtectedReportsDay_bookLayoutPurchaseIndexRoute,
-    ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute:
-      ProtectedReportsDay_bookLayoutPurchase_orderIndexRoute,
     ProtectedReportsDay_bookLayoutReceiptIndexRoute:
       ProtectedReportsDay_bookLayoutReceiptIndexRoute,
     ProtectedReportsDay_bookLayoutRejection_inIndexRoute:
@@ -5603,12 +5864,15 @@ const ProtectedReportsDay_bookRouteWithChildren =
 
 interface ProtectedReportsFreightLayoutRouteChildren {
   ProtectedReportsFreightLayoutFreightGodownWiseRoute: typeof ProtectedReportsFreightLayoutFreightGodownWiseRoute
+  ProtectedReportsFreightLayoutFreightVoucherWiseRoute: typeof ProtectedReportsFreightLayoutFreightVoucherWiseRoute
 }
 
 const ProtectedReportsFreightLayoutRouteChildren: ProtectedReportsFreightLayoutRouteChildren =
   {
     ProtectedReportsFreightLayoutFreightGodownWiseRoute:
       ProtectedReportsFreightLayoutFreightGodownWiseRoute,
+    ProtectedReportsFreightLayoutFreightVoucherWiseRoute:
+      ProtectedReportsFreightLayoutFreightVoucherWiseRoute,
   }
 
 const ProtectedReportsFreightLayoutRouteWithChildren =
@@ -5629,6 +5893,36 @@ const ProtectedReportsFreightRouteChildren: ProtectedReportsFreightRouteChildren
 const ProtectedReportsFreightRouteWithChildren =
   ProtectedReportsFreightRoute._addFileChildren(
     ProtectedReportsFreightRouteChildren,
+  )
+
+interface ProtectedReportsOrder_bookLayoutRouteChildren {
+  ProtectedReportsOrder_bookLayoutIndexRoute: typeof ProtectedReportsOrder_bookLayoutIndexRoute
+}
+
+const ProtectedReportsOrder_bookLayoutRouteChildren: ProtectedReportsOrder_bookLayoutRouteChildren =
+  {
+    ProtectedReportsOrder_bookLayoutIndexRoute:
+      ProtectedReportsOrder_bookLayoutIndexRoute,
+  }
+
+const ProtectedReportsOrder_bookLayoutRouteWithChildren =
+  ProtectedReportsOrder_bookLayoutRoute._addFileChildren(
+    ProtectedReportsOrder_bookLayoutRouteChildren,
+  )
+
+interface ProtectedReportsOrder_bookRouteChildren {
+  ProtectedReportsOrder_bookLayoutRoute: typeof ProtectedReportsOrder_bookLayoutRouteWithChildren
+}
+
+const ProtectedReportsOrder_bookRouteChildren: ProtectedReportsOrder_bookRouteChildren =
+  {
+    ProtectedReportsOrder_bookLayoutRoute:
+      ProtectedReportsOrder_bookLayoutRouteWithChildren,
+  }
+
+const ProtectedReportsOrder_bookRouteWithChildren =
+  ProtectedReportsOrder_bookRoute._addFileChildren(
+    ProtectedReportsOrder_bookRouteChildren,
   )
 
 interface ProtectedReportsStock_summaryLayoutRouteChildren {
@@ -5707,6 +6001,7 @@ interface ProtectedRouteChildren {
   ProtectedMastersStatutoryRoute: typeof ProtectedMastersStatutoryRouteWithChildren
   ProtectedReportsDay_bookRoute: typeof ProtectedReportsDay_bookRouteWithChildren
   ProtectedReportsFreightRoute: typeof ProtectedReportsFreightRouteWithChildren
+  ProtectedReportsOrder_bookRoute: typeof ProtectedReportsOrder_bookRouteWithChildren
   ProtectedReportsStock_summaryRoute: typeof ProtectedReportsStock_summaryRouteWithChildren
   ProtectedReportsBalance_sheetIndexRoute: typeof ProtectedReportsBalance_sheetIndexRoute
   ProtectedReportsProfit_lossIndexRoute: typeof ProtectedReportsProfit_lossIndexRoute
@@ -5740,6 +6035,7 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedMastersStatutoryRoute: ProtectedMastersStatutoryRouteWithChildren,
   ProtectedReportsDay_bookRoute: ProtectedReportsDay_bookRouteWithChildren,
   ProtectedReportsFreightRoute: ProtectedReportsFreightRouteWithChildren,
+  ProtectedReportsOrder_bookRoute: ProtectedReportsOrder_bookRouteWithChildren,
   ProtectedReportsStock_summaryRoute:
     ProtectedReportsStock_summaryRouteWithChildren,
   ProtectedReportsBalance_sheetIndexRoute:

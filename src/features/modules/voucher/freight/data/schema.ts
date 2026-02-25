@@ -2,6 +2,8 @@
 import { z } from 'zod';
 import { deliveryNoteSchema } from '../../delivery_note/data/schema';
 import { companySchema } from '@/features/modules/company/data/schema';
+import { accountLedgerSchema } from '@/features/modules/account_ledger/data/schema';
+
 export const freightSchema = deliveryNoteSchema.extend({
   // Add any additional fields specific to Freight if necessary
   voucherReferences: z.array(z.object({
@@ -17,6 +19,44 @@ export type FreightSchema = z.infer<typeof freightSchema>
 export const freightListSchema = z.array(freightSchema)
 export type FreightListSchema = z.infer<typeof freightListSchema>
 
+// Dipika Starting
+
+const ledgerSchema = z.object({
+  id: z.number().int().positive().nullish(),
+  name: z.string(),
+  code: z.string(),
+  currentBalance: z.number().optional(),
+});
+
+const voucherEntrySchema = z.object({
+  id: z.number().int().positive().nullish(),
+  entryOrder: z.number().int().positive().nullish(),
+  debit: z.string(),
+  credit: z.string(),
+  accountLedger: accountLedgerSchema,
+});
+
+export const freightVoucherSchema = z.object({
+  id: z.number().int().positive().nullish(),
+  voucherNo: z.string(),
+  voucherDate: z.string(),
+  referenceNo: z.string().nullable(),
+  referenceDate: z.string().nullable(),
+  module: z.literal("freight"),
+  remarks: z.string().nullable(),
+  status: z.string(),
+  amount: z.number(),
+  company: companySchema.nullish(),
+  partyLedger: accountLedgerSchema.nullish(),
+  voucherEntries: z.array(voucherEntrySchema),
+});
+
+export const freightVoucherListSchema = z.array(freightVoucherSchema);
+
+export type FreightVoucherSchema = z.infer<typeof freightVoucherSchema>;
+export type FreightVoucherListSchema = z.infer<typeof freightVoucherListSchema>;
+
+// Dipika Ending
 
 export const formSchema = z.object({
   deliveryNoteId: z.number().int().positive().nullish(),

@@ -29,6 +29,8 @@ export const stockJournalEntryDefaultValues = {
     alternateStockUnitId: undefined,
     unitRatio: 0,
     itemCost: 0,
+    //Order Quantity
+    orderQuantity:0,
     actualQuantity: 0,
     billingQuantity: 0,
     rate: 0,

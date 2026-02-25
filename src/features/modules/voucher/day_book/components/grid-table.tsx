@@ -6,7 +6,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
 import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
 import {
   flexRender,

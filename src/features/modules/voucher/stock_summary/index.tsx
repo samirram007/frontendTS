@@ -1,158 +1,183 @@
-
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Main } from '@/layouts/components/main'
-
-
-
-
-
-
 
 import { Outlet, useLocation, useNavigate } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 
 import { useStockSummary } from './contexts/stock_summary-context'
-import { toSentenceCase, capitalizeAllWords, date_format } from '../../../../utils/removeEmptyStrings';
+import {
+  toSentenceCase,
+  capitalizeAllWords,
+  date_format,
+} from '../../../../utils/removeEmptyStrings'
 import { IconCheck } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { reportLinks } from '@/layouts/links/report-links'
-import { useLayoutEffect, useMemo } from 'react';
+import { useLayoutEffect, useMemo } from 'react'
 import { useAuth } from '@/features/auth/contexts/AuthContext'
 
-
-
-
 export default function StockSummary() {
-    const location = useLocation();
-    const { currentReport, setCurrentReport } = useStockSummary();
-    const allLinksPlucked = useMemo(() => {
-        return reportLinks.flatMap(report =>
-            report.menus.map(menu => ({
-                href: menu.href,
-                title: menu.title,
-            }))
-        );
-    }, []);
-    useLayoutEffect(() => {
+  const location = useLocation()
+  const { currentReport, setCurrentReport } = useStockSummary()
 
+  //   console.log(currentReport)
 
-        const currentLink =
-            allLinksPlucked.find(
-                item =>
-                    location.pathname === item.href ||
-                    location.pathname.startsWith(`${item.href}/`)
-            ) ?? { href: '', title: '' };
-
-        const reportName = currentLink.title.split('/').pop() || '';
-
-        setCurrentReport(reportName);
-
-        document.title = `AIPT - ${capitalizeAllWords(
-            toSentenceCase(reportName)
-        ).replace(/_/g, ' ')}`;
-    }, [location.pathname]);
-    return (
-
-        <Main className='min-w-full min-h-full!'>
-            <div className='mb-2 flex flex-wrap items-center justify-between space-y-2 pr-8'>
-                <div>
-                    <h3 className='text-2xl font-bold tracking-tight'>
-                        {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')} </h3>
-                    <p className='text-muted-foreground'>
-                        <Period />
-                    </p>
-                </div>
-                <PrimaryButtons />
-            </div>
-            <div className='-mx-4 min-h-full flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-                <Outlet />
-            </div>
-        </Main>
-
+  const allLinksPlucked = useMemo(() => {
+    return reportLinks.flatMap((report) =>
+      report.menus.map((menu) => ({
+        href: menu.href,
+        title: menu.title,
+      })),
     )
+  }, [])
+  useLayoutEffect(() => {
+    const currentLink = allLinksPlucked.find(
+      (item) =>
+        location.pathname === item.href ||
+        location.pathname.startsWith(`${item.href}/`),
+    ) ?? { href: '', title: '' }
+
+    const reportName = currentLink.title.split('/').pop() || ''
+
+    setCurrentReport(reportName)
+
+    document.title = `AIPT - ${capitalizeAllWords(
+      toSentenceCase(reportName),
+    ).replace(/_/g, ' ')}`
+  }, [location.pathname])
+  return (
+    <Main className="min-w-full min-h-full!">
+      <div className="mb-2 flex flex-wrap items-center justify-between space-y-2 pr-8">
+        <div>
+          <h3 className="text-2xl font-bold tracking-tight">
+            {capitalizeAllWords(toSentenceCase(currentReport)).replace(
+              /_/g,
+              ' ',
+            )}{' '}
+          </h3>
+          <p className="text-muted-foreground">
+            <Period />
+          </p>
+        </div>
+        +
+        <PrimaryButtons />
+      </div>
+      <div className="-mx-4 min-h-full flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
+        <Outlet />
+      </div>
+    </Main>
+  )
 }
 
 const Period = () => {
-    const { period } = useAuth();
-    console.log("Period in layout:", period);
-    return (
-        <span>
-
-            {period ? `Period: ${date_format(period.startDate)} to ${date_format(period.endDate)}` : ''}
-        </span>
-    )
+  const { period } = useAuth()
+  // console.log("Period in layout:", period);
+  return (
+    <span>
+      {period
+        ? `Period: ${date_format(period.startDate)} to ${date_format(period.endDate)}`
+        : ''}
+    </span>
+  )
 }
 
 const PrimaryButtons = () => {
+  const { currentReport } = useStockSummary()
 
-    const { currentReport } = useStockSummary();
-
-    const reports = useMemo(() => {
-        const allLinksPlucked = reportLinks.flatMap(report =>
-            report.menus.filter(menu => menu.visible).map(menu => ({
-                link: menu.href.split('/').pop() || '',
-                label: menu.title,
-                visible: menu.visible,
-            }))
-        );
-        return allLinksPlucked;
-    }, []);
-
-    return (
-        <div className='flex space-x-2'>
-            {/* Add Dropdown  here */}
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className=' min-w-full'>
-                        {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')}
-                        <ChevronDown className="ml-2 h-4 w-4" />
-                    </Button>
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent align="end" className="min-w-full">
-                    {reports.map((report) => (
-                        <DropdownItem
-                            key={report.link}
-                            label={report.label}
-                            link={report.link}
-                            visible={report.visible}
-                        />
-                    ))}
-
-                </DropdownMenuContent>
-            </DropdownMenu>
-
-        </div>
+  const reports = useMemo(() => {
+    const allLinksPlucked = reportLinks.flatMap((report) =>
+      report.menus
+        .filter((menu) => menu.visible)
+        .map((menu) => ({
+          link: menu.href.split('/').pop() || '',
+          label: menu.title,
+          visible: menu.visible,
+        })),
     )
+    return allLinksPlucked
+  }, [])
+
+  return (
+    <div className="flex space-x-2">
+      {/* Add Dropdown  here */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" className=" min-w-full">
+            {capitalizeAllWords(toSentenceCase(currentReport)).replace(
+              /_/g,
+              ' ',
+            )}
+            <ChevronDown className="ml-2 h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent align="end" className="min-w-full">
+          {reports.map((report) => (
+            <DropdownItem
+              key={report.link}
+              label={report.label}
+              link={report.link}
+              visible={report.visible}
+            />
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  )
 }
 
-const DropdownItem = ({ label, link, visible }: { label: string, link: string, visible: boolean }) => {
-    const navigate = useNavigate();
+const DropdownItem = ({
+  label,
+  link,
+  visible,
+}: {
+  label: string
+  link: string
+  visible: boolean
+}) => {
+  const navigate = useNavigate()
 
-    const { currentReport, setCurrentReport } = useStockSummary();
+  const { currentReport, setCurrentReport } = useStockSummary()
 
-    const handleOnclick = () => {
-        //get links and title from reportLinks
+  const handleOnclick = () => {
+    //get links and title from reportLinks
 
-        const allLinksPlucked = reportLinks.flatMap(report =>
-            report.menus.map(menu => ({
-                href: menu.href,
-                title: menu.title,
-            }))
-        );
-
-        const currentLink = allLinksPlucked.find((href) => href.href.includes(link)) || { href: '', title: '' };
-
-        setCurrentReport(currentLink.title.split('/').pop() || '');
-        navigate({ to: `/reports/stock_summary/${link}` });
-    }
-
-    return (
-        visible &&
-        <DropdownMenuItem onClick={handleOnclick} className={currentReport === link ? 'bg-gray-200' : ''}>
-            <IconCheck size={18} className={cn('mr-2 h-4 w-4', currentReport === link ? 'visible' : 'invisible')} />   {label}
-            </DropdownMenuItem>
-
+    const allLinksPlucked = reportLinks.flatMap((report) =>
+      report.menus.map((menu) => ({
+        href: menu.href,
+        title: menu.title,
+      })),
     )
+
+    const currentLink = allLinksPlucked.find((href) =>
+      href.href.includes(link),
+    ) || { href: '', title: '' }
+
+    setCurrentReport(currentLink.title.split('/').pop() || '')
+    navigate({ to: `/reports/stock_summary/${link}` })
+  }
+
+  return (
+    visible && (
+      <DropdownMenuItem
+        onClick={handleOnclick}
+        className={currentReport === link ? 'bg-gray-200' : ''}
+      >
+        <IconCheck
+          size={18}
+          className={cn(
+            'mr-2 h-4 w-4',
+            currentReport === link ? 'visible' : 'invisible',
+          )}
+        />{' '}
+        {label}
+      </DropdownMenuItem>
+    )
+  )
 }

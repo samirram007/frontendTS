@@ -27,7 +27,7 @@ const TransactionLedgerForm = (props: TransactionLedgerFormProps) => {
     if (isLoading) {
         return <div>Loading...</div>
     }
-    // console.log(tabIndex)
+    // console.log(form.watch())
     return (
         <>
             <FormField

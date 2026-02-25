@@ -20,6 +20,7 @@ const DeliveryNote = ({ currentRow }: DeliveryNoteProps) => {
     useEffect(() => {
         setHeaderVisible?.(false)
     }, [])
+    
     return (
 
         <>

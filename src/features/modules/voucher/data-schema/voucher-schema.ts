@@ -36,6 +36,8 @@ export const stockJournalEntrySchema = z.object({
     alternateStockUnitId: z.number().int().positive().nullish(),
     unitRatio: z.coerce.number().nonnegative().nullish(),
     itemCost: z.coerce.number().nonnegative().nullish(),
+    //Order Quantity
+    orderQuantity: z.coerce.number().nonnegative().nullish(),
     actualQuantity: z.coerce.number().nonnegative().nullish(),
     billingQuantity: z.coerce.number().nonnegative().nullish(),
     rate: z.coerce.number().nonnegative().nullish(),
