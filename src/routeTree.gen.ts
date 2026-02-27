@@ -33,6 +33,7 @@ import { Route as ProtectedSettingsAccountRouteImport } from './routes/_protecte
 import { Route as ProtectedAdministrationLayoutRouteImport } from './routes/_protected/administration/_layout'
 import { Route as ProtectedReportsProfit_lossIndexRouteImport } from './routes/_protected/reports/profit_loss/index'
 import { Route as ProtectedReportsBalance_sheetIndexRouteImport } from './routes/_protected/reports/balance_sheet/index'
+import { Route as ProtectedauthProfileIndexRouteImport } from './routes/_protected/(auth)/profile/index'
 import { Route as ProtectedReportsStock_summaryLayoutRouteImport } from './routes/_protected/reports/stock_summary/_layout'
 import { Route as ProtectedReportsFreightLayoutRouteImport } from './routes/_protected/reports/freight/_layout'
 import { Route as ProtectedReportsDay_bookLayoutRouteImport } from './routes/_protected/reports/day_book/_layout'
@@ -52,7 +53,6 @@ import { Route as ProtectedAdministrationLayoutPermissionIndexRouteImport } from
 import { Route as ProtectedAdministrationLayoutApp_module_featureIndexRouteImport } from './routes/_protected/administration/_layout/app_module_feature/index'
 import { Route as ProtectedAdministrationLayoutApp_moduleIndexRouteImport } from './routes/_protected/administration/_layout/app_module/index'
 import { Route as ProtectedauthUserFiscalYearLayoutIndexRouteImport } from './routes/_protected/(auth)/user-fiscal-year/_layout/index'
-import { Route as ProtectedauthProfileIndexRouteImport } from './routes/_protected/(auth)/profile/index.'
 import { Route as ProtectedTransactionsProviderVouchersLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout'
 import { Route as ProtectedTransactionsProviderFreightLayoutRouteImport } from './routes/_protected/transactions/_provider/freight/_layout'
 import { Route as ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise'
@@ -580,6 +580,12 @@ const ProtectedReportsBalance_sheetIndexRoute =
     path: '/reports/balance_sheet/',
     getParentRoute: () => ProtectedRoute,
   } as any)
+const ProtectedauthProfileIndexRoute =
+  ProtectedauthProfileIndexRouteImport.update({
+    id: '/(auth)/profile/',
+    path: '/profile/',
+    getParentRoute: () => ProtectedRoute,
+  } as any)
 const ProtectedReportsStock_summaryLayoutRoute =
   ProtectedReportsStock_summaryLayoutRouteImport.update({
     id: '/_layout',
@@ -791,12 +797,6 @@ const ProtectedauthUserFiscalYearLayoutIndexRoute =
     id: '/',
     path: '/',
     getParentRoute: () => ProtectedauthUserFiscalYearLayoutRoute,
-  } as any)
-const ProtectedauthProfileIndexRoute =
-  ProtectedauthProfileIndexRouteImport.update({
-    id: '/(auth)/profile/index/',
-    path: '/profile/index/',
-    getParentRoute: () => ProtectedRoute,
   } as any)
 const ProtectedTransactionsProviderVouchersLayoutRoute =
   ProtectedTransactionsProviderVouchersLayoutRouteImport.update({
@@ -1661,6 +1661,7 @@ export interface FileRoutesByFullPath {
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutRouteWithChildren
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
+  '/profile': typeof ProtectedauthProfileIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutRouteWithChildren
@@ -1678,7 +1679,6 @@ export interface FileRoutesByFullPath {
   '/reports/stock_summary/stock-in-hand-voucher-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
   '/transactions/freight': typeof ProtectedTransactionsProviderFreightLayoutRouteWithChildren
   '/transactions/vouchers': typeof ProtectedTransactionsProviderVouchersLayoutRouteWithChildren
-  '/profile/index': typeof ProtectedauthProfileIndexRoute
   '/user-fiscal-year/': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/administration/app_module': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
   '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
@@ -1842,6 +1842,7 @@ export interface FileRoutesByTo {
   '/reports/day_book': typeof ProtectedReportsDay_bookLayoutIndexRoute
   '/reports/freight': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/reports/stock_summary': typeof ProtectedReportsStock_summaryLayoutIndexRoute
+  '/profile': typeof ProtectedauthProfileIndexRoute
   '/reports/balance_sheet': typeof ProtectedReportsBalance_sheetIndexRoute
   '/reports/profit_loss': typeof ProtectedReportsProfit_lossIndexRoute
   '/administration/role': typeof ProtectedAdministrationLayoutRoleLayoutIndexRoute
@@ -1859,7 +1860,6 @@ export interface FileRoutesByTo {
   '/reports/stock_summary/stock-in-hand-voucher-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
   '/transactions/freight': typeof ProtectedTransactionsProviderFreightLayoutIndexRoute
   '/transactions/vouchers': typeof ProtectedTransactionsProviderVouchersLayoutIndexRoute
-  '/profile/index': typeof ProtectedauthProfileIndexRoute
   '/administration/app_module': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
   '/administration/app_module_feature': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
   '/administration/permission': typeof ProtectedAdministrationLayoutPermissionIndexRoute
@@ -2010,6 +2010,7 @@ export interface FileRoutesById {
   '/_protected/reports/freight/_layout': typeof ProtectedReportsFreightLayoutRouteWithChildren
   '/_protected/reports/stock_summary': typeof ProtectedReportsStock_summaryRouteWithChildren
   '/_protected/reports/stock_summary/_layout': typeof ProtectedReportsStock_summaryLayoutRouteWithChildren
+  '/_protected/(auth)/profile/': typeof ProtectedauthProfileIndexRoute
   '/_protected/reports/balance_sheet/': typeof ProtectedReportsBalance_sheetIndexRoute
   '/_protected/reports/profit_loss/': typeof ProtectedReportsProfit_lossIndexRoute
   '/_protected/administration/_layout/role': typeof ProtectedAdministrationLayoutRoleRouteWithChildren
@@ -2031,7 +2032,6 @@ export interface FileRoutesById {
   '/_protected/transactions/_provider/freight/_layout': typeof ProtectedTransactionsProviderFreightLayoutRouteWithChildren
   '/_protected/transactions/_provider/vouchers': typeof ProtectedTransactionsProviderVouchersRouteWithChildren
   '/_protected/transactions/_provider/vouchers/_layout': typeof ProtectedTransactionsProviderVouchersLayoutRouteWithChildren
-  '/_protected/(auth)/profile/index/': typeof ProtectedauthProfileIndexRoute
   '/_protected/(auth)/user-fiscal-year/_layout/': typeof ProtectedauthUserFiscalYearLayoutIndexRoute
   '/_protected/administration/_layout/app_module/': typeof ProtectedAdministrationLayoutApp_moduleIndexRoute
   '/_protected/administration/_layout/app_module_feature/': typeof ProtectedAdministrationLayoutApp_module_featureIndexRoute
@@ -2219,6 +2219,7 @@ export interface FileRouteTypes {
     | '/reports/day_book'
     | '/reports/freight'
     | '/reports/stock_summary'
+    | '/profile'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
@@ -2236,7 +2237,6 @@ export interface FileRouteTypes {
     | '/reports/stock_summary/stock-in-hand-voucher-wise'
     | '/transactions/freight'
     | '/transactions/vouchers'
-    | '/profile/index'
     | '/user-fiscal-year/'
     | '/administration/app_module'
     | '/administration/app_module_feature'
@@ -2400,6 +2400,7 @@ export interface FileRouteTypes {
     | '/reports/day_book'
     | '/reports/freight'
     | '/reports/stock_summary'
+    | '/profile'
     | '/reports/balance_sheet'
     | '/reports/profit_loss'
     | '/administration/role'
@@ -2417,7 +2418,6 @@ export interface FileRouteTypes {
     | '/reports/stock_summary/stock-in-hand-voucher-wise'
     | '/transactions/freight'
     | '/transactions/vouchers'
-    | '/profile/index'
     | '/administration/app_module'
     | '/administration/app_module_feature'
     | '/administration/permission'
@@ -2567,6 +2567,7 @@ export interface FileRouteTypes {
     | '/_protected/reports/freight/_layout'
     | '/_protected/reports/stock_summary'
     | '/_protected/reports/stock_summary/_layout'
+    | '/_protected/(auth)/profile/'
     | '/_protected/reports/balance_sheet/'
     | '/_protected/reports/profit_loss/'
     | '/_protected/administration/_layout/role'
@@ -2588,7 +2589,6 @@ export interface FileRouteTypes {
     | '/_protected/transactions/_provider/freight/_layout'
     | '/_protected/transactions/_provider/vouchers'
     | '/_protected/transactions/_provider/vouchers/_layout'
-    | '/_protected/(auth)/profile/index/'
     | '/_protected/(auth)/user-fiscal-year/_layout/'
     | '/_protected/administration/_layout/app_module/'
     | '/_protected/administration/_layout/app_module_feature/'
@@ -3082,6 +3082,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedReportsBalance_sheetIndexRouteImport
       parentRoute: typeof ProtectedRoute
     }
+    '/_protected/(auth)/profile/': {
+      id: '/_protected/(auth)/profile/'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProtectedauthProfileIndexRouteImport
+      parentRoute: typeof ProtectedRoute
+    }
     '/_protected/reports/stock_summary/_layout': {
       id: '/_protected/reports/stock_summary/_layout'
       path: '/reports/stock_summary'
@@ -3340,13 +3347,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/user-fiscal-year/'
       preLoaderRoute: typeof ProtectedauthUserFiscalYearLayoutIndexRouteImport
       parentRoute: typeof ProtectedauthUserFiscalYearLayoutRoute
-    }
-    '/_protected/(auth)/profile/index/': {
-      id: '/_protected/(auth)/profile/index/'
-      path: '/profile/index'
-      fullPath: '/profile/index'
-      preLoaderRoute: typeof ProtectedauthProfileIndexRouteImport
-      parentRoute: typeof ProtectedRoute
     }
     '/_protected/transactions/_provider/vouchers/_layout': {
       id: '/_protected/transactions/_provider/vouchers/_layout'
@@ -5731,9 +5731,9 @@ interface ProtectedRouteChildren {
   ProtectedReportsDay_bookRoute: typeof ProtectedReportsDay_bookRouteWithChildren
   ProtectedReportsFreightRoute: typeof ProtectedReportsFreightRouteWithChildren
   ProtectedReportsStock_summaryRoute: typeof ProtectedReportsStock_summaryRouteWithChildren
+  ProtectedauthProfileIndexRoute: typeof ProtectedauthProfileIndexRoute
   ProtectedReportsBalance_sheetIndexRoute: typeof ProtectedReportsBalance_sheetIndexRoute
   ProtectedReportsProfit_lossIndexRoute: typeof ProtectedReportsProfit_lossIndexRoute
-  ProtectedauthProfileIndexRoute: typeof ProtectedauthProfileIndexRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
@@ -5765,10 +5765,10 @@ const ProtectedRouteChildren: ProtectedRouteChildren = {
   ProtectedReportsFreightRoute: ProtectedReportsFreightRouteWithChildren,
   ProtectedReportsStock_summaryRoute:
     ProtectedReportsStock_summaryRouteWithChildren,
+  ProtectedauthProfileIndexRoute: ProtectedauthProfileIndexRoute,
   ProtectedReportsBalance_sheetIndexRoute:
     ProtectedReportsBalance_sheetIndexRoute,
   ProtectedReportsProfit_lossIndexRoute: ProtectedReportsProfit_lossIndexRoute,
-  ProtectedauthProfileIndexRoute: ProtectedauthProfileIndexRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(

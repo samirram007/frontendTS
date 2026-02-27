@@ -134,6 +134,10 @@ code {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
+  
+  .border-border-subtle {
+    @apply border-border/50;
+  }
   html {
     @apply overflow-x-hidden;
   }
@@ -265,6 +269,175 @@ textarea::selection {
 @utility faded-bottom {
   @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_var(--background)_70%)] md:after:block;
 }
+
+
+/* profile psage design starts */
+
+
+
+.checkerboard-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%), 
+                    linear-gradient(-45deg, rgba(0, 0, 0, 0.02) 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.02) 75%), 
+                    linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.02) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dark .checkerboard-bg {
+  background-image: linear-gradient(45deg, #1a1a1a 25%, transparent 25%), 
+                    linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #1a1a1a 75%), 
+                    linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+  opacity: 0.15;
+}
+
+.background-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(59, 130, 246, 0.03) 25%, rgba(59, 130, 246, 0.03) 26%, transparent 27%, transparent 74%, rgba(59, 130, 246, 0.03) 75%, rgba(59, 130, 246, 0.03) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(59, 130, 246, 0.03) 25%, rgba(59, 130, 246, 0.03) 26%, transparent 27%, transparent 74%, rgba(59, 130, 246, 0.03) 75%, rgba(59, 130, 246, 0.03) 76%, transparent 77%, transparent);
+  background-size: 60px 60px;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.dark .background-grid {
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent);
+}
+
+.scan-line-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(59, 130, 246, 0.02),
+    rgba(59, 130, 246, 0.02) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  animation: scan-lines 8s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.dark .scan-line-effect {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 255, 0.03),
+    rgba(0, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+.hacker-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.dark .hacker-card {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(0, 255, 255, 0.3);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1), inset 0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+.hacker-card:hover {
+  border-color: var(--ring);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.1);
+}
+
+.dark .hacker-card:hover {
+  border-color: rgba(0, 255, 255, 0.6);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 30px rgba(0, 255, 255, 0.1);
+}
+
+.cipher-text {
+  color: var(--muted-foreground);
+  font-family: inherit;
+  text-shadow: none;
+  letter-spacing: 0.05em;
+}
+
+.dark .cipher-text {
+  color: #00ff00;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.cipher-highlight {
+  color: var(--foreground);
+  font-family: inherit;
+  text-shadow: none;
+  font-weight: 600;
+}
+
+.dark .cipher-highlight {
+  color: #00ffff;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.8),
+               0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-line {
+  animation: pulse-line 2s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+  }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 3s ease-in-out infinite;
+}
+
+.profile-glow {
+  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.6));
+  border: 2px solid rgba(0, 255, 255, 0.4);
+}
+
+
+
+/* ends */
 
 /* styles.css */
 .CollapsibleContent {
