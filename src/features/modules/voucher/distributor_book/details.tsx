@@ -32,7 +32,7 @@ const DistributorBookDetails = ({ data }: Props) => {
                 <p>No header data available.</p>
             )}
             <StockJournalPanel data={data} />
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+            {/* { <pre>{JSON.stringify(data, null, 2)}</pre>} */}
         </div >
     )
 }

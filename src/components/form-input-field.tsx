@@ -240,6 +240,7 @@ const DateBox = (props: Props) => {
                         </FormLabel>
                     }
                     <FormControl>
+
                         <Input
                             tabIndex={tabIndex}
                             autoFocus={tabIndex === 0}
@@ -249,7 +250,8 @@ const DateBox = (props: Props) => {
                             autoComplete='off'
                             {...rest}
                             {...field}
-                            value={field.value ?? ""}
+
+                            value={formatDateForInput(field.value)}
                         />
                     </FormControl>
                     <FormMessage className=' col-start-2' />
@@ -258,6 +260,20 @@ const DateBox = (props: Props) => {
             {...rest}
         />
     )
+}
+
+function formatDateForInput(value: unknown): string {
+    if (!value) return ''
+
+    if (value instanceof Date) {
+        return value.toISOString().split('T')[0]
+    }
+
+    if (typeof value === 'string') {
+        return value.includes('T') ? value.split('T')[0] : value
+    }
+
+    return ''
 }
 const NumberBox = (props: Props) => {
     const { form, name, label, type, gapClass, tabIndex, noLabel, rtl, ...rest } = props

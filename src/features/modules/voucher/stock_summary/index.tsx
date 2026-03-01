@@ -27,6 +27,15 @@ import ReportingPeriod from '@/features/global/components/reporting-period'
 export default function StockSummary() {
     const location = useLocation();
     const { currentReport, setCurrentReport } = useStockSummary();
+    const reportPeriodVisible = [
+        'Stock In Hand (Item Summary)',
+        'Stock In Hand (Item Wise)',
+        'Stock In Hand (Godown Wise)',
+        'Stock In Hand (Voucher Wise)',
+        'Day Book',
+        'Receipt Book',
+        'Distributor Book'
+    ];
     const allLinksPlucked = useMemo(() => {
         return reportLinks.flatMap(report =>
             report.menus.map(menu => ({
@@ -56,13 +65,15 @@ export default function StockSummary() {
     return (
 
         <Main className='min-w-full min-h-full!'>
-            <div className='mb-2 flex flex-wrap items-center justify-between space-y-2 pr-8'>
+            <div className='mb-2 flex flex-wrap items-start justify-between space-y-2 pr-8'>
                 <div>
                     <h3 className='text-2xl font-bold tracking-tight'>
                         {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')} </h3>
-                    <p className='text-muted-foreground pt-4 text-sm'>
+                    {/* {currentReport} */}
+                    {reportPeriodVisible.includes(currentReport) && <p className='pt-2 text-muted-foreground'><ReportingPeriod /></p>}
+                    {/* <p className='text-muted-foreground pt-4 text-sm'>
                         <ReportingPeriod />
-                    </p>
+                    </p> */}
                 </div>
                 <PrimaryButtons />
             </div>

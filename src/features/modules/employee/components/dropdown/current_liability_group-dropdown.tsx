@@ -53,7 +53,7 @@ const CurrentLiabilityGroupsDropdown = (props: Props) => {
                             onValueChange={(value) => handleValueChange(value)}
                             placeholder='Select a account group'
                             className='w-full'
-                            items={accountGroups?.data.map((accountGroup: AccountGroup) => ({
+                            items={accountGroups?.data?.filter((accountGroup: AccountGroup) => accountGroup.id === 20010).map((accountGroup: AccountGroup) => ({
                                 label: capitalizeAllWords(accountGroup.name),
                                 value: String(accountGroup.id),
                             }))}

@@ -5,17 +5,20 @@ import { Main } from "@/layouts/components/main";
 import { GridTable } from "./grid-table";
 import { useMemo } from "react";
 
-interface FreightVoucherWiseProps {
+interface FreightTransporterWiseProps {
   data: FreightVoucherListSchema
 }
 
-export default function FreightVoucherWise({ data: freightVoucherListSchema }: FreightVoucherWiseProps) {
+export default function FreightTransporterWise({ data: freightVoucherListSchema }: FreightTransporterWiseProps) {
+  //add transporterwise filter in toolbar and also add transporter name in columns
+  //voucherReferences[0].referenceVoucher?.voucherDispatchDetail?.carrierName 
   const prepareData = useMemo(() => {
     return freightVoucherListSchema.map(item => ({
       ...item,
-      partyName: item?.partyLedger?.name || 'Unknown',
-    }));
-  }, [freightVoucherListSchema]);
+      transporterName: item?.voucherReferences?.[0]?.referenceVoucher?.voucherDispatchDetail?.carrierName || 'Unknown',
+      vehicleNumber: item?.voucherReferences?.[0]?.referenceVoucher?.voucherDispatchDetail?.motorVehicleNo || 'Unknown'
+    }))
+  }, [freightVoucherListSchema])
   return (
     <>
       <Main className='min-w-full'>

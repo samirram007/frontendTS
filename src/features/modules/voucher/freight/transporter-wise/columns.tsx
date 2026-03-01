@@ -10,6 +10,7 @@ import { VoucherTypeColorMapping } from "../data/data";
 import { DataTableRowActions } from "../components/data-table-row-actions";
 import { toSentenceCase } from "@/utils/removeEmptyStrings";
 
+
 export const columns: ColumnDef<FreightVoucherSchema>[] = [
     {
         id: 'select',
@@ -64,23 +65,54 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
         enableHiding: false,
     },
     {
-        accessorKey: 'partyName',
+        accessorKey: 'transporterName',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title='Particulars' />
+            <DataTableColumnHeader column={column} title='Transporter' />
         ),
         filterFn: (row, columnId, filterValues: string[]) => {
             if (!filterValues || filterValues.length === 0) return true;
-            const partyName = row.getValue(columnId) as string;
-            return filterValues.map(String).includes(partyName);
+            const transporterName = row.getValue(columnId) as string;
+            return filterValues.map(String).includes(transporterName);
 
         },
         cell: ({ row }) => {
-            const { partyLedger, module } = row.original;
-            const key = module.replace(/\s+/g, "_"); // "freight"
-            const badgeColor = VoucherTypeColorMapping.get(key);
+            const transporterName = row.getValue('transporterName');
+            return (
+                <LongText className='max-w-40 flex items-center gap-2'>
+                    {transporterName ? String(transporterName) : <div className="text-muted-foreground">Unknown</div>}
+                </LongText>
+            );
+        }
+    },
+    {
+        accessorKey: 'vehicleNumber',
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title='Vehicle No.' />
+        ),
+        cell: ({ row }) => {
+            const vehicleNumber = row.getValue('vehicleNumber');
+            return (
+                <LongText className='max-w-40 flex items-center gap-2'>
+                    {vehicleNumber ? String(vehicleNumber) : <div className="text-muted-foreground">Unknown</div>}
+                </LongText>
+            );
+        }
+    },
+    {
+        id: 'partyLedger',
+        accessorFn: (row) => row.partyLedger?.name ?? 'Primary',
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Particulars" />
+        ),
+        cell: ({ row }) => {
+            const { partyLedger, module } = row.original
+            const key = module.replace(/\s+/g, "_")
+            const badgeColor = VoucherTypeColorMapping.get(key)
+
             if (!partyLedger) {
-                return <div className="text-muted-foreground">Primary</div>;
+                return <div className="text-muted-foreground">Primary</div>
             }
+
             return (
                 <div className="flex space-x-2">
                     <Badge
@@ -89,8 +121,9 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
                     >
                         {partyLedger.name}
                     </Badge>
+
                 </div>
-            );
+            )
         },
         enableHiding: false,
     },
@@ -108,7 +141,7 @@ export const columns: ColumnDef<FreightVoucherSchema>[] = [
             }
             return (
                 <div className='flex space-x-2'>
-                    <Badge variant='default' className={cn('capitalize', badgeColor)}>
+                    <Badge variant='default' className={cn('capitalize', badgeColor,)}>
                         {row.original.module ? row.original.module : (module ?? 'Unknown')}
                     </Badge>
 

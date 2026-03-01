@@ -89,10 +89,19 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
+
+
+            {
+                title: 'Freight (Voucher Wise)',
+                href: '/reports/freight/freight-voucher-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
             {
                 title: 'Freight (Transporter Wise)',
                 href: '/reports/freight/freight-transporter-wise',
-                visible: false,
+                visible: true,
                 isActive: false,
                 disabled: false,
             },
@@ -110,13 +119,7 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
-            {
-                title: 'Freight (Voucher Wise)',
-                href: '/reports/freight/freight-voucher-wise',
-                visible: true,
-                isActive: false,
-                disabled: false,
-            },
+
         ]
 
     }

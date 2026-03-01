@@ -107,7 +107,7 @@ const PrintFreightDialog = (props: Props) => {
                             </div> */}
                             <div className="grid grid-cols-1 gap-4 border-dotted">
                                 <div className="italic line-clamp-4 leading-relaxed text-justify underline decoration-2 decoration-dotted underline-offset-8">
-                                    {`Being the payment towards Freight Charges For material shifting to party:-${freightData?.partyLedger?.name} Destination:- ${dispatchDetail?.destination}, through by vehicle:-${dispatchDetail?.motorVehicleNo} `}
+                                    {`Being the payment towards Freight Charges For material shifting to party:-${freightData?.partyLedger?.name} Destination:- ${dispatchDetail?.destinationSecondary ?? (dispatchDetail?.destination ?? 'Unknown')}, through by vehicle:-${dispatchDetail?.motorVehicleNo} `}
                                 </div>
                                 {/* <div className="italic space-y-8 underline decoration-2 decoration-dotted text-justify underline-offset-8">{freightData?.remarks}</div> */}
                             </div>

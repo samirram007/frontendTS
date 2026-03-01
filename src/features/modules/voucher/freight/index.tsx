@@ -173,9 +173,16 @@ const DeliveryNoteRecord = ({ data, rowIndex }: DeliveryNoteRecordProps) => {
                     <div>{data.party?.name}</div>
                     <div>{data.voucherDispatchDetail?.billOfLadingNo}</div>
                 <div>{data.voucherDispatchDetail?.source}</div>
-                    <div>{data.voucherDispatchDetail?.destination}</div>
+                <div className='text-xs pt-1'>
+                    {[
+                        data.voucherDispatchDetail?.destination,
+                        data.voucherDispatchDetail?.destinationSecondary,
+                    ]
+                        .filter(Boolean)
+                        .join(', ')}
+                </div>
                     <div>{data.voucherDispatchDetail?.carrierName}</div>
-                    <div>{data.voucherDispatchDetail?.motorVehicleNo}</div>
+                <div className='text-xs pt-1'>{data.voucherDispatchDetail?.motorVehicleNo}</div>
                 <div className='px-4 text-right'>
 
                     {
