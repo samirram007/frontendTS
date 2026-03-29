@@ -47,8 +47,8 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
     const [open, onOpenChange] = useState(false);
     const gapClass01 = 'grid grid-cols-[100px_220px] gap-4';
     const gapClass02 = 'grid grid-cols-[200px_220px] gap-4';
-    const gapClass03 = 'grid grid-cols-[80px_100px] gap-4';
-    const gapClass04 = 'grid grid-cols-[80px_200px] gap-4';
+    // const gapClass03 = 'grid grid-cols-[80px_100px] gap-4';
+    const gapClass04 = 'grid grid-cols-[100px_200px] gap-4';
     const gapClass = 'grid grid-cols-[200px_1fr] gap-4';
 
     const voucherDispatchForm = useForm<VoucherDispatchDetailForm>({
@@ -129,8 +129,8 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='dispatchedThrough' label='Dispatched Through' />
                                                 <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='source' label='Source' />
                                                 <div className="grid grid-cols-[1fr_1fr] gap-12">
-                                                    <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='destination' label='Destination' />
-                                                    <FormInputField type='text' gapClass={gapClass04} form={voucherDispatchForm} name='destinationSecondary' label='Destination' />
+                                                    <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='destination' label='Destination(A)' />
+                                                    <FormInputField type='text' gapClass={gapClass04} form={voucherDispatchForm} name='destinationSecondary' label='Destination(B)' />
                                                 </div>
                                                 <div className="grid grid-cols-[1fr_1fr] gap-12">
                                                     <div className="grid grid-cols-[200px_220px_50px] items-center gap-4">
@@ -171,7 +171,7 @@ const VoucherDispatchDetail02 = (props: VoucherDispatchDetailFormProps) => {
 
                                                     <FormInputField type='text' gapClass={gapClass02} form={voucherDispatchForm} name='billOfLadingNo' label='Bill of Lading/LR-RR No' />
 
-                                                    <div className={gapClass03}>
+                                                    <div className={gapClass04}>
 
                                                         <Label>Date:</Label>
                                                         <DateBox tabIndex={1}

@@ -2,23 +2,23 @@
 import { CommandMenu } from '@/layouts/components/command-menu'
 import React from 'react'
 
-interface SearchContextType {
+interface GodownItemSearchContextType {
   open: boolean
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const SearchContext = React.createContext<SearchContextType | null>(null)
+const GodownItemSearchContext = React.createContext<GodownItemSearchContextType | null>(null)
 
 interface Props {
   children: React.ReactNode
 }
 
-export function SearchProvider({ children }: Props) {
+export function GodownItemSearchProvider({ children }: Props) {
   const [open, setOpen] = React.useState(false)
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === 'i' && (e.metaKey || e.ctrlKey)) {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         setOpen((open) => !open)
       }
@@ -28,20 +28,20 @@ export function SearchProvider({ children }: Props) {
   }, [])
 
   return (
-    <SearchContext.Provider value={{ open, setOpen }}>
+    <GodownItemSearchContext.Provider value={{ open, setOpen }}>
       {children}
       <CommandMenu />
-    </SearchContext.Provider>
+    </GodownItemSearchContext.Provider>
   )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useSearch = () => {
-  const searchContext = React.useContext(SearchContext)
+export const useGodownItemSearch = () => {
+  const godownItemSearchContext = React.useContext(GodownItemSearchContext)
 
-  if (!searchContext) {
-    throw new Error('useSearch has to be used within <SearchContext.Provider>')
+  if (!godownItemSearchContext) {
+    throw new Error('useGodownItemSearch has to be used within <GodownItemSearchProvider>')
   }
 
-  return searchContext
+  return godownItemSearchContext
 }

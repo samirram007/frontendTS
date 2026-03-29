@@ -16,6 +16,8 @@ export default function FreightVoucherWise({ data: freightVoucherListSchema }: F
       partyName: item?.partyLedger?.name || 'Unknown',
     }));
   }, [freightVoucherListSchema]);
+  console.log("PD:", prepareData);
+
   return (
     <>
       <Main className='min-w-full'>

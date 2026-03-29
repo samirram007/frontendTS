@@ -120,6 +120,7 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                 </div>
             ), value: "-1",
             stockInHand: '',
+            noOfDecimalPlaces: 2,
             stockUnitLabel: <div className="font-semibold underline">Quantity</div>,
             className: "min-w-full bg-red-200 active:bg-red-300 data-[selected=true]:bg-red-400  "
         },
@@ -128,6 +129,7 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
             value: String(stockItem.id),
             stockInHand: stockItem.stockInHand,
             stockUnitLabel: stockItem.stockUnit?.code || stockItem.stockUnit?.name || '',
+            noOfDecimalPlaces: stockItem.stockUnit?.noOfDecimalPlaces ?? 2,
             className: "min-w-full hover:bg-blue-300",
         })) ?? []),
     ];
@@ -184,7 +186,7 @@ export const StockItemCombobox = ({ stockJournalEntryForm: form, stockItems, han
                                             {framework.label}
                                         </div>
                                         <div>
-                                            {framework.stockInHand} {framework.stockUnitLabel}
+                                            {Number(framework.stockInHand).toFixed(framework.noOfDecimalPlaces)} {framework.stockUnitLabel}
                                         </div>
                                     </div>
 

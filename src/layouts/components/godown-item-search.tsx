@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils'
 import { IconSearch } from '@tabler/icons-react'
 
-import { useSearch } from '@/core/contexts/search-context'
-import { Button } from './ui/button'
+import { Button } from '@/components/ui/button'
+import { useGodownItemSearch } from '@/core/contexts/godown-item-search-context'
+
 
 interface Props {
   className?: string
@@ -10,8 +11,8 @@ interface Props {
   placeholder?: string
 }
 
-export function Search({ className = '', placeholder = 'Search' }: Props) {
-  const { setOpen } = useSearch()
+export function GodownItemSearch({ className = '', placeholder = 'Search' }: Props) {
+  const { setOpen } = useGodownItemSearch()
   return (
     <Button
       variant='outline'
@@ -27,7 +28,7 @@ export function Search({ className = '', placeholder = 'Search' }: Props) {
       />
       <span className='ml-3'>{placeholder}</span>
       <kbd className='pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex'>
-        <span className='text-xs'>⌘</span>I
+        <span className='text-xs'>⌘</span>K
       </kbd>
     </Button>
   )

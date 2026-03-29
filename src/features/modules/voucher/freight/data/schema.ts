@@ -4,6 +4,7 @@ import { deliveryNoteSchema } from '../../delivery_note/data/schema';
 import { companySchema } from '@/features/modules/company/data/schema';
 import { accountLedgerSchema } from '@/features/modules/account_ledger/data/schema';
 import { voucherSchema } from '../../data-schema/voucher-schema';
+import { voucherTypeSchema } from '@/features/modules/voucher_type/data/schema';
 
 export const freightSchema = deliveryNoteSchema.extend({
   // Add any additional fields specific to Freight if necessary
@@ -64,6 +65,7 @@ export const freightVoucherBaseSchema = z.object({
   company: companySchema.nullish(),
   partyLedger: accountLedgerSchema.nullish(),
   voucherEntries: z.array(voucherEntrySchema),
+  voucherType: voucherTypeSchema.nullish(),
 });
 
 export const freightVoucherSchema = z.lazy(() =>

@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from '@/features/tasks/components/data-table-view-options'
+import { date_format } from '@/utils/removeEmptyStrings'
 // import { exportTableToPdf } from '@/utils/export-table-pdf'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
@@ -35,11 +36,11 @@ export function DataTableToolbar<TData>({
 
   const exportData = useMemo(() => {
     return (filteredRows as any[]).map((row) => ({
-      transporter: row.transporter?.name ?? '',
-      sourcePlace: row.sourcePlace?.name ?? '',
-      destinationPlace: row.destinationPlace?.name ?? '',
-      rate: row.rate ?? 0,
-      vehicleNo: row.vehicleNo ?? '',
+      voucherDate: date_format(row.voucherDate) ?? '',
+      partyLedger: row.partyLedger?.name ?? '',
+      voucherType: row.voucherType?.name ?? '',
+      voucherNo: row.voucherNo ?? '',
+      amount: row.amount ?? '',
     }))
   }, [filteredRows])
 
@@ -80,10 +81,10 @@ export function DataTableToolbar<TData>({
         onClick={async () => {
           const { default: exportTableToPdf } = await import('@/utils/export-table-pdf')
           exportTableToPdf({
-            title: 'Delivery Routes',
+            title: 'Receipt Book',
             columnData: filteredColumn as any,
             data: exportData,
-            fileName: 'delivery-route-table.pdf',
+            fileName: 'receipt-book-table.pdf',
           })
         }}
       >
@@ -95,10 +96,10 @@ export function DataTableToolbar<TData>({
         onClick={async () => {
           const { default: exportTableToExcel } = await import('@/utils/export-table-excel')
           exportTableToExcel({
-            title: 'Delivery Routes',
+            title: 'Receipt Book',
             columnData: filteredColumn as any,
             data: exportData,
-            fileName: 'delivery-route-table.xlsx',
+            fileName: 'receipt-book-table.xlsx',
           })
         }}
       >

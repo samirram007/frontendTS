@@ -27,6 +27,7 @@ import { useState } from 'react'
 import type { StockSummarySchema } from '../../stock_summary/data/schema'
 import { cn } from '@/lib/utils'
 import { DataTableToolbar } from './data-table-toolbar'
+import type { FreightVoucherSchema } from '../data/schema'
 
 
 
@@ -86,10 +87,30 @@ export function GridTable({ columns, data }: DataTableProps) {
       return sum + Number(row.original.amount ?? 0)
     }, 0)
   const gridClass = 'grid grid-cols-[20px_100px_200px_150px_1fr_150px_150px_150px_300px]'
-
+  const exportColumnsData = table.getVisibleLeafColumns().map((col) => ({
+    header:
+      typeof col.columnDef.header === 'string' ? col.columnDef.header : col.id,
+    accessor: col.id as keyof FreightVoucherSchema,
+  })).concat([{
+    header: 'paymentStatus',
+    accessor: 'paymentStatus' as keyof FreightVoucherSchema,
+  }, {
+    header: 'partyName',
+    accessor: 'partyName' as keyof FreightVoucherSchema,
+  },
+  {
+    header: 'voucherType',
+    accessor: 'voucherType' as keyof FreightVoucherSchema,
+  }
+  ])
+  //   paymentStatus: row.paymentStatus ?? '',
+  const keyName = 'Freight Voucher'
   return (
     <div className='space-y-1'>
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table}
+        placeHolder={`Filter ${keyName} `}
+        filteredRows={data}
+        exportColumnsData={exportColumnsData} />
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

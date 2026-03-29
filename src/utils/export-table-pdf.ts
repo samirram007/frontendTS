@@ -2,6 +2,18 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { toSentenceCase } from './removeEmptyStrings'
 
+const MAX_PDF_CELL_CHARS = 180
+
+function formatPdfCellValue(value: unknown): string {
+    const normalized = String(value ?? '').replace(/\s+/g, ' ').trim()
+
+    if (normalized.length <= MAX_PDF_CELL_CHARS) {
+        return normalized
+    }
+
+    return `${normalized.slice(0, MAX_PDF_CELL_CHARS - 1)}...`
+}
+
 export default function exportTableToPdf<T extends Record<string, any>>({
     title,
     columnData: columns,
@@ -25,9 +37,10 @@ export default function exportTableToPdf<T extends Record<string, any>>({
     autoTable(doc, {
         startY: title ? 22 : 14,
         head: [columns.map((c) => toSentenceCase(c.header))],
-        body: data.map((row) => columns.map((c) => String(row[c.accessor] ?? ''))),
+        body: data.map((row) => columns.map((c) => formatPdfCellValue(row[c.accessor]))),
         styles: {
             fontSize: 9,
+            overflow: 'ellipsize',
         },
         headStyles: {
             fillColor: [22, 160, 133],
