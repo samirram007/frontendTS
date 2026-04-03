@@ -14,6 +14,7 @@ export const godownSchema: z.ZodType<any> = z.object({
   parentId: z.number().int().positive().optional().nullish(),
   parent: z.lazy(() => godownSchema).optional().nullish(),
   address: z.lazy(() => addressSchema).nullable().nullish(),
+  storageUnitType: z.string().default('GODOWN'),
   ourStockWithThirdParty: z.boolean(),
   thirdPartyStockWithUs: z.boolean()
 
@@ -38,6 +39,7 @@ export const formSchema = z
     parentId: z.number().int().positive().optional().nullish(),
     description: z.string().nullish(),
     address: z.lazy(() => addressSchema).nullable().nullish(),
+    storageUnitType: z.string().default('GODOWN'),
     ourStockWithThirdParty: z.boolean(),
     thirdPartyStockWithUs: z.boolean(),
     isEdit: z.boolean(),

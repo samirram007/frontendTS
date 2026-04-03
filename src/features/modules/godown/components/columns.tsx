@@ -60,6 +60,7 @@ export const columns: ColumnDef<Godown>[] = [
     enableHiding: false,
   },
 
+
   {
     accessorKey: 'code',
     header: ({ column }) => (
@@ -91,6 +92,13 @@ export const columns: ColumnDef<Godown>[] = [
       )
     },
     enableHiding: false,
+  },
+  {
+    accessorKey: 'storageUnitType',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Storage Type' />
+    ),
+    cell: ({ row }) => <div>{row.getValue('storageUnitType')}</div>,
   },
   {
     accessorKey: 'description',

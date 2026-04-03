@@ -6,16 +6,21 @@ import { Button } from './ui/button'
 type PasswordInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   'type'
->
+  > & {
+    containerClassName?: string
+  }
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ className, disabled, ...props }, ref) => {
+  ({ className, containerClassName, disabled, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false)
     return (
-      <div className={cn('relative rounded-md', className)}>
+      <div className={cn('relative', containerClassName)}>
         <input
           type={showPassword ? 'text' : 'password'}
-          className='flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'
+          className={cn(
+            'h-11 w-full rounded-lg border border-input bg-background px-3 pr-11 text-sm shadow-xs transition-colors placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 disabled:cursor-not-allowed disabled:opacity-50',
+            className
+          )}
           ref={ref}
           disabled={disabled}
           {...props}

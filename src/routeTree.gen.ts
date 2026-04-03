@@ -60,6 +60,7 @@ import { Route as ProtectedauthUserFiscalYearLayoutIndexRouteImport } from './ro
 import { Route as ProtectedauthProfileIndexRouteImport } from './routes/_protected/(auth)/profile/index.'
 import { Route as ProtectedTransactionsProviderVouchersLayoutRouteImport } from './routes/_protected/transactions/_provider/vouchers/_layout'
 import { Route as ProtectedTransactionsProviderFreightLayoutRouteImport } from './routes/_protected/transactions/_provider/freight/_layout'
+import { Route as ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand-zone-wise'
 import { Route as ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise'
 import { Route as ProtectedReportsStock_summaryLayoutStockInHandItemWiseRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand-item-wise'
 import { Route as ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRouteImport } from './routes/_protected/reports/stock_summary/_layout/stock-in-hand-godown-wise'
@@ -861,6 +862,12 @@ const ProtectedTransactionsProviderFreightLayoutRoute =
   ProtectedTransactionsProviderFreightLayoutRouteImport.update({
     id: '/_layout',
     getParentRoute: () => ProtectedTransactionsProviderFreightRoute,
+  } as any)
+const ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute =
+  ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRouteImport.update({
+    id: '/stock-in-hand-zone-wise',
+    path: '/stock-in-hand-zone-wise',
+    getParentRoute: () => ProtectedReportsStock_summaryLayoutRoute,
   } as any)
 const ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute =
   ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRouteImport.update({
@@ -1754,6 +1761,7 @@ export interface FileRoutesByFullPath {
   '/reports/stock_summary/stock-in-hand-godown-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRoute
   '/reports/stock_summary/stock-in-hand-item-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute
   '/reports/stock_summary/stock-in-hand-voucher-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
+  '/reports/stock_summary/stock-in-hand-zone-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute
   '/transactions/freight': typeof ProtectedTransactionsProviderFreightLayoutRouteWithChildren
   '/transactions/vouchers': typeof ProtectedTransactionsProviderVouchersLayoutRouteWithChildren
   '/profile/index': typeof ProtectedauthProfileIndexRoute
@@ -1943,6 +1951,7 @@ export interface FileRoutesByTo {
   '/reports/stock_summary/stock-in-hand-godown-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRoute
   '/reports/stock_summary/stock-in-hand-item-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute
   '/reports/stock_summary/stock-in-hand-voucher-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
+  '/reports/stock_summary/stock-in-hand-zone-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute
   '/transactions/freight': typeof ProtectedTransactionsProviderFreightLayoutIndexRoute
   '/transactions/vouchers': typeof ProtectedTransactionsProviderVouchersLayoutIndexRoute
   '/profile/index': typeof ProtectedauthProfileIndexRoute
@@ -2121,6 +2130,7 @@ export interface FileRoutesById {
   '/_protected/reports/stock_summary/_layout/stock-in-hand-godown-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRoute
   '/_protected/reports/stock_summary/_layout/stock-in-hand-item-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute
   '/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
+  '/_protected/reports/stock_summary/_layout/stock-in-hand-zone-wise': typeof ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute
   '/_protected/transactions/_provider/freight': typeof ProtectedTransactionsProviderFreightRouteWithChildren
   '/_protected/transactions/_provider/freight/_layout': typeof ProtectedTransactionsProviderFreightLayoutRouteWithChildren
   '/_protected/transactions/_provider/vouchers': typeof ProtectedTransactionsProviderVouchersRouteWithChildren
@@ -2336,6 +2346,7 @@ export interface FileRouteTypes {
     | '/reports/stock_summary/stock-in-hand-godown-wise'
     | '/reports/stock_summary/stock-in-hand-item-wise'
     | '/reports/stock_summary/stock-in-hand-voucher-wise'
+    | '/reports/stock_summary/stock-in-hand-zone-wise'
     | '/transactions/freight'
     | '/transactions/vouchers'
     | '/profile/index'
@@ -2525,6 +2536,7 @@ export interface FileRouteTypes {
     | '/reports/stock_summary/stock-in-hand-godown-wise'
     | '/reports/stock_summary/stock-in-hand-item-wise'
     | '/reports/stock_summary/stock-in-hand-voucher-wise'
+    | '/reports/stock_summary/stock-in-hand-zone-wise'
     | '/transactions/freight'
     | '/transactions/vouchers'
     | '/profile/index'
@@ -2702,6 +2714,7 @@ export interface FileRouteTypes {
     | '/_protected/reports/stock_summary/_layout/stock-in-hand-godown-wise'
     | '/_protected/reports/stock_summary/_layout/stock-in-hand-item-wise'
     | '/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise'
+    | '/_protected/reports/stock_summary/_layout/stock-in-hand-zone-wise'
     | '/_protected/transactions/_provider/freight'
     | '/_protected/transactions/_provider/freight/_layout'
     | '/_protected/transactions/_provider/vouchers'
@@ -3530,6 +3543,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/transactions/freight'
       preLoaderRoute: typeof ProtectedTransactionsProviderFreightLayoutRouteImport
       parentRoute: typeof ProtectedTransactionsProviderFreightRoute
+    }
+    '/_protected/reports/stock_summary/_layout/stock-in-hand-zone-wise': {
+      id: '/_protected/reports/stock_summary/_layout/stock-in-hand-zone-wise'
+      path: '/stock-in-hand-zone-wise'
+      fullPath: '/reports/stock_summary/stock-in-hand-zone-wise'
+      preLoaderRoute: typeof ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRouteImport
+      parentRoute: typeof ProtectedReportsStock_summaryLayoutRoute
     }
     '/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise': {
       id: '/_protected/reports/stock_summary/_layout/stock-in-hand-voucher-wise'
@@ -5922,6 +5942,7 @@ interface ProtectedReportsStock_summaryLayoutRouteChildren {
   ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRoute: typeof ProtectedReportsStock_summaryLayoutStockInHandGodownWiseRoute
   ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute: typeof ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute
   ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute: typeof ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute
+  ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute: typeof ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute
   ProtectedReportsStock_summaryLayoutIndexRoute: typeof ProtectedReportsStock_summaryLayoutIndexRoute
 }
 
@@ -5943,6 +5964,8 @@ const ProtectedReportsStock_summaryLayoutRouteChildren: ProtectedReportsStock_su
       ProtectedReportsStock_summaryLayoutStockInHandItemWiseRoute,
     ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute:
       ProtectedReportsStock_summaryLayoutStockInHandVoucherWiseRoute,
+    ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute:
+      ProtectedReportsStock_summaryLayoutStockInHandZoneWiseRoute,
     ProtectedReportsStock_summaryLayoutIndexRoute:
       ProtectedReportsStock_summaryLayoutIndexRoute,
   }

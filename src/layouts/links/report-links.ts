@@ -61,6 +61,13 @@ export const reportLinks = [
                 disabled: false,
             },
             {
+                title: 'Stock In Hand (Zone Wise)',
+                href: '/reports/stock_summary/stock-in-hand-zone-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
                 title: 'Stock In Hand (Voucher Wise)',
                 href: '/reports/stock_summary/stock-in-hand-voucher-wise',
                 visible: true,

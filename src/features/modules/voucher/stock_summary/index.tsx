@@ -29,7 +29,7 @@ export default function StockSummary() {
     const { currentReport, setCurrentReport } = useStockSummary();
     const reportPeriodVisible = [
         'Stock In Hand (Item Summary)',
-        'Stock In Hand (Item Wise)',
+        'Stock In Hand (Item Wise)', 
         'Stock In Hand (Godown Wise)',
         'Stock In Hand (Voucher Wise)',
         'Day Book',
