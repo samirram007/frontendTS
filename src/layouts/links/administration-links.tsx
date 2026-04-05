@@ -1,6 +1,6 @@
 
 
-import { IconUserCog } from "@tabler/icons-react";
+import { IconApps, IconPaperBag, IconPremiumRights, IconRadar2, IconUserCog } from "@tabler/icons-react";
 
 export const AdministrationLinks = [
     {
@@ -13,25 +13,25 @@ export const AdministrationLinks = [
         title: 'Roles',
         url: '/administration/role',
         visible: true,
-        icon: IconUserCog,
+        icon: IconRadar2,
     },
     {
         title: 'Roles & Permissions',
         url: '/administration/permission',
         visible: true,
-        icon: IconUserCog,
+        icon: IconPremiumRights,
     },
     {
         title: 'App Module  ',
         url: '/administration/app_module',
         visible: true,
-        icon: IconUserCog,
+        icon: IconApps,
     },
     {
         title: 'App Features  ',
         url: '/administration/app_module_feature',
         visible: true,
-        icon: IconUserCog,
+        icon: IconPaperBag,
     },
 ]
 

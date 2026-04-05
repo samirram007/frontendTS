@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/features/auth/contexts/AuthContext';
 import { Link } from '@tanstack/react-router';
+import { Route as ChangePasswordRoute } from '@/routes/_protected/(auth)/change-password';
 
 export function ProfileDropdown() {
   const auth = useAuth();
@@ -58,9 +59,9 @@ export function ProfileDropdown() {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link to='/'>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            <Link to={ChangePasswordRoute.to} >
+              Change Password
+              <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>

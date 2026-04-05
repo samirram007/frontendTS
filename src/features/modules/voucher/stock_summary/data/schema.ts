@@ -78,6 +78,26 @@ export type StockInHandGodownWiseSchema = z.infer<typeof stockInHandGodownWiseSc
 export const stockInHandGodownWiseListSchema = z.array(stockInHandGodownWiseSchema)
 export type StockInHandGodownWiseListSchema = z.infer<typeof stockInHandGodownWiseListSchema>
 
+
+export const stockInHandZoneWiseSchema = z.object({
+  zoneId: z.number().int().positive(),
+  zoneName: z.string().min(1),
+  openingQuantity: z.coerce.number().nullish(),
+  openingAmount: z.coerce.number().nullish(),
+  inwardQuantity: z.coerce.number().nullish(),
+  inwardAmount: z.coerce.number().nullish(),
+  outwardQuantity: z.coerce.number().nullish(),
+  outwardAmount: z.coerce.number().nullish(),
+  closingQuantity: z.coerce.number().nullish(),
+  closingAmount: z.coerce.number().nullish(),
+  godownDetails: z.array(stockInHandGodownWiseSchema)
+})
+export type StockInHandZoneWiseSchema = z.infer<typeof stockInHandZoneWiseSchema>
+
+export const stockInHandZoneWiseListSchema = z.array(stockInHandZoneWiseSchema)
+export type StockInHandZoneWiseListSchema = z.infer<typeof stockInHandZoneWiseListSchema>
+
+
 export const StockInHandVoucherWiseSchema = stockInHandSchema.extend({
   voucherDetails: z.array(voucherDetailsSchema)
 })

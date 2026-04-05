@@ -6,6 +6,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { FEATURES } from '@/data/features'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
 import { cn } from '@/lib/utils'
 import { IconChevronDown, IconMenu } from '@tabler/icons-react'
 import { Link, useLocation } from '@tanstack/react-router'
@@ -26,6 +28,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
 
 export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) {
   const location = useLocation();
+  const { permissions } = useAuth()
   const [links, setLinks] = useState([...arrayLinks]);
   useEffect(() => {
 
@@ -36,6 +39,13 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
       }))
     );
   }, [location.pathname]);
+
+
+
+
+  // if (title === 'Transactions' && !permissions.includes(FEATURES.TRANSACTION_MENU_VIEW)) {
+  //   return null
+  // }
   return (
     <>
       <div className='lg:hidden'>
@@ -85,15 +95,30 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                 <div className='flex flex-row bg-accent/10 px-4 space-x-8'>
                   {
                     submenuItems?.filter(submenu => submenu.visible).map((submenu, index) =>
+
+                      (submenu.title === 'Freight Reports' && !permissions.includes(FEATURES.FREIGHT_REPORT_MENU_VIEW)
+                      )
+                        ? null : (
+
+
                       <DropdownMenuItem key={`${title}-${submenu.title}`} asChild>
 
                         <div className='flex flex-col justify-start items-start'>
                           <div className=' min-w-[200px] font-semibold text-sm hover:underline hover:text-primary border-b border-gray-200 py-1' >
-                            {submenu.title}
+                                {submenu.title}
                           </div>
                           <div className=' flex flex-col'>
                             {
                               submenu.menus?.filter((item: any) => item.visible).map((item: any) =>
+                                (
+                                  (item.title === 'Day Book' && !permissions.includes(FEATURES.DAYBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Day Book (Self)' && !permissions.includes(FEATURES.DAYBOOK_SELF_MENU_VIEW)) ||
+                                  (item.title === 'Receipt Book' && !permissions.includes(FEATURES.RECEIPTBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Distributor Book' && !permissions.includes(FEATURES.DISTRIBUTORBOOK_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Item Summary)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Item Wise)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW)) ||
+                                  (item.title === 'Stock In Hand (Godown Wise)' && !permissions.includes(FEATURES.STOCKSUMMARY_MENU_VIEW))
+                                ) ? null : (
                                 <Link
                                   key={`${submenu.title}-${item.title}-${index}`}
                                   to={item.href}
@@ -104,24 +129,27 @@ export function TopNav({ className, links: arrayLinks, ...props }: TopNavProps) 
                                 >
                                   {item.title}
                                 </Link>
-                              )
+                                ))
                             }
                           </div>
                         </div>
 
                       </DropdownMenuItem>
+                        )
                     )
                   }
                 </div>
               </DropdownMenuContent>
             </DropdownMenu>)
             : (
+              title === 'Freight' && !permissions.includes(FEATURES.FREIGHT_MENU_VIEW)) ? null : (
+
           <Link
             key={`${title}-${href}`}
             to={href}
             // disabled={disabled}
             className={`text-sm font-medium transition-colors underline-offset-4  decoration-2 hover:text-primary hover:underline ${isActive ? '  animate-in  underline  decoration-red-500  text-primary' : 'text-muted-foreground decoration-red-200'}`}
-              >              {title}
+                >              {title}
 
           </Link>
             )))}

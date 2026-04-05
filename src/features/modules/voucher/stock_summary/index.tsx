@@ -27,6 +27,15 @@ import ReportingPeriod from '@/features/global/components/reporting-period'
 export default function StockSummary() {
     const location = useLocation();
     const { currentReport, setCurrentReport } = useStockSummary();
+    const reportPeriodVisible = [
+        'Stock In Hand (Item Summary)',
+        'Stock In Hand (Item Wise)', 
+        'Stock In Hand (Godown Wise)',
+        'Stock In Hand (Voucher Wise)',
+        'Day Book',
+        'Receipt Book',
+        'Distributor Book'
+    ];
     const allLinksPlucked = useMemo(() => {
         return reportLinks.flatMap(report =>
             report.menus.map(menu => ({
@@ -56,13 +65,15 @@ export default function StockSummary() {
     return (
 
         <Main className='min-w-full min-h-full!'>
-            <div className='mb-2 flex flex-wrap items-center justify-between space-y-2 pr-8'>
+            <div className='mb-2 flex flex-wrap items-start justify-between space-y-2 pr-8'>
                 <div>
                     <h3 className='text-2xl font-bold tracking-tight'>
                         {capitalizeAllWords(toSentenceCase(currentReport)).replace(/_/g, ' ')} </h3>
-                    <p className='text-muted-foreground pt-4 text-sm'>
+                    {/* {currentReport} */}
+                    {reportPeriodVisible.includes(currentReport) && <p className='pt-2 text-muted-foreground'><ReportingPeriod /></p>}
+                    {/* <p className='text-muted-foreground pt-4 text-sm'>
                         <ReportingPeriod />
-                    </p>
+                    </p> */}
                 </div>
                 <PrimaryButtons />
             </div>
@@ -83,14 +94,15 @@ const PrimaryButtons = () => {
     const reports = useMemo(() => {
         const allLinksPlucked = reportLinks.flatMap(report =>
             report.menus.filter(menu => menu.visible).map(menu => ({
-                link: menu.href.split('/').pop() || '',
+                // link: menu.href.split('/').pop() || '',
+                link: menu.href || '',
                 label: menu.title,
                 visible: menu.visible,
             }))
         );
         return allLinksPlucked;
     }, []);
-
+    // console.log("reports", reportLinks)
     return (
         <div className='flex space-x-2'>
             {/* Add Dropdown  here */}
@@ -137,7 +149,7 @@ const DropdownItem = ({ label, link, visible }: { label: string, link: string, v
         const currentLink = allLinksPlucked.find((href) => href.href.includes(link)) || { href: '', title: '' };
 
         setCurrentReport(currentLink.title.split('/').pop() || '');
-        navigate({ to: `/reports/stock_summary/${link}` });
+        navigate({ to: `${link}` });
     }
 
     return (

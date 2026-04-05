@@ -240,6 +240,7 @@ const DateBox = (props: Props) => {
                         </FormLabel>
                     }
                     <FormControl>
+
                         <Input
                             tabIndex={tabIndex}
                             autoFocus={tabIndex === 0}
@@ -249,7 +250,8 @@ const DateBox = (props: Props) => {
                             autoComplete='off'
                             {...rest}
                             {...field}
-                            value={field.value ?? ""}
+
+                            value={formatDateForInput(field.value)}
                         />
                     </FormControl>
                     <FormMessage className=' col-start-2' />
@@ -258,6 +260,20 @@ const DateBox = (props: Props) => {
             {...rest}
         />
     )
+}
+
+function formatDateForInput(value: unknown): string {
+    if (!value) return ''
+
+    if (value instanceof Date) {
+        return value.toISOString().split('T')[0]
+    }
+
+    if (typeof value === 'string') {
+        return value.includes('T') ? value.split('T')[0] : value
+    }
+
+    return ''
 }
 const NumberBox = (props: Props) => {
     const { form, name, label, type, gapClass, tabIndex, noLabel, rtl, ...rest } = props
@@ -296,16 +312,21 @@ const NumberBox = (props: Props) => {
 }
 
 const SelectBox = (props: Props) => {
-    const { form, name, label, items } = props
+    const { form, name, label, items, noLabel, gapClass } = props
     return (
         <FormField
             control={form.control}
             name={name}
             render={({ field }) => (
-                <FormItem className='grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='   '>
-                        {label ?? capitalizeAllWords(name)}
-                    </FormLabel>
+                <FormItem className={cn(
+                    'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                    gapClass
+                )} >
+                    {!noLabel &&
+                        <FormLabel className='   '>
+                            {label ?? capitalizeAllWords(name)}
+                        </FormLabel>
+                    }
                     <FormControl>
                         <SelectDropdown
                             defaultValue={field.value ? field.value.toString() : ''}
@@ -322,7 +343,7 @@ const SelectBox = (props: Props) => {
     )
 }
 const MultiSelectBox = (props: Props) => {
-    const { form, name, label, items } = props
+    const { form, name, label, items, gapClass } = props
     const [open, setOpen] = useState(false)
 
     const selectedValues: string[] = form.watch(name) || []
@@ -338,7 +359,10 @@ const MultiSelectBox = (props: Props) => {
             control={form.control}
             name={name}
             render={() => (
-                <FormItem className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-1">
+                <FormItem className={cn(
+                    'grid grid-cols-[100px_1fr] items-center space-y-0 gap-x-4 gap-y-1',
+                    gapClass
+                )} >
                     <FormLabel>{label ?? capitalizeAllWords(name)}</FormLabel>
                     <FormControl>
                         <Popover open={open} onOpenChange={setOpen}>

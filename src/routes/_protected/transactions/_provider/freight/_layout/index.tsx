@@ -1,4 +1,5 @@
 
+import { SkeletonTable } from '@/components/skeleton';
 import { deliveryPlaceQueryOptions } from '@/features/modules/delivery_place/data/queryOptions';
 import { deliveryVehicleQueryOptions } from '@/features/modules/delivery_vehicle/data/queryOptions';
 import { stockUnitQueryOptions } from '@/features/modules/stock_unit/data/queryOptions';
@@ -34,7 +35,7 @@ export const Route = createFileRoute('/_protected/transactions/_provider/freight
     // const { data: deliveryVehicles } = useSuspenseQuery(deliveryVehicleQueryOptions())
 
     return (
-      <Suspense fallback={<Loader className="animate-spin" />}>
+      <Suspense fallback={<SkeletonTable />}>
         <Freight data={freight?.data}
           stockUnits={stockUnits?.data}
           deliveryVehicles={deliveryVehicles?.data}

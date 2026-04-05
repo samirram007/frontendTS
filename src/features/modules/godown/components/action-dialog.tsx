@@ -17,7 +17,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import FormInputField from '@/components/form-input-field'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { showSubmittedData } from '@/utils/show-submitted-data'
@@ -26,6 +26,7 @@ import { useGodownMutation } from '../data/queryOptions'
 import { formSchema, type Godown, type GodownForm } from '../data/schema'
 import GodownDropdown from './dropdown/godown-dropdown'
 import AddressForm from './sub-component/address-form'
+import StorageUnitTypeSheet from './dropdown/storage_unit_type-sheet'
 
 
 interface Props {
@@ -38,7 +39,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
   const { mutate: saveGodown, isPending } = useGodownMutation()
   const isEdit = !!currentRow
   const form = useForm<GodownForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as Resolver<GodownForm>,
     defaultValues: isEdit
       ? {
         ...currentRow, isEdit,
@@ -52,6 +53,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         status: 'active',
         ourStockWithThirdParty: false,
         thirdPartyStockWithUs: false,
+        storageUnitType: 'GODOWN',
         isEdit,
       },
   })
@@ -101,6 +103,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
                   <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
                   <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
                   <GodownDropdown form={form} gapClass={gapClass} />
+                  <StorageUnitTypeSheet form={form} gapClass={gapClass} />
 
                   <FormInputField type='textarea' gapClass={gapClass} form={form} name='description' label='Description (optional)' />
               <FormInputField type='checkbox' form={form} name='status' label='Status' options={[

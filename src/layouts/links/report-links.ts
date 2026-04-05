@@ -10,6 +10,29 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
+            {
+                title: 'Day Book (Self)',
+                href: '/reports/day_book/self',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Receipt Book',
+                href: '/reports/receipt_book',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Distributor Book',
+                href: '/reports/distributor_book',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+
+
         ]
     },
     {
@@ -33,6 +56,13 @@ export const reportLinks = [
             {
                 title: 'Stock In Hand (Godown Wise)',
                 href: '/reports/stock_summary/stock-in-hand-godown-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
+            {
+                title: 'Stock In Hand (Zone Wise)',
+                href: '/reports/stock_summary/stock-in-hand-zone-wise',
                 visible: true,
                 isActive: false,
                 disabled: false,
@@ -66,10 +96,19 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
+
+
+            {
+                title: 'Freight (Voucher Wise)',
+                href: '/reports/freight/freight-voucher-wise',
+                visible: true,
+                isActive: false,
+                disabled: false,
+            },
             {
                 title: 'Freight (Transporter Wise)',
                 href: '/reports/freight/freight-transporter-wise',
-                visible: false,
+                visible: true,
                 isActive: false,
                 disabled: false,
             },
@@ -87,13 +126,7 @@ export const reportLinks = [
                 isActive: false,
                 disabled: false,
             },
-            {
-                title: 'Freight (Voucher Wise)',
-                href: '/reports/freight/freight-voucher-wise',
-                visible: true,
-                isActive: false,
-                disabled: false,
-            },
+
         ]
 
     }

@@ -46,7 +46,7 @@ const PrintDialog = (props: Props) => {
         <Dialog open={open}
             onOpenChange={(state) => { onOpenChange(state) }} >
             <DialogTrigger asChild>
-                <IconPrinter size={18} title='Print Freight' className="cursor-pointer" />
+                <IconPrinter size={30} title='Print Freight' className="cursor-pointer" />
             </DialogTrigger>
             <DialogContent className='sm:max-w-5xl'>
                 <DialogHeader className='text-left border-b-2 pb-2'>

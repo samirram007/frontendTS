@@ -4,6 +4,7 @@ import { deliveryNoteSchema } from '../../delivery_note/data/schema';
 import { companySchema } from '@/features/modules/company/data/schema';
 import { accountLedgerSchema } from '@/features/modules/account_ledger/data/schema';
 import { voucherSchema } from '../../data-schema/voucher-schema';
+import { voucherTypeSchema } from '@/features/modules/voucher_type/data/schema';
 
 export const freightSchema = deliveryNoteSchema.extend({
   // Add any additional fields specific to Freight if necessary
@@ -39,7 +40,18 @@ const voucherEntrySchema = z.object({
   accountLedger: accountLedgerSchema,
 });
 
-export const freightVoucherSchema = z.object({
+export const voucherReferenceSchema = z.lazy(() =>
+  z.object({
+    id: z.number().int().positive().nullish(),
+    voucherId: z.number().int().positive().nullish(),
+    refVoucherId: z.number().int().positive().nullish(),
+    voucher: voucherSchema.nullish(),
+    referenceVoucher: voucherSchema.nullish(),
+    type: z.string().nullable(),
+  })
+);
+
+export const freightVoucherBaseSchema = z.object({
   id: z.number().int().positive().nullish(),
   voucherNo: z.string(),
   voucherDate: z.string(),
@@ -49,10 +61,18 @@ export const freightVoucherSchema = z.object({
   remarks: z.string().nullable(),
   status: z.string(),
   amount: z.number(),
+  paymentStatus: z.string(),
   company: companySchema.nullish(),
   partyLedger: accountLedgerSchema.nullish(),
   voucherEntries: z.array(voucherEntrySchema),
+  voucherType: voucherTypeSchema.nullish(),
 });
+
+export const freightVoucherSchema = z.lazy(() =>
+  freightVoucherBaseSchema.extend({
+    voucherReferences: z.array(voucherReferenceSchema).optional(),
+  })
+);
 
 export const freightVoucherListSchema = z.array(freightVoucherSchema);
 
@@ -82,6 +102,7 @@ export const formSchema = z.object({
   freightCharges: z.coerce.number().min(0),
   totalFare: z.coerce.number().min(0),
   dispatchSourceId: z.number().int().positive().nullish(),
+  paymentStatus: z.string().nullish(),
   isEdit: z.boolean(),
 })
 export type FreightForm = z.infer<typeof formSchema>

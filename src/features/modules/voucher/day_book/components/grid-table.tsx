@@ -25,6 +25,7 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import type { DayBookSchema } from '../data/schema'
+import { DataTableToolbar } from './data-table-toolbar'
 
 
 declare module '@tanstack/react-table' {
@@ -76,10 +77,17 @@ export function GridTable({ columns, data, pagination = true }: DataTableProps) 
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
-
+  const exportColumnsData = table.getVisibleLeafColumns().map((col) => ({
+    header:
+      typeof col.columnDef.header === 'string' ? col.columnDef.header : col.id,
+    accessor: col.id as keyof DayBookSchema,
+  }))
+  const keyName = 'Day Book'
   return (
     <div className='space-y-4'>
-      {/* <DataTableToolbar table={table} /> */}
+      <DataTableToolbar table={table}
+        placeHolder={`Filter ${keyName} records...`}
+        filteredRows={data} exportColumnsData={exportColumnsData} />
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

@@ -13,5 +13,6 @@ export async function storeCompanyService(payload: any) {
     return await postData(API_PATH, payload)
 }
 export async function updateCompanyService(payload: any) {
+
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }

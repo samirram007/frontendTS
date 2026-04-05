@@ -11,7 +11,6 @@ import HeaderComponent from './components/HeaderComponent'
 import { GlobalContextProvider } from '@/features/global/contexts/global-context'
 
 
-
 const ProtectedLayout = () => {
     // const router = useRouter();
     // const { permissions } = useAuth();
@@ -25,6 +24,7 @@ const ProtectedLayout = () => {
     return (
         <GlobalContextProvider>
             <SearchProvider>
+                {/* <GodownItemSearchProvider> */}
 
                 <SidebarProvider  >
                     <SkipToMain />
@@ -63,6 +63,7 @@ const ProtectedLayout = () => {
                         {/* <!-- ===== Page Wrapper End ===== --> */}
                     </div>
                 </SidebarProvider>
+                {/* </GodownItemSearchProvider> */}
             </SearchProvider>
         </GlobalContextProvider>
     )

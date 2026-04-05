@@ -31,7 +31,7 @@ export function DataTableToolbar<TData>({
   filteredRows,
   exportColumnsData,
 }: DataTableToolbarProps<TData>) {
-  console.log(filteredRows)
+  // console.log(filteredRows)
 
   const exportData = useMemo(() => {
     return (filteredRows as any[]).map((row) => ({

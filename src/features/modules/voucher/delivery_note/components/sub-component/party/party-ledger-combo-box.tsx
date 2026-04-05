@@ -114,7 +114,7 @@ export const PartyLedgerCombobox = ({ partyLedgers }: Props) => {
                     <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </SheetTrigger>
-            <SheetContent className="sheet-content-width-same-as-trigger p-0"  >
+            <SheetContent showCloseButton={false} className="sheet-content-width-same-as-trigger p-0"  >
 
                 <SheetHeader>
                     <SheetTitle>Search Party</SheetTitle>

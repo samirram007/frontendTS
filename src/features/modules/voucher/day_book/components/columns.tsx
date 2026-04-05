@@ -9,10 +9,12 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
 
 
-import { lowerCase } from '../../../../../utils/removeEmptyStrings'
+import { lowerCase, toSentenceCase } from '../../../../../utils/removeEmptyStrings';
 import { VoucherTypeColorMapping } from '../data/data'
 import type { DayBookSchema } from '../data/schema'
 import RowActions from './row-actions'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
+import { FEATURES } from '@/data/features'
 
 export const columns: ColumnDef<DayBookSchema>[] = [
   {
@@ -75,11 +77,16 @@ export const columns: ColumnDef<DayBookSchema>[] = [
       <DataTableColumnHeader column={column} title='Particulars' />
     ),
     cell: ({ row }) => {
+      const { permissions } = useAuth()
       const { partyLedger, voucherType } = row.original
       const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
       const badgeColor = VoucherTypeColorMapping.get(key);
+      const DEVELOPER_ACCESS_VIEW = permissions.includes(FEATURES.DEVELOPER_ACCESS_VIEW);
+      // console.log("partyLedger", row.original)
       if (!partyLedger) {
-        return <div className='text-muted-foreground'>Primary</div>
+        return <div className='text-muted-foreground'>Primary -
+          {DEVELOPER_ACCESS_VIEW && row.original.id + '-' + row.original.voucherType?.id}
+        </div>
       }
       return (
         <div className='flex space-x-2'>
@@ -87,6 +94,8 @@ export const columns: ColumnDef<DayBookSchema>[] = [
             {/* <div className='text-muted-foreground'>{parentId.name}: </div> */}
             {partyLedger?.name ?? 'Unknown'}
           </Badge>
+
+          {DEVELOPER_ACCESS_VIEW && row.original.id + '-' + row.original.voucherType?.id}
 
         </div>
       )
@@ -99,8 +108,9 @@ export const columns: ColumnDef<DayBookSchema>[] = [
       <DataTableColumnHeader column={column} title='Vch. Type' />
     ),
     cell: ({ row }) => {
-      const { voucherType } = row.original
-      const key = lowerCase(voucherType?.name ?? '').replace(/\s+/g, '_');
+      const { voucherType, module } = row.original
+      const tagkey = module ? module : (toSentenceCase(voucherType?.name) ?? 'Unknown');
+      const key = lowerCase(tagkey ?? '').replace('_voucher', '').replace(/\s+/g, '_');
       const badgeColor = VoucherTypeColorMapping.get(key);
       if (!voucherType) {
         return <div className='text-muted-foreground'>Primary</div>
@@ -109,7 +119,7 @@ export const columns: ColumnDef<DayBookSchema>[] = [
         <div className='flex space-x-2'>
           <Badge variant='default' className={cn('capitalize', badgeColor)}>
             {/* <div className='text-muted-foreground'>{parentId.name}: </div> */}
-            {row.original.module ? row.original.module : (voucherType?.name ?? 'Unknown')}
+            {toSentenceCase(key)}
           </Badge>
 
         </div>

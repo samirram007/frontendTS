@@ -21,6 +21,7 @@ interface CompanyProps {
 }
 
 export default function Company({ data }: CompanyProps) {
+  console.log(data);
 
 
   return (

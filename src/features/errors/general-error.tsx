@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { useNavigate, useRouter } from '@tanstack/react-router'
+import { Link, useRouter } from '@tanstack/react-router'
 
 interface GeneralErrorProps extends React.HTMLAttributes<HTMLDivElement> {
   minimal?: boolean
@@ -10,7 +10,7 @@ export default function GeneralError({
   className,
   minimal = false,
 }: GeneralErrorProps) {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const { history } = useRouter()
   return (
     <div className={cn('h-svh w-full', className)}>
@@ -27,7 +27,11 @@ export default function GeneralError({
             <Button variant='outline' onClick={() => history.go(-1)}>
               Go Back
             </Button>
-            <Button onClick={() => navigate({ to: '/' })}>Back to Home</Button>
+            <Button asChild variant='default'>
+              <Link to='/' className='flex items-center gap-2'>
+                Back to Home
+              </Link>
+            </Button>
           </div>
         )}
       </div>

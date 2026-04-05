@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from 'vite'
 import tsConfigPaths from 'vite-tsconfig-paths'
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   // const isProd = mode === 'production'
   const env = loadEnv(mode, process.cwd())
   return {

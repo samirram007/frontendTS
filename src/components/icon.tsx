@@ -41,6 +41,7 @@ type Props = {
     name: string
     size?: number
     className?: string
+    style?: React.CSSProperties
 }
 
 const IconBag: Record<string, IconType> = {
@@ -92,9 +93,9 @@ const IconBag: Record<string, IconType> = {
 }
 
 
-export const Icon = ({ name, size = 20, className }: Props) => {
+export const Icon = ({ name, size = 20, className, style }: Props) => {
     const IconComponent = IconBag[name] || IconChecklist
-    return <IconComponent size={size} className={className} />
+    return <IconComponent size={size} className={className} style={style} />
 }
 
 

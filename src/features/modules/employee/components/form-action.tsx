@@ -25,6 +25,7 @@ import GradeDropdown from './dropdown/grade-dropdown'
 import ShiftDropdown from './dropdown/shift-dropdown'
 import AddressForm from './sub-component/address-form'
 import { toast } from 'sonner'
+import { useEffect } from 'react'
 
 interface Props {
     currentRow?: Employee
@@ -42,6 +43,7 @@ export function FormAction({ currentRow }: Props) {
                 ...currentRow,
                 isEdit,
                 hasUserAccount: currentRow?.user ? true : false,
+                accountGroupId: currentRow?.accountLedger?.accountGroupId || 20010,
             }
             : {
                 name: '',
@@ -62,8 +64,8 @@ export function FormAction({ currentRow }: Props) {
                         addressableType: '',
                     }
                 },
-                dob: '',
-                doj: '',
+                dob: undefined,
+                doj: undefined,
                 email: '',
                 contactNo: '',
                 education: '', 
@@ -75,7 +77,7 @@ export function FormAction({ currentRow }: Props) {
                 gradeId: 101,
                 shiftId: 101,
 
-                accountGroupId: 20002,
+                accountGroupId: 20010,
                 image: '4', 
                 hasUserAccount: false,
 
@@ -102,6 +104,16 @@ export function FormAction({ currentRow }: Props) {
         )
 
     }
+    useEffect(() => {
+        console.log("currentRow: ", currentRow)
+        if (currentRow) {
+            form.reset({
+                ...currentRow,
+                isEdit: true,
+                hasUserAccount: currentRow?.user ? true : false,
+            })
+        }
+    }, [currentRow])
 
 
     return (
@@ -132,6 +144,7 @@ export function FormAction({ currentRow }: Props) {
                                 <h3 className=" font-semibold text-md  ">Bio</h3>
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='name' label='Name' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='code' label='Code' />
+
                                 <FormInputField type='date' gapClass={gapClass} form={form} name='dob' label='DOB' />
                                 <FormInputField type='date' gapClass={gapClass} form={form} name='doj' label='Joining Date' />
                                 <FormInputField type='text' gapClass={gapClass} form={form} name='pan' label='Pan Number' />
@@ -156,7 +169,7 @@ export function FormAction({ currentRow }: Props) {
                                 {isEdit && form.getValues('accountLedger') ?
                                     <div className={cn(gapClass, 'items-center')}>
                                         <div>Ledger A/c: </div>
-                                        <div className={cn(gapClass, 'font-bold border-2 px-2 py-1 rounded-sm')} >
+                                        <div className={cn('font-bold border-2 px-2 py-1 rounded-sm')} >
                                             {form.getValues('accountLedger')?.name}
                                         </div>
                                     </div>

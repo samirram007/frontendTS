@@ -1,15 +1,25 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
 import type { DayBookForm } from "../types/types"
-import { fetchDayBookService, storeDayBookService, updateDayBookService } from "./api"
+import { fetchDayBookSelfService, fetchDayBookService,  storeDayBookService, updateDayBookService } from "./api"
+ 
 const Key = "DayBooks"
 export const dayBookQueryOptions = (key: string = Key) => {
     return queryOptions({
         queryKey: [key],
         queryFn: fetchDayBookService,
-        staleTime: 1000 * 60 * 5, // 5 minutes
+        staleTime: 1000 * 30, // 30 seconds
         retry: 1,
     })
 }
+export const dayBookSelfQueryOptions = (key: string = Key) => {
+    return queryOptions({
+        queryKey: [key],
+        queryFn: fetchDayBookSelfService,
+        staleTime: 1000 * 30, // 30 seconds
+        retry: 1,
+    })
+} 
+
 export function useDayBookMutation() {
     const queryClient = useQueryClient()
 
