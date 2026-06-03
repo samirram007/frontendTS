@@ -1,0 +1,361 @@
+[
+    {
+        "id": 1,
+        "section": "Bed Allocation Info",
+        "floors": [
+            {
+                "id": 2,
+                "floorName": "Second Floor – General & AC Ward",
+                "floorType": "General / AC",
+                "code": "S-012",
+                "rooms": [
+                    {
+                        "id": 1,
+                        "code": "WARD-201",
+                        "roomId": "WARD-201",
+                        "roomName": "General Ward - 201",
+                        "roomType": "General",
+                        "totalBeds": 2,
+                        "bedOccupied": 1,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 1,
+                                "bedId": "BED-201-A",
+                                "bedNo": "201-A",
+                                "currentStatus": "occupied",
+                                "occupation": {
+                                    "occupiedFrom": "2025-12-25T10:30:00",
+                                    "expectedAvailableOn": "2025-12-30T09:00:00",
+                                    "allocatedBy": {
+                                        "userId": 11,
+                                        "name": "Admin Nurse - Riya"
+                                    },
+                                    "patient": {
+                                        "patientId": 101,
+                                        "uhid": "UHID-1001",
+                                        "name": "Ramesh Kumar",
+                                        "gender": "Male",
+                                        "age": 54,
+                                        "contactNo": "9876543210",
+                                        "emergencyContact": "9876543211",
+                                        "diagnosis": "Ischemic Stroke",
+                                        "admissionDate": "2025-12-25T10:00:00"
+                                    },
+                                    "physician": {
+                                        "id": 1,
+                                        "name": "Dr. A. Sharma",
+                                        "specialization": "Neurology"
+                                    }
+                                }
+                            },
+                            {
+                                "id": 2,
+                                "bedId": "BED-201-B",
+                                "bedNo": "201-B",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "code": "WARD-202",
+                        "roomId": "WARD-202",
+                        "roomName": "AC Ward - 202",
+                        "roomType": "AC",
+                        "acType": "Centralized AC",
+                        "totalBeds": 2,
+                        "bedOccupied": 0,
+                        "bedBooked": 1,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 3,
+                                "bedId": "BED-202-A",
+                                "bedNo": "202-A",
+                                "currentStatus": "booked",
+                                "booking": {
+                                    "bookedFrom": "2025-12-28T08:00:00",
+                                    "bookedTo": "2025-12-31T08:00:00",
+                                    "bookedBy": {
+                                        "userId": 12,
+                                        "name": "Front Desk - Anil"
+                                    },
+                                    "patient": {
+                                        "patientId": 102,
+                                        "uhid": "UHID-1002",
+                                        "name": "Sunita Verma",
+                                        "age": 46,
+                                        "diagnosis": "Epilepsy"
+                                    }
+                                }
+                            },
+                            {
+                                "id": 4,
+                                "bedId": "BED-202-B",
+                                "bedNo": "202-B",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "code": "WARD-203",
+                        "roomId": "WARD-203",
+                        "roomName": "General Ward - 203",
+                        "roomType": "General",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 5,
+                                "bedId": "BED-203-A",
+                                "bedNo": "203-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "code": "PR-204",
+                        "roomId": "PR-204",
+                        "roomName": "Private Room - 204",
+                        "roomType": "Private",
+                        "privacyLevel": "Single Occupancy",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 6,
+                                "bedId": "BED-204-A",
+                                "bedNo": "204-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "floorName": "Third Floor – ICU, HDU & Stroke Unit",
+                "floorType": "Critical Care",
+                "code": "T-012",
+                "rooms": [
+                    {
+                        "id": 5,
+                        "code": "ICU-301",
+                        "roomId": "ICU-301",
+                        "roomName": "Neuro ICU - 301",
+                        "roomType": "ICU",
+                        "ventilatorSupported": true,
+                        "totalBeds": 1,
+                        "bedOccupied": 1,
+                        "bedBooked": 0,
+                        "bedAvailable": 0,
+                        "beds": [
+                            {
+                                "id": 7,
+                                "bedId": "BED-301-A",
+                                "bedNo": "301-A",
+                                "currentStatus": "occupied",
+                                "occupation": {
+                                    "occupiedFrom": "2025-12-23T14:00:00",
+                                    "expectedAvailableOn": "2025-12-29T14:00:00",
+                                    "allocatedBy": {
+                                        "userId": 13,
+                                        "name": "ICU Nurse - Pooja"
+                                    },
+                                    "patient": {
+                                        "patientId": 201,
+                                        "name": "Mahesh Patel",
+                                        "age": 63,
+                                        "diagnosis": "Traumatic Brain Injury"
+                                    },
+                                    "physician": {
+                                        "id": 2,
+                                        "name": "Dr. S. Mehta",
+                                        "specialization": "Neuro Critical Care"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": 6,
+                        "code": "HDU-302",
+                        "roomId": "HDU-302",
+                        "roomName": "Neuro HDU - 302",
+                        "roomType": "HDU",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 8,
+                                "bedId": "BED-302-A",
+                                "bedNo": "302-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 7,
+                        "code": "STU-303",
+                        "roomId": "STU-303",
+                        "roomName": "Stroke Unit - 303",
+                        "roomType": "Stroke Unit",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 1,
+                        "bedAvailable": 0,
+                        "beds": [
+                            {
+                                "id": 9,
+                                "bedId": "BED-303-A",
+                                "bedNo": "303-A",
+                                "currentStatus": "booked",
+                                "booking": {
+                                    "bookedFrom": "2025-12-29T06:00:00",
+                                    "bookedTo": "2025-12-31T06:00:00",
+                                    "bookedBy": {
+                                        "userId": 15,
+                                        "name": "Reception - Meena"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": 8,
+                        "code": "ISO-304",
+                        "roomId": "ISO-304",
+                        "roomName": "Isolation Room - 304",
+                        "roomType": "Isolation",
+                        "negativePressure": true,
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 10,
+                                "bedId": "BED-304-A",
+                                "bedNo": "304-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "floorName": "Fourth Floor – OT & Private Rooms",
+                "floorType": "Surgical / Private",
+                "code": "F-012",
+                "rooms": [
+                    {
+                        "id": 9,
+                        "code": "OT-401",
+                        "roomId": "OT-401",
+                        "roomName": "Operation Theatre - 1",
+                        "roomType": "OT",
+                        "otType": "Neuro Surgery",
+                        "totalBeds": 1,
+                        "bedOccupied": 1,
+                        "bedBooked": 0,
+                        "bedAvailable": 0,
+                        "beds": [
+                            {
+                                "id": 11,
+                                "bedId": "OT-BED-401-A",
+                                "bedNo": "OT-401-A",
+                                "currentStatus": "occupied",
+                                "occupation": {
+                                    "occupiedFrom": "2025-12-27T09:00:00",
+                                    "expectedAvailableOn": "2025-12-27T13:00:00",
+                                    "allocatedBy": {
+                                        "userId": 16,
+                                        "name": "OT Coordinator - Rahul"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": 10,
+                        "code": "OT-402",
+                        "roomId": "OT-402",
+                        "roomName": "Operation Theatre - 2",
+                        "roomType": "OT",
+                        "otType": "General Surgery",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 1,
+                        "bedAvailable": 0,
+                        "beds": [
+                            {
+                                "id": 12,
+                                "bedId": "OT-BED-402-A",
+                                "bedNo": "OT-402-A",
+                                "currentStatus": "booked",
+                                "booking": {
+                                    "bookedFrom": "2025-12-28T14:00:00",
+                                    "bookedTo": "2025-12-28T18:00:00",
+                                    "bookedBy": {
+                                        "userId": 16,
+                                        "name": "OT Coordinator - Rahul"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": 11,
+                        "code": "PR-403",
+                        "roomId": "PR-403",
+                        "roomName": "Private Deluxe Room - 403",
+                        "roomType": "Private",
+                        "privacyLevel": "Deluxe",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 13,
+                                "bedId": "BED-403-A",
+                                "bedNo": "403-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 12,
+                        "code": "OBS-404",
+                        "roomId": "OBS-404",
+                        "roomName": "Observation Room - 404",
+                        "roomType": "Observation",
+                        "totalBeds": 1,
+                        "bedOccupied": 0,
+                        "bedBooked": 0,
+                        "bedAvailable": 1,
+                        "beds": [
+                            {
+                                "id": 14,
+                                "bedId": "BED-404-A",
+                                "bedNo": "404-A",
+                                "currentStatus": "available"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

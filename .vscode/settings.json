@@ -8,7 +8,6 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
-
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#1c5a3e",
     "activityBar.background": "#1c5a3e",
@@ -29,5 +28,5 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "editor.formatOnSave": true,
-  "peacock.color": "#103323"
+  "explorer.compactFolders": false
 }
