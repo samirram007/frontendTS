@@ -15,7 +15,6 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChartsRouteImport } from './routes/_authenticated/charts'
-import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
@@ -305,11 +304,6 @@ const AuthenticatedChartsRoute = AuthenticatedChartsRouteImport.update({
   id: '/charts',
   path: '/charts',
   getParentRoute: () => AuthenticatedRoute,
-} as any)
-const authSignInRoute = authSignInRouteImport.update({
-  id: '/(auth)/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const authOtpRoute = authOtpRouteImport.update({
   id: '/(auth)/otp',
@@ -1220,7 +1214,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/otp': typeof authOtpRoute
-  '/sign-in': typeof authSignInRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
@@ -1359,7 +1352,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/otp': typeof authOtpRoute
-  '/sign-in': typeof authSignInRoute
   '/charts': typeof AuthenticatedChartsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
@@ -1483,7 +1475,6 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/(auth)/otp': typeof authOtpRoute
-  '/(auth)/sign-in': typeof authSignInRoute
   '/_authenticated/charts': typeof AuthenticatedChartsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
@@ -1650,7 +1641,6 @@ export interface FileRouteTypes {
     | '/'
     | '/settings'
     | '/otp'
-    | '/sign-in'
     | '/charts'
     | '/dashboard'
     | '/forgot-password'
@@ -1789,7 +1779,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/otp'
-    | '/sign-in'
     | '/charts'
     | '/dashboard'
     | '/forgot-password'
@@ -1912,7 +1901,6 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_authenticated/settings'
     | '/(auth)/otp'
-    | '/(auth)/sign-in'
     | '/_authenticated/charts'
     | '/_authenticated/dashboard'
     | '/(auth)/forgot-password'
@@ -2078,7 +2066,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   authOtpRoute: typeof authOtpRoute
-  authSignInRoute: typeof authSignInRoute
   authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
   authSignIn2LazyRoute: typeof authSignIn2LazyRoute
   authSignUpLazyRoute: typeof authSignUpLazyRoute
@@ -2182,13 +2169,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/charts'
       preLoaderRoute: typeof AuthenticatedChartsRouteImport
       parentRoute: typeof AuthenticatedRoute
-    }
-    '/(auth)/sign-in': {
-      id: '/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/sign-in'
-      preLoaderRoute: typeof authSignInRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/(auth)/otp': {
       id: '/(auth)/otp'
@@ -4297,7 +4277,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   authOtpRoute: authOtpRoute,
-  authSignInRoute: authSignInRoute,
   authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
   authSignIn2LazyRoute: authSignIn2LazyRoute,
   authSignUpLazyRoute: authSignUpLazyRoute,

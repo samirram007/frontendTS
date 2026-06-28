@@ -1,21 +1,21 @@
-import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 
 export default function SignIn() {
   return (
     <AuthLayout>
-      <Card className='p-6'>
-        <div className='flex flex-col space-y-2 text-left'>
-          <h1 className='text-2xl font-semibold tracking-tight'>Login</h1>
-          <p className='text-sm text-muted-foreground'>
-            Enter your email and password below <br />
-            to log into your account
+      <div className='space-y-6'>
+        <div>
+          <h1 className='text-2xl font-bold tracking-tight'>Welcome back</h1>
+          <p className='mt-1 text-sm text-muted-foreground'>
+            Sign in to access your lab reports and bookings
           </p>
         </div>
+
         <UserAuthForm />
-        <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
-          By clicking login, you agree to our{' '}
+
+        <p className='text-center text-xs text-muted-foreground'>
+          By signing in, you agree to our{' '}
           <a
             href='/terms'
             className='underline underline-offset-4 hover:text-primary'
@@ -31,7 +31,7 @@ export default function SignIn() {
           </a>
           .
         </p>
-      </Card>
+      </div>
     </AuthLayout>
   )
 }

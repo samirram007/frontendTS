@@ -1,5 +1,5 @@
-import { PasswordInput } from '@/components/password-input';
-import { Button } from '@/components/ui/button';
+import { PasswordInput } from '@/components/password-input'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -7,18 +7,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react';
-import { Link, useRouter } from '@tanstack/react-router';
-import { type HTMLAttributes } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { useAuth } from '../../contexts/AuthContext';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { IconLoader2 } from '@tabler/icons-react'
+import { Link, useRouter } from '@tanstack/react-router'
+import { type HTMLAttributes } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useAuth } from '../../contexts/AuthContext'
 
-type UserAuthFormProps = HTMLAttributes<HTMLDivElement>;
+type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
 const formSchema = z.object({
   email: z
@@ -27,119 +27,83 @@ const formSchema = z.object({
     .email({ message: 'Invalid email address' }),
   password: z
     .string()
-    .min(1, {
-      message: 'Please enter your password',
-    })
-    .min(7, {
-      message: 'Password must be at least 7 characters long',
-    }),
+    .min(1, { message: 'Please enter your password' })
+    .min(7, { message: 'Password must be at least 7 characters long' }),
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { login, isLoading } = useAuth()
-
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: { email: '', password: '' },
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    // setIsLoading(true)
     await login(data)
       .then(() => router.invalidate())
       .catch((error) => {
-        console.error("Login failed:...........", error)
-
-        // throw redirect({
-        //   to: '/sign-in',
-        // })
-        // handle error here
+        console.error('Login failed:', error)
       })
-    // eslint-disable-next-line no-console
-
-    // setTimeout(() => {
-    //   setIsLoading(false)
-    // }, 3000)
   }
 
   return (
-    <div className={cn('grid gap-6', className)} {...props}>
+    <div className={cn('grid gap-5', className)} {...props}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='grid gap-2'>
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='password'
-              render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <div className='flex items-center justify-between'>
-                    <FormLabel>Password</FormLabel>
-                    <Link
-                      to='/forgot-password'
-                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
-                  <FormControl>
-                    <PasswordInput placeholder='********' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button className='mt-2' disabled={isLoading}>
-              Login
-            </Button>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='grid gap-4'>
+          <FormField
+            control={form.control}
+            name='email'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email address</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder='doctor@hospital.com'
+                    type='email'
+                    autoComplete='email'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <div className='relative my-2'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-              <div className='hidden relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
-                  Or continue with
-                </span>
-              </div>
-            </div>
+          <FormField
+            control={form.control}
+            name='password'
+            render={({ field }) => (
+              <FormItem>
+                <div className='flex items-center justify-between'>
+                  <FormLabel>Password</FormLabel>
+                  <Link
+                    to='/forgot-password'
+                    className='text-xs font-medium text-muted-foreground hover:text-primary'
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+                <FormControl>
+                  <PasswordInput
+                    placeholder='••••••••'
+                    autoComplete='current-password'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <div className='flex items-center flex-row flex-nowrap gap-2 hidden'>
-              <Button
-                variant='outline'
-                className='w-1/2'
-                type='button'
-                disabled={isLoading}
-              >
-                <IconBrandGithub className='h-4 w-4' /> GitHub
-              </Button>
-              <Button
-                variant='outline'
-                className='w-1/2'
-                type='button'
-                disabled={isLoading}
-              >
-                <IconBrandFacebook className='h-4 w-4' /> Facebook
-              </Button>
-            </div>
-          </div>
+          <Button
+            className='mt-1 w-full bg-blue-700 hover:bg-blue-800 text-white'
+            disabled={isLoading}
+          >
+            {isLoading && <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />}
+            Sign in
+          </Button>
         </form>
       </Form>
     </div>

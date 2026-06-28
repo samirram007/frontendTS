@@ -104,7 +104,7 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Sign In',
-              url: '/sign-in',
+              url: '/',
             },
             {
               title: 'Sign In (2 Col)',

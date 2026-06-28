@@ -5,7 +5,7 @@ export async function protectedLoader() {
     const { isAuthenticated } = useAuth();
     if (!isAuthenticated) {
         throw redirect({
-            to: '/sign-in',
+            to: '/',
             search: { redirect: window.location.pathname }, // optional: after-login redirect
         })
     }

@@ -1,7 +1,7 @@
 // src/context/AuthContext.tsx
 import type { User } from '@/types/schema';
 import { useQueryClient } from '@tanstack/react-query';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { fetchUserProfileService, loginService, logoutService } from '../services/apis';
 export type LoginProps = {
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // const navigate = useNavigate();
     // const [isAuthenticated, setIsAuthenticated] = useState(true)
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const queryClient = useQueryClient();
     const fetchProfile = async () => {
         setIsLoading(true);
@@ -89,9 +89,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [])
 
-    useEffect(() => {
-        fetchProfile();
-    }, []);
+    // Profile API disabled — auth state is set explicitly after login
+    // useEffect(() => {
+    //     fetchProfile();
+    // }, []);
     return (
         <AuthContext.Provider
             value={{ user, isLoading, isAuthenticated: !!user, login, logout, fetchProfile }}>

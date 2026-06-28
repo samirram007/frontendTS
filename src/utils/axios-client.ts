@@ -57,7 +57,7 @@ axiosClient.interceptors.response.use(
         const status = error.response?.status
 
         const isAuthRoute =
-            window.location.pathname.includes('/sign-in') ||
+            window.location.pathname === '/' ||
             originalRequest.url?.includes('/auth/refresh')
 
         if (status === 401 && !originalRequest._retry && !isAuthRoute) {
@@ -67,7 +67,7 @@ axiosClient.interceptors.response.use(
                 return axiosClient(originalRequest)
             } catch (refreshError) {
                 console.error('❌ Token refresh failed, redirecting to sign-in.')
-                window.location.href = '/sign-in'
+                window.location.href = '/'
                 return Promise.reject(refreshError)
             }
         }
