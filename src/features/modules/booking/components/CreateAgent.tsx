@@ -53,7 +53,7 @@ export default function CreateAgent({button}:CreateAgentInterface) {
                   <InputBox placeholder="0.00" name="comission" type="number" label="Comission" />
                 </div>
                
-                <Button type="submit" className="w-full !bg-blue-500">
+                <Button type="submit" className="w-full !bg-primary">
                   Save
                 </Button>
               </Form>

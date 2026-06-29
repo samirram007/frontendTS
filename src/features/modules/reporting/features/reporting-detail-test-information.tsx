@@ -105,7 +105,7 @@ export const ReportingTestInformation: React.FC<IReportingTestInterface> = ({ da
                                                             href={fileUrl}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="text-blue-600 underline"
+                                                            className="text-primary underline"
                                                         >
                                                             {item.reportTemplateName}
                                                         </a>
@@ -146,12 +146,12 @@ export const ReportingTestInformation: React.FC<IReportingTestInterface> = ({ da
                                 <>
                                     <Label className="font-semibold mb-2">View Report File :</Label>
                                     <div className="flex flex-row items-center gap-6 space-y-2">
-                                        <Button asChild variant={'outline'} className="border-blue-500">
+                                        <Button asChild variant={'outline'} className="border-primary">
                                             <a
                                                 href={data?.reportFilePath}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-blue-600 hover:underline m-0 flex items-center gap-2"
+                                                className="text-primary hover:underline m-0 flex items-center gap-2"
                                             >
                                                 View Report
                                             </a>

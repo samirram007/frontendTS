@@ -59,7 +59,7 @@ export default function PhysicianSearch() {
             ))
           ) : (
             <div className="px-3 py-2 text-sm text-slate-500">
-              <CreatePhysician button={<span className="text-sm text-blue-500 cursor-pointer">Create Pyhsician</span>} />
+              <CreatePhysician button={<span className="text-sm text-primary cursor-pointer">Create Pyhsician</span>} />
             </div>
           )}
         </div>

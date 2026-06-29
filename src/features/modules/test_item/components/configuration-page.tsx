@@ -49,7 +49,7 @@ export function TestConfigurationForm({ form, gapClass }: Props) {
         <div className='flex justify-end'>
           <button
             type='submit'
-            className='px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700'
+            className='px-4 py-2 rounded bg-primary text-white hover:bg-primary'
           >
             Save Configuration
           </button>

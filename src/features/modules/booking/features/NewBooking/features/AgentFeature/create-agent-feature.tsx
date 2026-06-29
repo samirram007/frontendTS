@@ -85,7 +85,7 @@ const AgentForm: React.FC<AgentFormInterface> = ({button,action}) => {
                                     <InputBox placeholder="0.00" name="commissionPercent" type="text" label="Comission" />
                                 </div>
 
-                                <Button type="submit" className="w-full !bg-blue-500">
+                                <Button type="submit" className="w-full !bg-primary">
                                     {isPending ? "Saving...." : "Save"}
                                 </Button>
                             </Form>

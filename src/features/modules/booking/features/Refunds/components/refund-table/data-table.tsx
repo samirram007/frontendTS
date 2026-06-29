@@ -66,7 +66,7 @@ export function RefundListDataTable<TData, TValue>({
                                                 onMouseDown={header.getResizeHandler()}
                                                 onTouchStart={header.getResizeHandler()}
                                                 className={`absolute right-0 top-0 h-full w-1 cursor-col-resize select-none ${header.column.getIsResizing()
-                                                    ? "bg-blue-500"
+                                                    ? "bg-primary/80"
                                                     : "bg-transparent hover:bg-gray-300"
                                                     }`}
                                             />

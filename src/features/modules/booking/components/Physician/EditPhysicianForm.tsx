@@ -49,7 +49,7 @@ export default function EditPhysician({button}:{button:any}) {
                     <InputBox placeholder="Enter patient discipline" type="text" name="discipline" label="Discipline" />
                   </div>
                 <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
-                  <Button type="submit" variant={'default'} size={'lg'} className="!bg-blue-500 !px-12 !py-6 text-xl">Save & Use</Button>
+                  <Button type="submit" variant={'default'} size={'lg'} className="!bg-primary !px-12 !py-6 text-xl">Save & Use</Button>
                 </div>
               </Form>
             )}

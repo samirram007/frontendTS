@@ -1,4 +1,3 @@
-import RefundDetail from '@/features/modules/booking/features/Refunds/components/refund-detail'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from "zod";
 
@@ -14,7 +13,6 @@ export const Route = createFileRoute(
 function RouteComponent() {
     return (
         <>
-            <RefundDetail />
         </>
     )
 }

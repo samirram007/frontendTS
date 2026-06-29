@@ -317,7 +317,7 @@ export default function Chats() {
                   </p>
                 </div>
                 <Button
-                  className='bg-blue-500 px-6 text-white hover:bg-blue-600'
+                  className='bg-primary/80 px-6 text-white hover:bg-primary'
                   onClick={() => setCreateConversationDialog(true)}
                 >
                   Send message

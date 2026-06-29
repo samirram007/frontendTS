@@ -19,6 +19,7 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* ── Brand color: #02B1C5 ≈ oklch(0.694 0.114 199) ─────────────────── */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -26,68 +27,96 @@ code {
   --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
+
+  /* Primary = #02B1C5 */
+  --primary: oklch(0.694 0.114 199);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+
+  /* Secondary: very light tint of primary */
+  --secondary: oklch(0.950 0.018 199);
+  --secondary-foreground: oklch(0.350 0.060 199);
+
+  /* Muted: near-neutral with warm-teal undertone */
+  --muted: oklch(0.960 0.010 199);
+  --muted-foreground: oklch(0.530 0.030 199);
+
+  /* Accent: same as secondary */
+  --accent: oklch(0.940 0.022 199);
+  --accent-foreground: oklch(0.350 0.060 199);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.871 0.006 286.286);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  /* Border / input: faint teal tint */
+  --border: oklch(0.900 0.022 199);
+  --input: oklch(0.900 0.022 199);
+
+  /* Ring: same as primary */
+  --ring: oklch(0.694 0.114 199);
+
+  --chart-1: oklch(0.694 0.114 199);
+  --chart-2: oklch(0.750 0.090 165);
+  --chart-3: oklch(0.600 0.100 230);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
+
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: oklch(0.985 0.004 199);
   --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
+  --sidebar-primary: oklch(0.694 0.114 199);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.871 0.006 286.286);
+  --sidebar-accent: oklch(0.940 0.022 199);
+  --sidebar-accent-foreground: oklch(0.350 0.060 199);
+  --sidebar-border: oklch(0.900 0.022 199);
+  --sidebar-ring: oklch(0.694 0.114 199);
 }
 
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.141 0.005 285.823);
+  --card: oklch(0.175 0.008 199);
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.141 0.005 285.823);
+  --popover: oklch(0.175 0.008 199);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
+
+  /* Primary slightly brighter in dark mode */
+  --primary: oklch(0.734 0.120 199);
+  --primary-foreground: oklch(0.985 0 0);
+
+  --secondary: oklch(0.240 0.025 199);
+  --secondary-foreground: oklch(0.900 0.020 199);
+
+  --muted: oklch(0.240 0.020 199);
+  --muted-foreground: oklch(0.620 0.040 199);
+
+  --accent: oklch(0.240 0.025 199);
+  --accent-foreground: oklch(0.900 0.020 199);
+
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.274 0.006 286.033);
-  --input: oklch(0.274 0.006 286.033);
-  --ring: oklch(0.442 0.017 285.786);
-  --chart-1: oklch(0.488 0.243 264.376);
+
+  --border: oklch(0.280 0.028 199);
+  --input: oklch(0.280 0.028 199);
+
+  --ring: oklch(0.440 0.055 199);
+
+  --chart-1: oklch(0.734 0.120 199);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
+
+  /* Sidebar */
+  --sidebar: oklch(0.175 0.010 199);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary: oklch(0.734 0.120 199);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.274 0.006 286.033);
-  --sidebar-ring: oklch(0.442 0.017 285.786);
+  --sidebar-accent: oklch(0.240 0.025 199);
+  --sidebar-accent-foreground: oklch(0.900 0.020 199);
+  --sidebar-border: oklch(0.280 0.028 199);
+  --sidebar-ring: oklch(0.440 0.055 199);
 }
 
 @theme inline {
@@ -139,7 +168,6 @@ code {
     @apply overflow-x-hidden;
   }
   body {
-    /* @apply bg-background text-foreground; */
     @apply bg-background text-foreground min-h-svh w-full;
   }
 
@@ -147,59 +175,59 @@ code {
   [role='button']:not(:disabled) {
     cursor: pointer;
   }
-  input[type="number"]{
+
+  input[type="number"] {
     @apply text-right;
-     &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
- 
-  }
+
   input,
   select,
   button[role='combobox'],
   textarea {
-    @apply shadow-sm shadow-indigo-400;
-    @apply focus:bg-indigo-500! focus:text-gray-200 focus:font-semibold focus:text-left;
-    @apply focus:placeholder:text-gray-200;
+    @apply shadow-sm shadow-primary/20;
+    @apply focus:bg-primary! focus:text-primary-foreground focus:font-semibold focus:text-left;
+    @apply focus:placeholder:text-primary-foreground/60;
   }
-  .command-input-wrapper input[data-slot="command-input"]{
-    @apply shadow-none shadow-indigo-400/5;
-    @apply focus:bg-indigo-500/10! focus:text-gray-200 focus:font-semibold focus:text-left;
-    @apply focus:placeholder:text-gray-200;
+
+  .command-input-wrapper input[data-slot="command-input"] {
+    @apply shadow-none;
+    @apply focus:bg-primary/10! focus:text-foreground focus:font-semibold focus:text-left;
+    @apply focus:placeholder:text-muted-foreground;
   }
+
   [data-slot='command-input-wrapper'] input {
     @apply shadow-none;
-  @apply focus:bg-transparent! focus:text-inherit! focus:font-normal!;
-}
-  
+    @apply focus:bg-transparent! focus:text-inherit! focus:font-normal!;
+  }
+
   input[type='checkbox'] {
     @apply !px-0 w-9;
   }
+
   aside {
-    box-shadow: 5px 0px 16px 1px #1d1ad521;
-}
-button[role='combobox'][data-state='open'] {
-  background-color: #e66262;
-  border-color: #3b82f6; /* Tailwind blue-500 */
-  box-shadow: 0 0 0 2px rgba(221, 58, 8, 0.5);
-   /* @apply  bg-indigo-500! text-gray-200!; */
-  
-}
+    box-shadow: 5px 0px 16px 1px oklch(0.694 0.114 199 / 0.12);
+  }
 
+  button[role='combobox'][data-state='open'] {
+    background-color: oklch(0.694 0.114 199);
+    border-color: oklch(0.694 0.114 199);
+    box-shadow: 0 0 0 2px oklch(0.694 0.114 199 / 0.30);
+  }
 
-/* Optional: change text color */
-button[role='combobox'][data-state='open'] > span {
-  @apply font-semibold text-gray-200;
-  @apply focus:text-gray-200;
-}
-button[role='combobox']    {
-   @apply   data-[placeholder]:focus:text-blue-200! ;  
- 
-}
-   
-  /* Prevent focus zoom on mobile devices */
+  button[role='combobox'][data-state='open'] > span {
+    @apply font-semibold text-white;
+  }
+
+  button[role='combobox'] {
+    @apply data-[placeholder]:focus:text-primary-foreground/70!;
+  }
+
+  /* Prevent focus zoom on mobile */
   @media screen and (max-width: 767px) {
     input,
     select,
@@ -208,40 +236,37 @@ button[role='combobox']    {
     }
   }
 }
+
 @utility placeholder {
   @apply placeholder:text-slate-400/80 dark:placeholder:text-zinc-600;
-   @apply focus:placeholder:text-gray-200/60
-  
+  @apply focus:placeholder:text-primary-foreground/60;
 }
+
 @utility text-destructive {
   @apply !text-red-300/70;
 }
+
 @utility border-destructive {
   @apply !border-red-300;
 }
+
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
 }
-/* @utility caret-underscore{
-  caret-shape:underscore;
-} */
- 
+
 @utility no-scrollbar {
-  /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @utility faded-bottom {
   @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_var(--background)_70%)] md:after:block;
 }
 
-/* styles.css */
 .CollapsibleContent {
   overflow: hidden;
 }
@@ -253,24 +278,15 @@ button[role='combobox']    {
 }
 
 @keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-collapsible-content-height);
-  }
+  from { height: 0; }
+  to   { height: var(--radix-collapsible-content-height); }
 }
 
 @keyframes slideUp {
-  from {
-    height: var(--radix-collapsible-content-height);
-  }
-  to {
-    height: 0;
-  }
+  from { height: var(--radix-collapsible-content-height); }
+  to   { height: 0; }
 }
 
 .popover-content-width-same-as-trigger {
   width: var(--radix-popover-trigger-width);
-  /* optionally, max-width, min-width as needed */
 }

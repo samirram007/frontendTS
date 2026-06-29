@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react"
 function ViewNavbar(){
     return(
         <div className="py-6 flex items-center gap-6">
-            <Link to="/" className="font-semibold flex flex-wrap underline underline-offset-2 gap-1 items-center text-blue-500">
+            <Link to="/" className="font-semibold flex flex-wrap underline underline-offset-2 gap-1 items-center text-primary">
                 <ArrowLeft size={17} />
                 Go Back
             </Link>
@@ -50,9 +50,9 @@ export const BookingHeader = () =>{
                 <div>
                     <h1 className="font-semibold text-lg">Reports</h1>
                     <div className="px-2 py-2 flex gap-3">
-                        <h1 className="text-blue-500 cursor-pointer text-app-base">Blood Report</h1>
-                        <h1 className="text-blue-500 cursor-pointer text-app-base">Liver Report</h1>
-                        <h1 className="text-blue-500 cursor-pointer text-app-base">Kidney Report</h1>
+                        <h1 className="text-primary cursor-pointer text-app-base">Blood Report</h1>
+                        <h1 className="text-primary cursor-pointer text-app-base">Liver Report</h1>
+                        <h1 className="text-primary cursor-pointer text-app-base">Kidney Report</h1>
                     </div>
                 </div>
             </div>

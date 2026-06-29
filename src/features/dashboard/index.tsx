@@ -25,7 +25,7 @@ function BedStatus({ status, bedNo }: { status: string, bedNo: string }) {
     } else if (status === "booked") {
         return <div>
             <Bed size={BED_SIZE} stroke="#2563eb" />
-            <div className="text-blue-600 font-semibold">{bedNo}</div>
+            <div className="text-primary font-semibold">{bedNo}</div>
         </div>
     }
 }

@@ -85,7 +85,7 @@ const CancellationDetail: React.FC<IRefundDetailInterface> = ({ data }) => {
                                             </Button>
                                             :
                                             item.status == "approved" ?
-                                                <Button className="bg-blue-500 text-white border-2 border-gray-50 w-full">
+                                                <Button className="bg-primary/80 text-white border-2 border-gray-50 w-full">
                                                     Approved
                                                 </Button>
                                                 :

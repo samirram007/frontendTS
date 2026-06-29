@@ -45,7 +45,7 @@ export const columns: ColumnDef<IAllBooking>[] = [
                     <Button
                         variant={'outline'}
                         onClick={() => navigate({ to: `/transactions/booking/${props.row.original.voucherId}` })}
-                        className="  hover:bg-blue-100 border-2 border-blue-800 !border-l-8 flex items-center gap-2 cursor-pointer"
+                        className="  hover:bg-primary/10 border-2 border-primary !border-l-8 flex items-center gap-2 cursor-pointer"
                     >
                         <Eye size={22} color="black" /> Details
                     </Button>

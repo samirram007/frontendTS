@@ -80,7 +80,7 @@ export function DataTableRowActions<TData>({
             //   setCurrentRow(row.original)
             //   setOpen('delete')
             // }}
-            className='text-blue-500! cursor-pointer!'
+            className='text-primary! cursor-pointer!'
           >
             Configuration
             <DropdownMenuShortcut>

@@ -37,7 +37,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </div>
 
           </div>
-          <div className={cn('w-full pl-2 font-bold flex flex-row justify-start mt-2 text-xs text-sidebar-muted text-pink-400', !sidebar.open && 'pl-0 justify-center')}>
+          <div className={cn('w-full pl-2 font-bold flex flex-row justify-start mt-2 text-xs text-sidebar-primary', !sidebar.open && 'pl-0 justify-center')}>
             {
               sidebar.open ? (
                 capitalizeAllWords(sidebarData.header.subtitle)

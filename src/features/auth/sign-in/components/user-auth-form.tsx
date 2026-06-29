@@ -43,30 +43,32 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     await login(data)
       .then(() => router.invalidate())
-      .catch((error) => {
-        console.error('Login failed:', error)
-      })
+      .catch((error) => console.error('Login failed:', error))
   }
 
   return (
-    <div className={cn('grid gap-5', className)} {...props}>
+    <div className={cn('space-y-5', className)} {...props}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='grid gap-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+
           <FormField
             control={form.control}
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email address</FormLabel>
+                <FormLabel className='text-xs font-semibold uppercase tracking-widest text-muted-foreground'>
+                  Email Address
+                </FormLabel>
                 <FormControl>
                   <Input
-                    placeholder='doctor@hospital.com'
+                    placeholder='you@hospital.com'
                     type='email'
                     autoComplete='email'
+                    className='h-11 text-sm'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className='text-xs' />
               </FormItem>
             )}
           />
@@ -77,10 +79,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             render={({ field }) => (
               <FormItem>
                 <div className='flex items-center justify-between'>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className='text-xs font-semibold uppercase tracking-widest text-muted-foreground'>
+                    Password
+                  </FormLabel>
                   <Link
                     to='/forgot-password'
-                    className='text-xs font-medium text-muted-foreground hover:text-primary'
+                    className='text-[11px] font-medium text-primary hover:text-primary/80'
                   >
                     Forgot password?
                   </Link>
@@ -89,20 +93,24 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   <PasswordInput
                     placeholder='••••••••'
                     autoComplete='current-password'
+                    className='h-11 text-sm'
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className='text-xs' />
               </FormItem>
             )}
           />
 
           <Button
-            className='mt-1 w-full bg-blue-700 hover:bg-blue-800 text-white'
+            type='submit'
             disabled={isLoading}
+            className='mt-2 h-11 w-full text-sm font-semibold tracking-wide'
           >
-            {isLoading && <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />}
-            Sign in
+            {isLoading
+              ? <><IconLoader2 className='mr-2 h-4 w-4 animate-spin' />Signing in…</>
+              : 'Sign in'
+            }
           </Button>
         </form>
       </Form>

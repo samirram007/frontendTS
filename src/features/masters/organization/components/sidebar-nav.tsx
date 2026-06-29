@@ -72,7 +72,7 @@ export default function SidebarNav({
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
                 pathname === item.href
-                  ? 'bg-blue-500 hover:bg-blue-600'
+                  ? 'bg-primary/80 hover:bg-primary'
                   : 'hover:bg-transparent hover:underline',
                 'justify-start'
               )}

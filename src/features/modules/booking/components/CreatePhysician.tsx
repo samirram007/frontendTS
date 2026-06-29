@@ -44,7 +44,7 @@ export default function CreatePhysician({button}:{button:any}) {
                     <InputBox placeholder="M.B.B.S" name="degree" type="text" label="Degree" />
                     <InputBox placeholder="Palentology" name="discipline" type="text" label="Discipline" />
                   </div>
-                  <Button type="submit" className="w-full !bg-blue-500">
+                  <Button type="submit" className="w-full !bg-primary">
                     Save
                   </Button>
                 </Form>

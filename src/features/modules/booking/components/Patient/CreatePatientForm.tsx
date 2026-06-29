@@ -34,7 +34,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
             }
         }}>
             <DialogTrigger asChild>
-                {button ? button : <span className="text-blue-600 underline underline-offset-1">Add new patient</span>}
+                {button ? button : <span className="text-primary underline underline-offset-1">Add new patient</span>}
             </DialogTrigger>
             <DialogContent aria-description="Patient Creation form of new Patient" aria-describedby="patient-creation-form" className="sm:max-w-8/12">
                 <DialogHeader>
@@ -159,7 +159,7 @@ const PatientForm: React.FC<IPatientForm> = ({button,action}) =>{
                                     </div>
                                 </div>
                                 <div className="grid  justify-center gap-3 mt-4 border-t-2 border-gray-200 pt-4">
-                                    <Button type="submit" variant={'default'} size={'sm'} className="!bg-blue-500 !text-white !px-12 !py-4 text-app-base-lg">Save</Button>
+                                    <Button type="submit" variant={'default'} size={'sm'} className="!bg-primary !text-white !px-12 !py-4 text-app-base-lg">Save</Button>
                                 </div>
                             </Form>
                         )}

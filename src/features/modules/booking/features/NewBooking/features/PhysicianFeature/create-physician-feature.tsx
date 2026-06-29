@@ -114,7 +114,7 @@ const PhysicianForm = ({button,action}:{button: string | React.ReactNode,action?
                                         options={displineList} 
                                     />
                                 </div>
-                                <Button type="submit" className="w-full !bg-blue-500">
+                                <Button type="submit" className="w-full !bg-primary">
                                     {isPending ? "Saving...." : "Save"}
                                 </Button>
                             </Form>

@@ -3,8 +3,8 @@ import { Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTableColumnHeader } from "@/features/tasks/components/data-table-column-header";
 import { useNavigate } from "@tanstack/react-router";
-import type { ITestCancellation } from "../../data/schema";
 import { formatDateMonthYearForInput } from "@/features/modules/booking/utils/date-utils";
+import type { ITestCancellation } from "../../../Cancellations/data/schema";
 
 
 export const columns: ColumnDef<ITestCancellation>[] = [

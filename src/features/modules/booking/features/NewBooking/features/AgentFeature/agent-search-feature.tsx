@@ -55,7 +55,7 @@ const AgentSearchFeature = () => {
     };
     return (
         <>
-            <div className="relative w-full grid grid-cols-[1fr_30px] focus-within:border-1 focus-within:border-blue-500 items-center border-1 rounded focus:border-emerald-600 ">
+            <div className="relative w-full grid grid-cols-[1fr_30px] focus-within:border-1 focus-within:border-primary items-center border-1 rounded focus:border-emerald-600 ">
                 <input
                     type="search"
                     id="agent_search"
@@ -92,8 +92,8 @@ const AgentSearchFeature = () => {
                         ) : (
                             <div className="px-3 py-2 flex justify-center items-center gap-1 text-sm text-slate-500">
                                 No Agent Found
-                                {/* <AgentForm button={<span className="text-sm text-blue-500 cursor-pointer">Create Agent</span>} />
-                                <Plus size={16} className="text-blue-500"/> */}
+                                {/* <AgentForm button={<span className="text-sm text-primary cursor-pointer">Create Agent</span>} />
+                                <Plus size={16} className="text-primary"/> */}
                             </div>
                         )}
                     </div>

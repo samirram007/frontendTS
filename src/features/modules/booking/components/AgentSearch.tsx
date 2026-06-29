@@ -87,7 +87,7 @@ export default function AgentSearch() {
             ))
           ) : (
             <div className="px-3 py-2 text-sm text-slate-500">
-              <CreateAgent button={<span className="text-sm text-blue-500 cursor-pointer">Create Agent</span>} />
+              <CreateAgent button={<span className="text-sm text-primary cursor-pointer">Create Agent</span>} />
             </div>
           )}
         </div>

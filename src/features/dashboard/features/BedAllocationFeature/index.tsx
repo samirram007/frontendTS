@@ -31,7 +31,7 @@ function BedStatus({ bed }: { bed: BedInfo }) {
         return <div className="grid grid-cols-2">
             <div>
                 <Bed size={BED_SIZE} stroke="#2563eb" />
-                <div className="text-blue-600 font-semibold">{bed.bedNo}</div>
+                <div className="text-primary font-semibold">{bed.bedNo}</div>
             </div>
             <div className="font-bold">
                 {bed.bedId}

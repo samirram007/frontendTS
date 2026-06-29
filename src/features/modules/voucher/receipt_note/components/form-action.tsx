@@ -131,7 +131,7 @@ const BodyComponent = () => {
 
 
     return (
-        <div className="bg-violet-400/20">
+        <div className="bg-primary/15">
             {/* <StockJournalEntries /> */}
             <StockJournalComponent />
             {/* <pre>

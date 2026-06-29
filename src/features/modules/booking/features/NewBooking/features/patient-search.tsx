@@ -83,7 +83,7 @@ const PatientSearch = () => {
                             ) : (
                                 <div className="px-3 py-2 text-sm text-slate-500">
                                     <PatientForm button={
-                                        <h3 className="text-blue-400 underline underline-offset-1 text-center cursor-pointer">Add new Patient</h3>
+                                        <h3 className="text-primary underline underline-offset-1 text-center cursor-pointer">Add new Patient</h3>
                                     } />
                                     
                                 </div>

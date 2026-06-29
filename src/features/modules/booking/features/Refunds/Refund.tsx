@@ -25,7 +25,7 @@ const RefundDashboard = () => {
         <>
             <div className="w-full grid grid-cols-[1fr_20vw] my-4 py-2 px-2 border-[1px] border-gray-300 rounded">
                 <div className="flex gap-2">
-                    <label htmlFor="search-patient" className="w-full cursor-pointer flex border-[1px] px-1 pr-2 focus-within::border-2 focus-within:border-blue-500 rounded items-center gap-2">
+                    <label htmlFor="search-patient" className="w-full cursor-pointer flex border-[1px] px-1 pr-2 focus-within::border-2 focus-within:border-primary rounded items-center gap-2">
                         <input type="search"
                             autoComplete="off"
                             className="w-full outline-none border-r-2 h-full border-0 shadow-none px-2 text-sm placeholder:text-[11px]"

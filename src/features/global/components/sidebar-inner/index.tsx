@@ -11,7 +11,7 @@ interface SidebarNavProps {
 }
 const SidebarInner = ({ items }: SidebarNavProps) => {
     return (
-        <aside className='bg-blue-400/20 top-0 h-full xl:sticky xl:w-3/12 '>
+        <aside className='bg-primary/15 top-0 h-full xl:sticky xl:w-3/12 '>
             <SidebarNav items={items} />
         </aside>
     )
