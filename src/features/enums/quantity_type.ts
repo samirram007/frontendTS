@@ -12,7 +12,7 @@ export type QuantityType = z.infer<typeof QuantityTypeSchema>
 
 
 export const QuantityTypeTypes = new Map<QuantityType, string>([
-    ['measure', 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'],
+    ['measure', 'bg-teal-100/30 text-teal-900 border-teal-200'],
     ['volume', 'bg-neutral-300/40 border-neutral-300'],
     ['weight', 'bg-neutral-300/40 border-neutral-300'],
     ['length', 'bg-neutral-300/40 border-neutral-300'],

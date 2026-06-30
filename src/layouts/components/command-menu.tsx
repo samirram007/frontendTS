@@ -5,28 +5,19 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from '@/components/ui/command'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useSearch } from '@/core/contexts/search-context'
 
-import { useTheme } from '@/core/contexts/ThemeContextProvider'
 import {
   IconArrowRightDashed,
-  IconDeviceLaptop,
-  IconMoon,
-  IconSun,
 } from '@tabler/icons-react'
 import { useNavigate } from '@tanstack/react-router'
 import React from 'react'
 import { sidebarData } from './data/sidebar-data'
 
-
-// import { ScrollArea } from './ui/scroll-area'
-
 export function CommandMenu() {
   const navigate = useNavigate()
-  const { setTheme } = useTheme()
   const { open, setOpen } = useSearch()
 
   const runCommand = React.useCallback(
@@ -79,20 +70,6 @@ export function CommandMenu() {
               })}
             </CommandGroup>
           ))}
-          <CommandSeparator />
-          <CommandGroup heading='Theme'>
-            <CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
-              <IconSun /> <span>Light</span>
-            </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme('dark'))}>
-              <IconMoon className='scale-90' />
-              <span>Dark</span>
-            </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => setTheme('system'))}>
-              <IconDeviceLaptop />
-              <span>System</span>
-            </CommandItem>
-          </CommandGroup>
         </ScrollArea>
       </CommandList>
     </CommandDialog>

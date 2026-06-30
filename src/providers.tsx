@@ -11,7 +11,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 export function Providers({ children }: { children: React.ReactNode }) {
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeContextProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <ThemeContextProvider>
                 <FontProvider>
                     <AuthProvider>
                         <ClientOnly>

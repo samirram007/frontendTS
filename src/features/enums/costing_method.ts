@@ -15,7 +15,7 @@ export type CostingMethod = z.infer<typeof CostingMethodSchema>
 
 
 export const CostingMethodColorsSchema = new Map<CostingMethod, string>([
-    ['at_zero_cost', 'bg-teal-100/30 text-teal-900 dark:text-teal-200 border-teal-200'],
+    ['at_zero_cost', 'bg-teal-100/30 text-teal-900 border-teal-200'],
     ['avg_cost', 'bg-neutral-300/40 border-neutral-300'],
     ['fifo', 'bg-neutral-300/40 border-neutral-300'],
     ['fifo_perpetual', 'bg-neutral-300/40 border-neutral-300'],

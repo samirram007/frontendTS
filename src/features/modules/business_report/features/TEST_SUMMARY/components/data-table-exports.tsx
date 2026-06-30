@@ -19,7 +19,7 @@ const DataTableExports: React.FC<IDataTableExportInterface> = ({ onPdfDownload }
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem asChild>
-                        <Button onClick={onPdfDownload} className="w-full bg-transparent text-black dark:text-white">
+                        <Button onClick={onPdfDownload} className="w-full bg-transparent text-black">
                             PDF <FileText />
                         </Button>
                     </DropdownMenuItem>

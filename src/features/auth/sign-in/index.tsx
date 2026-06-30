@@ -17,23 +17,23 @@ export default function SignIn() {
 
         {/* Heading */}
         <div className='space-y-1'>
-          <h1 className='text-2xl font-bold tracking-tight text-slate-900 dark:text-white'>
+          <h1 className='text-2xl font-bold tracking-tight text-slate-900'>
             Sign in to your account
           </h1>
-          <p className='text-sm text-slate-500 dark:text-slate-400'>
+          <p className='text-sm text-slate-500'>
             Access lab reports, bookings, and diagnostics.
           </p>
         </div>
 
         <UserAuthForm />
 
-        <p className='text-center text-[11px] text-slate-400 dark:text-slate-600'>
+        <p className='text-center text-[11px] text-slate-400'>
           By signing in you agree to our{' '}
-          <a href='/terms' className='underline underline-offset-4 hover:text-slate-700 dark:hover:text-slate-300'>
+          <a href='/terms' className='underline underline-offset-4 hover:text-slate-700'>
             Terms
           </a>{' '}
           &amp;{' '}
-          <a href='/privacy' className='underline underline-offset-4 hover:text-slate-700 dark:hover:text-slate-300'>
+          <a href='/privacy' className='underline underline-offset-4 hover:text-slate-700'>
             Privacy Policy
           </a>
         </p>

@@ -117,7 +117,7 @@ export default function Apps() {
                 <Button
                   variant='outline'
                   size='sm'
-                  className={`${app.connected ? 'border border-primary bg-primary/8 hover:bg-primary/10 dark:border-primary dark:bg-primary/10 dark:hover:bg-primary/90' : ''}`}
+                  className={`${app.connected ? 'border border-primary bg-primary/8 hover:bg-primary/10' : ''}`}
                 >
                   {app.connected ? 'Connected' : 'Connect'}
                 </Button>
